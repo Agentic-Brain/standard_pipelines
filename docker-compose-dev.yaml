@@ -1,0 +1,21 @@
+services:
+  postgres:
+    container_name: flask-base_postgres
+    image: postgres
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres_password
+    volumes:
+      - flask-base_postgres_data:/var/lib/postgresql/data
+
+  adminer:
+    container_name: flask-base_adminer
+    image: adminer
+    ports:
+      - 8080:8080
+
+volumes:
+  flask-base_postgres_data:

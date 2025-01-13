@@ -1,0 +1,36 @@
+name: Secrets Check 
+on:
+  push:
+  pull_request:
+jobs:
+  secrets-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: TruffleHog OSS
+        # You may pin to the exact commit or the version.
+        # uses: trufflesecurity/trufflehog@ead9dd57486f43830ba2279f3a3c49d4b9c36633
+        uses: trufflesecurity/trufflehog@v3.76.1
+        with:
+          # Scan commits until here (usually dev branch).
+          head: ${{ github.ref_name }}
+          # Extra args to be passed to the trufflehog cli.
+          extra_args: "--json"
+
+      - name: Send Slack Notification
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_SECRETS_NOTIFICATION_WEBHOOK_URL }}
+        run: |
+          GITHUB_ACTOR=${{ github.actor }}
+          curl -X POST -H 'Content-type: application/json' \
+          --data "{
+            \"text\": \"🚨 *Secrets detected in a pull request!* 🚨\n
+            Author: ${GITHUB_ACTOR}\n
+            Repository: ${{ github.repository }}\n
+            Branch: ${{ github.ref_name }}\n
+            Commit: ${{ github.sha }}\n
+            Pull Request: ${{ github.event.pull_request.html_url }}\n
+            Please review the secrets found by truffleHog.\"
+          }" $SLACK_WEBHOOK_URL
