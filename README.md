@@ -8,6 +8,6 @@ Below are the modifications you will need to make to update this to a new projec
 - Change FLASK_APP= to name of your new application
 
 ## docker-compose-dev.yaml
-- Change all references to flask-base to application name
+- Change all references to standard-pipelines to application name
 ## .env
 - openssl rand -base64 32
