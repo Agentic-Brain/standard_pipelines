@@ -1,7 +1,7 @@
 # from .config import celery_init_app
 from flask import Flask
-from flask_base.config import DevelopmentConfig
-from flask_base.extensions import db
+from standard_pipelines.config import DevelopmentConfig
+from standard_pipelines.extensions import db
 from celery import Celery, Task
 import redis
 

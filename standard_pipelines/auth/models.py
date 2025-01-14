@@ -3,8 +3,8 @@ from sqlalchemy.orm import Mapped, relationship, mapped_column
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.exc import IntegrityError
 from flask_security.core import UserMixin, RoleMixin
-from flask_base.extensions import db
-from flask_base.database.models import TimestampMixin, BaseMixin
+from standard_pipelines.extensions import db
+from standard_pipelines.database.models import TimestampMixin, BaseMixin
 from typing import TYPE_CHECKING, Optional
 from datetime import datetime, timezone
 import uuid

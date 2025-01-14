@@ -2,7 +2,7 @@ from sqlalchemy.dialects.postgresql import UUID as pgUUID
 from sqlalchemy import func, DateTime, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 from uuid import UUID
-from flask_base.extensions import db
+from standard_pipelines.extensions import db
 from time import time
 
 class BaseMixin(db.Model):

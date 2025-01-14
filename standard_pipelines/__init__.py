@@ -4,15 +4,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_babel import Babel
 from flask_security.utils import hash_password
 import os
-from flask_base.version import APP_VERSION, FLASK_BASE_VERSION
+from standard_pipelines.version import APP_VERSION, FLASK_BASE_VERSION
 from dotenv import load_dotenv
 import logging
 import colorlog
 import time
-from flask_base.extensions import migrate, db
+from standard_pipelines.extensions import migrate, db
 from typing import Optional
 import sentry_sdk
-from flask_base.config import DevelopmentConfig, ProductionConfig, TestingConfig, Config, get_config
+from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, Config, get_config
 
 def create_app():
     load_dotenv()
