@@ -9,6 +9,9 @@ from typing import TYPE_CHECKING, Optional, List
 from datetime import datetime, timezone
 import uuid
 
+if TYPE_CHECKING:
+    from transformers.models import TransformerRegistry
+
 
 
 class Role(BaseMixin, RoleMixin):
@@ -61,9 +64,9 @@ class Client(BaseMixin):
     
     # Relationships
     users: Mapped[List['User']] = relationship('User', back_populates='client', passive_deletes=True)
-    transformers: Mapped[List['Transformer']] = relationship(
-        'Transformer',
-        secondary='client_transformer_join',
+    transformers: Mapped[List['TransformerRegistry']] = relationship(
+        'TransformerRegistry',
+        secondary='client_transformer_registry_join',
         back_populates='clients',
         passive_deletes=True
     )
