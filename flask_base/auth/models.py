@@ -4,19 +4,12 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.exc import IntegrityError
 from flask_security.core import UserMixin, RoleMixin
 from flask_base.extensions import db
-from flask_base.database.models import TimestampMixin, BaseMixin
-from typing import TYPE_CHECKING, Optional
+from flask_base.database.models import BaseMixin
+from typing import TYPE_CHECKING, Optional, List
 from datetime import datetime, timezone
 import uuid
 
-if TYPE_CHECKING:
-    pass
 
-# Join table
-# roles_users = db.Table('roles_users',
-#     Column('user_id', Integer, ForeignKey('user.id')),
-#     Column('role_id', Integer, ForeignKey('role.id'))
-# )
 
 class Role(BaseMixin, RoleMixin):
     __tablename__ = 'role'
@@ -26,7 +19,7 @@ class Role(BaseMixin, RoleMixin):
 
     # TODO: init function
 
-class User(BaseMixin, TimestampMixin, UserMixin):
+class User(BaseMixin, UserMixin):
     __tablename__ = 'user'
     # Default core usage info
     email: Mapped[str] = mapped_column(String(255), unique=True)
@@ -51,10 +44,33 @@ class User(BaseMixin, TimestampMixin, UserMixin):
     tf_primary_method: Mapped[Optional[str]] = mapped_column(String)
     tf_phone_number: Mapped[Optional[str]] = mapped_column(String(128))
 
-
-
+    # Client relationship
+    client_id: Mapped[UUID] = mapped_column(UUID, ForeignKey('client.id', ondelete='CASCADE'), nullable=False)
+    client: Mapped['Client'] = relationship('Client', back_populates='users')
     
     roles: Mapped[list['Role']] = relationship('Role', secondary='user_role_join', back_populates='users', passive_deletes=True)
+    
+
+class Client(BaseMixin):
+    __tablename__ = 'client'
+    
+    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    description: Mapped[Optional[str]] = mapped_column(String(1000))
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default='true')
+    domain: Mapped[Optional[str]] = mapped_column(String(255), unique=True)
+    
+    # Relationships
+    users: Mapped[List['User']] = relationship('User', back_populates='client', passive_deletes=True)
+    transformers: Mapped[List['Transformer']] = relationship(
+        'Transformer',
+        secondary='client_transformer_join',
+        back_populates='clients',
+        passive_deletes=True
+    )
+    
+    def __repr__(self) -> str:
+        return f"<Client {self.name}>"
+
 
 # Jointable
 # TODO: setup cascsading delete to remove join entry if a user is deleted
