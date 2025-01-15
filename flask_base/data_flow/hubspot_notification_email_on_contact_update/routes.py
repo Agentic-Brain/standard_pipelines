@@ -1,7 +1,7 @@
 from flask import render_template, current_app, jsonify, request, redirect, url_for, flash
 
 from .services import HubSpotNotificationEmailOnContactUpdate
-from . import data_flow
+from .. import data_flow
 from flask_base.extensions import db
 from .models import Contact
 

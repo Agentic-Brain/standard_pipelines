@@ -1,125 +1,97 @@
-import typing as t
-import re
-import requests
-from flask import current_app
-from tap_hubspot.tap import TapHubspot
-from target_postgres.target import TargetPostgres
-from flask_base.common.services import BaseDataFlowService
-from .models import Contact
-import json
-import io
 import contextlib
+import io
+from flask import current_app
+from .models import Notification
+from flask_base.extensions import db
+from abc import ABCMeta, abstractmethod
+import typing as t
+import tempfile
+import json
+import os
 
-class HubSpotNotificationEmailOnContactUpdate(BaseDataFlowService):
+from singer_sdk import Tap, Target
 
-    # TODO: read from database for a specific client
-    @classmethod
-    def new_instance_from_env(cls) -> 'HubSpotNotificationEmailOnContactUpdate':
-        return cls(
-            tap_config={
-                "client_id": current_app.config['HUBSPOT_CLIENT_ID'],
-                "client_secret": current_app.config['HUBSPOT_CLIENT_SECRET'],
-                "refresh_token": current_app.config['HUBSPOT_REFRESH_TOKEN']
-            },
-            target_config={
-                "sqlalchemy_url": current_app.config['POSTGRES_SQLALCHEMY_URL']
-            },
-            tap_catalog=current_app.config['TAP_HUBSPOT_CONTACTS_CATALOG_PATH'],
-        ) 
+@contextlib.contextmanager
+def temp_json_file(data: dict):
+    """Context manager that creates a temporary JSON file and cleans it up after use."""
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as temp_file:
+        json.dump(data, temp_file)
+        temp_file.flush()
+        yield temp_file.name
 
+class BaseDataFlowService(metaclass=ABCMeta):
+    def __init__(self, tap_config: dict, target_config: dict, tap_catalog: os.PathLike):
+        self.tap_config = tap_config
+        self.target_config = target_config
+        self.tap_catalog = tap_catalog
+
+    def run(self, data: t.Any = None, context: t.Optional[dict] = None):
+        self.transform(data, context)
+        try:
+            self.load(context)
+        except Exception as e:
+            self.handle_load_failure(e)
+        self.notify(context)
+
+    def handle_load_failure(self, exception: Exception):
+        current_app.logger.error(f'load failed: {exception}')
+
+    def add_notification(self, notification: dict):
+        current_app.logger.info(f'Adding notification: {notification}')
+        db.session.add(Notification(**notification))
+        db.session.commit()
+    
+    @abstractmethod
     def transform(self, data: t.Any = None, context: t.Optional[dict] = None):
-        for item in data:
-            if item['subscriptionType'] == 'contact.propertyChange' and item['propertyName'] == 'email':
-                contact_id = item['objectId']
-                current_app.logger.info(f'Contact ID: {contact_id}')
+        pass
 
-                contact = Contact.query.filter_by(hubspot_id=str(contact_id)).first()
-                current_app.logger.info(f'Contact Found: {contact}')
-
-                # TODO: use AI to generate the email body
-                notification = {
-                    'title': "Contact Updated",
-                    'body': f"Email updated for contact: {contact.full_name}"
-                }
-                current_app.logger.info(f'Notification: {notification}')
-                self.add_notification(notification)
-
+    @abstractmethod
     def load(self, context: t.Optional[dict] = None):
-        """
-        Here's where we perform logic to use meltano to load from postgres to
-        the target system. Not needed for this service.
-        """
+        pass
 
-    # TODO: lookup based on the specific client
-    # TODO: allow multiple recipients per URI
-    # TODO: allow multiple URIs per client?
     @property
-    def _apprise_uri(self): 
+    @abstractmethod
+    def _apprise_uri(self):
+        pass
 
-        if not self.verify_config('MAILGUN_API_KEY'):
-            return None
-        if not self.verify_config('MAILGUN_SEND_DOMAIN'):
-            return None
-        if not self.verify_config('MAILGUN_SEND_USER'):
-            return None
-        if not self.verify_config('MAILGUN_RECIPIENT'):
-            return None
-
-        user = current_app.config['MAILGUN_SEND_USER']
-        domain = current_app.config['MAILGUN_SEND_DOMAIN']
-        apikey = current_app.config['MAILGUN_API_KEY']
-        emails = [current_app.config['MAILGUN_RECIPIENT']]
-        return f'mailgun://{user}@{domain}/{apikey}/{"/".join(emails)}'
-
-    # TODO: there must be a better way to do this. Loading context should not
-    # need to be a two-step process.
-    def load_context(self):
-        self.tap_2_target(TapHubspot, TargetPostgres)
-        self._sync_contacts_to_flask()
-
-    def _sync_contacts_to_flask(self):
-        from flask import current_app
-        from sqlalchemy import text
-        from .models import Contact
-        from flask_base.extensions import db
-
-        with current_app.app_context():
-
-            Contact.query.delete()
-            
-            # TODO: use sqlalchemy instead of raw sql
-            # TODO: can this be genericized for any data flow service?
-            sql = text("""
-                SELECT 
-                    id,
-                    properties,
-                    "createdAt" as created_at,
-                    "updatedAt" as updated_at,
-                    archived,
-                    lastmodifieddate
-                FROM melty.contacts
-                WHERE archived = false
-                ORDER BY "createdAt"
-            """)
-            
-            result = db.session.execute(sql)
-            
-            contacts = []
-            for row in result:
-                # Parse the JSONB properties column
-                props = row.properties or {}
-                
-                contact = Contact(
-                    hubspot_id=row.id,
-                    email=props.get('email'),
-                    firstname=props.get('firstname'),
-                    lastname=props.get('lastname'),
-                    created_at=row.created_at,
-                    updated_at=row.updated_at,
-                    last_modified_date=row.lastmodifieddate
+    def tap_2_target(self, tap: Tap, target: Target):
+        with (
+            temp_json_file(self.tap_config) as tap_config_path,
+            temp_json_file(self.target_config) as target_config_path
+        ):
+            current_app.logger.info(f'tap_config_path: {tap_config_path}')
+            current_app.logger.info(f'target_config_path: {target_config_path}')
+            current_app.logger.info(f'tap_catalog: {self.tap_catalog}')
+            tap_output_buffer = io.StringIO()
+            with contextlib.redirect_stdout(tap_output_buffer):
+                tap.invoke(
+                    config=(tap_config_path,),
+                    catalog=self.tap_catalog
                 )
-                contacts.append(contact)
-            
-            # Bulk insert all contacts
-            db.session.bulk_save_objects(contacts)
+
+            tap_output_buffer.seek(0)
+            target.invoke(
+                config=(target_config_path,),
+                file_input=tap_output_buffer
+            )
+
+    def verify_config(self, config_name: str):
+        if config_name not in current_app.config:
+            current_app.logger.error(f'{config_name} not found in application config')
+            return False
+        return True
+
+    def notify(self, context: t.Optional[dict] = None):
+        import apprise
+        apobj = apprise.Apprise()
+        apobj.add(self._apprise_uri)
+        for notification in Notification.query.filter_by(sent=False).all():
+            current_app.logger.info(f'Sending notification for notification record: {notification}')
+            current_app.logger.info(f'Apprise URI: {self._apprise_uri}')
+            notification.sent = apobj.notify(
+                body=notification.body,
+                title=notification.title
+            )
+            if notification.sent is False:
+                current_app.logger.error(f'Failed to send notification for notification record: {notification}')
             db.session.commit()
