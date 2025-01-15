@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h1>Emails</h1>
+
+  <!-- Form to Generate Emails -->
+  <form method="POST">
+    <button type="submit" name="generate_emails" class="btn btn-primary mb-3">
+      Generate Emails
+    </button>
+  </form>
+
+  <!-- Form to Display and Send Emails -->
+  <form method="POST">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Contact Name</th>
+          <th>Subject</th>
+          <th>Body</th>
+          <th>Select</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for email in emails %}
+        <tr>
+          <td>{{ email.contact_name }}</td>
+          <td>{{ email.title }}</td>
+          <td>{{ email.body }}</td>
+          <td>
+            <input type="checkbox" name="selected_emails" value="{{ email.id }}">
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <button type="submit" name="send_emails" class="btn btn-success">
+      Send Emails
+    </button>
+  </form>
+</div>
+{% endblock %} 

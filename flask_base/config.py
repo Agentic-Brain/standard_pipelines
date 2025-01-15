@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from os import getenv
+import os
 from typing import Any, Dict, Set
 from flask_base.version import get_versions
 
@@ -14,6 +14,14 @@ class Config:
         'ENCRYPTION_KEY': None,
         'SECURITY_PASSWORD_SALT': None,
         'SECURITY_PASSWORD_HASH': 'bcrypt',
+        'MAILGUN_API_KEY': None, # TODO: remove and read from DB
+        'MAILGUN_SEND_DOMAIN': None, # TODO: remove and read from DB    
+        'MAILGUN_SEND_USER': None, # TODO: remove and read from DB
+        'MAILGUN_RECIPIENT': None, # TODO: remove and read from DB
+        'HUBSPOT_CLIENT_ID': None, # TODO: remove and read from DB
+        'HUBSPOT_CLIENT_SECRET': None, # TODO: remove and read from DB
+        'HUBSPOT_REFRESH_TOKEN': None, # TODO: remove and read from DB
+        'POSTGRES_SQLALCHEMY_URL': None,
     }
 
     # Optional settings that enable additional features
@@ -63,6 +71,10 @@ class Config:
         'USE_AWS': 'AWS',
         # Add more mappings as needed
     }
+
+    # Data flow configuration paths
+    DATA_FLOW_CONFIG_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config', 'data_flow')
+    TAP_HUBSPOT_CONTACTS_CATALOG_PATH = os.path.join(DATA_FLOW_CONFIG_DIR, 'tap_hubspot_contacts_catalog.json')
 
     def __init__(self, env_prefix: str) -> None:
         # These are all defined just to prevent errors with type checking
@@ -160,7 +172,7 @@ class Config:
         self.verify_api_configuration()
 
     def get_env(self, key: str, default: Any = None) -> Any:
-        return getenv(f'{self.env_prefix}_{key}', default)
+        return os.getenv(f'{self.env_prefix}_{key}', default)
 
     def build_celery_config(self):
         url = f'redis://{self.REDIS_HOST}:{self.REDIS_PORT}/0'
@@ -260,7 +272,7 @@ class ProductionConfig(Config):
 
 # Used to get initial config type, defined by FLASK_ENV
 def get_config() -> Config:
-    env = getenv('FLASK_ENV', 'development').lower()
+    env = os.getenv('FLASK_ENV', 'development').lower()
     config_classes = {
         'development': DevelopmentConfig,
         'testing': TestingConfig,
