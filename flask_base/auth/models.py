@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 import uuid
 
 if TYPE_CHECKING:
-    from transformers.models import TransformerRegistry
+    from transformers.models import DataFlowRegistry
 
 
 
@@ -64,9 +64,9 @@ class Client(BaseMixin):
     
     # Relationships
     users: Mapped[List['User']] = relationship('User', back_populates='client', passive_deletes=True)
-    transformers: Mapped[List['TransformerRegistry']] = relationship(
-        'TransformerRegistry',
-        secondary='client_transformer_registry_join',
+    transformers: Mapped[List['DataFlowRegistry']] = relationship(
+        'DataFlowRegistry',
+        secondary='client_data_flow_registry_join',
         back_populates='clients',
         passive_deletes=True
     )
