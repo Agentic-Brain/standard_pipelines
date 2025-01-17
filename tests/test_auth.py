@@ -1,7 +1,7 @@
 import pytest
 from flask_security.utils import hash_password
-from flask_base.auth.models import User, Role, UserRoleJoin
-from flask_base.extensions import db
+from standard_pipelines.auth.models import User, Role, UserRoleJoin
+from standard_pipelines.extensions import db
 import uuid
 
 

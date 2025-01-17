@@ -1,6 +1,6 @@
 import pytest
-from flask_base.extensions import db
-from flask_base.database.models import BaseMixin, TimestampMixin
+from standard_pipelines.extensions import db
+from standard_pipelines.database.models import BaseMixin, TimestampMixin
 import uuid
 from datetime import datetime
 from sqlalchemy import String

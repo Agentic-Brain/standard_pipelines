@@ -4,15 +4,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_babel import Babel
 from flask_security.utils import hash_password
 import os
-from flask_base.version import APP_VERSION, FLASK_BASE_VERSION
+from standard_pipelines.version import APP_VERSION, FLASK_BASE_VERSION
 from dotenv import load_dotenv
 import logging
 import colorlog
 import time
-from flask_base.extensions import migrate, db
+from standard_pipelines.extensions import migrate, db
 from typing import Optional
 import sentry_sdk
-from flask_base.config import DevelopmentConfig, ProductionConfig, TestingConfig, Config, get_config
+from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, Config, get_config
 
 def create_app():
     load_dotenv()
@@ -54,6 +54,12 @@ def create_app():
     from .auth import init_app as auth_init_app
     app.register_blueprint(auth_blueprint)
     auth_init_app(app)
+
+    # Add the new transformers blueprint
+    from .transformers import transformers as transformers_blueprint
+    from .transformers import init_app as transformers_init_app
+    app.register_blueprint(transformers_blueprint)
+    transformers_init_app(app)
 
     from .main import main as main_blueprint
     from .main import init_app as main_init_app

@@ -1,8 +1,8 @@
 from flask import Blueprint, Flask
-from flask_base.extensions import admin, db
+from standard_pipelines.extensions import admin, db
 # TODO: Move flask_admin stuff to a new blueprint
-from flask_base.auth.models import User, Role
-from flask_base.admin_dash.model_views import UserView, RestrictedView
+from standard_pipelines.auth.models import User, Role
+from standard_pipelines.admin_dash.model_views import UserView, RestrictedView
 
 from typing import TYPE_CHECKING
 

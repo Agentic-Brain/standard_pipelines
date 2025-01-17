@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 from typing import Any, Dict, Set
-from flask_base.version import get_versions
+from standard_pipelines.version import get_versions
 
 class Config:
     # Core settings that are required for the application to function

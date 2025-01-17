@@ -6,8 +6,8 @@ from typing import Dict, Any
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
-from flask_base import create_app
-from flask_base.extensions import db
+from standard_pipelines import create_app
+from standard_pipelines.extensions import db
 from testcontainers.postgres import PostgresContainer
 from testcontainers.redis import RedisContainer
 

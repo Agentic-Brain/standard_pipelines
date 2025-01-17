@@ -6,7 +6,7 @@ from flask_security.mail_util import MailUtil
 from flask_security.datastore import SQLAlchemyUserDatastore
 from flask_security.forms import RegisterForm, LoginForm, ResetPasswordForm
 # Application
-from flask_base.extensions import db, security, mail
+from standard_pipelines.extensions import db, security, mail
 import requests
 
 auth = Blueprint('auth', __name__)
@@ -45,7 +45,7 @@ def init_app(app: Flask):
     mail.init_app(app)
     
     # Importing here prevents a circular import
-    from flask_base.auth.models import Role, User
+    from standard_pipelines.auth.models import Role, User
 
     app.logger.debug(f'Creating user_datastore')
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)
