@@ -73,6 +73,11 @@ def create_app():
     
     from .celery import init_app as celery_init_app
     celery_init_app(app)
+
+    from .data_flow import data_flow as data_flow_blueprint
+    from .data_flow import init_app as data_flow_init_app
+    app.register_blueprint(data_flow_blueprint)
+    data_flow_init_app(app)
     
     
     @app.context_processor
