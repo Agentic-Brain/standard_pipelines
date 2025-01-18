@@ -14,7 +14,6 @@ class Config:
         'ENCRYPTION_KEY': None,
         'SECURITY_PASSWORD_SALT': None,
         'SECURITY_PASSWORD_HASH': 'bcrypt',
-        'POSTGRES_SQLALCHEMY_URL': None,
     }
 
     # Optional settings that enable additional features
