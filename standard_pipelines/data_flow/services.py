@@ -2,7 +2,7 @@ import contextlib
 import io
 from flask import current_app
 from .models import Notification
-from flask_base.extensions import db
+from standard_pipelines.extensions import db
 from abc import ABCMeta, abstractmethod
 import typing as t
 import tempfile

@@ -1,14 +1,10 @@
 import typing as t
-import re
-import requests
 from flask import current_app
 from tap_hubspot.tap import TapHubspot
 from target_postgres.target import TargetPostgres
 from ..services import BaseDataFlowService
 from .models import Contact
-import json
-import io
-import contextlib
+
 
 class HubSpotNotificationEmailOnContactUpdate(BaseDataFlowService):
 
@@ -81,7 +77,7 @@ class HubSpotNotificationEmailOnContactUpdate(BaseDataFlowService):
         from flask import current_app
         from sqlalchemy import text
         from .models import Contact
-        from flask_base.extensions import db
+        from standard_pipelines.extensions import db
 
         with current_app.app_context():
 

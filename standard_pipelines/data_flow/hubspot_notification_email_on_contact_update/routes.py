@@ -2,7 +2,7 @@ from flask import render_template, current_app, jsonify, request, redirect, url_
 
 from .services import HubSpotNotificationEmailOnContactUpdate
 from .. import data_flow
-from flask_base.extensions import db
+from standard_pipelines.extensions import db
 from .models import Contact
 
 @data_flow.route('/sync', methods=['GET', 'POST'])
