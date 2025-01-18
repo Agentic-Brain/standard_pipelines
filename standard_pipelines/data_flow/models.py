@@ -1,6 +1,6 @@
 from sqlalchemy import String, Text, Boolean
 from sqlalchemy.orm import Mapped, mapped_column
-from flask_base.database.models import BaseMixin
+from standard_pipelines.database.models import BaseMixin
 
 class Notification(BaseMixin):
     """Model for storing notifications with title and body for consumption by apprise."""

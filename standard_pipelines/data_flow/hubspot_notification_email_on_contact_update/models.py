@@ -1,12 +1,15 @@
 from sqlalchemy import String, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import UUID
-from flask_base.database.models import BaseMixin
+from standard_pipelines.database.models import BaseMixin
 from typing import Optional
-from flask_base.extensions import db
+from standard_pipelines.extensions import db
 from datetime import datetime
 
 
+# TODO: This will need to be reformated
+# directly overwrites much of the normal BaseMixin
+# Will also need more descriptive name for details
 class Contact(BaseMixin):
     """
     Flask-managed contacts table that mirrors data from melty.contacts

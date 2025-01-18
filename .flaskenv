@@ -1,3 +1,3 @@
 FLASK_ENV=development
 FLASK_DEBUG=1
-FLASK_APP=flask_base
+FLASK_APP=standard_pipelines
