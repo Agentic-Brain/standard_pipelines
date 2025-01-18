@@ -4,13 +4,13 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.exc import IntegrityError
 from flask_security.core import UserMixin, RoleMixin
 from standard_pipelines.extensions import db
-from standard_pipelines.database.models import TimestampMixin, BaseMixin
-from typing import TYPE_CHECKING, Optional
+from standard_pipelines.database.models import BaseMixin
+from typing import TYPE_CHECKING, Optional, List
 from datetime import datetime, timezone
 import uuid
 
 if TYPE_CHECKING:
-    from transformers.models import DataFlowRegistry
+    from data_flow.models import DataFlowRegistry
 
 
 
