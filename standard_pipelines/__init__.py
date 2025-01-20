@@ -13,6 +13,8 @@ from standard_pipelines.extensions import migrate, db
 from typing import Optional
 import sentry_sdk
 from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, Config, get_config
+from standard_pipelines.data_flow.models import Client, DataFlowRegistry
+from standard_pipelines.auth.models import User
 
 def create_app():
     load_dotenv()
@@ -55,11 +57,10 @@ def create_app():
     app.register_blueprint(auth_blueprint)
     auth_init_app(app)
 
-    # Add the new transformers blueprint
-    from .transformers import transformers as transformers_blueprint
-    from .transformers import init_app as transformers_init_app
-    app.register_blueprint(transformers_blueprint)
-    transformers_init_app(app)
+    from .data_flow import data_flow as data_flow_blueprint
+    from .data_flow import init_app as data_flow_init_app
+    app.register_blueprint(data_flow_blueprint)
+    data_flow_init_app(app)
 
     from .main import main as main_blueprint
     from .main import init_app as main_init_app
@@ -69,17 +70,11 @@ def create_app():
     from .admin_dash import admin_dash as admin_dash_blueprint
     from .admin_dash import init_app as admin_dash_init_app
     app.register_blueprint(admin_dash_blueprint)
-    admin_dash_init_app(app)
+    # admin_dash_init_app(app)
     
     from .celery import init_app as celery_init_app
     celery_init_app(app)
 
-    from .data_flow import data_flow as data_flow_blueprint
-    from .data_flow import init_app as data_flow_init_app
-    app.register_blueprint(data_flow_blueprint)
-    data_flow_init_app(app)
-    
-    
     @app.context_processor
     def inject_semver():
         return dict(app_version=str(APP_VERSION), flask_base_version=str(FLASK_BASE_VERSION))
