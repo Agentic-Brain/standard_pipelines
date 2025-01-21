@@ -58,15 +58,28 @@ class SecureMixin(BaseMixin):
         raise NotImplementedError("Secure models must implement get_encryption_key()")
     
     def _is_encrypted(self, value: Any) -> bool:
-        if not isinstance(value, (str, bytes)):
+        """Check if a value appears to be encrypted.
+        
+        Fernet tokens always start with 'gAAAAA' when base64 encoded.
+        Returns True if the value appears to be a Fernet token.
+        """
+        if value is None:
             return False
+            
+        # Handle both bytes and string representations
         try:
-            return (isinstance(value, bytes) and value.startswith(b'gAAAAA')) or \
-                   (isinstance(value, str) and value.startswith('gAAAAA'))
+            if isinstance(value, bytes):
+                return value.startswith(b'gAAAAA')
+            elif isinstance(value, str):
+                # Check both the string itself and its byte representation
+                return value.startswith('gAAAAA') or value.encode().startswith(b'gAAAAA')
         except:
             return False
+            
+        return False
     
-    def _encrypt_value(self, value: Any) -> bytes:
+    def _encrypt_value(self, value: Any) -> str:
+        """Encrypt a value and return as a string for database storage."""
         if value is None or self._is_encrypted(value):
             return value
         
@@ -77,17 +90,25 @@ class SecureMixin(BaseMixin):
                 value = str(value)
             
         fernet = Fernet(self.get_encryption_key())
-        return fernet.encrypt(value.encode())
+        encrypted_bytes = fernet.encrypt(value.encode())
+        # Convert to string for database storage
+        return encrypted_bytes.decode()
     
-    def _decrypt_value(self, encrypted_value: bytes | str) -> Any:
+    def _decrypt_value(self, encrypted_value: Any) -> Any:
+        """Decrypt a value that might be stored as string in database."""
         if encrypted_value is None or not self._is_encrypted(encrypted_value):
             return encrypted_value
             
         try:
             fernet = Fernet(self.get_encryption_key())
+            
+            # Ensure we have bytes for decryption
             if isinstance(encrypted_value, str):
-                encrypted_value = encrypted_value.encode()
-            decrypted = fernet.decrypt(encrypted_value).decode()
+                encrypted_bytes = encrypted_value.encode()
+            else:
+                encrypted_bytes = encrypted_value
+                
+            decrypted = fernet.decrypt(encrypted_bytes).decode()
             try:
                 return json.loads(decrypted)
             except json.JSONDecodeError:

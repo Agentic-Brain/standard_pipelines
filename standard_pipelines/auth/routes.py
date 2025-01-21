@@ -42,16 +42,16 @@ def manage_fireflies_credentials(client_id: str):
                 
         else:  # GET request
             # Retrieve existing credentials
-            credentials = FirefliesCredentials.query.filter_by(client_id=client_uuid).first()
+            new_credentials = FirefliesCredentials.query.filter_by(client_id=client_uuid).first()
             
-            if not credentials:
+            if not new_credentials:
                 return jsonify({
                     'error': 'No credentials found for this client'
                 }), 404
                 
             return jsonify({
                 'client': client.name,
-                'api_key': credentials.api_key
+                'api_key': new_credentials.api_key
             })
             
     except ValueError:
