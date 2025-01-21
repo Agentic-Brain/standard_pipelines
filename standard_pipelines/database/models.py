@@ -8,6 +8,7 @@ from cryptography.fernet import Fernet
 from bitwarden_sdk import BitwardenClient
 from typing import Any
 import json
+import os
 
 class BaseMixin(db.Model):
     __abstract__ = True
@@ -51,39 +52,44 @@ class SecureMixin(BaseMixin):
     __abstract__ = True
     
     # Bitwarden ID for client encryption key
-    encryption_key_id: Mapped[String] = mapped_column(String, nullable=False)
-    _fernet: Fernet = None  # Class variable to store Fernet instance
+    encryption_key_id: Mapped[str] = mapped_column(String, nullable=False)
     
-    @classmethod
-    def init_encryption(cls, key: bytes):
-        """Initialize the encryption key for the mixin"""
-        cls._encryption_key = key
-        cls._fernet = Fernet(key)
+    def _get_encryption_key(self) -> bytes:
+        """Get the encryption key from environment variable"""
+        key = os.environ.get('SECURE_ENCRYPTION_KEY')
+        if not key:
+            raise ValueError("SECURE_ENCRYPTION_KEY environment variable not set")
+        return key.encode()
     
-    def _encrypt_value(self, value: Any) -> str:
-        """Encrypt a value"""
-        if self._fernet is None:
-            raise ValueError("Encryption not initialized. Call init_encryption first.")
-        
+    def _encrypt_value(self, value: Any) -> bytes:
+        """Encrypt a value using a new Fernet instance"""
         if value is None:
             return None
-            
+        
         # Convert value to string if it isn't already
         if not isinstance(value, str):
-            value = json.dumps(value)
+            try:
+                value = json.dumps(value)
+            except TypeError:
+                value = str(value)
             
-        return self._fernet.encrypt(value.encode()).decode()
+        # Create new Fernet instance for encryption
+        fernet = Fernet(self._get_encryption_key())
+        # Return bytes directly
+        return fernet.encrypt(value.encode())
     
-    def _decrypt_value(self, encrypted_value: str) -> Any:
-        """Decrypt a value"""
-        if self._fernet is None:
-            raise ValueError("Encryption not initialized. Call init_encryption first.")
-            
+    def _decrypt_value(self, encrypted_value: bytes | str) -> Any:
+        """Decrypt a value using a new Fernet instance"""
         if encrypted_value is None:
             return None
             
         try:
-            decrypted = self._fernet.decrypt(encrypted_value.encode()).decode()
+            # Create new Fernet instance for decryption
+            fernet = Fernet(self._get_encryption_key())
+            # Convert to bytes if it's a string
+            if isinstance(encrypted_value, str):
+                encrypted_value = encrypted_value.encode()
+            decrypted = fernet.decrypt(encrypted_value).decode()
             try:
                 # Attempt to convert back to original type
                 return json.loads(decrypted)
@@ -99,13 +105,15 @@ class SecureMixin(BaseMixin):
         value = super().__getattribute__(key)
         
         # Don't decrypt special attributes or primary keys
-        if key.startswith('_') or key == 'id' or key in ('created_at', 'modified_at'):
+        if key.startswith('_') or key == 'id' or key in ('created_at', 'modified_at', 'encryption_key_id'):
             return value
             
         # Get the mapper and see if this is a column
         mapper = inspect(self.__class__)
-        if key in mapper.columns.keys():
-            if isinstance(value, str) and value.startswith(b'gAAAAA'.decode()):
+        if mapper is not None and key in mapper.columns.keys():
+            # Check if value is encrypted (either as bytes or string)
+            if (isinstance(value, bytes) and value.startswith(b'gAAAAA')) or \
+               (isinstance(value, str) and value.startswith('gAAAAA')):
                 return self._decrypt_value(value)
                 
         return value
@@ -113,13 +121,13 @@ class SecureMixin(BaseMixin):
     def __setattr__(self, key: str, value: Any):
         """Intercept attribute setting to encrypt values"""
         # Don't encrypt special attributes or primary keys
-        if key.startswith('_') or key == 'id' or key in ('created_at', 'modified_at'):
+        if key.startswith('_') or key == 'id' or key in ('created_at', 'modified_at', 'encryption_key_id'):
             super().__setattr__(key, value)
             return
             
         # Get the mapper and see if this is a column
         mapper = inspect(self.__class__)
-        if key in mapper.columns.keys():
+        if mapper is not None and key in mapper.columns.keys():
             # Encrypt the value before setting
             if value is not None:
                 value = self._encrypt_value(value)
