@@ -35,6 +35,7 @@ class Config:
         'USE_STRIPE': False,
         'USE_SENDGRID': False,
         'USE_AWS': False,
+        'USE_BITWARDEN': True,
         # Add more API usage flags as needed
     }
 
