@@ -32,8 +32,6 @@ class BaseMixin(db.Model):
         # import json
         # return json.dumps(self.to_dict())
 
-
-
 # FIXME: This is broken, need to fix
 class VersionedMixin(BaseMixin):
     __abstract__ = True
@@ -51,13 +49,13 @@ class SecureMixin(BaseMixin):
     """Mixin that provides automatic encryption for all non-primary-key fields in database."""
     __abstract__ = True
     
-    encryption_key_id: Mapped[str] = mapped_column(String, nullable=False)
-    
-    def _get_encryption_key(self) -> bytes:
-        key = os.environ.get('SECURE_ENCRYPTION_KEY')
-        if not key:
-            raise ValueError("SECURE_ENCRYPTION_KEY environment variable not set")
-        return key.encode()
+    # This should be implemented by child classes
+    def get_encryption_key(self) -> bytes:
+        """
+        Override this method to specify how to retrieve the encryption key.
+        Must return bytes suitable for Fernet encryption.
+        """
+        raise NotImplementedError("Secure models must implement get_encryption_key()")
     
     def _is_encrypted(self, value: Any) -> bool:
         if not isinstance(value, (str, bytes)):
@@ -78,7 +76,7 @@ class SecureMixin(BaseMixin):
             except TypeError:
                 value = str(value)
             
-        fernet = Fernet(self._get_encryption_key())
+        fernet = Fernet(self.get_encryption_key())
         return fernet.encrypt(value.encode())
     
     def _decrypt_value(self, encrypted_value: bytes | str) -> Any:
@@ -86,7 +84,7 @@ class SecureMixin(BaseMixin):
             return encrypted_value
             
         try:
-            fernet = Fernet(self._get_encryption_key())
+            fernet = Fernet(self.get_encryption_key())
             if isinstance(encrypted_value, str):
                 encrypted_value = encrypted_value.encode()
             decrypted = fernet.decrypt(encrypted_value).decode()
