@@ -1,7 +1,7 @@
 from sqlalchemy import String, Text, Boolean, ForeignKey, Index, text, UUID
 from typing import Optional, List
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from standard_pipelines.database.models import BaseMixin
+from standard_pipelines.database.models import BaseMixin, SecureMixin
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -24,7 +24,7 @@ class Client(BaseMixin):
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     description: Mapped[Optional[str]] = mapped_column(String(1000))
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default='true')
-    domain: Mapped[Optional[str]] = mapped_column(String(255), unique=True)
+    bitwarden_encryption_key_id: Mapped[str] = mapped_column(String(255))
     
     # Relationships
     users: Mapped[List['User']] = relationship('User', back_populates='client', passive_deletes=True)
@@ -102,4 +102,4 @@ class ClientDataFlowRegistryJoin(BaseMixin):
         UUID, 
         ForeignKey('data_flow_registry.id', ondelete='CASCADE'),
         nullable=False
-    ) 
+    )
