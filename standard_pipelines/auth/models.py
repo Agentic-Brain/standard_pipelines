@@ -83,7 +83,6 @@ class BaseCredentials(SecureMixin):
         
         # Get Bitwarden client from Flask app extensions
         
-        return '9W3jbgW2GDx4NpZ89jxtWXABFxDgKh7NpQTXXsVu2PM='.encode()
         bitwarden_client = current_app.extensions['bitwarden_client']
         
         # Retrieve the secret using the client's encryption key ID
