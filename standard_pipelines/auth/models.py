@@ -85,13 +85,16 @@ class BaseCredentials(SecureMixin):
         bitwarden_client = current_app.extensions['bitwarden_client']
         
         # Retrieve the secret using the client's encryption key ID
-        secret = bitwarden_client.secrets().get(
-            organization_id=current_app.config['BITWARDEN_ORGANIZATION_ID'],
-            secret_id=self.client.bitwarden_encryption_key_id
-        )
+        try:
+            secret = bitwarden_client.secrets().get(self.client.bitwarden_encryption_key_id)
+            if secret.success:
+                return secret.data.value.encode()
+            else:
+                raise Exception(f"Failed to retrieve secret from Bitwarden: {secret.data.error}")
+        except Exception as e:
+            print(f"Error retrieving secret from Bitwarden: {e}")
+            raise e
         
-        # The value should be a base64-encoded Fernet key
-        return secret.value.encode()
 
     def __repr__(self) -> str:
         """Return string representation showing client name and credential type."""

@@ -99,7 +99,7 @@ class SecureMixin(BaseMixin):
 @event.listens_for(SecureMixin, 'before_insert', propagate=True)
 @event.listens_for(SecureMixin, 'before_update', propagate=True)
 def encrypt_before_save(mapper, connection, target):
-    skip_columns = {'id', 'created_at', 'modified_at'}
+    skip_columns = {'id', 'created_at', 'modified_at', 'client_id'}
     
     for column in mapper.columns.keys():
         if not column.startswith('_') and column not in skip_columns:
@@ -110,7 +110,7 @@ def encrypt_before_save(mapper, connection, target):
 # Decrypt after loading from database
 @event.listens_for(SecureMixin, 'load', propagate=True)
 def decrypt_after_load(target, context):
-    skip_columns = {'id', 'created_at', 'modified_at'}
+    skip_columns = {'id', 'created_at', 'modified_at', 'client_id'}
     
     for column in inspect(target).mapper.columns.keys():
         if not column.startswith('_') and column not in skip_columns:

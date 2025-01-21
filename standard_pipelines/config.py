@@ -49,6 +49,7 @@ class Config:
         'BITWARDEN': {
             'BITWARDEN_ACCESS_TOKEN': None,
             'BITWARDEN_STATE_FILE_PATH': None,
+            'BITWARDEN_ORGANIZATION_ID': None,
         },
         'MAILGUN': {
             'MAILGUN_API_KEY': None,
