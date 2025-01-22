@@ -28,7 +28,7 @@ def hubspot_webhook():
             if not payload:
                 return jsonify({'error': 'No payload received'}), 400
 
-            data_flow_service.run(data=payload, context=None)
+            data_flow_service.run(webhook_data=payload, context=None)
 
             # Return a success response
             return jsonify({'status': 'success', 'message': 'Webhook received'}), 200

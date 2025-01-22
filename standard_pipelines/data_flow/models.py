@@ -44,6 +44,12 @@ class DataFlowConfigurationMixin(BaseMixin):
     
     # Runtime configuration
     is_default: Mapped[bool] = mapped_column(Boolean, default=False, server_default='false')
+    client_id: Mapped[UUID] = mapped_column(
+        UUID, 
+        ForeignKey('client.id', ondelete='CASCADE'),
+        nullable=True,
+        unique=True
+    )
     
     # Link to registry
     registry_id: Mapped[UUID] = mapped_column(
@@ -53,8 +59,8 @@ class DataFlowConfigurationMixin(BaseMixin):
     )
     
     registry: Mapped['DataFlowRegistry'] = relationship('DataFlowRegistry')
-    # Add a partial unique index for is_default
     __table_args__ = (
+        # There may only be a single row where is_default is true
         Index(
             'ix_unique_default_config',
             'registry_id',
@@ -62,6 +68,15 @@ class DataFlowConfigurationMixin(BaseMixin):
             unique=True,
             postgresql_where=text('is_default = true')
         ),
+        # There may only be a single row where client_id is null
+        Index(
+            'ix_unique_client_id_config',
+            'registry_id',
+            'client_id',
+            unique=True,
+            postgresql_where=text('client_id IS NULL')
+        ),
+        # TODO: the row where client_id is null must be the default row
     )
 
 class ClientDataFlowRegistryJoin(BaseMixin):
@@ -69,6 +84,7 @@ class ClientDataFlowRegistryJoin(BaseMixin):
     __tablename__ = 'client_data_flow_registry_join'
     
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default='true')
+    webhook_id: Mapped[str] = mapped_column(String(255), nullable=False)
     
     client_id: Mapped[UUID] = mapped_column(
         UUID, 
