@@ -3,9 +3,10 @@ from flask import current_app
 from tap_hubspot.tap import TapHubspot
 from target_postgres.target import TargetPostgres
 from ..services import BaseDataFlowService
-from .models import Contact
+# from .models import Contact
 
 
+# WARNING: THIS IS COMPLETELY BROKEN CURENTLY, REMOVED CONTACT MODELS SO MIGRATIONS CAN BE DONE
 class HubSpotNotificationEmailOnContactUpdate(BaseDataFlowService):
 
     # TODO: read from database for a specific client
