@@ -6,13 +6,14 @@ import uuid
 
 
 
-def test_create_user(app):
+def test_create_user(app, test_client):
     """Test user creation and retrieval"""
     user = app.user_datastore.create_user(
         email="test@example.com",
         password=hash_password("password123"),
         active=True,
-        fs_uniquifier=str(uuid.uuid4())
+        fs_uniquifier=str(uuid.uuid4()),
+        client_id=test_client.id
     )
     db.session.commit()
 
@@ -34,14 +35,15 @@ def test_create_role(app):
     assert retrieved_role.name == "admin"
     assert retrieved_role.description == "Administrator role"
 
-def test_user_role_assignment(app):
+def test_user_role_assignment(app, test_client):
     """Test assigning roles to users"""
     # Create user and role
     user = app.user_datastore.create_user(
         email="test_role@example.com",
         password=hash_password("password123"),
         active=True,
-        fs_uniquifier=str(uuid.uuid4())
+        fs_uniquifier=str(uuid.uuid4()),
+        client_id=test_client.id
     )
     role = app.user_datastore.create_role(
         name="test_role",
@@ -59,14 +61,15 @@ def test_user_role_assignment(app):
     assert len(retrieved_user.roles) == 1
     assert retrieved_user.roles[0].name == "test_role"
 
-def test_user_authentication(client):
+def test_user_authentication(client, test_client):
     """Test user login functionality"""
     # Create test user
     user = client.application.user_datastore.create_user(
         email="register_test@gmail.com",
         password=hash_password("password123"),
         active=True,
-        fs_uniquifier=str(uuid.uuid4())
+        fs_uniquifier=str(uuid.uuid4()),
+        client_id=test_client.id
     )
     db.session.commit()
 
@@ -85,19 +88,28 @@ def test_user_authentication(client):
     assert user.login_count > 0
     assert user.current_login_ip is not None
 
-def test_user_registration(client):
+def test_user_registration(client, test_client):
     """Test user registration endpoint"""
     response = client.post('/register', data={
         'email': 'register_test@gmail.com',
         'password': 'Password123!',
-        'password_confirm': 'Password123!'
+        'password_confirm': 'Password123!',
+        'client_id': str(test_client.id)
     }, follow_redirects=True)
+    
+    assert response.status_code == 200
+    
+    # Verify user was created with correct client_id
+    user = client.application.user_datastore.find_user(email="register_test@gmail.com")
+    assert user is not None
+    assert user.client_id == test_client.id
     
     assert response.status_code == 200
     
     # Verify user was created
     user = client.application.user_datastore.find_user(email="register_test@gmail.com")
     assert user is not None
+    assert user.client_id == test_client.id  # Verify client_id was set correctly
     
     # If using confirmable, confirm the user
     if not user.active:
@@ -106,14 +118,15 @@ def test_user_registration(client):
     
     assert user.active is True
 
-def test_cascade_delete(app):
+def test_cascade_delete(app, test_client):
     """Test that deleting a user also removes their role assignments"""
     # Create user and role
     user = app.user_datastore.create_user(
         email="cascade_test@example.com",
         password=hash_password("password123"),
         active=True,
-        fs_uniquifier=str(uuid.uuid4())
+        fs_uniquifier=str(uuid.uuid4()),
+        client_id=test_client.id
     )
     role = app.user_datastore.create_role(
         name="cascade_role",
@@ -139,4 +152,4 @@ def test_cascade_delete(app):
 
     # Verify role still exists
     retrieved_role = app.user_datastore.find_role("cascade_role")
-    assert retrieved_role is not None 
+    assert retrieved_role is not None            

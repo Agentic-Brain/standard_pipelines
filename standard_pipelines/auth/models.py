@@ -10,8 +10,10 @@ from datetime import datetime, timezone
 import uuid
 
 if TYPE_CHECKING:
-    from data_flow.models import DataFlowRegistry
+    from standard_pipelines.data_flow.models import DataFlowRegistry
 
+# Import the join table class for runtime use
+from standard_pipelines.data_flow.models import ClientDataFlowRegistryJoin
 
 
 class Role(BaseMixin, RoleMixin):
@@ -64,9 +66,9 @@ class Client(BaseMixin):
     
     # Relationships
     users: Mapped[List['User']] = relationship('User', back_populates='client', passive_deletes=True)
-    transformers: Mapped[List['DataFlowRegistry']] = relationship(
-        'DataFlowRegistry',
-        secondary='client_data_flow_registry_join',
+    data_flows: Mapped[List['DataFlowRegistry']] = relationship(
+        'standard_pipelines.data_flow.models.DataFlowRegistry',
+        secondary=lambda: ClientDataFlowRegistryJoin.__table__,
         back_populates='clients',
         passive_deletes=True
     )

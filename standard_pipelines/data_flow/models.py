@@ -1,8 +1,10 @@
 from sqlalchemy import String, Text, Boolean, ForeignKey, Index, text, UUID
-from typing import Optional, List
+from typing import Optional, List, TYPE_CHECKING
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from standard_pipelines.database.models import BaseMixin
-from standard_pipelines.auth.models import Client
+
+if TYPE_CHECKING:
+    from standard_pipelines.auth.models import Client
 
 class Notification(BaseMixin):
     """Model for storing notifications with title and body for consumption by apprise."""
@@ -29,8 +31,8 @@ class DataFlowRegistry(BaseMixin):
     
     # Relationships
     clients: Mapped[List['Client']] = relationship(
-        'Client', 
-        secondary='client_data_flow_registry_join',
+        'standard_pipelines.auth.models.Client', 
+        secondary=lambda: ClientDataFlowRegistryJoin.__table__,
         back_populates='data_flows',
         passive_deletes=True
     )
@@ -79,4 +81,4 @@ class ClientDataFlowRegistryJoin(BaseMixin):
         UUID, 
         ForeignKey('data_flow_registry.id', ondelete='CASCADE'),
         nullable=False
-    ) 
+    )       

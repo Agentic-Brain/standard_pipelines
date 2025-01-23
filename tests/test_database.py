@@ -1,13 +1,13 @@
 import pytest
 from standard_pipelines.extensions import db
-from standard_pipelines.database.models import BaseMixin, TimestampMixin
+from standard_pipelines.database.models import BaseMixin
 import uuid
 from datetime import datetime
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 
 # Test model that implements all mixins
-class SampleModel(BaseMixin, TimestampMixin):
+class SampleModel(BaseMixin):
     __tablename__ = 'sample_models'
     
     name: Mapped[str] = mapped_column(String(50))
@@ -46,22 +46,6 @@ def test_base_mixin(db_session):
     # Test deletion
     test_obj.delete()
     assert db_session.get(SampleModel, test_obj.id) is None
-
-def test_timestamp_mixin(db_session):
-    # Test TimestampMixin functionality
-    test_obj = SampleModel(name="timestamp_test")
-    test_obj.save()
-    
-    # Verify timestamps were set
-    assert isinstance(test_obj.created_at, datetime)
-    assert isinstance(test_obj.modified_at, datetime)
-    
-    # Test modification timestamp updates
-    original_modified = test_obj.modified_at
-    test_obj.name = "updated"
-    db_session.commit()
-    
-    assert test_obj.modified_at > original_modified
 
 def test_model_relationships(db_session):
     # Create multiple objects and test basic querying

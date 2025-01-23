@@ -51,12 +51,20 @@ def init_app(app: Flask):
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 
     app.logger.debug('Initializing security object')
+    # Import here to avoid circular imports
+    from standard_pipelines.auth.forms import CustomRegisterForm
+    
+    # Initialize security first
     security.init_app(app, 
                     user_datastore,
-                    register_form=RegisterForm,
+                    register_form=CustomRegisterForm,
                     login_form=LoginForm,
                     reset_password_form=ResetPasswordForm,
                     mail_util_cls=MailgunMailUtil)
+    
+    # Now that security is initialized, we can import and set up the custom views
+    from standard_pipelines.auth.views import register_view
+    app.view_functions['security.register'] = register_view
     
     app.user_datastore = user_datastore # type: ignore
     app.logger.debug('Creating cipher from encryption key')

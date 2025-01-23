@@ -14,14 +14,18 @@ class Config:
         'ENCRYPTION_KEY': None,
         'SECURITY_PASSWORD_SALT': None,
         'SECURITY_PASSWORD_HASH': 'bcrypt',
-        'MAILGUN_API_KEY': None, # TODO: remove and read from DB
-        'MAILGUN_SEND_DOMAIN': None, # TODO: remove and read from DB    
-        'MAILGUN_SEND_USER': None, # TODO: remove and read from DB
-        'MAILGUN_RECIPIENT': None, # TODO: remove and read from DB
-        'HUBSPOT_CLIENT_ID': None, # TODO: remove and read from DB
-        'HUBSPOT_CLIENT_SECRET': None, # TODO: remove and read from DB
-        'HUBSPOT_REFRESH_TOKEN': None, # TODO: remove and read from DB
         'POSTGRES_SQLALCHEMY_URL': None,
+    }
+    
+    # Settings that are required in production but can have test values
+    PRODUCTION_REQUIRED_SETTINGS: Dict[str, Any] = {
+        'MAILGUN_API_KEY': None,  # TODO: remove and read from DB
+        'MAILGUN_SEND_DOMAIN': None,  # TODO: remove and read from DB    
+        'MAILGUN_SEND_USER': None,  # TODO: remove and read from DB
+        'MAILGUN_RECIPIENT': None,  # TODO: remove and read from DB
+        'HUBSPOT_CLIENT_ID': None,  # TODO: remove and read from DB
+        'HUBSPOT_CLIENT_SECRET': None,  # TODO: remove and read from DB
+        'HUBSPOT_REFRESH_TOKEN': None,  # TODO: remove and read from DB
     }
 
     # Optional settings that enable additional features
@@ -94,6 +98,8 @@ class Config:
 
         # Set required settings
         self._configure_settings(self.REQUIRED_SETTINGS, required=True)
+        # Set production required settings (only required in production)
+        self._configure_settings(self.PRODUCTION_REQUIRED_SETTINGS, required=(self.env_prefix == 'PRODUCTION'))
         # Set optional settings
         self._configure_settings(self.OPTIONAL_SETTINGS, required=False)
         # Configure API usage flags
@@ -101,7 +107,10 @@ class Config:
         # Configure API settings based on usage
         self._configure_api_settings()
 
-        self.SQLALCHEMY_DATABASE_URI = f'postgresql://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
+        # Use POSTGRES_SQLALCHEMY_URL if it's set, otherwise construct it
+        if not hasattr(self, 'POSTGRES_SQLALCHEMY_URL') or self.POSTGRES_SQLALCHEMY_URL is None:
+            self.POSTGRES_SQLALCHEMY_URL = f'postgresql://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
+        self.SQLALCHEMY_DATABASE_URI = self.POSTGRES_SQLALCHEMY_URL
         self.set_additional_config()
         self.build_celery_config()
 
@@ -112,7 +121,7 @@ class Config:
             if env_value is not None:
                 setattr(self, key, env_value)
             elif not hasattr(self, key) or getattr(self, key) is None:
-                if required and common_value is None:
+                if required and common_value is None and not (self.env_prefix == 'TESTING' and key in self.PRODUCTION_REQUIRED_SETTINGS):
                     raise ValueError(f"Required configuration '{key}' is not set")
                 setattr(self, key, getattr(self, key, common_value))
 
@@ -194,6 +203,8 @@ class DevelopmentConfig(Config):
         self.DB_HOST: str = 'localhost'
         self.DB_PORT: int = 5432
         self.DB_NAME: str = 'postgres'
+        # Construct POSTGRES_SQLALCHEMY_URL
+        self.POSTGRES_SQLALCHEMY_URL: str = f'postgresql://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
         # Redis/Celery
         self.REDIS_HOST: str = 'localhost'
         self.REDIS_PORT: int = 6379
@@ -225,33 +236,45 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     WTF_CSRF_ENABLED = False  # Disable CSRF tokens in the forms for testing
     def __init__(self) -> None:
+        # Initialize development config to use as fallback
+        dev_config = DevelopmentConfig()
         
-        # Postgres (using SQLite for testing)
-        self.DB_USER: str = 'postgres'
-        self.DB_PASS: str = 'postgres_password'
-        self.DB_HOST: str = 'localhost'
-        self.DB_PORT: int = 5432
-        self.DB_NAME: str = 'postgres'
-        # Redis/Celery
-        self.REDIS_HOST: str = 'localhost'
-        self.REDIS_PORT: int = 6379
-        self.REDIS_DB: int = 0  # Using different DB for testing
-        self.BROKER_URL = "redis://localhost:6379/0"
-        self.RESULT_BACKEND = "redis://localhost:6379/0"
-        self.TASK_IGNORE_RESULT = True
-        # Flask
-        self.SECRET_KEY: str = 'test_secret'
-        self.FLASK_DEBUG: bool = True
-        self.DEFAULT_ADMIN_ACCOUNT: str = 'test@example.com'
-        self.DEFAULT_ADMIN_PASSWORD: str = 'test_password'
-        self.SECURITY_PASSWORD_SALT: str = 'test_salt'
-        self.ENCRYPTION_KEY: str = 'IduTzHtJ7mk2B/j3TzMl4XC/+NdSFAgbIcgGh7nlguc='
-        # Testing specific settings
+        # Database configuration with fallback to development values
+        self.DB_USER: str = os.getenv('TESTING_DB_USER', dev_config.DB_USER)
+        self.DB_PASS: str = os.getenv('TESTING_DB_PASS', dev_config.DB_PASS)
+        self.DB_HOST: str = os.getenv('TESTING_DB_HOST', dev_config.DB_HOST)
+        self.DB_PORT: int = int(os.getenv('TESTING_DB_PORT', str(dev_config.DB_PORT)))
+        self.DB_NAME: str = os.getenv('TESTING_DB_NAME', dev_config.DB_NAME)
+        
+        # Construct POSTGRES_SQLALCHEMY_URL with test database configuration
+        self.POSTGRES_SQLALCHEMY_URL: str = os.getenv(
+            'TESTING_POSTGRES_SQLALCHEMY_URL',
+            f'postgresql://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
+        )
+        
+        # Redis/Celery configuration with fallback to development values
+        self.REDIS_HOST: str = os.getenv('TESTING_REDIS_HOST', dev_config.REDIS_HOST)
+        self.REDIS_PORT: int = int(os.getenv('TESTING_REDIS_PORT', str(dev_config.REDIS_PORT)))
+        self.REDIS_DB: int = int(os.getenv('TESTING_REDIS_DB', str(dev_config.REDIS_DB)))
+        self.BROKER_URL = os.getenv('TESTING_BROKER_URL', dev_config.BROKER_URL)
+        self.RESULT_BACKEND = os.getenv('TESTING_RESULT_BACKEND', dev_config.RESULT_BACKEND)
+        self.TASK_IGNORE_RESULT = True  # Keep this always True for testing
+        
+        # Flask configuration with fallback to development values
+        self.SECRET_KEY: str = os.getenv('TESTING_SECRET_KEY', dev_config.SECRET_KEY)
+        self.FLASK_DEBUG: bool = os.getenv('TESTING_FLASK_DEBUG', dev_config.FLASK_DEBUG) in ('True', 'true', '1', True)
+        self.DEFAULT_ADMIN_ACCOUNT: str = os.getenv('TESTING_DEFAULT_ADMIN_ACCOUNT', dev_config.DEFAULT_ADMIN_ACCOUNT)
+        self.DEFAULT_ADMIN_PASSWORD: str = os.getenv('TESTING_DEFAULT_ADMIN_PASSWORD', dev_config.DEFAULT_ADMIN_PASSWORD)
+        self.SECURITY_PASSWORD_SALT: str = os.getenv('TESTING_SECURITY_PASSWORD_SALT', dev_config.SECURITY_PASSWORD_SALT)
+        self.ENCRYPTION_KEY: str = os.getenv('TESTING_ENCRYPTION_KEY', dev_config.ENCRYPTION_KEY)
+        
+        # Testing specific settings that should always be set for tests
         self.TESTING = True
         self.WTF_CSRF_ENABLED = False
         self.SECURITY_CONFIRMABLE = False
         self.SECURITY_SEND_REGISTER_EMAIL = False
-        self.SENTRY_DSN = ''
+        self.SENTRY_DSN = ''  # Disable Sentry in tests
+        
         super().__init__('TESTING')
         self.verify_attributes()
 

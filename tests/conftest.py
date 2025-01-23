@@ -1,6 +1,7 @@
 import os
 import sys
 from typing import Dict, Any
+from dotenv import load_dotenv
 
 # Add project root to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -16,11 +17,40 @@ from testcontainers.redis import RedisContainer
 postgres = PostgresContainer("postgres:16-alpine")
 redis = RedisContainer("redis:7-alpine")
 
+@pytest.fixture(scope='function')
+def test_client(app):
+    """Create a test client for all tests."""
+    from standard_pipelines.auth.models import Client
+    import uuid
+    
+    with app.app_context():
+        # Create a new client for each test
+        # Generate unique values for each test
+        test_id = uuid.uuid4()
+        client = Client(
+            id=test_id,
+            name=f"Test Client {test_id}",
+            description="Test Client for Unit Tests",
+            domain=f"test-{test_id}.example.com"
+        )
+        db.session.add(client)
+        db.session.commit()
+        
+        yield client  # Return the client for the test to use
+        
+        # Clean up after the test
+        db.session.delete(client)
+        db.session.commit()
+        db.session.remove()  # Clear the session
+
 @pytest.fixture(scope='session')
 def app(request):
     """Create and configure a new app instance for all tests in module."""
     postgres.start()
     redis.start()
+    
+    # Load .env file first for default values
+    load_dotenv()
     
     # Set base testing environment variables
     os.environ['FLASK_ENV'] = 'testing'
@@ -34,6 +64,12 @@ def app(request):
     redis_url = f"redis://{redis.get_container_host_ip()}:{redis.get_exposed_port(6379)}/0"
     os.environ['TESTING_BROKER_URL'] = redis_url
     os.environ['TESTING_RESULT_BACKEND'] = redis_url
+    
+    # Set empty values for production-required settings in testing
+    for key in ['MAILGUN_API_KEY', 'MAILGUN_SEND_DOMAIN', 'MAILGUN_SEND_USER', 
+                'MAILGUN_RECIPIENT', 'HUBSPOT_CLIENT_ID', 'HUBSPOT_CLIENT_SECRET', 
+                'HUBSPOT_REFRESH_TOKEN']:
+        os.environ[f'TESTING_{key}'] = ''
     
     # Create the app with the test configuration
     app = create_app()
