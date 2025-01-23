@@ -81,4 +81,4 @@ def init_app(app: Flask):
     app.extensions['bitwarden_project'] = bitwarden_project
     
 
-# from . import routes
+from . import routes
