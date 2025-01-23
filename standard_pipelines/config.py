@@ -86,9 +86,9 @@ class Config:
         self.DB_PASS: str
         self.DB_NAME: str
         self.DB_HOST: str
-        self.DB_PORT: str
+        self.DB_PORT: int  # Changed to int for consistency
         self.REDIS_HOST: str
-        self.REDIS_PORT: str
+        self.REDIS_PORT: int  # Changed to int for consistency
         
         load_dotenv()
         versions = get_versions()
@@ -109,19 +109,32 @@ class Config:
 
         # Use POSTGRES_SQLALCHEMY_URL if it's set, otherwise construct it
         if not hasattr(self, 'POSTGRES_SQLALCHEMY_URL') or self.POSTGRES_SQLALCHEMY_URL is None:
-            self.POSTGRES_SQLALCHEMY_URL = f'postgresql://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
+            self.POSTGRES_SQLALCHEMY_URL = self._build_postgres_url()
         self.SQLALCHEMY_DATABASE_URI = self.POSTGRES_SQLALCHEMY_URL
         self.set_additional_config()
         self.build_celery_config()
+
+    def _is_required_setting(self, key: str, common_value: Any, required: bool) -> bool:
+        """Determine if a setting is required based on the environment and setting type."""
+        return required and common_value is None and not (
+            self.env_prefix == 'TESTING' and key in self.PRODUCTION_REQUIRED_SETTINGS
+        )
+
+    def _build_postgres_url(self) -> str:
+        """Build the PostgreSQL connection URL from individual components."""
+        return f'postgresql://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
 
     def _configure_settings(self, settings: Dict[str, Any], required: bool = False) -> None:
         """Configure settings from environment variables or defaults"""
         for key, common_value in settings.items():
             env_value = self.get_env(key)
             if env_value is not None:
+                # Convert port values to int if needed
+                if key in ('DB_PORT', 'REDIS_PORT') and env_value:
+                    env_value = int(env_value)
                 setattr(self, key, env_value)
             elif not hasattr(self, key) or getattr(self, key) is None:
-                if required and common_value is None and not (self.env_prefix == 'TESTING' and key in self.PRODUCTION_REQUIRED_SETTINGS):
+                if self._is_required_setting(key, common_value, required):
                     raise ValueError(f"Required configuration '{key}' is not set")
                 setattr(self, key, getattr(self, key, common_value))
 
@@ -203,8 +216,8 @@ class DevelopmentConfig(Config):
         self.DB_HOST: str = 'localhost'
         self.DB_PORT: int = 5432
         self.DB_NAME: str = 'postgres'
-        # Construct POSTGRES_SQLALCHEMY_URL
-        self.POSTGRES_SQLALCHEMY_URL: str = f'postgresql://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
+        # Set POSTGRES_SQLALCHEMY_URL using helper method
+        self.POSTGRES_SQLALCHEMY_URL: str = self._build_postgres_url()
         # Redis/Celery
         self.REDIS_HOST: str = 'localhost'
         self.REDIS_PORT: int = 6379
@@ -258,7 +271,8 @@ class TestingConfig(Config):
         self.REDIS_DB: int = int(os.getenv('TESTING_REDIS_DB', str(dev_config.REDIS_DB)))
         self.BROKER_URL = os.getenv('TESTING_BROKER_URL', dev_config.BROKER_URL)
         self.RESULT_BACKEND = os.getenv('TESTING_RESULT_BACKEND', dev_config.RESULT_BACKEND)
-        self.TASK_IGNORE_RESULT = True  # Keep this always True for testing
+        # Allow TASK_IGNORE_RESULT to be configurable but default to True in testing
+        self.TASK_IGNORE_RESULT = os.getenv('TESTING_TASK_IGNORE_RESULT', 'True').lower() in ('true', '1', 'yes', 'on')
         
         # Flask configuration with fallback to development values
         self.SECRET_KEY: str = os.getenv('TESTING_SECRET_KEY', dev_config.SECRET_KEY)

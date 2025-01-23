@@ -24,24 +24,34 @@ def test_client(app):
     import uuid
     
     with app.app_context():
-        # Create a new client for each test
-        # Generate unique values for each test
-        test_id = uuid.uuid4()
-        client = Client(
-            id=test_id,
-            name=f"Test Client {test_id}",
-            description="Test Client for Unit Tests",
-            domain=f"test-{test_id}.example.com"
-        )
-        db.session.add(client)
-        db.session.commit()
+        client = None
+        try:
+            # Create a new client for each test
+            test_id = uuid.uuid4()
+            client = Client(
+                id=test_id,
+                name=f"Test Client {test_id}",
+                description="Test Client for Unit Tests",
+                domain=f"test-{test_id}.example.com"
+            )
+            db.session.add(client)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            raise Exception(f"Failed to create test client: {str(e)}")
         
         yield client  # Return the client for the test to use
         
         # Clean up after the test
-        db.session.delete(client)
-        db.session.commit()
-        db.session.remove()  # Clear the session
+        if client is not None:
+            try:
+                db.session.delete(client)
+                db.session.commit()
+            except Exception as e:
+                db.session.rollback()
+                raise Exception(f"Failed to cleanup test client: {str(e)}")
+            finally:
+                db.session.remove()  # Clear the session
 
 @pytest.fixture(scope='session')
 def app(request):

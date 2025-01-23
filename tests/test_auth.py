@@ -103,19 +103,6 @@ def test_user_registration(client, test_client):
     user = client.application.user_datastore.find_user(email="register_test@gmail.com")
     assert user is not None
     assert user.client_id == test_client.id
-    
-    assert response.status_code == 200
-    
-    # Verify user was created
-    user = client.application.user_datastore.find_user(email="register_test@gmail.com")
-    assert user is not None
-    assert user.client_id == test_client.id  # Verify client_id was set correctly
-    
-    # If using confirmable, confirm the user
-    if not user.active:
-        client.application.user_datastore.activate_user(user)
-        db.session.commit()
-    
     assert user.active is True
 
 def test_cascade_delete(app, test_client):
@@ -152,4 +139,4 @@ def test_cascade_delete(app, test_client):
 
     # Verify role still exists
     retrieved_role = app.user_datastore.find_role("cascade_role")
-    assert retrieved_role is not None            
+    assert retrieved_role is not None               
