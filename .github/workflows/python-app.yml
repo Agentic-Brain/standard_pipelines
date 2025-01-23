@@ -10,6 +10,31 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres_password
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
     steps:
     - uses: actions/checkout@v4
     
@@ -23,11 +48,34 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install pytest pytest-cov
+
+    - name: Get Secrets
+      uses: bitwarden/sm-action@v1
+      with:
+        access_token: ${{ secrets.ACCESS_TOKEN }}
+        secrets: |
+          ${{ secrets.BWS_PROJECT_ID }} > TESTING_KEYS_PROJECT
+
+    - name: Set test environment variables
+      run: |
+        echo "FLASK_ENV=testing" >> $GITHUB_ENV
+        echo "TESTING_DB_HOST=localhost" >> $GITHUB_ENV
+        echo "TESTING_DB_PORT=5432" >> $GITHUB_ENV
+        echo "TESTING_DB_USER=postgres" >> $GITHUB_ENV
+        echo "TESTING_DB_PASS=postgres_password" >> $GITHUB_ENV
+        echo "TESTING_DB_NAME=postgres" >> $GITHUB_ENV
+        echo "TESTING_REDIS_HOST=localhost" >> $GITHUB_ENV
+        echo "TESTING_REDIS_PORT=6379" >> $GITHUB_ENV
+        echo "TESTING_BROKER_URL=redis://localhost:6379/0" >> $GITHUB_ENV
+        echo "TESTING_RESULT_BACKEND=redis://localhost:6379/0" >> $GITHUB_ENV
         
     - name: Run tests
-      env:
-        TESTING_SENTRY_DSN: ${{ secrets.TESTING_SENTRY_DSN }}
-        FLASK_ENV: "testing"
       run: |
-        pytest --cov=flask_base tests/
+        pytest --cov=standard_pipelines --cov-report=term-missing
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: .coverage
         
