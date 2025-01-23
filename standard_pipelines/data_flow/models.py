@@ -1,8 +1,11 @@
 from sqlalchemy import String, Text, Boolean, ForeignKey, Index, text, UUID
 from typing import Optional, List
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from standard_pipelines.database.models import BaseMixin
-from standard_pipelines.auth.models import Client
+from standard_pipelines.database.models import BaseMixin, SecureMixin
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from standard_pipelines.auth.models import User
 
 class Notification(BaseMixin):
     """Model for storing notifications with title and body for consumption by apprise."""
@@ -14,7 +17,27 @@ class Notification(BaseMixin):
     
     def __repr__(self):
         return f'<Notification {self.title}>'
+
+class Client(BaseMixin):
+    __tablename__ = 'client'
     
+    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    description: Mapped[Optional[str]] = mapped_column(String(1000))
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default='true')
+    bitwarden_encryption_key_id: Mapped[str] = mapped_column(String(255))
+    
+    # Relationships
+    users: Mapped[List['User']] = relationship('User', back_populates='client', passive_deletes=True)
+    data_flows: Mapped[List['DataFlowRegistry']] = relationship(
+        'DataFlowRegistry',
+        secondary='client_data_flow_registry_join',
+        back_populates='clients',
+        passive_deletes=True,
+    )
+    
+    def __repr__(self) -> str:
+        return f"<Client {self.name}>"
+ 
 class DataFlowRegistry(BaseMixin):
     """Registry of available transformers in the system"""
     __tablename__ = 'data_flow_registry'
@@ -79,4 +102,4 @@ class ClientDataFlowRegistryJoin(BaseMixin):
         UUID, 
         ForeignKey('data_flow_registry.id', ondelete='CASCADE'),
         nullable=False
-    ) 
+    )

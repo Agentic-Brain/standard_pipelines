@@ -14,14 +14,6 @@ class Config:
         'ENCRYPTION_KEY': None,
         'SECURITY_PASSWORD_SALT': None,
         'SECURITY_PASSWORD_HASH': 'bcrypt',
-        'MAILGUN_API_KEY': None, # TODO: remove and read from DB
-        'MAILGUN_SEND_DOMAIN': None, # TODO: remove and read from DB    
-        'MAILGUN_SEND_USER': None, # TODO: remove and read from DB
-        'MAILGUN_RECIPIENT': None, # TODO: remove and read from DB
-        'HUBSPOT_CLIENT_ID': None, # TODO: remove and read from DB
-        'HUBSPOT_CLIENT_SECRET': None, # TODO: remove and read from DB
-        'HUBSPOT_REFRESH_TOKEN': None, # TODO: remove and read from DB
-        'POSTGRES_SQLALCHEMY_URL': None,
     }
 
     # Optional settings that enable additional features
@@ -53,13 +45,20 @@ class Config:
             'STRIPE_PUBLIC_KEY': None,
             'STRIPE_WEBHOOK_SIGNING_KEY': None,
         },
-        'SENDGRID': {
-            'SENDGRID_API_KEY': None,
+        'BITWARDEN': {
+            'BITWARDEN_ACCESS_TOKEN': None,
+            'BITWARDEN_STATE_FILE_PATH': None,
         },
-        'AWS': {
-            'AWS_ACCESS_KEY_ID': None,
-            'AWS_SECRET_ACCESS_KEY': None,
-            'AWS_REGION': None,
+        'MAILGUN': {
+            'MAILGUN_API_KEY': None,
+            'MAILGUN_SEND_DOMAIN': None,
+            'MAILGUN_SEND_USER': None,
+            'MAILGUN_RECIPIENT': None,
+        },
+        'HUBSPOT': {
+            'HUBSPOT_CLIENT_ID': None,
+            'HUBSPOT_CLIENT_SECRET': None,
+            'HUBSPOT_REFRESH_TOKEN': None,
         },
         # Add more API configurations as needed
     }
@@ -67,8 +66,8 @@ class Config:
     # Mapping of API usage flags to their corresponding API groups
     API_REQUIREMENTS: Dict[str, str] = {
         'USE_STRIPE': 'STRIPE',
-        'USE_SENDGRID': 'SENDGRID',
-        'USE_AWS': 'AWS',
+        'USE_BITWARDEN': 'BITWARDEN',
+        'USE_MAILGUN': 'MAILGUN',
         # Add more mappings as needed
     }
 

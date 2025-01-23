@@ -10,9 +10,7 @@ from datetime import datetime, timezone
 import uuid
 
 if TYPE_CHECKING:
-    from data_flow.models import DataFlowRegistry
-
-
+    from standard_pipelines.data_flow.models import Client
 
 class Role(BaseMixin, RoleMixin):
     __tablename__ = 'role'
@@ -47,32 +45,13 @@ class User(BaseMixin, UserMixin):
     tf_primary_method: Mapped[Optional[str]] = mapped_column(String)
     tf_phone_number: Mapped[Optional[str]] = mapped_column(String(128))
 
-    # Client relationship
+    # DataFlow Client relationship
     client_id: Mapped[UUID] = mapped_column(UUID, ForeignKey('client.id', ondelete='CASCADE'), nullable=False)
     client: Mapped['Client'] = relationship('Client', back_populates='users')
     
+    # Role relationship
     roles: Mapped[list['Role']] = relationship('Role', secondary='user_role_join', back_populates='users', passive_deletes=True)
     
-
-class Client(BaseMixin):
-    __tablename__ = 'client'
-    
-    name: Mapped[str] = mapped_column(String(255), nullable=False)
-    description: Mapped[Optional[str]] = mapped_column(String(1000))
-    is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default='true')
-    domain: Mapped[Optional[str]] = mapped_column(String(255), unique=True)
-    
-    # Relationships
-    users: Mapped[List['User']] = relationship('User', back_populates='client', passive_deletes=True)
-    transformers: Mapped[List['DataFlowRegistry']] = relationship(
-        'DataFlowRegistry',
-        secondary='client_data_flow_registry_join',
-        back_populates='clients',
-        passive_deletes=True
-    )
-    
-    def __repr__(self) -> str:
-        return f"<Client {self.name}>"
 
 
 # Jointable

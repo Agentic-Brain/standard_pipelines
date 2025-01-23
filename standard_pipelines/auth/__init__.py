@@ -1,16 +1,19 @@
 from flask import Blueprint, Flask, current_app
 # Cryptography
 from cryptography.fernet import Fernet
+from typing import Optional
 # Flask Security
 from flask_security.mail_util import MailUtil
 from flask_security.datastore import SQLAlchemyUserDatastore
 from flask_security.forms import RegisterForm, LoginForm, ResetPasswordForm
 # Application
 from standard_pipelines.extensions import db, security, mail
+from bitwarden_sdk import BitwardenClient, client_settings_from_dict, DeviceType, ResponseForProjectResponse
 import requests
 
 auth = Blueprint('auth', __name__)
-
+bitwarden_client: Optional[BitwardenClient] = None
+bitwarden_project: Optional[ResponseForProjectResponse] = None
 
 class MailgunMailUtil(MailUtil):
     def send_mail(self, template, subject, recipient, sender, body, html, **kwargs):
@@ -62,5 +65,20 @@ def init_app(app: Flask):
     app.logger.debug('Creating cipher from encryption key')
     app.extensions['cipher'] = Fernet(app.config['ENCRYPTION_KEY']) # type: ignore
     app.extensions['security'] = security
+    
+    app.logger.debug('Creating bitwarden client')
+    bitwarden_client = BitwardenClient(
+        client_settings_from_dict(
+            {
+                "device_type": DeviceType.SDK,
+                "userAgent": "Python"
+            }
+        )
+    )
+    
+    bitwarden_client.auth().login_access_token(app.config['BITWARDEN_ACCESS_TOKEN'], app.config['BITWARDEN_STATE_FILE_PATH'])
+    app.extensions['bitwarden_client'] = bitwarden_client
+    app.extensions['bitwarden_project'] = bitwarden_project
+    
 
 # from . import routes
