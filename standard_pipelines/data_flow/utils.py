@@ -19,6 +19,8 @@ from hubspot.crm.contacts import SimplePublicObjectWithAssociations
 from hubspot.crm.associations import BatchInputPublicObjectId
 from requests.auth import AuthBase
 import backoff
+from collections import defaultdict
+
 
 class BaseAPIManager(metaclass=ABCMeta):
 
@@ -72,11 +74,11 @@ class BaseManualAPIManager(BaseAPIManager, metaclass=ABCMeta):
         pass
 
     def https_parameters(self, api_context: t.Optional[dict] = None) -> t.Optional[dict]:
-        # debug_msg = (
-        #     f'https_parameters not implemented for {self.__class__.__name__}, '
-        #     'defaulting to None'
-        # )
-        # current_app.logger.debug(debug_msg)
+        debug_msg = (
+            f'https_parameters not implemented for {self.__class__.__name__}, '
+            'defaulting to None'
+        )
+        current_app.logger.debug(debug_msg)
         return None
 
     def https_headers(self, api_context: t.Optional[dict] = None) -> t.Optional[dict]:
@@ -109,12 +111,13 @@ class BaseManualAPIManager(BaseAPIManager, metaclass=ABCMeta):
         return NullAuthenticator()
 
     def validate_response(self, response: requests.Response):
-        breakpoint()
         status_code = response.status_code
         if status_code >= 500 or status_code == 429:
-            raise RetriableAPIError(response)
+            error_msg = f"{response}, {response.text}"
+            raise RetriableAPIError(error_msg)
         if status_code >= 400:
-            raise APIError(response)
+            error_msg = f"{response}, {response.text}"
+            raise APIError(error_msg)
 
     @backoff.on_exception(
         backoff.expo,
@@ -208,11 +211,6 @@ class BaseDataFlowService(metaclass=ABCMeta):
     def load(self, output_data: t.Optional[dict] = None, context: t.Optional[dict] = None) -> None:
         pass
 
-    @property
-    @abstractmethod
-    def _apprise_uri(self):
-        pass
-
     def verify_config(self, config_name: str):
         if config_name not in current_app.config:
             current_app.logger.error(f'{config_name} not found in application config')
@@ -221,14 +219,22 @@ class BaseDataFlowService(metaclass=ABCMeta):
 
     def notify(self, context: t.Optional[dict] = None):
         import apprise
-        apobj = apprise.Apprise()
-        apobj.add(self._apprise_uri)
-        for notification in Notification.query.filter_by(sent=False).all():
-            notification.sent = apobj.notify(
-                body=notification.body,
-                title=notification.title
-            )
-            db.session.commit()
+
+        unsent_notifications = Notification.query.filter_by(sent=False).all()
+        notifications_by_uri = defaultdict(list)
+
+        for notification in unsent_notifications:
+            notifications_by_uri[notification.uri].append(notification)
+
+        for uri, notifications in notifications_by_uri.items():
+            apobj = apprise.Apprise()
+            apobj.add(uri)
+            for notification in notifications:
+                notification.sent = apobj.notify(
+                    body=notification.body,
+                    title=notification.title
+                )
+                db.session.commit()
 
 
 class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
@@ -244,19 +250,26 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
 
     @property
     def access_token(self) -> str:
-        foo = self.api_client.oauth.tokens_api.create(
+        return self.api_client.oauth.tokens_api.create(
             grant_type="refresh_token",
             client_id=self.api_config["client_id"],
             client_secret=self.api_config["client_secret"],
             refresh_token=self.api_config["refresh_token"],
-        )
-        return foo.access_token
+        ).access_token
 
-    def get_all_contacts(self) -> list[dict]:
+    def all_contacts(self) -> list[dict]:
         return [contact.to_dict() for contact in self.api_client.crm.contacts.get_all()]
+
+    def contact_by_contact_id(self, contact_id: str, properties: list[str] = []) -> dict:
+        contact: SimplePublicObjectWithAssociations = self.api_client.crm.contacts.basic_api.get_by_id(contact_id, properties=properties)
+        return contact.to_dict()
     
-    def get_contact_by_name_or_email(self, name: t.Optional[str] = None, email: t.Optional[str] = None) -> dict:
-        all_contacts = self.get_all_contacts()
+    def deal_by_deal_id(self, deal_id: str, properties: list[str] = []) -> dict:
+        deal: SimplePublicObjectWithAssociations = self.api_client.crm.deals.basic_api.get_by_id(deal_id, properties=properties)
+        return deal.to_dict()
+    
+    def contact_by_name_or_email(self, name: t.Optional[str] = None, email: t.Optional[str] = None) -> dict:
+        all_contacts = self.all_contacts()
         matching_contacts = []
         for contact in all_contacts:
             contact_first_name = contact.get("properties", {}).get("firstname", "") 
@@ -276,7 +289,7 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
             raise APIError(error_msg)
         return matching_contacts[0]
 
-    def get_deal_by_contact_id(self, contact_id: str) -> dict:
+    def deal_by_contact_id(self, contact_id: str) -> dict:
         batch_ids = BatchInputPublicObjectId([{"id": contact_id}])
         deal_associations = self.api_client.crm.associations.batch_api.read(
             from_object_type="contacts",
@@ -289,27 +302,25 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
         if len(deal_associations) == 0:
             error_msg = f"No deal found for contact {contact_id}."
             raise APIError(error_msg)
-        deal_association = deal_associations[0]["to"]
-        deal_association_type = deal_association["type"]
-        if deal_association_type != "contact_to_deal":
-            error_msg = (
-                f"Incorrect association type for contact {contact_id}. Should "
-                f"be 'contact_to_deal' but got '{deal_association_type}'."
-            )
+        deal_association_to = deal_associations[0]["to"]
+        contact_to_deal_associations = []
+        for deal_association in deal_association_to:
+            if deal_association["type"] == "contact_to_deal":
+                contact_to_deal_associations.append(deal_association)
+        if len(contact_to_deal_associations) > 1:
+            error_msg = f"Multiple deals found for contact {contact_id}."
             raise APIError(error_msg)
-        deal_id = deal_association["id"]
-        return self.get_deal_by_deal_id(deal_id)
+        if len(contact_to_deal_associations) == 0:
+            error_msg = f"No deal found for contact {contact_id}."
+            raise APIError(error_msg)
+        deal_id = contact_to_deal_associations[0]["id"]
+        return self.deal_by_deal_id(deal_id)
 
-    def get_contact_by_contact_id(self, contact_id: str) -> dict:
-        contact: SimplePublicObjectWithAssociations = self.api_client.crm.contacts.basic_api.get_by_id(contact_id)
-        return contact.to_dict()
-    
-    def get_deal_by_deal_id(self, deal_id: str) -> dict:
-        deal: SimplePublicObjectWithAssociations = self.api_client.crm.deals.basic_api.get_by_id(deal_id)
-        return deal.to_dict()
-
-    def log_meeting(self, meeting_object: dict) -> None:
+    def create_meeting(self, meeting_object: dict) -> None:
         self.api_client.crm.objects.meetings.basic_api.create(meeting_object)
+    
+    def create_note(self, note_object: dict) -> None:
+        self.api_client.crm.objects.notes.basic_api.create(note_object)
 
 
 class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
@@ -334,23 +345,43 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
 
     def https_payload(self, api_context: t.Optional[dict] = None) -> t.Optional[dict]:
         query_string = """
-            query Transcript($transcriptId: String!) {
-                transcript(id: $transcriptId) {
-                    title
+        query Transcript($transcriptId: String!) {
+            transcript(id: $transcriptId) {
+                id
+                dateString
+                privacy
+                speakers {
                     id
-                    sentences {
-                        index
-                        speaker_name
-                        start_time
-                        raw_text
-                    }
-                    participants
-                    meeting_attendees {
-                        email
-                        name
-                    }
+                    name
                 }
+                sentences {
+                    index
+                    speaker_name
+                    speaker_id
+                    text
+                    raw_text
+                    start_time
+                    end_time
+                }
+                title
+                host_email
+                organizer_email
+                calendar_id
+                date
+                transcript_url
+                duration
+                meeting_attendees {
+                    displayName
+                    email
+                    phoneNumber
+                    name
+                    location
+                }
+                cal_id
+                calendar_type
+                meeting_link
             }
+        }
         """
         return {
             "query": query_string,
@@ -362,11 +393,56 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
             "Content-Type": "application/json",
         }
 
-    def get_transcript(self, transcript_id: str) -> dict:
-        response = self.get_response({"transcript_id": transcript_id})
-        return response.json()
+    def transcript(self, transcript_id: str) -> tuple[str, list[str], list[str]]:
+        """
+        Returns a tuple of a prettified transcript suitable for input into an
+        AI prompt, a list of emails present in the transcript, and a list of
+        names present in the transcript.
+        """
+        transcript_object = self.get_response({"transcript_id": transcript_id}).json()
+        pretty_transcript = self._pretty_transcript_from_transcript_object(transcript_object)
+        emails = self._emails_from_transcript_object(transcript_object)
+        names = self._names_from_transcript_object(transcript_object)
+        return pretty_transcript, emails, names
+
+    def _emails_from_transcript_object(self, transcript: dict) -> list[str]:
+        transcript_data = transcript.get("data", {}).get("transcript", {})
+        meeting_attendees = transcript_data.get("meeting_attendees")
+        return meeting_attendees if meeting_attendees else []
+
+    def _names_from_transcript_object(self, transcript: dict) -> list[str]:
+        transcript_data = transcript.get("data", {}).get("transcript", {})
+        return [speaker.get("name", "") for speaker in transcript_data.get("speakers", [])]
+
+    def _pretty_transcript_from_transcript_object(self, transcript: dict) -> str:
+
+        if "errors" in transcript:
+            warning_msg = f"GraphQL Errors: {transcript['errors']}"
+            current_app.logger.warning(warning_msg)
+        
+        transcript_data = transcript.get("data", {}).get("transcript", {})
+        if not transcript_data:
+            warning_msg = "No transcript data found."
+            current_app.logger.warning(warning_msg)
+        sentences = transcript_data.get('sentences', [])
+        if not sentences:
+            warning_msg = "No sentences found."
+            current_app.logger.warning(warning_msg)
+
+        formatted_lines = []
+        for sentence in sentences:
+            minutes = int(sentence.get("start_time", 0)) // 60
+            seconds = int(sentence.get("start_time", 0)) % 60
+            timestamp = f"[{minutes:02d}:{seconds:02d}]"
+            speaker = sentence.get("speaker_name", "Unknown Speaker")
+            text = sentence.get("raw_text", "")
+            formatted_line = f"{timestamp} {speaker}: {text}"
+            formatted_lines.append(formatted_line)
+
+        return "\n".join(formatted_lines)
 
 
+# TODO: implement non-placeholder
 class BitwardenAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
 
     @property

@@ -1,9 +1,7 @@
-from flask import render_template, current_app, jsonify, request, redirect, url_for, flash
+from flask import current_app, jsonify, request
 
-from .. import data_flow
+from . import data_flow
 from .services import determine_data_flow_service
-from .hubspot_notification_email_on_contact_update.services import HubSpotNotificationEmailOnContactUpdate
-from standard_pipelines.extensions import db
 
 @data_flow.route('/webhook/<string:webhook_id>', methods=['POST'])
 def webhook(webhook_id: str):
