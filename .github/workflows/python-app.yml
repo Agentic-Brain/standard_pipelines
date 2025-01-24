@@ -34,7 +34,7 @@ jobs:
 
     - name: Pull Secrets
       env:
-        BITWARDEN_ACCESS_TOKEN: ${{ secrets.TESTING_BWS_ACCESS_TOKEN }}
+        BWS_ACCESS_TOKEN: ${{ secrets.TESTING_BWS_ACCESS_TOKEN }}
       run: |
         chmod +x .github/scripts/pull_secrets.sh
         .github/scripts/pull_secrets.sh "testing_keys" "testing" --github-env
