@@ -1,4 +1,5 @@
 from flask import redirect, url_for, session, request, Blueprint, current_app, flash
+from flask_login import current_user
 from google_auth_oauthlib.flow import Flow
 from werkzeug.exceptions import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
@@ -7,7 +8,8 @@ from standard_pipelines.api.gmail.models import GmailCredentials
 
 
 gmail = Blueprint('gmail', __name__)
-    
+
+#============= Authorization ===============#
 flow = Flow.from_client_secrets_file(
     client_secrets_file=current_app.config['CLIENT_SECRETS_FILE'],
     scopes=['https://www.googleapis.com/auth/gmail.modify'],
@@ -60,6 +62,7 @@ def oauth2callback():
         credentials = flow.credentials
 
         gmail_credentials = GmailCredentials(
+            user_id=current_user.id,
             access_token=credentials.token,
             refresh_token=credentials.refresh_token,
             token_uri=credentials.token_uri,
@@ -90,4 +93,8 @@ def oauth2callback():
     
     next_url = session.pop('redirect_url', url_for('main.index'))
     return redirect(next_url)
-    
+
+#============= Functionality ===============#
+@gmail.route('/send_email', methods=['POST'])
+def send_email():
+    pass
