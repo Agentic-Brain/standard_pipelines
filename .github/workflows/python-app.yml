@@ -23,11 +23,33 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install pytest pytest-cov
+
+    - name: Install Bitwarden Secrets CLI
+      run: |
+        curl -L --output bws.zip "https://github.com/bitwarden/sdk/releases/download/bws-v0.3.0/bws-x86_64-unknown-linux-gnu-0.3.0.zip"
+        unzip bws.zip
+        chmod +x bws
+        sudo mv bws /usr/local/bin/bws
+        rm bws.zip
+
+    - name: Pull Secrets
+      env:
+        BWS_ACCESS_TOKEN: ${{ secrets.TESTING_BWS_ACCESS_TOKEN }}
+      run: |
+        chmod +x .github/scripts/pull_secrets.sh
+        .github/scripts/pull_secrets.sh "testing_keys" "testing" --github-env
+
+    - name: Set test environment variables
+      run: |
+        echo "FLASK_ENV=testing" >> $GITHUB_ENV
         
     - name: Run tests
-      env:
-        TESTING_SENTRY_DSN: ${{ secrets.TESTING_SENTRY_DSN }}
-        FLASK_ENV: "testing"
       run: |
-        pytest --cov=flask_base tests/
+        pytest --cov=standard_pipelines --cov-report=term-missing
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: .coverage
         

@@ -36,6 +36,7 @@ class Config:
         'USE_SENDGRID': False,
         'USE_AWS': False,
         'USE_BITWARDEN': True,
+        'USE_OPENAI': True,
         # Add more API usage flags as needed
     }
 
@@ -50,6 +51,9 @@ class Config:
             'BITWARDEN_ACCESS_TOKEN': None,
             'BITWARDEN_STATE_FILE_PATH': None,
             'BITWARDEN_ORGANIZATION_ID': None,
+        },
+        'OPENAI': {
+            'OPENAI_API_KEY': None,
         },
         'MAILGUN': {
             'MAILGUN_API_KEY': None,
@@ -70,6 +74,7 @@ class Config:
         'USE_STRIPE': 'STRIPE',
         'USE_BITWARDEN': 'BITWARDEN',
         'USE_MAILGUN': 'MAILGUN',
+        'USE_OPENAI': 'OPENAI',
         # Add more mappings as needed
     }
 
@@ -203,6 +208,7 @@ class DevelopmentConfig(Config):
         self.BROKER_URL = "redis://localhost:6379/0"  
         self.RESULT_BACKEND = "redis://localhost:6379/0"
         self.TASK_IGNORE_RESULT = True
+        self.BITWARDEN_STATE_FILE_PATH: str = 'bitwarden-state'
         # Flask
         self.SECRET_KEY: str = 'secret'
         self.FLASK_DEBUG: bool = True
@@ -247,6 +253,7 @@ class TestingConfig(Config):
         self.DEFAULT_ADMIN_PASSWORD: str = 'test_password'
         self.SECURITY_PASSWORD_SALT: str = 'test_salt'
         self.ENCRYPTION_KEY: str = 'IduTzHtJ7mk2B/j3TzMl4XC/+NdSFAgbIcgGh7nlguc='
+        self.BITWARDEN_STATE_FILE_PATH: str = 'bitwarden-state'
         # Testing specific settings
         self.TESTING = True
         self.WTF_CSRF_ENABLED = False
