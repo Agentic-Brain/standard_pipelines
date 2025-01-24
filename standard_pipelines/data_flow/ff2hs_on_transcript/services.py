@@ -6,13 +6,13 @@ from flask import current_app
 from functools import cached_property
 
 from sqlalchemy import UUID
-from ..services import BaseDataFlowService
+from ..services import BaseDataFlow
 from ..utils import HubSpotAPIManager, FirefliesAPIManager, OpenAIAPIManager
 from ...auth.models import HubSpotCredentials, FirefliesCredentials
 from ..exceptions import InvalidWebhookError
 from .models import FF2HSOnTranscriptConfiguration
 
-class FF2HSOnTranscript(BaseDataFlowService):
+class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
 
     MEETING_TO_CONTACT_ASSOCIATION_ID = 200
     MEETING_TO_DEAL_ASSOCIATION_ID = 212
@@ -22,14 +22,6 @@ class FF2HSOnTranscript(BaseDataFlowService):
     @classmethod
     def data_flow_id(cls) -> uuid.UUID:
         return uuid.UUID("a1abd672-4e54-4ce7-8504-1625ea6f79aa")
-
-    @property
-    def configuration_type(self) -> type[FF2HSOnTranscriptConfiguration]:
-        return FF2HSOnTranscriptConfiguration
-
-    @property
-    def configuration(self) -> FF2HSOnTranscriptConfiguration:
-        return super().configuration
 
     @cached_property
     def hubspot_api_manager(self) -> HubSpotAPIManager:

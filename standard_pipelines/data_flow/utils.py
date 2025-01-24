@@ -21,7 +21,8 @@ from collections import defaultdict
 from openai import OpenAI
 from openai.types.chat.chat_completion import ChatCompletion
 from openai import OpenAIError
-from .models import DataFlowConfigurationMixin
+from .models import DataFlowConfiguration
+import inspect
 
 class BaseAPIManager(metaclass=ABCMeta):
 
@@ -145,7 +146,40 @@ class BaseManualAPIManager(BaseAPIManager, metaclass=ABCMeta):
         return response
 
 
-class BaseDataFlowService(metaclass=ABCMeta):
+class DataFlowRegistryMeta(ABCMeta):
+
+    DATA_FLOW_REGISTRY: dict[uuid.UUID, type[BaseDataFlow]] = {}
+
+    def __new__(cls, name, bases, attrs):
+        new_cls = type.__new__(cls, name, bases, attrs)
+
+        if new_cls == BaseDataFlow:
+            return new_cls
+
+        if not issubclass(new_cls, BaseDataFlow):
+            error_msg = f"Class {name} must inherit from BaseDataFlow to be registered."
+            raise ValueError(error_msg)
+
+        if inspect.isabstract(new_cls):
+            return new_cls
+
+        data_flow_id = new_cls.data_flow_id()
+        if data_flow_id in cls.DATA_FLOW_REGISTRY:
+            raise ValueError(f"data_flow_id is already registered as {cls.DATA_FLOW_REGISTRY[data_flow_id].__name__}: {data_flow_id}")
+        cls.DATA_FLOW_REGISTRY[data_flow_id] = new_cls
+
+        return new_cls
+
+    @classmethod
+    def data_flow_class(cls, dataflow_id: uuid.UUID) -> type[BaseDataFlow]:
+        if dataflow_id not in cls.DATA_FLOW_REGISTRY:
+            raise ValueError(f"No dataflow class found for {dataflow_id}")
+        return cls.DATA_FLOW_REGISTRY[dataflow_id]
+
+
+DataFlowConfigurationType = t.TypeVar("DataFlowConfigurationType", bound=DataFlowConfiguration)
+
+class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegistryMeta):
 
     def __init__(self, client_id: str) -> None:
         self.client_id = client_id
@@ -153,24 +187,14 @@ class BaseDataFlowService(metaclass=ABCMeta):
     @classmethod
     @abstractmethod
     def data_flow_id(cls) -> uuid.UUID:
-        """ID of the data flow in the registry."""
+        """ID of the data flow in the database."""
 
     @property
-    @abstractmethod
-    def configuration_type(self) -> type[DataFlowConfigurationMixin]:
-        """
-        Type of the configuration to use for this data flow. TODO: Could use
-        generics to do this more elegantly, but this is a simpler solution
-        for now.
-        """
-        pass
-
-    @property
-    def configuration(self) -> DataFlowConfigurationMixin:
+    def configuration(self) -> DataFlowConfigurationType:
         """Return the configuration with the matching client ID and data flow ID"""
-        return self.configuration_type.query.filter(
-            self.configuration_type.client_id == self.client_id,
-            self.configuration_type.registry_id == self.data_flow_id()
+        return DataFlowConfigurationType.query.filter(
+            DataFlowConfigurationType.client_id == self.client_id,
+            DataFlowConfigurationType.registry_id == self.data_flow_id()
         ).first()
 
     @abstractmethod

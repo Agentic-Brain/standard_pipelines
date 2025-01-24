@@ -13,7 +13,7 @@ from standard_pipelines.extensions import migrate, db
 from typing import Optional
 import sentry_sdk
 from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, Config, get_config
-from standard_pipelines.data_flow.models import Client, DataFlowRegistry
+from standard_pipelines.data_flow.models import Client, DataFlow
 from standard_pipelines.auth.models import User
 
 def create_app():

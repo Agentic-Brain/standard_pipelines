@@ -29,9 +29,9 @@ class Client(BaseMixin):
     
     # Relationships
     users: Mapped[List['User']] = relationship('User', back_populates='client', passive_deletes=True)
-    data_flows: Mapped[List['DataFlowRegistry']] = relationship(
-        'DataFlowRegistry',
-        secondary='client_data_flow_registry_join',
+    data_flows: Mapped[List['DataFlow']] = relationship(
+        'DataFlow',
+        secondary='client_data_flow_join',
         back_populates='clients',
         passive_deletes=True,
     )
@@ -39,9 +39,9 @@ class Client(BaseMixin):
     def __repr__(self) -> str:
         return f"<Client {self.name}>"
  
-class DataFlowRegistry(BaseMixin):
+class DataFlow(BaseMixin):
     """Registry of available transformers in the system"""
-    __tablename__ = 'data_flow_registry'
+    __tablename__ = 'data_flow'
     
     # Basic information
     name: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
@@ -54,18 +54,16 @@ class DataFlowRegistry(BaseMixin):
     # Relationships
     clients: Mapped[List['Client']] = relationship(
         'Client', 
-        secondary='client_data_flow_registry_join',
+        secondary='client_data_flow_join',
         back_populates='data_flows',
         passive_deletes=True
     )
 
     def __repr__(self) -> str:
-        return f"<DataFlowRegistry {self.name} v{self.version}>"
+        return f"<DataFlow {self.name} v{self.version}>"
 
-# TODO: don't understand how declared_attr works but chatgpt said that's what's
-# needed so that this doesn't error.
-class DataFlowConfigurationMixin(BaseMixin):
-    """Base mixin for transformer implementations"""
+class DataFlowConfiguration(BaseMixin):
+    """Base class for data flow configurations"""
     __abstract__ = True
     
     @declared_attr
@@ -85,13 +83,13 @@ class DataFlowConfigurationMixin(BaseMixin):
     def registry_id(cls) -> Mapped[UUID]:
         return mapped_column(
             UUID,
-            ForeignKey('data_flow_registry.id', ondelete='CASCADE'),
+            ForeignKey('data_flow.id', ondelete='CASCADE'),
             nullable=False
         )
 
     @declared_attr
-    def registry(cls) -> Mapped['DataFlowRegistry']:
-        return relationship('DataFlowRegistry')
+    def registry(cls) -> Mapped['DataFlow']:
+        return relationship('DataFlow')
 
     @declared_attr
     def __table_args__(cls):
@@ -114,9 +112,9 @@ class DataFlowConfigurationMixin(BaseMixin):
             ),
         )
 
-class ClientDataFlowRegistryJoin(BaseMixin):
-    """Join table for clients and data_flow registry"""
-    __tablename__ = 'client_data_flow_registry_join'
+class ClientDataFlowJoin(BaseMixin):
+    """Join table for clients and data_flow"""
+    __tablename__ = 'client_data_flow_join'
     
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default='true')
     webhook_id: Mapped[str] = mapped_column(String(255), nullable=False)
@@ -128,6 +126,6 @@ class ClientDataFlowRegistryJoin(BaseMixin):
     )
     data_flow_id: Mapped[UUID] = mapped_column(
         UUID, 
-        ForeignKey('data_flow_registry.id', ondelete='CASCADE'),
+        ForeignKey('data_flow.id', ondelete='CASCADE'),
         nullable=False
     )
