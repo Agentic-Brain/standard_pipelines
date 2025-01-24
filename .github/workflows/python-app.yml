@@ -10,31 +10,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
-    services:
-      postgres:
-        image: postgres:16-alpine
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres_password
-          POSTGRES_DB: postgres
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-      
-      redis:
-        image: redis:7-alpine
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-    
     steps:
     - uses: actions/checkout@v4
     
@@ -49,29 +24,24 @@ jobs:
         pip install -r requirements.txt
         pip install pytest pytest-cov
 
-    - name: Get Secrets
-      uses: bitwarden/sm-action@v1
-      with:
-        access_token: ${{ secrets.BWS_ACCESS_TOKEN }}
-        secrets: |
-          "ci_secret_1;TESTING_DB_USER"
-          "ci_secret_2;TESTING_DB_PASS"
-          "ci_secret_3;TESTING_SECRET_KEY"
-          "ci_secret_4;TESTING_ENCRYPTION_KEY"
-          "ci_secret_5;TESTING_SECURITY_PASSWORD_SALT"
+    - name: Install Bitwarden Secrets CLI
+      run: |
+        curl -L --output bws.zip "https://github.com/bitwarden/sdk/releases/download/bws-v0.3.0/bws-x86_64-unknown-linux-gnu-0.3.0.zip"
+        unzip bws.zip
+        chmod +x bws
+        sudo mv bws /usr/local/bin/bws
+        rm bws.zip
+
+    - name: Pull Secrets
+      env:
+        BITWARDEN_ACCESS_TOKEN: ${{ secrets.TESTING_BITWARDEN_ACCESS_TOKEN }}
+      run: |
+        chmod +x .github/scripts/pull_secrets.sh
+        .github/scripts/pull_secrets.sh "standard_pipelines" "testing" --github-env
 
     - name: Set test environment variables
       run: |
         echo "FLASK_ENV=testing" >> $GITHUB_ENV
-        echo "TESTING_DB_HOST=localhost" >> $GITHUB_ENV
-        echo "TESTING_DB_PORT=5432" >> $GITHUB_ENV
-        echo "TESTING_DB_USER=postgres" >> $GITHUB_ENV
-        echo "TESTING_DB_PASS=postgres_password" >> $GITHUB_ENV
-        echo "TESTING_DB_NAME=postgres" >> $GITHUB_ENV
-        echo "TESTING_REDIS_HOST=localhost" >> $GITHUB_ENV
-        echo "TESTING_REDIS_PORT=6379" >> $GITHUB_ENV
-        echo "TESTING_BROKER_URL=redis://localhost:6379/0" >> $GITHUB_ENV
-        echo "TESTING_RESULT_BACKEND=redis://localhost:6379/0" >> $GITHUB_ENV
         
     - name: Run tests
       run: |
