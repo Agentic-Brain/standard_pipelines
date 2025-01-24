@@ -1,6 +1,7 @@
 import pytest
 from flask_security.utils import hash_password
 from standard_pipelines.auth.models import User, Role, UserRoleJoin
+from standard_pipelines.data_flow.models import Client
 from standard_pipelines.extensions import db
 import uuid
 
@@ -12,7 +13,8 @@ def test_create_user(app):
         email="test@example.com",
         password=hash_password("password123"),
         active=True,
-        fs_uniquifier=str(uuid.uuid4())
+        fs_uniquifier=str(uuid.uuid4()),
+        client_id=create_client_util().id
     )
     db.session.commit()
 
@@ -41,7 +43,8 @@ def test_user_role_assignment(app):
         email="test_role@example.com",
         password=hash_password("password123"),
         active=True,
-        fs_uniquifier=str(uuid.uuid4())
+        fs_uniquifier=str(uuid.uuid4()),
+        client_id=create_client_util().id
     )
     role = app.user_datastore.create_role(
         name="test_role",
@@ -66,7 +69,8 @@ def test_user_authentication(client):
         email="register_test@gmail.com",
         password=hash_password("password123"),
         active=True,
-        fs_uniquifier=str(uuid.uuid4())
+        fs_uniquifier=str(uuid.uuid4()),
+        client_id=create_client_util().id
     )
     db.session.commit()
 
@@ -113,7 +117,8 @@ def test_cascade_delete(app):
         email="cascade_test@example.com",
         password=hash_password("password123"),
         active=True,
-        fs_uniquifier=str(uuid.uuid4())
+        fs_uniquifier=str(uuid.uuid4()),
+        client_id=create_client_util().id
     )
     role = app.user_datastore.create_role(
         name="cascade_role",
@@ -140,3 +145,14 @@ def test_cascade_delete(app):
     # Verify role still exists
     retrieved_role = app.user_datastore.find_role("cascade_role")
     assert retrieved_role is not None 
+
+def create_client_util():
+    client = Client(
+        name="agentic_brain",
+        description="Agentic Brain client for testing",
+        is_active=True,
+        bitwarden_encryption_key_id="test_key_id"
+    )
+    db.session.add(client)
+    db.session.commit()
+    return client
