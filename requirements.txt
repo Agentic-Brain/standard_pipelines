@@ -43,9 +43,7 @@ Flask-WTF==1.2.1
 fs==2.4.16
 fsspec==2024.12.0
 greenlet==3.0.3
-h11==0.14.0
-httpcore==1.0.7
-httpx==0.28.1
+hubspot-api-client==11.1.0
 idna==3.7
 importlib_resources==6.4.3
 inflection==0.5.1
