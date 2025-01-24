@@ -1,7 +1,6 @@
 from flask import current_app
 from .models import ClientDataFlowJoin
 from .utils import BaseDataFlow,DataFlowRegistryMeta
-from .ff2hs_on_transcript.services import FF2HSOnTranscript
 
 def determine_data_flow_service(webhook_id: str) -> BaseDataFlow:
     client_data_flow = ClientDataFlowJoin.query.filter_by(webhook_id=str(webhook_id)).first()

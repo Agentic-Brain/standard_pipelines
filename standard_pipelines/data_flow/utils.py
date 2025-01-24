@@ -153,15 +153,11 @@ class DataFlowRegistryMeta(ABCMeta):
     def __new__(cls, name, bases, attrs):
         new_cls = type.__new__(cls, name, bases, attrs)
 
-        if new_cls == BaseDataFlow:
-            return new_cls
-
-        if not issubclass(new_cls, BaseDataFlow):
-            error_msg = f"Class {name} must inherit from BaseDataFlow to be registered."
-            raise ValueError(error_msg)
-
         if inspect.isabstract(new_cls):
             return new_cls
+        
+        if not hasattr(new_cls, 'data_flow_id'):
+            raise ValueError(f"Class {name} must implement data_flow_id to be registered.")
 
         data_flow_id = new_cls.data_flow_id()
         if data_flow_id in cls.DATA_FLOW_REGISTRY:
@@ -189,12 +185,17 @@ class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegis
     def data_flow_id(cls) -> uuid.UUID:
         """ID of the data flow in the database."""
 
+    @cached_property
+    def _configuration_class(self) -> type[DataFlowConfigurationType]:
+        from typing import get_args
+        return get_args(self.__class__.__orig_bases__[0])[0]
+
     @property
     def configuration(self) -> DataFlowConfigurationType:
-        """Return the configuration with the matching client ID and data flow ID"""
-        return DataFlowConfigurationType.query.filter(
-            DataFlowConfigurationType.client_id == self.client_id,
-            DataFlowConfigurationType.registry_id == self.data_flow_id()
+        """Return the configuration with the matching client ID and data flow ID."""
+        return self._configuration_class.query.filter(
+            self._configuration_class.client_id == self.client_id,
+            self._configuration_class.registry_id == self.data_flow_id()
         ).first()
 
     @abstractmethod

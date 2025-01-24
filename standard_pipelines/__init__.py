@@ -15,6 +15,8 @@ import sentry_sdk
 from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, Config, get_config
 from standard_pipelines.data_flow.models import Client, DataFlow
 from standard_pipelines.auth.models import User
+from standard_pipelines.data_flow.ff2hs_on_transcript.models import FF2HSOnTranscriptConfiguration
+from standard_pipelines.data_flow.ff2hs_on_transcript.services import FF2HSOnTranscript
 
 def create_app():
     load_dotenv()

@@ -106,15 +106,16 @@ class HubSpotCredentials(BaseCredentials):
     """Credentials for HubSpot API access."""
     __tablename__ = 'hubspot_credential'
     
-    # API Key for HubSpot
-    client_id: Mapped[str] = mapped_column(String(255))
-    client_secret: Mapped[str] = mapped_column(String(255))
-    refresh_token: Mapped[str] = mapped_column(String(255))
+    # Previously overshadowed the parent's client_id column -- rename it:
+    hubspot_client_id: Mapped[str] = mapped_column(String(255))
+    hubspot_client_secret: Mapped[str] = mapped_column(String(255))
+    hubspot_refresh_token: Mapped[str] = mapped_column(String(255))
     
-    def __init__(self, client_id: UUID, client_secret: str, refresh_token: str):
-        self.client_id = client_id
-        self.client_secret = client_secret
-        self.refresh_token = refresh_token
+    def __init__(self, client_id: UUID, hubspot_client_id: str, hubspot_client_secret: str, hubspot_refresh_token: str):
+        super().__init__(client_id=client_id)
+        self.hubspot_client_id = hubspot_client_id
+        self.hubspot_client_secret = hubspot_client_secret
+        self.hubspot_refresh_token = hubspot_refresh_token
 
 
 class FirefliesCredentials(BaseCredentials):
@@ -122,8 +123,8 @@ class FirefliesCredentials(BaseCredentials):
     __tablename__ = 'fireflies_credential'
     
     # API Key for Fireflies.ai
-    api_key: Mapped[str] = mapped_column(String(255))
+    fireflies_api_key: Mapped[str] = mapped_column(String(255))
     
-    def __init__(self, client_id: UUID, api_key: str):
+    def __init__(self, client_id: UUID, fireflies_api_key: str):
         self.client_id = client_id
-        self.api_key = api_key
+        self.fireflies_api_key = fireflies_api_key
