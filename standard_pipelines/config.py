@@ -36,6 +36,7 @@ class Config:
         'USE_SENDGRID': False,
         'USE_AWS': False,
         'USE_BITWARDEN': True,
+        'USE_GMAIL': True,
         # Add more API usage flags as needed
     }
 
@@ -62,6 +63,9 @@ class Config:
             'HUBSPOT_CLIENT_SECRET': None,
             'HUBSPOT_REFRESH_TOKEN': None,
         },
+        'GMAIL': {
+            'GMAIL_REDIRECT_URI': None,
+        },
         # Add more API configurations as needed
     }
 
@@ -70,6 +74,7 @@ class Config:
         'USE_STRIPE': 'STRIPE',
         'USE_BITWARDEN': 'BITWARDEN',
         'USE_MAILGUN': 'MAILGUN',
+        'USE_GMAIL': 'GMAIL',
         # Add more mappings as needed
     }
 

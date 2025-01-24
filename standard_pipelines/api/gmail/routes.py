@@ -5,10 +5,10 @@ import os
 gmail = Blueprint('gmail', __name__)
     
 flow = Flow.from_client_secrets_file(
-    client_secrets_file= current_app.config['CLIENT_SECRETS_FILE'],
+    client_secrets_file=current_app.config['CLIENT_SECRETS_FILE'],
     scopes=['https://www.googleapis.com/auth/gmail.modify'],
     # Temperaraly url for development only
-    redirect_uri='http://localhost:5000/api/gmail/oauth2callback'
+    redirect_uri=current_app.config['GMAIL']['GMAIL_REDIRECT_URI']
 )
 
 @gmail.route('/authorize')
