@@ -4,6 +4,7 @@ import contextlib
 from enum import Enum
 from functools import cached_property
 import io
+import uuid
 from flask import current_app
 import requests
 from .models import Client, Notification
@@ -20,7 +21,10 @@ from hubspot.crm.associations import BatchInputPublicObjectId
 from requests.auth import AuthBase
 import backoff
 from collections import defaultdict
-
+from openai import OpenAI
+from openai.types.chat.chat_completion import ChatCompletion
+from openai import OpenAIError
+from .models import DataFlowConfigurationMixin
 
 class BaseAPIManager(metaclass=ABCMeta):
 
@@ -149,13 +153,28 @@ class BaseDataFlowService(metaclass=ABCMeta):
     def __init__(self, client_id: str) -> None:
         self.client_id = client_id
 
-    @cached_property
-    def bitwarden_api_manager(self) -> BitwardenAPIManager:
-        bitwarden_encryption_key_id = Client.query.filter_by(id=self.client_id).first().bitwarden_encryption_key_id
-        api_config = {
-            "encryption_key_id": bitwarden_encryption_key_id
-        }
-        return BitwardenAPIManager(api_config)
+    @classmethod
+    @abstractmethod
+    def data_flow_id(cls) -> uuid.UUID:
+        """ID of the data flow in the registry."""
+
+    @property
+    @abstractmethod
+    def configuration_type(self) -> type[DataFlowConfigurationMixin]:
+        """
+        Type of the configuration to use for this data flow. TODO: Could use
+        generics to do this more elegantly, but this is a simpler solution
+        for now.
+        """
+        pass
+
+    @property
+    def configuration(self) -> DataFlowConfigurationMixin:
+        """Return the configuration with the matching client ID and data flow ID"""
+        return self.configuration_type.query.filter(
+            self.configuration_type.client_id == self.client_id,
+            self.configuration_type.registry_id == self.data_flow_id()
+        ).first()
 
     @abstractmethod
     def context_from_webhook_data(self, webhook_data: t.Any) -> t.Optional[dict]:
@@ -172,18 +191,30 @@ class BaseDataFlowService(metaclass=ABCMeta):
         self.run(context)
 
     def run(self, context: t.Optional[dict] = None):
+        """Run each stage of ETL in sequence, stopping if any stage fails."""
+
+        success = True
+
         try:
             input_data: dict = self.extract(context)
         except Exception as e:
             self.handle_extract_failure(e)
-        try:
-            output_data: dict = self.transform(input_data, context)
-        except Exception as e:
-            self.handle_transform_failure(e)
-        try:
-            self.load(output_data, context)
-        except Exception as e:
-            self.handle_load_failure(e)
+            success = False
+
+        if success:
+            try:
+                output_data: dict = self.transform(input_data, context)
+            except Exception as e:
+                self.handle_transform_failure(e)
+                success = False
+
+        if success:
+            try:
+                self.load(output_data, context)
+            except Exception as e:
+                self.handle_load_failure(e)
+                success = False
+
         self.notify(context)
 
     def handle_extract_failure(self, exception: Exception):
@@ -442,15 +473,26 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
         return "\n".join(formatted_lines)
 
 
-# TODO: implement non-placeholder
-class BitwardenAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
+class OpenAIAPIManager(BaseAPIManager, metaclass=ABCMeta):
+
+    def __init__(self, api_config: dict) -> None:
+        super().__init__(api_config)
+        self.api_client = OpenAI(api_key=self.api_config["api_key"])
 
     @property
     def required_config(self) -> list[str]:
-        return ["encryption_key_id"]
+        return ["api_key"]
+    
+    def chat(self, prompt: str, model: str) -> ChatCompletion:
+        if not prompt or not model:
+            raise ValueError("Prompt and model are required.")
+        try:
+            return self.api_client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+            )
+        except OpenAIError as e:
+            error_msg = f"Error during OpenAI API call."
+            raise APIError(error_msg) from e
 
-    def api_url(self, api_context: t.Optional[dict] = None) -> str:
-        return "placeholder"
 
-    def get_secret(self, secret_id: str) -> str:
-        return "placeholder"

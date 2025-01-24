@@ -64,7 +64,7 @@ class Client(BaseMixin):
     
     # Relationships
     users: Mapped[List['User']] = relationship('User', back_populates='client', passive_deletes=True)
-    transformers: Mapped[List['DataFlowRegistry']] = relationship(
+    data_flows: Mapped[List['DataFlowRegistry']] = relationship(
         'DataFlowRegistry',
         secondary='client_data_flow_registry_join',
         back_populates='clients',

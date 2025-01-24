@@ -5,6 +5,7 @@ from .services import determine_data_flow_service
 
 @data_flow.route('/webhook/<string:webhook_id>', methods=['POST'])
 def webhook(webhook_id: str):
+    current_app.logger.info(f'Received webhook for {webhook_id}')
     if request.method == 'POST':
         try:
             webhook_data = request.get_json(silent=True)

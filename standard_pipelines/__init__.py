@@ -55,11 +55,10 @@ def create_app():
     app.register_blueprint(auth_blueprint)
     auth_init_app(app)
 
-    # Add the new transformers blueprint
-    from .transformers import transformers as transformers_blueprint
-    from .transformers import init_app as transformers_init_app
-    app.register_blueprint(transformers_blueprint)
-    transformers_init_app(app)
+    from .data_flow import data_flow as data_flow_blueprint
+    from .data_flow import init_app as data_flow_init_app
+    app.register_blueprint(data_flow_blueprint)
+    data_flow_init_app(app)
 
     from .main import main as main_blueprint
     from .main import init_app as main_init_app
@@ -73,12 +72,6 @@ def create_app():
     
     from .celery import init_app as celery_init_app
     celery_init_app(app)
-
-    from .data_flow import data_flow as data_flow_blueprint
-    from .data_flow import init_app as data_flow_init_app
-    app.register_blueprint(data_flow_blueprint)
-    data_flow_init_app(app)
-    
     
     @app.context_processor
     def inject_semver():

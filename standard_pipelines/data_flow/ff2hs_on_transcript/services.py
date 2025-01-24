@@ -1,45 +1,66 @@
 import datetime
+import os
 import typing as t
+import uuid
 from flask import current_app
 from functools import cached_property
-from ..services import BaseDataFlowService
-from ..utils import HubSpotAPIManager, FirefliesAPIManager
-from ..exceptions import InvalidWebhookError
-from .models import HubSpotDraftEmailOnFirefliesTranscriptConfiguration
 
-class HubSpotDraftEmailOnFirefliesTranscript(BaseDataFlowService):
+from sqlalchemy import UUID
+from ..services import BaseDataFlowService
+from ..utils import HubSpotAPIManager, FirefliesAPIManager, OpenAIAPIManager
+from ..exceptions import InvalidWebhookError
+from .models import FF2HSOnTranscriptConfiguration
+
+class FF2HSOnTranscript(BaseDataFlowService):
 
     MEETING_TO_CONTACT_ASSOCIATION_ID = 200
     MEETING_TO_DEAL_ASSOCIATION_ID = 212
     NOTE_TO_DEAL_ASSOCIATION_ID = 214
+    OPENAI_SUMMARY_MODEL = "gpt-4" # TODO: update to a stronger model once we're out of dev
+
+    @classmethod
+    def data_flow_id(cls) -> uuid.UUID:
+        return uuid.UUID("a1abd672-4e54-4ce7-8504-1625ea6f79aa")
+
+    @property
+    def configuration_type(self) -> type[FF2HSOnTranscriptConfiguration]:
+        return FF2HSOnTranscriptConfiguration
+
+    @property
+    def configuration(self) -> FF2HSOnTranscriptConfiguration:
+        return super().configuration
 
     @cached_property
     def hubspot_api_manager(self) -> HubSpotAPIManager:
-        data_flow_config = HubSpotDraftEmailOnFirefliesTranscriptConfiguration.query.filter_by(
-            client_id=self.client_id,
-        ).first()
+        # TODO: read client-specific configuration
         hubspot_config = {
-            "client_id": self.bitwarden_api_manager.get_secret(data_flow_config.hubspot_client_id_bitwarden_id),
-            "client_secret": self.bitwarden_api_manager.get_secret(data_flow_config.hubspot_client_secret_bitwarden_id),
-            "refresh_token": self.bitwarden_api_manager.get_secret(data_flow_config.hubspot_refresh_token_bitwarden_id)
+            "client_id": os.getenv("DEVELOPMENT_HUBSPOT_CLIENT_ID"),
+            "client_secret": os.getenv("DEVELOPMENT_HUBSPOT_CLIENT_SECRET"),
+            "refresh_token": os.getenv("DEVELOPMENT_HUBSPOT_REFRESH_TOKEN")
         }
         return HubSpotAPIManager(hubspot_config)
 
     @cached_property
     def fireflies_api_manager(self) -> FirefliesAPIManager:
-        data_flow_config = HubSpotDraftEmailOnFirefliesTranscriptConfiguration.query.filter_by(
-            client_id=self.client_id,
-        ).first()
+        # TODO: read client-specific configuration
         fireflies_config = {
-            "api_key": self.bitwarden_api_manager.get_secret(data_flow_config.fireflies_api_key_bitwarden_id)
+            "api_key": os.getenv("DEVELOPMENT_FIREFLIES_API_KEY")
         }
         return FirefliesAPIManager(fireflies_config)
+    
+    @cached_property
+    def openai_api_manager(self) -> OpenAIAPIManager:
+        # TODO: read credentials from the database
+        openai_config = {
+            "api_key": os.getenv("DEVELOPMENT_OPENAI_API_KEY")
+        }
+        return OpenAIAPIManager(openai_config)
 
     def context_from_webhook_data(self, webhook_data: t.Any) -> t.Optional[dict]:
         if not isinstance(webhook_data, dict):
             raise InvalidWebhookError('Invalid webhook data')
         if webhook_data.get("eventType") != "Transcription completed":
-            return None
+            raise InvalidWebhookError('Webhook does not represent a completed transcription')
         meeting_id = webhook_data.get("meetingId")
         if not isinstance(meeting_id, str):
             raise InvalidWebhookError("Invalid meeting ID")
@@ -69,19 +90,11 @@ class HubSpotDraftEmailOnFirefliesTranscript(BaseDataFlowService):
             "deals": deals
         }
 
-    def email_body(self, transcript: str) -> str:
-        """
-        TODO: generate email body using chatgpt
-        """
-        return transcript[:1000]
-
     def meeting_summary(self, transcript: str) -> str:
-        """
-        TODO: generate meeting summary using chatgpt
-        """
-        return transcript[:100]
+        prompt = self.configuration.prompt.format(transcript=transcript)
+        return self.openai_api_manager.chat(prompt, model=self.OPENAI_SUMMARY_MODEL).choices[0].message.content
 
-    def hubspot_association(to_id: str, type_category: str, type_id: str) -> dict:
+    def hubspot_association_object(self, to_id: str, type_category: str, type_id: str) -> dict:
         return {
             "to": {
                 "id": to_id
@@ -94,7 +107,7 @@ class HubSpotDraftEmailOnFirefliesTranscript(BaseDataFlowService):
             ]
         }
 
-    def hubspot_meeting(self, transcript: str, contacts: list[dict], deal: dict) -> dict:
+    def hubspot_meeting_object(self, transcript: str, contacts: list[dict], deal: dict) -> dict:
         now = datetime.datetime.now()
         contact_names = [contact["properties"]["firstname"] + " " + contact["properties"]["lastname"] for contact in contacts]
         contact_names_str = ", ".join(contact_names)
@@ -105,19 +118,19 @@ class HubSpotDraftEmailOnFirefliesTranscript(BaseDataFlowService):
                 "hubspot_owner_id": deal["properties"]["hubspot_owner_id"],
                 "hs_meeting_title": "Meeting with " + contact_names_str,
                 "hs_meeting_body": "Meeting with " + contact_names_str,
-                # "hs_internal_meeting_notes": "",
+                "hs_internal_meeting_notes": transcript,
                 "hs_meeting_location": "Remote",
                 "hs_meeting_start_time": now.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                 # "hs_meeting_end_time": "",
                 "hs_meeting_outcome": "COMPLETED"
             },
             "associations": [
-                *[self.hubspot_association(contact["id"], "HUBSPOT_DEFINED", self.MEETING_TO_CONTACT_ASSOCIATION_ID) for contact in contacts],
-                self.hubspot_association(deal["id"], "HUBSPOT_DEFINED", self.MEETING_TO_DEAL_ASSOCIATION_ID)
+                *[self.hubspot_association_object(contact["id"], "HUBSPOT_DEFINED", self.MEETING_TO_CONTACT_ASSOCIATION_ID) for contact in contacts],
+                self.hubspot_association_object(deal["id"], "HUBSPOT_DEFINED", self.MEETING_TO_DEAL_ASSOCIATION_ID)
             ]
         }
 
-    def hubspot_note(self, transcript: str, contacts: list[dict], deal: dict) -> dict:
+    def hubspot_note_object(self, transcript: str, contacts: list[dict], deal: dict) -> dict:
         now = datetime.datetime.now()
 
         return {
@@ -128,7 +141,7 @@ class HubSpotDraftEmailOnFirefliesTranscript(BaseDataFlowService):
                 # "hs_attachment_ids": ""
             },
             "associations": [
-                self.hubspot_association(deal["id"], "HUBSPOT_DEFINED", self.NOTE_TO_DEAL_ASSOCIATION_ID)
+                self.hubspot_association_object(deal["id"], "HUBSPOT_DEFINED", self.NOTE_TO_DEAL_ASSOCIATION_ID)
             ]
         }
 
@@ -136,16 +149,13 @@ class HubSpotDraftEmailOnFirefliesTranscript(BaseDataFlowService):
         if len(data["deals"]) > 1:
             raise ValueError("More than one deal found")
         deal = data["deals"][0]
-        meeting = self.hubspot_meeting(data["transcript"], data["contacts"], deal)
-        note = self.hubspot_note(data["transcript"], data["contacts"], deal)
-        # email = self.gmail_or_outlook_email(data["transcript"], data["contacts"], deal) # TODO: implement
+        meeting = self.hubspot_meeting_object(data["transcript"], data["contacts"], deal)
+        note = self.hubspot_note_object(data["transcript"], data["contacts"], deal)
         return {
             "meeting": meeting,
             "note": note,
-            # "email": email # TODO: implement
         }
 
     def load(self, data: dict, context: t.Optional[dict] = None):
         self.hubspot_api_manager.create_meeting(data["meeting"])
         self.hubspot_api_manager.create_note(data["note"])
-        # self.email_api_manager.send_email(data["email"]) # TODO: implement
