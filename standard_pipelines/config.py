@@ -76,6 +76,9 @@ class Config:
     # Data flow configuration paths
     DATA_FLOW_CONFIG_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config', 'data_flow')
     TAP_HUBSPOT_CONTACTS_CATALOG_PATH = os.path.join(DATA_FLOW_CONFIG_DIR, 'tap_hubspot_contacts_catalog.json')
+    
+    # Path to the client_secret.json file for Gmail API
+    CLIENT_SECRETS_FILE = os.path.join(os.path.dirname(__file__), 'client_secret.json')
 
     def __init__(self, env_prefix: str) -> None:
         # These are all defined just to prevent errors with type checking
