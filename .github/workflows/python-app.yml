@@ -52,9 +52,13 @@ jobs:
     - name: Get Secrets
       uses: bitwarden/sm-action@v1
       with:
-        access_token: ${{ secrets.ACCESS_TOKEN }}
+        access_token: ${{ secrets.BWS_ACCESS_TOKEN }}
         secrets: |
-          ${{ secrets.BWS_PROJECT_ID }} > TESTING_KEYS_PROJECT
+          testing_keys/secret/db_user > TESTING_DB_USER
+          testing_keys/secret/db_pass > TESTING_DB_PASS
+          testing_keys/secret/secret_key > TESTING_SECRET_KEY
+          testing_keys/secret/encryption_key > TESTING_ENCRYPTION_KEY
+          testing_keys/secret/security_salt > TESTING_SECURITY_PASSWORD_SALT
 
     - name: Set test environment variables
       run: |
