@@ -71,6 +71,11 @@ def create_app():
     from .admin_dash import init_app as admin_dash_init_app
     app.register_blueprint(admin_dash_blueprint)
     # admin_dash_init_app(app)
+
+    from .api.gmail import gmail as gmail_blueprint
+    from .api.gmail import init_app as gmail_init_app
+    app.register_blueprint(gmail_blueprint)
+    gmail_init_app(app)
     
     from .celery import init_app as celery_init_app
     celery_init_app(app)
