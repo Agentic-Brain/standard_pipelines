@@ -1,5 +1,5 @@
-from sqlalchemy import DateTime, func, String, Integer, Boolean, ForeignKey
-from sqlalchemy.orm import Mapped, relationship, mapped_column
+from sqlalchemy import DateTime, func, String, Integer, Boolean, ForeignKey, Text, UniqueConstraint
+from sqlalchemy.orm import Mapped, relationship, mapped_column, declared_attr
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.exc import IntegrityError
 from flask_security.core import UserMixin, RoleMixin
@@ -8,11 +8,11 @@ from standard_pipelines.database.models import BaseMixin
 from typing import TYPE_CHECKING, Optional, List
 from datetime import datetime, timezone
 import uuid
+from standard_pipelines.database.models import SecureMixin
+from flask import current_app
 
 if TYPE_CHECKING:
-    from data_flow.models import DataFlowRegistry
-
-
+    from standard_pipelines.data_flow.models import Client
 
 class Role(BaseMixin, RoleMixin):
     __tablename__ = 'role'
@@ -47,33 +47,12 @@ class User(BaseMixin, UserMixin):
     tf_primary_method: Mapped[Optional[str]] = mapped_column(String)
     tf_phone_number: Mapped[Optional[str]] = mapped_column(String(128))
 
-    # Client relationship
+    # DataFlow Client relationship
     client_id: Mapped[UUID] = mapped_column(UUID, ForeignKey('client.id', ondelete='CASCADE'), nullable=False)
     client: Mapped['Client'] = relationship('Client', back_populates='users')
     
+    # Role relationship
     roles: Mapped[list['Role']] = relationship('Role', secondary='user_role_join', back_populates='users', passive_deletes=True)
-    
-
-class Client(BaseMixin):
-    __tablename__ = 'client'
-    
-    name: Mapped[str] = mapped_column(String(255), nullable=False)
-    description: Mapped[Optional[str]] = mapped_column(String(1000))
-    is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default='true')
-    domain: Mapped[Optional[str]] = mapped_column(String(255), unique=True)
-    
-    # Relationships
-    users: Mapped[List['User']] = relationship('User', back_populates='client', passive_deletes=True)
-    data_flows: Mapped[List['DataFlowRegistry']] = relationship(
-        'DataFlowRegistry',
-        secondary='client_data_flow_registry_join',
-        back_populates='clients',
-        passive_deletes=True
-    )
-    
-    def __repr__(self) -> str:
-        return f"<Client {self.name}>"
-
 
 # Jointable
 # TODO: setup cascsading delete to remove join entry if a user is deleted
@@ -82,3 +61,53 @@ class UserRoleJoin(BaseMixin):
     __tablename__ = 'user_role_join'
     user_id: Mapped[UUID] = mapped_column(UUID, ForeignKey('user.id', ondelete='CASCADE')) 
     role_id: Mapped[UUID] = mapped_column(UUID, ForeignKey('role.id', ondelete='CASCADE'))
+
+class BaseCredentials(SecureMixin):
+    """Base model for storing encrypted credentials."""
+
+    __abstract__ = True
+    
+    # Link to client for encryption key lookup
+    client_id: Mapped[UUID] = mapped_column(
+        UUID, 
+        ForeignKey('client.id', ondelete='CASCADE'),
+        unique=True
+    )
+    
+    @declared_attr
+    def client(self) -> Mapped['Client']:
+        return relationship('Client')
+    
+    def get_encryption_key(self) -> bytes:
+        """Get encryption key from Bitwarden using the client's encryption key ID."""
+        
+        # Get Bitwarden client from Flask app extensions
+        
+        bitwarden_client = current_app.extensions['bitwarden_client']
+        
+        # Retrieve the secret using the client's encryption key ID
+        try:
+            secret = bitwarden_client.secrets().get(self.client.bitwarden_encryption_key_id)
+            if secret.success:
+                return secret.data.value.encode()
+            else:
+                raise Exception(f"Failed to retrieve secret from Bitwarden: {secret.data.error}")
+        except Exception as e:
+            print(f"Error retrieving secret from Bitwarden: {e}")
+            raise e
+        
+
+    def __repr__(self) -> str:
+        """Return string representation showing client name and credential type."""
+        return f"<{self.__class__.__name__} for {self.client.name}>"
+
+class FirefliesCredentials(BaseCredentials):
+    """Credentials for Fireflies.ai API access."""
+    __tablename__ = 'fireflies_credential'
+    
+    # API Key for Fireflies.ai
+    api_key: Mapped[str] = mapped_column(String(255))
+    
+    def __init__(self, client_id: UUID, api_key: str):
+        self.client_id = client_id
+        self.api_key = api_key

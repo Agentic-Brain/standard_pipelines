@@ -35,6 +35,7 @@ class Config:
         'USE_STRIPE': False,
         'USE_SENDGRID': False,
         'USE_AWS': False,
+        'USE_BITWARDEN': True,
         # Add more API usage flags as needed
     }
 
@@ -45,13 +46,21 @@ class Config:
             'STRIPE_PUBLIC_KEY': None,
             'STRIPE_WEBHOOK_SIGNING_KEY': None,
         },
-        'SENDGRID': {
-            'SENDGRID_API_KEY': None,
+        'BITWARDEN': {
+            'BITWARDEN_ACCESS_TOKEN': None,
+            'BITWARDEN_STATE_FILE_PATH': None,
+            'BITWARDEN_ORGANIZATION_ID': None,
         },
-        'AWS': {
-            'AWS_ACCESS_KEY_ID': None,
-            'AWS_SECRET_ACCESS_KEY': None,
-            'AWS_REGION': None,
+        'MAILGUN': {
+            'MAILGUN_API_KEY': None,
+            'MAILGUN_SEND_DOMAIN': None,
+            'MAILGUN_SEND_USER': None,
+            'MAILGUN_RECIPIENT': None,
+        },
+        'HUBSPOT': {
+            'HUBSPOT_CLIENT_ID': None,
+            'HUBSPOT_CLIENT_SECRET': None,
+            'HUBSPOT_REFRESH_TOKEN': None,
         },
         # Add more API configurations as needed
     }
@@ -59,8 +68,8 @@ class Config:
     # Mapping of API usage flags to their corresponding API groups
     API_REQUIREMENTS: Dict[str, str] = {
         'USE_STRIPE': 'STRIPE',
-        'USE_SENDGRID': 'SENDGRID',
-        'USE_AWS': 'AWS',
+        'USE_BITWARDEN': 'BITWARDEN',
+        'USE_MAILGUN': 'MAILGUN',
         # Add more mappings as needed
     }
 

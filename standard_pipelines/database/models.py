@@ -1,9 +1,14 @@
 from sqlalchemy.dialects.postgresql import UUID as pgUUID
-from sqlalchemy import func, DateTime, Integer, String, Boolean
+from sqlalchemy import func, DateTime, Integer, String, Boolean, event, inspect
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from uuid import UUID
 from standard_pipelines.extensions import db
 from time import time
+from cryptography.fernet import Fernet
+from bitwarden_sdk import BitwardenClient
+from typing import Any
+import json
+import os
 
 class BaseMixin(db.Model):
     __abstract__ = True
@@ -27,8 +32,6 @@ class BaseMixin(db.Model):
         # import json
         # return json.dumps(self.to_dict())
 
-
-
 # FIXME: This is broken, need to fix
 class VersionedMixin(BaseMixin):
     __abstract__ = True
@@ -41,5 +44,99 @@ class VersionedMixin(BaseMixin):
             self.version += 1
         db.session.add(self)
         db.session.commit()
+
+class SecureMixin(BaseMixin):
+    """Mixin that provides automatic encryption for all non-primary-key fields in database."""
+    __abstract__ = True
+    
+    # This should be implemented by child classes
+    def get_encryption_key(self) -> bytes:
+        """
+        Override this method to specify how to retrieve the encryption key.
+        Must return bytes suitable for Fernet encryption.
+        """
+        raise NotImplementedError("Secure models must implement get_encryption_key()")
+    
+    def _is_encrypted(self, value: Any) -> bool:
+        """Check if a value appears to be encrypted.
+        
+        Fernet tokens always start with 'gAAAAA' when base64 encoded.
+        Returns True if the value appears to be a Fernet token.
+        """
+        if value is None:
+            return False
+            
+        # Handle both bytes and string representations
+        try:
+            if isinstance(value, bytes):
+                return value.startswith(b'gAAAAA')
+            elif isinstance(value, str):
+                # Check both the string itself and its byte representation
+                return value.startswith('gAAAAA') or value.encode().startswith(b'gAAAAA')
+        except:
+            return False
+            
+        return False
+    
+    def _encrypt_value(self, value: Any) -> str:
+        """Encrypt a value and return as a string for database storage."""
+        if value is None or self._is_encrypted(value):
+            return value
+        
+        if not isinstance(value, str):
+            try:
+                value = json.dumps(value)
+            except TypeError:
+                value = str(value)
+            
+        fernet = Fernet(self.get_encryption_key())
+        encrypted_bytes = fernet.encrypt(value.encode())
+        # Convert to string for database storage
+        return encrypted_bytes.decode()
+    
+    def _decrypt_value(self, encrypted_value: Any) -> Any:
+        """Decrypt a value that might be stored as string in database."""
+        if encrypted_value is None or not self._is_encrypted(encrypted_value):
+            return encrypted_value
+            
+        try:
+            fernet = Fernet(self.get_encryption_key())
+            
+            # Ensure we have bytes for decryption
+            if isinstance(encrypted_value, str):
+                encrypted_bytes = encrypted_value.encode()
+            else:
+                encrypted_bytes = encrypted_value
+                
+            decrypted = fernet.decrypt(encrypted_bytes).decode()
+            try:
+                return json.loads(decrypted)
+            except json.JSONDecodeError:
+                return decrypted
+        except Exception as e:
+            raise ValueError(f"Failed to decrypt value: {e}")
+
+# Encrypt before saving to database
+@event.listens_for(SecureMixin, 'before_insert', propagate=True)
+@event.listens_for(SecureMixin, 'before_update', propagate=True)
+def encrypt_before_save(mapper, connection, target):
+    skip_columns = {'id', 'created_at', 'modified_at', 'client_id'}
+    
+    for column in mapper.columns.keys():
+        if not column.startswith('_') and column not in skip_columns:
+            value = getattr(target, column)
+            encrypted_value = target._encrypt_value(value)
+            setattr(target, column, encrypted_value)
+
+# Decrypt after loading from database
+@event.listens_for(SecureMixin, 'load', propagate=True)
+def decrypt_after_load(target, context):
+    skip_columns = {'id', 'created_at', 'modified_at', 'client_id'}
+    
+    for column in inspect(target).mapper.columns.keys():
+        if not column.startswith('_') and column not in skip_columns:
+            value = getattr(target, column)
+            decrypted_value = target._decrypt_value(value)
+            setattr(target, column, decrypted_value)
 
     

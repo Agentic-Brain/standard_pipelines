@@ -12,9 +12,6 @@ from .exceptions import APIError, RetriableAPIError
 from standard_pipelines.extensions import db
 from abc import ABCMeta, abstractmethod
 import typing as t
-import tempfile
-import json
-import os
 from hubspot import HubSpot
 from hubspot.crm.contacts import SimplePublicObjectWithAssociations
 from hubspot.crm.associations import BatchInputPublicObjectId

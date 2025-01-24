@@ -13,6 +13,8 @@ from standard_pipelines.extensions import migrate, db
 from typing import Optional
 import sentry_sdk
 from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, Config, get_config
+from standard_pipelines.data_flow.models import Client, DataFlowRegistry
+from standard_pipelines.auth.models import User
 
 def create_app():
     load_dotenv()
@@ -68,11 +70,11 @@ def create_app():
     from .admin_dash import admin_dash as admin_dash_blueprint
     from .admin_dash import init_app as admin_dash_init_app
     app.register_blueprint(admin_dash_blueprint)
-    admin_dash_init_app(app)
+    # admin_dash_init_app(app)
     
     from .celery import init_app as celery_init_app
     celery_init_app(app)
-    
+
     @app.context_processor
     def inject_semver():
         return dict(app_version=str(APP_VERSION), flask_base_version=str(FLASK_BASE_VERSION))
