@@ -101,6 +101,22 @@ class BaseCredentials(SecureMixin):
         """Return string representation showing client name and credential type."""
         return f"<{self.__class__.__name__} for {self.client.name}>"
 
+
+class HubSpotCredentials(BaseCredentials):
+    """Credentials for HubSpot API access."""
+    __tablename__ = 'hubspot_credential'
+    
+    # API Key for HubSpot
+    client_id: Mapped[str] = mapped_column(String(255))
+    client_secret: Mapped[str] = mapped_column(String(255))
+    refresh_token: Mapped[str] = mapped_column(String(255))
+    
+    def __init__(self, client_id: UUID, client_secret: str, refresh_token: str):
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.refresh_token = refresh_token
+
+
 class FirefliesCredentials(BaseCredentials):
     """Credentials for Fireflies.ai API access."""
     __tablename__ = 'fireflies_credential'

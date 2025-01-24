@@ -1,8 +1,8 @@
 """initial migrations
 
-Revision ID: be97740b9503
+Revision ID: 954f02437793
 Revises: 
-Create Date: 2025-01-23 18:28:21.913384
+Create Date: 2025-01-23 21:38:19.014082
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'be97740b9503'
+revision = '954f02437793'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -38,7 +38,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
-    op.create_table('notification',
+    op.create_table('notifications',
+    sa.Column('uri', sa.String(length=255), nullable=False),
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('body', sa.Text(), nullable=False),
     sa.Column('sent', sa.Boolean(), nullable=False),
@@ -58,6 +59,7 @@ def upgrade():
     )
     op.create_table('client_data_flow_registry_join',
     sa.Column('is_active', sa.Boolean(), server_default='true', nullable=False),
+    sa.Column('webhook_id', sa.String(length=255), nullable=False),
     sa.Column('client_id', sa.UUID(), nullable=False),
     sa.Column('data_flow_id', sa.UUID(), nullable=False),
     sa.Column('id', sa.UUID(), server_default=sa.text('gen_random_uuid()'), nullable=False),
@@ -120,7 +122,7 @@ def downgrade():
     op.drop_table('fireflies_credential')
     op.drop_table('client_data_flow_registry_join')
     op.drop_table('role')
-    op.drop_table('notification')
+    op.drop_table('notifications')
     op.drop_table('data_flow_registry')
     op.drop_table('client')
     # ### end Alembic commands ###

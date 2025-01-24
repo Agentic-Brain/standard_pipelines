@@ -8,6 +8,7 @@ from functools import cached_property
 from sqlalchemy import UUID
 from ..services import BaseDataFlowService
 from ..utils import HubSpotAPIManager, FirefliesAPIManager, OpenAIAPIManager
+from ...auth.models import HubSpotCredentials, FirefliesCredentials
 from ..exceptions import InvalidWebhookError
 from .models import FF2HSOnTranscriptConfiguration
 
@@ -32,19 +33,19 @@ class FF2HSOnTranscript(BaseDataFlowService):
 
     @cached_property
     def hubspot_api_manager(self) -> HubSpotAPIManager:
-        # TODO: read client-specific configuration
+        credentials = HubSpotCredentials.query.filter_by(client_id=self.client_id).first()
         hubspot_config = {
-            "client_id": os.getenv("DEVELOPMENT_HUBSPOT_CLIENT_ID"),
-            "client_secret": os.getenv("DEVELOPMENT_HUBSPOT_CLIENT_SECRET"),
-            "refresh_token": os.getenv("DEVELOPMENT_HUBSPOT_REFRESH_TOKEN")
+            "client_id": credentials.client_id,
+            "client_secret": credentials.client_secret,
+            "refresh_token": credentials.refresh_token
         }
         return HubSpotAPIManager(hubspot_config)
 
     @cached_property
     def fireflies_api_manager(self) -> FirefliesAPIManager:
-        # TODO: read client-specific configuration
+        credentials = FirefliesCredentials.query.filter_by(client_id=self.client_id).first()
         fireflies_config = {
-            "api_key": os.getenv("DEVELOPMENT_FIREFLIES_API_KEY")
+            "api_key": credentials.api_key
         }
         return FirefliesAPIManager(fireflies_config)
     

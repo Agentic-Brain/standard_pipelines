@@ -5,7 +5,8 @@ from .ff2hs_on_transcript.services import FF2HSOnTranscript
 
 
 # TODO: replace with the production names we plan to use for these data flows
-# TODO: is there a better way to abstract this functionality?
+# TODO: this could be done better using the registry pattern, but this is a
+# simple solution for now
 DATA_FLOW_IDS_TO_CLASSES: dict[str, type[BaseDataFlowService]] = {
     FF2HSOnTranscript.data_flow_id(): FF2HSOnTranscript
 }   
