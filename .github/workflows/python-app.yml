@@ -54,11 +54,11 @@ jobs:
       with:
         access_token: ${{ secrets.BWS_ACCESS_TOKEN }}
         secrets: |
-          database/testing/username > TESTING_DB_USER
-          database/testing/password > TESTING_DB_PASS
-          app/testing/secret_key > TESTING_SECRET_KEY
-          app/testing/encryption_key > TESTING_ENCRYPTION_KEY
-          app/testing/security_salt > TESTING_SECURITY_PASSWORD_SALT
+          "ci_secret_1;TESTING_DB_USER"
+          "ci_secret_2;TESTING_DB_PASS"
+          "ci_secret_3;TESTING_SECRET_KEY"
+          "ci_secret_4;TESTING_ENCRYPTION_KEY"
+          "ci_secret_5;TESTING_SECURITY_PASSWORD_SALT"
 
     - name: Set test environment variables
       run: |
