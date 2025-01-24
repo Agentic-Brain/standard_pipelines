@@ -36,6 +36,7 @@ class Config:
         'USE_SENDGRID': False,
         'USE_AWS': False,
         'USE_BITWARDEN': True,
+        'USE_OPENAI': True,
         # Add more API usage flags as needed
     }
 
@@ -50,6 +51,9 @@ class Config:
             'BITWARDEN_ACCESS_TOKEN': None,
             'BITWARDEN_STATE_FILE_PATH': None,
             'BITWARDEN_ORGANIZATION_ID': None,
+        },
+        'OPENAI': {
+            'OPENAI_API_KEY': None,
         },
         'MAILGUN': {
             'MAILGUN_API_KEY': None,
@@ -70,6 +74,7 @@ class Config:
         'USE_STRIPE': 'STRIPE',
         'USE_BITWARDEN': 'BITWARDEN',
         'USE_MAILGUN': 'MAILGUN',
+        'USE_OPENAI': 'OPENAI',
         # Add more mappings as needed
     }
 
