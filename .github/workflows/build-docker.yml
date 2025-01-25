@@ -1,0 +1,86 @@
+name: Build and Publish Docker Image
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      commit_hash:
+        description: 'Commit hash to build (defaults to latest main)'
+        required: false
+        type: string
+
+jobs:
+  build-and-publish:
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install --no-cache-dir -r requirements.txt
+
+      - name: Install Bitwarden Secrets CLI
+        run: |
+          curl -L --output bws.zip "https://github.com/bitwarden/sdk/releases/download/bws-v0.3.0/bws-x86_64-unknown-linux-gnu-0.3.0.zip"
+          unzip bws.zip
+          chmod +x bws
+          sudo mv bws /usr/local/bin/bws
+          rm bws.zip
+
+      - name: Pull Testing Secrets
+        env:
+          BWS_ACCESS_TOKEN: ${{ secrets.TESTING_BWS_ACCESS_TOKEN }}
+        run: |
+          chmod +x .github/scripts/pull_secrets.sh
+          .github/scripts/pull_secrets.sh "testing_keys" "testing" --github-env
+
+      - name: Pull Docker Secrets
+        env:
+          BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
+        run: |
+          chmod +x .github/scripts/pull_secrets.sh
+          .github/scripts/pull_secrets.sh "docker_keys" "docker" --github-env
+
+      - name: Set test environment variables
+        run: |
+          echo "FLASK_ENV=testing" >> $GITHUB_ENV
+
+      - name: Run Unit Tests
+        run: |
+          pytest --maxfail=1 --disable-warnings -q
+
+      - name: Build Docker Image
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ inputs.commit_hash }}" ]; then
+            COMMIT_HASH="${{ inputs.commit_hash }}"
+          else
+            COMMIT_HASH=$(echo "${{ github.event.pull_request.head.sha }}" | cut -c1-7)
+          fi
+          docker build -t ${{ env.DOCKER_REGISTRY }}/standard-pipelines:${COMMIT_HASH} .
+
+      - name: Login to Docker Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
+
+      - name: Push Docker Image
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ inputs.commit_hash }}" ]; then
+            COMMIT_HASH="${{ inputs.commit_hash }}"
+          else
+            COMMIT_HASH=$(echo "${{ github.event.pull_request.head.sha }}" | cut -c1-7)
+          fi
+          docker push ${{ env.DOCKER_REGISTRY }}/standard-pipelines:${COMMIT_HASH}
