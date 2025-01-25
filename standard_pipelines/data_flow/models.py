@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 class Notification(BaseMixin):
     """Model for storing notifications with title and body for consumption by apprise."""
-    __tablename__ = 'notifications'
+    __tablename__ = 'notification'
     
     uri: Mapped[str] = mapped_column(String(255))
     title: Mapped[str] = mapped_column(String(255))
