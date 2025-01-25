@@ -7,6 +7,7 @@ import requests
 from email.message import EmailMessage
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from datetime import datetime, timezone, timedelta
 import base64
 
 
@@ -16,12 +17,17 @@ class GmailService:
 
     def send_email(self, to_address, subject, body):
         try:
+            # Checks if the access token is expired and refreshes it if so
+            if self.credentials.expire_time < datetime.now(timezone.utc):
+                refresh_response = self.refresh_access_token()
+                if 'error' in refresh_response:
+                    return refresh_response
+
             # Sets the email address if it has not been set before
             if self.credentials.email_address == "":
                 from_address = self.set_user_email()
                 if 'error' in from_address:
                     return from_address
-                self.credentials.email_address = from_address
 
             email_data = self.structure_email_data(to_address, self.credentials.email_address, subject, body)
             if 'error' in email_data:
@@ -29,7 +35,6 @@ class GmailService:
 
             # Create the Gmail service object
             service = build('gmail', 'v1', credentials=self.credentials)
-            
             # Sends the email using the Gmail API
             message = service.users().messages().send(userId="me", body=email_data).execute()
 
@@ -69,12 +74,12 @@ class GmailService:
                 current_app.logger.error(f"Failed to refresh token: {error_description}")
                 return {'error': f"Failed to refresh token: {error_description}"}
 
-            # Update the credentials with the new access token
             self.credentials.access_token = token_data['access_token']
+            self.credentials.expire_time = datetime.now(timezone.utc) + timedelta(minutes=55)
             db.session.commit()
 
             current_app.logger.info("Access token refreshed successfully.")
-            return {'access_token': token_data['access_token']}
+            return {'message': 'Access token refreshed successfully'}
         
         except requests.exceptions.HTTPError as http_err:
             # Need to handle the case where the refresh token is expired or invalid
@@ -117,7 +122,13 @@ class GmailService:
             service = build("gmail", "v1", credentials=self.credentials)
             # Get the user's profile information
             profile = service.users().getProfile(userId="me").execute()
-            return {'email_address': profile["emailAddress"]}
+
+            if 'emailAddress' not in profile:
+                current_app.logger.exception('No email address found in user profile')
+                return {'error': 'No email address found in user profile'}
+
+            self.credentials.email_address = profile["emailAddress"]
+            return {'message': 'User email address set successfully'}
 
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting user email: {e}")

@@ -6,6 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from standard_pipelines.extensions import db
 from standard_pipelines.api.gmail.models import GmailCredentials
 from standard_pipelines.api.gmail.services import GmailService, get_user_credentials
+from datetime import datetime, timezone, timedelta
 
 gmail = Blueprint('gmail', __name__)
 
@@ -65,6 +66,7 @@ def oauth2callback():
             user_id=current_user.id,
             email_address="",
             access_token=credentials.token,
+            expire_time=datetime.now(timezone.utc) + timedelta(minutes=55), #token expires in 1 hour, 5 minute buffer
             refresh_token=credentials.refresh_token,
             token_uri=credentials.token_uri,
             oauth_client_id=credentials.client_id,
@@ -126,6 +128,7 @@ def send_email():
             current_app.logger.exception(f'An error occurred while sending the email: {email_response["error"]}')
             return jsonify({'error': email_response['error']}), 400
 
+        current_app.logger.info(f'Email sent successfully to {email_data["to_address"]}')
         return jsonify({'message': 'Email sent successfully'}), 200
     
     except Exception as e:

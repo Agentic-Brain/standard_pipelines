@@ -15,6 +15,7 @@ class GmailCredentials(BaseCredentials):
     email_address: Mapped[str] = mapped_column(String(255), nullable=False)
 
     access_token: Mapped[str] = mapped_column(String(255), nullable=False)
+    expire_time: Mapped[DateTime] = mapped_column(DateTime, nullable=True)
     refresh_token: Mapped[str] = mapped_column(String(255), nullable=True)
     token_uri: Mapped[str] = mapped_column(String(255), nullable=False)
     
@@ -25,10 +26,11 @@ class GmailCredentials(BaseCredentials):
     
     updated_at: Mapped[DateTime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
     
-    def __init__(self, user_id: int, email_address: str, access_token: str, refresh_token: str, token_uri: str, oauth_client_id: str, oauth_client_secret: str, scopes: str):
+    def __init__(self, user_id: int, email_address: str, access_token: str, expire_time: DateTime, refresh_token: str, token_uri: str, oauth_client_id: str, oauth_client_secret: str, scopes: str):
         self.user_id = user_id
         self.email_address = email_address
         self.access_token = access_token
+        self.expire_time = expire_time
         self.refresh_token = refresh_token
         self.token_uri = token_uri
         self.oauth_client_id = oauth_client_id
