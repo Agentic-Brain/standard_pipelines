@@ -1,5 +1,8 @@
 from flask import current_app, jsonify, request
-
+from standard_pipelines.auth.models import HubSpotCredentials, FirefliesCredentials
+from standard_pipelines.extensions import db
+from uuid import UUID
+from .models import Client
 from . import data_flow
 from .services import determine_data_flow_service
 
@@ -21,3 +24,4 @@ def webhook(webhook_id: str):
             return jsonify({'error': 'Internal server error'}), 500
     
     return jsonify({'error': 'Method not allowed'}), 405
+

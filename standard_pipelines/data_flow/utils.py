@@ -465,7 +465,11 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
 
     def _names_from_transcript_object(self, transcript: dict) -> list[str]:
         transcript_data = transcript.get("data", {}).get("transcript", {})
-        return [speaker.get("name", "") for speaker in transcript_data.get("speakers", [])]
+        try:
+            return [speaker.get("name", "") for speaker in transcript_data.get("speakers", [])]
+        except Exception as e:
+            current_app.logger.error(f"Error getting names from transcript object: {e}")
+            return ["Unknown Speaker"]
 
     def _pretty_transcript_from_transcript_object(self, transcript: dict) -> str:
 
