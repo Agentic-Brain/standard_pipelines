@@ -19,7 +19,7 @@ COPY . .
 
 # Set environment variables
 ENV FLASK_APP=app
-ENV FLASK_ENV=production
+ENV FLASK_DEBUG=0
 
 # Expose port
 EXPOSE 5000
