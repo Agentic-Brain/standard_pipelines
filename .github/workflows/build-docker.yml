@@ -4,10 +4,16 @@ on:
   pull_request:
     types: [closed]
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      commit_hash:
+        description: 'Commit hash to build (defaults to latest main)'
+        required: false
+        type: string
 
 jobs:
   build-and-publish:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     
     steps:
@@ -56,7 +62,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          COMMIT_HASH=$(echo "${{ github.event.pull_request.head.sha }}" | cut -c1-7)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ inputs.commit_hash }}" ]; then
+            COMMIT_HASH="${{ inputs.commit_hash }}"
+          else
+            COMMIT_HASH=$(echo "${{ github.event.pull_request.head.sha }}" | cut -c1-7)
+          fi
           docker build -t ${{ env.DOCKER_REGISTRY }}/standard-pipelines:${COMMIT_HASH} .
 
       - name: Login to Docker Registry
@@ -68,5 +78,9 @@ jobs:
 
       - name: Push Docker Image
         run: |
-          COMMIT_HASH=$(echo "${{ github.event.pull_request.head.sha }}" | cut -c1-7)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ inputs.commit_hash }}" ]; then
+            COMMIT_HASH="${{ inputs.commit_hash }}"
+          else
+            COMMIT_HASH=$(echo "${{ github.event.pull_request.head.sha }}" | cut -c1-7)
+          fi
           docker push ${{ env.DOCKER_REGISTRY }}/standard-pipelines:${COMMIT_HASH}
