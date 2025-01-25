@@ -63,6 +63,7 @@ def oauth2callback():
 
         gmail_credentials = GmailCredentials(
             user_id=current_user.id,
+            email_address="",
             access_token=credentials.token,
             refresh_token=credentials.refresh_token,
             token_uri=credentials.token_uri,
@@ -110,9 +111,8 @@ def send_email():
         
         incorrect_types = [field for field in email_data if not isinstance(email_data[field], str)]
         if incorrect_types:
-            current_app.logger.error(f'Incorrect data type for fields: {", ".join(incorrect_types)}')
+            current_app.logger.exception(f'Incorrect data type for fields: {", ".join(incorrect_types)}')
             return jsonify({'error': f'Incorrect data type for fields: {", ".join(incorrect_types)}'}), 400
-
 
         credentials = get_user_credentials()
         if 'error' in credentials:
