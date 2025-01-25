@@ -6,6 +6,7 @@ from standard_pipelines.extensions import db
 import requests
 from email.message import EmailMessage
 from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 import base64
 
 
@@ -14,7 +15,34 @@ class GmailService:
         self.credentials = credentials
 
     def send_email(self, to_address, subject, body):
-        pass
+        try:
+            # Sets the email address if it has not been set before
+            if self.credentials.email_address == "":
+                from_address = self.set_user_email()
+                if 'error' in from_address:
+                    return from_address
+                self.credentials.email_address = from_address
+
+            email_data = self.structure_email_data(to_address, self.credentials.email_address, subject, body)
+            if 'error' in email_data:
+                return email_data  
+
+            # Create the Gmail service object
+            service = build('gmail', 'v1', credentials=self.credentials)
+            
+            # Sends the email using the Gmail API
+            message = service.users().messages().send(userId="me", body=email_data).execute()
+
+            current_app.logger.info(f'Email sent successfully to {to_address}')
+            return {'message': 'Email sent successfully', 'message_id': message['id']}
+        
+        except HttpError as e:
+            current_app.logger.exception(f'An error occurred while sending the email: {e}')
+            return {'error': f'Failed to send email: {str(e)}'}
+    
+        except Exception as e:
+            current_app.logger.exception(f'An unexpected error occurred while sending email: {e}')
+            return {'error': 'An unexpected error occurred while sending email'}
 
     #====== Helper functions ======#
     def refresh_access_token(self):
