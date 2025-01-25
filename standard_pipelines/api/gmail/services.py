@@ -4,6 +4,10 @@ from flask_login import current_user
 from sqlalchemy.exc import SQLAlchemyError
 from standard_pipelines.extensions import db
 import requests
+from email.message import EmailMessage
+from googleapiclient.discovery import build
+import base64
+
 
 class GmailService:
     def __init__(self, credentials):
@@ -15,7 +19,7 @@ class GmailService:
     #====== Helper functions ======#
     def refresh_access_token(self):
         try:
-            missing_fields = [field for field in ['refresh_token', 'token_uri', 'oauth_client_id', 'oauth_client_secret'] if not getattr(self.credentials, field)]
+            missing_fields = [field for field in ['refresh_token', 'token_uri', 'oauth_client_id', 'oauth_client_secret'] if not hasattr(self.credentials, field)]
             if missing_fields:
                 current_app.logger.exception(f"A required field is missing: {', '.join(missing_fields)}")
                 return {'error': f"A required field is missing: {', '.join(missing_fields)}"}
@@ -32,6 +36,7 @@ class GmailService:
 
             token_data = response.json()
             if 'access_token' not in token_data:
+                #Temporary error code check
                 error_description = token_data.get('error_description', token_data.get('error', 'Unknown error'))
                 current_app.logger.error(f"Failed to refresh token: {error_description}")
                 return {'error': f"Failed to refresh token: {error_description}"}
@@ -59,9 +64,37 @@ class GmailService:
             current_app.logger.exception(f"Unexpected error while refreshing access token: {e}")
             return {'error': 'An unexpected error occurred while refreshing access token'}
 
+    def structure_email_data(self, to_address, from_address, subject, body):
+        try:            
+            # Construct MIME message using EmailMessage class
+            message = EmailMessage()
+            message["To"] = to_address
+            message["From"] = from_address
+            message["Subject"] = subject
+            message.set_content(body)
 
-    def structure_email_data(self, to_address, subject, body):
-        pass
+            # Encode the MIME message in base64url format
+            raw_message = base64.urlsafe_b64encode(message.as_bytes()).decode("utf-8")
+            
+            # Return the structured data for Gmail API
+            return {"raw": raw_message}
+    
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while structuring email data: {e}")
+            return {'error': 'An unexpected error occurred while structuring email data'}
+        
+    def set_user_email(self):
+        try:
+            # Create the Gmail service object
+            service = build("gmail", "v1", credentials=self.credentials)
+            # Get the user's profile information
+            profile = service.users().getProfile(userId="me").execute()
+            return {'email_address': profile["emailAddress"]}
+
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while getting user email: {e}")
+            return {'error': 'An unexpected error occurred while getting user email'}
+
 
 
 def get_user_credentials():
