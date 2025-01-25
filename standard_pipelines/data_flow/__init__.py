@@ -11,10 +11,10 @@ from . import routes  # Import routes after blueprint creation
 
 def init_app(app: Flask):
     app.logger.debug(f'Initalizing blueprint {__name__}')
-    app.cli.add_command(create_flows)
+    app.cli.add_command(init_flows)
 
-@click.command('create-flows')
-def create_flows():
+@click.command('init-flows')
+def init_flows():
     """Create DataFlow objects for flows listed in flows.txt if they don't exist."""
     flows_file = Path('flows.txt')
     

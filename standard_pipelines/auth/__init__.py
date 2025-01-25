@@ -82,10 +82,10 @@ def init_app(app: Flask):
     bitwarden_client.auth().login_access_token(app.config['BITWARDEN_ACCESS_TOKEN'], app.config['BITWARDEN_STATE_FILE_PATH'])
     app.extensions['bitwarden_client'] = bitwarden_client
     
-    app.cli.add_command(create_admin)
+    app.cli.add_command(create_default_admin)
 
-@click.command('create-admin')
-def create_admin():
+@click.command('create-default-admin')
+def create_default_admin():
     """Create default internal client and admin user if they don't exist."""
     from standard_pipelines.auth.models import User, Role
     from standard_pipelines.data_flow.models import Client
