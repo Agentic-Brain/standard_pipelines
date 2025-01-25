@@ -103,10 +103,16 @@ def send_email():
                       'subject' : data.get('subject'),
                       'body' : data.get('body')}
 
-        missing_fields = [field for field in ['to_address', 'subject', 'body'] if not email_data[field]]
+        missing_fields = [field for field in email_data if not email_data[field]]
         if missing_fields:
             current_app.logger.exception(f'A required field is missing: {", ".join(missing_fields)}')
             return jsonify({'error': f'A required field is missing: {", ".join(missing_fields)}'}), 400
+        
+        incorrect_types = [field for field in email_data if not isinstance(email_data[field], str)]
+        if incorrect_types:
+            current_app.logger.error(f'Incorrect data type for fields: {", ".join(incorrect_types)}')
+            return jsonify({'error': f'Incorrect data type for fields: {", ".join(incorrect_types)}'}), 400
+
 
         credentials = get_user_credentials()
         if 'error' in credentials:
