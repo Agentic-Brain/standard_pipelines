@@ -1,6 +1,7 @@
 import datetime
 import os
 import typing as t
+from typing import Optional
 import uuid
 from flask import current_app
 from functools import cached_property
@@ -14,10 +15,12 @@ from .models import FF2HSOnTranscriptConfiguration
 
 class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
 
+    # Magic hubspot numbers to associate various object types
+    # Don't change these unless you know what you're doing
     MEETING_TO_CONTACT_ASSOCIATION_ID = 200
     MEETING_TO_DEAL_ASSOCIATION_ID = 212
     NOTE_TO_DEAL_ASSOCIATION_ID = 214
-    OPENAI_SUMMARY_MODEL = "gpt-4" # TODO: update to a stronger model once we're out of dev
+    OPENAI_SUMMARY_MODEL = "gpt-4o"
 
     @classmethod
     def data_flow_id(cls) -> uuid.UUID:
@@ -25,27 +28,21 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
 
     @cached_property
     def hubspot_api_manager(self) -> HubSpotAPIManager:
-        # credentials = HubSpotCredentials.query.filter_by(client_id=self.client_id).first()
-        # hubspot_config = {
-        #     "client_id": credentials.client_id,
-        #     "client_secret": credentials.client_secret,
-        #     "refresh_token": credentials.refresh_token
-        # }
+        credentials: Optional[HubSpotCredentials] = HubSpotCredentials.query.filter_by(client_id=self.client_id).first()
+        if credentials is None:
+            raise ValueError("No HubSpot credentials found for client")
         hubspot_config = {
-            "client_id": os.getenv("DEVELOPMENT_HUBSPOT_CLIENT_ID"),
-            "client_secret": os.getenv("DEVELOPMENT_HUBSPOT_CLIENT_SECRET"),
-            "refresh_token": os.getenv("DEVELOPMENT_HUBSPOT_REFRESH_TOKEN")
+            "client_id": credentials.hubspot_client_id,
+            "client_secret": credentials.hubspot_client_secret,
+            "refresh_token": credentials.hubspot_refresh_token
         }
         return HubSpotAPIManager(hubspot_config)
 
     @cached_property
     def fireflies_api_manager(self) -> FirefliesAPIManager:
-        # credentials = FirefliesCredentials.query.filter_by(client_id=self.client_id).first()
-        # fireflies_config = {
-        #     "api_key": credentials.api_key
-        # }
+        credentials = FirefliesCredentials.query.filter_by(client_id=self.client_id).first()
         fireflies_config = {
-            "api_key": os.getenv("DEVELOPMENT_FIREFLIES_API_KEY")
+            "api_key": credentials.fireflies_api_key
         }
         return FirefliesAPIManager(fireflies_config)
     

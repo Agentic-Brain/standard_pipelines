@@ -77,6 +77,13 @@ def create_app():
     from .celery import init_app as celery_init_app
     celery_init_app(app)
 
+    # Register testing blueprint only in development or testing environments
+    if environment_type in ['development', 'testing']:
+        from .testing import testing as testing_blueprint
+        from .testing import init_app as testing_init_app
+        app.register_blueprint(testing_blueprint)
+        testing_init_app(app)
+
     @app.context_processor
     def inject_semver():
         return dict(app_version=str(APP_VERSION), flask_base_version=str(FLASK_BASE_VERSION))
