@@ -24,19 +24,35 @@ jobs:
           python -m pip install --upgrade pip
           pip install --no-cache-dir -r requirements.txt
 
+      - name: Install Bitwarden Secrets CLI
+        run: |
+          curl -L --output bws.zip "https://github.com/bitwarden/sdk/releases/download/bws-v0.3.0/bws-x86_64-unknown-linux-gnu-0.3.0.zip"
+          unzip bws.zip
+          chmod +x bws
+          sudo mv bws /usr/local/bin/bws
+          rm bws.zip
+
+      - name: Pull Testing Secrets
+        env:
+          BWS_ACCESS_TOKEN: ${{ secrets.TESTING_BWS_ACCESS_TOKEN }}
+        run: |
+          chmod +x .github/scripts/pull_secrets.sh
+          .github/scripts/pull_secrets.sh "testing_keys" "testing" --github-env
+
+      - name: Pull Docker Secrets
+        env:
+          BWS_ACCESS_TOKEN: ${{ secrets.BWS_ACCESS_TOKEN }}
+        run: |
+          chmod +x .github/scripts/pull_secrets.sh
+          .github/scripts/pull_secrets.sh "docker_keys" "docker" --github-env
+
+      - name: Set test environment variables
+        run: |
+          echo "FLASK_ENV=testing" >> $GITHUB_ENV
+
       - name: Run Unit Tests
         run: |
           pytest --maxfail=1 --disable-warnings -q
-
-      - name: Get BWS Secrets
-        uses: bitwarden/sm-action@v1
-        with:
-          access_token: ${{ secrets.BWS_ACCESS_TOKEN }}
-          secrets: |
-            "organization/${{ secrets.BWS_PROJECT_ID }}" |
-            DOCKER_USERNAME => DOCKER_USERNAME;
-            DOCKER_PASSWORD => DOCKER_PASSWORD;
-            DOCKER_REGISTRY => DOCKER_REGISTRY;
 
       - name: Build Docker Image
         run: |
