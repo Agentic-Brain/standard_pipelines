@@ -1,11 +1,11 @@
-from flask import redirect, url_for, session, request, Blueprint, current_app, flash
+from flask import redirect, url_for, session, request, Blueprint, current_app, flash, jsonify
 from flask_login import current_user
 from google_auth_oauthlib.flow import Flow
 from werkzeug.exceptions import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
 from standard_pipelines.extensions import db
 from standard_pipelines.api.gmail.models import GmailCredentials
-
+from standard_pipelines.api.gmail.services import GmailService, get_user_credentials
 
 gmail = Blueprint('gmail', __name__)
 
@@ -97,4 +97,32 @@ def oauth2callback():
 #============= Functionality ===============#
 @gmail.route('/send_email', methods=['POST'])
 def send_email():
-    pass
+    try:
+        data = request.get_json()
+        email_data = {'to_address' : data.get('to_address'),
+                      'subject' : data.get('subject'),
+                      'body' : data.get('body')}
+
+        missing_fields = [field for field in ['to_address', 'subject', 'body'] if not email_data[field]]
+        if missing_fields:
+            current_app.logger.exception(f'A required field is missing: {", ".join(missing_fields)}')
+            return jsonify({'error': f'A required field is missing: {", ".join(missing_fields)}'}), 400
+
+        credentials = get_user_credentials()
+        if 'error' in credentials:
+            current_app.logger.exception(f'An error occurred while getting the user credentials: {credentials["error"]}')
+            return jsonify({'error': credentials['error']}), 400
+        
+        gmail_service = GmailService(credentials)
+
+        email_response = gmail_service.send_email(email_data['to_address'], email_data['subject'], email_data['body'])
+        if 'error' in email_response :
+            current_app.logger.exception(f'An error occurred while sending the email: {email_response["error"]}')
+            return jsonify({'error': email_response['error']}), 400
+
+        return jsonify({'message': 'Email sent successfully'}), 200
+    
+    except Exception as e:
+        current_app.logger.exception(f'An error occurred by user {getattr(current_user, "id", "unknown")}: {e}')
+        return jsonify({'error': 'An unknown error occurred while sending the email'}), 500
+
