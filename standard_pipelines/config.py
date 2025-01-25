@@ -14,6 +14,7 @@ class Config:
         'ENCRYPTION_KEY': None,
         'SECURITY_PASSWORD_SALT': None,
         'SECURITY_PASSWORD_HASH': 'bcrypt',
+        'DEFAULT_CLIENT_NAME': 'agentic-brain',
     }
 
     # Optional settings that enable additional features
@@ -51,6 +52,7 @@ class Config:
             'BITWARDEN_ACCESS_TOKEN': None,
             'BITWARDEN_STATE_FILE_PATH': None,
             'BITWARDEN_ORGANIZATION_ID': None,
+            'DEFAULT_CLIENT_BITWARDEN_KEY_ID': None,
         },
         'OPENAI': {
             'OPENAI_API_KEY': None,
@@ -216,6 +218,7 @@ class DevelopmentConfig(Config):
         self.DEFAULT_ADMIN_PASSWORD: str = 'password'
         self.SECURITY_PASSWORD_SALT: str = 'password_salt' # Should be random 128 bits for production systems
         self.ENCRYPTION_KEY: str = 'IduTzHtJ7mk2B/j3TzMl4XC/+NdSFAgbIcgGh7nlguc=' # Development encryption KEY. CHANGE THIS IN PRODUCTION
+        self.DEFAULT_CLIENT_NAME = 'agentic-brain'
         super().__init__('DEVELOPMENT')
         
         # Required to be set manually in each config type
