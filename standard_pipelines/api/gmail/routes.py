@@ -7,20 +7,23 @@ from standard_pipelines.extensions import db
 from standard_pipelines.api.gmail.models import GmailCredentials
 from standard_pipelines.api.gmail.services import GmailService, get_user_credentials
 from datetime import datetime, timezone, timedelta
-
-gmail = Blueprint('gmail', __name__)
+from . import gmail
 
 #============= Authorization ===============#
-flow = Flow.from_client_secrets_file(
-    client_secrets_file=current_app.config['CLIENT_SECRETS_FILE'],
-    scopes=['https://www.googleapis.com/auth/gmail.modify'],
-    redirect_uri=current_app.config['GMAIL']['GMAIL_REDIRECT_URI']
-)
+
+def get_flow():
+    """Create and return a Flow object with the current app's configuration."""
+    return Flow.from_client_secrets_file(
+        client_secrets_file=current_app.config['CLIENT_SECRETS_FILE'],
+        scopes=['https://www.googleapis.com/auth/gmail.send', 'https://www.googleapis.com/auth/gmail.readonly'],
+        redirect_uri=current_app.config['GMAIL']['GMAIL_REDIRECT_URI']
+    )
 
 @gmail.route('/authorize')
 def authorize():
     """Initiates OAuth flow by redirecting to Google's consent screen."""
     try:
+        flow = get_flow()
         session['redirect_url'] = request.args.get('next') or request.referrer or url_for('main.index')
 
         authorization_url, state = flow.authorization_url(
@@ -51,6 +54,8 @@ def authorize():
 def oauth2callback():
     """Handles OAuth callback, exchanges code for tokens."""
     try:
+        flow = get_flow()
+        
         #The state verification is used to prevent CSRF attacks
         if 'state' not in session or session['state'] != request.args.get('state'):
             current_app.logger.exception(f'Invalid state parameter: Start: {session["state"]} End:{request.args.get("state")}')

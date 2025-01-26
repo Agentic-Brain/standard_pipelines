@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 from datetime import datetime, timezone
 import uuid
-from standard_pipelines.database.models import BaseCredentials
+from standard_pipelines.auth.models import BaseCredentials
 
 class GmailCredentials(BaseCredentials):
     """Credentials for Gmail API access."""
