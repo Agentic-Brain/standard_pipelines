@@ -15,6 +15,7 @@ class Config:
         'SECURITY_PASSWORD_SALT': None,
         'SECURITY_PASSWORD_HASH': 'bcrypt',
         'DEFAULT_CLIENT_NAME': 'agentic-brain',
+        'INTERNAL_API_KEY': None,
     }
 
     # Optional settings that enable additional features
@@ -219,6 +220,7 @@ class DevelopmentConfig(Config):
         self.SECURITY_PASSWORD_SALT: str = 'password_salt' # Should be random 128 bits for production systems
         self.ENCRYPTION_KEY: str = 'IduTzHtJ7mk2B/j3TzMl4XC/+NdSFAgbIcgGh7nlguc=' # Development encryption KEY. CHANGE THIS IN PRODUCTION
         self.DEFAULT_CLIENT_NAME = 'agentic-brain'
+        self.INTERNAL_API_KEY: str = 'internal_api_key'
         super().__init__('DEVELOPMENT')
         
         # Required to be set manually in each config type
@@ -263,6 +265,7 @@ class TestingConfig(Config):
         self.SECURITY_CONFIRMABLE = False
         self.SECURITY_SEND_REGISTER_EMAIL = False
         self.SENTRY_DSN = ''
+        self.INTERNAL_API_KEY: str = 'internal_api_key'
         super().__init__('TESTING')
         self.verify_attributes()
 
