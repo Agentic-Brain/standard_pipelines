@@ -8,22 +8,17 @@ x-staging-secrets: &staging-secrets
     - standard_pipelines_staging_encryption_key
     - standard_pipelines_staging_security_password_salt
     - standard_pipelines_staging_secret_key
-    - standard_pipelines_staging_relevance_api_key
-    - standard_pipelines_staging_relevance_endpoint
-    - standard_pipelines_staging_relevance_project_id
-    - standard_pipelines_staging_relevance_region
-    - standard_pipelines_staging_relevance_tool_id
     - standard_pipelines_staging_default_admin_account
     - standard_pipelines_staging_default_admin_password
-    - standard_pipelines_staging_stripe_secret_key
-    - standard_pipelines_staging_stripe_public_key
     - standard_pipelines_staging_mailgun_api_key
     - standard_pipelines_staging_mailgun_send_domain
-    - standard_pipelines_staging_rapidapi_key
-    - standard_pipelines_staging_rapidapi_host
     - standard_pipelines_staging_sentry_dsn
-    - standard_pipelines_staging_stripe_price_id
     - standard_pipelines_staging_openai_api_key
+    - standard_pipelines_staging_internal_api_key
+    - standard_pipelines_staging_bitwarden_api_key
+    - standard_pipelines_staging_bitwarden_state_file_path
+    - standard_pipelines_staging_bitwarden_organization_id
+    - standard_pipelines_staging_bitwarden_default_client_bitwarden_key_id
 x-base-service: &base-service
   image: ghcr.io/agentic-brain/standard_pipelines:v0.0.0
   secrets:
@@ -46,7 +41,7 @@ services:
 
   migrations:
     <<: *base-service
-    command: /bin/sh -c "flask db upgrade && flask create-admin"
+    command: /bin/sh -c "flask db upgrade && flask create-admin && flask init-flows"
     depends_on:
       - postgres
 
@@ -85,35 +80,15 @@ secrets:
     external: true
   standard_pipelines_staging_secret_key:
     external: true
-  standard_pipelines_staging_relevance_api_key:
-    external: true
-  standard_pipelines_staging_relevance_endpoint:
-    external: true
-  standard_pipelines_staging_relevance_project_id:
-    external: true
-  standard_pipelines_staging_relevance_region:
-    external: true
-  standard_pipelines_staging_relevance_tool_id:
-    external: true
   standard_pipelines_staging_default_admin_account:
     external: true
   standard_pipelines_staging_default_admin_password:
     external: true
   github-token:
     external: true 
-  standard_pipelines_staging_stripe_secret_key:
-    external: true
-  standard_pipelines_staging_stripe_public_key:
-    external: true
   standard_pipelines_staging_mailgun_api_key:
     external: true
-  standard_pipelines_staging_stripe_price_id:
-    external: true
   standard_pipelines_staging_mailgun_send_domain:
-    external: true
-  standard_pipelines_staging_rapidapi_key:
-    external: true
-  standard_pipelines_staging_rapidapi_host:
     external: true
   standard_pipelines_staging_sentry_dsn:
     external: true
