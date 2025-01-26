@@ -6,10 +6,13 @@ from typing import Optional
 from flask_security.mail_util import MailUtil
 from flask_security.datastore import SQLAlchemyUserDatastore
 from flask_security.forms import RegisterForm, LoginForm, ResetPasswordForm
+from flask_security.utils import hash_password
 # Application
 from standard_pipelines.extensions import db, security, mail
 from bitwarden_sdk import BitwardenClient, client_settings_from_dict, DeviceType, ResponseForProjectResponse
 import requests
+import click
+from standard_pipelines.data_flow.models import Client
 
 auth = Blueprint('auth', __name__)
 bitwarden_client: Optional[BitwardenClient] = None
@@ -78,7 +81,56 @@ def init_app(app: Flask):
     
     bitwarden_client.auth().login_access_token(app.config['BITWARDEN_ACCESS_TOKEN'], app.config['BITWARDEN_STATE_FILE_PATH'])
     app.extensions['bitwarden_client'] = bitwarden_client
-    app.extensions['bitwarden_project'] = bitwarden_project
     
+    app.cli.add_command(create_default_admin)
+
+@click.command('create-default-admin')
+def create_default_admin():
+    """Create default internal client and admin user if they don't exist."""
+    from standard_pipelines.auth.models import User, Role
+    from standard_pipelines.data_flow.models import Client
+    
+    # First create default internal client if it doesn't exist
+    client_name = current_app.config['DEFAULT_CLIENT_NAME']
+    default_client = Client.query.filter_by(name=client_name).first()
+    
+    if not default_client:
+        default_client = Client(
+            name=client_name,
+            description='Default internal client',
+            bitwarden_encryption_key_id=current_app.config['DEFAULT_CLIENT_BITWARDEN_KEY_ID']  # You might want to set this from config
+        )
+        db.session.add(default_client)
+        current_app.logger.info(f'Created default client: {client_name}')
+        db.session.flush()  # Flush to get the client ID
+    
+    # Check if admin user exists
+    admin_email = current_app.config['SECURITY_EMAIL']
+    existing_admin = User.query.filter_by(email=admin_email).first()
+    
+    if existing_admin:
+        current_app.logger.info(f'Admin user {admin_email} already exists')
+        return
+    
+    # Ensure admin role exists
+    admin_role = Role.query.filter_by(name='admin').first()
+    if not admin_role:
+        admin_role = Role(name='admin', description='Administrator')
+        db.session.add(admin_role)
+        current_app.logger.info('Created admin role')
+    
+    # Create admin user
+    admin_user = User(
+        email=admin_email,
+        password=hash_password(current_app.config['SECURITY_PASSWORD']),
+        roles=[admin_role],
+        active=True,
+        confirmed_at=db.func.now(),  # Set confirmed_at to current timestamp
+        client=default_client  # Link to default client
+    )
+    
+    db.session.add(admin_user)
+    db.session.commit()
+    current_app.logger.info(f'Created admin user: {admin_email} linked to client: {client_name}')
 
 from . import routes
