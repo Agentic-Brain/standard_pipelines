@@ -35,10 +35,9 @@ class Config:
     # API Usage flags
     API_USE_SETTINGS: Dict[str, bool] = {
         'USE_STRIPE': False,
-        'USE_SENDGRID': False,
-        'USE_AWS': False,
         'USE_BITWARDEN': True,
         'USE_OPENAI': True,
+        'USE_MAILGUN': True,
         # Add more API usage flags as needed
     }
 
@@ -284,12 +283,26 @@ class ProductionConfig(Config):
         for key in additional_keys:
             setattr(self, key, self.get_env(key))
 
+class StagingConfig(Config):
+    def __init__(self) -> None:
+        # Has to be set after initial creation, similar to ProductionConfig
+        super().__init__('STAGING')
+        self.verify_attributes()
+
+    def set_additional_config(self) -> None:
+        additional_keys = [
+
+        ]
+        for key in additional_keys:
+            setattr(self, key, self.get_env(key))
+
 # Used to get initial config type, defined by FLASK_ENV
 def get_config() -> Config:
     env = os.getenv('FLASK_ENV', 'development').lower()
     config_classes = {
         'development': DevelopmentConfig,
         'testing': TestingConfig,
+        'staging': StagingConfig,
         'production': ProductionConfig
     }
     return config_classes.get(env, DevelopmentConfig)()

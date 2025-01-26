@@ -12,7 +12,7 @@ import time
 from standard_pipelines.extensions import migrate, db
 from typing import Optional
 import sentry_sdk
-from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, Config, get_config
+from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, StagingConfig, get_config
 from standard_pipelines.data_flow.models import Client, DataFlow
 from standard_pipelines.auth.models import User
 from standard_pipelines.data_flow.ff2hs_on_transcript.models import FF2HSOnTranscriptConfiguration
@@ -37,6 +37,8 @@ def create_app():
         config = ProductionConfig()
     elif environment_type == 'testing':  # Add this block
         config = TestingConfig()
+    elif environment_type == 'staging':
+        config = StagingConfig()
     else:
         app.logger.critical('INVALID ENVIRONMENT TYPE DEFINED, ABORTING')
         quit()
