@@ -9,7 +9,7 @@ from functools import cached_property
 from sqlalchemy import UUID
 from ..services import BaseDataFlow
 from ..utils import HubSpotAPIManager, FirefliesAPIManager, OpenAIAPIManager
-from ...auth.models import HubSpotCredentials, FirefliesCredentials
+from ...auth.models import HubSpotCredentials, FirefliesCredentials, OpenAICredentials
 from ..exceptions import InvalidWebhookError
 from .models import FF2HSOnTranscriptConfiguration
 
@@ -48,9 +48,9 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
     
     @cached_property
     def openai_api_manager(self) -> OpenAIAPIManager:
-        # TODO: read credentials from the database
+        credentials = OpenAICredentials.query.filter_by(client_id=self.client_id).first()
         openai_config = {
-            "api_key": os.getenv("DEVELOPMENT_OPENAI_API_KEY")
+            "api_key": credentials.openai_api_key
         }
         return OpenAIAPIManager(openai_config)
 
