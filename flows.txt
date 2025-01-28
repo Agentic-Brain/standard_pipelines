@@ -1,0 +1,2 @@
+# list of flows to be created on application startup if they don't already exist
+ff2hs_on_transcript

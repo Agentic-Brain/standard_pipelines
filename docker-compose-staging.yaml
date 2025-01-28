@@ -1,0 +1,96 @@
+version: "3.8"
+
+x-staging-secrets: &staging-secrets
+  secrets:
+    - standard_pipelines_staging_db_name
+    - standard_pipelines_staging_db_pass
+    - standard_pipelines_staging_db_user
+    - standard_pipelines_staging_encryption_key
+    - standard_pipelines_staging_security_password_salt
+    - standard_pipelines_staging_secret_key
+    - standard_pipelines_staging_default_admin_account
+    - standard_pipelines_staging_default_admin_password
+    - standard_pipelines_staging_mailgun_api_key
+    - standard_pipelines_staging_mailgun_send_domain
+    - standard_pipelines_staging_sentry_dsn
+    - standard_pipelines_staging_openai_api_key
+    - standard_pipelines_staging_internal_api_key
+    - standard_pipelines_staging_bitwarden_api_key
+    - standard_pipelines_staging_bitwarden_state_file_path
+    - standard_pipelines_staging_bitwarden_organization_id
+    - standard_pipelines_staging_bitwarden_default_client_bitwarden_key_id
+x-base-service: &base-service
+  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.0
+  secrets:
+    - github-token
+  environment:
+    - FLASK_ENV=staging
+    - STAGING_DB_HOST=standard_pipelines_staging_postgres
+    - STAGING_DB_PORT=5432
+  <<: *staging-secrets
+
+services:
+  standard_pipelines:
+    <<: *base-service
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgres
+      - adminer
+      - migrations
+
+  migrations:
+    <<: *base-service
+    command: /bin/sh -c "flask db upgrade && flask create-admin && flask init-flows"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    shm_size: 128mb
+    environment:
+      POSTGRES_DB_FILE: /run/secrets/standard_pipelines_staging_db_name
+      POSTGRES_PASSWORD_FILE: /run/secrets/standard_pipelines_staging_db_pass
+      POSTGRES_USER_FILE: /run/secrets/standard_pipelines_staging_db_user
+    volumes:
+      - standard_pipelines_postgres_data_staging:/var/lib/postgresql/data
+    secrets:
+      - standard_pipelines_staging_db_name
+      - standard_pipelines_staging_db_pass
+      - standard_pipelines_staging_db_user
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
+volumes:
+  standard_pipelines_postgres_data_staging:
+
+secrets:
+  standard_pipelines_staging_db_name:
+    external: true
+  standard_pipelines_staging_db_pass:
+    external: true
+  standard_pipelines_staging_db_user:
+    external: true
+  standard_pipelines_staging_encryption_key:
+    external: true
+  standard_pipelines_staging_security_password_salt:
+    external: true
+  standard_pipelines_staging_secret_key:
+    external: true
+  standard_pipelines_staging_default_admin_account:
+    external: true
+  standard_pipelines_staging_default_admin_password:
+    external: true
+  github-token:
+    external: true 
+  standard_pipelines_staging_mailgun_api_key:
+    external: true
+  standard_pipelines_staging_mailgun_send_domain:
+    external: true
+  standard_pipelines_staging_sentry_dsn:
+    external: true
+  standard_pipelines_staging_openai_api_key:
+    external: true

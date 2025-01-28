@@ -14,3 +14,5 @@ def index():
 @main.route('/healthcheck')
 def healthcheck():
     return Response(status=200)
+
+from . import routes

@@ -1,8 +1,8 @@
 """initial migrations
 
-Revision ID: be97740b9503
+Revision ID: 95a1e04e3195
 Revises: 
-Create Date: 2025-01-23 18:28:21.913384
+Create Date: 2025-01-25 16:00:43.179433
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'be97740b9503'
+revision = '95a1e04e3195'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -28,7 +28,7 @@ def upgrade():
     sa.Column('modified_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('data_flow_registry',
+    op.create_table('data_flow',
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('description', sa.String(length=1000), nullable=True),
     sa.Column('version', sa.String(length=50), nullable=False),
@@ -39,6 +39,7 @@ def upgrade():
     sa.UniqueConstraint('name')
     )
     op.create_table('notification',
+    sa.Column('uri', sa.String(length=255), nullable=False),
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('body', sa.Text(), nullable=False),
     sa.Column('sent', sa.Boolean(), nullable=False),
@@ -56,19 +57,49 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
-    op.create_table('client_data_flow_registry_join',
+    op.create_table('client_data_flow_join',
     sa.Column('is_active', sa.Boolean(), server_default='true', nullable=False),
+    sa.Column('webhook_id', sa.String(length=255), nullable=False),
     sa.Column('client_id', sa.UUID(), nullable=False),
     sa.Column('data_flow_id', sa.UUID(), nullable=False),
     sa.Column('id', sa.UUID(), server_default=sa.text('gen_random_uuid()'), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
     sa.Column('modified_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
     sa.ForeignKeyConstraint(['client_id'], ['client.id'], ondelete='CASCADE'),
-    sa.ForeignKeyConstraint(['data_flow_id'], ['data_flow_registry.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['data_flow_id'], ['data_flow.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('ff2hs_on_transcript_configuration',
+    sa.Column('prompt', sa.Text(), nullable=True),
+    sa.Column('is_default', sa.Boolean(), server_default='false', nullable=False),
+    sa.Column('client_id', sa.UUID(), nullable=True),
+    sa.Column('registry_id', sa.UUID(), nullable=False),
+    sa.Column('id', sa.UUID(), server_default=sa.text('gen_random_uuid()'), nullable=False),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('modified_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.ForeignKeyConstraint(['client_id'], ['client.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['registry_id'], ['data_flow.id'], ondelete='CASCADE'),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('client_id')
+    )
+    with op.batch_alter_table('ff2hs_on_transcript_configuration', schema=None) as batch_op:
+        batch_op.create_index('ix_unique_client_id_config', ['registry_id', 'client_id'], unique=True, postgresql_where=sa.text('client_id IS NULL'))
+        batch_op.create_index('ix_unique_default_config', ['registry_id', 'is_default'], unique=True, postgresql_where=sa.text('is_default = true'))
+
     op.create_table('fireflies_credential',
-    sa.Column('api_key', sa.String(length=255), nullable=False),
+    sa.Column('fireflies_api_key', sa.String(length=255), nullable=False),
+    sa.Column('client_id', sa.UUID(), nullable=False),
+    sa.Column('id', sa.UUID(), server_default=sa.text('gen_random_uuid()'), nullable=False),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('modified_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.ForeignKeyConstraint(['client_id'], ['client.id'], ondelete='CASCADE'),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('client_id')
+    )
+    op.create_table('hubspot_credential',
+    sa.Column('hubspot_client_id', sa.String(length=255), nullable=False),
+    sa.Column('hubspot_client_secret', sa.String(length=255), nullable=False),
+    sa.Column('hubspot_refresh_token', sa.String(length=255), nullable=False),
     sa.Column('client_id', sa.UUID(), nullable=False),
     sa.Column('id', sa.UUID(), server_default=sa.text('gen_random_uuid()'), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
@@ -110,23 +141,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('gmail_credentials',
-    sa.Column('id', sa.UUID(), nullable=False),
-    sa.Column('email_address', sa.String(length=255), nullable=False),
-    sa.Column('access_token', sa.String(length=512), nullable=False),
-    sa.Column('expire_time', sa.String(length=255), nullable=True),
-    sa.Column('refresh_token', sa.String(length=512), nullable=True),
-    sa.Column('token_uri', sa.String(length=255), nullable=False),
-    sa.Column('oauth_client_id', sa.String(length=255), nullable=False),
-    sa.Column('oauth_client_secret', sa.String(length=255), nullable=False),
-    sa.Column('scopes', sa.String(length=255), nullable=False),
-    sa.Column('client_id', sa.UUID(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
-    sa.Column('modified_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
-    sa.ForeignKeyConstraint(['client_id'], ['client.id'], ondelete='CASCADE'),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('client_id')
-    )
     # ### end Alembic commands ###
 
 
@@ -134,11 +148,16 @@ def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
     op.drop_table('user_role_join')
     op.drop_table('user')
+    op.drop_table('hubspot_credential')
     op.drop_table('fireflies_credential')
-    op.drop_table('gmail_credentials')
-    op.drop_table('client_data_flow_registry_join')
+    with op.batch_alter_table('ff2hs_on_transcript_configuration', schema=None) as batch_op:
+        batch_op.drop_index('ix_unique_default_config', postgresql_where=sa.text('is_default = true'))
+        batch_op.drop_index('ix_unique_client_id_config', postgresql_where=sa.text('client_id IS NULL'))
+
+    op.drop_table('ff2hs_on_transcript_configuration')
+    op.drop_table('client_data_flow_join')
     op.drop_table('role')
     op.drop_table('notification')
-    op.drop_table('data_flow_registry')
+    op.drop_table('data_flow')
     op.drop_table('client')
     # ### end Alembic commands ###

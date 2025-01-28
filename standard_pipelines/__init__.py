@@ -1,8 +1,4 @@
-from flask import Flask, request
-from sqlalchemy import func
-from flask_sqlalchemy import SQLAlchemy
-from flask_babel import Babel
-from flask_security.utils import hash_password
+from flask import Flask
 import os
 from standard_pipelines.version import APP_VERSION, FLASK_BASE_VERSION
 from dotenv import load_dotenv
@@ -12,9 +8,8 @@ import time
 from standard_pipelines.extensions import migrate, db
 from typing import Optional
 import sentry_sdk
-from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, Config, get_config
-from standard_pipelines.data_flow.models import Client, DataFlowRegistry
-from standard_pipelines.auth.models import User
+from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, StagingConfig, get_config
+
 
 def create_app():
     load_dotenv()
@@ -35,6 +30,8 @@ def create_app():
         config = ProductionConfig()
     elif environment_type == 'testing':  # Add this block
         config = TestingConfig()
+    elif environment_type == 'staging':
+        config = StagingConfig()
     else:
         app.logger.critical('INVALID ENVIRONMENT TYPE DEFINED, ABORTING')
         quit()
@@ -79,6 +76,13 @@ def create_app():
     
     from .celery import init_app as celery_init_app
     celery_init_app(app)
+
+    # Register testing blueprint only in development or testing environments
+    if environment_type in ['development', 'testing']:
+        from .testing import testing as testing_blueprint
+        from .testing import init_app as testing_init_app
+        app.register_blueprint(testing_blueprint)
+        testing_init_app(app)
 
     @app.context_processor
     def inject_semver():

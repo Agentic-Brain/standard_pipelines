@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 import os
-from typing import Any, Dict, Set
+from typing import Any, Dict
 from standard_pipelines.version import get_versions
 
 class Config:
@@ -14,6 +14,8 @@ class Config:
         'ENCRYPTION_KEY': None,
         'SECURITY_PASSWORD_SALT': None,
         'SECURITY_PASSWORD_HASH': 'bcrypt',
+        'DEFAULT_CLIENT_NAME': 'agentic-brain',
+        'INTERNAL_API_KEY': None,
     }
 
     # Optional settings that enable additional features
@@ -33,10 +35,10 @@ class Config:
     # API Usage flags
     API_USE_SETTINGS: Dict[str, bool] = {
         'USE_STRIPE': False,
-        'USE_SENDGRID': False,
-        'USE_AWS': False,
         'USE_BITWARDEN': True,
         'USE_GMAIL': True,
+        'USE_OPENAI': True,
+        'USE_MAILGUN': True,
         # Add more API usage flags as needed
     }
 
@@ -51,12 +53,15 @@ class Config:
             'BITWARDEN_ACCESS_TOKEN': None,
             'BITWARDEN_STATE_FILE_PATH': None,
             'BITWARDEN_ORGANIZATION_ID': None,
+            'DEFAULT_CLIENT_BITWARDEN_KEY_ID': None,
+        },
+        'OPENAI': {
+            'OPENAI_API_KEY': None,
         },
         'MAILGUN': {
             'MAILGUN_API_KEY': None,
             'MAILGUN_SEND_DOMAIN': None,
             'MAILGUN_SEND_USER': None,
-            'MAILGUN_RECIPIENT': None,
         },
         'HUBSPOT': {
             'HUBSPOT_CLIENT_ID': None,
@@ -75,6 +80,7 @@ class Config:
         'USE_BITWARDEN': 'BITWARDEN',
         'USE_MAILGUN': 'MAILGUN',
         'USE_GMAIL': 'GMAIL',
+        'USE_OPENAI': 'OPENAI',
         # Add more mappings as needed
     }
 
@@ -212,6 +218,7 @@ class DevelopmentConfig(Config):
         self.BROKER_URL = "redis://localhost:6379/0"  
         self.RESULT_BACKEND = "redis://localhost:6379/0"
         self.TASK_IGNORE_RESULT = True
+        self.BITWARDEN_STATE_FILE_PATH: str = 'bitwarden-state'
         # Flask
         self.SECRET_KEY: str = 'secret'
         self.FLASK_DEBUG: bool = True
@@ -219,6 +226,8 @@ class DevelopmentConfig(Config):
         self.DEFAULT_ADMIN_PASSWORD: str = 'password'
         self.SECURITY_PASSWORD_SALT: str = 'password_salt' # Should be random 128 bits for production systems
         self.ENCRYPTION_KEY: str = 'IduTzHtJ7mk2B/j3TzMl4XC/+NdSFAgbIcgGh7nlguc=' # Development encryption KEY. CHANGE THIS IN PRODUCTION
+        self.DEFAULT_CLIENT_NAME = 'agentic-brain'
+        self.INTERNAL_API_KEY: str = 'internal_api_key'
         super().__init__('DEVELOPMENT')
         
         # Required to be set manually in each config type
@@ -256,12 +265,14 @@ class TestingConfig(Config):
         self.DEFAULT_ADMIN_PASSWORD: str = 'test_password'
         self.SECURITY_PASSWORD_SALT: str = 'test_salt'
         self.ENCRYPTION_KEY: str = 'IduTzHtJ7mk2B/j3TzMl4XC/+NdSFAgbIcgGh7nlguc='
+        self.BITWARDEN_STATE_FILE_PATH: str = 'bitwarden-state'
         # Testing specific settings
         self.TESTING = True
         self.WTF_CSRF_ENABLED = False
         self.SECURITY_CONFIRMABLE = False
         self.SECURITY_SEND_REGISTER_EMAIL = False
         self.SENTRY_DSN = ''
+        self.INTERNAL_API_KEY: str = 'internal_api_key'
         super().__init__('TESTING')
         self.verify_attributes()
 
@@ -280,12 +291,26 @@ class ProductionConfig(Config):
         for key in additional_keys:
             setattr(self, key, self.get_env(key))
 
+class StagingConfig(Config):
+    def __init__(self) -> None:
+        # Has to be set after initial creation, similar to ProductionConfig
+        super().__init__('STAGING')
+        self.verify_attributes()
+
+    def set_additional_config(self) -> None:
+        additional_keys = [
+
+        ]
+        for key in additional_keys:
+            setattr(self, key, self.get_env(key))
+
 # Used to get initial config type, defined by FLASK_ENV
 def get_config() -> Config:
     env = os.getenv('FLASK_ENV', 'development').lower()
     config_classes = {
         'development': DevelopmentConfig,
         'testing': TestingConfig,
+        'staging': StagingConfig,
         'production': ProductionConfig
     }
     return config_classes.get(env, DevelopmentConfig)()
