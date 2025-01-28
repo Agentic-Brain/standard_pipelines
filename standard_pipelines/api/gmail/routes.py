@@ -1,4 +1,4 @@
-from flask import redirect, url_for, session, request, Blueprint, current_app, flash, jsonify
+from flask import redirect, url_for, session, request, current_app, flash, jsonify
 from flask_login import current_user
 from google_auth_oauthlib.flow import Flow
 from werkzeug.exceptions import HTTPException
@@ -16,7 +16,7 @@ def get_flow():
     return Flow.from_client_secrets_file(
         client_secrets_file=current_app.config['CLIENT_SECRETS_FILE'],
         scopes=['https://www.googleapis.com/auth/gmail.send', 'https://www.googleapis.com/auth/gmail.readonly'],
-        redirect_uri=current_app.config['GMAIL']['GMAIL_REDIRECT_URI']
+        redirect_uri=current_app.config['GMAIL_REDIRECT_URI']
     )
 
 @gmail.route('/authorize')
@@ -32,6 +32,7 @@ def authorize():
             # Lets the application request additional scopes without re-prompting the user
             include_granted_scopes='true'  
         )
+
         current_app.logger.info(f"Generated authorization URL: {authorization_url}")
         
         session['state'] = state
@@ -39,13 +40,13 @@ def authorize():
         return redirect(authorization_url)
     
     except HTTPException as e:
-        current_app.logger.error(f"HTTP error during authorization: {e}")
+        current_app.logger.exception(f"HTTP error during authorization: {e}")
         flash('An error occurred while trying to authorize. Please try again.', 'error')
         next_url = session.pop('redirect_url', url_for('main.index'))
         return redirect(next_url)
     
     except Exception as e:
-        current_app.logger.error(f"Unexpected error during authorization: {e}")
+        current_app.logger.exception(f"Unexpected error during authorization: {e}")
         flash('An unexpected error occurred. Please try again later.', 'error')
         next_url = session.pop('redirect_url', url_for('main.index'))
         return redirect(next_url)

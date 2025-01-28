@@ -4,4 +4,4 @@ venv
 .coverage
 logs
 __pycache__
-client_secret.json
+client_secrets_file.json
