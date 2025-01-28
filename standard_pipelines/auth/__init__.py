@@ -55,7 +55,7 @@ def init_app(app: Flask):
 
     app.logger.debug(f'Creating user_datastore')
     user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-
+    
     app.logger.debug('Initializing security object')
     security.init_app(app, 
                     user_datastore,
@@ -90,47 +90,48 @@ def create_default_admin():
     from standard_pipelines.auth.models import User, Role
     from standard_pipelines.data_flow.models import Client
     
-    # First create default internal client if it doesn't exist
+    # 1. Create default internal client if it doesn't exist.
     client_name = current_app.config['DEFAULT_CLIENT_NAME']
     default_client = Client.query.filter_by(name=client_name).first()
-    
     if not default_client:
         default_client = Client(
             name=client_name,
             description='Default internal client',
-            bitwarden_encryption_key_id=current_app.config['DEFAULT_CLIENT_BITWARDEN_KEY_ID']  # You might want to set this from config
+            bitwarden_encryption_key_id=current_app.config['DEFAULT_CLIENT_BITWARDEN_KEY_ID']
         )
         db.session.add(default_client)
         current_app.logger.info(f'Created default client: {client_name}')
-        db.session.flush()  # Flush to get the client ID
-    
-    # Check if admin user exists
-    admin_email = current_app.config['SECURITY_EMAIL']
-    existing_admin = User.query.filter_by(email=admin_email).first()
-    
+        db.session.flush()  # So that default_client has an ID before assigning it to a user
+
+    # 2. Check if the admin user already exists.
+    admin_email = current_app.config['DEFAULT_ADMIN_ACCOUNT']
+    existing_admin = current_app.user_datastore.find_user(email=admin_email)
     if existing_admin:
         current_app.logger.info(f'Admin user {admin_email} already exists')
         return
-    
-    # Ensure admin role exists
-    admin_role = Role.query.filter_by(name='admin').first()
+
+    # 3. Ensure the "admin" role exists (create if not).
+    admin_role_name = 'admin'
+    admin_role = current_app.user_datastore.find_role(admin_role_name)
     if not admin_role:
-        admin_role = Role(name='admin', description='Administrator')
-        db.session.add(admin_role)
-        current_app.logger.info('Created admin role')
-    
-    # Create admin user
-    admin_user = User(
+        admin_role = current_app.user_datastore.create_role(
+            name=admin_role_name,
+            description='Administrator'
+        )
+        current_app.logger.info(f'Created {admin_role_name} role')
+
+    # 4. Create the admin user using Flask-Security datastore.
+    admin_user = current_app.user_datastore.create_user(
         email=admin_email,
-        password=hash_password(current_app.config['SECURITY_PASSWORD']),
+        password=hash_password(current_app.config['DEFAULT_ADMIN_PASSWORD']),
         roles=[admin_role],
         active=True,
-        confirmed_at=db.func.now(),  # Set confirmed_at to current timestamp
-        client=default_client  # Link to default client
+        confirmed_at=db.func.now(),  # or datetime.utcnow() if you prefer
+        client=default_client       # Link to the client foreign key
     )
-    
-    db.session.add(admin_user)
-    db.session.commit()
+
+    # 5. Commit the changes to the database.
+    current_app.user_datastore.commit()
     current_app.logger.info(f'Created admin user: {admin_email} linked to client: {client_name}')
 
 from . import routes
