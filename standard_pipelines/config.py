@@ -61,7 +61,6 @@ class Config:
             'MAILGUN_API_KEY': None,
             'MAILGUN_SEND_DOMAIN': None,
             'MAILGUN_SEND_USER': None,
-            'MAILGUN_RECIPIENT': None,
         },
         'HUBSPOT': {
             'HUBSPOT_CLIENT_ID': None,
