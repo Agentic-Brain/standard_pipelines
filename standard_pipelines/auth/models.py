@@ -128,3 +128,15 @@ class FirefliesCredentials(BaseCredentials):
     def __init__(self, client_id: UUID, fireflies_api_key: str):
         self.client_id = client_id
         self.fireflies_api_key = fireflies_api_key
+        
+        
+class OpenAICredentials(BaseCredentials):
+    """Credentials for OpenAI API access."""
+    __tablename__ = 'openai_credential'
+    
+    # API Key for OpenAI
+    openai_api_key: Mapped[str] = mapped_column(String(255))
+    
+    def __init__(self, client_id: UUID, openai_api_key: str):
+        self.client_id = client_id
+        self.openai_api_key = openai_api_key
