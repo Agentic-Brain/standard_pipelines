@@ -19,7 +19,7 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_bitwarden_access_token
     - standard_pipelines_production_mailgun_send_user
 x-base-service: &base-service
-  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.2h4
+  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.2h5
   secrets:
     - github-token
   environment:

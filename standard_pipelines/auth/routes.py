@@ -24,7 +24,7 @@ def manage_fireflies_credentials(client_id: str):
                 # Create and save new credentials
                 credentials = FirefliesCredentials(
                     client_id=client_uuid,
-                    api_key=data['api_key']
+                    fireflies_api_key=data['api_key']
                 )
                 credentials.client = client
                 credentials.save()

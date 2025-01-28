@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY standard_pipelines/ standard_pipelines/
 COPY migrations/ migrations/
 COPY entrypoint.sh /entrypoint.sh
-COPY flows.txt /flows.txt
+COPY flows.txt /app/flows.txt
 RUN mkdir /app/logs
 
 # Make entrypoint executable
