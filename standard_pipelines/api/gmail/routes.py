@@ -9,6 +9,7 @@ from standard_pipelines.api.gmail.services import GmailService, get_user_credent
 from datetime import datetime, timezone, timedelta
 from . import gmail
 
+
 #============= Authorization ===============#
 
 def get_flow():
@@ -69,20 +70,25 @@ def oauth2callback():
         credentials = flow.credentials
 
         gmail_credentials = GmailCredentials(
-            user_id=current_user.id,
             email_address="",
             access_token=credentials.token,
-            expire_time=datetime.now(timezone.utc) + timedelta(minutes=55), #token expires in 1 hour, 5 minute buffer
+            expire_time="", 
             refresh_token=credentials.refresh_token,
             token_uri=credentials.token_uri,
             oauth_client_id=credentials.client_id,
             oauth_client_secret=credentials.client_secret,
             scopes=' '.join(credentials.scopes)
         )
+        #token expires in 1 hour, 5 minute buffer
+        gmail_credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
 
         db.session.add(gmail_credentials)
         db.session.commit()
         current_app.logger.info(f'Credentials stored successfully for client: {gmail_credentials.client_id}')
+        
+        user_id = gmail_credentials.id
+        current_app.logger.info(f'User ID: {str(user_id)}')
+        session['user_id'] = str(user_id)
         
     except SQLAlchemyError as e:
         db.session.rollback()

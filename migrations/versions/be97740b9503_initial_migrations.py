@@ -110,6 +110,23 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('gmail_credentials',
+    sa.Column('id', sa.UUID(), nullable=False),
+    sa.Column('email_address', sa.String(length=255), nullable=False),
+    sa.Column('access_token', sa.String(length=512), nullable=False),
+    sa.Column('expire_time', sa.String(length=255), nullable=True),
+    sa.Column('refresh_token', sa.String(length=512), nullable=True),
+    sa.Column('token_uri', sa.String(length=255), nullable=False),
+    sa.Column('oauth_client_id', sa.String(length=255), nullable=False),
+    sa.Column('oauth_client_secret', sa.String(length=255), nullable=False),
+    sa.Column('scopes', sa.String(length=255), nullable=False),
+    sa.Column('client_id', sa.UUID(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('modified_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.ForeignKeyConstraint(['client_id'], ['client.id'], ondelete='CASCADE'),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('client_id')
+    )
     # ### end Alembic commands ###
 
 
@@ -118,6 +135,7 @@ def downgrade():
     op.drop_table('user_role_join')
     op.drop_table('user')
     op.drop_table('fireflies_credential')
+    op.drop_table('gmail_credentials')
     op.drop_table('client_data_flow_registry_join')
     op.drop_table('role')
     op.drop_table('notification')

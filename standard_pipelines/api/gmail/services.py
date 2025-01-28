@@ -1,4 +1,4 @@
-from flask import current_app
+from flask import current_app, session
 from .models import GmailCredentials
 from flask_login import current_user
 from sqlalchemy.exc import SQLAlchemyError
@@ -18,7 +18,7 @@ class GmailService:
     def send_email(self, to_address, subject, body):
         try:
             # Checks if the access token is expired and refreshes it if so
-            if self.credentials.expire_time < datetime.now(timezone.utc):
+            if self.credentials.get_expire_time_as_datetime() < datetime.now(timezone.utc):
                 refresh_response = self.refresh_access_token()
                 if 'error' in refresh_response:
                     return refresh_response
@@ -75,7 +75,7 @@ class GmailService:
                 return {'error': f"Failed to refresh token: {error_description}"}
 
             self.credentials.access_token = token_data['access_token']
-            self.credentials.expire_time = datetime.now(timezone.utc) + timedelta(minutes=55)
+            self.credentials.expire_time = self.credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
             db.session.commit()
 
             current_app.logger.info("Access token refreshed successfully.")
@@ -138,8 +138,7 @@ class GmailService:
 
 def get_user_credentials():
     try:
-        user_id = current_user.id
-        credentials = GmailCredentials.query.filter_by(user_id=user_id).first()
+        credentials = GmailCredentials.query.filter_by(id=session['user_id']).first()
         if not credentials:
             current_app.logger.exception('No credentials found for the user')
             return {'error': 'No credentials found for the user'}
