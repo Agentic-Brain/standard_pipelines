@@ -17,9 +17,9 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_internal_api_key
     - standard_pipelines_production_bitwarden_organization_id
     - standard_pipelines_production_bitwarden_access_token
-
+    - standard_pipelines_production_mailgun_send_user
 x-base-service: &base-service
-  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.2h1
+  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.2h4
   secrets:
     - github-token
   environment:
@@ -27,14 +27,16 @@ x-base-service: &base-service
     - PRODUCTION_DB_HOST=standard_pipelines_production_postgres
     - PRODUCTION_DB_PORT=5432
     - PRODUCTION_BITWARDEN_STATE_FILE_PATH=/bitwarden-state
-    - PRODUCTION_BITWARDEN_DEFAULT_CLIENT_BITWARDEN_KEY_ID=b5e69235-8670-4b89-9135-b26b017f5906
+    - PRODUCTION_DEFAULT_CLIENT_BITWARDEN_KEY_ID=b5e69235-8670-4b89-9135-b26b017f5906
+    - PRODUCTION_REDIS_HOST=standard_pipelines_production_redis
+    - PRODUCTION_REDIS_PORT=6379
   <<: *production-secrets
 
 services:
   standard_pipelines:
     <<: *base-service
     ports:
-      - 5000:5000
+      - 5050:5000
     depends_on:
       - postgres
       - adminer
@@ -62,7 +64,7 @@ services:
   adminer:
     image: adminer
     ports:
-      - 8080:8080
+      - 8050:8080
 
 volumes:
   standard_pipelines_postgres_data_production:
@@ -89,6 +91,8 @@ secrets:
   standard_pipelines_production_mailgun_api_key:
     external: true
   standard_pipelines_production_mailgun_send_domain:
+    external: true
+  standard_pipelines_production_mailgun_send_user:
     external: true
   standard_pipelines_production_sentry_dsn:
     external: true
