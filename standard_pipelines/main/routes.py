@@ -1,7 +1,7 @@
 from flask import request, jsonify, current_app
 from standard_pipelines.main.decorators import require_api_key
 from standard_pipelines.data_flow.models import Client
-from standard_pipelines.auth.models import HubSpotCredentials, FirefliesCredentials, OpenAICredentials
+from standard_pipelines.auth.models import HubSpotCredentials, FirefliesCredentials, OpenAICredentials, AnthropicCredentials
 from standard_pipelines.extensions import db
 from uuid import UUID
 from . import main
@@ -152,5 +152,40 @@ def create_openai_credentials():
         
     except Exception as e:
         current_app.logger.error(f'Error creating OpenAI credentials: {str(e)}')
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+    
+    
+@main.route('/credentials/anthropic', methods=['POST'])
+@require_api_key
+def create_anthropic_credentials():
+    try:
+        data = request.get_json()
+        
+        # Validate required fields using set operations
+        required_fields = {'client_id', 'anthropic_api_key'}
+        missing_fields = required_fields - data.keys()
+        if missing_fields:
+            return jsonify({'error': f'Missing required fields: {", ".join(missing_fields)}'}), 400
+        
+        # Create new credentials
+        credentials = AnthropicCredentials(
+            client_id=data['client_id'],
+            anthropic_api_key=data['anthropic_api_key']
+        )
+        
+        client = Client.query.get_or_404(data['client_id'])
+        credentials.client = client
+        
+        db.session.add(credentials)
+        db.session.commit()
+        
+        return jsonify({
+            'message': 'Anthropic credentials created successfully',
+            'id': str(credentials.id)
+        }), 201
+        
+    except Exception as e:
+        current_app.logger.error(f'Error creating Anthropic credentials: {str(e)}')
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
