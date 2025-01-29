@@ -54,7 +54,7 @@ class GmailService:
             return {'message': 'Email sent successfully', 'message_id': message['id']}
         
         except HttpError as e:
-            current_app.logger.exception(f'An error occurred while sending the email: {e}')
+            current_app.logger.exception(f'A HTTP error occurred while sending the email: {e}')
             return {'error': f'Failed to send email: {str(e)}'}
     
         except Exception as e:
@@ -87,8 +87,18 @@ class GmailService:
                 return {'error': f"Failed to refresh token: {error_description}"}
 
             self.credentials.access_token = token_data['access_token']
-            self.credentials.expire_time = self.credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
-            db.session.commit()
+            self.credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
+           
+            self.credentials.save()
+
+            client_id = self.credentials.client_id
+            db.session.expunge(self.credentials)
+
+            new_credentials = get_user_credentials(client_id)
+            if 'error' in new_credentials:
+                current_app.logger.exception(f'An error occurred while getting the user credentials: {new_credentials["error"]}')
+                return {'error': new_credentials['error']}
+            self.credentials = new_credentials['credentials']
 
             current_app.logger.info("Access token refreshed successfully.")
             return {'message': 'Access token refreshed successfully'}

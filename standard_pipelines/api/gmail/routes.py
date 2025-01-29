@@ -150,7 +150,6 @@ def send_email():
             current_app.logger.exception(f'An error occurred while sending the email: {email_response["error"]}')
             return jsonify({'error': email_response['error']}), 400
 
-        current_app.logger.info(f'Email sent successfully to {email_data["to_address"]}')
         return jsonify({'message': 'Email sent successfully'}), 200
     
     except Exception as e:
