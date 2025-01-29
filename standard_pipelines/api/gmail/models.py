@@ -7,20 +7,18 @@ class GmailCredentials(BaseCredentials):
     """Credentials for Gmail API access."""
     __tablename__ = 'gmail_credential'
     
-    email_address: Mapped[str] = mapped_column(String(255), nullable=False)
-
     access_token: Mapped[str] = mapped_column(String(255), nullable=False)
-    expire_time: Mapped[str] = mapped_column(String(255), nullable=True)
-    refresh_token: Mapped[str] = mapped_column(String(255), nullable=True)
+    expire_time: Mapped[str] = mapped_column(String(255), nullable=False)
+    refresh_token: Mapped[str] = mapped_column(String(255), nullable=False)
     token_uri: Mapped[str] = mapped_column(String(255), nullable=False)
     
+
     oauth_client_id: Mapped[str] = mapped_column(String(255), nullable=False)
     oauth_client_secret: Mapped[str] = mapped_column(String(255), nullable=False)
     
     scopes: Mapped[str] = mapped_column(String(255), nullable=False)
         
-    def __init__(self, email_address: str, access_token: str, expire_time: str, refresh_token: str, token_uri: str, oauth_client_id: str, oauth_client_secret: str, scopes: str):
-        self.email_address = email_address
+    def __init__(self, access_token: str, expire_time: str, refresh_token: str, token_uri: str, oauth_client_id: str, oauth_client_secret: str, scopes: str):
         self.access_token = access_token
         self.expire_time = expire_time
         self.refresh_token = refresh_token
