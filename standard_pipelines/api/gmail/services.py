@@ -1,19 +1,22 @@
 from flask import current_app, session
 from .models import GmailCredentials
-from flask_login import current_user
+from standard_pipelines.auth.models import User
 from sqlalchemy.exc import SQLAlchemyError
 from standard_pipelines.extensions import db
 import requests
 from email.message import EmailMessage
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from google.oauth2.credentials import Credentials
 from datetime import datetime, timezone, timedelta
 import base64
 
 
 class GmailService:
-    def __init__(self, credentials):
+    def __init__(self, credentials, client_id):
         self.credentials = credentials
+        self.client_id = client_id
+        self.email_address = ""
 
     def send_email(self, to_address, subject, body):
         try:
@@ -24,7 +27,7 @@ class GmailService:
                     return refresh_response
 
             # Sets the email address if it has not been set before
-            if self.credentials.email_address == "":
+            if self.email_address == "":
                 from_address = self.set_user_email()
                 if 'error' in from_address:
                     return from_address
@@ -33,8 +36,17 @@ class GmailService:
             if 'error' in email_data:
                 return email_data  
 
+            google_credentials = Credentials(
+                token=self.credentials.access_token,
+                refresh_token=self.credentials.refresh_token,
+                token_uri=self.credentials.token_uri,
+                client_id=self.credentials.oauth_client_id,
+                client_secret=self.credentials.oauth_client_secret,
+                scopes=self.credentials.scopes.split()
+            )
+
             # Create the Gmail service object
-            service = build('gmail', 'v1', credentials=self.credentials)
+            service = build('gmail', 'v1', credentials=google_credentials)
             # Sends the email using the Gmail API
             message = service.users().messages().send(userId="me", body=email_data).execute()
 
@@ -71,7 +83,7 @@ class GmailService:
             if 'access_token' not in token_data:
                 #Temporary error code check
                 error_description = token_data.get('error_description', token_data.get('error', 'Unknown error'))
-                current_app.logger.error(f"Failed to refresh token: {error_description}")
+                current_app.logger.exception(f"Failed to refresh token: {error_description}")
                 return {'error': f"Failed to refresh token: {error_description}"}
 
             self.credentials.access_token = token_data['access_token']
@@ -84,9 +96,9 @@ class GmailService:
         except requests.exceptions.HTTPError as http_err:
             # Need to handle the case where the refresh token is expired or invalid
             if response.status_code == 400 and 'invalid_grant' in response.json().get('error', ''):
-                current_app.logger.error("Refresh token has expired or is invalid. User re-authorization required.")
+                current_app.logger.exception("Refresh token has expired or is invalid. User re-authorization required.")
                 return {'error': 'Refresh token is expired or invalid. Please reauthorize.'}
-            current_app.logger.error(f"HTTP error while refreshing token: {http_err}")
+            current_app.logger.exception(f"HTTP error while refreshing token: {http_err}")
             return {'error': 'HTTP error occurred while refreshing token'}
 
         except requests.exceptions.RequestException as e:
@@ -109,7 +121,6 @@ class GmailService:
             # Encode the MIME message in base64url format
             raw_message = base64.urlsafe_b64encode(message.as_bytes()).decode("utf-8")
             
-            # Return the structured data for Gmail API
             return {"raw": raw_message}
     
         except Exception as e:
@@ -118,16 +129,14 @@ class GmailService:
         
     def set_user_email(self):
         try:
-            # Create the Gmail service object
-            service = build("gmail", "v1", credentials=self.credentials)
-            # Get the user's profile information
-            profile = service.users().getProfile(userId="me").execute()
+            user_credentials = User.query.filter_by(client_id=self.client_id).first()
+            email_address = user_credentials.email
 
-            if 'emailAddress' not in profile:
+            if email_address is None:
                 current_app.logger.exception('No email address found in user profile')
                 return {'error': 'No email address found in user profile'}
 
-            self.credentials.email_address = profile["emailAddress"]
+            self.credentials.email_address = email_address
             return {'message': 'User email address set successfully'}
 
         except Exception as e:
@@ -136,13 +145,13 @@ class GmailService:
 
 
 
-def get_user_credentials():
+def get_user_credentials(client_id : str):
     try:
-        credentials = GmailCredentials.query.filter_by(id=session['user_id']).first()
+        credentials = GmailCredentials.query.filter_by(client_id=client_id).first()
         if not credentials:
             current_app.logger.exception('No credentials found for the user')
             return {'error': 'No credentials found for the user'}
-        return credentials
+        return {'credentials': credentials}
     
     except SQLAlchemyError as e:
         current_app.logger.exception(f'Database error occurred: {e}')
