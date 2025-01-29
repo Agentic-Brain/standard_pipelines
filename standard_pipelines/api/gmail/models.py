@@ -1,16 +1,12 @@
-from sqlalchemy import String, DateTime, ForeignKey
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 from datetime import datetime
-import uuid
 from standard_pipelines.auth.models import BaseCredentials
 
 class GmailCredentials(BaseCredentials):
     """Credentials for Gmail API access."""
-    __tablename__ = 'gmail_credentials'
+    __tablename__ = 'gmail_credential'
     
-    # Unique identifier for the credentials
-    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     email_address: Mapped[str] = mapped_column(String(255), nullable=False)
 
     access_token: Mapped[str] = mapped_column(String(255), nullable=False)

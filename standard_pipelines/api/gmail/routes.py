@@ -82,8 +82,7 @@ def oauth2callback():
         #token expires in 1 hour, 5 minute buffer
         gmail_credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
 
-        db.session.add(gmail_credentials)
-        db.session.commit()
+        gmail_credentials.save()  
         current_app.logger.info(f'Credentials stored successfully for client: {gmail_credentials.client_id}')
         
         user_id = gmail_credentials.id
