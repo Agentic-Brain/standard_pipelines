@@ -153,6 +153,6 @@ def send_email():
         return jsonify({'message': 'Email sent successfully'}), 200
     
     except Exception as e:
-        current_app.logger.exception(f'An error occurred by user {getattr(current_user, "id", "unknown")}: {e}')
+        current_app.logger.exception(f'An unknown error occurred while sending the email: {e}')
         return jsonify({'error': 'An unknown error occurred while sending the email'}), 500
 
