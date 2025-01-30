@@ -1,6 +1,7 @@
 from flask import request, jsonify, current_app
 from functools import wraps
 
+# TODO: Move this to auth/decorators.py
 def require_api_key(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
