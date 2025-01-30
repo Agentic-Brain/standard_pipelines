@@ -16,11 +16,19 @@ from . import gmail
 
 def get_flow():
     """Create and return a Flow object with the current app's configuration."""
-    return Flow.from_client_secrets_file(
-        client_secrets_file=current_app.config['CLIENT_SECRETS_FILE'],
-        scopes=['https://www.googleapis.com/auth/gmail.send', 'https://www.googleapis.com/auth/gmail.readonly'],
-        redirect_uri=current_app.config['GMAIL_REDIRECT_URI']
-    )
+    try:
+        return Flow.from_client_secrets_file(
+            client_secrets_file=current_app.config['CLIENT_SECRETS_FILE'],
+            scopes=['https://www.googleapis.com/auth/gmail.send', 'https://www.googleapis.com/auth/gmail.readonly'],
+            redirect_uri=current_app.config['GMAIL_REDIRECT_URI']
+        )
+    except ValueError as e:
+        current_app.logger.error(f"Invalid client secrets file format: {e}")
+        raise HTTPException(status_code=500, description="Invalid client secrets file format")
+    except Exception as e:
+        current_app.logger.error(f"An unexpected error occurred while creating the OAuth flow: {e}")
+        raise HTTPException(status_code=500, description="An unexpected error occurred while creating the OAuth flow")
+    
 
 @gmail.route('/authorize/<client_id>')
 def authorize(client_id: str):
@@ -54,7 +62,8 @@ def authorize(client_id: str):
     
     except HTTPException as e:
         display_error_and_redirect(redirect_url, f"HTTP error during authorization: {e}")
-    
+    except ValueError as e:
+        display_error_and_redirect(redirect_url, f"Value error during authorization: {e}")
     except Exception as e:
         display_error_and_redirect(redirect_url, f"Unexpected error during authorization: {e}")
 
