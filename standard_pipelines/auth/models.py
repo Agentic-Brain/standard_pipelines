@@ -140,3 +140,14 @@ class OpenAICredentials(BaseCredentials):
     def __init__(self, client_id: UUID, openai_api_key: str):
         self.client_id = client_id
         self.openai_api_key = openai_api_key
+        
+class AnthropicCredentials(BaseCredentials):
+    """Credentials for Anthropic API access."""
+    __tablename__ = 'anthropic_credential'
+    
+    # API Key for Anthropic
+    anthropic_api_key: Mapped[str] = mapped_column(String(255))
+    
+    def __init__(self, client_id: UUID, anthropic_api_key: str):
+        self.client_id = client_id
+        self.anthropic_api_key = anthropic_api_key

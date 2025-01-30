@@ -15,18 +15,19 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_sentry_dsn
     - standard_pipelines_production_openai_api_key
     - standard_pipelines_production_internal_api_key
-    - standard_pipelines_production_bitwarden_api_key
-    - standard_pipelines_production_bitwarden_state_file_path
     - standard_pipelines_production_bitwarden_organization_id
-    - standard_pipelines_production_bitwarden_default_client_bitwarden_key_id
+    - standard_pipelines_production_bitwarden_access_token
+
 x-base-service: &base-service
-  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.0
+  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.2h1
   secrets:
     - github-token
   environment:
     - FLASK_ENV=production
-    - production_DB_HOST=standard_pipelines_production_postgres
-    - production_DB_PORT=5432
+    - PRODUCTION_DB_HOST=standard_pipelines_production_postgres
+    - PRODUCTION_DB_PORT=5432
+    - PRODUCTION_BITWARDEN_STATE_FILE_PATH=/bitwarden-state
+    - PRODUCTION_BITWARDEN_DEFAULT_CLIENT_BITWARDEN_KEY_ID=b5e69235-8670-4b89-9135-b26b017f5906
   <<: *production-secrets
 
 services:
@@ -41,13 +42,12 @@ services:
 
   migrations:
     <<: *base-service
-    command: /bin/sh -c "flask db upgrade && flask create-admin && flask init-flows"
+    command: /bin/sh -c "flask db upgrade && flask create-default-admin && flask init-flows"
     depends_on:
       - postgres
 
   postgres:
     image: postgres
-    shm_size: 128mb
     environment:
       POSTGRES_DB_FILE: /run/secrets/standard_pipelines_production_db_name
       POSTGRES_PASSWORD_FILE: /run/secrets/standard_pipelines_production_db_pass
@@ -93,4 +93,10 @@ secrets:
   standard_pipelines_production_sentry_dsn:
     external: true
   standard_pipelines_production_openai_api_key:
+    external: true
+  standard_pipelines_production_internal_api_key:
+    external: true
+  standard_pipelines_production_bitwarden_access_token:
+    external: true
+  standard_pipelines_production_bitwarden_organization_id:
     external: true
