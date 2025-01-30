@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, current_app, url_for, session, render_template
 from standard_pipelines.auth.models import HubSpotCredentials
-from flask_login import current_user
+from flask_login import current_user, login_required
 from standard_pipelines.auth.models import FirefliesCredentials, User, Role
 from standard_pipelines.main.decorators import require_api_key
 from standard_pipelines.data_flow.models import Client
@@ -66,6 +66,7 @@ def manage_fireflies_credentials(client_id: str):
     
 # 3) Route to redirect the user to the HubSpot login/consent page
 @auth.route('/oauth/login/hubspot')
+@login_required
 def login_hubspot():
     current_app.logger.info("Starting HubSpot OAuth login flow")
     
@@ -92,6 +93,7 @@ def login_hubspot():
 
 # 4) Callback URL where HubSpot will redirect the user after they authorize
 @auth.route('/oauth/authorize/hubspot')
+@login_required
 def authorize_hubspot():
     current_app.logger.info("Processing HubSpot OAuth callback")
     
@@ -119,9 +121,10 @@ def authorize_hubspot():
             existing_creds = HubSpotCredentials.query.filter_by(client_id=client_id).first()
             
             if existing_creds:
-                # TODO: Make sure this works without manually attaching the client object
                 current_app.logger.info(f"Updating existing HubSpot credentials for client {client.name}")
                 existing_creds.hubspot_refresh_token = token['refresh_token']
+                existing_creds.hubspot_access_token = token['access_token']
+                existing_creds.hubspot_token_expiry = token.get('expires_at')
                 existing_creds.save()
             else:
                 current_app.logger.info(f"Creating new HubSpot credentials for client {client.name}")
@@ -136,14 +139,18 @@ def authorize_hubspot():
                 
             current_app.logger.info("Successfully stored HubSpot credentials in database")
             
+            # Store minimal info in session for current request handling
+            session['hubspot_connected'] = True
+            
+            return render_template(
+                'auth/oauth_success.html',
+                service='HubSpot',
+                client_name=client.name
+            )
+            
         except Exception as e:
             current_app.logger.error(f"Error storing HubSpot credentials: {str(e)}")
             return jsonify({'error': 'Failed to store credentials'}), 500
-        
-        session['hubspot_token'] = token
-        current_app.logger.info("Stored HubSpot token in session")
-        
-        return f"HubSpot OAuth successful!<br>Token Info: {token}"
         
     except Exception as e:
         current_app.logger.error(f"Error during HubSpot OAuth token exchange: {str(e)}")
