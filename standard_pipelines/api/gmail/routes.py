@@ -43,6 +43,7 @@ def authorize(client_id: str):
             access_type='offline',  
             # Lets the application request additional scopes without re-prompting the user
             include_granted_scopes='true',
+            prompt='consent',
             state=serialized_data
         )
 
@@ -82,23 +83,35 @@ def oauth2callback():
 
         client = Client.query.get_or_404(decoded_data['client_id'])
 
-        gmail_credentials = GmailCredentials(
-            access_token=credentials.token,
-            expire_time="", 
-            refresh_token=credentials.refresh_token,
-            token_uri=credentials.token_uri,
-            oauth_client_id=credentials.client_id,
-            oauth_client_secret=credentials.client_secret,
-            scopes=' '.join(credentials.scopes)
-        )
-        #token expires in 1 hour, 5 minute buffer
-        gmail_credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
-        gmail_credentials.client = client
-
-        gmail_credentials.save()  
+        existing_credentials = GmailCredentials.query.filter_by(client_id=client.id).first()
+        if existing_credentials:
+            existing_credentials.access_token = credentials.token
+            existing_credentials.refresh_token = credentials.refresh_token
+            existing_credentials.token_uri = credentials.token_uri
+            existing_credentials.oauth_client_id = credentials.client_id
+            existing_credentials.oauth_client_secret = credentials.client_secret
+            existing_credentials.scopes = ' '.join(credentials.scopes)
+            existing_credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
+            existing_credentials.save()  
+            current_app.logger.info(f'updated existing credentials for client')
+        else:
+            gmail_credentials = GmailCredentials(
+                access_token=credentials.token,
+                expire_time="", 
+                refresh_token=credentials.refresh_token,
+                token_uri=credentials.token_uri,
+                oauth_client_id=credentials.client_id,
+                oauth_client_secret=credentials.client_secret,
+                scopes=' '.join(credentials.scopes)
+            )
+            #token expires in 1 hour, 5 minute buffer
+            gmail_credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
+            gmail_credentials.client = client
+            gmail_credentials.save()  
+            current_app.logger.info(f'created new credentials for client')
         
         next_url = decoded_data.get('redirect_url', url_for('main.index'))
-        current_app.logger.info(f'Client has been successfully authorized: {gmail_credentials.client_id}')
+        current_app.logger.info(f'Client has been successfully authorized')
         flash('Successfully authorized', 'success')
         return redirect(next_url)
         
