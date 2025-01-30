@@ -13,9 +13,9 @@ import base64
 
 
 class GmailService:
-    def __init__(self, credentials, client_id):
-        self.credentials = credentials
-        self.client_id = client_id
+    def __init__(self):
+        self.credentials = None
+        self.client_id = None
 
     def send_email(self, to_address, subject, body):
         try:
@@ -98,11 +98,10 @@ class GmailService:
             client_id = self.credentials.client_id
             db.session.expunge(self.credentials)
 
-            new_credentials = get_user_credentials(client_id)
+            new_credentials = self.set_user_credentials(client_id)
             if 'error' in new_credentials:
                 current_app.logger.exception(f'An error occurred while getting the user credentials: {new_credentials["error"]}')
                 return {'error': new_credentials['error']}
-            self.credentials = new_credentials['credentials']
 
             current_app.logger.info("Access token refreshed successfully.")
             return {'message': 'Access token refreshed successfully'}
@@ -141,19 +140,21 @@ class GmailService:
             current_app.logger.exception(f"An unexpected error occurred while structuring email data: {e}")
             return {'error': 'An unexpected error occurred while structuring email data'}
       
-
-def get_user_credentials(client_id : str):
-    try:
-        credentials = GmailCredentials.query.filter_by(client_id=client_id).first()
-        if not credentials:
-            current_app.logger.exception('No credentials found for the user')
-            return {'error': 'No credentials found for the user'}
-        return {'credentials': credentials}
-    
-    except SQLAlchemyError as e:
-        current_app.logger.exception(f'Database error occurred: {e}')
-        return {'error': 'An error occurred while getting the user credentials'}
-    
-    except Exception as e:
-        current_app.logger.exception(f'An unexpected error occurred: {e}')
-        return {'error': 'An unexpected error occurred'}
+    def set_user_credentials(self, client_id : str):
+        try:
+            credentials = GmailCredentials.query.filter_by(client_id=client_id).first()
+            if not credentials:
+                current_app.logger.exception('No credentials found for the user')
+                return {'error': 'No credentials found for the user'}
+            
+            self.credentials = credentials
+            self.client_id = client_id
+            return {'message': 'User credentials retrieved successfully'}
+        
+        except SQLAlchemyError as e:
+            current_app.logger.exception(f'Database error occurred: {e}')
+            return {'error': 'An error occurred while getting the user credentials'}
+        
+        except Exception as e:
+            current_app.logger.exception(f'An unexpected error occurred: {e}')
+            return {'error': 'An unexpected error occurred'}

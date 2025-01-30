@@ -5,7 +5,7 @@ from werkzeug.exceptions import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
 from standard_pipelines.extensions import db
 from standard_pipelines.api.gmail.models import GmailCredentials
-from standard_pipelines.api.gmail.services import GmailService, get_user_credentials
+from standard_pipelines.api.gmail.services import GmailService
 from standard_pipelines.data_flow.models import Client
 from datetime import datetime, timezone, timedelta
 import urllib.parse
@@ -138,16 +138,13 @@ def send_email():
             current_app.logger.exception(f'Incorrect data type for fields: {", ".join(incorrect_types)}')
             return jsonify({'error': f'Incorrect data type for fields: {", ".join(incorrect_types)}'}), 400
 
-        credentials = get_user_credentials(email_data['client_id'])
+        gmail_service = GmailService()
+        credentials = gmail_service.set_user_credentials(email_data['client_id'])
         if 'error' in credentials:
-            current_app.logger.exception(f'An error occurred while getting the user credentials: {credentials["error"]}')
             return jsonify({'error': credentials['error']}), 400
-        
-        gmail_service = GmailService(credentials['credentials'], email_data['client_id'])
 
         email_response = gmail_service.send_email(email_data['to_address'], email_data['subject'], email_data['body'])
         if 'error' in email_response :
-            current_app.logger.exception(f'An error occurred while sending the email: {email_response["error"]}')
             return jsonify({'error': email_response['error']}), 400
 
         return jsonify({'message': 'Email sent successfully'}), 200
