@@ -155,7 +155,7 @@ def oauth_client_register(app: Flask):
         authorize_url='https://app.hubspot.com/oauth/authorize',
         api_base_url='https://api.hubapi.com/',  # Updated base URL
         client_kwargs={
-            'scope': 'crm.objects.leads.read crm.objects.contacts.read oauth',
+            'scope': 'crm.objects.contacts.read crm.objects.contacts.write crm.objects.deals.read crm.objects.deals.write oauth',
             'token_endpoint_auth_method': 'client_secret_post'
         }
     )

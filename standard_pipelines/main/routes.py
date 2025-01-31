@@ -62,6 +62,8 @@ def get_hubspot_credentials(client_id: UUID):
             'id': str(credentials.id),
             'client_id': str(credentials.client_id),
             'hubspot_client_id': credentials.hubspot_client_id,
+            'hubspot_client_secret': credentials.hubspot_client_secret,
+            'hubspot_refresh_token': credentials.hubspot_refresh_token,
             # Not returning sensitive fields like client_secret and refresh_token
         }), 200
         
@@ -114,6 +116,7 @@ def get_fireflies_credentials(client_id: UUID):
         return jsonify({
             'id': str(credentials.id),
             'client_id': str(credentials.client_id),
+            'fireflies_api_key': credentials.fireflies_api_key
             # Not returning sensitive field fireflies_api_key
         }), 200
         

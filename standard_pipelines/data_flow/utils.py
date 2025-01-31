@@ -15,6 +15,9 @@ import typing as t
 from hubspot import HubSpot
 from hubspot.crm.contacts import SimplePublicObjectWithAssociations
 from hubspot.crm.associations import BatchInputPublicObjectId
+from hubspot.crm.contacts import SimplePublicObjectInput as ContactInput
+from hubspot.crm.deals import SimplePublicObjectInput as DealInput
+from hubspot.files import ApiException
 from requests.auth import AuthBase
 import backoff
 from collections import defaultdict
@@ -368,6 +371,79 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
             raise APIError(error_msg)
         deal_id = contact_to_deal_associations[0]["id"]
         return self.deal_by_deal_id(deal_id)
+
+    def create_contact(self, email: str | None = None, first_name: str | None = None, last_name: str | None = None) -> dict:
+        """
+        Creates a new contact in HubSpot with the given email/first/last name.
+        Returns the contact as a dictionary.
+        """
+        props = {}
+        if email:
+            props["email"] = email
+        if first_name:
+            props["firstname"] = first_name
+        if last_name:
+            props["lastname"] = last_name
+
+        contact_input = ContactInput(properties=props)
+
+        try:
+            new_contact = self.api_client.crm.contacts.basic_api.create(contact_input)
+        except ApiException as e:
+            print(f"Error creating contact: {e}")
+            raise
+
+        return new_contact.to_dict()
+
+    def create_deal(self, deal_name: str, stage_id: str, contact_id: t.Optional[str] = None) -> dict:
+        """
+        Creates a new deal in HubSpot, optionally associating it with the provided contact_id.
+        
+        :param deal_name: The name for the new deal
+        :param contact_id: Optional HubSpot contact ID to associate with the deal
+        :return: Dictionary containing the newly created deal
+        """
+        # Prepare the deal input with a valid stage ID
+        deal_input = DealInput(
+            properties={
+                "dealname": deal_name,
+                "pipeline": "default",
+                "dealstage": stage_id
+            }
+        )
+
+        try:
+            # Create the deal
+            new_deal = self.api_client.crm.deals.basic_api.create(deal_input)
+            deal_dict = new_deal.to_dict()
+            deal_id = deal_dict.get("id")
+
+            if not deal_id:
+                raise APIError("Failed to retrieve 'id' from newly created deal.")
+
+            # If we have a contact_id, create the association
+            if contact_id:
+                batch_input = BatchInputPublicObjectId(
+                    inputs=[
+                        {
+                            "from": {"id": contact_id},
+                            "to": {"id": deal_id},
+                            "type": "contact_to_deal"
+                        }
+                    ]
+                )
+
+                self.api_client.crm.associations.batch_api.create(
+                    "contacts",
+                    "deals",
+                    batch_input
+                )
+
+            return deal_dict
+
+        except ApiException as e:
+            print(f"Error creating or associating deal: {e}")
+            raise
 
     def create_meeting(self, meeting_object: dict) -> None:
         self.api_client.crm.objects.meetings.basic_api.create(meeting_object)
