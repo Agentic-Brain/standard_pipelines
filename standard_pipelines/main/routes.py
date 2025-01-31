@@ -114,6 +114,7 @@ def get_fireflies_credentials(client_id: UUID):
         return jsonify({
             'id': str(credentials.id),
             'client_id': str(credentials.client_id),
+            'fireflies_api_key': credentials.fireflies_api_key
             # Not returning sensitive field fireflies_api_key
         }), 200
         
