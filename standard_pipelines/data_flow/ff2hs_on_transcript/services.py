@@ -85,9 +85,21 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
 
         # Contacts from names
         for name in names:
-            resp = self.hubspot_api_manager.contact_by_name_or_email(name=name)
+            try:
+                resp = self.hubspot_api_manager.contact_by_name_or_email(name=name)
+            except Exception:
+                # Split name into first and last if it contains a space
+                name_parts = name.split(maxsplit=1)
+                if len(name_parts) > 1:
+                    resp = self.hubspot_api_manager.create_contact(
+                        first_name=name_parts[0],
+                        last_name=name_parts[1]
+                    )
+                else:
+                    resp = self.hubspot_api_manager.create_contact(first_name=name)
             contacts.append(resp)
 
+        # TODO: Fix this deal shit
         deals = []
         for contact in contacts:
             try:
@@ -169,9 +181,10 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
             ]
         }
 
+    # TODO: Fix this deal shit
     def transform(self, data: dict, context: t.Optional[dict] = None):
-        if len(data["deals"]) > 1:
-            raise ValueError("More than one deal found")
+        # if len(data["deals"]) > 1:
+        #     raise ValueError("More than one deal found")
         deal = data["deals"][0]
         meeting = self.hubspot_meeting_object(data["transcript"], data["contacts"], deal)
         note = self.hubspot_note_object(data["transcript"], data["contacts"], deal)
