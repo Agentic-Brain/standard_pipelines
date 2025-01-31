@@ -11,14 +11,11 @@ from . import testing
 
 
 # Example config for HubSpot – fill these with your actual values or load from env
-HUBSPOT_CONFIG = {
-    "client_id": "25699c7f-8140-4f16-ab92-123c56e12e9b",
-    "client_secret": "56904222-a1f5-4fc2-bac4-11ab6ee0ea93",
-    "refresh_token": "na1-7505-abc0-48f4-b42d-4271671c7885"
-}
+# HUBSPOT_CONFIG = {
+# }
 
 # Create a single global instance for testing
-hubspot_manager = HubSpotAPIManager(HUBSPOT_CONFIG)
+# hubspot_manager = HubSpotAPIManager(HUBSPOT_CONFIG)
 
 @testing.route("/create-contact", methods=["POST"])
 def test_create_contact():
