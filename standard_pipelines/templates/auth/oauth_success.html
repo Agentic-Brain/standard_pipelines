@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}{{ service }} Connected{% endblock %}
+
+{% block content %}
+<div class="oauth-success">
+    <h1>🎉 Success!</h1>
+    <p>{{ service }} has been successfully connected to {{ client_name }}.</p>
+    <p>You can now close this window and return to the main application.</p>
+    
+    <div class="actions">
+        <a href="{{ url_for('auth.oauth_index') }}" class="btn btn-primary">Return to Connections</a>
+    </div>
+</div>
+
+<style>
+    .oauth-success {
+        text-align: center;
+        padding: 2rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .actions {
+        margin-top: 2rem;
+    }
+    .btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %} 

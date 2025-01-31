@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}OAuth Connections{% endblock %}
+
+{% block styles %}
+<style>
+    .oauth-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+    .oauth-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+    }
+    .oauth-card img {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 10px;
+    }
+    .oauth-card h3 {
+        margin: 10px 0;
+    }
+    .oauth-card p {
+        color: #666;
+        margin-bottom: 15px;
+    }
+    .oauth-card a {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+    .oauth-card a:hover {
+        background-color: #0056b3;
+    }
+    .oauth-card.unavailable {
+        opacity: 0.7;
+    }
+    .oauth-card.unavailable a {
+        background-color: #6c757d;
+        pointer-events: none;
+    }
+    .status-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    .status-active {
+        background-color: #28a745;
+        color: white;
+    }
+    .status-unavailable {
+        background-color: #dc3545;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>OAuth Connections</h1>
+<p>Connect your account with these services:</p>
+
+<div class="oauth-grid">
+    {% for name, client in oauth._clients.items() %}
+        {% set service_info = oauth_service_info.get(name, {}) %}
+        <div class="oauth-card {{ 'active' if client else 'unavailable' }}">
+            <img src="{{ service_info.get('icon', '') }}" alt="{{ name }} icon">
+            <h3>{{ name|title }}</h3>
+            <div class="status-badge status-{{ 'active' if client else 'unavailable' }}">
+                {{ 'Active' if client else 'Unavailable' }}
+            </div>
+            <p>{{ service_info.get('description', 'Connect to ' + name|title) }}</p>
+            <a href="{{ url_for('auth.login_' + name) }}" 
+               {{ 'disabled' if not client }}>
+               Connect to {{ name|title }}
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %} 

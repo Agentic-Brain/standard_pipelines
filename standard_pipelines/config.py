@@ -38,6 +38,7 @@ class Config:
         'USE_BITWARDEN': True,
         'USE_OPENAI': True,
         'USE_MAILGUN': True,
+        'USE_HUBSPOT': True,
         # Add more API usage flags as needed
     }
 
@@ -76,6 +77,7 @@ class Config:
         'USE_BITWARDEN': 'BITWARDEN',
         'USE_MAILGUN': 'MAILGUN',
         'USE_OPENAI': 'OPENAI',
+        'USE_HUBSPOT': 'HUBSPOT',
         # Add more mappings as needed
     }
 
