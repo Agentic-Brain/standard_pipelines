@@ -1,7 +1,8 @@
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from standard_pipelines.auth.models import BaseCredentials
+from flask import current_app
 
 class GmailCredentials(BaseCredentials):
     """Credentials for Gmail API access."""
@@ -29,8 +30,16 @@ class GmailCredentials(BaseCredentials):
 
     def set_expire_time_from_datetime(self, expire_time: datetime):
         """Set expire_time from a datetime object."""
-        self.expire_time = expire_time.isoformat() if expire_time else None 
+        try:
+            self.expire_time = expire_time.isoformat() 
+        except Exception as e:
+            current_app.logger.warning(f"Error setting expire_time: {str(e)}")
+            self.expire_time = datetime.now(timezone.utc) + timedelta(minutes=55) #Sets a default time
 
     def get_expire_time_as_datetime(self) -> datetime:
         """Convert expire_time string back to datetime."""
-        return datetime.fromisoformat(self.expire_time) if self.expire_time else None
+        try:
+            return datetime.fromisoformat(self.expire_time)
+        except Exception as e:
+            current_app.logger.warning(f"Error converting expire_time to datetime: {str(e)}")
+            return datetime.now(timezone.utc) - timedelta(minutes=5) #Force a refresh

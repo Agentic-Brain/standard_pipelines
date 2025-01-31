@@ -80,7 +80,7 @@ class GmailService:
                 'grant_type': 'refresh_token'
             }
 
-            response = requests.post(self.credentials.token_uri, data=payload)
+            response = requests.post(self.credentials.token_uri, data=payload, timeout=30)
             response.raise_for_status()
 
             token_data = response.json()
