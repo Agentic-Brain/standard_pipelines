@@ -5,6 +5,8 @@ from typing import Optional
 import uuid
 from flask import current_app
 from functools import cached_property
+from hubspot.files import ApiException
+from standard_pipelines.data_flow.exceptions import APIError
 
 from sqlalchemy import UUID
 from ..services import BaseDataFlow
@@ -66,22 +68,46 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
             "meeting_id": meeting_id
         }
 
+    # TODO: Want to change this, creating contacts in extract isn't really the right place
     def extract(self, context: t.Optional[dict] = None) -> dict:
         meeting_id = context["meeting_id"]
         transcript, emails, names = self.fireflies_api_manager.transcript(meeting_id)
         contacts = []
+
+        # Contacts from emails
         for email in emails:
-            resp = self.hubspot_api_manager.contact_by_name_or_email(email=email)
+            try:
+                resp = self.hubspot_api_manager.contact_by_name_or_email(email=email)
+            except Exception:
+            # <--    CHANGED: create contact if not found
+                resp = self.hubspot_api_manager.create_contact(email=email)
             contacts.append(resp)
+
+        # Contacts from names
         for name in names:
             resp = self.hubspot_api_manager.contact_by_name_or_email(name=name)
             contacts.append(resp)
+
         deals = []
         for contact in contacts:
-            resp = self.hubspot_api_manager.deal_by_contact_id(contact["id"])
+            try:
+                resp = self.hubspot_api_manager.deal_by_contact_id(contact["id"])
+            except Exception:
+                # <-- CHANGED: create deal if not found
+                # We'll build a simple deal name from the contact's email or first name
+                contact_props = contact.get("properties", {})
+                fallback_name = contact_props.get("email") or contact_props.get("firstname") or "Unnamed Contact"
+                deal_name = f"Deal for {fallback_name}"
+                # "appointmentscheduled" can be changed to your actual stage ID
+                resp = self.hubspot_api_manager.create_deal(
+                    deal_name=deal_name,
+                    stage_id="995768441",
+                    contact_id=contact["id"]
+                )
             id = resp["id"]
             resp = self.hubspot_api_manager.deal_by_deal_id(id, properties=["hubspot_owner_id"])
             deals.append(resp)
+
         return {
             "transcript": transcript,
             "contacts": contacts,
