@@ -1,4 +1,4 @@
-"""Create gmail_credential table
+"""added gmail credentials
 
 Revision ID: f2b8a690e006
 Revises: 98820cd10142
@@ -11,7 +11,7 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision = 'f2b8a690e006'
-down_revision = '98820cd10142'
+down_revision = '7e5289365d67'
 branch_labels = None
 depends_on = None
 
