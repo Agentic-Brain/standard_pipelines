@@ -1,5 +1,4 @@
 from flask import redirect, url_for, session, request, current_app, flash, jsonify, json
-from flask_login import current_user
 from google_auth_oauthlib.flow import Flow
 from werkzeug.exceptions import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
@@ -17,11 +16,23 @@ from . import gmail
 def get_flow():
     """Create and return a Flow object with the current app's configuration."""
     try:
-        return Flow.from_client_secrets_file(
-            client_secrets_file=current_app.config['CLIENT_SECRETS_FILE'],
+        client_config = {
+            "installed": {
+                "client_id": current_app.config['GMAIL_CLIENT_ID'],
+                "project_id": current_app.config['GMAIL_PROJECT_ID'],
+                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                "token_uri": "https://oauth2.googleapis.com/token",
+                "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+                "client_secret": current_app.config['GMAIL_CLIENT_SECRET'],
+                "redirect_uris": current_app.config['GMAIL_REDIRECT_URI']
+            }
+        }
+        return Flow.from_client_config(
+            client_config=client_config,
             scopes=['https://www.googleapis.com/auth/gmail.send', 'https://www.googleapis.com/auth/gmail.readonly'],
             redirect_uri=current_app.config['GMAIL_REDIRECT_URI']
         )
+
     except ValueError as e:
         current_app.logger.error(f"Invalid client secrets file format: {e}")
         raise HTTPException(status_code=500, description="Invalid client secrets file format")
