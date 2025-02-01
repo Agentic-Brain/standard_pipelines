@@ -7,7 +7,7 @@ import io
 import uuid
 from flask import current_app
 import requests
-from .models import Client, Notification
+from .models import DataFlow, Notification
 from .exceptions import APIError, RetriableAPIError
 from standard_pipelines.extensions import db
 from abc import ABCMeta, abstractmethod
@@ -151,7 +151,7 @@ class BaseManualAPIManager(BaseAPIManager, metaclass=ABCMeta):
 
 class DataFlowRegistryMeta(ABCMeta):
 
-    DATA_FLOW_REGISTRY: dict[uuid.UUID, type[BaseDataFlow]] = {}
+    DATA_FLOW_REGISTRY: dict[str, type[BaseDataFlow]] = {}
 
     def __new__(cls, name, bases, attrs):
         new_cls = type.__new__(cls, name, bases, attrs)
@@ -159,21 +159,21 @@ class DataFlowRegistryMeta(ABCMeta):
         if inspect.isabstract(new_cls):
             return new_cls
         
-        if not hasattr(new_cls, 'data_flow_id'):
-            raise ValueError(f"Class {name} must implement data_flow_id to be registered.")
+        if not hasattr(new_cls, 'data_flow_name'):
+            raise ValueError(f"Class {name} must implement data_flow_name to be registered.")
 
-        data_flow_id = new_cls.data_flow_id()
-        if data_flow_id in cls.DATA_FLOW_REGISTRY:
-            raise ValueError(f"data_flow_id is already registered as {cls.DATA_FLOW_REGISTRY[data_flow_id].__name__}: {data_flow_id}")
-        cls.DATA_FLOW_REGISTRY[data_flow_id] = new_cls
+        data_flow_name = new_cls.data_flow_name()
+        if data_flow_name in cls.DATA_FLOW_REGISTRY:
+            raise ValueError(f"data_flow_name is already registered as {cls.DATA_FLOW_REGISTRY[data_flow_name].__name__}: {data_flow_name}")
+        cls.DATA_FLOW_REGISTRY[data_flow_name] = new_cls
 
         return new_cls
 
     @classmethod
-    def data_flow_class(cls, dataflow_id: uuid.UUID) -> type[BaseDataFlow]:
-        if dataflow_id not in cls.DATA_FLOW_REGISTRY:
-            raise ValueError(f"No dataflow class found for {dataflow_id}")
-        return cls.DATA_FLOW_REGISTRY[dataflow_id]
+    def data_flow_class(cls, dataflow_name: str) -> type[BaseDataFlow]:
+        if dataflow_name not in cls.DATA_FLOW_REGISTRY:
+            raise ValueError(f"No dataflow class found for {dataflow_name}")
+        return cls.DATA_FLOW_REGISTRY[dataflow_name]
 
 
 DataFlowConfigurationType = t.TypeVar("DataFlowConfigurationType", bound=DataFlowConfiguration)
@@ -184,9 +184,17 @@ class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegis
         self.client_id = client_id
 
     @classmethod
-    @abstractmethod
     def data_flow_id(cls) -> uuid.UUID:
         """ID of the data flow in the database."""
+        return DataFlow.query.filter_by(name=cls.data_flow_name()).first().id
+
+    @classmethod
+    @abstractmethod
+    def data_flow_name(cls) -> str:
+        """
+        Name of the data flow in the database. Must have a matching entry in
+        `flows.txt`.
+        """
 
     @cached_property
     def _configuration_class(self) -> type[DataFlowConfigurationType]:
