@@ -16,6 +16,8 @@ class GmailService:
     def __init__(self):
         self.credentials = None
         self.client_id = None
+        self.token_uri = "https://oauth2.googleapis.com/token"
+
 
     def send_email(self, to_address, subject, body):
         try:
@@ -32,7 +34,7 @@ class GmailService:
             google_credentials = Credentials(
                 token = self.credentials.access_token,
                 refresh_token = self.credentials.refresh_token,
-                token_uri = "https://oauth2.googleapis.com/token",
+                token_uri = self.token_uri,
                 client_id = current_app.config['GMAIL_CLIENT_ID'],
                 client_secret = current_app.config['GMAIL_CLIENT_SECRET'],
                 scopes = current_app.config['GMAIL_SCOPES'].split()

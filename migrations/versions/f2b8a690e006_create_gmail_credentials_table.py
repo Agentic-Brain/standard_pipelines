@@ -1,7 +1,7 @@
 """added gmail credentials
 
 Revision ID: f2b8a690e006
-Revises: 98820cd10142
+Revises: 7e5289365d67
 Create Date: 2025-01-28 18:41:52.615949
 
 """

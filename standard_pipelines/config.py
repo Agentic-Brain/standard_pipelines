@@ -73,7 +73,7 @@ class Config:
             'GMAIL_CLIENT_ID': None,
             'GMAIL_PROJECT_ID': None,
             'GMAIL_CLIENT_SECRET': None,
-            'GMAIL_SCOPES': None,
+            'GMAIL_SCOPES': "https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.readonly",
         },
         # Add more API configurations as needed
     }
