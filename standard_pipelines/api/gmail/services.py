@@ -30,12 +30,12 @@ class GmailService:
                 return email_data  
 
             google_credentials = Credentials(
-                token=self.credentials.access_token,
-                refresh_token=self.credentials.refresh_token,
-                token_uri=self.credentials.token_uri,
-                client_id=self.credentials.oauth_client_id,
-                client_secret=self.credentials.oauth_client_secret,
-                scopes=self.credentials.scopes.split()
+                token = self.credentials.access_token,
+                refresh_token = self.credentials.refresh_token,
+                token_uri = "https://oauth2.googleapis.com/token",
+                client_id = current_app.config['GMAIL_CLIENT_ID'],
+                client_secret = current_app.config['GMAIL_CLIENT_SECRET'],
+                scopes = current_app.config['GMAIL_SCOPES'].split()
             )
 
             # Create the Gmail service object
@@ -68,19 +68,14 @@ class GmailService:
     #====== Helper functions ======#
     def refresh_access_token(self):
         try:
-            missing_fields = [field for field in ['refresh_token', 'token_uri', 'oauth_client_id', 'oauth_client_secret'] if not hasattr(self.credentials, field)]
-            if missing_fields:
-                current_app.logger.exception(f"A required field is missing: {', '.join(missing_fields)}")
-                return {'error': f"A required field is missing: {', '.join(missing_fields)}"}
-
             payload = {
-                'client_id': self.credentials.oauth_client_id,
-                'client_secret': self.credentials.oauth_client_secret,
+                'client_id': current_app.config['GMAIL_CLIENT_ID'],
+                'client_secret': current_app.config['GMAIL_CLIENT_SECRET'],
                 'refresh_token': self.credentials.refresh_token,
                 'grant_type': 'refresh_token'
             }
 
-            response = requests.post(self.credentials.token_uri, data=payload, timeout=30)
+            response = requests.post("https://oauth2.googleapis.com/token", data=payload, timeout=30)
             response.raise_for_status()
 
             token_data = response.json()

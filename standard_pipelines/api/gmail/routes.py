@@ -29,7 +29,7 @@ def get_flow():
         }
         return Flow.from_client_config(
             client_config=client_config,
-            scopes=['https://www.googleapis.com/auth/gmail.send', 'https://www.googleapis.com/auth/gmail.readonly'],
+            scopes=current_app.config['GMAIL_SCOPES'].split(),
             redirect_uri=current_app.config['GMAIL_REDIRECT_URI']
         )
 
@@ -107,10 +107,6 @@ def oauth2callback():
         if existing_credentials:
             existing_credentials.access_token = credentials.token
             existing_credentials.refresh_token = credentials.refresh_token
-            existing_credentials.token_uri = credentials.token_uri
-            existing_credentials.oauth_client_id = credentials.client_id
-            existing_credentials.oauth_client_secret = credentials.client_secret
-            existing_credentials.scopes = ' '.join(credentials.scopes)
             existing_credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
             existing_credentials.save()  
             current_app.logger.info(f'updated existing credentials for client')
@@ -119,10 +115,6 @@ def oauth2callback():
                 access_token=credentials.token,
                 expire_time="", 
                 refresh_token=credentials.refresh_token,
-                token_uri=credentials.token_uri,
-                oauth_client_id=credentials.client_id,
-                oauth_client_secret=credentials.client_secret,
-                scopes=' '.join(credentials.scopes)
             )
             #token expires in 1 hour, 5 minute buffer
             gmail_credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
