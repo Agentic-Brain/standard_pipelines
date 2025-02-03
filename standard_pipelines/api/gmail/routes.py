@@ -34,12 +34,9 @@ def get_flow():
         )
 
     except ValueError as e:
-        current_app.logger.error(f"Invalid client secrets file format: {e}")
-        raise HTTPException(status_code=500, description="Invalid client secrets file format")
+        raise
     except Exception as e:
-        current_app.logger.error(f"An unexpected error occurred while creating the OAuth flow: {e}")
-        raise HTTPException(status_code=500, description="An unexpected error occurred while creating the OAuth flow")
-    
+        raise HTTPException(status_code=500, description=f"An unexpected error occurred while creating the OAuth flow: {e}")
 
 @gmail.route('/authorize/<client_id>')
 def authorize(client_id: str):
@@ -72,11 +69,11 @@ def authorize(client_id: str):
         return redirect(authorization_url)
     
     except HTTPException as e:
-        display_error_and_redirect(redirect_url, f"HTTP error during authorization: {e}")
+        return display_error_and_redirect(redirect_url, f"HTTP error during authorization: {e}")
     except ValueError as e:
-        display_error_and_redirect(redirect_url, f"Value error during authorization: {e}")
+        return display_error_and_redirect(redirect_url, f"Value error during authorization: {e}")
     except Exception as e:
-        display_error_and_redirect(redirect_url, f"Unexpected error during authorization: {e}")
+        return display_error_and_redirect(redirect_url, f"Unexpected error during authorization: {e}")
 
 @gmail.route('/oauth2callback')
 def oauth2callback():
@@ -129,10 +126,10 @@ def oauth2callback():
         
     except SQLAlchemyError as e:
         db.session.rollback()
-        display_error_and_redirect(decoded_data.get('redirect_url', url_for('main.index')), f'Error storing credentials: {e}')
+        return display_error_and_redirect(decoded_data.get('redirect_url', url_for('main.index')), f'Error storing credentials: {e}')
 
     except Exception as e:
-        display_error_and_redirect(decoded_data.get('redirect_url', url_for('main.index')), f'Unexpected error during OAuth callback: {e}')
+        return display_error_and_redirect(decoded_data.get('redirect_url', url_for('main.index')), f'Unexpected error during OAuth callback: {e}')
 
 #============= Helper Functions ===============#
 def display_error_and_redirect(redirect_url : str, debug_message : str, flash_message : str = "An error occurred while trying to authorize."):
