@@ -79,21 +79,22 @@ def authorize(client_id: str):
 def oauth2callback():
     """Handles OAuth callback, exchanges code for tokens."""
     try:
+        decoded_data = {}
         flow = get_flow()
 
         serialized_data = request.args.get('state')
         if serialized_data is None:
-            display_error_and_redirect(url_for('main.index'), 'State parameter is missing from request from Google')
+            return display_error_and_redirect(url_for('main.index'), 'State parameter is missing from request from Google')
         decoded_data = json.loads(urllib.parse.unquote(serialized_data))
         
         required_fields = {'client_id', 'redirect_url'}
         missing_fields = required_fields - decoded_data.keys()
         if missing_fields:
-            display_error_and_redirect(decoded_data.get('redirect_url', url_for('main.index')), f'Missing required fields: {", ".join(missing_fields)}')
+            return display_error_and_redirect(decoded_data.get('redirect_url', url_for('main.index')), f'Missing required fields: {", ".join(missing_fields)}')
         
         #The state verification is used to prevent CSRF attacks
         if 'state' not in session or session['state'] != serialized_data:
-            display_error_and_redirect(decoded_data.get('redirect_url', url_for('main.index')), f'Invalid state parameter: Start: {session["state"]} End:{request.args.get("state")}')
+            return display_error_and_redirect(decoded_data.get('redirect_url', url_for('main.index')), f'Invalid state parameter: Start: {session["state"]} End:{request.args.get("state")}')
 
         flow.fetch_token(authorization_response=request.url)
         credentials = flow.credentials
@@ -106,7 +107,7 @@ def oauth2callback():
             existing_credentials.refresh_token = credentials.refresh_token
             existing_credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
             existing_credentials.save()  
-            current_app.logger.info(f'updated existing credentials for client')
+            current_app.logger.info(f'Updated existing credentials for client')
         else:
             gmail_credentials = GmailCredentials(
                 access_token=credentials.token,
@@ -117,7 +118,7 @@ def oauth2callback():
             gmail_credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
             gmail_credentials.client = client
             gmail_credentials.save()  
-            current_app.logger.info(f'created new credentials for client')
+            current_app.logger.info(f'Created new credentials for client')
         
         next_url = decoded_data.get('redirect_url', url_for('main.index'))
         current_app.logger.info(f'Client has been successfully authorized')
