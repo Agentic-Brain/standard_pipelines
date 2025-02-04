@@ -164,11 +164,11 @@ def send_email():
         gmail_service = GmailService()
         credentials = gmail_service.set_user_credentials(email_data['client_id'])
         if 'error' in credentials:
-            return jsonify({'error': credentials['error']}), 400
+            return jsonify(credentials), 400
 
         email_response = gmail_service.send_email(email_data['to_address'], email_data['subject'], email_data['body'])
         if 'error' in email_response :
-            return jsonify({'error': email_response['error']}), 400
+            return jsonify(email_response), 400
 
         return jsonify({'message': 'Email sent successfully'}), 200
     

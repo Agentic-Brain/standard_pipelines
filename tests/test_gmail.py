@@ -12,14 +12,16 @@ GET_CLIENT = 'standard_pipelines.api.gmail.routes.Client'
 GET_FLOW = 'standard_pipelines.api.gmail.routes.get_flow'
 GET_LOGS = 'standard_pipelines.api.gmail.routes.current_app.logger'
 GET_GMAIL_CREDENTIALS = 'standard_pipelines.api.gmail.routes.GmailCredentials'
+GET_GMAIL_SERVICE = 'standard_pipelines.api.gmail.routes.GmailService'
 
 #======================================================================#
 #=========================== Routes Tests =============================#
 
 #========== Authorize Route ==========#
+@patch(GET_LOGS)
 @patch(GET_CLIENT)
 @patch(GET_FLOW)
-def test_authorize_route_success(mock_flow, mock_client, client):
+def test_authorize_route_success(mock_flow, mock_client, mock_logger, client):
     """Test the /authorize/<client_id> route for correct redirection."""
     auth_url = 'http://mock_authorization_url'
     state = 'mock_state'
@@ -51,9 +53,10 @@ def test_authorize_route_success(mock_flow, mock_client, client):
         state=ANY 
     )
 
+@patch(GET_LOGS)
 @patch(GET_CLIENT)
 @patch(GET_FLOW)
-def test_authorize_route_missing_redirect_url(mock_flow, mock_client, client):
+def test_authorize_route_missing_redirect_url(mock_flow, mock_client, mock_logger, client):
     """Test the /authorize/<client_id> route with a missing redirect URL."""
     auth_url = 'http://mock_authorization_url'
     state = 'mock_state'
@@ -411,10 +414,138 @@ def test_oauth2callback_database_error(mock_client, mock_flow, mock_gmail_creden
     mock_logger.exception.assert_called_with('Error storing credentials: Database error')
 
 #========== Send Email Route ==========#
-def test_send_email_route_success(client):
+@patch(GET_GMAIL_SERVICE)
+def test_send_email_route_success(mock_gmail_service, client):
     """Test the /send_email route for processing email sending requests."""
-    pass
+    # Mock the GmailService and its methods
+    mock_gmail_service_instance = mock_gmail_service.return_value
+    mock_gmail_service_instance.set_user_credentials.return_value = {}
+    mock_gmail_service_instance.send_email.return_value = {}
 
+    # Define the valid email data
+    email_data = {
+        'client_id': 'mock_client_id',
+        'to_address': 'test@example.com',
+        'subject': 'Test Subject',
+        'body': 'This is a test email.'
+    }
+
+    with client.application.test_request_context():
+        response = client.post(url_for('gmail.send_email'), json=email_data)
+
+    assert response.status_code == 200
+    assert response.get_json() == {'message': 'Email sent successfully'}
+
+    mock_gmail_service_instance.set_user_credentials.assert_called_once_with(email_data['client_id'])
+    mock_gmail_service_instance.send_email.assert_called_once_with(
+        email_data['to_address'], email_data['subject'], email_data['body']
+    )
+
+@patch(GET_LOGS)
+def test_send_email_route_missing_fields(mock_logger, client):
+    """Test that the /send_email route returns an error when required fields are missing."""
+    incomplete_email_data = {
+        'client_id': 'mock_client_id',
+        'body': 'This is a test email.'
+    }
+
+    with client.application.test_request_context():
+        response = client.post(url_for('gmail.send_email'), json=incomplete_email_data)
+
+    assert response.status_code == 400
+    error_message = response.get_json().get('error', '')
+    assert 'A required field is missing:' in error_message
+    assert 'to_address' in error_message
+    assert 'subject' in error_message
+
+@patch(GET_LOGS)
+def test_send_email_route_incorrect_data_types(mock_logger, client):
+    """Test that the /send_email route returns an error when fields have incorrect data types."""
+    incorrect_type_email_data = {
+            'client_id': 'mock_client_id',
+            'to_address': ['test@example.com'],  # Incorrect type
+            'subject': 'Test Subject',
+            'body': 12345  # Incorrect type
+        }
+
+    with client.application.test_request_context():
+        response = client.post(url_for('gmail.send_email'), json=incorrect_type_email_data)
+
+    assert response.status_code == 400
+    error_message = response.get_json().get('error', '')
+
+    assert 'Incorrect data type for fields:' in error_message
+    assert 'to_address' in error_message
+    assert 'body' in error_message
+
+@patch(GET_GMAIL_SERVICE)
+def test_send_email_route_invalid_client_id(mock_gmail_service, client):
+    """Test that the /send_email route returns an error when an invalid client_id is provided."""
+    mock_gmail_service_instance = mock_gmail_service.return_value
+    #Mock the set_user_credentials method to return an error
+    mock_gmail_service_instance.set_user_credentials.return_value = {'error': 'No credentials found for the user'}
+
+    email_data = {
+        'client_id': 'invalid_client_id',
+        'to_address': 'test@example.com',
+        'subject': 'Test Subject',
+        'body': 'This is a test email.'
+    }
+
+    with client.application.test_request_context():
+        response = client.post(url_for('gmail.send_email'), json=email_data)
+
+    assert response.status_code == 400
+    assert response.get_json() == {'error': 'No credentials found for the user'}
+    mock_gmail_service_instance.set_user_credentials.assert_called_once_with(email_data['client_id'])
+
+@patch(GET_GMAIL_SERVICE)
+def test_send_email_route_email_service_error(mock_gmail_service, client):
+    """Test that the /send_email route returns an error when the email service fails to send the email."""
+    mock_gmail_service_instance = mock_gmail_service.return_value
+    mock_gmail_service_instance.set_user_credentials.return_value = {'message': 'User credentials retrieved successfully'}
+    #Mock the send_email method to return an error
+    mock_gmail_service_instance.send_email.return_value = {'error': 'Failed to send email'}
+
+    email_data = {
+        'client_id': 'mock_client_id',
+        'to_address': 'test@example.com',
+        'subject': 'Test Subject',
+        'body': 'This is a test email.'
+    }
+
+    with client.application.test_request_context():
+        response = client.post(url_for('gmail.send_email'), json=email_data)
+
+    assert response.status_code == 400
+    assert response.get_json() == {'error': 'Failed to send email'}
+
+    mock_gmail_service_instance.set_user_credentials.assert_called_once_with(email_data['client_id'])
+    mock_gmail_service_instance.send_email.assert_called_once_with(
+        email_data['to_address'], email_data['subject'], email_data['body']
+    )
+
+@patch(GET_LOGS)
+@patch(GET_GMAIL_SERVICE)
+def test_send_email_route_unknown_exception(mock_gmail_service, mock_logger, client):
+    """Test that the /send_email route handles unknown exceptions gracefully."""
+    mock_gmail_service_instance = mock_gmail_service.return_value
+    mock_gmail_service_instance.set_user_credentials.side_effect = Exception("Unexpected error")
+
+    email_data = {
+        'client_id': 'mock_client_id',
+        'to_address': 'test@example.com',
+        'subject': 'Test Subject',
+        'body': 'This is a test email.'
+    }
+
+    with client.application.test_request_context():
+        response = client.post(url_for('gmail.send_email'), json=email_data)
+
+    assert response.status_code == 500
+    assert response.get_json() == {'error': 'An unknown error occurred while sending the email'}
+
+    mock_gmail_service_instance.set_user_credentials.assert_called_once_with(email_data['client_id'])
 
 #========================================================================#
 #=========================== Services Tests =============================#
