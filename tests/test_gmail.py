@@ -1,6 +1,7 @@
 import pytest
 from flask import url_for
 from werkzeug.exceptions import NotFound, HTTPException
+from sqlalchemy.exc import SQLAlchemyError
 import json
 import urllib.parse
 from unittest.mock import patch, MagicMock, ANY
@@ -10,6 +11,7 @@ from unittest.mock import patch, MagicMock, ANY
 GET_CLIENT = 'standard_pipelines.api.gmail.routes.Client'
 GET_FLOW = 'standard_pipelines.api.gmail.routes.get_flow'
 GET_LOGS = 'standard_pipelines.api.gmail.routes.current_app.logger'
+GET_GMAIL_CREDENTIALS = 'standard_pipelines.api.gmail.routes.GmailCredentials'
 
 #======================================================================#
 #=========================== Routes Tests =============================#
@@ -101,6 +103,7 @@ def test_authorize_route_invalid_client_id(mock_client, mock_logger, client):
         assert response.status_code == 302
         assert response.headers['Location'] == url_for('main.index')
 
+    # Verify that the correct error handler was called
     mock_logger.exception.assert_called_with(f"HTTP error during authorization: 404 Not Found: Client {client_id} not found")
 
 @patch(GET_LOGS)
@@ -179,9 +182,233 @@ def test_authorize_route_unexpected_error_handling(mock_client, mock_flow, mock_
         mock_logger.exception.assert_called_with("Unexpected error during authorization: Unexpected error occurred")
 
 #========== OAuth2 Callback Route ==========#
-def test_oauth2callback_route_success(client):
-    """Test the /oauth2callback route for handling OAuth callback."""
-    pass
+@patch(GET_LOGS)
+@patch(GET_GMAIL_CREDENTIALS)
+@patch(GET_FLOW)
+@patch(GET_CLIENT)
+def test_oauth2callback_new_account_success(mock_client, mock_flow, mock_gmail_credentials, mock_logger, client):
+    """Test the /oauth2callback route for handling OAuth callback for a new account."""
+    # Create a mock for the OAuth flow
+    mock_flow_instance = MagicMock()
+    mock_flow_instance.fetch_token.return_value = None
+
+    # Create a mock for the credentials
+    mock_credentials = MagicMock(
+        token='mock_access_token',
+        refresh_token='mock_refresh_token',
+        set_expire_time_from_datetime=MagicMock(return_value=None),
+        client=MagicMock(),
+        save=MagicMock(return_value=None)
+    )
+    mock_flow_instance.credentials = mock_credentials
+    mock_flow.return_value = mock_flow_instance
+   
+    # Mock the client retrieval
+    client_id = 'mock_client_id'
+    redirect_url = 'http://testing.com'
+    mock_client_instance = MagicMock(id=client_id)
+    mock_client.query.get_or_404.return_value = mock_client_instance
+
+    # Mock the GmailCredentials query to simulate no existing credentials
+    mock_gmail_credentials.query.filter_by.return_value.first.return_value = None
+    mock_gmail_credentials_instance = MagicMock()
+    mock_gmail_credentials.return_value = mock_gmail_credentials_instance
+
+    state_data = {'client_id': client_id, 'redirect_url': redirect_url}
+    serialized_state = json.dumps(state_data, separators=(',', ':'))
+    
+    # Simulate a request to the oauth2callback route with the correct state and code
+    with client.application.test_request_context():
+        with client.session_transaction() as session:
+            session['state'] = serialized_state
+        response = client.get(url_for('gmail.oauth2callback'), query_string={'state': serialized_state, 'code': 'mock_code'})
+
+    assert response.status_code == 302
+    assert response.headers['Location'] == redirect_url
+
+    # Assert fetch_token was called with the correct URL
+    mock_flow_instance.fetch_token.assert_called_once_with(
+        authorization_response=f'http://localhost/api/gmail/oauth2callback?state={serialized_state}&code=mock_code'
+    )
+
+    mock_client.query.get_or_404.assert_called_once_with(client_id)
+
+    # Assert new credentials were created and saved
+    mock_gmail_credentials.assert_called_once_with(
+        access_token='mock_access_token',
+        expire_time='',
+        refresh_token='mock_refresh_token',
+    )
+
+    # Ensure the instance methods were called
+    mock_gmail_credentials_instance.set_expire_time_from_datetime.assert_called_once()
+    mock_gmail_credentials_instance.save.assert_called_once()
+
+    mock_logger.info.assert_any_call('Created new credentials for client')
+    mock_logger.info.assert_any_call('Client has been successfully authorized')
+
+@patch(GET_LOGS)
+@patch(GET_GMAIL_CREDENTIALS)
+@patch(GET_FLOW)
+@patch(GET_CLIENT)
+def test_oauth2callback_existing_account_success(mock_client, mock_flow, mock_gmail_credentials, mock_logger, client):
+    """Test the /oauth2callback route for handling OAuth callback for an existing account."""
+    # Create a mock for the OAuth flow
+    mock_flow_instance = MagicMock()
+    mock_flow_instance.fetch_token.return_value = None
+
+    # Create a mock for the credentials
+    mock_credentials = MagicMock(
+        token='mock_access_token',
+        refresh_token='mock_refresh_token',
+        set_expire_time_from_datetime=MagicMock(return_value=None),
+        client=MagicMock(),
+        save=MagicMock(return_value=None)
+    )
+    mock_flow_instance.credentials = mock_credentials
+    mock_flow.return_value = mock_flow_instance
+   
+    # Mock the client retrieval
+    client_id = 'mock_client_id'
+    redirect_url = 'http://testing.com'
+    mock_client_instance = MagicMock(id=client_id)
+    mock_client.query.get_or_404.return_value = mock_client_instance
+
+    # Mock the GmailCredentials query to simulate existing credentials
+    existing_credentials = MagicMock()
+    mock_gmail_credentials.query.filter_by.return_value.first.return_value = existing_credentials
+
+    state_data = {'client_id': client_id, 'redirect_url': redirect_url}
+    serialized_state = json.dumps(state_data, separators=(',', ':'))
+    
+    # Simulate a request to the oauth2callback route with the correct state and code
+    with client.application.test_request_context():
+        with client.session_transaction() as session:
+            session['state'] = serialized_state
+        response = client.get(url_for('gmail.oauth2callback'), query_string={'state': serialized_state, 'code': 'mock_code'})
+
+    assert response.status_code == 302
+    assert response.headers['Location'] == redirect_url
+
+    # Assert fetch_token was called with the correct URL
+    mock_flow_instance.fetch_token.assert_called_once_with(
+        authorization_response=f'http://localhost/api/gmail/oauth2callback?state={serialized_state}&code=mock_code'
+    )
+
+    mock_client.query.get_or_404.assert_called_once_with(client_id)
+
+    # Assert existing credentials were updated
+    assert existing_credentials.access_token == mock_credentials.token
+    assert existing_credentials.refresh_token == mock_credentials.refresh_token
+    existing_credentials.set_expire_time_from_datetime.assert_called_once()
+    existing_credentials.save.assert_called_once()
+
+    mock_logger.info.assert_any_call('Updated existing credentials for client')
+    mock_logger.info.assert_any_call('Client has been successfully authorized')
+
+@patch(GET_LOGS)
+@patch(GET_FLOW, return_value=MagicMock())
+def test_oauth2callback_missing_state(mock_flow, mock_logger, client):
+    """Test that missing state parameter results in an error redirect."""
+    with client.application.test_request_context():
+        response = client.get(url_for('gmail.oauth2callback'), query_string={'code': 'mock_code'})
+        assert response.headers['Location'] == url_for('main.index')
+        
+    assert response.status_code == 302    
+    mock_logger.exception.assert_called_with('State parameter is missing from request from Google')
+
+@patch(GET_LOGS)
+@patch(GET_FLOW, return_value=MagicMock())
+def test_oauth2callback_invalid_state(mock_flow, mock_logger, client):
+    """Test that an invalid state parameter results in an error redirect."""
+    redirect_url = 'http://testing.com'
+    state_data = {'client_id': 'mock_client_id', 'redirect_url': redirect_url}
+    serialized_state = json.dumps(state_data, separators=(',', ':'))
+
+    with client.application.test_request_context():
+        with client.session_transaction() as session:
+            session['state'] = 'some_other_state'  # Set a different state in the session
+        response = client.get(url_for('gmail.oauth2callback'), query_string={'state': serialized_state, 'code': 'mock_code'})
+        assert response.headers['Location'] == redirect_url
+        
+    assert response.status_code == 302
+    mock_logger.exception.assert_called_with(f'Invalid state parameter: Start: some_other_state End:{serialized_state}')
+
+@patch(GET_LOGS)
+@patch(GET_FLOW, return_value=MagicMock())
+def test_oauth2callback_missing_required_fields(mock_flow, mock_logger, client):
+    """Test that missing required fields in state results in an error redirect."""
+    state_data = {} #Missing client_id and redirect_url
+    serialized_state = json.dumps(state_data, separators=(',', ':'))
+
+    with client.application.test_request_context():
+        with client.session_transaction() as session:
+            session['state'] = serialized_state
+        response = client.get(url_for('gmail.oauth2callback'), query_string={'state': serialized_state, 'code': 'mock_code'})
+        assert response.headers['Location'] == url_for('main.index')
+    
+    assert response.status_code == 302
+
+    log_calls = [call[0][0] for call in mock_logger.exception.call_args_list]
+    # Check that the log message contains 'Missing required fields', 'client_id', and 'redirect_url' regardless of order
+    assert any(all(keyword in log_call for keyword in ['Missing required fields', 'client_id', 'redirect_url']) for log_call in log_calls)
+
+@patch(GET_LOGS)
+@patch(GET_FLOW, side_effect=Exception("Unexpected error"))
+def test_oauth2callback_unexpected_exception(mock_flow, mock_logger, client):
+    """Test that an unexpected exception is handled gracefully."""
+    state_data = {'client_id': 'mock_client_id', 'redirect_url': 'http://testing.com'}
+    serialized_state = json.dumps(state_data, separators=(',', ':'))
+
+    with client.application.test_request_context():
+        with client.session_transaction() as session:
+            session['state'] = serialized_state
+        response = client.get(url_for('gmail.oauth2callback'), query_string={'state': serialized_state, 'code': 'mock_code'})
+        assert response.headers['Location'] == url_for('main.index')
+
+    assert response.status_code == 302
+    mock_logger.exception.assert_called_with("Unexpected error during OAuth callback: Unexpected error")
+
+@patch(GET_LOGS)
+@patch(GET_GMAIL_CREDENTIALS)
+@patch(GET_FLOW)
+@patch(GET_CLIENT)
+def test_oauth2callback_database_error(mock_client, mock_flow, mock_gmail_credentials, mock_logger, client):
+    """Test that a database error triggers rollback and results in an error redirect."""
+    mock_flow_instance = MagicMock()
+    mock_flow_instance.fetch_token.return_value = None
+
+    mock_credentials = MagicMock(
+        token='mock_access_token',
+        refresh_token='mock_refresh_token'
+    )
+    mock_flow_instance.credentials = mock_credentials
+    mock_flow.return_value = mock_flow_instance
+   
+    client_id = 'mock_client_id'
+    redirect_url = 'http://testing.com'
+    mock_client_instance = MagicMock(id=client_id)
+    mock_client.query.get_or_404.return_value = mock_client_instance
+
+    # Mock the GmailCredentials query to simulate no existing credentials
+    mock_gmail_credentials.query.filter_by.return_value.first.return_value = None
+    mock_gmail_credentials_instance = MagicMock()
+    mock_gmail_credentials.return_value = mock_gmail_credentials_instance
+
+    # Simulate a database error when saving credentials
+    mock_gmail_credentials_instance.save.side_effect = SQLAlchemyError("Database error")
+
+    state_data = {'client_id': client_id, 'redirect_url': redirect_url}
+    serialized_state = json.dumps(state_data, separators=(',', ':'))
+    
+    with client.application.test_request_context():
+        with client.session_transaction() as session:
+            session['state'] = serialized_state
+        response = client.get(url_for('gmail.oauth2callback'), query_string={'state': serialized_state, 'code': 'mock_code'})
+
+    assert response.status_code == 302
+    assert response.headers['Location'] == redirect_url
+    mock_logger.exception.assert_called_with('Error storing credentials: Database error')
 
 #========== Send Email Route ==========#
 def test_send_email_route_success(client):
