@@ -50,11 +50,7 @@ class GmailService:
         
         except HttpError as e:
             status_code = e.resp.status
-            try:
-                error_json = json.loads(e.content) 
-                error_reason = error_json.get('error', {}).get('errors', [{}])[0].get('reason', 'Unknown error')
-            except json.JSONDecodeError:
-                error_reason = 'Failed to extract error message'
+            error_reason = e.reason
 
             current_app.logger.exception(f"HTTP error {status_code}: {error_reason}")
             return {'error': f'{error_reason}'}
