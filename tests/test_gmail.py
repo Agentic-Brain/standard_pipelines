@@ -5,14 +5,18 @@ from sqlalchemy.exc import SQLAlchemyError
 import json
 import urllib.parse
 from unittest.mock import patch, MagicMock, ANY
-
-
+from standard_pipelines.api.gmail.services import GmailService
+from datetime import datetime, timezone, timedelta
+from googleapiclient.errors import HttpError
 
 GET_CLIENT = 'standard_pipelines.api.gmail.routes.Client'
 GET_FLOW = 'standard_pipelines.api.gmail.routes.get_flow'
 GET_LOGS = 'standard_pipelines.api.gmail.routes.current_app.logger'
 GET_GMAIL_CREDENTIALS = 'standard_pipelines.api.gmail.routes.GmailCredentials'
 GET_GMAIL_SERVICE = 'standard_pipelines.api.gmail.routes.GmailService'
+
+GET_BUILD = 'standard_pipelines.api.gmail.services.build'
+GET_GOOGLE_CREDENTIALS = 'standard_pipelines.api.gmail.services.Credentials'
 
 #======================================================================#
 #=========================== Routes Tests =============================#
@@ -553,13 +557,145 @@ def test_send_email_route_unknown_exception(mock_gmail_service, mock_logger, cli
 #========================== Gmail Service ===============================#
 
 #========== Send Email ==========#
-def test_gmail_service_send_email_success(client):
-    """Test the GmailService send_email method for successful email sending."""
-    pass
 
-def test_gmail_service_send_email_error(client):
-    """Test the GmailService send_email method for error handling."""
-    pass
+@patch(GET_LOGS)
+@patch(GET_GOOGLE_CREDENTIALS)
+@patch(GET_BUILD)
+def test_gmail_service_send_email_success(mock_build, mock_google_credentials, mock_logger, client):
+    """Test the GmailService send_email method for successful email sending."""
+    mock_credentials_instance = MagicMock()
+    #To ensure the access token is not considered expired
+    mock_credentials_instance.get_expire_time_as_datetime.return_value = datetime.now(timezone.utc) + timedelta(hours=1)
+
+    # Mock Gmail API client
+    mock_service = mock_build.return_value
+    mock_messages = mock_service.users.return_value.messages.return_value
+    mock_messages.send.return_value.execute.return_value = {'id': 'mock_message_id'}
+
+    # Create an instance of GmailService and set mock credentials
+    gmail_service = GmailService()
+    gmail_service.credentials = mock_credentials_instance 
+    gmail_service.client_id = 'mock_client_id'
+
+    # Mock the structure_email_data method to return valid email data
+    gmail_service.structure_email_data = MagicMock(return_value={'raw': 'mock_email_data'})
+
+    response = gmail_service.send_email('test@example.com', 'Test Subject', 'Test Body')
+
+    assert response == {'message': 'Email sent successfully', 'message_id': 'mock_message_id'}
+    mock_build.assert_called_once()
+    mock_messages.send.assert_called_once()
+
+@patch(GET_LOGS)
+@patch(GET_GOOGLE_CREDENTIALS)
+@patch(GET_BUILD)
+def test_gmail_service_send_email_token_refresh_success(mock_build, mock_google_credentials, mock_logger, client):
+    """Test that the send_email method refreshes the token when it is expired and proceeds to send the email."""
+    mock_credentials_instance = MagicMock()
+    mock_credentials_instance.get_expire_time_as_datetime.return_value = datetime.now(timezone.utc) - timedelta(minutes=1)
+    mock_google_credentials.return_value = mock_credentials_instance
+
+    mock_service = mock_build.return_value
+    mock_messages = mock_service.users.return_value.messages.return_value
+    mock_messages.send.return_value.execute.return_value = {'id': 'mock_message_id'}
+
+    gmail_service = GmailService()
+    gmail_service.credentials = mock_credentials_instance
+    gmail_service.client_id = 'mock_client_id'
+
+    gmail_service.refresh_access_token = MagicMock(return_value={'message': 'Access token refreshed successfully'})
+    gmail_service.structure_email_data = MagicMock(return_value={'raw': 'mock_email_data'})
+
+    response = gmail_service.send_email('test@example.com', 'Test Subject', 'Test Body')
+
+    assert response == {'message': 'Email sent successfully', 'message_id': 'mock_message_id'}
+    gmail_service.refresh_access_token.assert_called_once()
+    mock_build.assert_called_once()
+    mock_messages.send.assert_called_once()
+
+def test_gmail_service_send_email_token_refresh_error(client):
+    """Test that the send_email method returns an error when token refresh fails."""
+    mock_credentials_instance = MagicMock()
+    mock_credentials_instance.get_expire_time_as_datetime.return_value = datetime.now(timezone.utc) - timedelta(minutes=1)
+
+    gmail_service = GmailService()
+    gmail_service.credentials = mock_credentials_instance
+    gmail_service.client_id = 'mock_client_id'
+
+    gmail_service.refresh_access_token = MagicMock(return_value={'error': 'Refresh token is expired or invalid. Please reauthorize.'})
+
+    response = gmail_service.send_email('test@example.com', 'Test Subject', 'Test Body')
+
+    assert response == {'error': 'Refresh token is expired or invalid. Please reauthorize.'}
+    gmail_service.refresh_access_token.assert_called_once()
+
+def test_gmail_service_send_email_structure_email_data_error(client):
+    """Test that the send_email method returns an error when structuring email data fails."""
+    mock_credentials_instance = MagicMock()
+    mock_credentials_instance.get_expire_time_as_datetime.return_value = datetime.now(timezone.utc) + timedelta(minutes=10)
+
+    gmail_service = GmailService()
+    gmail_service.credentials = mock_credentials_instance
+    gmail_service.client_id = 'mock_client_id'
+
+    # Mock the structure_email_data method to simulate a failure
+    gmail_service.structure_email_data = MagicMock(return_value={'error': 'Failed to structure email data'})
+
+    response = gmail_service.send_email('test@example.com', 'Test Subject', 'Test Body')
+
+    assert response == {'error': 'Failed to structure email data'}
+    gmail_service.structure_email_data.assert_called_once_with('test@example.com', 'Test Subject', 'Test Body')
+
+@patch(GET_LOGS)
+@patch(GET_GOOGLE_CREDENTIALS)
+@patch(GET_BUILD)
+def test_gmail_service_send_email_http_error(mock_build, mock_google_credentials, mock_logger, client):
+    """Test that the send_email method handles HttpError exceptions and returns the appropriate error message."""
+    mock_credentials_instance = MagicMock()
+    mock_credentials_instance.get_expire_time_as_datetime.return_value = datetime.now(timezone.utc) + timedelta(minutes=10)
+
+    gmail_service = GmailService()
+    gmail_service.credentials = mock_credentials_instance
+    gmail_service.client_id = 'mock_client_id'
+
+    gmail_service.structure_email_data = MagicMock(return_value={'raw': 'mock_email_data'})
+
+    # Simulate an HttpError during the Gmail API call
+    mock_service = MagicMock()
+    mock_messages = mock_service.users.return_value.messages.return_value
+    http_error = HttpError(
+        resp=MagicMock(status=403),
+        content=b'Forbidden',
+    )
+    http_error.reason='Forbidden'
+    mock_messages.send.return_value.execute.side_effect = http_error
+
+    mock_build.return_value = mock_service
+
+    response = gmail_service.send_email('test@example.com', 'Test Subject', 'Test Body')
+
+    assert response == {'error': 'Forbidden'}
+    gmail_service.structure_email_data.assert_called_once_with('test@example.com', 'Test Subject', 'Test Body')
+    mock_messages.send.assert_called_once()
+    mock_logger.exception.assert_called_once_with('HTTP error 403: Forbidden')
+
+@patch(GET_LOGS)
+def test_gmail_service_send_email_unexpected_exception(mock_logger, client):
+    """Test that the send_email method handles unexpected exceptions gracefully and returns a generic error message."""
+    mock_credentials_instance = MagicMock()
+    mock_credentials_instance.get_expire_time_as_datetime.return_value = datetime.now(timezone.utc) + timedelta(minutes=10)
+
+    gmail_service = GmailService()
+    gmail_service.credentials = mock_credentials_instance
+    gmail_service.client_id = 'mock_client_id'
+
+    gmail_service.structure_email_data = MagicMock(side_effect=Exception("Unexpected error during structuring"))
+
+    response = gmail_service.send_email('test@example.com', 'Test Subject', 'Test Body')
+
+    assert response == {'error': 'An unexpected error occurred while sending email'}
+    gmail_service.structure_email_data.assert_called_once_with('test@example.com', 'Test Subject', 'Test Body')
+    mock_logger.exception.assert_called_once_with('An unexpected error occurred while sending email: Unexpected error during structuring')
 
 #========== Refresh Access Token ==========#
 def test_gmail_service_refresh_access_token_success(client):
