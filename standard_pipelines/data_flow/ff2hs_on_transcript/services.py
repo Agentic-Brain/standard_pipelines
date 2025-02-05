@@ -19,14 +19,16 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
 
     # Magic hubspot numbers to associate various object types
     # Don't change these unless you know what you're doing
+    # Docs: https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4#association-type-id-values
     MEETING_TO_CONTACT_ASSOCIATION_ID = 200
     MEETING_TO_DEAL_ASSOCIATION_ID = 212
     NOTE_TO_DEAL_ASSOCIATION_ID = 214
+
     OPENAI_SUMMARY_MODEL = "gpt-4o"
 
     @classmethod
-    def data_flow_id(cls) -> uuid.UUID:
-        return uuid.UUID("a1abd672-4e54-4ce7-8504-1625ea6f79aa")
+    def data_flow_name(cls) -> str:
+        return "ff2hs_on_transcript"
 
     @cached_property
     def hubspot_api_manager(self) -> HubSpotAPIManager:

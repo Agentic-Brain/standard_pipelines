@@ -117,7 +117,6 @@ class ClientDataFlowJoin(BaseMixin):
     __tablename__ = 'client_data_flow_join'
     
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, server_default='true')
-    webhook_id: Mapped[str] = mapped_column(String(255), nullable=False)
     
     client_id: Mapped[UUID] = mapped_column(
         UUID, 
