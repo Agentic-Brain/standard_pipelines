@@ -30,5 +30,5 @@ class OpenAIAPIManager(BaseAPIManager, metaclass=ABCMeta):
                 messages=[{"role": "user", "content": prompt}],
             )
         except OpenAIError as e:
-            error_msg = f"Error during OpenAI API call."
+            error_msg = f"Error during OpenAI API call: {str(e)}"
             raise APIError(error_msg) from e
