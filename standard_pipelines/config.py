@@ -39,7 +39,7 @@ class Config:
     # API Usage flags
     API_USE_SETTINGS: Dict[str, bool] = {
         'USE_STRIPE': False,
-        'USE_BITWARDEN': True,
+        'USE_BITWARDEN': False,  # Disabled for testing
         'USE_OPENAI': True,
         'USE_MAILGUN': True,
         'USE_HUBSPOT': True,
@@ -142,8 +142,10 @@ class Config:
     def _configure_api_settings(self) -> None:
         """Configure API-specific settings based on which APIs are in use"""
         for api_flag, api_group in self.API_REQUIREMENTS.items():
-            if getattr(self, api_flag, False):
-                # If this API is in use, configure its settings
+            # First check if this API is enabled in settings
+            api_enabled = self.API_USE_SETTINGS.get(api_flag, False)
+            if api_enabled:
+                # If this API is enabled, configure its settings
                 api_settings = self.API_SETTINGS[api_group]
                 for key, default_value in api_settings.items():
                     env_value = self.get_env(key)
