@@ -10,6 +10,10 @@ class Config:
         'DB_PASS': None,
         'DB_HOST': None,
         'DB_PORT': None,
+        'DB_NAME': None,
+        'REDIS_HOST': None,
+        'REDIS_PORT': 6379,
+        'REDIS_DB': 0,
         'SECRET_KEY': None,
         'ENCRYPTION_KEY': None,
         'SECURITY_PASSWORD_SALT': None,
@@ -66,7 +70,6 @@ class Config:
         'HUBSPOT': {
             'HUBSPOT_CLIENT_ID': None,
             'HUBSPOT_CLIENT_SECRET': None,
-            'HUBSPOT_REFRESH_TOKEN': None,
         },
         # Add more API configurations as needed
     }

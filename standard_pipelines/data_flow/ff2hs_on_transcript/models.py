@@ -7,5 +7,5 @@ class FF2HSOnTranscriptConfiguration(DataFlowConfiguration):
     __tablename__ = 'ff2hs_on_transcript_configuration'
 
     prompt: Mapped[str] = mapped_column(Text, nullable=True)
+    intial_deal_stage_id: Mapped[str] = mapped_column(String(255))
     
-
