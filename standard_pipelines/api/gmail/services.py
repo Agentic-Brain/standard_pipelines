@@ -1,14 +1,11 @@
-from flask import current_app, json
+from flask import current_app
 from .models import GmailCredentials
 from sqlalchemy.exc import SQLAlchemyError
-from standard_pipelines.extensions import db
-import requests
 from email.message import EmailMessage
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from google.auth.exceptions import RefreshError
 from google.oauth2.credentials import Credentials
-from datetime import datetime, timezone, timedelta
 import base64
 
 
@@ -21,12 +18,6 @@ class GmailService:
 
     def send_email(self, to_address, subject, body):
         try:
-            # Checks if the access token is expired and refreshes it if so
-            if self.credentials.get_expire_time_as_datetime() < datetime.now(timezone.utc):
-                refresh_response = self.refresh_access_token()
-                if 'error' in refresh_response:
-                    return refresh_response
-
             email_data = self.structure_email_data(to_address, subject, body)
             if 'error' in email_data:
                 return email_data  
@@ -64,59 +55,6 @@ class GmailService:
             return {'error': 'An unexpected error occurred while sending email'}
 
     #====== Helper functions ======#
-    def refresh_access_token(self):
-        try:
-            payload = {
-                'client_id': current_app.config['GMAIL_CLIENT_ID'],
-                'client_secret': current_app.config['GMAIL_CLIENT_SECRET'],
-                'refresh_token': self.credentials.refresh_token,
-                'grant_type': 'refresh_token'
-            }
-
-            response = requests.post("https://oauth2.googleapis.com/token", data=payload, timeout=30)
-            response.raise_for_status()
-
-            token_data = response.json()
-            if 'access_token' not in token_data:
-                error_description = token_data.get('error_description', 'Access token is missing from the response.')
-                error = token_data.get('error', 'Unknown error')
-                current_app.logger.exception(f"Failed to refresh token: {error_description}")
-                return {'error': f"Failed to refresh token: {error}"}
-
-
-            self.credentials.access_token = token_data['access_token']
-            self.credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
-           
-            self.credentials.save()
-
-            client_id = self.credentials.client_id
-            db.session.expunge(self.credentials)
-
-            new_credentials = self.set_user_credentials(client_id)
-            if 'error' in new_credentials:
-                current_app.logger.exception(f'An error occurred while getting the user credentials: {new_credentials["error"]}')
-                return {'error': new_credentials['error']}
-
-            current_app.logger.info("Access token refreshed successfully.")
-            return {'message': 'Access token refreshed successfully'}
-        
-        except requests.exceptions.HTTPError as http_err:
-            # Need to handle the case where the refresh token is expired or invalid
-            if response.status_code == 400 and 'invalid_grant' in response.json().get('error', ''):
-                current_app.logger.exception("Refresh token has expired or is invalid. User re-authorization required.")
-                return {'error': 'Refresh token is expired or invalid. Please reauthorize.'}
-            else:
-                current_app.logger.exception(f"HTTP error while refreshing token: {http_err}")
-                return {'error': 'HTTP error occurred while refreshing token'}
-
-        except requests.exceptions.RequestException as e:
-            current_app.logger.exception(f"Failed to refresh access token: {e}")
-            return {'error': 'Failed to refresh access token'}
-        
-        except Exception as e:
-            current_app.logger.exception(f"Unexpected error while refreshing access token: {e}")
-            return {'error': 'An unexpected error occurred while refreshing access token'}
-
     def structure_email_data(self, to_address, subject, body):
         try:            
             # Construct MIME message using EmailMessage class

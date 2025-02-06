@@ -6,7 +6,6 @@ from standard_pipelines.extensions import db
 from standard_pipelines.api.gmail.models import GmailCredentials
 from standard_pipelines.api.gmail.services import GmailService
 from standard_pipelines.data_flow.models import Client
-from datetime import datetime, timezone, timedelta
 import urllib.parse
 from . import gmail
 
@@ -105,17 +104,13 @@ def oauth2callback():
         if existing_credentials:
             existing_credentials.access_token = credentials.token
             existing_credentials.refresh_token = credentials.refresh_token
-            existing_credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
             existing_credentials.save()  
             current_app.logger.info(f'Updated existing credentials for client')
         else:
             gmail_credentials = GmailCredentials(
                 access_token=credentials.token,
-                expire_time="", 
                 refresh_token=credentials.refresh_token,
             )
-            #token expires in 1 hour, 5 minute buffer
-            gmail_credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
             gmail_credentials.client = client
             gmail_credentials.save()  
             current_app.logger.info(f'Created new credentials for client')
