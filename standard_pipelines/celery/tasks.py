@@ -25,6 +25,9 @@ def check_scheduled_items(self):
                 try:
                     item.trigger_job()
                     
+                    if not item.increment_run_count():
+                        continue
+                        
                     if item.is_recurring and item.recurrence_interval:
                         # Schedule next run based on the original scheduled time
                         next_time = item.scheduled_time + timedelta(minutes=item.recurrence_interval)
