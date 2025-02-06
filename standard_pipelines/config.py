@@ -187,7 +187,13 @@ class Config:
         url = f'redis://{self.REDIS_HOST}:{self.REDIS_PORT}/0'
         celery_conf = {
             'broker_url': url,
-            'result_backend': url
+            'result_backend': url,
+            'beat_schedule': {
+                'check-scheduled-items': {
+                    'task': 'standard_pipelines.celery.tasks.check_scheduled_items',
+                    'schedule': 60.0,  # Run every minute
+                }
+            }
         }
         self.CELERY_CONFIG = celery_conf
 
