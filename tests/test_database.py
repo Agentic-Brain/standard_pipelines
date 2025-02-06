@@ -1,6 +1,7 @@
+from abc import ABC
 import pytest
 from standard_pipelines.extensions import db
-from standard_pipelines.database.models import BaseMixin
+from standard_pipelines.database.models import BaseMixin, ScheduledMixin
 import uuid
 from datetime import datetime
 from sqlalchemy import String
@@ -94,3 +95,17 @@ def test_bulk_operations(db_session):
     db_session.commit()
     
     assert SampleModel.query.count() == 0
+
+
+class TestScheduledModel(ScheduledMixin, BaseMixin):
+    __tablename__ = 'test_scheduled_models'
+    
+    name: Mapped[str] = mapped_column(String(50))
+    
+    def __init__(self, **kwargs):
+        super().__init__()
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+            
+    def trigger_job(self) -> None:
+        self.name = f"triggered_{self.run_count}"
