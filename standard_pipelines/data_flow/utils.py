@@ -7,7 +7,7 @@ import io
 import uuid
 from flask import current_app
 import requests
-from .models import Client, Notification
+from .models import DataFlow, Notification
 from .exceptions import APIError, RetriableAPIError
 from standard_pipelines.extensions import db
 from abc import ABCMeta, abstractmethod
@@ -15,6 +15,9 @@ import typing as t
 from hubspot import HubSpot
 from hubspot.crm.contacts import SimplePublicObjectWithAssociations
 from hubspot.crm.associations import BatchInputPublicObjectId
+from hubspot.crm.contacts import SimplePublicObjectInput as ContactInput
+from hubspot.crm.deals import SimplePublicObjectInput as DealInput
+from hubspot.files import ApiException
 from requests.auth import AuthBase
 import backoff
 from collections import defaultdict
@@ -148,7 +151,7 @@ class BaseManualAPIManager(BaseAPIManager, metaclass=ABCMeta):
 
 class DataFlowRegistryMeta(ABCMeta):
 
-    DATA_FLOW_REGISTRY: dict[uuid.UUID, type[BaseDataFlow]] = {}
+    DATA_FLOW_REGISTRY: dict[str, type[BaseDataFlow]] = {}
 
     def __new__(cls, name, bases, attrs):
         new_cls = type.__new__(cls, name, bases, attrs)
@@ -156,21 +159,21 @@ class DataFlowRegistryMeta(ABCMeta):
         if inspect.isabstract(new_cls):
             return new_cls
         
-        if not hasattr(new_cls, 'data_flow_id'):
-            raise ValueError(f"Class {name} must implement data_flow_id to be registered.")
+        if not hasattr(new_cls, 'data_flow_name'):
+            raise ValueError(f"Class {name} must implement data_flow_name to be registered.")
 
-        data_flow_id = new_cls.data_flow_id()
-        if data_flow_id in cls.DATA_FLOW_REGISTRY:
-            raise ValueError(f"data_flow_id is already registered as {cls.DATA_FLOW_REGISTRY[data_flow_id].__name__}: {data_flow_id}")
-        cls.DATA_FLOW_REGISTRY[data_flow_id] = new_cls
+        data_flow_name = new_cls.data_flow_name()
+        if data_flow_name in cls.DATA_FLOW_REGISTRY:
+            raise ValueError(f"data_flow_name is already registered as {cls.DATA_FLOW_REGISTRY[data_flow_name].__name__}: {data_flow_name}")
+        cls.DATA_FLOW_REGISTRY[data_flow_name] = new_cls
 
         return new_cls
 
     @classmethod
-    def data_flow_class(cls, dataflow_id: uuid.UUID) -> type[BaseDataFlow]:
-        if dataflow_id not in cls.DATA_FLOW_REGISTRY:
-            raise ValueError(f"No dataflow class found for {dataflow_id}")
-        return cls.DATA_FLOW_REGISTRY[dataflow_id]
+    def data_flow_class(cls, dataflow_name: str) -> type[BaseDataFlow]:
+        if dataflow_name not in cls.DATA_FLOW_REGISTRY:
+            raise ValueError(f"No dataflow class found for {dataflow_name}")
+        return cls.DATA_FLOW_REGISTRY[dataflow_name]
 
 
 DataFlowConfigurationType = t.TypeVar("DataFlowConfigurationType", bound=DataFlowConfiguration)
@@ -181,9 +184,17 @@ class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegis
         self.client_id = client_id
 
     @classmethod
-    @abstractmethod
     def data_flow_id(cls) -> uuid.UUID:
         """ID of the data flow in the database."""
+        return DataFlow.query.filter_by(name=cls.data_flow_name()).first().id
+
+    @classmethod
+    @abstractmethod
+    def data_flow_name(cls) -> str:
+        """
+        Name of the data flow in the database. Must have a matching entry in
+        `flows.txt`.
+        """
 
     @cached_property
     def _configuration_class(self) -> type[DataFlowConfigurationType]:
@@ -368,6 +379,79 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
             raise APIError(error_msg)
         deal_id = contact_to_deal_associations[0]["id"]
         return self.deal_by_deal_id(deal_id)
+
+    def create_contact(self, email: str | None = None, first_name: str | None = None, last_name: str | None = None) -> dict:
+        """
+        Creates a new contact in HubSpot with the given email/first/last name.
+        Returns the contact as a dictionary.
+        """
+        props = {}
+        if email:
+            props["email"] = email
+        if first_name:
+            props["firstname"] = first_name
+        if last_name:
+            props["lastname"] = last_name
+
+        contact_input = ContactInput(properties=props)
+
+        try:
+            new_contact = self.api_client.crm.contacts.basic_api.create(contact_input)
+        except ApiException as e:
+            print(f"Error creating contact: {e}")
+            raise
+
+        return new_contact.to_dict()
+
+    def create_deal(self, deal_name: str, stage_id: str, contact_id: t.Optional[str] = None) -> dict:
+        """
+        Creates a new deal in HubSpot, optionally associating it with the provided contact_id.
+        
+        :param deal_name: The name for the new deal
+        :param contact_id: Optional HubSpot contact ID to associate with the deal
+        :return: Dictionary containing the newly created deal
+        """
+        # Prepare the deal input with a valid stage ID
+        deal_input = DealInput(
+            properties={
+                "dealname": deal_name,
+                "pipeline": "default",
+                "dealstage": stage_id
+            }
+        )
+
+        try:
+            # Create the deal
+            new_deal = self.api_client.crm.deals.basic_api.create(deal_input)
+            deal_dict = new_deal.to_dict()
+            deal_id = deal_dict.get("id")
+
+            if not deal_id:
+                raise APIError("Failed to retrieve 'id' from newly created deal.")
+
+            # If we have a contact_id, create the association
+            if contact_id:
+                batch_input = BatchInputPublicObjectId(
+                    inputs=[
+                        {
+                            "from": {"id": contact_id},
+                            "to": {"id": deal_id},
+                            "type": "contact_to_deal"
+                        }
+                    ]
+                )
+
+                self.api_client.crm.associations.batch_api.create(
+                    "contacts",
+                    "deals",
+                    batch_input
+                )
+
+            return deal_dict
+
+        except ApiException as e:
+            print(f"Error creating or associating deal: {e}")
+            raise
 
     def create_meeting(self, meeting_object: dict) -> None:
         self.api_client.crm.objects.meetings.basic_api.create(meeting_object)

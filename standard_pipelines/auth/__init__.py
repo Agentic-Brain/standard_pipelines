@@ -13,6 +13,7 @@ from bitwarden_sdk import BitwardenClient, client_settings_from_dict, DeviceType
 import requests
 import click
 from standard_pipelines.data_flow.models import Client
+from standard_pipelines.extensions import oauth
 
 auth = Blueprint('auth', __name__)
 bitwarden_client: Optional[BitwardenClient] = None
@@ -49,7 +50,8 @@ def send_mailgun_email(**kwargs):
 def init_app(app: Flask):
     app.logger.debug(f'Initalizing blueprint {__name__}')
     mail.init_app(app)
-    
+    oauth.init_app(app)
+    oauth_client_register(app)
     # Importing here prevents a circular import
     from standard_pipelines.auth.models import Role, User
 
@@ -133,5 +135,30 @@ def create_default_admin():
     # 5. Commit the changes to the database.
     current_app.user_datastore.commit()
     current_app.logger.info(f'Created admin user: {admin_email} linked to client: {client_name}')
+
+def oauth_client_register(app: Flask):
+    client_id = app.config.get('HUBSPOT_CLIENT_ID')
+    client_secret = app.config.get('HUBSPOT_CLIENT_SECRET')
+    
+    if not client_id or not client_secret:
+        app.logger.error("Missing HubSpot OAuth credentials in configuration")
+        return
+        
+    app.logger.info("Registering HubSpot OAuth client")
+    app.logger.debug(f"Using client ID: {client_id[:5]}...")
+    
+    oauth.register(
+        name='hubspot',
+        client_id=client_id,
+        client_secret=client_secret,
+        access_token_url='https://api.hubapi.com/oauth/v1/token',
+        authorize_url='https://app.hubspot.com/oauth/authorize',
+        api_base_url='https://api.hubapi.com/',  # Updated base URL
+        client_kwargs={
+            'scope': 'crm.objects.contacts.read crm.objects.contacts.write crm.objects.deals.read crm.objects.deals.write oauth',
+            'token_endpoint_auth_method': 'client_secret_post'
+        }
+    )
+    app.logger.info("HubSpot OAuth client registered successfully")
 
 from . import routes

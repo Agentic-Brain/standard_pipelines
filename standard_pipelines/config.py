@@ -10,6 +10,10 @@ class Config:
         'DB_PASS': None,
         'DB_HOST': None,
         'DB_PORT': None,
+        'DB_NAME': None,
+        'REDIS_HOST': None,
+        'REDIS_PORT': 6379,
+        'REDIS_DB': 0,
         'SECRET_KEY': None,
         'ENCRYPTION_KEY': None,
         'SECURITY_PASSWORD_SALT': None,
@@ -39,6 +43,7 @@ class Config:
         'USE_GMAIL': True,
         'USE_OPENAI': True,
         'USE_MAILGUN': True,
+        'USE_HUBSPOT': True,
         # Add more API usage flags as needed
     }
 
@@ -66,7 +71,6 @@ class Config:
         'HUBSPOT': {
             'HUBSPOT_CLIENT_ID': None,
             'HUBSPOT_CLIENT_SECRET': None,
-            'HUBSPOT_REFRESH_TOKEN': None,
         },
         'GMAIL': {
             'GMAIL_REDIRECT_URI': None,
@@ -85,6 +89,7 @@ class Config:
         'USE_MAILGUN': 'MAILGUN',
         'USE_GMAIL': 'GMAIL',
         'USE_OPENAI': 'OPENAI',
+        'USE_HUBSPOT': 'HUBSPOT',
         # Add more mappings as needed
     }
 

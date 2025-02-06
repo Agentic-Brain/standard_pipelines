@@ -5,6 +5,8 @@ from typing import Optional
 import uuid
 from flask import current_app
 from functools import cached_property
+from hubspot.files import ApiException
+from standard_pipelines.data_flow.exceptions import APIError
 
 from sqlalchemy import UUID
 from ..services import BaseDataFlow
@@ -17,14 +19,16 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
 
     # Magic hubspot numbers to associate various object types
     # Don't change these unless you know what you're doing
+    # Docs: https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4#association-type-id-values
     MEETING_TO_CONTACT_ASSOCIATION_ID = 200
     MEETING_TO_DEAL_ASSOCIATION_ID = 212
     NOTE_TO_DEAL_ASSOCIATION_ID = 214
+
     OPENAI_SUMMARY_MODEL = "gpt-4o"
 
     @classmethod
-    def data_flow_id(cls) -> uuid.UUID:
-        return uuid.UUID("a1abd672-4e54-4ce7-8504-1625ea6f79aa")
+    def data_flow_name(cls) -> str:
+        return "ff2hs_on_transcript"
 
     @cached_property
     def hubspot_api_manager(self) -> HubSpotAPIManager:
@@ -66,22 +70,58 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
             "meeting_id": meeting_id
         }
 
+    # TODO: Want to change this, creating contacts in extract isn't really the right place
     def extract(self, context: t.Optional[dict] = None) -> dict:
         meeting_id = context["meeting_id"]
         transcript, emails, names = self.fireflies_api_manager.transcript(meeting_id)
         contacts = []
+
+        # Contacts from emails
         for email in emails:
-            resp = self.hubspot_api_manager.contact_by_name_or_email(email=email)
+            try:
+                resp = self.hubspot_api_manager.contact_by_name_or_email(email=email)
+            except Exception:
+            # <--    CHANGED: create contact if not found
+                resp = self.hubspot_api_manager.create_contact(email=email)
             contacts.append(resp)
+
+        # Contacts from names
         for name in names:
-            resp = self.hubspot_api_manager.contact_by_name_or_email(name=name)
+            try:
+                resp = self.hubspot_api_manager.contact_by_name_or_email(name=name)
+            except Exception:
+                # Split name into first and last if it contains a space
+                name_parts = name.split(maxsplit=1)
+                if len(name_parts) > 1:
+                    resp = self.hubspot_api_manager.create_contact(
+                        first_name=name_parts[0],
+                        last_name=name_parts[1]
+                    )
+                else:
+                    resp = self.hubspot_api_manager.create_contact(first_name=name)
             contacts.append(resp)
+
+        # TODO: Fix this deal shit
         deals = []
         for contact in contacts:
-            resp = self.hubspot_api_manager.deal_by_contact_id(contact["id"])
+            try:
+                resp = self.hubspot_api_manager.deal_by_contact_id(contact["id"])
+            except Exception:
+                # <-- CHANGED: create deal if not found
+                # We'll build a simple deal name from the contact's email or first name
+                contact_props = contact.get("properties", {})
+                fallback_name = contact_props.get("email") or contact_props.get("firstname") or "Unnamed Contact"
+                deal_name = f"Deal for {fallback_name}"
+                # "appointmentscheduled" can be changed to your actual stage ID
+                resp = self.hubspot_api_manager.create_deal(
+                    deal_name=deal_name,
+                    stage_id=self.configuration.intial_deal_stage_id,
+                    contact_id=contact["id"]
+                )
             id = resp["id"]
             resp = self.hubspot_api_manager.deal_by_deal_id(id, properties=["hubspot_owner_id"])
             deals.append(resp)
+
         return {
             "transcript": transcript,
             "contacts": contacts,
@@ -143,9 +183,10 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
             ]
         }
 
+    # TODO: Fix this deal shit
     def transform(self, data: dict, context: t.Optional[dict] = None):
-        if len(data["deals"]) > 1:
-            raise ValueError("More than one deal found")
+        # if len(data["deals"]) > 1:
+        #     raise ValueError("More than one deal found")
         deal = data["deals"][0]
         meeting = self.hubspot_meeting_object(data["transcript"], data["contacts"], deal)
         note = self.hubspot_note_object(data["transcript"], data["contacts"], deal)
