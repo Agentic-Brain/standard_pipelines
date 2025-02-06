@@ -115,7 +115,7 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
                 # "appointmentscheduled" can be changed to your actual stage ID
                 resp = self.hubspot_api_manager.create_deal(
                     deal_name=deal_name,
-                    stage_id="995768441",
+                    stage_id=self.configuration.intial_deal_stage_id,
                     contact_id=contact["id"]
                 )
             id = resp["id"]
