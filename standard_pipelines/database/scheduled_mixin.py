@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 from typing import Optional, List
-from sqlalchemy import DateTime, JSON, Boolean
+from sqlalchemy import DateTime, JSON, Boolean, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 from standard_pipelines.database.models import BaseMixin
 
@@ -12,7 +12,7 @@ class ScheduledMixin(BaseMixin, ABC):
     active_hours: Mapped[Optional[List[int]]] = mapped_column(JSON, nullable=True, default=list(range(24)))
     active_days: Mapped[Optional[List[int]]] = mapped_column(JSON, nullable=True, default=list(range(7)))
     is_recurring: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
-    recurrence_interval: Mapped[Optional[int]] = mapped_column(JSON, nullable=True)
+    recurrence_interval: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
 
     @abstractmethod
     def trigger_job(self) -> None:

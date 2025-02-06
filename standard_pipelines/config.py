@@ -191,7 +191,7 @@ class Config:
             'beat_schedule': {
                 'check-scheduled-items': {
                     'task': 'standard_pipelines.celery.tasks.check_scheduled_items',
-                    'schedule': 60.0,  # Run every minute
+                    'schedule': float(os.getenv('SCHEDULED_ITEMS_CHECK_INTERVAL', '60.0')),  # Configurable interval in seconds
                 }
             }
         }
