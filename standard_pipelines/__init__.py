@@ -84,8 +84,14 @@ def create_app():
     @app.context_processor
     def inject_semver():
         return dict(app_version=str(APP_VERSION), flask_base_version=str(FLASK_BASE_VERSION))
-    # Migrate must be in server init function to work
-    # migrate.init_app(app, database)
+
+    @app.route('/test-logging')
+    def test_logging():
+        app.logger.debug('Test debug message')
+        app.logger.info('Test info message')
+        app.logger.warning('Test warning message')
+        app.logger.error('Test error message')
+        return 'Logging test complete'
 
 
     
