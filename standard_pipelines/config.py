@@ -142,9 +142,16 @@ class Config:
     def _configure_api_settings(self) -> None:
         """Configure API-specific settings based on which APIs are in use"""
         for api_flag, api_group in self.API_REQUIREMENTS.items():
-            # First check if this API is enabled in settings
-            api_enabled = self.API_USE_SETTINGS.get(api_flag, False)
-            if api_enabled:
+            # Check if API is enabled via environment variable first
+            env_enabled = self.get_env(api_flag)
+            if env_enabled is not None:
+                use_api = env_enabled.lower() in ('true', '1', 'yes', 'on')
+                setattr(self, api_flag, use_api)
+            else:
+                use_api = self.API_USE_SETTINGS.get(api_flag, False)
+                setattr(self, api_flag, use_api)
+
+            if use_api:
                 # If this API is enabled, configure its settings
                 api_settings = self.API_SETTINGS[api_group]
                 for key, default_value in api_settings.items():
