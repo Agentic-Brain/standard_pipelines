@@ -275,7 +275,10 @@ class TestingConfig(Config):
 
 class ProductionConfig(Config):
     def __init__(self) -> None:
-        # Has to be set after initial creation
+        # Set empty strings for potentially missing keys
+        self.SENTRY_DSN = ''
+        self.DEFAULT_ADMIN_ACCOUNT = ''
+        self.DEFAULT_ADMIN_PASSWORD = ''
         super().__init__('PRODUCTION')
         self.verify_attributes()
 
@@ -289,7 +292,10 @@ class ProductionConfig(Config):
 
 class StagingConfig(Config):
     def __init__(self) -> None:
-        # Has to be set after initial creation, similar to ProductionConfig
+        # Set empty strings for potentially missing keys
+        self.SENTRY_DSN = ''
+        self.DEFAULT_ADMIN_ACCOUNT = ''
+        self.DEFAULT_ADMIN_PASSWORD = ''
         super().__init__('STAGING')
         self.verify_attributes()
 

@@ -95,27 +95,42 @@ def create_app():
     return app
 
 def init_logging(app: Flask) -> None:
-    # Clear existing handlers
+    # Clear ALL handlers (including Flask's default handlers)
     app.logger.handlers.clear()
+    logging.getLogger().handlers.clear()
 
     # Set the logger level
     app.logger.setLevel(logging.INFO)
-
+    
     # Create logs directory if it doesn't exist
     logs_dir = 'logs'
     if not os.path.exists(logs_dir):
         os.makedirs(logs_dir)
 
-    # File handler
+    environment_type = os.getenv('FLASK_ENV', 'development')
+    
+    # Define format based on environment
+    if environment_type == 'production':
+        log_format = '%(asctime)s - %(levelname)s : %(message)s'
+        date_format = '%y-%m-%d %H:%M'
+    elif environment_type == 'development':
+        log_format = '%(filename)s:%(lineno)d - %(levelname)s : %(message)s'
+        date_format = None
+    else:  # staging
+        log_format = '%(asctime)s - %(filename)s:%(lineno)d - %(levelname)s : %(message)s'
+        date_format = '%y-%m-%d %H:%M'
+
+    # File handler with environment-specific format
     file_handler = logging.FileHandler(f'logs/{str(time.ctime(time.time()))}.log')
-    file_formatter = logging.Formatter('%(asctime)s %(filename)s - %(funcName)s - %(lineno)d - %(name)s - %(levelname)s : %(message)s')
+    file_formatter = logging.Formatter(log_format, datefmt=date_format)
     file_handler.setFormatter(file_formatter)
     file_handler.setLevel(logging.DEBUG)
 
-    # Stream handler with color
+    # Stream handler with color and environment-specific format
     stream_handler = logging.StreamHandler()
     stream_formatter = colorlog.ColoredFormatter(
-        '%(log_color)s%(levelname)s - %(name)s:%(reset)s %(message)s',
+        '%(log_color)s' + log_format + '%(reset)s',
+        datefmt=date_format,
         log_colors={
             'DEBUG': 'cyan',
             'INFO': 'green',
@@ -129,6 +144,9 @@ def init_logging(app: Flask) -> None:
     # Add handlers to app.logger
     app.logger.addHandler(file_handler)
     app.logger.addHandler(stream_handler)
+    
+    # Prevent propagation to avoid duplicate logs
+    app.logger.propagate = False
 
 
 def init_sentry() -> None:
