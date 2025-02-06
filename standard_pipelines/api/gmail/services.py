@@ -78,10 +78,11 @@ class GmailService:
 
             token_data = response.json()
             if 'access_token' not in token_data:
-                #Temporary error code check
-                error_description = token_data.get('error_description', token_data.get('error', 'Unknown error'))
+                error_description = token_data.get('error_description', 'Access token is missing from the response.')
+                error = token_data.get('error', 'Unknown error')
                 current_app.logger.exception(f"Failed to refresh token: {error_description}")
-                return {'error': f"Failed to refresh token: {error_description}"}
+                return {'error': f"Failed to refresh token: {error}"}
+
 
             self.credentials.access_token = token_data['access_token']
             self.credentials.set_expire_time_from_datetime(datetime.now(timezone.utc) + timedelta(minutes=55))
