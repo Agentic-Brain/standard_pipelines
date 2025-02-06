@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 from typing import Optional, List
-from sqlalchemy import DateTime, JSON, Boolean, Integer
+from sqlalchemy import DateTime, JSON, Boolean, Integer, inspect
 from sqlalchemy.orm import Mapped, mapped_column
 from standard_pipelines.database.models import BaseMixin
 
