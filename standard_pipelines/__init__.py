@@ -56,6 +56,12 @@ def create_app():
     app.register_blueprint(auth_blueprint)
     auth_init_app(app)
 
+    # Add the new API blueprint registration
+    from .api import api as api_blueprint
+    from .api import init_app as api_init_app
+    app.register_blueprint(api_blueprint)
+    api_init_app(app)
+
     from .data_flow import data_flow as data_flow_blueprint
     from .data_flow import init_app as data_flow_init_app
     app.register_blueprint(data_flow_blueprint)
@@ -147,7 +153,7 @@ def init_logging(app: Flask) -> None:
 def init_sentry() -> None:
     config = get_config()
     sentry_sdk.init(
-        dsn=config.SENTRY_DSN,
+        dsn=config.SENTRY_DSN, #type: ignore
         environment=str(os.getenv('FLASK_ENV')),
         release=APP_VERSION if APP_VERSION else FLASK_BASE_VERSION,
         traces_sample_rate=1.0,
