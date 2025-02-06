@@ -71,21 +71,18 @@ def init_app(app: Flask):
     app.extensions['cipher'] = Fernet(app.config['ENCRYPTION_KEY']) # type: ignore
     app.extensions['security'] = security
     
-    if app.config.get('USE_BITWARDEN', False):
-        app.logger.debug('Creating bitwarden client')
-        bitwarden_client = BitwardenClient(
-            client_settings_from_dict(
-                {
-                    "device_type": DeviceType.SDK,
-                    "userAgent": "Python"
-                }
-            )
+    app.logger.debug('Creating bitwarden client')
+    bitwarden_client = BitwardenClient(
+        client_settings_from_dict(
+            {
+                "device_type": DeviceType.SDK,
+                "userAgent": "Python"
+            }
         )
-        
-        bitwarden_client.auth().login_access_token(app.config['BITWARDEN_ACCESS_TOKEN'], app.config['BITWARDEN_STATE_FILE_PATH'])
-        app.extensions['bitwarden_client'] = bitwarden_client
-    else:
-        app.logger.debug('Bitwarden integration disabled')
+    )
+    
+    bitwarden_client.auth().login_access_token(app.config['BITWARDEN_ACCESS_TOKEN'], app.config['BITWARDEN_STATE_FILE_PATH'])
+    app.extensions['bitwarden_client'] = bitwarden_client
     
     app.cli.add_command(create_default_admin)
 

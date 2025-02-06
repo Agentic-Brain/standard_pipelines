@@ -85,18 +85,6 @@ def create_app():
     def inject_semver():
         return dict(app_version=str(APP_VERSION), flask_base_version=str(FLASK_BASE_VERSION))
 
-    @app.route('/test-logging')
-    def test_logging():
-        app.logger.debug('Test debug message')
-        app.logger.info('Test info message')
-        app.logger.warning('Test warning message')
-        app.logger.error('Test error message')
-        return 'Logging test complete'
-
-
-    
-    # TODO: move into seperate blueprint?
-    # Admin setup
 
     return app
 
@@ -113,6 +101,7 @@ def init_logging(app: Flask) -> None:
     if not os.path.exists(logs_dir):
         os.makedirs(logs_dir)
 
+    # TODO: Probably want to set this to use the confiig system at some point
     environment_type = os.getenv('FLASK_ENV', 'development')
     
     # Define format based on environment
@@ -157,15 +146,13 @@ def init_logging(app: Flask) -> None:
 
 def init_sentry() -> None:
     config = get_config()
-    dsn = getattr(config, 'SENTRY_DSN', '')
-    if dsn:  # Only initialize if DSN is provided
-        sentry_sdk.init(
-            dsn=dsn,
-            environment=str(os.getenv('FLASK_ENV')),
-            release=APP_VERSION if APP_VERSION else FLASK_BASE_VERSION,
-            traces_sample_rate=1.0,
-            profiles_sample_rate=1.0,
-            _experiments = {
-                "continuous_profiling_auto_start": True,
-            }
-        )
+    sentry_sdk.init(
+        dsn=config.SENTRY_DSN,
+        environment=str(os.getenv('FLASK_ENV')),
+        release=APP_VERSION if APP_VERSION else FLASK_BASE_VERSION,
+        traces_sample_rate=1.0,
+        profiles_sample_rate=1.0,
+        _experiments = {
+            "continuous_profiling_auto_start": True,
+        }
+    )

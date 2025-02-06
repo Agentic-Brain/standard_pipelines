@@ -39,7 +39,7 @@ class Config:
     # API Usage flags
     API_USE_SETTINGS: Dict[str, bool] = {
         'USE_STRIPE': False,
-        'USE_BITWARDEN': False,  # Disabled for testing
+        'USE_BITWARDEN': True,
         'USE_OPENAI': True,
         'USE_MAILGUN': True,
         'USE_HUBSPOT': True,
@@ -142,17 +142,8 @@ class Config:
     def _configure_api_settings(self) -> None:
         """Configure API-specific settings based on which APIs are in use"""
         for api_flag, api_group in self.API_REQUIREMENTS.items():
-            # Check if API is enabled via environment variable first
-            env_enabled = self.get_env(api_flag)
-            if env_enabled is not None:
-                use_api = env_enabled.lower() in ('true', '1', 'yes', 'on')
-                setattr(self, api_flag, use_api)
-            else:
-                use_api = self.API_USE_SETTINGS.get(api_flag, False)
-                setattr(self, api_flag, use_api)
-
-            if use_api:
-                # If this API is enabled, configure its settings
+            if getattr(self, api_flag, False):
+                # If this API is in use, configure its settings
                 api_settings = self.API_SETTINGS[api_group]
                 for key, default_value in api_settings.items():
                     env_value = self.get_env(key)
@@ -284,10 +275,7 @@ class TestingConfig(Config):
 
 class ProductionConfig(Config):
     def __init__(self) -> None:
-        # Set empty strings for potentially missing keys
-        self.SENTRY_DSN = ''
-        self.DEFAULT_ADMIN_ACCOUNT = ''
-        self.DEFAULT_ADMIN_PASSWORD = ''
+        # Has to be set after initial creation
         super().__init__('PRODUCTION')
         self.verify_attributes()
 
@@ -301,10 +289,7 @@ class ProductionConfig(Config):
 
 class StagingConfig(Config):
     def __init__(self) -> None:
-        # Set empty strings for potentially missing keys
-        self.SENTRY_DSN = ''
-        self.DEFAULT_ADMIN_ACCOUNT = ''
-        self.DEFAULT_ADMIN_PASSWORD = ''
+        # Has to be set after initial creation, similar to ProductionConfig
         super().__init__('STAGING')
         self.verify_attributes()
 
@@ -325,4 +310,3 @@ def get_config() -> Config:
         'production': ProductionConfig
     }
     return config_classes.get(env, DevelopmentConfig)()
-
