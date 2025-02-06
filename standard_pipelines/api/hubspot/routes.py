@@ -32,9 +32,9 @@ def login_hubspot():
         auth_redirect = oauth.hubspot.authorize_redirect(redirect_uri)
         current_app.logger.debug(f"Authorization URL generated successfully")
         return auth_redirect
-    except Exception as e:
-        current_app.logger.error(f"Error during HubSpot OAuth redirect: {str(e)}")
-        return jsonify({'error': 'Failed to initiate OAuth flow'}), 500
+    except (OAuth2Error, ConnectionError) as e:
+        current_app.logger.exception("Error during HubSpot OAuth redirect")
+    return jsonify({'error': 'Failed to initiate OAuth flow'}), 500
 
 
 # 4) Callback URL where HubSpot will redirect the user after they authorize

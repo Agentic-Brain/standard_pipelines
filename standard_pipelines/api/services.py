@@ -100,12 +100,17 @@ class BaseManualAPIManager(BaseAPIManager, metaclass=ABCMeta):
 
     def validate_response(self, response: requests.Response):
         status_code = response.status_code
+        error_msg = f"{response}, {response.text}"
         if status_code >= 500 or status_code == 429:
-            error_msg = f"{response}, {response.text}"
             raise RetriableAPIError(error_msg)
+        if status_code == 401:
+            raise APIError(f"Unauthorized: {error_msg}")
+        if status_code == 403:
+            raise APIError(f"Forbidden: {error_msg}")
+        if status_code == 404:
+            raise APIError(f"Not Found: {error_msg}")
         if status_code >= 400:
-            error_msg = f"{response}, {response.text}"
-            raise APIError(error_msg)
+            raise APIError(f"Client Error: {error_msg}")
 
     @backoff.on_exception(
         backoff.expo,
