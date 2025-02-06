@@ -74,6 +74,11 @@ def create_app():
     from .celery import init_app as celery_init_app
     celery_init_app(app)
 
+    from .api import api as api_blueprint
+    from .api import init_app as api_init_app
+    app.register_blueprint(api_blueprint)
+    api_init_app(app)
+
     # Register testing blueprint only in development or testing environments
     if environment_type in ['development', 'testing']:
         from .testing import testing as testing_blueprint

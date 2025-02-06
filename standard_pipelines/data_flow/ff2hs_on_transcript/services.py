@@ -10,7 +10,9 @@ from standard_pipelines.data_flow.exceptions import APIError
 
 from sqlalchemy import UUID
 from ..services import BaseDataFlow
-from ..utils import HubSpotAPIManager, FirefliesAPIManager, OpenAIAPIManager
+from standard_pipelines.api.hubspot.services import HubSpotAPIManager
+from standard_pipelines.api.fireflies.services import FirefliesAPIManager
+from standard_pipelines.api.openai.services import OpenAIAPIManager
 from ...auth.models import HubSpotCredentials, FirefliesCredentials, OpenAICredentials
 from ..exceptions import InvalidWebhookError
 from .models import FF2HSOnTranscriptConfiguration
