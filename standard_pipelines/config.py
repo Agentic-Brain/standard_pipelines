@@ -310,4 +310,3 @@ def get_config() -> Config:
         'production': ProductionConfig
     }
     return config_classes.get(env, DevelopmentConfig)()
-
