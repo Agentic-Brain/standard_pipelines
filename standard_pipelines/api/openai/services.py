@@ -20,8 +20,10 @@ class OpenAIAPIManager(BaseAPIManager, metaclass=ABCMeta):
         return ["api_key"]
 
     def chat(self, prompt: str, model: str) -> ChatCompletion:
-        if not prompt or not model:
-            raise ValueError("Prompt and model are required.")
+        if prompt is None or model is None:
+            raise ValueError("Prompt and model cannot be None.")
+        if not prompt.strip() or not model.strip():
+            raise ValueError("Prompt and model cannot be empty strings.")
         try:
             return self.api_client.chat.completions.create(
                 model=model,
