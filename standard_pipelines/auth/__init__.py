@@ -88,7 +88,7 @@ def init_app(app: Flask):
             app.logger.warning(f'Bitwarden secrets not set, will be unable to interact with any encrypted database models {e}')
         else:
             app.logger.critical(f'Bitwarden secrets not set, stopping application: {e}')
-            exit(1)
+            raise RuntimeError('Failed to initialize Bitwarden client')
     
     app.cli.add_command(create_default_admin)
 
