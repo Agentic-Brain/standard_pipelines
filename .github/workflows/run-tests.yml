@@ -18,11 +18,15 @@ jobs:
       with:
         python-version: '3.12'
         
+    - name: Install uv
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install pytest pytest-cov
+        uv sync
+        uv add pytest pytest-cov
 
     - name: Install Bitwarden Secrets CLI
       run: |
@@ -45,10 +49,10 @@ jobs:
         
     - name: Run tests
       run: |
-        pytest --cov=standard_pipelines --cov-report=term-missing
+        uv run pytest --cov=standard_pipelines --cov-report=term-missing
 
     - name: Upload coverage report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: coverage-report
         path: .coverage
