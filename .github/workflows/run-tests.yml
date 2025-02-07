@@ -26,7 +26,7 @@ jobs:
     - name: Install dependencies
       run: |
         uv sync
-        uv pip install pytest pytest-cov
+        uv add pytest pytest-cov
 
     - name: Install Bitwarden Secrets CLI
       run: |
@@ -49,7 +49,7 @@ jobs:
         
     - name: Run tests
       run: |
-        pytest --cov=standard_pipelines --cov-report=term-missing
+        uv run pytest --cov=standard_pipelines --cov-report=term-missing
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v4
