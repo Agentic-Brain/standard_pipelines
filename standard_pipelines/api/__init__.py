@@ -12,3 +12,4 @@ def init_app(app: Flask):
 
 from .fireflies import routes as fireflies_routes
 from .hubspot import routes as hubspot_routes
+from .gmail import routes as gmail_routes

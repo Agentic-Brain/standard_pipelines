@@ -3,12 +3,12 @@ from google_auth_oauthlib.flow import Flow
 from werkzeug.exceptions import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
 from standard_pipelines.extensions import db
-from standard_pipelines.api.gmail.models import GmailCredentials
+from standard_pipelines.auth.models import GmailCredentials
 from standard_pipelines.api.gmail.services import GmailService
 from standard_pipelines.data_flow.models import Client
 import urllib.parse
 from . import gmail
-
+import os
 
 #============= Authorization ===============#
 
@@ -37,10 +37,13 @@ def get_flow():
     except Exception as e:
         raise HTTPException(status_code=500, description=f"An unexpected error occurred while creating the OAuth flow: {e}")
 
-@gmail.route('/authorize/<client_id>')
+@gmail.route('/oauth/login/gmail/<client_id>')
 def authorize(client_id: str):
     """Initiates OAuth flow by redirecting to Google's consent screen."""
     try:
+        if current_app.config['ENV'] in ['development', 'testing']:
+            os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+
         redirect_url = request.args.get('next') or request.referrer or url_for('main.index')
 
         client = Client.query.get_or_404(client_id)
@@ -74,7 +77,7 @@ def authorize(client_id: str):
     except Exception as e:
         return display_error_and_redirect(redirect_url, f"Unexpected error during authorization: {e}")
 
-@gmail.route('/oauth2callback')
+@gmail.route('/oauth/authorize/gmail')
 def oauth2callback():
     """Handles OAuth callback, exchanges code for tokens."""
     try:

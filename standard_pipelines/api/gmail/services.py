@@ -1,5 +1,5 @@
 from flask import current_app
-from .models import GmailCredentials
+from standard_pipelines.auth.models import GmailCredentials
 from sqlalchemy.exc import SQLAlchemyError
 from email.message import EmailMessage
 from googleapiclient.discovery import build
