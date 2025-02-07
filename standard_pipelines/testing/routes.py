@@ -4,10 +4,9 @@ from hubspot.files import ApiException
 
 # Be sure to import your HubSpotAPIManager and any needed exceptions
 # from the module where you defined it.
-from standard_pipelines.data_flow.utils import HubSpotAPIManager
-from standard_pipelines.data_flow.utils import APIError
+from standard_pipelines.api.hubspot.services import HubSpotAPIManager
+from standard_pipelines.data_flow.exceptions import APIError
 from . import testing
-
 
 
 # Example config for HubSpot – fill these with your actual values or load from env
