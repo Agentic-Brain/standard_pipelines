@@ -80,9 +80,15 @@ def init_app(app: Flask):
             }
         )
     )
-    
-    bitwarden_client.auth().login_access_token(app.config['BITWARDEN_ACCESS_TOKEN'], app.config['BITWARDEN_STATE_FILE_PATH'])
-    app.extensions['bitwarden_client'] = bitwarden_client
+    try:
+        bitwarden_client.auth().login_access_token(app.config['BITWARDEN_ACCESS_TOKEN'], app.config['BITWARDEN_STATE_FILE_PATH'])
+        app.extensions['bitwarden_client'] = bitwarden_client
+    except (KeyError, AssertionError) as e:
+        if app.config['FLASK_ENV'] in ['development', 'testing']:
+            app.logger.warning(f'Bitwarden secrets not set, will be unable to interact with any encrypted database models {e}')
+        else:
+            app.logger.critical(f'Bitwarden secrets not set, stopping application: {e}')
+            exit(1)
     
     app.cli.add_command(create_default_admin)
 
