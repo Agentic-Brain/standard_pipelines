@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [ main ]
   push:
-    branches: [ main ]
+    branches: [ 'main' ]
 
 jobs:
   run-tests:
@@ -18,11 +18,15 @@ jobs:
       with:
         python-version: '3.12'
         
+    - name: Install uv
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install pytest pytest-cov
+        uv sync
+        uv pip install pytest pytest-cov
 
     - name: Install Bitwarden Secrets CLI
       run: |
