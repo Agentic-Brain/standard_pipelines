@@ -48,10 +48,13 @@ class OpenAIAPIManager(BaseAPIManager, metaclass=ABCMeta):
             raise APIError(error_msg) from e
 
     def list_fine_tuning_jobs(self, limit: int = 10) -> List[FineTuningJob]:
-        """List fine-tuning jobs."""
+        """List fine-tuning jobs.
+        
+        Returns:
+            List[FineTuningJob]: A list of fine-tuning jobs
+        """
         try:
-            response = self.api_client.fine_tuning.jobs.list(limit=limit)
-            return response.data
+            return list(self.api_client.fine_tuning.jobs.list(limit=limit))
         except OpenAIError as e:
             error_msg = f"Error listing fine-tuning jobs: {str(e)}"
             raise APIError(error_msg) from e
