@@ -57,7 +57,9 @@ def test_fine_tuning_operations(app):
     # Test listing fine-tuning jobs
     try:
         jobs = api_manager.list_fine_tuning_jobs(limit=5)
-        assert isinstance(jobs, list), "Expected list of fine-tuning jobs"
+        # OpenAI returns a SyncCursorPage object that contains the list of jobs
+        assert hasattr(jobs, 'data'), "Response should have data attribute"
+        assert isinstance(jobs.data, list), "jobs.data should be a list"
     except Exception as e:
         pytest.fail(f"Failed to list fine-tuning jobs: {str(e)}")
     
