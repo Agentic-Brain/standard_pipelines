@@ -7,7 +7,7 @@ from standard_pipelines.auth.models import GmailCredentials
 from standard_pipelines.api.gmail.services import GmailService
 from standard_pipelines.data_flow.models import Client
 import urllib.parse
-from . import gmail
+from standard_pipelines.auth import auth
 import os
 
 #============= Authorization ===============#
@@ -37,7 +37,7 @@ def get_flow():
     except Exception as e:
         raise HTTPException(status_code=500, description=f"An unexpected error occurred while creating the OAuth flow: {e}")
 
-@gmail.route('/oauth/login/gmail/<client_id>')
+@auth.route('/oauth/login/gmail/<client_id>')
 def authorize(client_id: str):
     """Initiates OAuth flow by redirecting to Google's consent screen."""
     try:
@@ -77,7 +77,7 @@ def authorize(client_id: str):
     except Exception as e:
         return display_error_and_redirect(redirect_url, f"Unexpected error during authorization: {e}")
 
-@gmail.route('/oauth/authorize/gmail')
+@auth.route('/oauth/authorize/gmail')
 def oauth2callback():
     """Handles OAuth callback, exchanges code for tokens."""
     try:
@@ -138,7 +138,7 @@ def display_error_and_redirect(redirect_url : str, debug_message : str, flash_me
     return redirect(next_url)
 
 #============= Functionality ===============#
-@gmail.route('/send_email', methods=['POST'])
+@auth.route('/send_email', methods=['POST'])
 def send_email():
     try:
         data = request.get_json()
