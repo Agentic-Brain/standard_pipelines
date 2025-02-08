@@ -243,18 +243,18 @@ class DevelopmentConfig(Config):
         self.REDIS_HOST: str = 'localhost'
         self.REDIS_PORT: int = 6379
         self.REDIS_DB: int = 0
-        self.SECRET_KEY: str = 'secret'
+        self.SECRET_KEY: str = 'secret' # trufflehog:ignore
         self.BROKER_URL = "redis://localhost:6379/0"  
         self.RESULT_BACKEND = "redis://localhost:6379/0"
         self.TASK_IGNORE_RESULT = True
         self.BITWARDEN_STATE_FILE_PATH: str = 'bitwarden-state'
         # Flask
-        self.SECRET_KEY: str = 'secret'
+        self.SECRET_KEY: str = 'secret' # trufflehog:ignore
         self.FLASK_DEBUG: bool = True
-        self.DEFAULT_ADMIN_ACCOUNT:  str = 'admin@example.com'
-        self.DEFAULT_ADMIN_PASSWORD: str = 'password'
-        self.SECURITY_PASSWORD_SALT: str = 'password_salt' # Should be random 128 bits for production systems
-        self.ENCRYPTION_KEY: str = 'IduTzHtJ7mk2B/j3TzMl4XC/+NdSFAgbIcgGh7nlguc=' # Development encryption KEY. CHANGE THIS IN PRODUCTION
+        self.DEFAULT_ADMIN_ACCOUNT: str = 'admin@example.com' # trufflehog:ignore
+        self.DEFAULT_ADMIN_PASSWORD: str = 'password' # trufflehog:ignore
+        self.SECURITY_PASSWORD_SALT: str = 'password_salt' # trufflehog:ignore
+        self.ENCRYPTION_KEY: str = 'IduTzHtJ7mk2B/j3TzMl4XC/+NdSFAgbIcgGh7nlguc=' # trufflehog:ignore
         self.DEFAULT_CLIENT_NAME = 'agentic-brain'
         self.INTERNAL_API_KEY: str = 'internal_api_key'
         super().__init__('DEVELOPMENT')
@@ -290,10 +290,10 @@ class TestingConfig(Config):
         # Flask
         self.SECRET_KEY: str = 'test_secret'
         self.FLASK_DEBUG: bool = True
-        self.DEFAULT_ADMIN_ACCOUNT: str = 'test@example.com'
-        self.DEFAULT_ADMIN_PASSWORD: str = 'test_password'
-        self.SECURITY_PASSWORD_SALT: str = 'test_salt'
-        self.ENCRYPTION_KEY: str = 'IduTzHtJ7mk2B/j3TzMl4XC/+NdSFAgbIcgGh7nlguc='
+        self.DEFAULT_ADMIN_ACCOUNT: str = 'test@example.com' # trufflehog:ignore
+        self.DEFAULT_ADMIN_PASSWORD: str = 'test_password' # trufflehog:ignore
+        self.SECURITY_PASSWORD_SALT: str = 'test_salt' # trufflehog:ignore
+        self.ENCRYPTION_KEY: str = 'IduTzHtJ7mk2B/j3TzMl4XC/+NdSFAgbIcgGh7nlguc=' # trufflehog:ignore
         self.BITWARDEN_STATE_FILE_PATH: str = 'bitwarden-state'
         # Testing specific settings
         self.TESTING = True
