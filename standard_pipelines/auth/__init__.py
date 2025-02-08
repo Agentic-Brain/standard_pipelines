@@ -143,6 +143,7 @@ def create_default_admin():
     current_app.logger.info(f'Created admin user: {admin_email} linked to client: {client_name}')
 
 def oauth_client_register(app: Flask):
+    # Register HubSpot OAuth client
     client_id = app.config.get('HUBSPOT_CLIENT_ID')
     client_secret = app.config.get('HUBSPOT_CLIENT_SECRET')
     
@@ -166,5 +167,31 @@ def oauth_client_register(app: Flask):
         }
     )
     app.logger.info("HubSpot OAuth client registered successfully")
+
+    # Register Gmail OAuth client
+    gmail_client_id = app.config.get('GMAIL_CLIENT_ID')
+    gmail_client_secret = app.config.get('GMAIL_CLIENT_SECRET')
+    gmail_scopes = app.config.get('GMAIL_SCOPES')
+    
+    if not gmail_client_id or not gmail_client_secret or not gmail_scopes:
+        app.logger.error("Missing Gmail OAuth credentials in configuration")
+        return
+    else:
+        app.logger.info("Registering Gmail OAuth client")
+        app.logger.debug(f"Using Gmail client ID: {gmail_client_id[:5]}...")
+        
+        oauth.register(
+            name='gmail',
+            client_id=gmail_client_id,
+            client_secret=gmail_client_secret,
+            access_token_url='https://oauth2.googleapis.com/token',
+            authorize_url='https://accounts.google.com/o/oauth2/auth',
+            api_base_url='https://www.googleapis.com/',
+            client_kwargs={
+                'scope': gmail_scopes,
+                'token_endpoint_auth_method': 'client_secret_post'
+            }
+        )
+        app.logger.info("Gmail OAuth client registered successfully")
 
 from . import routes
