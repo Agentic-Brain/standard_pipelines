@@ -1,0 +1,14 @@
+# This is marked as a sentry key, it's actually the uv.lock hash for the sentry-sdk package
+467df6e126ba242d39952375dd816fbee0f217d119bf454a8ce74cf1e7909e8d
+
+# These are all hardocoded passwords for Development and Testing Configs
+postgres_password
+password
+password_salt
+IduTzHtJ7mk2B/j3TzMl4XC/+NdSFAgbIcgGh7nlguc=
+internal_api_key
+postgres
+secret
+test_password
+test_secret
+test_salt
