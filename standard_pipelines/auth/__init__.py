@@ -52,6 +52,7 @@ def init_app(app: Flask):
     mail.init_app(app)
     oauth.init_app(app)
     oauth_client_register(app)
+    gmail_oauth_client_register(app)
     # Importing here prevents a circular import
     from standard_pipelines.auth.models import Role, User
 
@@ -143,7 +144,6 @@ def create_default_admin():
     current_app.logger.info(f'Created admin user: {admin_email} linked to client: {client_name}')
 
 def oauth_client_register(app: Flask):
-    # Register HubSpot OAuth client
     client_id = app.config.get('HUBSPOT_CLIENT_ID')
     client_secret = app.config.get('HUBSPOT_CLIENT_SECRET')
     
@@ -168,12 +168,14 @@ def oauth_client_register(app: Flask):
     )
     app.logger.info("HubSpot OAuth client registered successfully")
 
-    # Register Gmail OAuth client
+
+def gmail_oauth_client_register(app: Flask):
     gmail_client_id = app.config.get('GMAIL_CLIENT_ID')
     gmail_client_secret = app.config.get('GMAIL_CLIENT_SECRET')
     gmail_scopes = app.config.get('GMAIL_SCOPES')
+    gmail_redirect_uri = app.config.get('GMAIL_REDIRECT_URI')
     
-    if not gmail_client_id or not gmail_client_secret or not gmail_scopes:
+    if not gmail_client_id or not gmail_client_secret or not gmail_scopes or not gmail_redirect_uri:
         app.logger.error("Missing Gmail OAuth credentials in configuration")
         return
     else:
@@ -184,11 +186,12 @@ def oauth_client_register(app: Flask):
             name='gmail',
             client_id=gmail_client_id,
             client_secret=gmail_client_secret,
+            redirect_uri=gmail_redirect_uri,
             access_token_url='https://oauth2.googleapis.com/token',
             authorize_url='https://accounts.google.com/o/oauth2/auth',
             api_base_url='https://www.googleapis.com/',
             client_kwargs={
-                'scope': gmail_scopes,
+                'scope': gmail_scopes.split(),
                 'token_endpoint_auth_method': 'client_secret_post'
             }
         )
