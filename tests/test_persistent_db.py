@@ -22,6 +22,7 @@ def persistent_db(app):
             fs_uniquifier=str(uuid.uuid4()),
             client_id=client.id
         )
+        db.session.commit()  # Commit user to get its ID
         
         # Create DataFlow registry item
         data_flow = DataFlow(
@@ -31,10 +32,10 @@ def persistent_db(app):
         )
         db.session.add(data_flow)
         db.session.commit()  # Commit to get data_flow.id
-        db.session.refresh(data_flow)  # Refresh to ensure we have the ID
-        db.session.refresh(client)  # Refresh client object as well
         
         # Create relationship using SQLAlchemy's relationship methods
+        client = Client.query.get(client.id)  # Get fresh client from DB
+        data_flow = DataFlow.query.get(data_flow.id)  # Get fresh data_flow from DB
         client.data_flows.append(data_flow)
         db.session.commit()
         
