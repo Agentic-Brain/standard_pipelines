@@ -1,13 +1,14 @@
 from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
 from standard_pipelines.auth.models import GmailCredentials
-from sqlalchemy.exc import SQLAlchemyError
 from email.message import EmailMessage
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from google.auth.exceptions import RefreshError
 from google.oauth2.credentials import Credentials
+from google.auth.transport.requests import Request
 import base64
+
 
 
 class GmailService(BaseAPIManager):
@@ -15,18 +16,37 @@ class GmailService(BaseAPIManager):
         super().__init__(api_config)
         self.user_db_credentials = credentials
         self.google_credentials = Credentials(
-                token = self.user_db_credentials.access_token,
+                token = None,
                 refresh_token = self.user_db_credentials.refresh_token,
                 token_uri = "https://oauth2.googleapis.com/token",
                 client_id = self.api_config['GMAIL_CLIENT_ID'],
                 client_secret = self.api_config['GMAIL_CLIENT_SECRET'],
                 scopes = self.api_config['GMAIL_SCOPES'].split()
             )
+        self.refresh_token()
 
     @property
     def required_config(self) -> list[str]:
         return ['GMAIL_CLIENT_ID', 'GMAIL_CLIENT_SECRET', 'GMAIL_SCOPES']
     
+    def refresh_token(self):
+        """Attempts to refresh the access token using the stored refresh token."""
+        try:
+            self.google_credentials.refresh(Request())
+        except RefreshError as e:
+            current_app.logger.error(f"Token refresh failed: {str(e)}")
+            #Can be used to detect if the refresh token has been revoked or is invalid and handle it
+            if "invalid_grant" in str(e):
+                current_app.logger.error("The refresh token has been revoked or is invalid.")
+                raise RefreshError("The refresh token has been revoked or is invalid.")
+            else:
+                current_app.logger.error(f"An error occurred during token refresh: {str(e)}")
+                raise RefreshError(f"An error occurred during token refresh: {str(e)}")
+        except Exception as e:
+            current_app.logger.error(f"Unknown error during token refresh: {str(e)}")
+            raise RefreshError(f"Unknown error during token refresh: {str(e)}")
+
+    #====== Gmail API functions ======#
     def send_email(self, to_address, subject, body):
         try:
             current_app.logger.info(f'Sending email to {to_address}')
@@ -74,3 +94,4 @@ class GmailService(BaseAPIManager):
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while structuring email data: {e}")
             return {'error': 'An unexpected error occurred while structuring email data'}
+

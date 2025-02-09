@@ -156,10 +156,8 @@ class GmailCredentials(BaseCredentials):
     """Credentials for Gmail API access."""
     __tablename__ = 'gmail_credential'
     
-    access_token: Mapped[str] = mapped_column(String(255))
     refresh_token: Mapped[str] = mapped_column(String(255))
         
-    def __init__(self, client_id: UUID, access_token: str, refresh_token: str):
+    def __init__(self, client_id: UUID, refresh_token: str):
         super().__init__(client_id=client_id)
-        self.access_token = access_token
         self.refresh_token = refresh_token

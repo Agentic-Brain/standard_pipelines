@@ -55,7 +55,7 @@ def authorize_gmail():
         current_app.logger.info("Successfully obtained Gmail access token")
         current_app.logger.debug(f"Token expiry: {token.get('expires_at')}")
 
-        #Verify that the current user is avaliable and authenticated
+        # #Verify that the current user is avaliable and authenticated
         if not current_user or not current_user.is_authenticated:
             current_app.logger.error("No authenticated user found")
             return jsonify({'error': 'Authentication required'}), 401
@@ -67,14 +67,12 @@ def authorize_gmail():
         # Create or update Gmail credentials
         existing_credentials = GmailCredentials.query.filter_by(client_id=client.id).first()
         if existing_credentials:
-            existing_credentials.access_token = token['access_token']
             existing_credentials.refresh_token = token['refresh_token']
             existing_credentials.save()  
             current_app.logger.info(f'Updated existing credentials for client')
         else:
             gmail_credentials = GmailCredentials(
                 client_id=client_id,
-                access_token=token['access_token'],
                 refresh_token=token['refresh_token'],
             )
             gmail_credentials.client = client
@@ -99,3 +97,4 @@ def authorize_gmail():
     except Exception as e:
         current_app.logger.exception(f"Unexpected error during OAuth callback: {e}")
         return jsonify({'error': f'Unexpected error during OAuth callback: {e}'}), 500
+
