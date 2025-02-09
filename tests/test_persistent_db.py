@@ -16,7 +16,7 @@ def persistent_db(app):
         
         # Create user with default values from config
         user = app.user_datastore.create_user(
-            email=app.config['DEFAULT_ADMIN_ACCOUNT'],
+            email="persistent_test@example.com",
             password=hash_password(app.config['DEFAULT_ADMIN_PASSWORD']),
             active=True,
             fs_uniquifier=str(uuid.uuid4()),
