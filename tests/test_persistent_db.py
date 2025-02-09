@@ -30,6 +30,7 @@ def persistent_db(app):
             version="1.0.0"
         )
         db.session.add(data_flow)
+        db.session.commit()  # Commit to get data_flow.id
         
         # Create join table entry
         join_entry = ClientDataFlowJoin(
