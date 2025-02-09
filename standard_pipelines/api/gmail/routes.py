@@ -1,136 +1,101 @@
-from flask import redirect, url_for, session, request, current_app, flash, jsonify, json
-from google_auth_oauthlib.flow import Flow
-from werkzeug.exceptions import HTTPException
+from flask import url_for, current_app, jsonify, render_template
+from flask_login import current_user, login_required
 from sqlalchemy.exc import SQLAlchemyError
 from standard_pipelines.extensions import db
 from standard_pipelines.auth.models import GmailCredentials
 from standard_pipelines.data_flow.models import Client
-import urllib.parse
-from standard_pipelines.auth import auth
-import os
+from standard_pipelines.extensions import oauth
+from authlib.integrations.base_client.errors import OAuthError
+from standard_pipelines.api import api
 
 #============= Routes ===============#
-@auth.route('/oauth/login/gmail/<client_id>')
-def authorize(client_id: str):
+@api.route('/oauth/login/gmail')
+@login_required
+def login_gmail():
     """Initiates OAuth flow by redirecting to Google's consent screen."""
     try:
-        if current_app.config['ENV'] in ['development', 'testing']:
-            os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+        current_app.logger.info("Starting Gmail OAuth login flow")
 
-        redirect_url = request.args.get('next') or request.referrer or url_for('main.index')
+        if oauth.gmail is None:
+            current_app.logger.error("Gmail OAuth client not initialized")
+            return jsonify({'error': 'Gmail OAuth client not initialized'}), 500
 
-        client = Client.query.get_or_404(client_id)
+        redirect_uri = url_for('api.authorize_gmail', _external=True, _scheme='https')
+        current_app.logger.debug(f"Generated redirect URI: {redirect_uri}")
 
-        flow = get_flow()
-        
-        passed_data = {
-            'client_id': str(client.id),
-            'redirect_url': redirect_url
-            }
-        serialized_data = urllib.parse.quote(json.dumps(passed_data))
-
-        authorization_url, state = flow.authorization_url(
-            # Request offline access to get a refresh token
-            access_type='offline',  
-            # Lets the application request additional scopes without re-prompting the user
-            include_granted_scopes='true',
-            prompt='consent',
-            state=serialized_data
-        )
-
-        session['state'] = state
-        current_app.logger.info(f"Generated authorization URL: {authorization_url}")
-        
-        return redirect(authorization_url)
-    
-    except HTTPException as e:
-        return display_error_and_redirect(redirect_url, f"HTTP error during authorization: {e}")
-    except ValueError as e:
-        return display_error_and_redirect(redirect_url, f"Value error during authorization: {e}")
+        auth_redirect = oauth.gmail.authorize_redirect(
+            redirect_uri,
+            access_type='offline',
+            prompt='consent'
+            )
+        current_app.logger.debug(f"Authorization URL generated successfully")
+        return auth_redirect
+     
+    except (OAuthError, ConnectionError) as e:
+        current_app.logger.error(f"Error during Gmail OAuth redirect: {e}")
+        return jsonify({'error': 'Failed to initiate OAuth flow'}), 500
     except Exception as e:
-        return display_error_and_redirect(redirect_url, f"Unexpected error during authorization: {e}")
+        current_app.logger.exception(f"Error during Gmail OAuth redirect: {e}")
+        return jsonify({'error': f'Unexpected error during authorization'}), 500
 
-@auth.route('/oauth/authorize/gmail')
-def oauth2callback():
+@api.route('/oauth/authorize/gmail')
+@login_required
+def authorize_gmail():
     """Handles OAuth callback, exchanges code for tokens."""
     try:
-        decoded_data = {}
-        flow = get_flow()
-
-        serialized_data = request.args.get('state')
-        if serialized_data is None:
-            return display_error_and_redirect(url_for('main.index'), 'State parameter is missing from request from Google')
-        decoded_data = json.loads(urllib.parse.unquote(serialized_data))
+        current_app.logger.info("Handling Gmail OAuth callback")
         
-        required_fields = {'client_id', 'redirect_url'}
-        missing_fields = required_fields - decoded_data.keys()
-        if missing_fields:
-            return display_error_and_redirect(decoded_data.get('redirect_url', url_for('main.index')), f'Missing required fields: {", ".join(missing_fields)}')
+        if oauth.gmail is None:
+            current_app.logger.error("Gmail OAuth client not initialized")
+            return jsonify({'error': 'Gmail OAuth client not initialized'}), 500
         
-        #The state verification is used to prevent CSRF attacks
-        if 'state' not in session or session['state'] != serialized_data:
-            return display_error_and_redirect(decoded_data.get('redirect_url', url_for('main.index')), f'Invalid state parameter: Start: {session["state"]} End:{request.args.get("state")}')
+        token = oauth.gmail.authorize_access_token()
+        if not token:
+            return jsonify({'error': 'Failed to retrieve access token'}), 400
+        current_app.logger.info("Successfully obtained Gmail access token")
+        current_app.logger.debug(f"Token expiry: {token.get('expires_at')}")
 
-        flow.fetch_token(authorization_response=request.url)
-        credentials = flow.credentials
+        #Verify that the current user is avaliable and authenticated
+        if not current_user or not current_user.is_authenticated:
+            current_app.logger.error("No authenticated user found")
+            return jsonify({'error': 'Authentication required'}), 401
 
-        client = Client.query.get_or_404(decoded_data['client_id'])
+        client_id = current_user.client_id
+        client = Client.query.get_or_404(client_id)
+        current_app.logger.debug(f"Found client: {client.name}")
 
+        # Create or update Gmail credentials
         existing_credentials = GmailCredentials.query.filter_by(client_id=client.id).first()
         if existing_credentials:
-            existing_credentials.access_token = credentials.token
-            existing_credentials.refresh_token = credentials.refresh_token
+            existing_credentials.access_token = token['access_token']
+            existing_credentials.refresh_token = token['refresh_token']
             existing_credentials.save()  
             current_app.logger.info(f'Updated existing credentials for client')
         else:
             gmail_credentials = GmailCredentials(
-                access_token=credentials.token,
-                refresh_token=credentials.refresh_token,
+                client_id=client_id,
+                access_token=token['access_token'],
+                refresh_token=token['refresh_token'],
             )
             gmail_credentials.client = client
             gmail_credentials.save()  
             current_app.logger.info(f'Created new credentials for client')
         
-        next_url = decoded_data.get('redirect_url', url_for('main.index'))
-        current_app.logger.info(f'Client has been successfully authorized')
-        flash('Successfully authorized', 'success')
-        return redirect(next_url)
-        
+        current_app.logger.info("Successfully stored Gmail credentials in database")
+
+        return render_template(
+                'auth/oauth_success.html',
+                service='Gmail',
+                client_name=client.name
+            )
+
     except SQLAlchemyError as e:
         db.session.rollback()
-        return display_error_and_redirect(decoded_data.get('redirect_url', url_for('main.index')), f'Error storing credentials: {e}')
-
+        current_app.logger.error(f"Database error: {e}")
+        return jsonify({'error': f'Error storing credentials: {e}'}), 500
+    except OAuthError as e:
+        current_app.logger.error(f"OAuth error: {e}")
+        return jsonify({'error': 'OAuth authorization failed'}), 400
     except Exception as e:
-        return display_error_and_redirect(decoded_data.get('redirect_url', url_for('main.index')), f'Unexpected error during OAuth callback: {e}')
-
-#============= Helper Functions ===============#
-def get_flow():
-    """Create and return a Flow object with the current app's configuration."""
-    try:
-        client_config = {
-            "installed": {
-                "client_id": current_app.config['GMAIL_CLIENT_ID'],
-                "project_id": current_app.config['GMAIL_PROJECT_ID'],
-                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-                "token_uri": "https://oauth2.googleapis.com/token",
-                "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-                "client_secret": current_app.config['GMAIL_CLIENT_SECRET'],
-                "redirect_uris": current_app.config['GMAIL_REDIRECT_URI']
-            }
-        }
-        return Flow.from_client_config(
-            client_config=client_config,
-            scopes=current_app.config['GMAIL_SCOPES'].split(),
-            redirect_uri=current_app.config['GMAIL_REDIRECT_URI']
-        )
-
-    except ValueError as e:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, description=f"An unexpected error occurred while creating the OAuth flow: {e}")
-
-def display_error_and_redirect(redirect_url : str, debug_message : str, flash_message : str = "An error occurred while trying to authorize."):
-    current_app.logger.exception(debug_message)
-    flash(flash_message)
-    next_url = redirect_url or url_for('main.index')
-    return redirect(next_url)
+        current_app.logger.exception(f"Unexpected error during OAuth callback: {e}")
+        return jsonify({'error': f'Unexpected error during OAuth callback: {e}'}), 500
