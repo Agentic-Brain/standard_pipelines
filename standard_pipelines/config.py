@@ -77,7 +77,6 @@ class Config:
         'GMAIL': {
             'GMAIL_REDIRECT_URI': None,
             'GMAIL_CLIENT_ID': None,
-            'GMAIL_PROJECT_ID': None,
             'GMAIL_CLIENT_SECRET': None,
             'GMAIL_SCOPES': "https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.readonly",
         },
