@@ -34,41 +34,36 @@ def persistent_db(app):
         db.session.refresh(data_flow)  # Refresh to ensure we have the ID
         db.session.refresh(client)  # Refresh client object as well
         
-        # Create join table entry
-        join_entry = ClientDataFlowJoin(
-            client_id=client.id,
-            data_flow_id=data_flow.id,
-            is_active=True
-        )
-        db.session.add(join_entry)
+        # Create relationship using SQLAlchemy's relationship methods
+        client.data_flows.append(data_flow)
         db.session.commit()
         
         return {
             'client': client,
             'user': user,
-            'data_flow': data_flow,
-            'join_entry': join_entry
+            'data_flow': data_flow
         }
 
 
-def test_persistent_database_setup(persistent_db):
+def test_persistent_database_setup(app, persistent_db):
     """Test that persistent database items are created and retrievable"""
     client = persistent_db['client']
     user = persistent_db['user']
     data_flow = persistent_db['data_flow']
     
-    # Verify client exists and relationships
-    retrieved_client = Client.query.get(client.id)
-    assert retrieved_client is not None
-    assert retrieved_client.name == client.name
-    
-    # Verify user exists and is linked to client
-    retrieved_user = User.query.filter_by(client_id=client.id).first()
-    assert retrieved_user is not None
-    assert retrieved_user.email == user.email
-    
-    # Verify dataflow exists and is linked to client
-    retrieved_data_flow = DataFlow.query.get(data_flow.id)
-    assert retrieved_data_flow is not None
-    assert retrieved_data_flow.name == data_flow.name
-    assert any(c.id == client.id for c in retrieved_data_flow.clients)
+    with app.app_context():
+        # Verify client exists and relationships
+        retrieved_client = Client.query.get(client.id)
+        assert retrieved_client is not None
+        assert retrieved_client.name == client.name
+        
+        # Verify user exists and is linked to client
+        retrieved_user = User.query.filter_by(client_id=client.id).first()
+        assert retrieved_user is not None
+        assert retrieved_user.email == user.email
+        
+        # Verify dataflow exists and is linked to client
+        retrieved_data_flow = DataFlow.query.get(data_flow.id)
+        assert retrieved_data_flow is not None
+        assert retrieved_data_flow.name == data_flow.name
+        assert client.id in [c.id for c in retrieved_data_flow.clients]
