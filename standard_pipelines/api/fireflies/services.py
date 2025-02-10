@@ -4,6 +4,8 @@ from requests.auth import AuthBase
 from abc import ABCMeta
 from typing import Optional
 
+from standard_pipelines.data_flow.exceptions import APIError
+
 class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
 
     class FirefliesAuthenticator(AuthBase):
@@ -74,32 +76,65 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
             "Content-Type": "application/json",
         }
 
-    def transcript(self, transcript_id: str) -> tuple[str, list[str], list[str]]:
+    def transcript(self, transcript_id: str) -> tuple[str, list[str], list[str], str]:
         """
         Returns a tuple of a prettified transcript suitable for input into an
-        AI prompt, a list of emails present in the transcript, and a list of
-        names present in the transcript.
+        AI prompt, a list of emails present in the transcript, a list of
+        names present in the transcript, and the organizer's email.
         """
         transcript_object = self.get_response({"transcript_id": transcript_id}).json()
         pretty_transcript = self._pretty_transcript_from_transcript_object(transcript_object)
         emails = self._emails_from_transcript_object(transcript_object)
         names = self._names_from_transcript_object(transcript_object)
-        return pretty_transcript, emails, names
+        organizer_email = self._organizer_email_from_transcript_object(transcript_object)
+        return pretty_transcript, emails, names, organizer_email
 
     def _emails_from_transcript_object(self, transcript: dict) -> list[str]:
-        transcript_data = transcript.get("data", {}).get("transcript", {})
+        transcript_data: dict = transcript.get("data", {}).get("transcript", {})
         meeting_attendees = transcript_data.get("meeting_attendees")
         return meeting_attendees if meeting_attendees else []
 
     def _names_from_transcript_object(self, transcript: dict) -> list[str]:
-        transcript_data = transcript.get("data", {}).get("transcript", {})
+        transcript_data: dict = transcript.get("data", {}).get("transcript", {})
         try:
             return [speaker.get("name", "") for speaker in transcript_data.get("speakers", [])]
         except Exception as e:
             current_app.logger.error(f"Error getting names from transcript object: {e}")
             return ["Unknown Speaker"]
 
+    def _organizer_email_from_transcript_object(self, transcript: dict) -> str:
+        transcript_data: dict = transcript.get("data", {}).get("transcript", {})
+        if "organizer_email" in transcript_data:
+            return transcript_data.get("organizer_email", "")
+        else:
+            error_msg = "Organizer email not found in transcript object."
+            current_app.logger.warning(error_msg)
+            return ""
+    
+    def _date_from_transcript_object(self, transcript: dict) -> str:
+        transcript_data: dict = transcript.get("data", {}).get("transcript", {})
+        if "date" in transcript_data:
+            return transcript_data.get("date", "")
+        else:
+            error_msg = "Date not found in transcript object."
+            current_app.logger.warning(error_msg)
+            return ""
+
+    def _meeting_name_from_transcript_object(self, transcript: dict) -> str:
+        transcript_data: dict = transcript.get("data", {}).get("transcript", {})
+        if "title" in transcript_data:
+            return transcript_data.get("title", "")
+        else:
+            error_msg = "Meeting name not found in transcript object."
+            current_app.logger.warning(error_msg)
+            return ""
+
     def _pretty_transcript_from_transcript_object(self, transcript: dict) -> str:
+
+        organizer_email = self._organizer_email_from_transcript_object(transcript)
+        attendees = self._emails_from_transcript_object(transcript)
+        date = self._date_from_transcript_object(transcript)
+        meeting_name = self._meeting_name_from_transcript_object(transcript)
 
         if "errors" in transcript:
             warning_msg = f"GraphQL Errors: {transcript['errors']}"
@@ -115,6 +150,10 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
             current_app.logger.warning(warning_msg)
 
         formatted_lines = []
+        formatted_lines.append(f"Organizer: {organizer_email}")
+        formatted_lines.append(f"Attendees: {attendees}")
+        formatted_lines.append(f"Date: {date}")
+        formatted_lines.append(f"Meeting Name: {meeting_name}")
         for sentence in sentences:
             minutes = int(sentence.get("start_time", 0)) // 60
             seconds = int(sentence.get("start_time", 0)) % 60
