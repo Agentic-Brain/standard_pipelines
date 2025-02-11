@@ -6,9 +6,9 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
 
-class GmailCredentials(BaseCredentials):
-    """Credentials for Gmail API access."""
-    __tablename__ = 'gmail_credential'
+class GoogleCredentials(BaseCredentials):
+    """Credentials for Google API access."""
+    __tablename__ = 'google_credential'
 
     refresh_token: Mapped[str] = mapped_column(String(255))
 

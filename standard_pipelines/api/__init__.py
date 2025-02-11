@@ -7,40 +7,40 @@ api = Blueprint('api', __name__, url_prefix='/api')
 def init_app(app: Flask):
     app.logger.debug(f'Initializing blueprint {__name__}')
     hubspot_oauth_client_register(app)
-    gmail_oauth_client_register(app)
+    google_oauth_client_register(app)
     
 
     # Add any API-specific initialization here
     # For example, registering error handlers, before_request handlers, etc.
     
-def gmail_oauth_client_register(app: Flask):
+def google_oauth_client_register(app: Flask):
 # TODO: Clean this up a little using dict/set checking method
-    gmail_client_id = app.config.get('GMAIL_CLIENT_ID')
-    gmail_client_secret = app.config.get('GMAIL_CLIENT_SECRET')
-    gmail_scopes = app.config.get('GMAIL_SCOPES')
-    gmail_redirect_uri = app.config.get('GMAIL_REDIRECT_URI')
+    google_client_id = app.config.get('GOOGLE_CLIENT_ID')
+    google_client_secret = app.config.get('GOOGLE_CLIENT_SECRET')
+    google_scopes = app.config.get('GOOGLE_SCOPES')
+    google_redirect_uri = app.config.get('GOOGLE_REDIRECT_URI')
 
-    if not gmail_client_id or not gmail_client_secret or not gmail_scopes or not gmail_redirect_uri:
-        app.logger.error("Missing Gmail OAuth credentials in configuration")
+    if not google_client_id or not google_client_secret or not google_scopes or not google_redirect_uri:
+        app.logger.error("Missing Google OAuth credentials in configuration")
         return
     else:
-        app.logger.info("Registering Gmail OAuth client")
-        app.logger.debug(f"Using Gmail client ID: {gmail_client_id[:5]}...")
+        app.logger.info("Registering Google OAuth client")
+        app.logger.debug(f"Using Google client ID: {google_client_id[:5]}...")
 
         oauth.register(
-            name='gmail',
-            client_id=gmail_client_id,
-            client_secret=gmail_client_secret,
-            redirect_uri=gmail_redirect_uri,
+            name='google',
+            client_id=google_client_id,
+            client_secret=google_client_secret,
+            redirect_uri=google_redirect_uri,
             access_token_url='https://oauth2.googleapis.com/token',
             authorize_url='https://accounts.google.com/o/oauth2/auth',
             api_base_url='https://www.googleapis.com/',
             client_kwargs={
-                'scope': gmail_scopes.split(),
+                'scope': google_scopes.split(),
                 'token_endpoint_auth_method': 'client_secret_post'
             }
         )
-        app.logger.info("Gmail OAuth client registered successfully")
+        app.logger.info("Google OAuth client registered successfully")
 
 
 def hubspot_oauth_client_register(app: Flask):
@@ -70,4 +70,4 @@ def hubspot_oauth_client_register(app: Flask):
     
 from .fireflies import routes as fireflies_routes
 from .hubspot import routes as hubspot_routes
-from .gmail import routes as gmail_routes
+from .google import routes as google_routes

@@ -42,7 +42,7 @@ class Config:
     API_USE_SETTINGS: Dict[str, bool] = {
         'USE_STRIPE': False,
         'USE_BITWARDEN': True,
-        'USE_GMAIL': True,
+        'USE_GOOGLE': True,
         'USE_OPENAI': True,
         'USE_MAILGUN': True,
         'USE_HUBSPOT': True,
@@ -74,11 +74,11 @@ class Config:
             'HUBSPOT_CLIENT_ID': None,
             'HUBSPOT_CLIENT_SECRET': None,
         },
-        'GMAIL': {
-            'GMAIL_REDIRECT_URI': None,
-            'GMAIL_CLIENT_ID': None,
-            'GMAIL_CLIENT_SECRET': None,
-            'GMAIL_SCOPES': "https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.readonly",
+        'GOOGLE': {
+            'GOOGLE_REDIRECT_URI': None,
+            'GOOGLE_CLIENT_ID': None,
+            'GOOGLE_CLIENT_SECRET': None,
+            'GOOGLE_SCOPES': "https://www.googleapis.com/auth/GOOGLE.send https://www.googleapis.com/auth/GOOGLE.readonly",
         },
         # Add more API configurations as needed
     }
@@ -88,7 +88,7 @@ class Config:
         'USE_STRIPE': 'STRIPE',
         'USE_BITWARDEN': 'BITWARDEN',
         'USE_MAILGUN': 'MAILGUN',
-        'USE_GMAIL': 'GMAIL',
+        'USE_GOOGLE': 'GOOGLE',
         'USE_OPENAI': 'OPENAI',
         'USE_HUBSPOT': 'HUBSPOT',
         # Add more mappings as needed

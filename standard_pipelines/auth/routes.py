@@ -6,7 +6,7 @@ from standard_pipelines.extensions import db
 from standard_pipelines.api.hubspot.models import HubSpotCredentials
 from uuid import UUID
 from flask_security.utils import hash_password
-from standard_pipelines.api.gmail.models import GoogleCredentials
+from standard_pipelines.api.google.models import GoogleCredentials
 
 from . import auth
 
@@ -24,10 +24,10 @@ def oauth_index():
             'description': 'Connect to HubSpot to sync contacts and deals'
         },
         'google': {
-            'enabled': bool(current_app.config.get('USE_GMAIL')),
+            'enabled': bool(current_app.config.get('USE_GOOGLE')),
             'connected': GoogleCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
             'icon': url_for('static', filename='images/google-icon.png'),
-            'description': 'Connect to Gmail for email integration'
+            'description': 'Connect to Google for email integration'
         }
         # Add other services here as they're implemented
     }
