@@ -14,7 +14,7 @@ def init_app(app: Flask):
     # For example, registering error handlers, before_request handlers, etc.
     
 def google_oauth_client_register(app: Flask):
-# TODO: Clean this up a little using dict/set checking method
+    # TODO: Clean this up a little using dict/set checking method
     google_client_id = app.config.get('GOOGLE_CLIENT_ID')
     google_client_secret = app.config.get('GOOGLE_CLIENT_SECRET')
     google_scopes = app.config.get('GOOGLE_SCOPES')

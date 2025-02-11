@@ -78,7 +78,7 @@ class Config:
             'GOOGLE_REDIRECT_URI': None,
             'GOOGLE_CLIENT_ID': None,
             'GOOGLE_CLIENT_SECRET': None,
-            'GOOGLE_SCOPES': "https://www.googleapis.com/auth/GOOGLE.send https://www.googleapis.com/auth/GOOGLE.readonly",
+            'GOOGLE_SCOPES': "https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.readonly",
         },
         # Add more API configurations as needed
     }

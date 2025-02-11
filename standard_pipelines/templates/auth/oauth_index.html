@@ -89,7 +89,7 @@
         </div>
         <p>{{ service.description }}</p>
         {% if service.enabled %}
-            <a href="{{ url_for('auth.login_' + name|lower) }}">
+            <a href="{{ url_for('api.login_' + name|lower) }}">
                 {% if service.connected %}
                     Reconnect to {{ name|title }}
                 {% else %}

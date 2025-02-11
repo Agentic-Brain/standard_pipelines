@@ -8,9 +8,10 @@ from flask_login import current_user, login_required
 from standard_pipelines.api.hubspot.models import HubSpotCredentials
 from standard_pipelines.data_flow.models import Client
 from standard_pipelines.extensions import oauth
+from .. import api
 
 
-@auth.route('/hubspot/oauth/login')
+@api.route('/hubspot/oauth/login')
 @login_required
 def login_hubspot():
     current_app.logger.info("Starting HubSpot OAuth login flow")
@@ -26,7 +27,7 @@ def login_hubspot():
         return jsonify({'error': 'HubSpot OAuth client not initialized'}), 500
 
     # TODO: Change this to use the preffered URL scheme based on production or development
-    redirect_uri = url_for('auth.authorize_hubspot', _external=True, _scheme='https')
+    redirect_uri = url_for('api.authorize_hubspot', _external=True, _scheme='https')
     current_app.logger.debug(f"Generated redirect URI: {redirect_uri}")
 
     try:
@@ -39,7 +40,7 @@ def login_hubspot():
 
 
 # 4) Callback URL where HubSpot will redirect the user after they authorize
-@auth.route('/hubspot/oauth/authorize')
+@api.route('/hubspot/oauth/authorize')
 @login_required
 def authorize_hubspot():
     current_app.logger.info("Processing HubSpot OAuth callback")
