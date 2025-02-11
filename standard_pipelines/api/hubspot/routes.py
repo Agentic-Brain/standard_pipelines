@@ -5,11 +5,12 @@ from standard_pipelines.auth import auth
 from flask import current_app, jsonify, render_template, session, url_for
 from flask_login import current_user, login_required
 
-from standard_pipelines.auth.models import HubSpotCredentials
+from standard_pipelines.api.hubspot.models import HubSpotCredentials
 from standard_pipelines.data_flow.models import Client
 from standard_pipelines.extensions import oauth
 
-@auth.route('/oauth/login/hubspot')
+
+@auth.route('/hubspot/oauth/login')
 @login_required
 def login_hubspot():
     current_app.logger.info("Starting HubSpot OAuth login flow")
@@ -32,13 +33,13 @@ def login_hubspot():
         auth_redirect = oauth.hubspot.authorize_redirect(redirect_uri)
         current_app.logger.debug(f"Authorization URL generated successfully")
         return auth_redirect
-    except (OAuth2Error, ConnectionError) as e:
+    except ConnectionError as e:
         current_app.logger.exception("Error during HubSpot OAuth redirect")
     return jsonify({'error': 'Failed to initiate OAuth flow'}), 500
 
 
 # 4) Callback URL where HubSpot will redirect the user after they authorize
-@auth.route('/oauth/authorize/hubspot')
+@auth.route('/hubspot/oauth/authorize')
 @login_required
 def authorize_hubspot():
     current_app.logger.info("Processing HubSpot OAuth callback")

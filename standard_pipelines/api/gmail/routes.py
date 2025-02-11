@@ -9,7 +9,7 @@ from authlib.integrations.base_client.errors import OAuthError
 from standard_pipelines.api import api
 
 #============= Routes ===============#
-@api.route('/oauth/login/gmail')
+@api.route('/gmail/oauth/login')
 @login_required
 def login_gmail():
     """Initiates OAuth flow by redirecting to Google's consent screen."""
@@ -38,7 +38,7 @@ def login_gmail():
         current_app.logger.exception(f"Error during Gmail OAuth redirect: {e}")
         return jsonify({'error': f'Unexpected error during authorization'}), 500
 
-@api.route('/oauth/authorize/gmail')
+@api.route('/gmail/oauth/authorize')
 @login_required
 def authorize_gmail():
     """Handles OAuth callback, exchanges code for tokens."""
