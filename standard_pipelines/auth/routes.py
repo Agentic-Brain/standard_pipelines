@@ -3,12 +3,12 @@ from standard_pipelines.main.decorators import require_api_key
 from standard_pipelines.data_flow.models import Client
 from standard_pipelines.extensions import db
 from uuid import UUID
-from . import auth
 from standard_pipelines.extensions import oauth
 from flask_security.utils import hash_password
 from functools import wraps
 import secrets
 
+from . import auth
 
 @auth.route('/oauth')
 def oauth_index():
@@ -20,6 +20,10 @@ def oauth_index():
         'hubspot': {
             'icon': 'https://www.hubspot.com/hubfs/HubSpot_Logos/HubSpot-Inversed-Favicon.png',
             'description': 'Connect to HubSpot CRM'
+        },
+        'google': {
+            'icon': 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+            'description': 'Connect to Google Workspace'
         }
         # Add other services here as they're implemented
     }
