@@ -4,7 +4,7 @@ from standard_pipelines.auth.models import User
 from standard_pipelines.data_flow.models import Client, DataFlow, ClientDataFlowJoin
 from standard_pipelines.extensions import db
 import uuid
-from test_auth import create_client_util
+from tests.test_auth import create_client_util
 
 
 @pytest.fixture(scope="session")

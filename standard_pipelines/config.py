@@ -313,6 +313,12 @@ class TestingConfig(Config):
         super().__init__('TESTING')
         self.verify_attributes()
 
+    def set_additional_config(self) -> None:
+        additional_keys = [
+            'GMAIL_TEST_RECIPIENT'
+        ]
+        for key in additional_keys:
+            setattr(self, key, self.get_env(key))
 
 class ProductionConfig(Config):
     def __init__(self) -> None:
@@ -324,7 +330,7 @@ class ProductionConfig(Config):
 
     def set_additional_config(self) -> None:
         additional_keys = [
-
+            
         ]
         for key in additional_keys:
             setattr(self, key, self.get_env(key))
