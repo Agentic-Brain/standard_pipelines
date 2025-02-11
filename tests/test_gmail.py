@@ -5,7 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 import json
 import urllib.parse
 from unittest.mock import patch, MagicMock, ANY
-from standard_pipelines.api.gmail.services import GmailService
+from standard_pipelines.api.google.gmail_services import GmailAPIManager
 from datetime import datetime, timezone, timedelta
 from googleapiclient.errors import HttpError
 

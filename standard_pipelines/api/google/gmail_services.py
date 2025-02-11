@@ -1,6 +1,5 @@
 from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
-from standard_pipelines.api.google.models import GoogleCredentials
 from email.message import EmailMessage
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -11,23 +10,23 @@ import base64
 
 
 class GmailAPIManager(BaseAPIManager):
-    def __init__(self, api_config: dict, credentials: GoogleCredentials) -> None:
+    def __init__(self, api_config: dict) -> None:
         super().__init__(api_config)
-        self.user_db_credentials = credentials
         self.google_credentials = Credentials(
                 token = None,
-                refresh_token = self.user_db_credentials.refresh_token,
+                refresh_token = api_config['refresh_token'],
                 token_uri = "https://oauth2.googleapis.com/token",
-                client_id = self.api_config['GMAIL_CLIENT_ID'],
-                client_secret = self.api_config['GMAIL_CLIENT_SECRET'],
-                scopes = self.api_config['GMAIL_SCOPES'].split()
+                client_id = current_app.config['GOOGLE_CLIENT_ID'],
+                client_secret = current_app.config['GOOGLE_CLIENT_SECRET'],
+                scopes = current_app.config['GOOGLE_SCOPES'].split()
             )
-        self.refresh_token()
+        self.gmail_service = build('gmail', 'v1', credentials=self.google_credentials)
 
     @property
     def required_config(self) -> list[str]:
-        return ['GMAIL_CLIENT_ID', 'GMAIL_CLIENT_SECRET', 'GMAIL_SCOPES']
+        return ['refresh_token']
     
+    @property
     def refresh_token(self):
         """Attempts to refresh the access token using the stored refresh token."""
         try:
@@ -49,14 +48,13 @@ class GmailAPIManager(BaseAPIManager):
     def send_email(self, to_address, subject, body):
         try:
             current_app.logger.info(f'Sending email to {to_address}')
-            email_data = self.structure_email_data(to_address, subject, body)
+            email_data = self._structure_email_data(to_address, subject, body)
             if 'error' in email_data:
                 return email_data  
 
             # Create the Gmail service object
-            service = build('gmail', 'v1', credentials=self.google_credentials)
             # Sends the email using the Gmail API
-            message = service.users().messages().send(userId="me", body=email_data).execute()
+            message = self.gmail_service.users().messages().send(userId="me", body=email_data).execute()
 
             current_app.logger.info(f'Email sent successfully to {to_address} with message id: {message["id"]}')
             return {'message': 'Email sent successfully', 'message_id': message['id']}
@@ -77,7 +75,7 @@ class GmailAPIManager(BaseAPIManager):
             return {'error': 'An unexpected error occurred while sending email'}
 
     #====== Helper functions ======#
-    def structure_email_data(self, to_address, subject, body):
+    def _structure_email_data(self, to_address, subject, body):
         try:            
             # Construct MIME message using EmailMessage class
             message = EmailMessage()
