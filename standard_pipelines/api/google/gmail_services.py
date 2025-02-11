@@ -1,6 +1,6 @@
 from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
-from standard_pipelines.auth.models import GmailCredentials
+from standard_pipelines.api.google.models import GmailCredentials
 from email.message import EmailMessage
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -11,7 +11,7 @@ import base64
 
 
 
-class GmailService(BaseAPIManager):
+class GmailAPIManager(BaseAPIManager):
     def __init__(self, api_config: dict, credentials: GmailCredentials) -> None:
         super().__init__(api_config)
         self.user_db_credentials = credentials

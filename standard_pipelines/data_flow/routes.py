@@ -1,5 +1,6 @@
 from flask import current_app, jsonify, request
-from standard_pipelines.auth.models import HubSpotCredentials, FirefliesCredentials
+from standard_pipelines.api.hubspot.models import HubSpotCredentials
+from standard_pipelines.api.fireflies.models import FirefliesCredentials
 from standard_pipelines.extensions import db
 from uuid import UUID
 from .models import Client

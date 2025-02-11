@@ -1,37 +1,40 @@
-from flask import Blueprint, jsonify, request, current_app, render_template
+from flask import Blueprint, jsonify, request, current_app, render_template, url_for
 from standard_pipelines.main.decorators import require_api_key
 from standard_pipelines.data_flow.models import Client
+from flask_login import login_required, current_user
 from standard_pipelines.extensions import db
+from standard_pipelines.api.hubspot.models import HubSpotCredentials
 from uuid import UUID
-from standard_pipelines.extensions import oauth
 from flask_security.utils import hash_password
-from functools import wraps
-import secrets
+from standard_pipelines.api.gmail.models import GoogleCredentials
 
 from . import auth
 
 @auth.route('/oauth')
+@login_required
 def oauth_index():
     """Index page showing all available OAuth login options."""
     current_app.logger.debug("Rendering OAuth index page")
     
-    # Service-specific information
-    oauth_service_info = {
+    oauth_services = {
         'hubspot': {
-            'icon': 'https://www.hubspot.com/hubfs/HubSpot_Logos/HubSpot-Inversed-Favicon.png',
-            'description': 'Connect to HubSpot CRM'
+            'enabled': bool(current_app.config.get('USE_HUBSPOT')),
+            'connected': HubSpotCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
+            'icon': url_for('static', filename='images/hubspot-icon.png'),
+            'description': 'Connect to HubSpot to sync contacts and deals'
         },
         'google': {
-            'icon': 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
-            'description': 'Connect to Google Workspace'
+            'enabled': bool(current_app.config.get('USE_GMAIL')),
+            'connected': GoogleCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
+            'icon': url_for('static', filename='images/google-icon.png'),
+            'description': 'Connect to Gmail for email integration'
         }
         # Add other services here as they're implemented
     }
     
     return render_template(
         'auth/oauth_index.html',
-        oauth=oauth,
-        oauth_service_info=oauth_service_info
+        oauth_services=oauth_services
     )
 
 # TODO: Remove upon creation of admin dash    
