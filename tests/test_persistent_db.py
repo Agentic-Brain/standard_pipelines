@@ -4,13 +4,13 @@ from standard_pipelines.auth.models import User
 from standard_pipelines.data_flow.models import Client, DataFlow, ClientDataFlowJoin
 from standard_pipelines.extensions import db
 import uuid
-from test_auth import create_client_util
+from tests.test_auth import create_client_util
 
 
 @pytest.fixture(scope="session")
 def persistent_db(app):
     """Creates a persistent database setup with client, user, and dataflow"""
-        # Create client using existing utility
+    # Create client using existing utility
     client = create_client_util()
     
     # Create user with default values from config

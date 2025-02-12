@@ -1,4 +1,4 @@
-from sqlalchemy import DateTime, func, String, Integer, Boolean, ForeignKey, Text, UniqueConstraint
+from sqlalchemy import DateTime, func, String, Integer, Boolean, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import Mapped, relationship, mapped_column, declared_attr
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.exc import IntegrityError
@@ -102,45 +102,6 @@ class BaseCredentials(SecureMixin):
         return f"<{self.__class__.__name__} for {self.client.name}>"
 
 
-class HubSpotCredentials(BaseCredentials):
-    """Credentials for HubSpot API access."""
-    __tablename__ = 'hubspot_credential'
-    
-    # Previously overshadowed the parent's client_id column -- rename it:
-    hubspot_client_id: Mapped[str] = mapped_column(String(255))
-    hubspot_client_secret: Mapped[str] = mapped_column(String(255))
-    hubspot_refresh_token: Mapped[str] = mapped_column(String(255))
-    
-    def __init__(self, client_id: UUID, hubspot_client_id: str, hubspot_client_secret: str, hubspot_refresh_token: str):
-        super().__init__(client_id=client_id)
-        self.hubspot_client_id = hubspot_client_id
-        self.hubspot_client_secret = hubspot_client_secret
-        self.hubspot_refresh_token = hubspot_refresh_token
-
-
-class FirefliesCredentials(BaseCredentials):
-    """Credentials for Fireflies.ai API access."""
-    __tablename__ = 'fireflies_credential'
-    
-    # API Key for Fireflies.ai
-    fireflies_api_key: Mapped[str] = mapped_column(String(255))
-    
-    def __init__(self, client_id: UUID, fireflies_api_key: str):
-        self.client_id = client_id
-        self.fireflies_api_key = fireflies_api_key
-        
-        
-class OpenAICredentials(BaseCredentials):
-    """Credentials for OpenAI API access."""
-    __tablename__ = 'openai_credential'
-    
-    # API Key for OpenAI
-    openai_api_key: Mapped[str] = mapped_column(Text)
-    
-    def __init__(self, client_id: UUID, openai_api_key: str):
-        self.client_id = client_id
-        self.openai_api_key = openai_api_key
-        
 class AnthropicCredentials(BaseCredentials):
     """Credentials for Anthropic API access."""
     __tablename__ = 'anthropic_credential'
