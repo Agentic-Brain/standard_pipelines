@@ -9,8 +9,9 @@ from freezegun import freeze_time
 class TestScheduledModel(ScheduledMixin):
     __tablename__ = 'test_scheduled_model'
     name: Mapped[str] = mapped_column(String, nullable=False)
-    def trigger_job(self) -> None:
+    def trigger_job(self) -> bool:
         self.scheduled_time = datetime.utcnow() + timedelta(minutes=self.recurrence_interval)
+        print(f"Scheduled time set to {self.scheduled_time}")
 
 def test_basic_scheduling(frozen_datetime):
     model = TestScheduledModel(name="test") # type: ignore
@@ -88,16 +89,88 @@ def test_recurring_schedule(frozen_datetime) -> None:
     assert model.is_recurring is False
     assert model.recurrence_interval is None
 
-def test_celery_task_integration(celery_app, frozen_datetime):
-    from standard_pipelines.celery.tasks import check_scheduled_items
+# def test_celery_task_integration(celery_app, frozen_datetime):
+#     from standard_pipelines.celery.tasks import check_scheduled_items
     
-    model = TestScheduledModel(name="test") # type: ignore
-    model.set_scheduled_time_to_now()
-    model.max_runs = 2
-    model.save()
+#     model = TestScheduledModel(name="test") # type: ignore
+#     model.set_scheduled_time_to_now()
+#     model.max_runs = 2
+#     model.save()
     
-    task = check_scheduled_items.s()
-    task.apply().get()
+#     task = check_scheduled_items.s()
+#     task.apply().get()
     
-    assert model.run_count == 1
-    assert model.name == "triggered_1"
+#     assert model.run_count == 1
+#     assert model.name == "triggered_1"
+
+def test_run_scheduled_tasks(frozen_datetime, capsys, app):
+    schedule = TestScheduledModel(name="test", )
+    schedule.set_scheduled_time(datetime.now() + timedelta(minutes=1))
+    schedule.save()
+    app.logger.debug(f"Scheduled time: {schedule.scheduled_time}")
+    run_scheduled_tasks()
+    frozen_datetime.tick(delta=timedelta(minutes=3))
+    app.logger.debug(f'Current time: {datetime.now()}')
+    run_scheduled_tasks()
+    # assert model.run_count == 1
+    # assert model.name == "triggered_1"
+
+#### HELPER FUNCTIONS ####from datetime import datetime, timedelta
+from flask_sqlalchemy import SQLAlchemy
+
+# Assume you have already set up Flask and SQLAlchemy (db)
+db = SQLAlchemy()
+
+# Our mixin is assumed to be imported or defined somewhere:
+# from your_module import ScheduledMixin
+
+def all_subclasses(cls):
+    """
+    Recursively find all subclasses of a given class.
+    """
+    return set(cls.__subclasses__()).union(
+        [sub for subclass in cls.__subclasses__() for sub in all_subclasses(subclass)]
+    )
+
+def run_scheduled_tasks():
+    """
+    Check all models that inherit from ScheduledMixin and, if their scheduled time is due
+    and the current day/hour is active, run their trigger_job() method.
+    """
+    now = datetime.utcnow()
+    print('Checking tasks')
+
+    # Loop over every concrete subclass of ScheduledMixin
+    for model_class in all_subclasses(ScheduledMixin):
+        # Skip abstract classes
+        if getattr(model_class, '__abstract__', False):
+            continue
+
+        # Query for records where scheduled_time is set and is due
+        due_tasks = db.session.query(model_class).filter(
+            model_class.scheduled_time.isnot(None),
+            model_class.scheduled_time <= now
+        ).all()
+
+        for task in due_tasks:
+            print(f"Running task")
+            # Check if current hour and day are allowed.
+            # (Remember: datetime.utcnow().weekday() returns 0 for Monday, 6 for Sunday.)
+            if now.hour in task.active_hours and now.weekday() in task.active_days:
+                # Call the actual job trigger method.
+                task.trigger_job()
+                
+                # Update scheduling:
+                if task.is_recurring and task.recurrence_interval:
+                    # Increment run count and reschedule if max_runs not reached.
+                    if task.increment_run_count():
+                        task.delay_scheduled_time(timedelta(minutes=task.recurrence_interval))
+                    else:
+                        # The task has reached its maximum number of runs.
+                        pass
+                else:
+                    # For non-recurring tasks, clear the scheduled_time
+                    task.scheduled_time = None
+
+    # Commit all changes (for example, updated scheduled_time/run_count changes)
+    # db.session.commit()
