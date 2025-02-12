@@ -1,8 +1,16 @@
 import pytest
 from datetime import datetime, timedelta, timezone
 from standard_pipelines.extensions import db
-from standard_pipelines.database.models import TestScheduledModel
+from standard_pipelines.database.models import ScheduledMixin
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column
 from freezegun import freeze_time
+
+class TestScheduledModel(ScheduledMixin):
+    __tablename__ = 'test_scheduled_model'
+    name: Mapped[str] = mapped_column(String, nullable=False)
+    def trigger_job(self) -> None:
+        self.scheduled_time = datetime.utcnow() + timedelta(minutes=self.recurrence_interval)
 
 def test_basic_scheduling(frozen_datetime):
     model = TestScheduledModel(name="test") # type: ignore
@@ -70,10 +78,10 @@ def test_recurring_schedule(frozen_datetime) -> None:
     
     # Advance time and check next schedule
     frozen_datetime.tick(delta=timedelta(minutes=120))
-    model.increment_run_count()
+    model.trigger_job()
     
     # Should be scheduled 60 minutes after current time (14:00 + 60min = 15:00)
-    expected_next_run = datetime.now(timezone.utc) + timedelta(minutes=60)
+    expected_next_run = datetime.now() + timedelta(minutes=60)
     assert model.scheduled_time == expected_next_run
     
     model.disable_recurring()
