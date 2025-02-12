@@ -12,6 +12,7 @@ from testcontainers.postgres import PostgresContainer
 from testcontainers.redis import RedisContainer
 from freezegun import freeze_time
 from test_database import TestScheduledModel
+from datetime import datetime, timedelta
 
 
 
@@ -95,13 +96,7 @@ def celery_app(app):
 
 @pytest.fixture
 def frozen_datetime():
-    """Freeze time for deterministic datetime testing."""
-    with freeze_time("2024-02-06 12:00:00") as frozen:
+    """Fixture to manage frozen time in tests."""
+    with freeze_time("2025-01-01 12:00:00") as frozen:
         yield frozen
 
-@pytest.fixture(autouse=True)
-def cleanup_scheduled_models(db_session):
-    """Cleanup after each test"""
-    yield
-    db_session.query(TestScheduledModel).delete()
-    db_session.commit()
