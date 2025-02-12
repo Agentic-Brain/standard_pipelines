@@ -6,11 +6,14 @@ import uuid
 from flask import current_app
 from functools import cached_property
 from hubspot.files import ApiException
+
+from ...api.fireflies.services import FirefliesAPIManager
+from ...api.hubspot.services import HubSpotAPIManager
 from standard_pipelines.data_flow.exceptions import APIError
 
 from sqlalchemy import UUID
 from ..services import BaseDataFlow
-from ..utils import HubSpotAPIManager, FirefliesAPIManager, OpenAIAPIManager
+from ...api.openai.services import OpenAIAPIManager
 from ...auth.models import HubSpotCredentials, FirefliesCredentials, OpenAICredentials
 from ..exceptions import InvalidWebhookError
 from .models import FF2HSOnTranscriptConfiguration
@@ -115,7 +118,7 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
                 # "appointmentscheduled" can be changed to your actual stage ID
                 resp = self.hubspot_api_manager.create_deal(
                     deal_name=deal_name,
-                    stage_id="995768441",
+                    stage_id=self.configuration.intial_deal_stage_id,
                     contact_id=contact["id"]
                 )
             id = resp["id"]

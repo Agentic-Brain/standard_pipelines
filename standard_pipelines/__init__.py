@@ -56,6 +56,12 @@ def create_app():
     app.register_blueprint(auth_blueprint)
     auth_init_app(app)
 
+    # Add the new API blueprint registration
+    from .api import api as api_blueprint
+    from .api import init_app as api_init_app
+    app.register_blueprint(api_blueprint)
+    api_init_app(app)
+
     from .data_flow import data_flow as data_flow_blueprint
     from .data_flow import init_app as data_flow_init_app
     app.register_blueprint(data_flow_blueprint)
@@ -84,38 +90,48 @@ def create_app():
     @app.context_processor
     def inject_semver():
         return dict(app_version=str(APP_VERSION), flask_base_version=str(FLASK_BASE_VERSION))
-    # Migrate must be in server init function to work
-    # migrate.init_app(app, database)
 
-
-    
-    # TODO: move into seperate blueprint?
-    # Admin setup
 
     return app
 
 def init_logging(app: Flask) -> None:
-    # Clear existing handlers
+    # Clear ALL handlers (including Flask's default handlers)
     app.logger.handlers.clear()
+    logging.getLogger().handlers.clear()
 
     # Set the logger level
     app.logger.setLevel(logging.INFO)
-
+    
     # Create logs directory if it doesn't exist
     logs_dir = 'logs'
     if not os.path.exists(logs_dir):
         os.makedirs(logs_dir)
 
-    # File handler
+    # TODO: Probably want to set this to use the confiig system at some point
+    environment_type = os.getenv('FLASK_ENV', 'development')
+    
+    # Define format based on environment
+    if environment_type == 'production':
+        log_format = '%(asctime)s - %(levelname)s : %(message)s'
+        date_format = '%y-%m-%d %H:%M'
+    elif environment_type == 'development':
+        log_format = '%(filename)s:%(lineno)d - %(levelname)s : %(message)s'
+        date_format = None
+    else:  # staging
+        log_format = '%(asctime)s - %(filename)s:%(lineno)d - %(levelname)s : %(message)s'
+        date_format = '%y-%m-%d %H:%M'
+
+    # File handler with environment-specific format
     file_handler = logging.FileHandler(f'logs/{str(time.ctime(time.time()))}.log')
-    file_formatter = logging.Formatter('%(asctime)s %(filename)s - %(funcName)s - %(lineno)d - %(name)s - %(levelname)s : %(message)s')
+    file_formatter = logging.Formatter(log_format, datefmt=date_format)
     file_handler.setFormatter(file_formatter)
     file_handler.setLevel(logging.DEBUG)
 
-    # Stream handler with color
+    # Stream handler with color and environment-specific format
     stream_handler = logging.StreamHandler()
     stream_formatter = colorlog.ColoredFormatter(
-        '%(log_color)s%(levelname)s - %(name)s:%(reset)s %(message)s',
+        '%(log_color)s' + log_format + '%(reset)s',
+        datefmt=date_format,
         log_colors={
             'DEBUG': 'cyan',
             'INFO': 'green',
@@ -129,12 +145,15 @@ def init_logging(app: Flask) -> None:
     # Add handlers to app.logger
     app.logger.addHandler(file_handler)
     app.logger.addHandler(stream_handler)
+    
+    # Prevent propagation to avoid duplicate logs
+    app.logger.propagate = False
 
 
 def init_sentry() -> None:
     config = get_config()
     sentry_sdk.init(
-        dsn=config.SENTRY_DSN,
+        dsn=config.SENTRY_DSN, #type: ignore
         environment=str(os.getenv('FLASK_ENV')),
         release=APP_VERSION if APP_VERSION else FLASK_BASE_VERSION,
         traces_sample_rate=1.0,

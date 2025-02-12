@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 import os
 from typing import Any, Dict
 from standard_pipelines.version import get_versions
+# TODO: Should shift this from warnings to logging
+import warnings
 
 class Config:
     # Core settings that are required for the application to function
@@ -10,6 +12,10 @@ class Config:
         'DB_PASS': None,
         'DB_HOST': None,
         'DB_PORT': None,
+        'DB_NAME': None,
+        'REDIS_HOST': None,
+        'REDIS_PORT': 6379,
+        'REDIS_DB': 0,
         'SECRET_KEY': None,
         'ENCRYPTION_KEY': None,
         'SECURITY_PASSWORD_SALT': None,
@@ -66,7 +72,6 @@ class Config:
         'HUBSPOT': {
             'HUBSPOT_CLIENT_ID': None,
             'HUBSPOT_CLIENT_SECRET': None,
-            'HUBSPOT_REFRESH_TOKEN': None,
         },
         # Add more API configurations as needed
     }
@@ -138,10 +143,15 @@ class Config:
 
     def _configure_api_settings(self) -> None:
         """Configure API-specific settings based on which APIs are in use"""
+        env = os.getenv('FLASK_ENV', 'development').lower()
+        is_dev_or_test = env in ['development', 'testing']
+        
         for api_flag, api_group in self.API_REQUIREMENTS.items():
             if getattr(self, api_flag, False):
                 # If this API is in use, configure its settings
                 api_settings = self.API_SETTINGS[api_group]
+                missing_configs = []
+                
                 for key, default_value in api_settings.items():
                     env_value = self.get_env(key)
                     if env_value is not None:
@@ -149,23 +159,48 @@ class Config:
                     elif default_value is not None:
                         setattr(self, key, default_value)
                     else:
-                        raise ValueError(
-                            f"Required API configuration '{key}' is not set for {api_group}. "
-                            f"This must be set via environment variable {self.env_prefix}_{key} "
-                            f"when {api_flag} is enabled."
-                        )
+                        if is_dev_or_test:
+                            missing_configs.append(key)
+                            setattr(self, key, None)  # Set to None for dev/test
+                        else:
+                            raise ValueError(
+                                f"Required API configuration '{key}' is not set for {api_group}. "
+                                f"This must be set via environment variable {self.env_prefix}_{key} "
+                                f"when {api_flag} is enabled."
+                            )
+                
+                if is_dev_or_test and missing_configs:
+                    warnings.warn(
+                        f"Warning: {api_group} is enabled but missing configurations: {', '.join(missing_configs)}. "
+                        f"These should be set via environment variables in {self.env_prefix} prefix. "
+                        "This warning is only shown in development/testing environments."
+                    )
 
     def verify_api_configuration(self) -> None:
         """Verify that all required API configurations are set when their corresponding API is in use"""
+        env = os.getenv('FLASK_ENV', 'development').lower()
+        is_dev_or_test = env in ['development', 'testing']
+        
         for api_flag, api_group in self.API_REQUIREMENTS.items():
             if getattr(self, api_flag, False):
                 api_settings = self.API_SETTINGS[api_group]
+                missing_configs = []
+                
                 for key in api_settings:
                     if getattr(self, key, None) is None:
-                        raise ValueError(
-                            f"Missing required API configuration for {api_group}: {key}. "
-                            f"This must be set when {api_flag} is enabled."
-                        )
+                        if is_dev_or_test:
+                            missing_configs.append(key)
+                        else:
+                            raise ValueError(
+                                f"Missing required API configuration for {api_group}: {key}. "
+                                f"This must be set when {api_flag} is enabled."
+                            )
+                
+                if is_dev_or_test and missing_configs:
+                    warnings.warn(
+                        f"Warning: {api_group} is enabled but missing configurations: {', '.join(missing_configs)}. "
+                        "This warning is only shown in development/testing environments."
+                    )
 
     def verify_attributes(self) -> None:
         '''Verifies that the configuration object has all required attributes'''
@@ -203,6 +238,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     def __init__(self) -> None:
+        self.FLASK_ENV = 'development'
         # Postgres 
         self.DB_USER: str = 'postgres'
         self.DB_PASS: str = 'postgres_password'
@@ -243,7 +279,7 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     WTF_CSRF_ENABLED = False  # Disable CSRF tokens in the forms for testing
     def __init__(self) -> None:
-        
+        self.FLASK_ENV = 'testing'
         # Postgres (using SQLite for testing)
         self.DB_USER: str = 'postgres'
         self.DB_PASS: str = 'postgres_password'
@@ -278,6 +314,7 @@ class TestingConfig(Config):
 
 class ProductionConfig(Config):
     def __init__(self) -> None:
+        self.FLASK_ENV = 'production'
         # Has to be set after initial creation
         super().__init__('PRODUCTION')
         self.verify_attributes()
@@ -292,6 +329,7 @@ class ProductionConfig(Config):
 
 class StagingConfig(Config):
     def __init__(self) -> None:
+        self.FLASK_ENV = 'staging'
         # Has to be set after initial creation, similar to ProductionConfig
         super().__init__('STAGING')
         self.verify_attributes()
@@ -313,4 +351,3 @@ def get_config() -> Config:
         'production': ProductionConfig
     }
     return config_classes.get(env, DevelopmentConfig)()
-
