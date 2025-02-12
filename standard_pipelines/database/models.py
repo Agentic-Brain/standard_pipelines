@@ -47,7 +47,7 @@ class VersionedMixin(BaseMixin):
         db.session.add(self)
         db.session.commit()
 
-class ScheduledMixin(BaseMixin, ABC):
+class ScheduledMixin(BaseMixin):
     __abstract__ = True
 
     scheduled_time: Mapped[Optional[DateTime]] = mapped_column(DateTime, nullable=True, index=True)
