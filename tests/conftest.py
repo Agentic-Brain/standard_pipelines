@@ -36,6 +36,7 @@ def app(request):
     redis_url = f"redis://{redis.get_container_host_ip()}:{redis.get_exposed_port(6379)}/0"
     os.environ['TESTING_BROKER_URL'] = redis_url
     os.environ['TESTING_RESULT_BACKEND'] = redis_url
+    os.environ['SERVER_NAME'] = 'localhost'
     
     # Create the app with the test configuration
     app = create_app()

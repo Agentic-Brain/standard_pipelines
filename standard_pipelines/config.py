@@ -42,6 +42,7 @@ class Config:
     API_USE_SETTINGS: Dict[str, bool] = {
         'USE_STRIPE': False,
         'USE_BITWARDEN': True,
+        'USE_GOOGLE': True,
         'USE_OPENAI': True,
         'USE_MAILGUN': True,
         'USE_HUBSPOT': True,
@@ -73,6 +74,12 @@ class Config:
             'HUBSPOT_CLIENT_ID': None,
             'HUBSPOT_CLIENT_SECRET': None,
         },
+        'GOOGLE': {
+            'GOOGLE_REDIRECT_URI': None,
+            'GOOGLE_CLIENT_ID': None,
+            'GOOGLE_CLIENT_SECRET': None,
+            'GOOGLE_SCOPES': "https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.readonly",
+        },
         # Add more API configurations as needed
     }
 
@@ -81,6 +88,7 @@ class Config:
         'USE_STRIPE': 'STRIPE',
         'USE_BITWARDEN': 'BITWARDEN',
         'USE_MAILGUN': 'MAILGUN',
+        'USE_GOOGLE': 'GOOGLE',
         'USE_OPENAI': 'OPENAI',
         'USE_HUBSPOT': 'HUBSPOT',
         # Add more mappings as needed
@@ -89,7 +97,7 @@ class Config:
     # Data flow configuration paths
     DATA_FLOW_CONFIG_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config', 'data_flow')
     TAP_HUBSPOT_CONTACTS_CATALOG_PATH = os.path.join(DATA_FLOW_CONFIG_DIR, 'tap_hubspot_contacts_catalog.json')
-
+ 
     def __init__(self, env_prefix: str) -> None:
         # These are all defined just to prevent errors with type checking
         self.DB_USER: str
@@ -311,6 +319,12 @@ class TestingConfig(Config):
         super().__init__('TESTING')
         self.verify_attributes()
 
+    def set_additional_config(self) -> None:
+        additional_keys = [
+            'GMAIL_TEST_RECIPIENT'
+        ]
+        for key in additional_keys:
+            setattr(self, key, self.get_env(key))
 
 class ProductionConfig(Config):
     def __init__(self) -> None:
@@ -322,7 +336,7 @@ class ProductionConfig(Config):
 
     def set_additional_config(self) -> None:
         additional_keys = [
-
+            
         ]
         for key in additional_keys:
             setattr(self, key, self.get_env(key))
