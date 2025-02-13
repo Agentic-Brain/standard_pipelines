@@ -11,7 +11,7 @@ from standard_pipelines.api.hubspot.services import HubSpotAPIManager
 from standard_pipelines.data_flow.exceptions import APIError
 from . import testing
 from standard_pipelines.api.hubspot.models import HubSpotCredentials
-
+from standard_pipelines.api.dialpad.services import DialpadAPIManager
 # Example config for HubSpot – fill these with your actual values or load from env
 
 
@@ -230,3 +230,15 @@ def test_deal_flow():
         
     except (ApiException, APIError) as e:
         return jsonify({"error": str(e)}), 400
+
+
+@testing.route("/transcript/<call_id>", methods=["GET"])
+def get_transcript(call_id):
+    api_config = {"api_key": request.headers.get("X-API-Key")}
+    manager = DialpadAPIManager(api_config)
+    transcript, user_ids, names = manager.transcript(call_id)
+    return jsonify({
+        "transcript": transcript,
+        "user_ids": user_ids,
+        "names": names
+    })

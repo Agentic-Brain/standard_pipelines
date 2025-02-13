@@ -6,6 +6,7 @@ from typing import Optional
 from datetime import datetime
 
 class DialpadAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
+    
     class DialpadAuthenticator(AuthBase):
         def __init__(self, api_key: str) -> None:
             self.api_key = api_key
