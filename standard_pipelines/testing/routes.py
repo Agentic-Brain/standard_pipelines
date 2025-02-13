@@ -9,7 +9,6 @@ from standard_pipelines.extensions import db
 # from the module where you defined it.
 from standard_pipelines.api.hubspot.services import HubSpotAPIManager
 from standard_pipelines.data_flow.exceptions import APIError
-from standard_pipelines.data_flow.nurture.models import NurtureModel
 from . import testing
 
 

@@ -11,7 +11,6 @@ from standard_pipelines.extensions import db
 from testcontainers.postgres import PostgresContainer
 from testcontainers.redis import RedisContainer
 from freezegun import freeze_time
-from test_database import TestScheduledModel
 from datetime import datetime, timedelta
 
 
