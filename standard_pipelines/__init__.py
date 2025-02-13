@@ -62,6 +62,10 @@ def create_app():
     app.register_blueprint(api_blueprint)
     api_init_app(app)
 
+    # Register Dialpad API blueprint
+    from .api.dialpad import bp as dialpad_blueprint
+    app.register_blueprint(dialpad_blueprint, url_prefix="/api/dialpad")
+
     from .data_flow import data_flow as data_flow_blueprint
     from .data_flow import init_app as data_flow_init_app
     app.register_blueprint(data_flow_blueprint)
