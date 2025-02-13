@@ -185,7 +185,8 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
             for assoc in note_associations:
                 for note_ref in assoc["to"]:
                     note = self.api_client.crm.objects.notes.basic_api.get_by_id(
-                        note_ref["id"]
+                        note_ref["id"],
+                        properties=["hs_note_body", "createdate", "updatedate"]
                     ).to_dict()
                     notes.append(note)
             return notes
@@ -211,7 +212,8 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
                 for assoc in item_associations:
                     for item_ref in assoc["to"]:
                         item = getattr(self.api_client.crm.objects, eng_type).basic_api.get_by_id(
-                            item_ref["id"]
+                            item_ref["id"],
+                            properties=["id", "createdate", "updatedate", "outcome", "team_notes", "hs_call_to_number"]
                         ).to_dict()
                         items.append({"type": eng_type, **item})
             return items

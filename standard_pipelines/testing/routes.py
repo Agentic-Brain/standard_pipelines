@@ -10,24 +10,10 @@ from standard_pipelines.extensions import db
 from standard_pipelines.api.hubspot.services import HubSpotAPIManager
 from standard_pipelines.data_flow.exceptions import APIError
 from . import testing
-
+from standard_pipelines.api.hubspot.models import HubSpotCredentials
 
 # Example config for HubSpot – fill these with your actual values or load from env
-def get_hubspot_manager(client_id: str | None = None) -> HubSpotAPIManager:
-    """Get a HubSpot manager instance with credentials for the given client.
-    
-    For testing purposes, we'll use mock credentials that won't make actual API calls.
-    In production, we would fetch real credentials from the database.
-    """
-    from unittest.mock import MagicMock
-    
-    # Create a mock HubSpotAPIManager that won't make actual API calls
-    mock_manager = MagicMock(spec=HubSpotAPIManager)
-    mock_manager.deal_by_deal_id.return_value = {"id": "test-deal"}
-    mock_manager.get_deal_notes.return_value = [{"id": "test-note"}]
-    mock_manager.get_deal_items.return_value = [{"id": "test-item"}]
-    
-    return mock_manager
+
 
 @testing.route("/create-contact", methods=["POST"])
 def test_create_contact():
@@ -155,7 +141,18 @@ def test_create_note():
 
     return jsonify({"message": "Note created"}), 201
 
-@testing.route("/test/deal/<client_id>/<deal_id>", methods=["GET"])
+def get_hubspot_manager(client_id: str) -> HubSpotAPIManager:
+    credentials: Optional[HubSpotCredentials] = HubSpotCredentials.query.filter_by(client_id=client_id).first()
+    if credentials is None:
+        raise ValueError("No HubSpot credentials found for client")
+    hubspot_config = {
+        "client_id": credentials.hubspot_client_id,
+        "client_secret": credentials.hubspot_client_secret,
+        "refresh_token": credentials.hubspot_refresh_token
+    }
+    return HubSpotAPIManager(hubspot_config)
+
+@testing.route("/deal/<client_id>/<deal_id>", methods=["GET"])
 def test_get_deal(client_id: str, deal_id: str):
     """Get a deal by ID with all properties."""
     try:
@@ -165,7 +162,7 @@ def test_get_deal(client_id: str, deal_id: str):
     except (ApiException, APIError) as e:
         return jsonify({"error": str(e)}), 400
 
-@testing.route("/test/deal/<client_id>/<deal_id>/notes", methods=["GET"])
+@testing.route("/deal/<client_id>/<deal_id>/notes", methods=["GET"])
 def test_get_deal_notes(client_id: str, deal_id: str):
     """Get all notes associated with a deal."""
     try:
@@ -175,7 +172,7 @@ def test_get_deal_notes(client_id: str, deal_id: str):
     except (ApiException, APIError) as e:
         return jsonify({"error": str(e)}), 400
 
-@testing.route("/test/deal/<client_id>/<deal_id>/items", methods=["GET"])
+@testing.route("/deal/<client_id>/<deal_id>/items", methods=["GET"])
 def test_get_deal_items(client_id: str, deal_id: str):
     """Get all engagement items associated with a deal."""
     try:
