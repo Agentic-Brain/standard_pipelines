@@ -1,6 +1,6 @@
 # standard_pipelines
 
-This is our monolithic repo that handles all applications for clients. We may be changing the name for this soon.
+This is our monolithic repo that handles all applications for clients. It was named this way because it was anticipated to mostly be data pipelineing tools, but as the repo has grown, the scope has changed. It may be changed soon because of this.
 
 ## Setup
 - Clone Repo
