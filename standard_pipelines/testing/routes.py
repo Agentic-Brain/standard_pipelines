@@ -19,8 +19,13 @@ HUBSPOT_CONFIG = {
     "refresh_token": ""  # Will be provided per request
 }
 
-# Create a single global instance for testing
-hubspot_manager = HubSpotAPIManager(HUBSPOT_CONFIG)
+# Create manager instance per request with provided credentials
+def get_hubspot_manager(client_id: str) -> HubSpotAPIManager:
+    """Get a HubSpot manager instance with credentials for the given client."""
+    # In a real implementation, we would fetch credentials from the database
+    # For testing purposes, we'll use empty credentials
+    config = HUBSPOT_CONFIG.copy()
+    return HubSpotAPIManager(config)
 
 @testing.route("/create-contact", methods=["POST"])
 def test_create_contact():
@@ -148,7 +153,8 @@ def test_create_note():
 def test_get_deal(client_id: str, deal_id: str):
     """Get a deal by ID with all properties."""
     try:
-        deal = hubspot_manager.deal_by_deal_id(deal_id)
+        manager = get_hubspot_manager(client_id)
+        deal = manager.deal_by_deal_id(deal_id)
         return jsonify(deal), 200
     except (ApiException, APIError) as e:
         return jsonify({"error": str(e)}), 400
@@ -157,7 +163,8 @@ def test_get_deal(client_id: str, deal_id: str):
 def test_get_deal_notes(client_id: str, deal_id: str):
     """Get all notes associated with a deal."""
     try:
-        notes = hubspot_manager.get_deal_notes(deal_id)
+        manager = get_hubspot_manager(client_id)
+        notes = manager.get_deal_notes(deal_id)
         return jsonify(notes), 200
     except (ApiException, APIError) as e:
         return jsonify({"error": str(e)}), 400
@@ -166,7 +173,8 @@ def test_get_deal_notes(client_id: str, deal_id: str):
 def test_get_deal_items(client_id: str, deal_id: str):
     """Get all engagement items associated with a deal."""
     try:
-        items = hubspot_manager.get_deal_items(deal_id)
+        manager = get_hubspot_manager(client_id)
+        items = manager.get_deal_items(deal_id)
         return jsonify(items), 200
     except (ApiException, APIError) as e:
         return jsonify({"error": str(e)}), 400
