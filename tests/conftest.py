@@ -100,3 +100,11 @@ def frozen_datetime():
     with freeze_time("2025-01-01 12:00:00") as frozen:
         yield frozen
 
+# @pytest.fixture(scope='session')
+# def setup_database(app):
+#     with app.app_context():
+#         db.create_all()
+#     yield db.session
+#     with app.app_context():
+#         db.drop_all()
+
