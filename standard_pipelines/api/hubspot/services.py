@@ -1,3 +1,4 @@
+from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
 from standard_pipelines.data_flow.exceptions import APIError
 
@@ -8,8 +9,6 @@ from hubspot.crm.deals import SimplePublicObjectInput as DealInput
 from hubspot.files import ApiException
 
 from typing import Optional
-
-
 from abc import ABCMeta
 
 
@@ -170,3 +169,52 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
 
     def create_note(self, note_object: dict) -> None:
         self.api_client.crm.objects.notes.basic_api.create(note_object)
+
+    def get_deal_notes(self, deal_id: str) -> list[dict]:
+        """Get all notes associated with a deal."""
+        try:
+            # Use associations API to get notes
+            batch_ids = BatchInputPublicObjectId([{"id": deal_id}])
+            note_associations = self.api_client.crm.associations.batch_api.read(
+                from_object_type="deals",
+                to_object_type="notes",
+                batch_input_public_object_id=batch_ids
+            ).to_dict()["results"]
+            
+            notes = []
+            for assoc in note_associations:
+                for note_ref in assoc["to"]:
+                    note = self.api_client.crm.objects.notes.basic_api.get_by_id(
+                        note_ref["id"]
+                    ).to_dict()
+                    notes.append(note)
+            return notes
+        except ApiException as e:
+            current_app.logger.error(f"Error getting deal notes: {e}")
+            raise APIError(f"Failed to get notes for deal {deal_id}")
+
+    def get_deal_items(self, deal_id: str) -> list[dict]:
+        """Get all engagement items (calls, meetings, tasks) associated with a deal."""
+        try:
+            # Get all engagement types
+            engagement_types = ["calls", "meetings", "tasks"]
+            items = []
+            
+            for eng_type in engagement_types:
+                batch_ids = BatchInputPublicObjectId([{"id": deal_id}])
+                item_associations = self.api_client.crm.associations.batch_api.read(
+                    from_object_type="deals",
+                    to_object_type=eng_type,
+                    batch_input_public_object_id=batch_ids
+                ).to_dict()["results"]
+                
+                for assoc in item_associations:
+                    for item_ref in assoc["to"]:
+                        item = getattr(self.api_client.crm.objects, eng_type).basic_api.get_by_id(
+                            item_ref["id"]
+                        ).to_dict()
+                        items.append({"type": eng_type, **item})
+            return items
+        except ApiException as e:
+            current_app.logger.error(f"Error getting deal items: {e}")
+            raise APIError(f"Failed to get items for deal {deal_id}")

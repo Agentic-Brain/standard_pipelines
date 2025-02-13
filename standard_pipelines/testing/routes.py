@@ -13,11 +13,14 @@ from . import testing
 
 
 # Example config for HubSpot – fill these with your actual values or load from env
-# HUBSPOT_CONFIG = {
-# }
+HUBSPOT_CONFIG = {
+    "client_id": "",  # Will be provided per request
+    "client_secret": "",  # Will be provided per request
+    "refresh_token": ""  # Will be provided per request
+}
 
 # Create a single global instance for testing
-# hubspot_manager = HubSpotAPIManager(HUBSPOT_CONFIG)
+hubspot_manager = HubSpotAPIManager(HUBSPOT_CONFIG)
 
 @testing.route("/create-contact", methods=["POST"])
 def test_create_contact():
@@ -140,6 +143,33 @@ def test_create_note():
         return jsonify({"error": str(e)}), 400
 
     return jsonify({"message": "Note created"}), 201
+
+@testing.route("/test/deal/<client_id>/<deal_id>", methods=["GET"])
+def test_get_deal(client_id: str, deal_id: str):
+    """Get a deal by ID with all properties."""
+    try:
+        deal = hubspot_manager.deal_by_deal_id(deal_id)
+        return jsonify(deal), 200
+    except (ApiException, APIError) as e:
+        return jsonify({"error": str(e)}), 400
+
+@testing.route("/test/deal/<client_id>/<deal_id>/notes", methods=["GET"])
+def test_get_deal_notes(client_id: str, deal_id: str):
+    """Get all notes associated with a deal."""
+    try:
+        notes = hubspot_manager.get_deal_notes(deal_id)
+        return jsonify(notes), 200
+    except (ApiException, APIError) as e:
+        return jsonify({"error": str(e)}), 400
+
+@testing.route("/test/deal/<client_id>/<deal_id>/items", methods=["GET"])
+def test_get_deal_items(client_id: str, deal_id: str):
+    """Get all engagement items associated with a deal."""
+    try:
+        items = hubspot_manager.get_deal_items(deal_id)
+        return jsonify(items), 200
+    except (ApiException, APIError) as e:
+        return jsonify({"error": str(e)}), 400
 
 @testing.route("/deal-flow", methods=["POST"])
 def test_deal_flow():
