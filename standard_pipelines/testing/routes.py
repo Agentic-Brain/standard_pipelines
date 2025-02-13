@@ -10,14 +10,10 @@ from standard_pipelines.extensions import db
 from standard_pipelines.api.hubspot.services import HubSpotAPIManager
 from standard_pipelines.data_flow.exceptions import APIError
 from . import testing
-
+from standard_pipelines.api.hubspot.models import HubSpotCredentials
 
 # Example config for HubSpot – fill these with your actual values or load from env
-# HUBSPOT_CONFIG = {
-# }
 
-# Create a single global instance for testing
-# hubspot_manager = HubSpotAPIManager(HUBSPOT_CONFIG)
 
 @testing.route("/create-contact", methods=["POST"])
 def test_create_contact():
@@ -37,7 +33,8 @@ def test_create_contact():
     last_name = data.get("last_name")
 
     try:
-        contact = hubspot_manager.create_contact(
+        manager = get_hubspot_manager(request.args.get('client_id', ''))
+        contact = manager.create_contact(
             email=email,
             first_name=first_name,
             last_name=last_name
@@ -65,7 +62,8 @@ def test_create_deal():
     #     return jsonify({"error": "Must provide 'deal_name' and 'contact_id'"}), 400
 
     try:
-        deal = hubspot_manager.create_deal(deal_name)
+        manager = get_hubspot_manager(request.args.get('client_id', ''))
+        deal = manager.create_deal(deal_name)
     except (ApiException, APIError) as e:
         return jsonify({"error": str(e)}), 400
 
@@ -103,7 +101,8 @@ def test_create_meeting():
     """
     meeting_data = request.get_json(force=True)
     try:
-        hubspot_manager.create_meeting(meeting_data)
+        manager = get_hubspot_manager(request.args.get('client_id', ''))
+        manager.create_meeting(meeting_data)
     except (ApiException, APIError) as e:
         return jsonify({"error": str(e)}), 400
     
@@ -135,11 +134,53 @@ def test_create_note():
     """
     note_data = request.get_json(force=True)
     try:
-        hubspot_manager.create_note(note_data)
+        manager = get_hubspot_manager(request.args.get('client_id', ''))
+        manager.create_note(note_data)
     except (ApiException, APIError) as e:
         return jsonify({"error": str(e)}), 400
 
     return jsonify({"message": "Note created"}), 201
+
+def get_hubspot_manager(client_id: str) -> HubSpotAPIManager:
+    credentials: Optional[HubSpotCredentials] = HubSpotCredentials.query.filter_by(client_id=client_id).first()
+    if credentials is None:
+        raise ValueError("No HubSpot credentials found for client")
+    hubspot_config = {
+        "client_id": credentials.hubspot_client_id,
+        "client_secret": credentials.hubspot_client_secret,
+        "refresh_token": credentials.hubspot_refresh_token
+    }
+    return HubSpotAPIManager(hubspot_config)
+
+@testing.route("/deal/<client_id>/<deal_id>", methods=["GET"])
+def test_get_deal(client_id: str, deal_id: str):
+    """Get a deal by ID with all properties."""
+    try:
+        manager = get_hubspot_manager(client_id)
+        deal = manager.deal_by_deal_id(deal_id)
+        return jsonify(deal), 200
+    except (ApiException, APIError) as e:
+        return jsonify({"error": str(e)}), 400
+
+@testing.route("/deal/<client_id>/<deal_id>/notes", methods=["GET"])
+def test_get_deal_notes(client_id: str, deal_id: str):
+    """Get all notes associated with a deal."""
+    try:
+        manager = get_hubspot_manager(client_id)
+        notes = manager.get_deal_notes(deal_id)
+        return jsonify(notes), 200
+    except (ApiException, APIError) as e:
+        return jsonify({"error": str(e)}), 400
+
+@testing.route("/deal/<client_id>/<deal_id>/items", methods=["GET"])
+def test_get_deal_items(client_id: str, deal_id: str):
+    """Get all engagement items associated with a deal."""
+    try:
+        manager = get_hubspot_manager(client_id)
+        items = manager.get_deal_items(deal_id)
+        return jsonify(items), 200
+    except (ApiException, APIError) as e:
+        return jsonify({"error": str(e)}), 400
 
 @testing.route("/deal-flow", methods=["POST"])
 def test_deal_flow():
@@ -160,7 +201,8 @@ def test_deal_flow():
 
     try:
         # First create the contact
-        contact = hubspot_manager.create_contact(
+        manager = get_hubspot_manager(request.args.get('client_id', ''))
+        contact = manager.create_contact(
             email=data.get("email"),
             first_name=data.get("first_name"),
             last_name=data.get("last_name")
@@ -173,7 +215,8 @@ def test_deal_flow():
             
         # Create the deal with the contact association
         # TODO: Get the stage id dynamically, cant hardcode this
-        deal = hubspot_manager.create_deal(
+        manager = get_hubspot_manager(request.args.get('client_id', ''))
+        deal = manager.create_deal(
             deal_name=data.get("deal_name"),
             stage_id="995768441",
             contact_id=contact_id
