@@ -12,6 +12,7 @@ import typing as t
 from collections import defaultdict
 from .models import DataFlowConfiguration
 import inspect
+import sentry_sdk
 
 class DataFlowRegistryMeta(ABCMeta):
 
@@ -116,13 +117,15 @@ class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegis
 
     def handle_extract_failure(self, exception: Exception):
         current_app.logger.error(f'extract failed: {exception}')
+        sentry_sdk.capture_exception(exception)
 
     def handle_transform_failure(self, exception: Exception):
         current_app.logger.error(f'transform failed: {exception}')
+        sentry_sdk.capture_exception(exception)
 
     def handle_load_failure(self, exception: Exception):
         current_app.logger.error(f'load failed: {exception}')
-
+        sentry_sdk.capture_exception(exception)
     def add_notification(self, notification: dict):
         db.session.add(Notification(**notification))
         db.session.commit()
