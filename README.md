@@ -1,3 +1,7 @@
+# standard_pipelines
+
+This is our monolithic repo that handles all applications for clients. We may be changing the name for this soon.
+
 ## Setup
 - Clone Repo
 - Install Docker
