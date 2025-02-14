@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 import os
 from typing import Any, Dict
 from standard_pipelines.version import get_versions
+# TODO: Should shift this from warnings to logging
+import warnings
 
 class Config:
     # Core settings that are required for the application to function
@@ -10,6 +12,10 @@ class Config:
         'DB_PASS': None,
         'DB_HOST': None,
         'DB_PORT': None,
+        'DB_NAME': None,
+        'REDIS_HOST': None,
+        'REDIS_PORT': 6379,
+        'REDIS_DB': 0,
         'SECRET_KEY': None,
         'ENCRYPTION_KEY': None,
         'SECURITY_PASSWORD_SALT': None,
@@ -36,8 +42,10 @@ class Config:
     API_USE_SETTINGS: Dict[str, bool] = {
         'USE_STRIPE': False,
         'USE_BITWARDEN': True,
+        'USE_GOOGLE': True,
         'USE_OPENAI': True,
         'USE_MAILGUN': True,
+        'USE_HUBSPOT': True,
         # Add more API usage flags as needed
     }
 
@@ -65,7 +73,12 @@ class Config:
         'HUBSPOT': {
             'HUBSPOT_CLIENT_ID': None,
             'HUBSPOT_CLIENT_SECRET': None,
-            'HUBSPOT_REFRESH_TOKEN': None,
+        },
+        'GOOGLE': {
+            'GOOGLE_REDIRECT_URI': None,
+            'GOOGLE_CLIENT_ID': None,
+            'GOOGLE_CLIENT_SECRET': None,
+            'GOOGLE_SCOPES': "https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.readonly",
         },
         # Add more API configurations as needed
     }
@@ -75,14 +88,16 @@ class Config:
         'USE_STRIPE': 'STRIPE',
         'USE_BITWARDEN': 'BITWARDEN',
         'USE_MAILGUN': 'MAILGUN',
+        'USE_GOOGLE': 'GOOGLE',
         'USE_OPENAI': 'OPENAI',
+        'USE_HUBSPOT': 'HUBSPOT',
         # Add more mappings as needed
     }
 
     # Data flow configuration paths
     DATA_FLOW_CONFIG_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config', 'data_flow')
     TAP_HUBSPOT_CONTACTS_CATALOG_PATH = os.path.join(DATA_FLOW_CONFIG_DIR, 'tap_hubspot_contacts_catalog.json')
-
+ 
     def __init__(self, env_prefix: str) -> None:
         # These are all defined just to prevent errors with type checking
         self.DB_USER: str
@@ -136,10 +151,15 @@ class Config:
 
     def _configure_api_settings(self) -> None:
         """Configure API-specific settings based on which APIs are in use"""
+        env = os.getenv('FLASK_ENV', 'development').lower()
+        is_dev_or_test = env in ['development', 'testing']
+        
         for api_flag, api_group in self.API_REQUIREMENTS.items():
             if getattr(self, api_flag, False):
                 # If this API is in use, configure its settings
                 api_settings = self.API_SETTINGS[api_group]
+                missing_configs = []
+                
                 for key, default_value in api_settings.items():
                     env_value = self.get_env(key)
                     if env_value is not None:
@@ -147,23 +167,48 @@ class Config:
                     elif default_value is not None:
                         setattr(self, key, default_value)
                     else:
-                        raise ValueError(
-                            f"Required API configuration '{key}' is not set for {api_group}. "
-                            f"This must be set via environment variable {self.env_prefix}_{key} "
-                            f"when {api_flag} is enabled."
-                        )
+                        if is_dev_or_test:
+                            missing_configs.append(key)
+                            setattr(self, key, None)  # Set to None for dev/test
+                        else:
+                            raise ValueError(
+                                f"Required API configuration '{key}' is not set for {api_group}. "
+                                f"This must be set via environment variable {self.env_prefix}_{key} "
+                                f"when {api_flag} is enabled."
+                            )
+                
+                if is_dev_or_test and missing_configs:
+                    warnings.warn(
+                        f"Warning: {api_group} is enabled but missing configurations: {', '.join(missing_configs)}. "
+                        f"These should be set via environment variables in {self.env_prefix} prefix. "
+                        "This warning is only shown in development/testing environments."
+                    )
 
     def verify_api_configuration(self) -> None:
         """Verify that all required API configurations are set when their corresponding API is in use"""
+        env = os.getenv('FLASK_ENV', 'development').lower()
+        is_dev_or_test = env in ['development', 'testing']
+        
         for api_flag, api_group in self.API_REQUIREMENTS.items():
             if getattr(self, api_flag, False):
                 api_settings = self.API_SETTINGS[api_group]
+                missing_configs = []
+                
                 for key in api_settings:
                     if getattr(self, key, None) is None:
-                        raise ValueError(
-                            f"Missing required API configuration for {api_group}: {key}. "
-                            f"This must be set when {api_flag} is enabled."
-                        )
+                        if is_dev_or_test:
+                            missing_configs.append(key)
+                        else:
+                            raise ValueError(
+                                f"Missing required API configuration for {api_group}: {key}. "
+                                f"This must be set when {api_flag} is enabled."
+                            )
+                
+                if is_dev_or_test and missing_configs:
+                    warnings.warn(
+                        f"Warning: {api_group} is enabled but missing configurations: {', '.join(missing_configs)}. "
+                        "This warning is only shown in development/testing environments."
+                    )
 
     def verify_attributes(self) -> None:
         '''Verifies that the configuration object has all required attributes'''
@@ -185,7 +230,13 @@ class Config:
         url = f'redis://{self.REDIS_HOST}:{self.REDIS_PORT}/0'
         celery_conf = {
             'broker_url': url,
-            'result_backend': url
+            'result_backend': url,
+            'beat_schedule': {
+                'check-scheduled-items': {
+                    'task': 'standard_pipelines.celery.tasks.check_scheduled_items',
+                    'schedule': float(os.getenv('SCHEDULED_ITEMS_CHECK_INTERVAL', '60.0')),  # Configurable interval in seconds
+                }
+            }
         }
         self.CELERY_CONFIG = celery_conf
 
@@ -195,6 +246,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     def __init__(self) -> None:
+        self.FLASK_ENV = 'development'
         # Postgres 
         self.DB_USER: str = 'postgres'
         self.DB_PASS: str = 'postgres_password'
@@ -235,7 +287,7 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     WTF_CSRF_ENABLED = False  # Disable CSRF tokens in the forms for testing
     def __init__(self) -> None:
-        
+        self.FLASK_ENV = 'testing'
         # Postgres (using SQLite for testing)
         self.DB_USER: str = 'postgres'
         self.DB_PASS: str = 'postgres_password'
@@ -267,9 +319,16 @@ class TestingConfig(Config):
         super().__init__('TESTING')
         self.verify_attributes()
 
+    def set_additional_config(self) -> None:
+        additional_keys = [
+            'GMAIL_TEST_RECIPIENT'
+        ]
+        for key in additional_keys:
+            setattr(self, key, self.get_env(key))
 
 class ProductionConfig(Config):
     def __init__(self) -> None:
+        self.FLASK_ENV = 'production'
         # Has to be set after initial creation
         super().__init__('PRODUCTION')
         self.verify_attributes()
@@ -277,13 +336,14 @@ class ProductionConfig(Config):
 
     def set_additional_config(self) -> None:
         additional_keys = [
-
+            
         ]
         for key in additional_keys:
             setattr(self, key, self.get_env(key))
 
 class StagingConfig(Config):
     def __init__(self) -> None:
+        self.FLASK_ENV = 'staging'
         # Has to be set after initial creation, similar to ProductionConfig
         super().__init__('STAGING')
         self.verify_attributes()
@@ -305,4 +365,3 @@ def get_config() -> Config:
         'production': ProductionConfig
     }
     return config_classes.get(env, DevelopmentConfig)()
-

@@ -8,7 +8,7 @@ from flask_security.datastore import SQLAlchemyUserDatastore
 from flask_security.forms import RegisterForm, LoginForm, ResetPasswordForm
 from flask_security.utils import hash_password
 # Application
-from standard_pipelines.extensions import db, security, mail
+from standard_pipelines.extensions import db, security, mail, oauth
 from bitwarden_sdk import BitwardenClient, client_settings_from_dict, DeviceType, ResponseForProjectResponse
 import requests
 import click
@@ -49,7 +49,7 @@ def send_mailgun_email(**kwargs):
 def init_app(app: Flask):
     app.logger.debug(f'Initalizing blueprint {__name__}')
     mail.init_app(app)
-    
+    oauth.init_app(app)
     # Importing here prevents a circular import
     from standard_pipelines.auth.models import Role, User
 
@@ -78,9 +78,15 @@ def init_app(app: Flask):
             }
         )
     )
-    
-    bitwarden_client.auth().login_access_token(app.config['BITWARDEN_ACCESS_TOKEN'], app.config['BITWARDEN_STATE_FILE_PATH'])
-    app.extensions['bitwarden_client'] = bitwarden_client
+    try:
+        bitwarden_client.auth().login_access_token(app.config['BITWARDEN_ACCESS_TOKEN'], app.config['BITWARDEN_STATE_FILE_PATH'])
+        app.extensions['bitwarden_client'] = bitwarden_client
+    except (KeyError, AssertionError) as e:
+        if app.config['FLASK_ENV'] in ['development', 'testing']:
+            app.logger.warning(f'Bitwarden secrets not set, will be unable to interact with any encrypted database models {e}')
+        else:
+            app.logger.critical(f'Bitwarden secrets not set, stopping application: {e}')
+            raise RuntimeError('Failed to initialize Bitwarden client')
     
     app.cli.add_command(create_default_admin)
 
