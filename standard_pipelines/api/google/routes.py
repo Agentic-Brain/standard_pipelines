@@ -1,6 +1,7 @@
 from flask import url_for, current_app, jsonify, render_template, session
 from flask_login import current_user, login_required
 from sqlalchemy.exc import SQLAlchemyError
+import requests
 from standard_pipelines.extensions import db
 from standard_pipelines.api.google.models import GoogleCredentials, GoogleCredentials
 from standard_pipelines.data_flow.models import Client
@@ -63,6 +64,19 @@ def authorize_google():
         client_id = current_user.client_id
         client = Client.query.get_or_404(client_id)
         current_app.logger.debug(f"Found client: {client.name}")
+        
+        user_email = None
+        user_name = None
+        try:
+            USER_INFO_URL = "https://www.googleapis.com/oauth2/v3/userinfo"
+            headers = {"Authorization": f"Bearer {token['access_token']}"}
+            response = requests.get(USER_INFO_URL, headers=headers)
+            userinfo = response.json()
+            user_email = userinfo['email']
+            user_name = userinfo['name']
+        except Exception as e:
+            current_app.logger.error(f"Error fetching user info: {e}")
+            return jsonify({'error': 'Failed to fetch user info'}), 400
 
         # Create or update Google credentials
         existing_credentials = GoogleCredentials.query.filter_by(client_id=client.id).first()
@@ -74,6 +88,8 @@ def authorize_google():
             google_credentials = GoogleCredentials(
                 client_id=client_id,
                 refresh_token=token['refresh_token'],
+                user_email=user_email,
+                user_name=user_name
             )
             google_credentials.client = client
             google_credentials.save()  
