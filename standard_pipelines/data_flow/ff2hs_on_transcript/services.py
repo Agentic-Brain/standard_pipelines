@@ -4,7 +4,6 @@ import typing as t
 from typing import Optional
 import uuid
 from flask import current_app
-from functools import cached_property
 from hubspot.files import ApiException
 
 from ...api.fireflies.models import FirefliesCredentials
