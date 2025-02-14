@@ -61,6 +61,10 @@
         background-color: #dc3545;
         color: white;
     }
+    .status-disabled {
+        background-color: #6c757d;
+        color: white;
+    }
 </style>
 {% endblock %}
 
@@ -69,20 +73,33 @@
 <p>Connect your account with these services:</p>
 
 <div class="oauth-grid">
-    {% for name, client in oauth._clients.items() %}
-        {% set service_info = oauth_service_info.get(name, {}) %}
-        <div class="oauth-card {{ 'active' if client else 'unavailable' }}">
-            <img src="{{ service_info.get('icon', '') }}" alt="{{ name }} icon">
-            <h3>{{ name|title }}</h3>
-            <div class="status-badge status-{{ 'active' if client else 'unavailable' }}">
-                {{ 'Active' if client else 'Unavailable' }}
-            </div>
-            <p>{{ service_info.get('description', 'Connect to ' + name|title) }}</p>
-            <a href="{{ url_for('auth.login_' + name) }}" 
-               {{ 'disabled' if not client }}>
-               Connect to {{ name|title }}
-            </a>
+    {% for name, service in oauth_services.items() %}
+    <div class="oauth-card {{ 'unavailable' if not service.enabled }}">
+        <img src="{{ service.icon }}" alt="{{ name }} icon">
+        <h3>{{ name|title }}</h3>
+        <div class="status-badge 
+            {%- if service.connected %} status-active 
+            {%- elif not service.enabled %} status-disabled
+            {%- else %} status-unavailable 
+            {%- endif %}">
+            {%- if service.connected %}Connected
+            {%- elif not service.enabled %}Disabled
+            {%- else %}Not Connected
+            {%- endif %}
         </div>
+        <p>{{ service.description }}</p>
+        {% if service.enabled %}
+            <a href="{{ url_for('api.login_' + name|lower) }}">
+                {% if service.connected %}
+                    Reconnect to {{ name|title }}
+                {% else %}
+                    Connect to {{ name|title }}
+                {% endif %}
+            </a>
+        {% else %}
+            <a href="#" class="disabled">Service Unavailable</a>
+        {% endif %}
+    </div>
     {% endfor %}
 </div>
 {% endblock %} 

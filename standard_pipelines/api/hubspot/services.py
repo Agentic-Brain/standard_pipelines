@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
 from standard_pipelines.data_flow.exceptions import APIError
 

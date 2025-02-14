@@ -1,5 +1,5 @@
 from standard_pipelines.auth import auth
-from standard_pipelines.auth.models import FirefliesCredentials
+from standard_pipelines.api.fireflies.models import FirefliesCredentials
 from standard_pipelines.data_flow.models import Client
 from standard_pipelines.extensions import db
 

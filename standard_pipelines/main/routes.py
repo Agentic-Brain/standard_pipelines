@@ -1,7 +1,10 @@
 from flask import request, jsonify, current_app
+from standard_pipelines.api.fireflies.models import FirefliesCredentials
+from standard_pipelines.api.hubspot.models import HubSpotCredentials
+from standard_pipelines.api.openai.models import OpenAICredentials
 from standard_pipelines.main.decorators import require_api_key
 from standard_pipelines.data_flow.models import Client
-from standard_pipelines.auth.models import HubSpotCredentials, FirefliesCredentials, OpenAICredentials, AnthropicCredentials
+from standard_pipelines.auth.models import AnthropicCredentials
 from standard_pipelines.extensions import db
 from uuid import UUID
 from . import main

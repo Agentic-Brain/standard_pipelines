@@ -8,6 +8,10 @@ from flask import current_app
 from functools import cached_property
 from hubspot.files import ApiException
 
+from ...api.fireflies.models import FirefliesCredentials
+
+from ...api.hubspot.models import HubSpotCredentials
+
 from ...api.fireflies.services import FirefliesAPIManager
 from ...api.hubspot.services import (
     HubSpotAPIManager,
@@ -24,7 +28,7 @@ from standard_pipelines.data_flow.exceptions import APIError
 from sqlalchemy import UUID
 from ..services import BaseDataFlow
 from ...api.openai.services import OpenAIAPIManager
-from ...auth.models import HubSpotCredentials, FirefliesCredentials, OpenAICredentials
+from ...api.openai.models import OpenAICredentials
 from ..exceptions import InvalidWebhookError
 from .models import FF2HSOnTranscriptConfiguration
 
