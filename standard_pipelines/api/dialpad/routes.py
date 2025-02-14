@@ -8,7 +8,7 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from uuid import UUID
 
 
-@api.route('/api/dialpad/credentials/<client_id>', methods=['GET', 'POST'])
+@api.route('/dialpad/credentials/<client_id>', methods=['GET', 'POST'])
 def manage_dialpad_credentials(client_id: str):
     """Test endpoint to manage Dialpad credentials for a client."""
     try:
