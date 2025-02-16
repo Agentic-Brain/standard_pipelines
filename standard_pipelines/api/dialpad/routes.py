@@ -18,6 +18,7 @@ def manage_dialpad_credentials(client_id: str):
 
         # Create new credentials
         if request.method == 'POST':
+            current_app.logger.info(f"Saving credentials for client: {client.name}")
             if existing_credentials:
                 current_app.logger.error(f"Credentials already exist for client: {client_id}")
                 return jsonify({'error': 'Credentials already exist for this client'}), 400
@@ -35,6 +36,7 @@ def manage_dialpad_credentials(client_id: str):
             credentials.client = client
             credentials.save()
 
+            current_app.logger.info(f"Credentials saved successfully for client: {client.name}")
             return jsonify({'message': 'Credentials saved successfully', 'client': client.name}), 201
 
         # Get existing credentials
@@ -43,6 +45,7 @@ def manage_dialpad_credentials(client_id: str):
                 current_app.logger.error(f"No credentials found for client: {client_id}")
                 return jsonify({'error': 'No credentials found for this client'}), 404
 
+            current_app.logger.info(f"Returning credentials for client: {client.name}")
             return jsonify({'client': client.name,'api_key': existing_credentials.dialpad_api_key})
 
     except SQLAlchemyError as e:
