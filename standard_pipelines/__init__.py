@@ -8,10 +8,10 @@ import time
 from standard_pipelines.extensions import migrate, db
 from typing import Optional
 import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
 from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, StagingConfig, get_config
 from standard_pipelines.data_flow.utils import BaseDataFlow
 from standard_pipelines.data_flow.ff2hs_on_transcript.services import FF2HSOnTranscript
-
 
 def create_app():
     load_dotenv()
@@ -154,6 +154,7 @@ def init_sentry() -> None:
     config = get_config()
     sentry_sdk.init(
         dsn=config.SENTRY_DSN, #type: ignore
+        integrations=[FlaskIntegration()],
         environment=str(os.getenv('FLASK_ENV')),
         release=APP_VERSION if APP_VERSION else FLASK_BASE_VERSION,
         traces_sample_rate=1.0,
