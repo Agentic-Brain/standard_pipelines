@@ -2,7 +2,7 @@ from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
 from dialpad import DialpadClient
 from datetime import datetime
-
+import requests
 
 class DialpadAPIManager(BaseAPIManager):
     def __init__(self, api_config: dict) -> None:
@@ -24,12 +24,86 @@ class DialpadAPIManager(BaseAPIManager):
 
             only_transcripts = [entry for entry in lines if entry['type'].lower() == 'transcript']
             formatted_transcript = self._format_transcript(only_transcripts)
-            return formatted_transcript
+            return {"transcript": formatted_transcript}
 
-        except Exception as e:
-            current_app.logger.error(f"Error fetching transcripts: {e}")
+        except requests.exceptions.RequestException as e:
+            current_app.logger.error(f"An error occurred during API request: {e}")
             return {"error": str(e)}
-    
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while getting transcript: {e}")
+            return {"error": str(e)}
+        
+    def subscribe_to_call_webhook(self, hook_url: str, call_states: list[str] = ["hangup"]):
+        try:
+            webhook_info = self.get_webhook_id(hook_url) # Get the webhook id if it already exists
+            if 'error' in webhook_info:
+                webhook_info = self.create_webhook(hook_url) # Create the webhook if it doesn't exist
+                if 'error' in webhook_info:
+                    return {"error": webhook_info['error']}
+            
+            subscription_response = self.dialpad_client.subscription.create_call_event_subscription(
+                webhook_info["webhook_id"],
+                call_states=call_states,
+            )
+            if 'error' in subscription_response:
+                current_app.logger.error(f"Error subscribing to webhook: {subscription_response['error']}")
+                return {"error": subscription_response['error']}
+
+            current_app.logger.info(f"Subscribed to webhook: {webhook_info.get('webhook_id')}")
+            return {"success": True}
+        
+        except requests.exceptions.RequestException as e:
+            current_app.logger.error(f"An error occurred during API request: {e}")
+            return {"error": str(e)}
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while subscribing to webhook: {e}")
+            return {"error": str(e)}
+        
+    def create_webhook(self, hook_url: str):
+        try:
+            webhook = self.dialpad_client.webhook.create_webhook(hook_url)
+
+            if 'error' in webhook:
+                webhook_code = webhook['error'].get("code")
+                current_app.logger.error(f"Error creating webhook: {webhook.get('error')}")
+                if webhook_code == 409:
+                    return {"error": "Webhook already exists"}
+                return {"error": webhook.get("error")}
+             
+            if webhook.get("id"):
+                current_app.logger.info(f"Webhook created successfully: {webhook}")
+                return {"webhook_id": webhook["id"]}  
+            current_app.logger.error(f"Webhook created but id not found: {webhook}")
+            return {"error": "Webhook id not found"}
+        
+        except requests.exceptions.RequestException as e:
+            current_app.logger.error(f"An error occurred during API request: {e}")
+            return {"error": str(e)}
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while creating webhook: {e}")
+            return {"error": str(e)}
+        
+    def get_webhook_id(self, hook_url: str):
+        try:
+            webhooks = self.dialpad_client.webhook.list_webhooks()
+            for webhook in webhooks:
+                if webhook.get("hook_url") == hook_url:
+                    current_app.logger.info(f"Webhook found: {webhook}")
+                    if webhook.get("id"):
+                        return {"webhook_id": webhook["id"]}
+                    current_app.logger.error(f"Webhook found but id not found: {webhook}")
+                    return {"error": "Webhook found but id not found"}
+                
+            current_app.logger.error(f"Webhook not found: {hook_url}")
+            return {"error": "Webhook not found"}
+        
+        except requests.exceptions.RequestException as e:
+            current_app.logger.error(f"An error occurred during API request: {e}")
+            return {"error": str(e)}
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while getting webhook id: {e}")
+            return {"error": str(e)}
+        
     #============ Helper Functions =============#
     def _format_transcript(self, transcript_entries: list[dict]) -> str:
         formatted_lines = []
