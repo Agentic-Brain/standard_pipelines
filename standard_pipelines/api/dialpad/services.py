@@ -46,6 +46,9 @@ class DialpadAPIManager(BaseAPIManager):
                 call_states=call_states,
             )
             if 'error' in subscription_response:
+                if subscription_response['error'].get("code") == 409:
+                    current_app.logger.info(f"Webhook already subscribed to call events: {webhook_info.get('webhook_id')}")
+                    return {"success": True}
                 current_app.logger.error(f"Error subscribing to webhook: {subscription_response['error']}")
                 return {"error": subscription_response['error']}
 
