@@ -28,10 +28,10 @@ class DialpadAPIManager(BaseAPIManager):
 
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"An error occurred during API request: {e}")
-            return {"error": str(e)}
+            return {"error": f"An error occurred during API request: {e}"}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting transcript: {e}")
-            return {"error": str(e)}
+            return {"error": f"An unexpected error occurred while getting transcript: {e}"}
         
     def subscribe_to_call_webhook(self, hook_url: str, call_states: list[str] = ["hangup"]):
         try:
@@ -57,10 +57,10 @@ class DialpadAPIManager(BaseAPIManager):
         
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"An error occurred during API request: {e}")
-            return {"error": str(e)}
+            return {"error": f"An error occurred during API request: {e}"}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while subscribing to webhook: {e}")
-            return {"error": str(e)}
+            return {"error": f"An unexpected error occurred while subscribing to webhook: {e}"}
         
     def create_webhook(self, hook_url: str):
         try:
@@ -81,10 +81,10 @@ class DialpadAPIManager(BaseAPIManager):
         
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"An error occurred during API request: {e}")
-            return {"error": str(e)}
+            return {"error": f"An error occurred during API request: {e}"}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while creating webhook: {e}")
-            return {"error": str(e)}
+            return {"error": f"An unexpected error occurred while creating webhook: {e}"}
         
     def get_webhook_id(self, hook_url: str):
         try:
@@ -102,10 +102,10 @@ class DialpadAPIManager(BaseAPIManager):
         
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"An error occurred during API request: {e}")
-            return {"error": str(e)}
+            return {"error": f"An error occurred during API request: {e}"}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting webhook id: {e}")
-            return {"error": str(e)}
+            return {"error": f"An unexpected error occurred while getting webhook id: {e}"}
         
     #============ Helper Functions =============#
     def _format_transcript(self, transcript_entries: list[dict]) -> str:
