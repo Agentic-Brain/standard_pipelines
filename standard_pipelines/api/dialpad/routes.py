@@ -24,9 +24,9 @@ def manage_dialpad_credentials(client_id: str):
                 return jsonify({'error': 'Credentials already exist for this client'}), 400
 
             data = request.get_json()
-            if not data or 'api_key' not in data:
+            if not data or 'api_key' not in data or not isinstance(data['api_key'], str) or not data['api_key'].strip():
                 current_app.logger.error(f"Invalid request data: {data}")
-                return jsonify({'error': 'api_key is required'}), 400
+                return jsonify({'error': 'Proper api_key format is required'}), 400
 
 
             credentials = DialpadCredentials( 

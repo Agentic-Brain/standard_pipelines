@@ -3,6 +3,7 @@ from standard_pipelines.api.services import BaseAPIManager
 from dialpad import DialpadClient
 from datetime import datetime
 import requests
+from typing import Optional
 
 class DialpadAPIManager(BaseAPIManager):
     def __init__(self, api_config: dict) -> None:
@@ -16,6 +17,10 @@ class DialpadAPIManager(BaseAPIManager):
     #============ API Functions =============#
     def get_transcript(self, call_id: str):
         try:
+            if not call_id or not isinstance(call_id, str):
+                current_app.logger.error("Invalid call_id provided.")
+                return {"error": "Invalid call_id provided."}
+            
             transcript = self.dialpad_client.transcript.get(call_id=call_id)
             lines = transcript.get("lines")
             if not lines:
@@ -33,8 +38,11 @@ class DialpadAPIManager(BaseAPIManager):
             current_app.logger.exception(f"An unexpected error occurred while getting transcript: {e}")
             return {"error": f"An unexpected error occurred while getting transcript: {e}"}
         
-    def subscribe_to_call_webhook(self, hook_url: str, call_states: list[str] = ["hangup"]):
+    def subscribe_to_call_webhook(self, hook_url: str, call_states: Optional[list[str]] = None):
         try:
+            if call_states is None:
+                call_states = ["hangup"]
+
             webhook_info = self.get_webhook_id(hook_url) # Get the webhook id if it already exists
             if 'error' in webhook_info:
                 webhook_info = self.create_webhook(hook_url) # Create the webhook if it doesn't exist
