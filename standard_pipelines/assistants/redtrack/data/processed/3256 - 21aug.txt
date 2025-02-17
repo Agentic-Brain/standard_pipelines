@@ -1,0 +1,14 @@
+# 21-Aug
+
+
+ 	{palias} token in theoffer URL
+ 	Allow Facebook CAPI without connecting BM account
+ 	MLM referrals structure
+ 	Publisher Sign-up - add custom fields
+ 	Advertisers report cache
+ 	“Cached costs” switch renamed to "Cached data"
+ 	Traffic Sources: date created added
+ 	French interface
+ 	Allow same email register to different publisher panels
+ 	New integrations with Fraudscore
+ 	Bug fixes

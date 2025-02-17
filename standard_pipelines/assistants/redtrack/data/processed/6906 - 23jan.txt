@@ -1,0 +1,32 @@
+# 23-Jan
+
+
+ 	Improved validation parameters for the Taboola Traffic channel: if the user saves the Taboola traffic channel integration settings with invalid accesses, the error "Invalid integration settings: can't get an authorization token, check your "Client ID" and "Client secret" will pop up.
+ 	Bugfix: data in the Dashboard tab is now pulled in correctly depending on the chosen filters.
+ 	Rules:
+
+ 	added possibility to adjust the needed frequency of the rule check. Check out our guide Auto rules for more details.
+ 	added another column called "Action" to the Rules tab. Now you can see which types of actions (pause, pause&amp;restart, etc.) are applied to each created rule. Check out our guide Auto rules for more details.
+ 	implemented functionality of adding multiple webhooks (up to 10), this functionality is banned for legacy plans. Check out our guide Auto rules for more details.
+
+
+
+
+ 	Old UI bugfix: changes to the Offers are now saved without errors.
+ 	Added possibility to send conversions with wbraid and gbraid parameters to avoid issues with conversions due to Apple's iOS14.5 changes. Check out our Google Ads article for more details (step 1-&gt; open the expand and scroll down to the Note! section).
+ 	Added description to the "AOV" column for custom conversion type, it's "Average revenue for conversion type".
+ 	Bugfix: data in the Publisher statistics report is now displayed according to the set filters.
+ 	Bugfix: all the needed columns are present in the exported report of the API Postback logs and Сost updates logs.
+ 	Added several new columns (metrics) which can be added to the Reports if needed: EPV (aka Earnings per view (Total Revenue/LP views), LP click CTR to the landers, LP views to such pages as Traffic channels, Offer/Web-site,Offer source/Brands.
+ 	Bugfix: domain's settings are now pulled in the postback URL of the Offer source.
+ 	API Postback logs: corrected the logic of displaying the data in the column "Created at", now it shows the date of postback creation in UTC. Column "Created at" was respectively renamed into "Created at UTC".
+ 	Added Subs 11-20 to the filters in Funnel templates.
+ 	Added possibility to generate PDF with info about WhiteLabel - Payment request and send it to the client's email during creation of the payment in the Publisher panel.
+ 	Bugfix: correct payout is now pulled in when firing postback.
+ 	Columns were renamed: "Total actions" -&gt; "All conversions"; "Total Actions CR" -&gt; "All conversions CR".
+ 	Bugfix: all the additional parameters are in place after saving the Offer source templates.
+ 	Bugfix: data for the last hour is now shown in the API Postbacks logs.
+ 	Bugfix: data for Total ROAS in Reports is now displayed correctly.
+ 	Bugfix: data in the Whitelabel and in the Reporting portal is displayed correctly after changing and saving column settings.
+ 	Bugfix: the whole parameters are present in the dropdown of the Reporting portal.
+ 	Bugfix: when the function "Show conversions by conversion time" is applied in the grouping by hour, conversions are counted by conversion time only.

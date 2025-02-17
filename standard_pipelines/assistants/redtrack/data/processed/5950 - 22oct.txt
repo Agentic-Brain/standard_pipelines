@@ -1,0 +1,28 @@
+# 22-Oct
+
+
+ 	Publisher panel:
+
+→ added the toggle “Show accrued conversions” to the Whitelabel form. Once it's on, your publishers in the Pub panel will only see the conversions for which you've assigned payouts in their reports. For more details go to the article Adding Whitelabel;
+→ added possibility to send emails notifying Publishers about their Declined status. For more details go to the article Adding publishers.
+
+
+ 	Bugfix: burger menu button is now shown in the mobile view of the RT tool.
+ 	Added a new condition for rules in Facebook: pause for the Facebook Ad set.
+ 	Bugfix: export of Clicks in Logs is now available for Clickhouse.
+ 	Bugfix: sub roles are now saved when creating an Offer source.
+ 	The number of filters by Subs in Campaign reports was extended, it's no longer limited to the first ten.
+ 	When assigned, the Roles are no longer attributed to Facebook only, so the word "Facebook" was removed from the names of the roles.
+ 	Pagination feature was updated: users can set 1 parameter by default: Default, Title, Click, Conversions, ROI and set the number of lines on one page by default, or users can themselves set how and how many lines should be depicted and sort the data.
+ 	Acquisition report update: altered the ways domains are shown in the report: ref domain represents the domain from traffic came,  if the traffic came from the domain registered in RT, then it's shown in the report under the name Direct, domains are fixed in the report without protocols (http or https).
+ 	1-minute auto-refresh is now available for users who have a 1-minute auto cost update feature enabled.
+ 	Bugfix: data in the column LP clicks CTR is now shown correctly.
+ 	Bugfix: columns in the Campaign's report stay in the set order and no longer deflect when using another report.
+ 	Bugfix: when using shared access types of conversions are shown depending on the ones set by this user via shared access.
+ 	The referral program feature was migrated to the new UI.
+ 	Rules feature updated:
+
+→ now it's possible to send notifications for several emails;
+→ email notifications are not available for the Trial subscription plan;
+→ notifications for multiple emails are not available for Legacy subscription plans;
+→ it's possible to set the rules for several Campaigns using the same traffic source (possibility of multiple campaigns is unavailable for Legacy subscription plans).

@@ -1,0 +1,50 @@
+# 22-Nov
+
+
+ 	Rules:
+
+ 	added possibility to filter rules by a certain Campaign;
+ 	added 2 columns Traffic channel and Campaign;
+ 	bugfix: data requested for the last hour is now displayed in the Rule logs;
+ 	bugfix: RedTrack Campaigns field now shows both Deleted and Active Campaigns when selected;
+ 	added possibility to apply multiple conditions to one rule. To learn more about how Rules work in RedTrack follow our guide.
+
+
+
+
+ 	Agency account: set a new format for data processing.
+ 	Acquisition report:
+
+ 	an Autorefresh feature was added. When setting up an autorefresh for a report appears a large number of requests;
+ 	fixed the bug with the wrong time_interval;
+ 	fixed the filter logic. Click here to learn more about the Acquisition report.
+
+
+ 	Added opportunity to create pre-set Deeplinks for Publishers. It's also possible to track the data by Deeplink in the Pub panel report. Click here for more details.
+ 	ClickFunnels ↔ RedTrack integration was set up via a webhook connection. Click here for a more detailed guide on the matter.
+ 	The Cached data toggle was renamed into Show costs. It should be turned off to see the data in the Report by Costs. Go to our Dashboard article and check out how this toggle works there.
+ 	Added new feature allowing to specify a non-integer number on the Campaign level-&gt; Details For Publishers-&gt; Campaign Rate.
+ 	Changed the names of 2 switches: Remove knows robots/crawlers from data turned into Remove known (by user agent) bots/crawlers from data and Remove known detect moderators from data turned into Remove known (by corp ISP) moderators from data. The changes took place in the Burger menu-&gt; Settings-&gt;General.
+ 	Bugfix: "Today" filter in the Campaigns list is now up and running.
+ 	Conversion path report:
+
+ 	added 4 more possible data slices: RT Source + RT Campaign, RT Campaign + RT Adgroup, RT Campaign + RT Ad, RT Adgroup + RT Ad;
+ 	added restrictions for users on Trial and Grow users, meaning clients on these subscription plans can only view such data slices as Source, RT Source, Campaign, RT Campaign, and Entry page;For more details on how the Conversion path report works click here.
+
+
+ 	Bugfix: functionality of comparing Campaign is now up and running.
+ 	Bugfix: now when the client goes to the Referral program page the interface doesn't crash (Burger menu-&gt;Referral program).
+ 	Embedded possibility to add Promotional banners for pub panel. They are added when creating a Whitelabel and are placed in the footer of the pub panel on all pages. Click here to learn more about Whitelables.
+ 	Changes in the naming of UI tabs:
+
+ 	for Advertisers: tab Offers was renamed into Web-sites, tab Offer Sources was renamed into Brands;
+ 	for everyone: tab Traffic sources was renamed into Traffic channels.
+
+
+ 	News bell section and Billing alert (informing about payment problems or the end of monthly limits) elements migrated to the new UI.
+ 	Bugfix: conversion status is now successfully updated in the Logs by Conversions section.
+ 	Bugfix: S2S postbacks export is now up and running, the data in it is formed based on the set columns.
+ 	A new column "Revenue" was added to the list of Columns logs settings when adding Whitelabel.
+
+
+ 	Bugfix: Column "ID" is now controllable, meaning it can be added to the list of displayed columns as well as removed from it.

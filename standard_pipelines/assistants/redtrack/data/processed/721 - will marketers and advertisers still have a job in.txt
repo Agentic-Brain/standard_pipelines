@@ -1,0 +1,43 @@
+# Will marketers and advertisers still have a job in the age of AI?
+
+Concerns about robots and AI replacing our workplaces are nothing new. For that, great credit goes not only to the technical uprising but to the well-liked movies like RoboCop, the Matrix, Artificial Intelligence, etc.
+Marketing and advertising are the areas where AI is making a huge step forward. To know whether you should worry about your workplace or not, keep on reading.
+
+Market Research Analysts
+Every time we type a search request into Google, Bing, or Amazon, we leave a significant digital footprint — our age, gender, location, purchase preferences and more. It takes AI a few seconds to store and analyze all this data. While it would take a person at least several months to do the same.
+Artificial intelligence is becoming smarter with its ability to analyze tremendous amounts of data on the fly. This, in turn, puts high expectations on the marketers, who should leverage that data for its further handling and appliance.
+
+— Will AI replace Market Analysts?
+— AI might do this in a few years.
+&nbsp;
+Web Designers
+Usually, it takes at least two people to build the business site: a developer and a content marketer. Can the website design itself? San Francisco startup Grid seems to have an answer.
+Using the power of AI, the Grid builds the site on the basis of the images and text the user has input in advance. It algorithmically orders and matches the uploaded material, and picks the layout design based on the style of the chosen images. Nevertheless, the age of self-designing websites isn’t perfect (yet?). AI-driven website builders might be a worthy solution for a temporary landing page, but not for a corporate website.
+
+— Will AI show web designers the door?
+— Not today, AI, not today.
+&nbsp;
+Content Managers
+The field of content marketing might seem safe from ‘AI invasion’, and for now it might be true. The bots are far from replacing human creativity and ‘personal’ approach to content generation. Still, the reality is a little more complex. Less than a year ago Google invested over $800,000 to the Press Association news agency to start the initiative of writing stories solely with the use of AI.
+Today, huge national news agencies like the Guardian and the Associated Press use AI to create local news and sports reports. If the question is “Can AI write content?” The answer is yes, it can. But if “Can it write unique and not-template posts?” The answer is clearly no.
+
+— Should I worry about my job position as a Content Manager?
+— AI might replace some field-oriented journalists, e.g. sport-reporters but not the position of content manager as it is.
+&nbsp;
+SMM Managers
+Social networks are becoming increasingly smarter. Facebook, Twitter, and Instagram, for example, have learned how to define the content that the users like and which one they prefer to pass by. They use these insights to form a news feed that would correspond to the user’s preferences the best way.
+Besides, this deep analytics helps SMM managers to build ad messages, which would reach the desired target audience, without wasting money on the users who are not interested in it.
+
+— Will AI take place of SMM managers soon?
+— Not now and not soon. SMM managers may automate a number of tasks using AI, but the communication with the users and their engagement are within the human abilities only.
+&nbsp;
+Advertisers and media buyers
+While setting an ad offer, media buyers and advertisers should keep in mind dozens of parameters. The adjustment of these parameters influences the efficiency of the offer and the revenue it would bring. Because of AI analytics capabilities, it becomes easier for media buyers to optimize their offers and ad campaigns.
+
+— Will media buyers allow the AI to steal their job places?
+— No, AI looks like advertiser’s efficient assistant rather than a replacement.
+&nbsp;
+So far, AI cannot replace any marketing or advertising position completely. Humans are still very much needed since marketing and advertising are not a science, but an art, too.
+For now, it’s clear that AI will not replace, but empower the marketers and advertisers, making more and more tasks to become automated.
+So, why we started our blog with the topic of AI? RedTrack has recently launched the new version of its affiliate tracking solutions and joined the AI race.
+Smartlinks by RedTrack use AI in order to detect which user converts on what offer. The algorithm analysis this data and shows each specific user an offer that is most likely to bring conversion. It means that an advertiser shouldn’t test each offer manually since Smartlinks automatically detects most profitable combinations. To check the capabilities of Smartlinks to optimize your ad campaigns, write to support@redtrack.io.

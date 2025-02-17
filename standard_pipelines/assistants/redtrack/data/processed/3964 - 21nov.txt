@@ -1,0 +1,10 @@
+# 21-Nov
+
+
+ 	Limited traffic processing for rules: a dedicated channel for events (clicks, conversions, etc.) was added to store there only the events for users having at least one active rule
+ 	Cross-browser click attribution: once the browser changes, the already created click pops up instead of creating a new one
+ 	Publisher Panel / Sing-up: added Event for "Complete Registration" button push
+ 	Access to the user account is blocked after 5 unsuccessful attempts
+ 	Conversions are sent to TikTok (type, currency, ip, user-agent, data conversions)
+ 	Possibility to apply OS, Browser, OS version, Browser version, Device brand filters
+ 	Conversions API feature for users with Starter and Basic subscriptions was switched off

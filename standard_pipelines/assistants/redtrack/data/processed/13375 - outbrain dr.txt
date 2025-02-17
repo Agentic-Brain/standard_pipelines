@@ -1,0 +1,206 @@
+# Outbrain dr
+
+
+Outbrain&nbsp;is the world’s leading discovery and native advertising feed for the open web. 
+
+
+
+Outbrain is integrated with RedTrack via API.  API integration gives you the following benefits:
+
+
+
+
+Pause: campaign, placement, creative
+
+
+
+Create automated rules
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer and Offer source
+
+
+
+Conversion types
+
+
+
+
+
+
+1. Add Outbrain template to RedTrack
+
+
+
+Traffic channels→&nbsp;New from template→ find&nbsp;Outbrain&nbsp;template and press&nbsp;Add→ add the&nbsp;{{cpc}}&nbsp;parameter to the&nbsp;Click Cost ID&nbsp;field→ Save the template:
+
+
+
+
+
+
+
+
+
+
+
+2.  Integrate Outbrain and RedTrack
+
+
+
+2.1 Go to your Outbrain account→ as Outbrain has an API restriction on every new account you need to apply for it first. Once approved you will see the following in the dropdown of your Account settings:
+
+
+
+
+
+
+
+2.2 Get back to RedTrack→ Outbrain template (added within step 1)→ Outbrain API integration section→ fill in the mandatory values and Save the changes to the template:
+
+
+
+
+
+
+
+What should be inserted in the Outbrain API integration section depends on the account type:▸If this is a self-served account, this particular customer’s data (Email, Password) should be inserted.▸If this is a corporate-driven account, you should insert the email and password of the person who has access to the API integration.Values explained:(1) Email field:● if your account is a self-served one, insert the “ACCOUNT” value from Outbrain:● if this is a company-managed account, then the email should be of the person within the company who has access to the API integration should be inserted.(2) Password field:● if your account is a self-served one, insert your Outbrain account password;● if this is a company-managed account, then the password should be of the person within the company who has access to the API integration should be inserted.(3) Account ID: type in your Outbrain account ID. It can be found in the URL:
+
+
+
+3. Activate the “Conversion Event Name”&nbsp;in Outbrain and add it to the S2S postback link
+
+
+
+This is required for sending conversions back to Outbrain. To do that:
+
+
+
+3.1 In your Outbrain account go to&nbsp;Conversions→ Create Conversion→ Server-to-Server→ fill in the needed fields in the&nbsp;Conversion type window→ copy the value you put in the Name field:
+
+
+
+
+
+
+
+3.2 In RedTrack go to the added Outbrain template→ S2S Postback URL→ replace the CONVERSION_EVENT_NAME part with the name copied within step 3.1→ Save the changes to the template:
+
+
+
+
+
+
+
+4. Create a Campaign&nbsp;in RedTrack
+
+
+
+4.1 Use the dedicated guides to help you create a campaign in RedTrack:
+
+
+
+
+for Affiliates
+
+
+
+for Advertisers
+
+
+
+
+4.2 In Campaign settings scroll down to&nbsp;S2S Postback for PropellerAds.com→ press&nbsp;Add→ check if the parameters are in place→ press&nbsp;Save:
+
+
+
+
+
+
+
+
+
+
+
+4.3 Once you’ve saved the Campaign, a&nbsp;click URL&nbsp;(your tracking link) is automatically generated and can be copied from the Tracking links and parameters section:
+
+
+
+
+
+
+
+5. Launch a campaign in Outbrain
+
+
+
+5.1 In your Outbrain account go to Campaigns→&nbsp;Create Campaign:
+
+
+
+
+
+
+
+5.2 Fill in the needed Campaign details→&nbsp; add the&nbsp;tracking parameters from step 4.3&nbsp;(all parameters after the “?” in your tracking link) from RedTrack into the&nbsp;Suffix&nbsp;field→ Next Content:
+
+
+
+
+
+
+
+
+
+
+
+5.3 Put the first part of the tracking URL (till the “?”) to the URL field and add creatives, title, etc.→ Launch the campaign:
+
+
+
+
+
+
+
+
+
+
+
+6. Set up the&nbsp;automation&nbsp;and enjoy.
+
+
+
+Check out the following articles for the automation features:
+
+
+
+
+Integrated Traffic channels&nbsp;(for a general overview of the automation features in RT)
+
+
+
+Auto rules
+
+
+
+Auto cost update
+
+
+

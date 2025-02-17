@@ -1,0 +1,74 @@
+# Pushground tips to optimize push ad campaigns during holidays
+
+With Q4 being the most significant time of the year for digital advertising, there is no better time to improve the optimization of your ad campaigns.  We reached out to our friends at Pushground and ask them to share their expertise on campaign optimization regarding push ads campaigns. Although this article is more focused on push ad campaigns, you can apply these tactics to other types of ad formats, including POP and native.
+What are Push Ads?
+Before we get started, let's quickly review - what are push ads? Since their arrival, push ads have become one of the hottest new advertising formats available. Push advertising uses notifications to directly deliver promotional content to a user’s device in the form of a push ad. This highly-engaging format climbed to the top because of its visibility, high engagement, and, most importantly, its exceptional performance.
+
+Push Ads - the winning secret to your affiliate marketing strategy this Holiday season:
+
+Push ads have dominated the affiliate and advertising industry because of their unmatched performance. The ad format's nature has given it many advantages over other ad formats like display and pop ads. The alert-style ad brings in much higher average CTRs and conversion rates because of its high visibility and discrete style. On top of all that, it’s the only ad type you have to subscribe to, leading to more engaged audiences. Affiliates using thoroughly optimized push campaigns during this holiday season are sure to make it big.
+
+Push ads have made their way to the marketing culture since the users can no longer ignore them. The alert-styled ads capture the users’ attention more than anything else. The Smartinsights 2020 report shows that the average CTR for Google display ads is just 0.05%, whereas, according to Pushground’s ad trends report, the average CTR of push ads is about 0.58%. It goes to show the effectiveness of the trending format. 
+
+Now let's get into the good stuff. 
+How to optimize your Push Ad-Campaigns
+Optimizing a campaign is pertinent to its success. It happens to be one of the most critical steps in running a successful push ad campaign or any digital marketing campaign for that matter. It is the process of analyzing your campaign results, refining your campaign to maximize your ROI. Optimization is essentially a trial and run process to find the best combination for your push ad campaigns. It can be applied to all the steps from i.e., even from bidding and source targeting to landing pages and ad creatives.
+
+A lot of tools that we offer at RedTrack let you optimize, automate, and run your push ad-campaigns very effortlessly. Ever struggled with finding the best source of truth and detecting the winning combinations? Contact us, and we would assist you with the advanced ad tracking and conversion attribution software set-up.
+
+
+
+ hbspt.cta.load(7519541, 'ef490f48-8ab0-4913-8668-57716f5d0600', {}); 
+
+Let's dive into the process of how to optimize a successful push campaign.
+1. Plan &amp; Gather Data
+The most important thing is correctly setting up the campaigns because a well-structured strategy can help speed up the optimization process. So, proper planning and market analysis are necessary before a viable push ads campaign launch. A look into the recent trends and competitors’ practices can help you quickly find what's working, i.e. suitable vertical/niche + funnel combinations.
+
+After the successful setup and launch of the campaign, start gathering the data from it. Optimization without sufficient data can be dangerous because you could make the wrong decisions based on inaccurate data. 
+
+Ideally, it would be best if you wait until you have an ad spend equal to your payout before you start messing with anything. You can use the following as a guide:
+
+−  Start bid optimization at 1x payout
+−  Start your ad creative optimization at 1-2x payout
+−  Start your laundering page optimization when conversion &gt; 10
+−  Start narrowing your targeting and blacklists when ad spend (per target or feed) &gt;3x payout
+
+It’s important to note here that this is meant as a guide and not a perfect formula. Finding a one size fits all solution is difficult since a general formula would rarely work the same for a $2 sweepstakes payout and a crypto campaign with $500.
+2. Alter your Bid to the Desired Win Rate
+Once you have planned and collected the data for your campaign, move to the second stage, i.e. optimize your bid to the desired win ratio.
+
+A win rate is the % of the traffic that you can buy with your current bid. Your overall win rate is a great indication of how much you should be bidding. If you’re anything below a 30-40% win rate, you are likely missing the better quality traffic to the people bidding above you. If a bid is resulting in a win rate of above 70%, you might be overspending. There will be times when you want your win rate at that level but at the beginning of the optimization process is probably not one of those times.
+
+Tips: Adjusting different bids for different supply IDs works well. Move over to your Campaign Stats Page, select your campaign, and then set the dimension as "Supply ID". It helps in figuring out the bid performance across all supplies. Regular checking is also necessary because of the volatile prices of push traffic.
+3. Improve Your Creatives
+Then comes the creative part. Ad Creatives are a significant part of the optimization process!
+
+An intriguing title, a catchy description, and an appealing image make for a perfect ad. These are all essential test items. You can implement A/B testing to find the best performing creatives quickly. At Pushground, they allow you to a/b test up to 10 different creatives at a time as well as offering automated creative optimization making your best performing ads the ones being shown.
+4. Optimize Your Landing Page
+Landing pages are a must in your push ad campaign, and you got to be on top of your game in building a landing page. A properly designed and well-optimized landing page significantly increases the conversion rate.   
+
+Some of the vital stats you can measure landing pages performance are:
+
+ 	 Conversion rate or conversion per click
+ 	 Bounce Rate
+ 	 Loading time 
+
+If you’re not getting enough conversions or facing some other problems with the landing page, there are a lot of things you can do to optimize your landing page for maximum conversion. Properly optimizing your landing page might require you to use landing page builders for quickly testing different things to reach a suitable combination. Read our article and find the most popular landing page and funnel builders there.
+
+Once you’re finished building the page, you can use in-depth analysis tools like crazyegg and smartlook to gain valuable insights into your landing pages' performance. The speed of your landing page has a massive impact on CR. Walmart found that conversion increased by 2% for every 1-sec faster loading times.  This is even truer for mobile sites. Gtmetrix and Google page speed insights are the tools that’ll help you reduce the loading time of your landing pages. Pre-landers are also recommended with landing pages as they help you optimize and find problem areas faster as well as giving a large boost to your CR.
+5. Create Blacklist / Whitelist to Optimize the Supply of Traffic
+You should start blacklisting resources and create whitelist data once you have sufficient information. Usually, it’s recommended to wait until you have spent around three times the payout for a supply. This will help you avoid over-optimization and missing out on potential opportunities.
+
+You always want to start with a blacklist before you ever move to a whitelist to avoid missing out on potential opportunities.
+Learn more: How to create a bot blacklist.
+
+6. Optimize your Targeting Settings
+You can further customize your campaign by playing with the targeting options.
+
+Analyze the outcome from different device types, operating systems (OS), network types, and carriers through the campaign statistics tab. Notice the patterns in your CTR and conversions and make the necessary bid adjustments or pause entirely for the underperforming groups. For example, if you found that you got better mobile results rather than WIFI, edit your campaign to target only mobile.
+
+Tip: It’s important to note here that traffic is not equal. A significantly higher CPC might lead to the improved conversion of the traffic. Carry out duplicate campaigns and look at the shifts in cost and measure the ROI more efficiently.
+7. Determine Peak Hours and Days; Run Campaigns Accordingly
+Every campaign has peak times, and you will quickly find out that some days and hours work much better for you than others. Once you have determined the best converting days/hours, adjust your campaigns accordingly. It’s known as Dayparting as well, i.e. breaking campaigns into different times according to traffic suitability. It helps us in utilizing the best converting traffic while saving money on the traffic that doesn’t pay off.   
+
+To learn more about Push ads or if you are looking to start, we recommend that you check out Pushground.

@@ -1,0 +1,213 @@
+# Things you should know about Google Ads conversions tracking
+
+Google Ads is one of the most popular Traffic Sources among RedTrack users. Why? Well, the answer is pretty obvious. It has tons of traffic, tools, and ways to optimize advertising campaigns. One of its main shortcomings is the high click cost. Of course, it is. You certainly can’t answer the question of how many users does Google Ads actually has, but by some estimates, it’s more than 50% of business around the globe and 85–90% of online business.
+
+So, what opportunities Google Ads provides to digital marketers and affiliates? What does make Google Ads so popular? First, there's a great variety of ad formats available in Google Ads. Here are the 6 most popular:
+
+ 	
+Search ads:
+
+
+Search ads are the paid-for results that show above organic results when a user is looking for an answer or product. JFYI, Google has 75.2% of the search market, not including mobile (it's a lot, isn't it?). The ad may look like this
+
+
+
+&nbsp;
+
+or this:
+
+
+
+&nbsp;
+
+&nbsp;
+
+ 	
+Display: 
+
+
+Display Ads are those visual-based ads that you see while reading an article or a blog, watching a video, or do whatever you always do on the websites that are a part of Google Display Network. This network unites over 2 million websites and apps with a potential reach of over 90% of all internet users. 
+
+
+
+&nbsp;
+
+ 	
+In-app:
+
+
+It all works as it sounds. The ad is simply displayed in Google's app-related properties: search, Play store, Display Network and other. You can target the specific app categories or select the specific apps, where you want your ads to be shown.
+
+&nbsp;
+
+
+
+&nbsp;
+
+ 	
+Shopping:
+
+
+It works as follows: you send your product data with the Merchant Center and create a campaign in Google Ads. Shopping ads use the product data to decide how and where to show your ads. And the variety of spots is really great:
+
+- Shopping tab on Google Search,
+- Google Search itself, next to search results and Google Images (separate from text ads),
+- Search Partner websites,
+- Display Network.
+
+
+
+According to the latest data, Google Shopping Ads only amount to 20% of retail paid search clicks. So, there’s actually plenty of opportunities there.
+
+ 	
+Video:
+
+
+Your video ads will be shown to your users when they watch a YouTube video. There are several video ad formats that can be used: 
+
+ 	skippable in-stream ads, 
+ 	non-skippable in-stream ads,  
+ 	video discovery ads, 
+ 	out-stream ads, 
+ 	bumper ads, 
+ 	YouTube Masthead ads.
+
+
+
+
+&nbsp;
+
+Simply upload your video ad to YouTube and then proceed to create an advertising campaign on Google.
+What do we have?
+As you see Google Ads provides a truly wide range of opportunities for those who want to engage users with their product through advertising. However, using Google Ads itself won’t guarantee you excellent results. So, it’s better not to pull all the eggs in one basket. No matter how hard you believe in your chosen Traffic Source. 
+
+Besides, one of the most important things that you need for successful advertising with Google is secure and accurate data collection. It will give you insights about your customers, their behavior and tell how to change the strategy for greater efficiency. It’s not that difficult if you have a reliable and quality ad tracker. As to RedTrack features, you might like the most, it’s reliable no-sampling data collection method along with robust drill down extended reports with 30+ parameters about every click. RedTrack offers a combination of several conversion types, statuses, and ways to deal with duplicate postbacks.
+
+Continue reading this article, if you'd like to know
+
+ 	What are the best methods to track Google Ads campaigns,
+ 	Which method is suitable for your case
+ 	How RedTrack helps you track your conversions in Google Ads in the most effective way
+
+But wait a second. 
+
+&nbsp;
+What can be counted as conversion in Google Ads?
+&nbsp;
+
+Some people may get confused with the use of such terms as conversions, impressions, and clicks. In fact, conversion refers to any user action that is valuable for you. Most of the time it’s a sale. So,
+
+ 	Clicks are counted when a user clicks on an ad, link or landing page.
+ 	Impressions occur when your ad is ‘seen’ by a user. Basically it happens any time a user opens a website, a landing page or an app and an advertisement becomes visible.
+ 	Conversions refer to any user action that is valuable for you: sale/registration/ etc. You can easily calculate by dividing the number of sales by the number of clicks.
+
+So, how are conversions transferred to RedTrack? In two words, it’s generated on the offer side and then it’s passed to RedTrack with the help of either S2S Postbacks or Pixels. You can read more about it in our recent article. In order to automatically pass conversions to Google Ads, you need to enable API integration in your RedTrack account. But you must be prepared for the fact that Google takes the conversion data once a day. So, the statistics passed from RedTrack will appear in your Google Ads account in approximately 24 hours. 
+
+With RedTrack, you can now see all your 3rd-party conversions right into your Google Analytics account. 
+
+
+
+&nbsp;
+
+RedTrack sends S2S postback to your Google Analytics account based on previously recorded Google Analytics user id. Integration works out of the box with minor additional setup on the publisher's side. So, if you’d like to activate these features, please, drop us a message at sales@redtrack.io (and yes, it’s absolutely free).
+
+Now that we have everything to start a campaign in Google Ads, let's see what tracking methods are currently available:
+
+&nbsp;
+3 ways to track conversions in Google Ads 
+&nbsp;
+
+With RedTrack you can track your conversions in Google Ads in 3 different ways:
+
+ 	Parallel Tracking;
+ 	Direct Traffic Tracking;
+ 	Multiple Direct Traffic Sources.
+
+Now, let’s dive into these three methods. But before that you need to take three simple steps:
+
+ 	Activate your RedTrack account
+ 	Choose an Affiliate network and the offer
+ 	Activate your Google Ads account
+
+All set!
+
+#1 Parallel Tracking
+Parallel Tracking is a relatively new method of tracking introduced by Google Ads. By this time, Parallel tracking has been enabled for Search, Shopping, and Display campaigns on most browsers. In the traditional approach, users click on an ad and are taken through multiple tracking redirects to get to the final landing page. A distinctive feature of parallel tracking is that it loads a landing page URL of an ad separately from a tracking URL. Tracking URL, in its turn, loads in the background instead of redirecting the user. 
+
+
+
+By reducing the number of operations, parallel tracking speeds page load time and as a result has a positive effect on campaign performance. 
+Read more: Google Parallel Tracking Panic - RedTrack.io
+
+When it’s better to use Parallel Tracking?
+Well, actually this alternative method is suitable not for all cases. It can be useful only when you send traffic directly to the third-party offer and you need to receive postbacks with Google click IDs.
+
+Basically, the only case when you really need this Parallel Tracking thing is when you use redirects, so the tracking link and the landing page link differ from each other. In other cases, it’s much easier to track your data using RedTrack Direct Traffic Script instead of Click URL. It will simultaneously track both clicks and views, so you don’t need to add LP views script to the lander.
+What are the benefits of using Parallel tracking?
+There are three main advantages of using Parallel Tracking : 
+
+ 	Faster page load speed
+ 	Better user experience
+
+How to set it up correctly?
+
+
+ 	Ask your Affiliate Network manager if you need to change anything in your postback URL or offer URL to work with Parallel Tracking
+ 	Choose Parallel Tracking option in your RedTrack account with Google Adwords template
+ 	Put the {gclid} parameter in Click Ref ID field
+ 	 Set parallel tracking in your Google Adwords account
+
+Follow the full guide to learn more.
+
+&nbsp;
+#2 Direct Traffic Tracking 
+&nbsp;
+
+Direct Traffic Tracking is a tracking method you can use when sending your Google Ads Traffic directly to your landing page from just one traffic source. 
+
+
+
+&nbsp;
+
+Mainly, there are three cases when it’s simply necessary to use Direct Traffic Tracking:
+
+ 	when you  want to buy traffic from a traffic source where redirects are not allowed 
+ 	you work with Organic Traffic
+ 	when you have low page loading or internet connection speed
+
+The main advantages of direct traffic script:
+
+ 	Accelerates the process of redirecting visitors as there is no redirection-in-the-middle
+ 	Allow you to track all types of traffic that come to your landing page, whether it's organic or paid one
+ 	Every refresh of the landing page is recorded as a new visit.
+
+How to set it up in RedTrack?
+To implement the Direct Traffic Tracking method you need to use LP (or direct traffic tracking) Pixel. With its help, you can track events that come from both the paid and organic/direct traffic. In other words, this function allows you to send traffic without redirects, and get all the information like you normally do. If you’ve already worked with Google Ads, you know how much it loves to ban redirects:)
+
+Basically, the only thing that you have to do is just copy &amp; paste RedTrack Direct Script from your campaign settings. To learn how to set it correctly inside your campaign, we recommend you to watch this guide:
+
+&nbsp;
+
+
+
+Or contact us at support@redtrack.io if you still have questions. 
+
+&nbsp;
+#3 Multiple Direct Traffic Sources
+This method is relevant for those cases when you send traffic to your landing page from several sources. For example, you have a well-established landing page and you want to track your Google Ads traffic and keep tracking your organic traffic and keep all statistics clear and in one interface. Even though it may be complicated, in fact, RedTrack can easily manage all the flows with just one script that you can create inside your campaign in 3 simple steps:
+
+ 	create separate campaigns for all you Traffic Sources,
+ 	assign the link to a specific Traffic Source script, recognize and track your traffic sources properly with a special “tsource” parameter
+ 	add Campaign IDs into the script
+
+Simple, isn’t it? 
+
+We’ve prepared a profound guide on how to do it in our Knowledgebase as well as recorded a video:
+
+&nbsp;
+
+
+Conclusion
+Knowing how popular Google Ads is among RedTrack users, our team developed a variety of solutions to help you track your Google Ads conversions in the most effective way. If you have any other questions or suggestions regarding Google conversion tracking, please,  send them to  sales@redtrack.io. We'd be glad to answer all of them. Happy tracking!
+
+&nbsp;

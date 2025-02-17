@@ -1,0 +1,164 @@
+# Adnium and RedTrack
+
+
+
+
+
+
+Adnium truly is the next-generation ad network, which offers real-time statistics, advanced targeting options, CPM-based billing, and advanced campaign optimization.
+
+
+
+RedTrack has an API integration with&nbsp;Adnium, which gives you the following benefits:
+
+
+
+
+Pause: campaign, placement, creative
+
+
+
+Create automated rules
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types you're planning to work with
+
+
+
+
+
+
+1. Add&nbsp;Adnium&nbsp;as a Traffic channel in RedTrack.
+
+
+
+Go to your RedTrack account →&nbsp;Traffic channels&nbsp;→&nbsp;New from template&nbsp;→ find&nbsp;Adnium&nbsp;→&nbsp;Add&nbsp;→&nbsp;Save&nbsp;the template:
+
+
+
+
+
+
+
+
+
+
+
+2. Integrate Adnium with RedTrack.
+
+
+
+2.1 In your Adnium account go to Advertisers → Conversions → copy the API Key:
+
+
+
+
+
+
+
+2.2 Get back to RedTrack → in the added Adnium template go to the&nbsp;Adnium API integration&nbsp;section → add the&nbsp;Adnium&nbsp;API key&nbsp;→&nbsp;Save changes&nbsp;to the template:
+
+
+
+
+
+
+
+The “Active” button means the integration is on:
+
+
+
+3. Create a campaign in RedTrack with&nbsp;Adnium&nbsp;as your traffic channel.
+
+
+
+Campaigns&nbsp;→&nbsp;Create new campaign&nbsp;→ use&nbsp;this guide&nbsp;for Affiliates /&nbsp;this guide&nbsp;for Advertisers to help you add the campaign with Adnium as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL&nbsp;(your tracking link):
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+4. Set up the tracking on the Adnium side.
+
+
+
+4.1 Go to Advertisers → New Campaign:
+
+
+
+
+
+
+
+4.2 Add your RedTrack tracking URL (from step 3) to the banner:
+
+
+
+
+
+
+
+5. Set up the Postback URL in RedTrack.
+
+
+
+In Campaign settings (created in step 3) scroll down to&nbsp;S2S Postback for Adnium → press&nbsp;Add&nbsp;→ replace the API key value for the token parameter and check if any other needed parameters are in place → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+To find your Adnium API key in your Adnium account go to Advertisers → Conversions:
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+
+
+6. Set up the&nbsp;automation.
+
+
+
+
+Use&nbsp;this guide&nbsp;to help set up&nbsp;rules.
+
+
+
+Use&nbsp;this guide&nbsp;for setting up the&nbsp;auto update cost&nbsp;feature.
+
+
+

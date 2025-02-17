@@ -1,0 +1,65 @@
+# (Archived) Reporting: attribution report
+
+
+Reason: attribution report has not been migrated to the new ui yet.
+
+
+
+What is an attribution report and why it is so useful?
+
+
+
+Attribution report shows you the paths customers go through to convert and also provides insights on how your different sources of traffic work together and separately to create conversions for you. This gives you a better sense of your potential customers' conversion paths and can help to optimize even better.
+
+
+
+Attribution report is a pro-tool designed for RedTrack clients for a better analysis.
+
+
+
+Data slices
+
+
+
+
+“First Click” Weight - sets the importance of the first click that leads to the conversion.
+
+
+
+“Last Click” Weight -sets the importance of the last click that leads to the conversion.
+
+
+
+“Assisted Click” Weight - sets the importance of all intermediate clicks between the first and the last click that leads to the conversion.
+
+
+
+Conversions for - determines which conversions to include in the report.
+
+
+
+Click Attribution window - adjusts an attribution report's lookback window (we will check all the clicks that lead to the conversion within the desired window)
+
+
+
+
+
+
+
+How to work with the report
+1. To start checking the data, go to the offer you want to check and navigate to the Attribution report:
+
+ 
+2. Set the rules for us to analyze the data for you:
+
+ 
+
+ 
+3. Once you run the report, you will see the magic happening:
+
+ 
+The system groups the conversion data based on the first and last click counts the contribution towards the results, and provides you with extended functionality, allowing you to check what traffic source converts better for different stages of a user journey.
+Play with the settings, change the weights for the first and last click to have a better view and analysis.
+
+
+

@@ -1,0 +1,62 @@
+# Rev gener dr
+
+
+Payout is the amount you get paid for the conversion.
+
+
+
+With RedTrack you can track your conversions in 2 different ways: dynamically and statically.
+
+
+
+
+
+This method offers you an effective and accurate method of tracking using a dynamic payout token or fixed value in your S2S postback URL or tracking pixel.If your affiliate network supports a dynamic payout token, it will send it back to RedTrack via your postback URL / pixel for each registered conversion via our supported&nbsp;{sum}&nbsp;parameter. 
+
+
+
+
+Networks that have a preset template in RedTrack already have all the needed parameters added.
+
+
+
+
+
+To add this parameter for the network from scratch go to Offer source → Postback parameters → place the payout tracking macro from your network into the SUM field:
+
+
+
+
+
+
+
+
+The parameter will vary for each particular network, so please contact your Account manager for the correct one.
+
+
+
+Here are some examples of postback URLs with dynamic tokens:▸ Everflow PB URL example: http://yourtrackingdomain?clickid={sub1}&amp;sum={payout_amount}▸ Affise PB URL example: http://rdtrck2.com/postback?clickid={sub1}&amp;sum={sum}▸ HasOffers PB URL example: http://rdtrck2.com/postback?clickid={aff_sub}&amp;sum={payout}▸ CAKE PB URL example: http://rdtrck2.com/postback?clickid=#s2#&amp;sum=#price#
+
+
+
+
+
+
+
+
+
+This provides you with an alternative solution if dynamic payout macros aren’t supported by your affiliate network (or advertiser). You can record payout by using a fixed payout value in the offer settings. To set it up go to Offers → Main tab → set the payout value per each registered conversion in the Default conversion revenue field:
+
+
+
+
+
+
+
+
+
+
+
+
+
+

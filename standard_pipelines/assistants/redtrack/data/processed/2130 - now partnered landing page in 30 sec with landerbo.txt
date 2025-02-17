@@ -1,0 +1,30 @@
+# Now Partnered: Landing Page in 30 sec with LanderBolt
+
+Hosting, coding and optimizing landing pages hold you back from getting a higher number of conversions? RedTrack Team got you covered! We’re glad to announce that RedTrack is now integrated with LanderBolt — all-in-one landing page solution built for affiliate marketers.
+
+What is LanderBolt? 
+Simply put in a sentence, LanderBolt is a landing page management system, host and builder for affiliate marketers. With LanderBolt, create your own landing pages from a variety of successful templates — and save your efforts on the most time-consuming tasks affiliates typically have to go through. 
+With LanderBolt integrated into RedTrack, all our users can now start their ad campaign with well-designed landers in just 90 seconds! Besides, media buyers, affiliates, and online marketers will now be able to: 
+• pick a lander from the catalog of top performing pages in such categories as advertorials, sweepstakes, dating, etc.;
+• import already successful landing pages from spy tools like Adplexity, and start sending traffic right away;
+• instantly change the URL for all the outgoing links on your landers without touching any code;
+• leverage the lightning-fast load of the pages no matter where the visitor is.
+Read the blog post till the end, and find a special LanderBolt discount for RedTrack users only! 
+
+Here are the simple steps to connect your RedTrack and LanderBolt accounts
+Step#1
+Obtain your API Key from the settings page inside your RedTrack account.
+
+
+
+Step#2
+Access the "Integrations" page inside LanderBolt and complete the necessary fields under the RedTrack section.
+
+
+Click on the "Save" button at lower right to save those settings.
+Step#3
+Now that you have provided the necessary API information, you can simply click on "Publish To RedTrack" from the edit landing page window.
+
+Once published, your landing page will be sent to your RedTrack account and synchronized automatically. Changes you make to your landing page name or URL inside LanderBolt will be instantly updated for you inside your RedTrack account!
+LanderBolt has a free 14 day trial. Or use this link for registration, and get a special 10% discount for RedTrack users.
+Got questions or need assistance? Ping us in our Telegram Community. 

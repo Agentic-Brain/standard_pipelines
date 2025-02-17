@@ -1,0 +1,50 @@
+# Cost/Ad spend: manual update
+
+
+Ad spend/costs in RedTrack mean the cost of your clicks, impressions, or conversions (if you work with the CPA model) you pay to your source of traffic.
+
+
+
+In RedTrack, you can update your campaign costs in just a few clicks right from the RedTrack interface. This option is available for campaigns with the following cost models:
+
+
+
+
+CPC (cost per click)
+
+
+
+CPM (cost per 1000 impressions)
+
+
+
+PopCPM (cost per 1000 pops)
+
+
+
+
+To enable the cost update feature:
+
+
+
+1. Campaigns → select the campaign →  Update costs:
+
+
+
+
+
+
+
+2. Fill in the needed fields → Apply:
+
+
+
+
+
+
+
+Fields explained:1. Choose the time frame.2. Add the target cost for that period.(optional) 3. Your traffic source subid. The value you receive from the source of traffic under this particular subid in RedTrack, for example, Ad ID.(optional) 4. The exact subid value your traffic source sends to RedTrack (for example, AD ID can be 23456677865).5. Apply changes to the campaign.☛ Subids data are added to redistribute the cost data also among them, allowing accurate granular reporting and KPIs.
+
+
+
+The cost you enter here will be distributed among all clicks for the chosen period. Updates occur as often as every five minutes. The time in the cost update window matches your account timezone.

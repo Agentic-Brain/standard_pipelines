@@ -1,0 +1,186 @@
+# Adding Brand and Website
+
+
+What is brand and website?
+
+
+
+Brand is an element in RedTrack is your product name (shop, website). It is the essential element in the Campaign creation flow.Website is the link to the exact product/shop you are promoting.
+
+
+
+How to add a brand and a website
+
+
+
+
+
+Before you start adding Brand and Website make sure you already have the following elements added:
+
+
+
+
+
+
+
+1. Brands → New from scratch:
+
+
+
+
+
+
+
+2. Fill in the mandatory fields in the form → Save the template:
+
+
+
+
+Give your brand a name.
+
+
+
+Click expiration: check&nbsp;Click expiration for more details.
+
+
+
+Duplicate postback settings:&nbsp;can be useful if you receive several conversion types with the same click id and want to exclude duplicated ones. Duplicate postback settings in the conversion types will be checked and applied first, so consider setting the postback mode there. Refer to this guide for details.
+
+
+
+Multi-currency:&nbsp;if you are receiving the payouts and costs in different currencies and want to transform them into your account currency based on the European Central Bank rate. Check&nbsp;the multi-currency support&nbsp;guide for more details.
+
+
+
+
+The rest of the fields are optional, and you will need them only if some your partner works with the S2S postbacks on the other side.
+
+
+
+
+
+1. Websites →&nbsp;Create new website:
+
+
+
+
+
+
+
+2. Fill in the info in the Main, Scripts, CAPI (Maximize signals) tabs as per the hints below:
+
+
+
+
+
+
+
+
+
+1. Website name: type in the name of your website here.2. Brand: choose from the drop-down the brand you added earlier.3. Website URL: this is the link to the product.4. Show additional parameters for URL: in this section, you can find additional parameters for your URL (if needed).5. Default conversion revenue: fill in if you want to receive the payout data statically, the same for each conversion.6. Show more: press this button if you want to add tags to your websites. Guide on Tags&nbsp;has more details about this feature.7. Save to apply the changes and move on to the next tab.
+
+
+
+Once you save the changes in this tab, a bunch of actions are performed automatically:- a default traffic channel for the unattributed traffic is created.- a default Campaign with this channel is created.- you are redirected to the Scripts tab to proceed with the script generation.
+
+
+
+
+
+Values for the universal tracking script
+
+
+
+
+Script name: give your script a name;
+
+
+
+Script tracking domain: choose the custom tracking domain you have added to your RedTrack account;
+
+
+
+Default tracking campaign: by default, this field is filled in with the unattributed traffic campaign;
+
+
+
+Attribution setting: defines the conversion attribution model;
+
+
+
+Attribution window: is relevant for first click / last paid click attribution models;
+
+
+
+Script cookie domain: a domain for the cookie. Use the website domain.
+
+
+
+
+The script generated this way:- can be found in Tools → Scripts.- cannot be deleted, and only certain fields in such scripts can be edited. It is important for you to have it ready to be used all the time.
+
+
+
+E-com integrations
+
+
+
+If you use Shopify or WooCommerce, you can also find all the needed tracking scripts. Follow the steps in Shopify and WooCommerce guides for details.
+
+
+
+
+
+This tab is only Facebook tracking only! It allows you to add your Facebook pixels to send the conversion data back to Facebook with the CAPI.
+
+
+
+
+
+
+
+These are the values that will be used as default values in case you decide not to fill in the corresponding fields for each pixel:
+
+
+
+
+Default action source: this is the conversion source for the default FB pixel. "Website" is a recommended option.
+
+
+
+Default website URL: this is the URL of your Facebook verified domain. Please use "https://domain.name" URL structure.
+
+
+
+
+The default action source and website URL can be left empty only if you fill them on the pixel level. If they are left empty, both the default one and the one on the pixel level, conversions will not be sent to Facebook.
+
+
+
+These are the values you set per each pixel you are using separately:
+
+
+
+
+Pixel ID: your unique FB pixel
+
+
+
+API key: your API key
+
+
+
+Action source: this is the conversion source for the pixel. "Website" is a recommended option. 
+
+
+
+Website URL: this is the URL of your verified domain (FB guide → step 6). Please use the "https://domain.name" URL structure.
+
+
+
+Add more pixels if you want RedTrack to send the conversion data there as well.
+
+
+
+
+

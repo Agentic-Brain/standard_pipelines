@@ -1,0 +1,148 @@
+# Premium Support (SLA extention)
+
+
+
+
+Effective Date:&nbsp;08/01/2024Last Review: 09/01/2024Next Scheduled Review: 08/01/2025
+
+
+
+What is premium support?
+
+
+
+This is the extra service you, as a client, can expect in addition to the basic service provided to the majority of the paid clients. 
+
+
+
+An extra service includes:
+
+
+
+
+Activation of all the required funnels
+
+
+
+Private communication channel
+
+
+
+Prioritized responses and feature requests queue
+
+
+
+Dedicated support manager
+
+
+
+On-demand call assistance
+
+
+
+Product Education
+
+
+
+
+
+
+Explained
+
+
+
+You are assigned a personal manager who becomes your single point of contact on all the questions. 
+
+
+
+Your personal manager will guide you through the product, be available to answer any questions afterwards, provide advice on the best platform usage, schedule troubleshooting or educational calls, and escalate any of your issues with a higher priority.
+
+
+
+A personal manager is available from 10:00 A.M. to 7:00 P.M., Monday to Friday GMT+3. The request resolution depends on the complexity (deep analysis, check, dev team involvement, etc.)
+
+
+
+Being eligible for the premium support service, you can choose between the following channels of communication depending on what works better for you and your business needs:
+
+
+
+
+Telegram chat
+
+
+
+Skype chat
+
+
+
+Slack chat
+
+
+
+In-app chat
+
+
+
+Email
+
+
+
+
+All of the channels above, no matter what you choose, will work the same between you as a client and RedTrack.
+
+
+
+
+
+Urgency levels and priority
+
+
+
+In extension to the main SLA document, we guarantee:
+
+
+
+
+Respond promptly to Critical and High cases
+
+
+
+Respond within 1 hour to Medium and Low cases
+
+
+
+Respond within 5 hours for Informational and Feature cases 
+
+
+
+
+Respond implies either a resolution or the ETA for the resolution, considering we already have all the details for the check/investigation/fix. Otherwise, we might need to clarify the details.
+
+
+
+
+
+Additional exceptions and limitations
+
+
+
+
+The terms for funnel activation service are agreed upon individually, depending on the complexity. The client is provided with a separate document with the timeline 
+
+
+
+Any changes to the working funnel done not by a RedTrack specialist are not subject to RedTrack.io liabilities
+
+
+
+Call assistance is provided only if agreed in advance at least one working day before the desired time
+
+
+
+The resolution of any technical issue might take time, depending on the complexity and time-consuming components. RedTrack guarantees to provide the approximate ETA from the start
+
+
+
+
+

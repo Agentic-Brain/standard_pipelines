@@ -1,0 +1,30 @@
+# woocom: conv types in the plugin
+
+
+5. For the events to be tracked accurately you need to do these 3 actions precisely:
+
+
+
+
+Add the universal tracking script.
+
+
+
+Check the boxes next to the needed events in the settings of the added WooCommerce plugin.
+
+
+
+Add the checked events in RedTrack.
+
+
+
+
+Act as per your tracking scenario:
+
+
+
+Events you want to trackActions in WooCom pluginActions in RedTrackStandard Purchase:PurchaseRedTrack Settings → add universal tracking script to the Script field → check the Purchase box in the Advanced conversion settings section:Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionDownsellOrderBumpAdvanced Purchase:PurchasePurchase with CODRedTrack Settings → add universal tracking script to the Script field → check the Purchase and Purchase with COD (Purchase (Cash on Delivery)) boxes in the Advanced conversion settings section:Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchasePurchase (Cash on Delivery)UpsellSubscriptionDownsellOrderBumpAdvanced Purchase:Purchase with COD (Cash on Delivery)RedTrack Settings → add universal tracking script to the Script field → check the Purchase with COD (Purchase (Cash on Delivery)) box in the Advanced conversion settings section:Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchase (Cash on Delivery)UpsellSubscriptionDownsellOrderBumpAdvanced Purchase:Purchase with COD (Purchase)RedTrack Settings → add universal tracking script to the Script field → check the Purchase with COD (Purchase) box in the Advanced conversion settings section:Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchase UpsellSubscriptionDownsellOrderBumpAdditional conversions:Purchase TAX ShippingRedTrack Settings → add universal tracking script to the Script field → check the Purchase, Tax and Shipping boxes in the Advanced conversion settings section:ExampleProduct $44 + TAX $6 + Shipping $10 = Purchase $60  Events:Purchase = $60TAX = -$6Shipping = -$10Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpTAXShippingAdditional conversions:PurchaseRefund (include TAX andShipping)RedTrack Settings → add universal tracking script to the Script field → check the Purchase and Refund boxes in the Advanced conversion settings section:ExampleProduct $200 + TAX $44 + Shipping $20 = Purchase $264Events:Purchase = $264Refund = -$264Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpRefund Additional conversions:Purchase RefundRedTrack Settings → add universal tracking script to the Script field → check the Purchase and Refund boxes in the Advanced conversion settings section:Example:Product $200 + TAX $44 + Shipping $20 = Purchase $264Events:Purchase = $264Refund = -$200Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpRefundAdditional conversions:Purchase TAX Shipping RefundRedTrack Settings → add universal tracking script to the Script field → check the Purchase, Refund, TAX and Shipping boxes in the Advanced conversion settings section:ExampleProduct $200 + TAX $44 + Shipping $20 = Purchase $264Events:Purchase = $264TAX = -$44Shipping = -$20Refund = -$200Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpTAXShippingRefundAdditional conversions:Purchase Cancelled (include TAX andShipping)RedTrack Settings → add universal tracking script to the Script field → check the Purchase and Cancelled boxes in the Advanced conversion settings section:ExampleProduct $200 + TAX $44 + Shipping $20 = Purchase $264Events:Purchase = $264Cancelled = -$264Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpCancelledAdditional conversions:Purchase CancelledRedTrack Settings → add universal tracking script to the Script field → check the Purchase and Cancelled boxes in the Advanced conversion settings section:Example:Product $200 + TAX $44 + Shipping $20 = Purchase $264Events:Purchase = $264Cancelled = -$200Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpCancelledAdditional conversions:Purchase TAX Shipping CancelledRedTrack Settings → add universal tracking script to the Script field → check the Purchase, TAX, Shipping and Cancelled boxes in the Advanced conversion settings section:ExampleProduct $200 + TAX $44 + Shipping $20 = Purchase $264Events:Purchase = $264TAX = -$44Shipping = -$20Cancelled = -$200Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpTAXShippingCancelled
+
+
+
+

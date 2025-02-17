@@ -1,0 +1,16 @@
+# 20-Nov
+
+
+ 	Table page optimization (campaigns, offers, traffic sources, landing pages, offer sources).
+ 	PayPal Credit payment method added.
+ 	"Compare campaign data" feature.
+ 	Set account manager for publishers.
+ 	Separate statistics for multi-funnel campaigns (with prelandings).
+ 	Customizable conversion types: 2 for basic, 11 for Pro and higher.
+ 	Divide the "Save" button on a campaign level to "Save" and "Save and close."
+ 	New settings for statistics colors.
+ 	Offer source grouping in reports.
+ 	If the fraud check is enabled,  show click reports in the main table and enable filtering based on the fraud check.
+ 	Attribution, Bad device, Black List, Datacenter, OK columns for click logs.
+ 	If MGID integration is enabled, do not count its traffic towards the event limit.
+ 	Traffic source multi-accounts tracking.

@@ -1,0 +1,142 @@
+# traf junky dr
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer and Offer source
+
+
+
+Conversion types
+
+
+
+
+
+
+1. Add TrafficJunky template to RedTrack and integrate the 2 platforms
+
+
+
+1.1 Traffic channels→&nbsp;New from template→ find&nbsp;TrafficJunky&nbsp;template and press&nbsp;Add→ Save the template:
+
+
+
+
+
+
+
+
+
+
+
+You cannot integrate TrafficJunky with RedTrack without saving the TrafficJunky template first.
+
+
+
+1.2 Go to your TrafficJunky account→&nbsp;My Profile→ scroll down to the section&nbsp;Connect with TrafficJunky API→ click the&nbsp;Generate New Token&nbsp;button→ copy the API key:
+
+
+
+
+
+
+
+
+
+
+
+1.3 Get back to RedTrack→ settings of the TrafficJunky template added within step 1.1→ scroll down to the section&nbsp;Traffic Junky API integration→ paste the&nbsp;API key&nbsp;copied within step 1.2→ Save changes:
+
+
+
+
+
+
+
+The Active button means your integration has been successfully fulfilled:
+
+
+
+2. Create a Campaign in RedTrack with TrafficJunky as a traffic channel
+
+
+
+Campaigns→ New→ use this guide for Affiliates / this guide for Advertisers to help you add the campaign→ once your campaign is saved, copy the automatically generated&nbsp;click URL&nbsp;(your tracking link):
+
+
+
+
+
+
+
+3. Set up the tracking TrafficJunky
+
+
+
+In your TJ advertiser account click the&nbsp;Campaigns&nbsp;tab→ either choose an existing campaign / click&nbsp;New Campaign→ fill in the information related to your campaign→ paste the&nbsp;Campaign URL&nbsp;you have obtained in step 2&nbsp;into the&nbsp;Target URL&nbsp;section and proceed with setting up your TJ Campaign:
+
+
+
+
+
+
+
+4. Set up a new tracker in TrafficJunky
+
+
+
+You need to&nbsp;set up a new tracker in TJ to pass your conversions correctly.&nbsp;To do that, open&nbsp;Tools→&nbsp;Conversion Tracker →&nbsp;New Tracker→ enter the name of your tracker (e.g., RedTrack) and set the type of events you want to track→&nbsp;Add Tracker→ find your tracker in the list→&nbsp;view&nbsp;in the&nbsp;Invocation Code&nbsp;column→ choose&nbsp;Postback URL.&nbsp;&nbsp;Your Postback URL will be generated automatically→ copy the&nbsp;a&nbsp;and&nbsp;member_id&nbsp;values from the&nbsp;Invocation code:
+
+
+
+
+
+
+
+5. Set up the Postback URL in RedTrack
+
+
+
+Go to the Campaign created within step 2→ put the correct postback values (“a” and “member_id”) and make sure that your postback contains clickid values that should look like this&nbsp;aclid={ref_id}:
+
+
+
+
+
+
+
+6. Set the automation and enjoy
+
+
+
+Check out the following articles for the automation features:
+
+
+
+
+Integrated Traffic channels&nbsp;(for a general overview of the automation features in RT)
+
+
+
+Auto rules
+
+
+
+Auto cost update
+
+
+

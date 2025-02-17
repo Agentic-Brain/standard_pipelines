@@ -1,0 +1,138 @@
+# Masters in Cash and RedTrack
+
+
+
+
+
+
+Masters in Cash has the best-converting in-house developed dating and chat offers for the entertainment industry. 30+ geo, weekly new offers with fresh databases, and experienced affiliate managers willing to walk the extra mile.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events&nbsp;you want to track
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Masters in Cash as an Offer source in RedTrack.
+
+
+
+RedTrack → Offer sources → New from template → add Masters in Cash template → copy the Postback URL → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up the Postback URL in Masters in Cash.
+
+
+
+2.1 In your Masters in Cash account go to profile settings → Global postbacks → Add postback:
+
+
+
+
+
+
+
+2.2 Add the postback URL from RedTrack (copied in step 1) → choose the status → Add postback:
+
+
+
+
+
+
+
+Once added, you will see it under your Global postbacks:
+
+
+
+
+
+
+
+2.3 If you want to track different types of postbacks (for example, approved, pending, and declined simultaneously), you can use RedTrack conversion types.Remember to adjust the conversion types settings in your RedTrack account. Like that, you can have several events tracked for even better analysis:
+
+
+
+
+
+
+
+3. Obtain the Masters in Cash offer.
+
+
+
+In your Masters in Cash account go to all offers → choose the one you want to promote → request access → wait for approval → once approved, copy the offer link:
+
+
+
+
+
+
+
+4. Add Masters in Cash offer to RedTrack.
+
+
+
+In your RedTrack account go to Offers → Create new offer → fill in the mandatory fields → add Masters in Cash offer link in the URL field → make sure to add the tracking parameters “sub1={clickid}” at the end of the offer URL → Save:
+
+
+
+
+
+
+
+Refer to this guide for details on filling in the rest of the fields in the Offer form.
+
+
+
+5. Create a&nbsp;campaign in RedTrack&nbsp;with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To help you add the campaign refer to:
+
+
+
+
+this guide&nbsp;for Advertisers.
+
+
+
+this guide&nbsp;for Affiliates.
+
+
+

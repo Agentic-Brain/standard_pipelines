@@ -1,0 +1,48 @@
+# Email tracking
+
+
+Collecting emails and sending them to the target audience may be a part of your advertising funnel together with running a paid traffic campaign with some source of traffic, or tracking the unattributed (aka organic) traffic on your landing page. And you may want to track those emails performance together with other ad campaign elements. 
+
+
+
+To implement this in RedTrack act as follows:
+
+
+
+1. Campaigns → Create new campaign. 
+
+
+
+To help creating a campaign in RT be guided by:- this guide for Affiliates.- this guide for Advertisers.The campaign should be created as per your flow (can be with one or two landing pages, directly to the offer, etc.)
+
+
+
+2. Once the campaign is created, the tracking options automatically generated. Go to the settings of the created campaign → Tracking links and parameters → Impressions → copy the Impression pixel:
+
+
+
+
+
+
+
+3. Replace the sub1 value with something you want to pass to RedTrack. It can be both static and dynamic value.
+
+
+
+Dynamic values should be supported by your system.Examples:Static:&lt;img src="https://docs.trk.agency/impression/5f92a30bc860ee0001fa996?sub1=email" width="1" height="1" />Dynamic:&lt;img src="https://docs.trk.agency/impression/5f92a30bc860ee0001fa996?sub1={email}" width="1" height="1" /> (placeholders can be different depending on what your  system supports)
+
+
+
+4. Once the pixel is ready, place it inside your email as a piece of code. Once the email is open, the pixel will be fired.
+
+
+
+You will see the statistics in your target campaign reports (the dynamic or static value you will be sending):
+
+
+
+
+
+
+
+In addition to tracking the email openings, you can place the redirect tracking link to some CTA button and see who clicked on it within the same campaign.

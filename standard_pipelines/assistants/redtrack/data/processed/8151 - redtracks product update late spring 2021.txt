@@ -1,0 +1,129 @@
+# RedTrack's Product Update (Late spring 2021)
+
+You all know that RedTrack’s team has been working very very hard on Facebook CAPI integration. We didn’t just release an out-of-the-box solution, but we also keep working on improving it by doing weekly and monthly updates. However, RedTrack doesn’t end on Facebook CAPI! There were a bunch of other exciting things happening to the tool in the late spring. 
+
+Therefore, we decided to bring it all together in one article and cover all the updates that RedTrack scored. Follow along!
+UPD: We already have a new product update covering changes that we made over summer 2021, check the video with a description of the features and setup screensharing!
+&nbsp;
+
+
+New UI in beta
+If you haven’t tested the new interface already, check it out. It was a very long-awaited update and we are now testing a new interface that could fit all the needs of our users. Be sure to give us feedback so we could improve and provide the best tool possible whenever the new UI goes live!
+
+
+
+Core tracking 
+Here you will find a bunch of updates that touch the core tracking functionality RedTrack provides. Learn more about custom payouts, postback logs, Woocommerce updates, etc.!
+Custom payouts for any traffic source
+
+At RedTrack we are dedicated to providing you with flexibility. Custom payouts become handy when you want to adjust the reward according to the performance (or other variables) of your affiliates/partners. 
+
+Now it is possible at RedTrack to set custom payouts for CPA / RevShare campaigns in campaigns on the following levels:
+
+ 	Country-level, when payout set for a specific country overrides default campaign settings
+ 	SubID value level, when payout set for a particular subbed value overrides default campaign settings.
+
+
+Postback logs for conversion passed via API
+This feature is great if you want to troubleshoot your API performance. If something is off on your campaign performance, you can easily go to postback logs to verify if all the conversions have been sent. 
+
+Find the data on all the postbacks sent to Google, Facebook, or Bing via custom conversion API integrations. To access those logs please go to Logs → Conversion API.
+
+
+Cost update logs for automatic API-based cost updates
+Another feature that provides you the ability to control your API integrations. Access the logs for your cost updates in order to receive detailed data about costs, time of the update &amp; other details about the campaign. Always be sure that you know when the click was created and whether the costs updated accurately. 
+
+Access the log of automatic API-based cost updates done by RedTrack.io for your campaigns. To access those logs please go to Logs → Cost Updates.
+Woocommerce postback 
+In order to avoid the confusion of algorithms when facing different identification of currencies, we worked on a solution for Woocommerce postback to be able to differentiate those currencies with no problem. 
+
+E.g. Sometimes postbacks can contain additional symbols in {sum} value, in payout={sum} to record conversion payout / revenue, like 15zl or $10.
+
+Now RedTrack can 'read' the payout value and add those custom scenarios manually to train the system that payout={15zl} is the same as payout={15}&amp;currency=PLN
+Publisher panel
+New tokens: conversion ID &amp; conversion type
+We had requests for many publishers to develop another sort of conversion identification rather than click ID. Therefore, we created new tokens for the publisher panel. 
+
+Now your publishers (affiliates) can use two additional tokens/macros when adding postbacks in the white-label publisher panel. Or you can add them yourself in the publisher management screen.
+
+ 	{convid} — sends conversions
+ 	{convtype}  — sends conversion type (as specified in custom conversion type settings in RedTrack.io)
+
+Please note that publisher management is available to RedTrack.io Team+ subscribers
+Automation
+Auto-optimization improvements
+Now we provide even more value when it comes to granular data for advanced automation. This set of updates is for PRO users who have certain requirements for their campaign automation sequences. 
+
+
+
+New automation settings are:
+
+ 	Weight multiplier. As there can be more than one winning combination, you can now define how much traffic a winning combination will get. The higher the weight — the more traffic will be sent to it compared to other winning combinations.
+ 	The threshold for optimizing by subID. If you use optimization based on subID value. (e.g. placement or publisher), you can specify how many clicks a specific value should receive in the learning period to be included in optimization. E.g.: you do not want to keep traffic distribution as it is if a particular placement delivered you less than 100 clicks.
+
+API integrations 
+We take out time to provide value with simplified API integrations (like Facebook, Google, Bing, and 20+ other sources) at RedTrack. Find the latest updates in regards to API integrations for the RedTrack platform. 
+Improved Google automatic cost updates 
+As RedTrack used to update costs only on the campaign level, we kept working on providing better depth for automatic cost updates. Now you are able to get more data for automation and optimization purposes with several levels of cost-updates.  
+
+RedTrack.io can now automatically update costs for integrated Google accounts at the campaign, ad group, and ad level to give you more control over the tracking. 
+Pro and Advanced plans have cost updates on ad group level. Team+ plans have cost updates of ad level.
+Improved Facebook automatic cost updates
+The same goes for Facebook, utilize cost updates on several levels for Facebook Conversion API to get more from automation and make better optimization decisions. 
+
+RedTrack.io can now automatically update costs for integrated Facebook accounts of the campaign, ad set, and ad level.
+Pro and Advanced plans have cost updates on ad set level. Team+ plans have cost updates of ad level.
+Improved Event Match Quality for Facebook
+One of the problems that we had after the iOS 14 changes is Facebook had very low Event Match Quality, which affected attribution on FB. Facebook now required a lot of data to make sure that conversions happening are eligible and trustworthy. But guess what? We fixed that too 😎
+
+RedTrack.io now sends more data to Facebook to improve Event Match Quality and therefore improve conversion attribution. We send the following data now: city, country, external ID, subscription ID, event ID, content ID. 
+Multi-pixel for Facebook Conversion API 
+One of the most exciting updates is the possibility to use multiple pixels for your campaigns. Now you have a chance to add as many pixels as you like on the offer level if you wish to use separate pixels for different events.
+
+Using multipixel is good for two types of cases: if you want to separate each conversion type by pixel or simply for the purpose of the backup.
+
+To add pixels: Go to Offers → Edit offer → Scroll down → Set Default Action Source → Add Pixels 
+
+
+
+Send some types of conversion via FB, Google, or Bing
+It was truly a highly requested feature and we understand why! Not every conversion type should actually influence your optimization decisions. If you want to gain control over the optimization of your ads, it’s important to manage the conversion types you are sending to the source. 
+
+Now with RedTrack, you have more control over conversions for your API integrations (Facebook, Google, and Bing). You can choose certain types of conversions for a conditional postback while before the update RedTrack was sending all the conversions automatically.
+
+
+
+
+To access the feature go to Tools → Conversion Tracking → Conversion Types. You can read more about conditional postback in our knowledge base.
+
+Bing Auto-cost updates
+Just like with other API integrations, we developed an auto-cost update solution for Bing (Microsoft Ads) for you to be in constant control over the spending of your budget. It gives you a chance to make faster and better decisions when planning your campaigns. 
+Click ID in Conversion API logs
+If you need to quickly test your conversion API integrations and find any mistakes/conversions, this update is for you. Now you can find the required conversion in Conversion API logs using the ClickID with help of a special filter. 
+Reporting
+CPA for conversion types 
+Another amazing update that gives you flexibility. If you are running ads with several conversion types, you do want to calculate CPA separately and not put all the eggs in one basket. To do that we developed CPA for each conversion type.
+Now you can see individual acquisition cost for each conversion type used. To add it, go to “Column set-up” and add relevant CPA columns to the active view.
+
+&nbsp;
+
+
+Pre-Landing Page / Landing Page CTR metrics
+If you an affiliate, there is a high chance you are making use of advanced user funnels (taking a user from multiple landing pages and to the advertiser itself). You do need a few more metrics to analyze the performance of the ads you run, therefore we worked on the advanced metrics for those funnels. 
+
+Now you can also measure pre-lander page effectiveness as Pre-LP / LP CTR, a ratio between visitors coming to the pre-lander and proceeding to the landing page. 
+
+To add it: Go to Column set-up and add Pre-LP / LP CTR to the active view.
+
+
+Other
+
+User multi-access by campaign
+We worked as well on improved multi-access. If you are using your RedTrack account with several partners, you can now choose also to give access to certain campaigns. Well, as we already said, flexibility. 
+There is never too much control over your marketing tracking &amp; analytics 😎
+
+
+
+&nbsp;
+Conclusion
+Other minor updates and changes have been added as well, but these are the most important updates for you to keep in mind for now. As always, at RedTrack we are devoted to providing the best from tracking, analytics, and attribution, so be sure to leave your feedback or requests in any of our channels (social media or using the support email). Happy tracking! 

@@ -1,0 +1,76 @@
+# Publishers: overview
+
+
+What is a branded partner portal?
+
+
+
+Branded partner portal is a RedTrack feature allowing customers to do media-buying and manage publishers/partners in one place without workarounds. RedTrack branded partner portal has the following crucial characteristics:
+
+
+
+
+it is designed for the needs of small teams expanding media-buying into working directly with publishers/partners or other affiliates;
+
+
+
+it serves to expand the tracker's functionality and create an all-in-one tracking and affiliate management solution with new features at a reasonable price;
+
+
+
+it is represented by 2 separate workplaces: a control dashboard for Managers (your common RedTrack interface) and an app branded with your logo and URL.
+
+
+
+
+Must-dos to set up a properly branded partner portal
+
+
+
+Follow these 2 steps to set up the branded partner portal in a proper manner:
+
+
+
+1. To access the branded partner portal on the main RedTrack menu navigate to the section Publishers:
+
+
+
+
+
+
+
+2. Remember to implement the basic settings in the branded partner portal in the correct order:
+
+
+
+2.1 first you need to add a Domain. Refer to the Publishers: adding a domain article for details.
+
+
+
+2.2 then you add a Whitelabel. Refer to the Publishers: adding whitelabel article for details.
+
+
+
+2.3 only after that do you move on to creating a Campaign and adding Publishers/Partners. Refer to the Publishers: creating a campaign and Publishers: adding publishers articles for details.
+
+
+
+Remember that if you break this sequence and add a whitelabel first or add publishers/partners and only then add the domain, it will cause a conflict forcing you to start the settings all over again.
+
+
+
+3. Once you've added the domain, Whitelabel, created the Campaign, and added publishers/partners you can proceed further with:
+
+
+
+
+Publishers: settings for publisher
+
+
+
+Publishers: managing payouts
+
+
+
+Publishers: coupon tracking
+

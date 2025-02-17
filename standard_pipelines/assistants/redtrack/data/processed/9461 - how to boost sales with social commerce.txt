@@ -1,0 +1,72 @@
+# How to boost sales with social commerce
+
+We as marketers understand how quickly the industry changes and that we need to adjust and find out how we can maintain our performance in the new reality. Here comes social commerce that allows maintaining a connection with customers in the e-commerce niche. Social or conversational commerce is a new standard for a e-commerce brand so in this article we would like to educate you on steps you can take to introduce it to your business. 
+
+In this article we will discuss:
+
+ 	What is a social commerce 
+ 	Challenges in e-commerce 
+ 	How to implement social commerce
+ 	Post-Checkout experience in e-commerce
+ 	Future of Social commerce
+ 	Must-have tools for e-commerce
+
+This article is based on the conversation with our special guest Shuvo Rahman, Founder &amp; CEO of MyAlice.We discussed challenges in e-commerce today and how communication with our customers directly affects sales. 
+&nbsp;
+
+&nbsp;
+What is social-commerce 
+Social commerce is the process of selling your products or services using social media channels to communicate with your customers directly to provide them with the best customer experience.
+The pandemic boosted changes in the e-commerce industry drastically. The 10-year growth of the industry took only 3 months, and even giant like Shopify has grown more than 2 times in a few years. 
+
+We noticed that there are more and more e-commerce stores and more new businesses entering the D2C (Direct-to-consumer) segment.
+
+These businesses need to find a way to provide exceptional customer service. They become available on social media, which their customers use the most. But how do they find the optimal way for communication? How do they introduce real-life experience in the e-commerce world?
+Social commerce has a potential to do so by allowing customers to directly chat and talk to your business through they favorite social channels. You can communicate with customer in the place that is convenient for them, use their language, therefore, increase your revenue through a better customer experience. 
+And that’s where social commerce becomes so handy. Because actually selling through those social channels can be way easier than investing in other marketing &amp; advertising channels. 
+How did iOS 14 affect e-commerce? 
+One of the biggest challenges of the last year in e-commerce is IOS 14. It negatively affected the tracking &amp; analytics of the marketing performance of e-stores. 
+
+Shuvo shares that the IOS ATT prompt became the biggest challenge for marketers regardless of demographics, regions, or countries. However, IOS 14 became a real struggle mostly for big e-commerce and e-commerce enterprises.
+RedTrack is solving the problem of inaccurate tracking after iOS 14 by providing reliable first-party data technologies that will work even at the time of the cookieless future.
+
+With RedTrack you can track 100% of your conversions and manage the conversion data between marketing channels and your e-commerce platform. 
+While giants of e-commerce face the reality of IOS 14 implementation, small and growing stores have other challenges. They sell mostly on social media, launch marketing campaigns on socials, and keep the inventory on a separate platform. The main struggle is that you need to use multiple software and switch between the channels to maintain communication with a customer if you sell with socials. Social commerce tools like MyAlice can solve this issue and simplify the journey for your e-commerce business. 
+How to implement social commerce
+If you wanna win the competition, you should start thinking of implementing social commerce in your e-commerce business. But where do you start? Let's explore three simple steps to start your social &amp; conversationa journey.
+Step 1: Find your social channels 
+In order not to miss important data you need to understand which social media is more popular among your customer segment and monitor them for better performance. Commonly used social media really depends on the location of your customers. So be sure to identify those valuable channels that will be a direct bridge to your target audience. 
+Step 2: Create a strategy
+How are you gonna communicate with these customers? What's the best way to communicate with people through these particular socials?
+
+Once you figure out the channels you'll have to come up with a strategy to maintain a conversation with the customers. 
+Just knowing that your customers are available on this social media more often doesn't guarantee success. You might be not the only business that chooses social commerce.
+ After analysis, you will understand when it is the best time to interact with your audience and what content they want to see from you on a chosen channel.
+Step 3: Maintain the conversation with your customers 
+You can use the help of customer care agents, robots, and AI, or you can do a hybrid approach and use all of them. You’ll also need to think about the tools that you will use to serve your customers. Choose tools that will help you monitor all the communication with a customer and analyze their steps toward a purchase.
+
+MyAlice is one of the tools that will help you take the communication from each of your social channels to a single platform for it to be easier to keep track of everything.
+Post-Checkout experience in e-commerce with social commerce
+Post-checkout experience in e-commerce is staying in touch with your customers even after they made a purchase.
+Post-purchase interaction is underestimated, although it is easier to easier to upsell than pursue a new customer. You already understand your customer's needs which makes it easier to give them the best offer.
+
+It is valuable to track every step that led to a purchase. It is important to track not only the last conversions but also all the upsells and additional sales, which is called the Post-Checkout experience in e-commerce.
+
+People spend a lot of time on social media and messengers chatting with their family and friends. So, it would make sense to bring e-commerce to a place where your customers spend most of their time. Instead of a familiar interaction via email or SMS, try using the most used social channels among your customers. 
+
+Social commerce in the post-checkout experience can drive your sales once you learn when and where it is better to communicate with your customers. The most effective channel will vary for different customer segments. It really depends on the location, and which channel to use for social commerce. 
+
+Also, do not forget that there are tools that will let you manage communication with your customers and track the conversions. Such tools help you provide an outstanding customer experience and track attributions. They give you a better understanding of your audience and where you need to pay more attention to boost your sales.
+Future of Social commerce
+The experience that customers get in online stores is very different from what they experience in real life because of the lack of personalization in e-commerce. 
+
+You can provide your customers with a personalized experience by keeping the data in one place, which will help you understand customers better. It is like in real life when they enter a store, you see your customer and have a real conversation to understand their preferences.
+
+AI approach is becoming the future of social commerce because it is the best way to process a big amount of data. However, machines will never be able to substitute for human creativity. Automation will complement people's work social commerce to make it more personal.
+Must-have tools for e-commerce business 
+MyAlice is a unified inbox that connects all social and messaging channels with your e-commerce store. With MyAlice you will be able to keep all conversations and customer tickets from all social channels in one place in order to provide a better customer experience on the web. 
+
+Even though RedTrack and MyAlice have different purposes, we have one thing in common - connecting all the social channels in one place. While MyAlice helps to maintain a conversation with the customers to know them better, RedTrack connects all the marketing channels, where you could see the performance of your marketing campaigns and track all the conversions.
+
+&nbsp;
+

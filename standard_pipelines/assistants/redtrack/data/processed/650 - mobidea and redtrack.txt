@@ -1,0 +1,106 @@
+# Mobidea and RedTrack
+
+
+
+
+
+
+Mobidea is a mobile affiliate network focused on CPA advertising.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events&nbsp;you want to track
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Mobidea as an Offer source in RedTrack.
+
+
+
+RedTrack → Offer sources → New from template → Add Mobidea template → copy the Postback URL → Save the template: 
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Add Postback URL from RedTrack to Mobidea. 
+
+
+
+Go to your Mobidea account → Settings →&nbsp;Global Postback → put the postback&nbsp;from RedTrack&nbsp;to the&nbsp;Insert your domain section (do not put https before potback url) → Save changes:
+
+
+
+
+
+
+
+3. Add the offer link from Mobidea to RedTrack.
+
+
+
+3.1 In your Mobidea account go to Offers → apply for an offer → once approved, open the offer, and copy the Offer link.
+
+
+
+3.2 In your RedTrack account go to Offers&nbsp;→ Create new offer → add Mobidea offer link in the URL field -&gt; add the tracking parameters "tag={clickid}" at the end of the offer URL → Save changes to the template:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+4. Create the campaign with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To create a Campaign refer to:
+
+
+
+
+this guide&nbsp;for Advertisers.
+
+
+
+this guide&nbsp;for Affiliates.
+
+
+

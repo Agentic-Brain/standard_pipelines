@@ -1,0 +1,100 @@
+# Performance Marketing Automation in post-cookies era
+
+What's the dream of every marketer?
+
+I guess it's not gonna be possible to narrow it down to a single dream. We all marketers are unique creatures, I'm sure.
+
+But there is something I would definitely want to receive from technology.
+To have space to be creative more often.
+Marketing professions are quite creative, they require constant innovation and a permanent state of looking at things from a different angle. But marketing also comes with crazy seasonality, deadlines, numbers, tables, and spreadsheets. And a lot of pressure.
+
+That really ruins all the ease and creativity that comes with such an amazing job.
+
+And that's why for me personally and for the community with who I stay in touch, ANY automation tool just really saves the day.
+
+And today we are gonna talk about Marketing Automation for performance marketers. If you are running ads on multiple ad channels, if you have a high ad spend, you need these automation tactics to save your precious time and scale revenue.
+
+Agenda:
+
+ 	What is Marketing Automation?
+ 	Is Marketing Automation possible without cookies?
+ 	How to automate your campaigns' performance across multiple channels?
+ 	What is campaign cost-updates?
+ 	How to prevent ad loss and scale revenue with use of Automation.
+
+And now, let's start!
+What is Performance Marketing Automation?
+How many marketing channels you use? (Think of the answer) Facebook, Google, Email, Affiliates, SMM? This you probably will be able to count.
+
+How many campaigns you run on each channel? (This is gonna be a harder one to calculate fast)
+
+And how many ads do you have? How many creatives are in rotation? (The larger your marketing is, the more complicated it's gonna be to come up with a number here).
+
+Imagine there is some magical fairy creature that has an answer to all of that. In a matter of second.
+
+Usually, that's your Analytics tool.
+
+If you chose wisely, this tracking system has the data about all of your marketing channels, campaigns, ad groups and ads. Not just the number of those, but also all the performance stats: CRs, CTRs, AOVs, LTVs, Add-to-carts... and this list continues pretty endlessly.
+
+And now imagine that the tool you have can OPERATE according to the marketing data it has. This means managing, optimizing, stopping what doesn't work, and scaling what actually performs amazingly.
+
+These are Performance Marketing Automation Rules.
+
+If we take our own example, we have newly released Advanced Automation Extension from RedTrack. 
+
+With this smart tool you get an ability to:
+ Receive Cost Updates on your campaigns (up to 1 min update frequency). You will see the costs across all your campaigns to understand how you spend and how this spending turns into revenue.
+ Scale rules: these are special types of rules that help you manage campaigns' budgets and bids to scale performance based on the Cost, CPA, Conversion, ROI, Revenue, EPC, and other performance metrics. One rule can be applied to multiple campaigns.
+ Stop &amp; go rules: pause campaigns, ad groups/ ad sets, ads, and blacklist placements based on the Cost, CPA, Conversion, ROI, Revenue, EPC, and other performance metrics. Relaunch paused objects if KPIs improve with delayed conversions data.
+Alerts &amp; Notifications: receive updates on your performance. Send e-mail or web-hook notifications (through Slack, for example) based on benchmark KPI, including Cost, CPA, Conversion, ROI, Revenue, EPC, and other performance metrics.
+
+Is Marketing Automation possible without cookies?
+Yes. Without third-party cookies for sure.
+
+You have to ensure that your tracking tool operates without third-party cookies and relies only on first-party data.
+
+First-party data is your guarantee to comply with privacy regulations (like GDPR) but at the same time use this data for optimization &amp; automation.
+
+🚀 Read about the role of raw &amp; first-party data for advertisers 🚀
+
+How to automate marketing campaigns' performance?
+If you want to start automating instead of constant monitoring, you will have to land on Analytics &amp; Automation system first.
+
+Automation is not possible without data. Therefore, your tracking tool should have impeccable quality when it comes to data.
+
+All the clicks, conversions, add-to-carts, and initiate checkouts have to be measured.
+
+Once the data is gathered, Automation is possible.
+Prevent loss and scale revenue
+When it comes to preventing loss, you will find these 2 features of value: Stop &amp; Go Rules and Alerts &amp; Notifications. 
+When you set Stop Rule, you set a specific KPI for your campaign. If this KPI is not met, the campaign will be automatically stopped. You can set a KPI according to the cost of the campaign, CTR, CR, or other important for your business metrics.
+
+Another way to stay up to date with your campaigns' performance without over-monitoring is to set Alerts &amp; Notifications.
+
+When your KPI is not reached, you will be updated instantly.
+Value of cost updates frequency
+This one is big and I feel like I have to elaborate more on it.
+
+I want you to calculate now what's your monthly ad spend.
+Let's take a number of $50K ad spend per month (quite average for e-commerce). With simple math, we can calculate that you spend $70/hour on ads.
+
+Every hour that you run ads without proper optimization, you might be wasting this budget. But you could be distributing it with better accuracy and with much bigger returns. But ONLY if you know the exact costs of each campaign, ad group, or ad.
+
+Therefore, the larger your ad spend is, the more often you need to receive your cost updates on the campaign's performance.
+
+Many of our users at RedTrack reported that they need real-time cost updates in order to monitor the exact spend their campaigns are making and understand the results behind those costs.
+
+That's why we developed a 1-minute cost update for your marketing. It's as close to real-time updating as possible and it will keep you in the loop of all things finances of your campaigns. The other Automation plans also include 5-minute and 15-minute cost updates.
+Value of Scale Rules
+Another amazing feature is helping to make your campaign management smart. When you can only stop underperforming campaigns — you get only half of the automation job done. But if you can automatically scale campaigns that work, that's a whole other discussion.
+
+That's when you can experience Performance Marketing Automation Magic.
+
+In RedTrack we released this possibility as Scale Rules. These rules allow you to manage the budget and the bids of the campaigns.
+
+It works the same wat: you set a certain KPI and if the campaign or ad hits the benchmark, they RedTrack will help you distribute the budget and bids accordingly. You will spend more on the hottest ads, but that only means that you will scale revenue.
+Start Automation today
+Performance Marketing Automation is a must-have solution you should obtain if you invest in advertising larger budgets. Try the solution by RedTrack to automate your routines, get rid of manual tasks and scale your business ROI.
+
+&nbsp;
+

@@ -1,0 +1,42 @@
+# Reporting portal: adding a domain and whitelabel
+
+
+Reporting portal is a separate tool provided by RedTrack. It allows you to give your advertisers (partners you work with) access to the reporting panel. Like that, they can check their offer statistics on a convenient dashboard anytime.
+
+
+
+To start working with a reporting portal, you need to add a domain and create a whitelabel first.
+
+
+
+
+
+1. If you don't already have a domain, purchase it. Any domain will work, the main step is to integrate it by adding the CNAME record for a third-level domain. CNAME record should point to advert.redtrack.io in your domain registrar. CNAME setup varies depending on the registrar where you purchased the domain, follow this guide for details. 
+
+
+
+2. Purchase the SSL certificate. It is an obligatory step. GoGetSSL is a good service for this purpose.
+
+
+
+3. Go to RedTrack → Domains → Create new domain → add the created domain, certificate, and key to RedTrack → Save changes to the template:
+
+
+
+
+
+
+
+
+
+Reporting portal → Whitelabel → fill in the mandatory fields → Save changes: 
+
+
+
+Mandatory fields:- Choose the added domain from the drop-down. - Add your Logo and Favicon URLs (you can use any service for generating the logo, in the screenshot it's Amazon).The rest of the fields are optional, though may be useful to distinguish the added whitelabel. 
+
+
+
+
+
+

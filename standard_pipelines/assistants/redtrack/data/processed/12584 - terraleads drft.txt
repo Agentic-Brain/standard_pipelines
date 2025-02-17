@@ -1,0 +1,108 @@
+# TerraLeads drft
+
+
+Terra Leads&nbsp;is the world’s first CPA Hub, and a direct advertiser of Nutra offers represented in the following categories: beauty, diet, health, and adult.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Terra Leads as an Offer source in RedTrack
+
+
+
+1.1 Offer sources→ New from template→find Terra Leads template→Add:
+
+
+
+
+
+
+
+1.2 Copy the Postback URL→Save the template:
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up RedTrack Postback URL in Terra Leads
+
+
+
+Go to Terra Leads→Tools→&nbsp;API &amp; Postback→&nbsp;paste RedTrack Postback URL&nbsp;(you have copied within step 1.2)→ set&nbsp;GET&nbsp;query type→&nbsp;Save:
+
+
+
+
+
+
+
+3. Get Terra Leads offer URL
+
+
+
+3.1 In Terra Leads go to Offers→ select a product&nbsp;you want to promote and press&nbsp;Create Stream→fill in the needed info and save your offer:
+
+
+
+
+
+
+
+3.2 Go to the tab Streams→ copy the&nbsp;Direct link&nbsp;from the stream tab:
+
+
+
+
+
+
+
+4. Add Terra Leads direct link as an offer in RedTrack
+
+
+
+RedTrack→ Offers→ New→ give the offer a name and choose Terra Leads as the offer source→ paste the URL from Terra Leads (copied within step 3.2) → add subid1={clickid} to the URL→ Save:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create the&nbsp;Campaign&nbsp;with the traffic channel you buy the traffic from and the offer you have just added.
+
+

@@ -1,0 +1,36 @@
+# Direct linking
+
+
+Direct linking means sending the traffic directly to the offer. So you are not using any landing pages, only the tracking link.
+
+
+
+To add direct linking campaign act as follows:
+
+
+
+1. Add the offer source and the offer you are promoting.
+
+
+
+2. Add the traffic channel you will be using for buying traffic.
+
+
+
+3. Create a Campaign. Use the Offer option in the Funnel→ add your offers: 
+
+
+
+
+
+
+
+Proceed further with the other campaign settings→  Save the changes in your campaign settings. Once you save the campaign, the tracking link is already generated for you in the Tracking links and parameters section→ grab the tracking link and put it to the campaign settings on your network (traffic source) side:
+
+
+
+
+
+
+
+This method is called direct linking since you are not using any other landing pages and scripts, just the tracking link that leads directly to the offer.

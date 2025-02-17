@@ -1,156 +1,240 @@
 from openai import OpenAI
 import os
 import math
+from flask import Blueprint, request, jsonify
+import standard_pipelines.bots.TelegramBot as TelegramBot
+import standard_pipelines.assistants.redtrack.config as config
+import time
+redtrack_bp = Blueprint('redtrack', __name__, url_prefix='/redtrack')
 
-api_key = "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"
+@redtrack_bp.route('/start', methods=['POST'])
+def redtrack_start():
+    data = request.get_json()
+    
+    # Define required fields
+    required_fields = ['first_name', 'last_name', 'platform', 'username']
+    
+    # Check for missing fields
+    missing = [field for field in required_fields if field not in data]
+    if missing:
+        return jsonify({
+            'error': 'Missing required fields',
+            'missing_fields': missing
+        }), 400
 
-vector_store_config = {
-    "id" : "vs_67ad4870761881918ee49d874b3c03e0",
-    "name" : "RedTrack Knowledge Base"
-}
+    first_name = data['first_name']
+    last_name = data['last_name']
+    platform = data['platform']
+    username = data['username']
 
-assistant_config = {
-    "id" : "asst_TT69GyMnGA8Oy9YfnuXfiUW7",
-    "name" : "Redtrack Inbound Lead Outreach Tool",
-    "model" : "gpt-4o-mini",
-    "system_prompt" : "You are the RedTrack booking agent bot. Answer any questions the client may have and when they are ready, use the schedule_call function to schedule a call with a human.",
-    "tools" : [
-        {
-            "type": "function",
-            "function": {
-                "name": "schedule_call",
-                "strict": True,
-                "description": "Send a link to the client that will allow them to schedule a call with a human.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {},
-                    "additionalProperties": False,
-                    "required": []
-                }
-            }
-        },
-        {
-            "type": "file_search"
-        }
-    ],
-    "tool_resources" : {
-        "file_search" : {
-            "vector_store_ids" : [] if vector_store_config["id"] is None else [vector_store_config["id"]]
-        }
-    },
+    # (Optional) Validate platform if necessary
+    # allowed_platforms = ['skype', 'whatsapp', 'telegram']
+    # if platform.lower() not in allowed_platforms:
+    #     return jsonify({
+    #         'error': 'Invalid platform',
+    #         'allowed_platforms': allowed_platforms
+    #     }), 400
 
 
-}
+    # if platform == "telegram":
+    #     telegram_bot.new_conversation(username)
 
-client = OpenAI(api_key=api_key)
 
-if vector_store_config["id"] is None:
-    vector_store = client.beta.vector_stores.create(
-        name=vector_store_config["name"]
+    # Process the data as needed
+    # For now, we'll just return the received data as confirmation.
+    return 200
+
+
+thread_map : dict[str, str] = {}
+openai_client = OpenAI(api_key=config.OPENAI_API_KEY)
+
+def convo_start_handler(self, convo_id: str, username: str, message_text: str) -> str:
+    print("convo_start_handler", username, message_text)
+
+    thread = openai_client.beta.threads.create_and_run_poll(assistant_id=config.ASSISTANT["id"])
+    thread_id = thread.thread_id;
+    thread_map[convo_id] = thread_id
+    print("created thread:", thread_id)
+
+    return "Hello "+username+", I'm the RedTrack booking agent bot. How can I help you today?"
+
+def message_handler(self, convo_id: str, username: str, message_text: str) -> str:
+    print("message_handler", username, message_text)
+
+    
+    thread_id = thread_map[convo_id]
+
+    openai_client.beta.threads.messages.create(
+        thread_id=thread_id,
+        role="user",
+        content=message_text
     )
-    vector_store_config["id"] = vector_store.id
-    print("created vector store", vector_store.id)
-else:
-    vector_store = client.beta.vector_stores.retrieve(vector_store_config["id"])
-    print("retrieved vector store", vector_store.id)
 
-    client.beta.vector_stores.update(
-        vector_store_id=vector_store_config["id"],
-        name=vector_store_config["name"]
+    run = openai_client.beta.threads.runs.create_and_poll(
+        thread_id=thread_id,
+        assistant_id=config.ASSISTANT["id"]
     )
-    print("updated vector store", vector_store.id)
-
-
-assistant = None
-if assistant_config["id"] is None:
-    assistant = client.beta.assistants.create(
-        name=assistant_config["name"],
-        model=assistant_config["model"],
-        instructions=assistant_config["system_prompt"],
-        tools=assistant_config["tools"],
-        tool_resources=assistant_config["tool_resources"]
-    )
-    assistant_config["id"] = assistant.id
-    print("created assistant", assistant.id)
-else:
-    assistant = client.beta.assistants.retrieve(assistant_config["id"])
-    print("retrieved assistant", assistant.id)
-
-    client.beta.assistants.update(
-        assistant_id=assistant_config["id"],
-        name=assistant_config["name"],
-        model=assistant_config["model"],
-        instructions=assistant_config["system_prompt"],
-        tools=assistant_config["tools"],
-        tool_resources=assistant_config["tool_resources"]
-    )
-    print("updated assistant", assistant.id)
-
-assistant_id = assistant.id
-print("assistant_id", assistant_id)
-
-print(assistant.tool_resources.file_search.to_json())
-
-# Assuming the "os" module is already imported elsewhere in the project
-
-# Attempt to retrieve the vector store from the assistant's tool resources
-
-MAX_BATCH_SIZE = 500
-
-if not vector_store:
-    print("No vector store configured. Skipping file upload.")
-else:
-    data_folder = os.path.join(os.getcwd(), "standard_pipelines/assistants/redtrack/data/processed")
-    if not os.path.isdir(data_folder):
-        print(f"Data folder '{data_folder}' does not exist.")
+ 
+    if run.status == 'completed':
+        messages = openai_client.beta.threads.messages.list(
+            thread_id=thread_id
+        )
+        print(messages)
     else:
-        print("Syncing vector store with folder:", data_folder)
+        print(run.status)
+
+    if run.required_action:
+        # Define the list to store tool outputs
+        tool_outputs = []
+ 
+        # Loop through each tool in the required action section
+        for tool in run.required_action.submit_tool_outputs.tool_calls:
+            print(tool)
+
+            if tool.function.name == "schedule_call":
+                tool_outputs.append({
+                    "tool_call_id": tool.id,
+                    "output": "true"
+                })
+                # cancel the run because we don't want the bot to speak naturally
+                openai_client.beta.threads.runs.cancel(run.id, thread_id=thread_id)
+                return "Click here to schedule a call with a human: https://calendly.com/redtrack-booking-agent/30min"
         
-        # Collect all file paths in the folder (and subfolders, if any)
-        file_paths = []
-        for root, _, files in os.walk(data_folder):
-            for file_name in files:
-                file_paths.append(os.path.join(root, file_name))
-        
-        # If there are no files, just exit
-        if not file_paths:
-            print("No files found in data folder to upload.")
+        # Submit all tool outputs at once after collecting them in a list
+        if tool_outputs:
+            try:
+                run = openai_client.beta.threads.runs.submit_tool_outputs_and_poll(
+                    thread_id=thread_id,
+                    run_id=run.id,
+                    tool_outputs=tool_outputs
+                )
+                print("Tool outputs submitted successfully.")
+            except Exception as e:
+                print("Failed to submit tool outputs:", e)
         else:
-            # Calculate how many batches we need
-            total_files = len(file_paths)
-            num_batches = math.ceil(total_files / MAX_BATCH_SIZE)
-            print(f"Total files: {total_files}. Uploading in {num_batches} batches of up to {MAX_BATCH_SIZE} files each.")
+            print("No tool outputs to submit.")
+
+    messages = openai_client.beta.threads.messages.list(thread_id=thread_id)
+    print(messages)
+
+    return messages.data[0].content[0].text.value
+
+telegram_bot = None
+def start_bots():
+    print("starting RedTrack bots")
+    telegram_token = config.TELEGRAM_TOKEN
+    telegram_bot = TelegramBot(telegram_token, convo_start_handler, message_handler)
+
+if __name__ == "__main__":
+    client = OpenAI(api_key=config.OPENAI_API_KEY)
+
+    if config.VECTOR_STORE["id"] is None:
+        vector_store = client.beta.vector_stores.create(
+            name=config.VECTOR_STORE["name"]
+        )
+        config.VECTOR_STORE["id"] = vector_store.id
+        print("created vector store", vector_store.id)
+    else:
+        vector_store = client.beta.vector_stores.retrieve(config.VECTOR_STORE["id"])
+        print("retrieved vector store", vector_store.id)
+
+        client.beta.vector_stores.update(
+            vector_store_id=config.VECTOR_STORE["id"],
+            name=config.VECTOR_STORE["name"]
+        )
+        print("updated vector store", vector_store.id)
+
+
+    assistant = None
+    if config.ASSISTANT["id"] is None:
+        assistant = client.beta.assistants.create(
+            name=config.ASSISTANT["name"],
+            model=config.ASSISTANT["model"],
+            instructions=config.ASSISTANT["system_prompt"],
+            tools=config.ASSISTANT["tools"],
+            tool_resources=config.ASSISTANT["   tool_resources"]
+        )
+        config.ASSISTANT["idconfig.ASS "] = assistant.id
+        print("created assistant", assistant.id)
+    else:
+        assistant = client.beta.assistants.retrieve(config.ASSISTANT["id"])
+        print("retrieved assistant", assistant.id)
+
+        client.beta.assistants.update(
+            assistant_id=config.ASSISTANT["id"],
+            name=config.ASSISTANT["name"],
+            model=config.ASSISTANT["model"],
+            instructions=config.ASSISTANT["system_prompt"],
+            tools=config.ASSISTANT["tools"],
+            tool_resources=config.ASSISTANT["tool_resources"]
+        )
+        print("updated assistant", assistant.id)
+
+    assistant_id = assistant.id
+    print("assistant_id", assistant_id)
+
+    print(assistant.tool_resources.file_search.to_json())
+
+    # Assuming the "os" module is already imported elsewhere in the project
+
+    # Attempt to retrieve the vector store from the assistant's tool resources
+
+    MAX_BATCH_SIZE = 500
+
+    if not vector_store:
+        print("No vector store configured. Skipping file upload.")
+    else:
+        data_folder = os.path.join(os.getcwd(), "standard_pipelines/assistants/redtrack/data/processed")
+        if not os.path.isdir(data_folder):
+            print(f"Data folder '{data_folder}' does not exist.")
+        else:
+            print("Syncing vector store with folder:", data_folder)
             
-            start_index = 0
-            for batch_index in range(num_batches):
-                # Slice the current batch of file paths
-                batch_file_paths = file_paths[start_index : start_index + MAX_BATCH_SIZE]
-                start_index += MAX_BATCH_SIZE
+            # Collect all file paths in the folder (and subfolders, if any)
+            file_paths = []
+            for root, _, files in os.walk(data_folder):
+                for file_name in files:
+                    file_paths.append(os.path.join(root, file_name))
+            
+            # If there are no files, just exit
+            if not file_paths:
+                print("No files found in data folder to upload.")
+            else:
+                # Calculate how many batches we need
+                total_files = len(file_paths)
+                num_batches = math.ceil(total_files / MAX_BATCH_SIZE)
+                print(f"Total files: {total_files}. Uploading in {num_batches} batches of up to {MAX_BATCH_SIZE} files each.")
                 
-                # Open each file in this batch
-                file_streams = []
-                try:
-                    for file_path in batch_file_paths:
-                        f = open(file_path, "rb")
-                        file_streams.append(f)
+                start_index = 0
+                for batch_index in range(num_batches):
+                    # Slice the current batch of file paths
+                    batch_file_paths = file_paths[start_index : start_index + MAX_BATCH_SIZE]
+                    start_index += MAX_BATCH_SIZE
                     
-                    print(f"Uploading batch {batch_index + 1}/{num_batches} with {len(file_streams)} files.")
+                    # Open each file in this batch
+                    file_streams = []
+                    try:
+                        for file_path in batch_file_paths:
+                            f = open(file_path, "rb")
+                            file_streams.append(f)
+                        
+                        print(f"Uploading batch {batch_index + 1}/{num_batches} with {len(file_streams)} files.")
+                        
+                        # Upload the batch
+                        file_batch = client.beta.vector_stores.file_batches.upload_and_poll(
+                            vector_store_id=vector_store.id,
+                            files=file_streams
+                        )
+                        
+                        print("File batch status:", file_batch.status)
+                        print("File batch file counts:", file_batch.file_counts)
                     
-                    # Upload the batch
-                    file_batch = client.beta.vector_stores.file_batches.upload_and_poll(
-                        vector_store_id=vector_store.id,
-                        files=file_streams
-                    )
-                    
-                    print("File batch status:", file_batch.status)
-                    print("File batch file counts:", file_batch.file_counts)
-                
-                finally:
-                    # Close file streams for this batch
-                    for f in file_streams:
-                        f.close()
+                    finally:
+                        # Close file streams for this batch
+                        for f in file_streams:
+                            f.close()
 
-    print("File batch upload complete.")
+        print("File batch upload complete.")
 
 
-print("assistant push complete")
+    print("assistant push complete")

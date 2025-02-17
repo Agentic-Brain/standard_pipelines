@@ -1,0 +1,114 @@
+# DomainActive and RedTrack
+
+
+
+
+
+
+Domain Active works with the top advertisers and networks within the digital media industry and provides a full suite of optimization solutions to monetize their websites, traffic, and domain portfolios.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events you plan to work with
+
+
+
+Traffic channel 
+
+
+
+
+
+
+1. Add DomainActive as Offer source in RedTrack.
+
+
+
+1.1 Offer sources → New from scratch → fill in the mandatory fields → Save the template:
+
+
+
+
+
+
+
+The mandatory postback parameters:{$tg1} for clickid{$estimatedGoogleCPCNow} for the sum (revenue)Additionally, you can receive the keyword and domain data:{$keyword} for keyword{$domain} for domain
+
+
+
+1.2 Copy the Postback URL:
+
+
+
+
+
+
+
+If you want to use the "Ignore duplicate postback by event id " postback mode:1. Add &amp;rdtk_event_id={$rand_uuid} to the Postback URL:https://customdomain.com/postback?clickid={$tg1}&amp;rdtk_event_id={$rand_uuid}&amp;sum={$estimatedGoogleCPCNow}&amp;keyword={$keyword}&amp;domain={$domain}2. Set "Ignore duplicate postback by event id" mode next to the target conversion type you've added in RedTrack. For more information refer to this article.
+
+
+
+2. Give this Postback URL to your Account Manager to set it up in all the needed Campaigns.
+
+
+
+3. Copy the Offer URL from DomainActive.
+
+
+
+DomainActive account → Campaigns → choose the campaign → Traffic Source URLs → copy the Offer URL:
+
+
+
+
+
+
+
+4. Add the Offer URL from DomainActive to RedTrack.
+
+
+
+Offers → New → choose DomainActive from the drop-down → paste the copied offer URL into the URL field→ remember to add &amp;tg1={clickid} to the offer URL:
+
+
+
+
+
+
+
+
+
+
+
+5. Create your&nbsp;Campaign and start running the traffic.
+
+
+
+To create a Campaign refer to:
+
+
+
+
+&nbsp;this guide&nbsp;for Advertisers.
+
+
+
+&nbsp;this guide&nbsp;for Affiliates.
+
+
+

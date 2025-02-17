@@ -1,0 +1,147 @@
+# Are Native Ads Still Popular?
+
+In Westworld's pilot episode, a protagonist asks his humanoid hostess if she's "real".
+
+She replied: "Well if you can't tell, does it matter?" 
+
+How can you tell if native advertising is an ad if it looks exactly like regular content? This is its main advantage: most times, readers may not realize they are interacting with an ad if it appears similar to regular content. There are no clear rules or guidelines for how advertisers should label native ads; standards for transparency vary widely. So in this article, we discuss what native advertising means and how to use it in your marketing campaigns.
+What is native advertising?
+Native ads are a type of advertising designed to blend in with the look and feel of the platform it appears on. 
+
+These ads can appear in video format, an article or editorial, or even a well-designed display ad. In essence, "native" means something viewers will naturally interact with without feeling annoyed or confused. Native advertising formats like the Social Bar inherit some of the UX practices along with gamification and engagement techniques.
+Types and formats of native advertising
+Let's review the most popular types of native advertisements:
+1. Native banners
+The native banner is a traditional ad format with a captivating image and headline that blends in seamlessly with a website's content. Native banners typically appear in the most visible areas of a webpage, leading to higher viewability and interaction rates than standard ads.
+
+[caption id="attachment_9295" align="aligncenter" width="656"] Example of native advertising[/caption]
+2. In-feed ads
+Campaign goal: raise brand awareness and drive more traffic to the advertiser's website.
+
+Type: social media promoted campaigns (sponsored Facebook posts, promoted pins on Pinterest, etc.).
+
+User engagement: following the brand's social media page, liking the post or commenting on it, and clicking the post's links.
+Promoted posts help business owners reach a larger audience through social media. This ad format takes advantage of social media's high virality potential, which means that people are more likely to share your ads with their friends and peers.
+&nbsp;
+3. Search ads
+
+
+Campaign goal: boost traffic by attracting people who use relevant keywords in their search queries. 
+
+Sponsored offers appear higher than organic offers on a "Search results" page.
+
+User engagement: clicking on a link in the listing or interacting with the website. 
+
+Advertisers can pay for listings on most search engines. While the format isn't platform-specific, mobile sponsored announcements are typically longer and more detailed than their desktop variants.
+4. Suggested content
+You've probably noticed the sponsored content in the recommendations section of a news or content site. Sponsored content often has the style and format of an editorial piece: even the most basic ad resembles a newspaper or magazine article.
+
+
+5. Social Bar (display and in-page push combo)
+
+Examples of interstitial ads within Social bar: 
+
+
+
+Social Bar is a display and in-page push ads combo that can appear as:
+
+ 	system notifications (ideal for VPNs, antiviruses, and apps);
+ 	icons and widgets;
+ 	chat heads or messages from a messenger app;
+ 	interstitials and many other formats.
+
+Social Bar works great on desktop and mobile devices, making it an ideal replacement for classic native ad formats. It matches user patterns genuinely, especially those of Gen Z and millennials.
+As Adsterra's Social Bar combines the benefits of display and in-page push ads, the advertiser's goal to compel users becomes much more feasible. Its template creatives (available for every Self-Serve Platform user) have proved to return up to 30X CTRs along with increased CR.
+How to launch a native advertising campaign
+Advertisers can run AdBlock-resistant and cost-effective CPC and CPM native ad campaigns with Adsterra. 
+
+Both Native Banners and Social Bar are available on the Self-Serve Platform and on managed accounts. Here’s how to launch them:
+
+ 	After you sign up or log in, go to your dashboard and click Campaign → Create from the hamburger menu.
+ 	Select the available pricing model (you can choose between CPM and CPC).
+ 	Pick Native Banner, Social Bar, or In-Page Push as the AdUnit category.
+ 	Fill in all other required fields: pick the type of traffic you need, the connection type, and the devices you will target. 
+ 	Add your landing page URL with previews.
+ 	Choose your target country, and Adsterra smart algorithms will recommend the optimal bidding strategy.
+ 	Add creatives for your native ad campaign; you can upload up to 15 visuals and add up to 15 headings to discover the top-converting combinations faster.
+
+General settings are enough to submit your native ad campaign for verification. It is better to start your test campaign with broad targets as it will give you more info on how to optimize your campaign in the future.
+
+
+Why native advertising is popular among online marketers
+1. Native advertising is effective
+Native ads are viewed 53% more than most types of display ads. Native advertising also increases purchase intent by 18%, and visual engagement with native ads is on par with original content.
+2. Native advertising effectively combats ad fatigue 
+Ad fatigue happens when an audience becomes bored with seeing advertisements and simply stops paying attention to them after a while. Native ads expose your brand while hiding under natural content, so your audience isn't exhausted. This type of advertising engages the audience as long as the ad is relevant and exciting.
+
+Interacting with sponsored content is simple and enjoyable when it matches the website's style. 
+In terms of CTR and engagement, native ads outperform annoying pop-ups and bulky banners.
+3. Native ads do not hurt website performance
+Reputable publishers prefer native ad formats because they don’t hurt website performance. For example, a website user experience will remain the same regardless of how many sponsored posts they publish. Native banners are also responsive, automatically adjusting to different screen sizes.
+4. Native ads are viral among millennials
+Most marketing campaigns, without a doubt, are aimed at millennials. This generation has achieved financial stability, is aware of its needs, and is willing to spend money to achieve its objectives. Mobile native ads are preferred by millennials over other ad formats, with 80% stating that this format provides a positive user experience.
+5. Which niches benefit from native advertising?
+
+ 	Software and AddOns 
+
+Native advertising will ensure your programs and extensions will appear only on related blogs and websites. 
+
+ 	Apps and utilities
+
+Users will undoubtedly come across your next freemium or subscription offer while reading or simply browsing through tech articles.
+
+ 	Dating
+
+The key to success is having a high level of visibility and relevance. Adsterra places your dating ads on the most relevant websites, where visitors are more likely to visit your landing page or download your app.
+
+ 	Crypto
+
+Advertise your crypto services in topic-related content to reach the most engaged audience. For maximum impact, Adsterra rotates ads on trading and finance-related resources.
+
+ 	E-commerce
+
+Native ads are more effective than traditional display banners in promoting fashion accessories, embroidered clothing and other apparel, as well as electronics.
+
+ 	Nutra, health, wellness
+
+Your ad for a supplement or immune booster blends in with the rest of the website's content. It's an excellent way to attract motivated customers who are ready to buy.
+
+ 	Education and business
+
+When workshops, courses, and webinars are advertised natively, they attract more purchase-ready and loyal users.
+Why native ads are effective [statistics to back it up]
+Native advertising is highly effective and provides a significant competitive advantage to businesses. Let's look at some statistics from Marketing Land, eMarketer, Adsterra, Hubspot, and other sources.
+
+ 	Native ads have a CTR 40 times higher than display ads. (ignitevisibility)
+ 	In the coming years, native advertising will take over 25% of the market.
+ 	70% of people prefer sponsored articles over display advertisements for learning about products.
+ 	Native ads were not considered advertisements by nearly 77% of respondents. (fastcompany)
+ 	Around 44% of people were unable to identify the advertiser in the advertisement they were reading.
+ 	The global native advertising spend is expected to increase by 372% between 2020 and 2025.
+ 	Based on overall digital ad spend growth, the native ad market is expected to grow to $402 billion in 2025. (PRNewswire)
+ 	In North America, native advertising will grow by 37%. (deepnativeadvertising)
+
+Return on investment for native advertising
+Native ads account for over 80% of Audience Network impressions, according to Facebook. For example, native ads increased revenue by 40% for Gametion, a mobile game app. (appsamurai)
+3 tips for creating native advertising campaigns
+Use the native ad best practices to master native advertising and ensure your ads survive the fierce competition.
+1. Make your ad look like organic content 
+Most users trust the platforms they use frequently, so they'll click on content similar to what they've seen. As an advertiser, you'll want to make sure the tone and visual style of your sponsored post-match what the publisher has on their blog.
+
+[caption id="attachment_9300" align="aligncenter" width="559"] native ad example[/caption]
+
+Use these simple strategies to ensure your post blends in seamlessly:
+
+ 	Make a list of 4-5 natural posts that inspire you (because they are funny, informative, or have epic visuals).
+ 	Make a list of posts that resonated with the audience and figure out what characteristics of these articles made them perform better than others.
+ 	Create a list of 3-4 successful sponsored ads and determine what factors contributed to their success.
+
+When your post is finished, run it by the editorial team to see if it follows the platform's publishing guidelines.
+2. Ensure that your website is ready for mobile visitors
+You can expect smartphone users to visit your site, and you don't want them to be disappointed by a lack of responsiveness or usability. If your ads are mobile-friendly, your website must welcome mobile users as well ;)
+3. Create reusable ad templates and use spy tools
+Advertisers talk a lot about originality and creativity when coming up with ideas. Successful professionals place a high value on feasibility — the ability to create quality ads faster.
+
+Try to make your ad templates as reusable as possible to avoid bottlenecks. To ensure you never run out of sponsored post ideas, use design templates, a defined structure, and a well-thought-out editorial plan. This approach will save you time during ad design and help you focus on looking for new promotion tools.
+Conclusion
+When native ads are combined with relevant content or provide great UX, users are more likely to interact with them. More advertisers are learning how to incorporate native advertising into their campaigns to increase brand awareness, and conversions as the benefits of native advertising become more apparent. By incorporating native banners and Social Bar into your advertising strategy, you will access a whole new world of publishers, resulting in increased exposure and traffic. What’s great is that you can test your native campaign with multiple different native ad creatives in rotation to see which one converts and saves budgets from the start.

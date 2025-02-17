@@ -1,0 +1,118 @@
+# CrakRevenue and RedTrack
+
+
+
+
+
+
+CrakRevenue is an international and industry-leading CPA Network specializing in web traffic monetization and online marketing solutions.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add CrakRevenue as an Offer source in RedTrack.
+
+
+
+Offer sources→ New from template→ find CrakRevenue template→ Add → copy the Postback URL→ Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up the postback copied from RT in CrakRevenue.
+
+
+
+In your CrakRevenue account click to expand the Postback Options section of the menu → choose your tracking goal and paste the Postback URL (copied in step 1) into the corresponding field → click Create Postback to save the link. The setup should look like this:
+
+
+
+
+
+
+
+CrakRevenue also supports Global Postback. If you don’t want to put your Postback URL every time you set up a new offer, please contact your CrakRevenue affiliate manager and to add your Global Postback. A Global Postback link will be the same: https://your.domain.com/postback?clickid={aff_sub}
+
+
+
+3. Get the offer URL in CrakRevenue.
+
+
+
+In your CrakRevenue account go to the tab Offers → choose the desired offer and click the Agree button to confirm your choice. Your offer link will be generated automatically. However, it needs to be modified to enable tracking. Open the Link Customization section and add the "{clickid}" parameter to the Sub ID 1 field →  cope the link:
+
+
+
+
+
+
+
+4. Add CrakRevenue Offer to RedTrack.
+
+
+
+RedTrack→ Offers→ New→ give the offer a name and choose CrakRevenue as the offer source→ paste the URL from MaxBounty (copied within step 3) → add aff_sub={clickid} to the URL→ Save:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create the&nbsp;campaign in RT&nbsp;with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+Refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

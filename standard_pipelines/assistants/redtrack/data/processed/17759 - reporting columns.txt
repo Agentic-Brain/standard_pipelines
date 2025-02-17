@@ -1,0 +1,204 @@
+# Reporting: columns
+
+
+What are Columns in RedTrack?
+
+
+
+Columns in RedTrack is our analytical data processing system. The Columns functionality in a report organizes and displays collected data, structuring it based on the selected data slice, thereby allowing for easier analysis and interpretation.
+
+
+
+Each report in RT has a different set of columns you've set (e.g. the same types of columns set in the Campaign report won't be by default added to your Traffic channel report, unless you set them up exactly the same).
+
+
+
+This table will show which reports/sections of the RT tool have columns and whether they are customizable:
+
+
+
+Report/SectionColumns can be added/removed from/to the template lists (yes/no)Possibility to add custom columns with metrics (yes/no)Ads ManagerYesYesAutomated rulesNoNoConversion pathNoNoReports:CampaignOffersTraffic channelsOffer sourcesIP reportYesYesLandersYesYesLogs:ClicksConversionsS2S PostbacksAPI PostbacksCost updatesYesNo
+
+
+
+Manipulations with columns
+
+
+
+1. To access column settings press the Columns icon in the needed report/section:
+
+
+
+
+
+
+
+2. Adjust columns as per your needs:
+
+
+
+
+
+1. To add the column to the report go to the grey list of the columns on your left → press arrow next to it → Save changes to the column settings:
+
+
+
+
+
+
+
+
+
+
+
+2. To remove the column from the report go to the green list of the columns on your right → press arrow next to it → Save changes to the column settings:
+
+
+
+
+
+
+
+
+
+
+
+3. You can arrange the set of columns in templates for convenience. So far RT functionality allows you to collect 3 types of templates and all of them you can customize (add/remove/highlight the preferred columns) as per your needs:
+
+
+
+
+
+
+
+
+
+With the help of custom columns you can create and configure additional columns in a data table to suit your specific needs, enabling more personalized data organization and analysis.
+
+
+
+To add a custom column:
+
+
+
+1. Go to Columns → Add custom column → fill in the mandatory fields → enter the formula for your custom column → Save new column:
+
+
+
+
+
+
+
+2. Once it's created it'll be added to the grey list of columns, add this column to the green list of columns (active columns) → Save column settings to apply the changes to the report table:
+
+
+
+
+
+
+
+
+
+RedTrack functionality allows you to highlight certain rows based on the chosen column value. It can be done in 2 ways (choose the preferred one):
+
+
+
+
+
+To highlight rows via Toggles go to the needed report/section → columns settings → identify the preferred value for the system you need to switch on the toggle in the chosen column.
+
+
+
+Example: You decided to turn on the Total ROI toggle:
+
+
+
+
+
+
+
+So now your report is highlighted based on the Total ROI data:
+
+
+
+
+
+
+
+You can turn on only 1 toggle (choose only one value based on which the rows will be highlighted) per one report. That being said, you can choose a different toggle (another value based on which the rows will be highlighted) in another report. For example: you turned on the Cost toggle for Campaigns report, so your rows will be highlighted based on the cost data in the Campaigns report. Then you went to the Offers  report and turned on the Total ROI toggle, so your rows will be highlighted based on the total ROI data in the Offers report.
+
+
+
+If you want to set up the colours in all the templates and all the reports and manage it in one place hover to the "via Workplace settings" tab.
+
+
+
+
+
+To manage the highlight of rows and set them up for all the reports and templates in one place go to burger menu → Settings → Workplace → Control the color of the rows → next to each report choose the preferred value based on which the rows will be highlighted → Save changes: 
+
+
+
+
+
+
+
+
+
+
+
+To change the format of the displayed data go to burger menu → Settings → Workspace → choose the quantity of numbers after the divider → select the needed divider (dot or comma) → Save changes:
+
+
+
+
+
+
+
+
+
+To adjust the table layout:
+
+
+
+1. Press the Density button in the chosen report:
+
+
+
+
+
+
+
+2. Set the preferred mode: 
+
+
+
+
+Compact:
+
+
+
+
+
+
+
+
+
+Standard:
+
+
+
+
+
+
+
+
+
+Comfortable:
+
+
+
+
+
+
+

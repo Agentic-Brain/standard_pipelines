@@ -1,0 +1,79 @@
+# 5 changes in Google Privacy Sandbox 2022
+
+Did you see scary titles about Google Privacy Sandbox for Android and move to Google Analytics 4? Do you need more information to understand what’s going on with marketing and measuring performance in 2022? Google Privacy Sandbox is one of the biggest cookieless initiatives in the industry, but it had some serious changes in 2022. 
+
+So this article is here for you to learn about 5 changes that happened to GPS and that you should be aware of to be prepared for all the cookieless changes.
+
+If you have never heard about Google Privacy Sandbox, first check this video that explains the background and the theory behind this topic.
+
+
+Why Google changes agenda
+We can see that Google is taking its time to implement Google Privacy Sandbox and with every iteration, it takes even longer to fulfill this transition. The reason for that is that Google makes huge advertising revenue. 
+
+That means that Google can not just cut off advertisers from the tools they used because it will influence directly their profits.
+The more you make as an advertiser, the more you invest in ads, and the more Google profits from it. 
+So it takes a lot of time for Google to move forward with the new privacy-friendly ecosystem because they still can not figure out how to make it possible for us, marketers and advertisers do our job, earn money and therefore, contribute to Google making money. 
+All the technologies are carefully tested before being applied for your use. And that’s why it keeps getting postponed! 
+5 changes in Google Privacy Sandbox
+Now let’s talk about the latest Google updates regarding Privacy Sandbox, but drift away from complex protocols and talk about real marketing language and what it means for marketers. 
+
+
+1. Privacy Sandbox introduced on Android 
+It’s not released yet, but Google called it a “multi-year” initiative. That means that the same troubles we had with ad tracking on Apple devices are just around the corner for Android. 
+If you watched our video about digital marketing trends and predictions in 2022, then it wouldn't be a surprise for you as we talked about this change coming. There is no magic involved, just it's pretty obvious that it's getting harder and harder to perform cookie-tracking on all types of devices because of all privacy initiatives. 
+
+
+What does it mean for us?
+Now the majority of the advertising traffic was moved to Andriod for the very reason that tracking is still pretty much accurate. Soon this loophole will be closed as well, so privacy-friendly tracking is a must for your advertising.
+As Google states: 
+
+"We realize that other platforms have taken a different approach to ads privacy, bluntly restricting existing technologies used by developers and advertisers. We believe that — without first providing a privacy-preserving alternative path — such approaches can be ineffective and lead to worse outcomes for user privacy and developer businesses."
+Clearly pointing out to Apple's iOS 14 being a sudden change for advertisers, Google shows one more time that they can not create limitations for advertisers out of the blue. Everything has to be prepared to provide a quality advertisement.
+
+By the way, RedTrack's solution for ad tracking and conversion attribution has adapted as soon as possible to changes from iOS 14 influencing Facebook Ads. So be sure to join us to entrust technology adaptation to us.
+
+2. Targeting &amp; remarketing changes 
+Earlier Google announced an initiative called FLoC (Federal learning of cohorts) to introduce privacy-friendly targeting &amp; remarketing.
+FLoC was meant to become interest-based advertising where users were put in groups (and therefore, targeted in groups). This was supposed to keep private user information anonymous. However, Google announced that this protocol will never see the light of day.
+
+The new interest-based targeting initiative is called Topic API. 
+
+Based on the actions user performs, Google will be forming topics aka interest-based groups. And then later you as the advertiser will be able to target those topics or groups without personal information involved in the process. 
+
+FLEDGE is another protocol that allows you to do remarketing by adding users to groups based on certain actions. Basically, it’s creating custom audiences based on user interaction. But again, it’s supposed to be privacy-friendly and none of the information will be shared openly (everything is stored on a user side). 
+3. Measuring digital ads
+Google has tested Attribution reporting for a while now to stop relying on 3rd party cookies for measurement of performance and recording touchpoints in the user funnel. 
+One of the updates in this niche is Summary reports (previously called Aggregated reports). 
+“Summary reports provide an aggregated view of detailed conversion data while retaining critical information for reporting, without the ability to identify individual users within that data. Event-level reporting added new features for third-party reporting, view-through measurement, filtering reports, and debugging functionality.”
+Privacy is ensured through data aggregation and modeling.
+What does it mean for advertisers?
+Summary (or Aggregated) reports mean that we will have less of accurate data when measuring the performance of our advertisement. Since data aggregation leaves you with a model of the performance, you do not have a clear picture of all the clicks and the conversions that happened. The alternative for data aggregation is raw data. Raw data ensures that you have every single click recorded for your advertising and attributed to the right campaign.
+
+However, this API is already available for testing so if you are one of the geeky developers, feel free! 
+4. Moving to Google Analytics 4
+Even though it’s not a part of the Google Sandbox initiative, it’s an important update of 2022/23 and part of a privacy-friendly movement on a global scale. Universal GA will stop processing hits on July the 1st 2023 and the move to GA4 will be inevitable. 
+GA 4 does not rely on cookies, uses event-based modeling, and is future-proof in comparison to Universal GA. 
+
+But many marketers are not quite happy to see a new Google Analytics 4 as compulsory as it means losing some features we loved and also transitioning to a different UI.
+I recommend getting familiar with Google Analytics 4 as fast as possible. But if you want to get the most from marketing analytics, consider looking for GA alternatives. 
+5. Preventing cross-site tracking 
+Google calls this process "strengthen cross-site privacy boundaries".
+
+It all sounds very complicated and you might wonder: what the heck is it? It’s the same old song about the elimination of third-party cookies and preventing cross-site tracking aka privacy-oriented digital spaces. 
+
+Well, here we have a lot of APIs and protocols in progress: 
+
+ 	First party sets
+ 	Shared storage API
+ 	Fenced Frames API
+ 	CHIPS
+
+I don’t think it’s really necessary for our marketing minds to stuff ourselves with this information. I will give a single simple insight about it — do not ignore the elimination of third-party cookies and invest in first-party data tracking and attribution. We have been talking about it on our blog and YT channel for a while now. So be sure to prepare yourself for a cookieless future. 
+
+At RedTrack, we step out as a privacy-friendly marketing analytics tool to measure the performance of all of your marketing channels without 3rd party cookies. And by the way, whenever another scary update is rolled out, we adapt our solutions to be fully compliant and create a bunch of articles and videos to give you insights on this topic! 
+
+
+
+&nbsp;
+
+&nbsp;

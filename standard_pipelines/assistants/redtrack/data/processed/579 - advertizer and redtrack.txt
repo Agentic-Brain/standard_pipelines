@@ -1,0 +1,98 @@
+# Advertizer and RedTrack
+
+
+
+
+
+
+Advertizer is a must-use ad platform for an affiliate, an offer owner, or a media buying team serving 5 Billion Push, Pop &amp; Redirect ads a month Advertiser is one of the fastest-growing mobile ad networks around.
+
+
+
+Integration
+
+
+
+
+
+
+
+1. Get the unique values from your Advertizer account.
+
+
+
+In your Advertizer account go to Account → My Account → copy the values for advertiser_id and key parameters:
+
+
+
+
+
+
+
+2. Add Advertizer template to RedTrack.
+
+
+
+2.1 Traffic channels → New from template → find Advertizer → Add:
+
+
+
+
+
+
+
+2.2 Paste the copied values from Advertizer (copied in step 1) into the S2S Postback URL of the Advertizer template in RedTrack instead of&nbsp;REPLACE:
+
+
+
+
+
+
+
+3. Set up a campaign in RedTrack with the Advertizer traffic channel.
+
+
+
+Campaigns→ Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create the campaign with Advertizer as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL:
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+4. Set up the tracking on the Advertizer side.
+
+
+
+In your Advertizer account go to Account → My Account → Start conversion test → paste Click URL (copied in step 3) to the field in the secnd step → Create Test:
+
+
+
+
+
+
+
+5. Set up the postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 3) → scroll down to&nbsp;S2S Postback for Advertizer → Add → check if all the needed values for the&nbsp;REPLACE parameters are in place → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+

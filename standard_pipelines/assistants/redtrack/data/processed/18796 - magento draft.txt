@@ -1,0 +1,98 @@
+# Magento draft
+
+
+Magento&nbsp;is a powerful, open-source eCommerce platform that allows businesses to easily build and manage online stores. 
+
+
+
+Integration
+
+
+
+
+
+1. Add custom tracking domain.
+
+
+
+2. Add conversion events:
+
+
+
+Go to Tools → Conversion tracking → Conversion type → use&nbsp;this guide&nbsp;to help you add the needed events.
+
+
+
+The full list of Conversion types used for successful Magento integration includes:- ViewContent- AddToCart- InitiateCheckout- Purchase
+
+
+
+3. Add Magento as a Brand in RedTrack
+
+
+
+Brands → New from scratch → use this guide to help you fill in the rest of the fields.
+
+
+
+4. Add your Website:
+
+
+
+Websites → New → use&nbsp;this guide&nbsp;to help you add the website (your offer).
+
+
+
+ Once you’ve added your Website, the universal tracking script is generated automatically. To get it go to the added Website form → Scripts → scroll down to the field Universal tracking script and copy it (as you will need it later to insert in Magento):
+
+
+
+5. Create a paid traffic campaign:
+
+
+
+The campaign for the unattributed (organic) traffic is already in place. Now you need to create the one for the paid traffic. To do that act as follows:
+
+
+
+
+Add the&nbsp;Traffic channel. Most of them have a preset template in RedTrack: API-integrated traffic channels/ Non-API integrated traffic channels.
+
+
+
+Launch a campaign&nbsp;for the paid Traffic channel. Your website/shop will be the main link added to the traffic channel.
+
+
+
+
+
+
+1. Install Magento extension to your website. It can be done in 2 ways:
+
+
+
+
+
+Download this .zip extension file → check out&nbsp;this guide&nbsp;for further guidance.
+
+
+
+
+
+Check out&nbsp;this video tutorial&nbsp;for details.
+
+
+
+
+
+2. Add RedTrack universal tracking script to Magento
+
+
+
+Copy the universal tracking script from RT (Setup in RedTrack → step 4) → go to your Magento account → Universal script → add the RT script → save the changes:
+
+
+
+
+
+

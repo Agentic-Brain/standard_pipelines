@@ -1,0 +1,152 @@
+# HilltopAds and RedTrack
+
+
+
+
+
+
+HilltopAds is a monetizing platform for high-quality, unique traffic covering ALL GEO's, which focuses on deeper targeting than in other networks:&nbsp;carriers,&nbsp;OS,&nbsp;browser,&nbsp;device,&nbsp;and more.
+
+
+
+RedTrack has an API integration with HilltopAds, which gives you the following benefits:
+
+
+
+
+Pause: campaign, placement
+
+
+
+Create automated rules
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types you're planning to work with
+
+
+
+
+
+
+1. Add&nbsp;HilltopAds&nbsp;as a Traffic channel in RedTrack.
+
+
+
+Go to your RedTrack account →&nbsp;Traffic channels&nbsp;→&nbsp;New from template&nbsp;→ find&nbsp;HilltopAds&nbsp;→&nbsp;Add&nbsp;→&nbsp;Save&nbsp;the template:
+
+
+
+
+
+
+
+
+
+
+
+2. Integrate HilltopAds with RedTrack.
+
+
+
+In the added HilltopAds template go to the HillTopAds API integration section → add the HilltopAds API key → Save changes to the template:
+
+
+
+
+
+
+
+The "Active" button means the integration is on:
+
+
+
+3. Create a campaign in RedTrack with&nbsp;HilltopAds&nbsp;as your traffic channel.
+
+
+
+Campaigns&nbsp;→&nbsp;Create new campaign&nbsp;→ use&nbsp;this guide&nbsp;for Affiliates /&nbsp;this guide&nbsp;for Advertisers to help you add the campaign with HilltopAds as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL (your tracking link):
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+4. Set up the tracking on the HilltopAds side.
+
+
+
+4.1 Go to Manage Campaigns → Add campaign:
+
+
+
+
+
+
+
+4.2 Add your RedTrack campaign Click URL (copied in step 3) to the Final Destination URL field:
+
+
+
+
+
+
+
+5. Set up the Postback URL in RedTrack.
+
+
+
+In Campaign settings (created in step 3) scroll down to&nbsp;S2S Postback for HilltopAds → press&nbsp;Add&nbsp;→ check if the&nbsp;value(s) for the&nbsp;needed parameter(s) are in place → &nbsp;Save changes&nbsp;to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+
+
+6. Set up the&nbsp;automation. 
+
+
+
+
+Use&nbsp;this guide&nbsp;to help set up&nbsp;rules.
+
+
+
+Use&nbsp;this guide&nbsp;for setting up the&nbsp;auto update cost&nbsp;feature.
+
+
+

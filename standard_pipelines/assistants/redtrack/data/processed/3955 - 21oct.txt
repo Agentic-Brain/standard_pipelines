@@ -1,0 +1,15 @@
+# 21-Oct
+
+
+ 	Requirements for user account passwords were refined
+ 	All the parameters when requesting statistics for publishers with last hour period now work correctly
+ 	Link for Traffic Source editing was added to the outdated integration letter
+ 	Reporting portal page: wrong title in the meta tag fixed
+ 	Cross-browser attribution: dedicated Organic traffic template added, fingerprint formatting changed
+ 	Bing ads: data from Bing conversions are logged now
+ 	Elasticsearch: postback logs adjusted
+ 	Order of parameters in tracking URL at Publisher is now shown correctly
+ 	Сustom referral Link for MLM
+ 	Postback tracking parameters roles: additional postback parameters to send to Facebook (ZIP, Date_of_Birth, Content_Ids, Contents, content_name, content_category)
+ 	Incorrect logic when generating conversions fixed
+ 	Helper text postback mods (like in Offer sources) were added

@@ -1,0 +1,465 @@
+# The definitive guide to Facebook Ads Tracking [2024 updated]
+
+Facebook is considered to be the most popular social media platform today. Having 2.4 billion users from all over the world on board, it attracts thousands of marketers, media buyers, and affiliates. But does Facebook Ads really work? Especially after iOS 14 Privacy Update, there are a lot of questions about Facebook effectiveness.
+
+Does anyone still pay attention to all these endless offers in their newsfeed? Well, considering Facebook's $1 billion in advertising revenue per quarter, it seems like it is worth your time. But then we see this:
+
+- Facebook ad CTR has been consistently declining over the last year, from a median of 2.36% in Q1 2018 to a median of 1.33% in Q1 2019
+
+- 62 Percent of Small Business Owners Say Facebook Ads Miss Their Targets
+
+- Only 42% of marketers feel that their Facebook marketing is successful 
+
+and this
+
+- "You have to be careful because your efforts might ultimately be wasted if you focus 100% of your time doing affiliate marketing on Facebook" - Quora.
+
+It's not surprising that after reading these headlines the confidence of those who only start their Facebook Ad is diminished. But we suggest not making hasty conclusions and sort things out thoroughly. Let's do it together in this guide.
+
+&nbsp;
+Is it a good idea to run Facebook ads in 2022?
+Let's figure out first what the Facebook Ads ecosystem actually gives to media-buyers. It allows targeting specific audiences that are likely to be interested in specific products and services by leveraging the immense wealth of the data it possesses. 
+
+
+
+&nbsp;
+As to Facebook ad costs, the average CPC here is around $0.97 per click, while on Youtube this figure is about $3.21 and $5.26 on Linkedin. Not so bad, isn’t it? 
+So, if you meet someone claiming that he can’t make money on Facebook and advise you to choose another Traffic Source, we recommend you not to rush. There’s a high probability that it’s not a Facebook fault. Most often it happens due to the advertiser’s lack of knowledge and incorrect settings. Furthermore, let's figure out which campaign can be considered successful and which not? The easiest and most objective way is to compare your metrics with average market performance.
+
+An average CTR on Facebook Ads is between 2-5%, but the exact value is very dependent on the niche. Here are several of them:
+
+
+
+Industry
+Average CR
+Average CPC
+
+
+Apparel
+$4.11%
+$0.45
+
+
+Auto
+$5.11%
+$2.24
+
+
+B2B
+$10.63%
+$2.52
+
+
+Beauty
+$7.10%
+$1.81
+
+
+Consumer Services
+$9.96%
+$3.08
+
+
+Education
+$13.58%
+$1.06
+
+
+Employment &amp; Job Training
+$11.73%
+$2.72
+
+
+Finance &amp; Insurance
+$9.09%
+$3.77
+
+
+Fitness
+$14.29%
+$1.90
+
+
+Home Improvement
+$6.56%
+$2.93
+
+
+Healthcare
+$11.00%
+$1.32
+
+
+Industrial Services
+$0.71%
+$2.14
+
+
+Legal
+$5.60%
+$1.32
+
+
+Real Estate
+$10.68%
+$1.81
+
+
+Retail
+$3.26%
+$0.70
+
+
+Technology
+$2.31%
+$1.27
+
+
+Travel &amp; Hospitality
+$2.82%
+$0.63
+
+
+
+&nbsp;
+
+Looking at the table, some might conclude that Facebook is the perfect media platform for promoting fitness or education products and isn't very suitable for industrial services advertising. In fact, this is not entirely true. Whereas the target audience for industrial services is definitely much smaller than for fitness products, a single sale can bring you ten times more money than selling 100 bottles of premium bottled water for sports fans.
+
+
+Also, keep in mind that neither CR nor CTR or engagement rate can't be applied for an objective assessment of the cost-effectiveness and its value for your business. If your ad campaign gets you a lot of Reach, Clicks, and Conversions, but you’re actually losing money per sale when you sum up all your expenses, then your strategy is no good. 
+
+What about the recent changes in Facebook Ads after privacy Update by Apple was rolled out? We see problems around Facebook pixel, constant blocking of Business Manager, inability to verify domains to be able to run ads effectively. Well, we can agree — it's not pleasant. However, keep in mind that Facebook still remains the biggest social media in the world and catches the eyes of your potential clients. So we do have to find a way around it. If you want to learn more about the shift to Facebook Conversion API and how it changes advertising on Facebook — be sure to read this article "How Facebook Conversion API is changing advertising?"
+
+&nbsp;
+How to make Facebook ads work for you
+The whole process of promoting your offer on Facebook can be divided into 4 phases: preparation, running ads, tracking &amp; analytics, and optimization.
+
+However illogical it may seem at first sight, you should start with an ad tracker set up. Otherwise, your guesswork may result in a huge wasted ad spend if you don't track all the outcomes. Facebook allows you to track your ads absolutely for free with a built-in Facebook Analytics tool. With it, you can track some basic metrics of your campaign performance. And though it is often ignored by experienced media-buyers, it can actually be a good starting point for those beginners who are making their first steps in the world of FB advertising and are eager to test their hypothesis at the lowest cost. In this case, you only need to create a Facebook Pixel and add it to the code of your thank-you-page. 
+
+
+
+As we cheer for your success, we must warn that if you rely solely on Facebook Pixel, you are in big trouble. Ever since iOS 14 rolled out the Privacy Update, Facebook started a shift to Facebook Conversion API and pixel is not as trustworthy as it used to be. Other issues you usually face with FB Pixel:
+
+ 	Facebook statistics mismatch business statistics
+ 	Tracking Pixels often don’t fire or fire several times if you use omnichannel marketing strategy to the same conversion page
+ 	Pixels can be blocked by Safari, Mozilla, and other adblocking tools
+
+Again, it can be a good tool for your first ad campaign, but if you have a complex sales funnel, work with several paid marketing channels or combine organic and paid traffic, analyzing your campaign without a reliable ad tracker can be a big strategic miscalculation. It's almost impossible to track the effectiveness of all your marketing channels correctly and get the whole picture of your user's actions and their characteristics. Therefore, we suggest not losing money and time and going to the tracker setup.
+
+Another issue tracker can help you solve is the verification of third-party domains. At RedTrack.io  we found a way to help you verify domains with ease and keep running your ads. If you want to learn more about this topic, be sure to watch our latest stream on YouTube.
+
+
+
+Preparation
+Get reliable data from Facebook Ads &amp; Set up Facebook CAPI
+With RedTrack you can easily set up Facebook Conversion API ad track your conversions from Facebook, being sure about the accuracy of the information that you get with the help of non-redirect tracking. Remember those redirect URLs are forbidden on Facebook. Once Facebook detects it, you’ll be banned.
+
+The non-redirect set-up consists of 3 simple steps:
+
+
+RedTrack setup:
+
+ 	Add Facebook as a Traffic Source. 
+ 	Create a Campaign with Facebook as a Traffic Source and Save &amp; Close the tab. Scroll down and you'll see that all the dynamic macros that would store additional information about your audience and traffic source parameters are already configured by default. 
+ 	Copy and put your automatically generated Direct Traffic Script to your landing page.
+
+
+Facebook Ads setup: 
+
+ 	Create New Campaign or Use the existing Campaign inside the “Create Ad” section and set up campaign parameters.
+
+ 	Copy LP URL (the link without macros) to Destination/Website URL. 
+ 	Add macros to URL parameters with the help of the 'Add parameter' option. Make sure they match the ones you set up in RedTrack.
+
+
+
+At this link, you can find the full setup guide. If anything, contact our support team at support@redtrack.io and we'll be happy to help you.
+
+To run ads on Facebook you should have either a fan page or create a landing page. The need for a landing page fully depends on your product, its sales cycle length, goals, and the type of relationship you have with the audience. Don’t worry, we will analyze each of the cases in detail further in this guide.
+Choose the right goal for your Facebook Ads campaign
+On Facebook, you can choose one of the three goals groups: awareness, consideration, and conversion. Don’t diminish the importance of this step as your choice will not only influence Facebook algorithms behavior but also determine the metrics you must track:
+
+
+
+&nbsp;
+- Awareness:
+Choose this goal if you want to generate interest in your product or service or build a community. In this case, you want to make sure the copies you submit complement all your other affiliate marketing efforts on Facebook as you don't want to deceive their expectations and disappoint with the irrelevant content. For this goal, it’s important to keep your business page up-to-date and constantly interact with your audience. So, before running a Facebook campaign, warm up your account and fill it with high-quality engaging content.
+
+Key metrics to track: Reach, Frequency, Engagement Rate. 
+
+
+
+&nbsp;
+- Consideration:
+Consideration goals are more suitable for those cases when you work with people who are in the middle of your sales funnel. These are the people who've already demonstrated their interest in your offer or similar products. And now you want to convince them to buy by providing valuable and highly informative content about your product. By choosing one of the consideration goals, you make it clear to Facebook algorithms that you want to find delivery opportunities that drive web traffic and engagement.
+
+
+Key metrics to track: Conversion Rate, Engagement, Landing page performance, App installs.
+
+
+
+&nbsp;
+- Conversion:
+This group of goals is best applied to the audience that already heard about you enough. Now you want to motivate them to buy or use a product or service. You may direct them to your Pre-landers to collect their email addresses. 
+
+Key metrics to track: Conversions, Sales.
+
+&nbsp;
+
+
+
+&nbsp;
+
+At this point, we are simply obligated to remind you of the rule of thumb: users rarely buy from the first impression. Affiliates that earn a fortune on Facebook create funnels with several steps and provide valuable content before asking to buy. While practicing, you’ll see that a high percentage of your landing page visitors weren't actually looking for your product or even have a slight understanding of having a particular that your product may solve.
+Define your audience
+After we've decided on our campaign goals, it’s time to answer the question of who are these people that may be interested in an offer. This is usually done by audience segmentation. What it means is that you should create the profile of the users with similar characteristics to whom Facebook will show your ads. Luckily, Facebook has thousands of custom audience options that allow you to create amazingly refined audience segments for your campaigns. It divides all the audiences into three main categories: Core, Custom, and Lookalike audiences.
+
+&nbsp;
+
+
+
+&nbsp;
+Core Audience 
+This option allows you to target users based on the following parameters:
+
+ 	Locations – from an entire continent down to a 1-mile radius.
+ 	Age.
+ 	Gender.
+ 	Language. 
+ 	Detailed Targeting.
+ 	Connections.
+ 	Life events and some profile status – e.g. people who are recently engaged or have children and others
+
+Custom audience
+ It defines those people who have already engaged with your offer/business or it can also be an email database of those people who can be potentially interested in your offer.
+
+
+
+Look-alike audience 
+It's automatically generated by Facebook on the basis of the database you provide. It can be a Custom Audience created with your pixel data, your mobile app data, or fans of your Business Page. This option is frequently used for warm and hot traffic.
+
+
+Cold vs Warm vs Hot Traffic
+The term cold traffic is often used to describe people who have total ignorance of the company/product or service you promote. That means they basically have no idea who you are and what you are doing. People categorized as warm traffic already have a basic level of knowledge about you. They may have visited your site before, read your content, signed up to your emails or have been following your Facebook page for some time. BUT what sets them apart from hot traffic is that they haven’t indicated any interest in buying from you so far. Hot traffic is described for those who recognize and understand the value of the product, purchased your product and probably shared it with others.
+Choose your Bidding Strategy
+As you know, Facebook distributes ads based on an auction format. It means that in order to get your ad shown you have to win at auction. A bid is a figure that represents how much you're ready to spend to achieve your target audience. By default, Facebook automates it for you, but you have a free option to change to better control your costs. Facebook recommends setting a daily budget that is at least five times higher than your bid cap as it needs at least 50 events/week to properly optimize your campaign. 
+
+&nbsp;
+
+
+
+Bid Strategy
+Objectives
+When to use
+Benefits
+Drawbacks
+
+
+Lowest cost (auto bid)
+Brand Awareness, Reach, Traffic, Engagement, App Installs, Video Views, Lead Gen, Messages (excludes Sponsored Messages), Conversions, Product Catalogue Sales
+Want to spend the full budget
+
+Need to understand what bid/cost to use for other bid options
+Hands-off; Facebook manages to bid
+
+Reach all lowest-cost opportunities while spending your budget
+
+No control over your cost
+Costs can rise as you exhaust least expensive opportunities or as you increase the budget
+
+
+
+Bid cap
+Reach, Traffic, Engagement, App Installs, Video Views, Lead Gen, Messages, Conversions, Product Catalogue Sales
+Want to set a max. bid across auctions to control cost and reach as many users as possible at that bid
+Maximize volume at the specified max. bid
+
+Can increase competitiveness against other advertisers targeting similar audiences
+
+Need to spend more time managing bids to control cost
+Costs can rise as you exhaust cheaper opportunities or increase your budget
+May not spend full budget
+A bid is not the cost you'll see in reporting
+
+
+
+Cost cap (50% availability)
+Traffic, App Installs, Event Responses, Lead Gen, Offsite Conversions and Catalogue Sales with the following ad delivery optimizations
+When you want to maximize cost-efficiency
+
+When you need to keep the cost within a specific threshold
+Maximize conversion volume within your acceptable CPA/CPI
+
+Minimize your cost when possible without manually adjusting your bids
+
+Cost may rise as you run out of cheapest opportunities
+Learning phase requires more aggressive exploration
+May not spend full budget once you hit the cap
+
+
+
+Target cost
+Traffic, app installs (installs, app events, video views), lead gen, conversions, product catalog sales
+When you want to maintain a consistent cost
+Cost predictability
+
+Get the most conversions possible at the target cost
+
+Lose out on all cheaper results
+May not spend your entire budget
+
+
+
+Value optimization with min. ROAS
+App installs, conversions and catalog sales
+If ROAS is the primary measure of success and you're able to pass back transaction values to our platform
+Focus campaign performance on the bottom line and ROAS
+
+Get the most opportunities while maintaining minimum ROAS
+
+Specific to value optimization
+Setting the benchmark too high may lead to under-delivery
+
+
+
+Highest value
+App installs, conversions and catalog sales
+Want to get the highest ROAS, want to spend full budget and when unsure of min. ROAS/bid amount
+Hands off; Facebook manages to bid
+
+Achieve the highest value results while spending your budget
+Specific to value optimization
+
+
+
+&nbsp;
+Running Facebook Ads campaigns
+Cold Traffic
+So, you need to find your audience. Let's say right away that if you've never promoted your offer or similar products before, the image of the audience that you now have in your head is erroneous. But it's not a big deal. We all were there. The only method that will help you to find your audience is testing. So, let's take it to step by step:
+
+1. Create several audiences and isolate each from each other into separate ad sets and use the same ads for each of those ad sets.
+
+As an outcome, you'll see which audiences perform better for your offer and prioritize them. Once you know your best-performing audiences, you can test various types of ads or copy.
+
+2. Test ad copy either in separate ad sets (similar to audience tests) or in separate campaigns. This helps you to see any possible correlation between the audiences and ad types.
+
+
+How much should I spend? 
+There is no specific figure, but usually, it should be 2-3 times the target cost per conversion, per ad set.
+
+For example, if you are expecting a conversion cost of $5 per event, be ready to spend at least $10-15 per ad set before optimizing your campaign to make sure you gather enough performance data.
+
+What content should you promote?
+
+You may interest your cold audience with the following ad formats: 
+
+ 	Blog posts,
+ 	Power posts (also referred to as epic, data-driven content),
+ 	Videos,
+ 	Podcasts,
+ 	Research findings,
+ 	Lead magnet squeeze pages,
+ 	Surveys,
+ 	Guides.
+
+Warm Traffic
+
+This type of traffic can be divided into two categories: 
+
+ 	People who already know about you and your product but haven’t been targeted before.
+ 	Your retargeting audience – people who visited your website and/or came in contact with your brand. 
+
+Audience #1: 
+In order to convert your warm audience,  you need to drive it to pages or assets that deliver value but also remind them of their interest in your product or services. For these purposes, the following types of content will be ideal:
+
+ 	Lead magnets (e-books, white papers, etc.),
+ 	Product demos,
+ 	Webinars,
+ 	Free tools,
+ 	Trial signup pages (free),
+ 	Events,
+ 	Offers.
+
+Audience # 2: retargeting campaign:
+Your remarketing group may include your website visitors, your Facebook page fans, people who engaged with any of your organic posts or ads, your video viewers or your custom list which interacted with your product outside of the Facebook environment.
+
+
+
+But be careful with creating a too broad retargeting audience. Retargeting every website visitor means you run the risk of diluting your marketing message.
+
+Let’s say you have two different users who visited your website. One has spent 40 seconds scrolling the main page from top to bottom while another has carefully read all the information about your product and signed up for lead-magnet. In the first case, it may be worth promoting your lead-magnet offer while in the second it won't make any sense. You risk sending the wrong offer to the wrong person at the wrong stage of their buyer’s journey.
+
+Prevent your retargeting campaign from burning out by changing and updating ads, and using burn pixels remarketing cookies. Quite often, the new retargeting campaign performs amazingly well after launch, but it slowly dies down with time.
+
+Here it is. 
+
+Now what you need is to set a budget and time to run your campaign and the most complicated thing... wait.
+
+&nbsp;
+Measuring &amp; Optimizing your Facebook Ads  campaigns
+Once you start running your ads on Facebook, you can watch everything happening with it in real-time with the help of extended Campaign reports available in your RedTrack interface.
+
+The data is passed quickly and with no delays. To get them just go to your Campaign tab, select your desired Campaign and click the Report button. You'll have all the data about your campaign and can easily group it by the parameters, including offer, landing, date, Date parting, Connection, IP, Device, OS, and others. After getting enough data, you can analyze and optimize your campaigns to reach higher results. 
+
+
+
+&nbsp;
+Use FTO (fast take off) method
+ It helps you need to get the results faster as the smaller the starting budget, the more it takes to your campaign to take off. The essence of the method is as follows:
+
+
+ 	set daily and lifetime budgets exceed your planned minimum budget
+ 	wait until you ads get 10,000+ impressions, 
+ 	analyze what’s working and prioritize your ad sets
+ 	lower your budget back to initially planned one
+
+Keep in mind that Facebook needs at least 24 hours to adjust the performance of your ads after every edit.
+Experiment with the schedule
+While analyzing, you'll notice that there are always some days and hours that outperform the rest. Find the best time for advertising and keep all your campaigns.on a custom schedule. On the one hand, it will allow you to improve your performance indicators and earn more, on the other - your users won’t get bored with them as quickly.
+
+
+Rotate Ads regularly
+If you don't change your creatives, you should be ready that people will get bored soon. experiments show that showing the same creative to the same audience more than four times leads to a significant click-through rate increase. To avoid it, simply create several creative with different designs or set up an ad campaign with multiple ad sets with different ads and schedule each one of them on different days.
+
+
+Always limit your A/B test to only one element
+Some advertisers can make hasty conclusions. To get relevant data for analyzes, wait until you get at least 300 clicks/conversions/ leads. Even better if you can wait until you have 300 or 500 conversions per variation. 
+Set up auto-optimization rules
+There's a free and easy way not to spend hours in front of the monitor and track the effectiveness of your campaigns. Just use RedTrack automation set of features that will automatically optimize your campaigns and traffic if it doesn't meet expected KPIs. 
+
+
+
+Automation rules allow you to:
+
+1) Automatically pause or stop weak campaigns
+Set KPIs for your campaigns, like desired EPC, CR, or ROI and we would automatically pause sending traffic to this campaign if set metrics are not met.
+
+2) Redistribute traffic inside a campaign among its various elements
+
+Simply create a rule for several offers/landers/streams inside one campaign, and RedTrack would automatically distribute traffic between them once the performance of one increases or decreases. The special algorithms will optimize your ad/creatives/landing pages' performaтce and offer weight.
+
+3) Get rid of fraud traffic and help focus on trusted and efficient one
+
+Use the rules &amp; alerts feature together with our Fraud Report, and RedTrack will automatically pause traffic in your traffic source if the quality of clicks is suspicious.
+
+&nbsp;
+What you can't promote on Facebook
+Facebook has strict advertising policies. It will take some time to review your ads and decide whether to approve it or not and even check the page that your ad will be driving traffic to. So, be ready to have your ad disapproved if your page doesn't match up with what your ad is promoting. 
+
+
+
+On top of that, there's a list of products that you simply can't promote on Facebook Ads. Here are 10 of them:
+
+ 	Unregulated Supplements
+ 	Adult Products
+ 	Third-Party Infringements
+ 	Surveillance Equipment
+ 	Counterfeit Products
+ 	Health Products: Before and After
+ 	Controversial Products
+ 	Weapons
+ 	Tobacco Products
+ 	Drugs and Drug-Related Products
+
+Conclusion
+As you see, Facebook Ads is a powerful and workable tool for affiliates and media-buyers in various niches. RedTrack, in its turn, helps them to get the most out of it by providing quality tracking and optimization tools. With it, you won't have to worry about your pixels events firing, the accuracy of data, and the need for a dozen of sub-pages. If you have any questions please refer them to support@redtrack.io. We're always happy to chat :)

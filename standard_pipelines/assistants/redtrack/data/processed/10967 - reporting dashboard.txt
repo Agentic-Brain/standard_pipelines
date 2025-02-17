@@ -1,0 +1,56 @@
+# Reporting: dashboard
+
+
+The article is outdated and currently under revision.
+
+
+
+What's Dashboard in RedTrack?
+
+
+
+Dashboard is the first page (tab) you see after logging in to your RedTrack account. It displays overall statistics about the clicks and conversions from your Campaigns.
+
+
+
+How to work with Dashboard in RedTrack?
+
+
+
+1. Choose the data slices by which your report will be filtered:
+
+
+
+
+
+
+
+2.&nbsp; Select the needed metrics (clicks, conversions or certain conversion types, costs etc., whatever you need to be depicted in the report) and press Apply/Refresh:
+
+
+
+
+
+
+
+Keep in mind that in order to see the costs you need to turn off the Show costs toggle and, consequently, turn it on to filter the data without the costs (to get a quick report):
+
+
+
+3.&nbsp;Once the chosen data was filtered and the Apply/Refresh button was pressed, the Chart will show you the data by the chosen metrics. By navigating the mouse to certain parts of the chart you can spot the changes to your conversions (or else) over the chosen period:
+
+
+
+Each metric has its own color which makes it easier to trace the changes on the Chart:metric A-greenmetric B-orangemetric C- violetmetric D-pink
+
+
+
+
+
+
+
+4. There is also a block at the bottom of the page that contains quick reports on main metrics and you can also choose the grouping type to filter the data properly:
+
+
+
+

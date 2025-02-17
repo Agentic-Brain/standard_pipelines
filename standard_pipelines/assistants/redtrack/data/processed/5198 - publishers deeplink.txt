@@ -1,0 +1,70 @@
+# Publishers: deeplink
+
+What's Deeplink?
+Deeplink is a hypertext link to a page on a Web site other than its home page. These links are also used to send users directly to an app instead of a website or a store. Thus, when using deep links you do not get to the home page by default, but rather go straight to the specific in-app / website location (category of goods) or a concrete product. By using deep links partners/publishers save time and traffic.
+
+Deeplinks are used to help partners/publishers promote several different links/ offers within one Campaign.
+To create and apply the Deeplink you need to:
+1) Have an RT Campaign with a Traffic channel "For Publishers";
+2) Access to the branded portal.
+
+Setting up a Deeplink
+1. Create Deeplink(s) in the RT Campaign with the Traffic channel "For Publishers"
+
+[expand title="Expand to see how to create preset Deeplinks"]
+
+1.1 go to the list of your Campaigns and choose the needed Campaign:
+
+
+
+1.2 once you are in go to the tab Details for Publishers:
+
+
+
+1.3 scroll down to the end of this page till the section Preset DeepLinks-&gt; press Add Deeplink:
+
+
+
+1.4 fill in the needed fields-&gt; press Save Details-&gt; Save Changes:
+
+
+Hint!
+
+ 	Deeplinks Direct URL is a link that leads directly to the Offer URL.
+ 	Deeplinks Redirect URL is a link that leads to another link different from the Offer URL. Redirect URLs forward traffic from one URL to another when the old URL no longer exists.
+ 	Deeplinks Impression URL is the link meant to collect impressions, not leads.
+
+
+1.5 (optional) With RedTrack it is possible to hide unnecessary tracking links in the Publisher Panel. To do that turn off the toggle next to the link which you want to hide (Direct tracking URL/Redirect tracking URL/Tracking URL/Impression URL):
+
+
+Note!
+
+All the URLs in the Preset DeepLinks section are enabled by default. Once you turn off the toggle next to the needed URL (Direct tracking URL/Redirect tracking URL/Tracking URL/Impression URL), this URL won’t be shown in your Publisher Panel (Campaigns-&gt; choose the needed campaign).
+
+Example:
+
+I decided to hide the Impression URL, so I turn this toggle off, then go to my Publisher Panel and see that Impression URL is missing from the REDIRECT TRACKING URLS section:
+
+ ⇒
+
+And if you turn on the Impression URL toggle, this URL will appear in your Publisher Panel:
+
+⇒
+[/expand]
+
+2. Go to the branded portal and copy the Deeplink
+
+[expand title="Expand to see how to find the Deeplink in the Pub panel"]
+
+2.1 in the branded portal go to the tab Campaigns-&gt; choose the needed Campaign:
+
+
+
+2.2 choose from the drop-down the name of your link-&gt; copy the needed type of the Deeplink URL:
+
+
+
+[/expand]
+
+3. Paste this link to your ad, page, etc.

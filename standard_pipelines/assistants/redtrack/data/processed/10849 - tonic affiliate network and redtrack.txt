@@ -1,0 +1,172 @@
+# Tonic (affiliate network) and RedTrack
+
+
+
+
+
+
+Tonic offers clients the proper tooling to efficiently monetize Native, Social, Search, Display &amp; Direct Website traffic with the world’s largest search feed.
+
+
+
+In the integration workflow below Tonic performs as an Offer source (Affiliate network).
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add the conversion types to RedTrack.
+
+
+
+Tonic supports the following conversion types sent dynamically:▸redirect▸view▸viewrt▸click▸preestimated_revenue▸estimated_revenue▸estimated_revenue_5h
+
+
+
+The data by these conversions is passed into RedTrack via the {type} parameter in the Postback URL. However, if you need to pass any other conversion types, you can easily do it with RedTrack. Choose the way:
+
+
+
+
+
+1. Tools → Conversion tracking → Conversion type → add those you want to use. Use this article for guidance.
+
+
+
+2. Add the {type} parameter to the Additional parameters section in your Offer source template so that this parameter is appended to the Postback URL
+
+
+
+
+
+
+
+
+
+1. Tools → Conversion tracking → Conversion type → add the target events. Use this article for guidance.
+
+
+
+2. Hardcode the needed event types to the needed Postback URLs by adding &amp;type=hardcoded_name. 
+
+
+
+For example, if you need to get certain events as Purchases, you add to the Postback URL &amp;type=Purchase, so the Postback URL will look like this: https://docs.trk.agency/postback?keyword={keyword}&amp;timestamp={timestamp}&amp;currency={currency}&amp;type=Purchase&amp;clickid={subid1}&amp;sum={revenue}
+
+
+
+
+
+2. Add Tonic as an Offer source in RedTrack.
+
+
+
+2.1 Offer sources → New from template → find Tonic → Add → Save:
+
+
+
+
+
+
+
+With Tonic, you can use the following additional parameters to enrich your conversion data:{keyword} for such Tonic-supported conversion events like viewrt, click, preestimated_revenue, estimated_revenue and estimated_revenue_5h{timestamp} should be added if you want the delayed conversions to be attributed to the correct time{currency} should be added if you want to use a currency that is different from your RedTrack account{type} should be added if you want to use the universal postback in Tonic for all the Tonic-supported eventsThese parameters are to be added under the sub-parameters in the Additional parameters section:
+
+
+
+2.2 Copy the postback URL from the Offer Source settings (with or without your custom conversion types):
+
+
+
+
+
+
+
+3. Set up RedTrack Postback URL in Tonic.
+
+
+
+Tonic → Campaign Overview → choose the campaign → Callbacks → paste the Postback URL in the corresponding field(s) for the event(s):
+
+
+
+
+
+
+
+
+
+
+
+☛ You have to insert the Postback URL only to the fields next to the events you want to track. For example, in the screenshot above, it's a click.☛ If you decide to work with the hardcoded events, remember to add &amp;type=hardcoded_name, where you replace it with the actual name of the event.
+
+
+
+4. Copy the offer URL from Tonic.
+
+
+
+Campaign Overview → choose the campaign → edit → Tracking → copy the URL at the bottom of the page:
+
+
+
+
+
+
+
+
+
+
+
+5. Add your offer URL to RedTrack.
+
+
+
+RedTrack → Offers → New → give the offer a name and choose Tonic as the offer source → paste the URL from Tonic → add subid1={clickid} to the URL → Save:
+
+
+
+
+
+
+
+Refer to this article for details on other important fields within the Offer template.
+
+
+
+6. Create the&nbsp;Campaign with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To create a Campaign refer to:
+
+
+
+
+this guide&nbsp;for Advertisers.
+
+
+
+this guide&nbsp;for Affiliates.
+
+
+

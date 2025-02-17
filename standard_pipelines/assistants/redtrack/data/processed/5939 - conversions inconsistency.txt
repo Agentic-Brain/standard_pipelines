@@ -1,0 +1,146 @@
+# Conversions inconsistency
+
+
+A typical conversion path in RedTrack looks as follows: a click comes from the Traffic source → gets to RedTrack → is fixed in RedTrack as a conversion.
+
+
+
+There are 3 sets of data where inconsistency may occur:
+
+
+
+
+Conversions in the backend of the affiliate network, e-com, etc.
+
+
+
+Conversions in RedTrack
+
+
+
+Conversions in the traffic channel
+
+
+
+
+
+
+Here is the list of conversion inconsistencies that can be fixed by our Support team:
+
+
+
+1. Wrong dynamic parameters were put in the offer URL/postback URL.
+
+
+
+2. Integration expired, is wrong.
+
+
+
+3. Issues with the custom domain (e.g: it's not integrated yet, SSL certificate is not set for this domain, etc.).
+
+
+
+4. Conversion cap is used.
+
+
+
+5. Duplicate postback mode is set incorrectly.
+
+
+
+6. Protected postback is used.
+
+
+
+7. Issues with the server.
+
+
+
+8. Different time zones are used.
+
+
+
+9. The most typical one is human errors. Meaning, you probably skipped or misunderstood some steps in the integration guide, so it's the issue with the settings of your offer, traffic channel, campaign etc.
+
+
+
+
+
+1. Different attribution windows used by different traffic sources.
+
+
+
+Let's break this down on the example of Facebook and Google Ads:
+
+
+
+
+
+By default, Facebook uses a 1-day view and 7-day click-through attribution window. Google, by default, uses a 1-day view and 30-day click-through attribution window. It means that if someone clicks your Facebook ad and then converts on your site within 7 days, both Facebook and Google will take “credit” for that conversion. Why is this weird? Let's figure this out: a user clicks your Facebook ad today, checks out your site, but does not convert. Five days from now they click your Google Ad and ultimately make a purchase. And this is what happens with your stats five days from now when that sale actually occurs:
+
+
+
+→ Facebook will show that you had 1 sale for whatever Facebook ad the user clicked today;→ Google will show that you had 1 sale for whatever Google ad the user clicked right before they purchased.
+
+
+
+So you only had one sale, but according to Facebook and Google you had two sales because they’re both taking credit for the same sale. Actually, the default attribution settings for both Facebook Ads and Google Ads will cause them to take credit for conversions that occur even if a user doesn’t actually click your ad.
+
+
+
+
+
+Your Facebook ad is displayed in the user’s feed today, then tomorrow they search you up on Google and click your Google Ad, and ultimately make a purchase. Facebook is going to once again take credit for the sale even though the user didn’t click your Facebook ad or probably didn’t even see your Facebook ad, and yet Facebook takes credit for the sale.
+
+
+
+
+
+2. Cross-device tracking.
+
+
+
+And again the most obvious examples can be provided based on Facebook and Google Ads:
+
+
+
+To perform any type of cross-device tracking, the ad platforms like Facebook and Google require the user to be logged in on all of their devices, all the time.
+
+
+
+Suppose I'm a user who clicks the Facebook ad on my phone. I click some ad, opt in on the landing page, but then get distracted and leave the site. A few days later I'm using my desktop computer at work, check my email, and see an email from you. I click the link and ultimately end up buying something.
+
+
+
+That’s great, except I wasn't actually logged in to my personal Facebook account on my work computer so Facebook couldn’t track me. This type of thing happens all the time, every day. Moreover, some browsers and security apps are now actively and completely blocking the tracking codes from major ad platforms like Google, Facebook, and YouTube.
+
+
+
+All this contributes to inaccurate stats, not to mention Facebook using their short 7-day attribution window. To clarify: if someone clicks on your Facebook ad and doesn't buy within 7 days, those sales will never be tracked at all by Facebook
+
+
+
+3. Do not expect 100% for conversions.
+
+
+
+Especially if we are talking about bigger networks using algorithmic attribution (i.e. Facebook).
+
+
+
+Sometimes, you simply cannot rely on the conversion stats in your ad accounts. The record shows that such major networks like Facebook and Google misattribute or just completely miss somewhere about 20-50% of your conversions or even more.
+
+
+
+As for the other so-called advanced attribution settings offered by Facebook Ads and Google Ads, just know that they’ll actually result in even more “illusive” sales, more incorrectly attributed sales, and even bigger problems for 99% of advertisers.
+
+
+
+In general, when talking about Facebook, it will never show a 100% match, as it has its own algorithms and they may reject the conversion for no reason at all.
+
+
+
+
+
+The bottom line is that RedTrack matches the backend, does unbiased attribution based on your settings, and is all about your overall ROI and effectiveness, not increased spending with any particular channel. So, if your tracking is set up correctly, rely on your RedTrack data. Otherwise, why would you use a tracker at all?

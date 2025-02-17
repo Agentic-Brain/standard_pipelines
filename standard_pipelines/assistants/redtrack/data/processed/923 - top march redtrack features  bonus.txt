@@ -1,0 +1,89 @@
+# Top March RedTrack Features [+ bonus]
+
+&nbsp;
+
+Welcome to our March 2018 RedTrack update!
+
+We are pleased to announce that we have added some very exciting new features to make your tracking experience even more enjoyable and efficient:
+• Statuses for Offers and Campaigns (Active, Archived, Deleted)
+• Tags for Campaigns and Offers
+• Mass selection tool
+• Ability to post-back RevShare % to source
+• Bot lists 
+• Landing page views / Landing page clicks reporting
+• Unique clicks reporting (and filtering)
+• New filtering options for Campaigns (exclude / include)
+• RedTrack conversion pixel
+• Fallback-URL
+• API
+Let's take a closer look at each one of them:
+Updated statuses for Campaigns / Offers
+
+From now on, you are able to choose one of the three statuses for your Campaigns and Offers, and filter them out by:
+
+1. Activate
+2. Archive
+3. Delete
+To adjust status, select a Campaign or Offer and click the Change status button.
+
+For easier reference, the Offers are also marked with corresponding colors (green for active, yellow for archived and red for deleted).
+Tags for Campaigns and Offers
+
+If you wish to create a custom tag for your Campaigns or Offers, it is now possible with the new Edit Tags button.
+
+Simply choose a Campaign or an Offer you wish to create a tag for and click Edit tags. A new field will be open, where you can enter your custom tags. Click Save when you're done editing.
+
+You can also filter out Offers and Campaigns by the tags you've added.
+
+
+
+&nbsp;
+Mass selection tool
+
+As you can see, the new features above require a selection of Campaigns/Offers. In order to facilitate the use of these features, we have added a mass selection tool, allowing you to select multiple entries with just one click.
+
+Tip: if necessary, apply filters to your list for the most accurate selection.
+&nbsp;
+Better management of RevShare Campaigns
+
+If you are using the RevShare model for your Campaigns, you are now able to specify the exact share % when passing payout value to the Traffic Source. In order to do that, make sure that Postback URL contains the {offer_payout} parameter.
+&nbsp;
+Bot lists
+
+In order to exclude bot traffic from being added to your statistics, you may set specific Bot Rules. The actions performed by such traffic will not be treated as the events included in your RedTrack plan.
+Here's how to set new Bot rules:
+1. Log into your RedTrack account
+2. Navigate the Tools tab
+3. Choose Bot blacklist  from the drop-down menu
+4. Create a New rule
+5. Add a name for your rule and specify IP Addresses of all known bots, separated by commas
+6. Click Save
+
+&nbsp;
+Landing page views / Landing page clicks reporting
+
+We have added even more statistical data for your Landings.
+
+Landing Page views and Landing Page clicks are now available at the very beginning of the report.
+Unique clicks reporting
+
+We love adding features by request of our customers. You asked us for that - we've added the ability to view Unique Clicks for each Campaign.
+&nbsp;
+
+New Filtering Options for Campaigns
+
+Filters for Campaigns have now become even more customizable with the new Include/Exclude option. Make the most out of this feature from Campaign Creation/Edit window.
+&nbsp;
+Conversion Tracking Pixel
+If the Network of your choice does not support S2S tracking, you may now use a different way of tracking conversions - RedTrack Conversion Tracking Pixel. Simply copy the code from your RedTrack account and add it to your Landing page. More information about Conversion Tracking Pixel can be found here.
+&nbsp;
+Default Fallback-URL
+We know you would hate to lose important data due to a Campaign setup error. Don't worry - RedTrack will make sure it doesn't happen. If something is off in Stream settings, the data will be passed to your custom Fallback_URL, so don't forget to set it up. It can be done from the Tools tab of the menu.
+API
+RedTrack API is now available under Tools &gt; API Documentation.
+&nbsp;
+Special Bonus
+
+Have read the post till the end? Lucky you! We offer two-month 50% subscription discount to all users who will upgrade their current subscription till April 3, 2018. To enter the bonus, drop us a line with a request to sales@redtrack.io.
+
+We will have even more great features that we will present in April.  So, stay tuned, drive traffic and increase the ROI.

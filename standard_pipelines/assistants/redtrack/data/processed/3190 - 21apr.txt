@@ -1,0 +1,35 @@
+# 21-Apr
+
+
+ 	Autooptimization: set weight multiplier, set learning treshold for optimize by zoneid
+ 	Macros for webhook in a publisher panel
+Alias = {palias}
+First Name = {pfname}
+Last Name ={plname}
+Publisher Email = {pemail}
+Publisher Id ={pubid}
+
+
+ 	Cost update for Facebook on different levels and different frequencies (campaign, adset, and ad level)
+ 	Facebook "Rate limit" error fix
+ 	Postback logs for Facebook, Google, and Bing
+ 	Multi-access restriction by campaign/traffic
+ 	Сustom Payouts for regular campaigns
+ 	Postback for FB: “split conversions” by default
+ 	Add connection type column in logs (clicks and conversions)
+ 	Facebook Payload Part 1
+New fields added:
+City: ct
+Country: country
+External ID: external_id
+Subscription ID: subscription_id
+order_id - сonversion id 
+ 	Google auto-update costs (by adset and ad)
+ 	Woocommerce postback
+ 	CPA for Conversion Types
+ 	New macros:
+{convid} - id of the conversion 
+{convtype - type of the conversion 
+ 	Pre-LP / LP CTR metrics
+ 	FB Traffic Source set-up changes
+ 	FB integration: new pixel IDs can be added without connecting Business Manager

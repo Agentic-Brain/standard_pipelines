@@ -1,0 +1,750 @@
+# Facebook and RedTrack
+
+
+
+
+
+
+
+
+
+
+
+
+What's Facebook/Instagram?
+
+
+
+Both Facebook and Instagram have the same ad managing interface (Facebook Ads Manager), so this article describes the flow for both platforms. 
+
+
+
+Redirect URLs are normally forbidden on Facebook.There are limited cases when Facebook allows you to use the redirect link (e.g. RedTrack campaign tracking URL) but we as a service provider do not recommend it and cannot guarantee safety. 
+
+
+
+For all of your Facebook campaigns, no-redirect tracking with a custom tracking domain should be used. Traffic filtering functionality is limited for Facebook and can be used for the Offer level only (for the cases when you run the traffic to the landing page first). For more details go to the Traffic filtering guide. 
+
+
+
+Facebook integration allows you to:
+
+
+
+
+pass all the conversion data back to Facebook (even the extra conversions), attach it to the campaigns (not only to the events manager), and help Facebook to optimize your traffic for even better traffic matching;
+
+
+
+pause non-converting creatives and campaigns directly on the Facebook side, no manual work;
+
+
+
+auto update your cost data.
+
+
+
+
+Due to Facebook restrictions, conversion data can be delivered to your Facebook campaigns within 24 hours.
+
+
+
+Integration checklist
+
+
+
+
+
+Before you proceed with the other steps of the checklist, make sure to have the already added:
+
+
+
+1. Custom tracking domain.
+
+
+
+2. Offer (if you're an Affiliate) / Website (if you're an Advertiser).
+
+
+
+
+
+Add a Facebook template and integrate it with RedTrack.
+
+
+
+1. Traffic Channels → New from template → find Facebook → Add → Save:
+
+
+
+
+
+
+
+
+
+
+
+You can modify some Facebook parameters in the opened template. Blocked (greyed) parameters should be used under the same sub-values with the same roles assigned as provided in the initial template. The following parameters and their roles are essential for the API cost integration:{{ad.id}} should always be with Aid role{{adset.id}} should always be with Gid role{{campaign.id}} should always be with Cid role
+
+
+
+"fbclid" parameter is required for sending the conversion data back to Facebook. This parameter should always be the last in the line, meaning, that there should be no other parameters after it in your RedTrack settings and later when you will add the parameters string to Facebook.
+
+
+
+2. Since it is a complex API integration, we need to get permission to integrate from Facebook first. In the added template press Connect Facebook → verify your ad account:
+
+
+
+
+
+
+
+Once you are redirected to your RedTrack account settings and see the Connected button, it means Facebook accepted the integration:
+
+
+
+It is highly recommended to reconnect your Facebook account with RedTrack every 2-3 months for the integration to be valid, since Facebook can disconnect your account randomly for security reasons (you will notice that almost immediately since the cost data stops coming at that point).
+
+
+
+
+
+
+
+1. Create a campaign in RedTrack using this guide. Once the campaign is created, all the tracking links and the parameters for the script will be generated automatically and include all the supported macros.
+
+
+
+2. For Facebook tracking you will need to use the tracking script. Follow this guide to choose the one that suits your needs better and set it up.
+
+
+
+Since Facebook does not like redirect tracking, you will have to use our script on the page code. 
+
+
+
+You will need to add the tracking parameters later on the Facebook side. The parameters depend on the type of script you have chosen before and can be  taken from the "universal script" or "no-redirect" tab within campaign settings:
+
+
+
+
+
+
+
+It is preferable to place the tracking script at the end of the body section of the landing page script.
+
+
+
+
+
+1. Create a campaign in RedTrack using this guide. Once the campaign is created, all the tracking links and the parameters for the script will be generated automatically and include all the supported macros.
+
+
+
+2. For Facebook you will need to use our universal tracking script. The universal tracking script is created automatically once you've added the Website and can be taken from your RT account → Scripts. The script should be placed on the page code or for your e-commerce store (check out the precise e-com guide for details).
+
+
+
+The tracking parameters are to be copied from the campaign settings and saved for later:
+
+
+
+
+
+
+
+
+
+
+
+Use this guide to help you add the events you plan to use to RedTrack. It will automatically send your conversion types to Facebook exactly as you name them.
+
+
+
+- Conversion information will fall under your pixel/data source.- We recommend keeping a Purchase name for one of your conversions so that you do not need to make any adjustments on the Facebook side since Facebook knows this name very well and will optimize the traffic better for a Purchase than a custom name (Sale, Conversion, etc.).
+
+
+
+If you are using non-standard names for the events you send to Facebook (something apart from Purchase, ViewContent, InitiateCheckout, Lead), you need to set them up on Facebook, too:
+
+
+
+1.&nbsp;Events Manager →&nbsp;Custom conversions → Create custom conversion:
+
+
+
+
+
+
+
+
+
+
+
+2.&nbsp;Fill in the fields in the pop-up window:
+
+
+
+
+
+
+
+
+Name: give your custom conversion a&nbsp;name
+
+
+
+(optional) Description: add a&nbsp;description&nbsp;to distinguish your custom conversion from others in the list
+
+
+
+Data source: select the&nbsp;data source
+
+
+
+Action source: select the&nbsp;action source&nbsp;to which your custom conversions are attributed (it should match with the one you will set inside RedTrack)
+
+
+
+Event: select the event URL
+
+
+
+
+If you select All URL traffic or a custom event, you’ll see the option to Choose a standard event for optimization. Facebook recommends you to keep the category they chose for you. If you want to choose a different category, select the one that best describes the conversion event you’re optimizing. Refer to this article for learning more about standard event categories in Facebook.
+
+
+
+
+Rules:&nbsp;set the rules by URL&nbsp;or&nbsp;event parameters. You can select the parameters that you currently send with the event you selected. If you don’t see the parameter you want to choose, update your pixel or Conversions API setup to send the parameter with your event.
+
+
+
+
+▸ Parameters that follow the OR condition. For example, if you create a custom conversion using a purchase event and type in Product A, Product B and Product C in the content_id parameter value, the custom conversion measures when someone purchases product A, B or C.▸ Rules that follow the AND condition. For example, if you create 3 separate rules for content_id equals A, content_id equals B, and content_id equals C, the custom conversion measures when all 3 events occur.Refer to this article for more info about Rules within this setup.
+
+
+
+
+(optional) Enter a conversion value:&nbsp;click to check the box next to&nbsp;Enter a conversion value, then enter your value. Only use this field if the events in your custom conversion don’t have a conversion value.
+
+
+
+
+Use only whole numbers, and don’t include any additional symbols.
+
+
+
+Facebook guides on custom conversions that can also be useful:▸ Filtering events in Meta Events Manager▸ Best practices for custom conversion setup in Meta Events Manager▸ How to edit custom conversions in Meta Events Manager▸ How to delete custom conversions in Meta Events Manager
+
+
+
+3.&nbsp;Once you’ve created your custom conversion, to activate it, navigate to the page of your website it’s referencing to trigger it. Then get back to&nbsp;the Events Manager →&nbsp;Custom conversions&nbsp;tab and see if the added conversion changed its status to&nbsp;Active:
+
+
+
+
+
+
+
+
+
+Your Facebook account → Events Manager→ pixel settings → Settings → Create Access Token:
+
+
+
+
+
+
+
+Here is more about Conversion API Key in FB.
+
+
+
+
+
+Due to the new Facebook policy, you should now verify the domain you will be using for your Facebook campaign. This is an action that should be done on your Facebook account.
+
+
+
+Domains on Facebook can be verified in 3 ways:- via meta tag- via the uploaded HTML file- via DNS recordFor details on the domain verification procedure on Facebook, check out the following guides:- Domain verification in Meta Business Manager- Methods of domain verification on FacebookThe steps below will demonstrate the DNS record management method. 
+
+
+
+1. Business Manager → Brand Safety and Suitability → Domains → Add → Create a new domain:
+
+
+
+
+
+
+
+2. Paste your domain → Add:
+
+
+
+
+
+
+
+Use the root domain without any prefixes. Correct: website.com.Incorrect: www.website.com or https://website.com.
+
+
+
+Domains will not appear in your list immediately. Give the system some time to replicate the data.
+
+
+
+3. Select the target domain → choose the DNS verification method:
+
+
+
+
+
+
+
+4.&nbsp; Copy your unique TXT value:  
+
+
+
+
+
+
+
+5. Go to your domain registrar → open DNS settings and add a new record with the following values:
+
+
+
+
+Host: @
+
+
+
+Points to: your unique TXT record from point 4
+
+
+
+TTL: the lowest possible
+
+
+
+
+The steps you need to perform to add a DNS TXT record to your DNS settings may vary depending on the domain host. The screenshots in this article are examples from GoDaddy.
+
+
+
+6. Give it some time for the data replication to happen (approximately 1 hour), then verify the domain in your Facebook domain settings:
+
+
+
+
+
+
+
+Once the domain is verified, you'll see a Verified tag next to the added domain:
+
+
+
+7. Associate the domain with your page:
+
+
+
+
+
+
+
+
+
+
+
+8. Get back to RedTrack → settings of the added Offer (for Affiliates)/ Website (for Advertisers) → CAPI (Maximize signals) → add the values for Default Action source and Default Event URL → Save changes to the template:
+
+
+
+
+In the Default Action source select from the drop-down the type of the conversion to be set for Facebook API.
+
+
+
+In the Default Event URL add the verified domain. The domain should be secure, use the following link format: https://your.domain.com.
+
+
+
+
+
+
+
+
+If you don't add the the values for Default Action source and Default Event URL in RedTrack, conversions will fail to attribute.
+
+
+
+
+
+You can find your unique pixel ID in the Facebook campaign settings → Tracking:
+
+
+
+
+
+
+
+
+
+There are 2 ways of adding your FB pixel to RedTrack:
+
+
+
+
+
+ Go to the settings of the added Offer/Website → CAPI (Maximize signals) → Add your Meta (FB) pixels to send the conversions with the Meta (FB) conversion API → add the the pixel, token and other needed values → Save  changes to the template:
+
+
+
+
+
+
+
+Together with the Pixel ID add the Conversion API key for that pixel.
+
+
+
+
+Action source: we recommend using the Website option
+
+
+
+Event URL: the domain verified for Facebook. Use the "https://domain.name" URL structure.
+
+
+
+
+Set the default values for the action source and event URL to let the system use them for all your pixels.
+
+
+
+Check out this video explanation of how RT Conversion API works for META (Facebook). 
+
+
+
+
+
+Go to the settings of the added Facebook traffic channel → Facebook default data source (pixel) → add the the pixel, token and Default conversion name (if needed) → Save changes to the template:
+
+
+
+
+
+
+
+Default Event name field hint:- If the field remains empty, the default conversion is sent with the event under the name Purchase.- If the field is filled in, the default conversion is sent with the name specified in that field.
+
+
+
+
+
+
+
+Ads Manager&nbsp;→ Create Ad → create a new campaign or use an existing campaign → set up campaign parameters → copy paste your LP&nbsp;URL/Website URL (the link without tracking parameters) under the website URL → add additional tracking parameters (universal script or tracking parameters (UTMs)) in the "URL parameters" section
+
+
+
+Make sure there are no special symbols and spaces (#, %, etc.) in the names of your ads, adsets, and campaigns - otherwise the data won't be tracked. 
+
+
+
+- Facebook catches only the initial data for ads, adsets, and campaign names (even when some test name was added as a draft), it will ignore all name updates you make after. - If you need to be sure you receive the correct  names, add them to the tracking parameters manually or analyze the data by IDs instead:cmpid=5f92a30bc860ee0001fa9996&amp;sub1={{ad.id}}&amp;sub2={{adset.id}}&amp;sub3={{campaign.id}}&amp;sub4=myad&amp;sub5=myadset&amp;sub6=mycampaign&amp;sub7={{placement}}&amp;sub8={{site_source_name}}- If there are already some UTM parameters in the URL parameters field, you do not have to delete them, just append the parameters taken from your campaign in RedTrack to the already existing parameters with the help of the ampersand symbol: "&amp;". Use this tutorial to help you add your LP URL and tracking parameters properly in Facebook Ads Manager.
+
+
+
+
+
+This is an optional step. Warm up your account only if it is fresh and has no data / have a completely new empty account on Facebook.
+
+
+
+Facebook will not accept your event until it considers this is a real event that can be used for optimization on its side.To start running a live campaign, you need to make sure everything is up and running. And at this point, we will need to warm up your account with some fake conversions.
+
+
+
+1. Once you're done with the integration and have created a Facebook campaign, you need to run some live clicks from Facebook. 
+
+
+
+We will need them for conversion generation. To find your clicks, go to Logs → Clicks:
+
+
+
+
+
+
+
+2. Tools → Conversion tracking → copy the link from the S2S conversion tracking field:
+
+
+
+
+
+
+
+3. Put the clickid from step 1 instead of the replace_me part in the postback URL you copied within step 2. 
+
+
+
+Your link should look approximately like this: https://docs.trk.agency/postback?clickid=63e3788ca66ef500014a41ct
+
+
+
+4. Paste the link to the browser and press enter. You should get this successful message:
+
+
+
+
+
+
+
+5. The conversion will appear in your RedTrack account. Do the same with different click ids within a day. You will need approximately 20 conversions to warm up the account.
+
+
+
+Don't generate fake conversions simultaneously, as Facebook may not accept them.Facebook needs a bit more time to attribute the conversions to your campaigns. It can take 48 to 72 hours to see the data.
+
+
+
+
+
+Set up the automation.
+
+
+
+
+Use&nbsp;this guide&nbsp;to help set up&nbsp;rules.
+
+
+
+Use&nbsp;this guide&nbsp;for setting up the&nbsp;auto update cost&nbsp;feature.
+
+
+
+
+Our tool also offers you the opportunity to manually switch on/off your Facebook Campaigns, Ad sets, or Ads without leaving RedTrack UI. Please check out a brief overview of the manual campaign management feature and contact sales@redtrack.io if you are interested.
+
+
+
+
+
+If you work with an affiliate offer, having a 10/10 match quality is impossible. There is a&nbsp;list of parameters&nbsp;Facebook wants to receive, but only half of them can be covered by any third-party tool. This causes the match quality to be at a low level. And it’s not something you should struggle with.
+
+
+
+However, RedTrack has a feature that can help you to improve the event match quality with Facebook. It does not take any additional values from Facebook, but if you have them on your website/affiliate network side (for example, order ID at Shopify) or store them on your side, you can send them to RedTrack and then to Facebook to increase the event match quality.
+
+
+
+Make sure the website (affiliate network) can send additional target parameters. You can clarify this question with your account manager if it is an affiliate network you work with.For the cases where you do not work with any offer source and promote your offers, this feature can be used only if you store the data on your side and have the technical capabilities to add this data to the conversion triggered.
+
+
+
+1. Make RedTrack identify and accept this data with a postback first
+
+
+
+Offer sources / Brands → Additional parameters → add the required parameters, macro, name and assign the roles → Save changes to the template:
+
+
+
+
+
+
+
+Data MUST be added to such columns as:◉ Macro/Token where you have to insert {r} or {replace}.◉ Role where you assign your parameters a certain role. The list of supported roles can be viewed in the dropdown:Data in the following columns is OPTIONAL but useful:◉ Parameter: that’s where you give your parameter a name, but can leave it empty and in the tracking URL your parameters will be called sub1,2,3 etc.◉ Name / Description: that’s the name you’ll see in the reports instead of sub1,2,3. For your convenience you can customize these names as you wish.
+
+
+
+2. The added parameters will be appended to the Postback URL which you should copy:
+
+
+
+
+
+
+
+3. Paste it to your offer source S2S postback settings as usual (or in any other postback option you use on your side).
+
+
+
+Once the conversion postback containing those values is sent to RedTrack, we will grab it → attribute it to the appropriate campaign → send it to Facebook with the specified role. 
+
+
+
+
+
+Troubleshoot
+
+
+
+
+
+Account disconnected
+
+
+
+Sometimes, Facebook can disconnect your account randomly for security reasons (you will notice that almost immediately since the cost data stops coming at that point). All you need to do in that case is to reconnect. 
+
+
+
+Missing Purchase Currency and Value Parameters
+
+
+
+“One or more of your Purchase events is missing a value and currency parameter. This may affect your return on ad spend calculation.”
+
+
+
+If you have the value optimization on, some conversions still do not get the value. We always send the currency and value by default. This issue can be observed with test conversions. So it’s essential to send all values during the test.
+
+
+
+Purchase Event Missing Deduplication Parameter
+
+
+
+Most probably, you are using Conversion API and pixel at the same time (for example, send the same data from RedTrack and your website or use RedTrack CAPI and some other system CAPI).&nbsp; In this case, you might see both server and pixel type under the event in your Facebook account.Use only the RedTrack Conversion API to solve the issue.
+
+
+
+Another reason can be a duplicate from a pixel or Conversion API without any unique event value, Facebook can recognize. What can be done? Check out&nbsp;this guide.
+
+
+
+Conversion attribution issues
+
+
+
+Conversion attribution may differ due to the FB algorithms (for example, they can be sent to different adsets if Facebook considers attributing some particular conversion to another adset)
+
+
+
+Facebook has a 7-day attribution window. If there are less than 7 days between click and conversion, Facebook will attribute it. If the conversion is older than seven days, FB can exclude it from your statistics.
+
+
+
+You cannot do anything with the conversion attribution.
+
+
+
+Purchase Events May Be Dropped Due to Missing Event Source URL Parameter
+
+
+
+Make sure you have followed the&nbsp;Facebook integration guide, verified your domain, and added it to your RedTrack offer settings.
+
+
+
+
+
+
+
+Here is what you need to check on your side:
+
+
+
+1. The traffic channel should be connected from the Facebook template. No error is shown; If it is not connected or you are not sure, re-connect it.
+
+
+
+2. The correct account is connected.
+
+
+
+3. The dynamic parameters such as campaign id, adset id and ad id are received by RedTrack (Logs → Clicks → check sub values).If there are no parameters in click logs, that means we are not receiving them from Facebook. Either these are your test clicks, or you need to check the Facebook campaign settings to have the parameters string in place.
+
+
+
+4. The correct roles are assigned to the dynamic parameters;For the cost update to work properly, the following roles should be obligatory assigned to the Facebook ids in your traffic channel settings:
+
+
+
+
+
+
+
+5. Check the cost model you use in the campaign settings (should be CPC) and if the Auto-update cost toggle is on inside the campaign settings.
+
+
+
+If, after checking/doing all the suggested actions, you still experience the problem with the costs not coming, contact the support team.
+
+
+
+
+
+What you can check to understand why the cost data is incomplete (higher or lower than the one you have on Facebook):
+
+
+
+1. The first thing you need to compare is the IDs. RedTrack takes the cost data per ID (campaign, adset or ad, depending on your subscription level), so if some of the ID is missing, its cost data will not be taken to your RedTrack report. 
+
+
+
+Check if all IDs are received in RedTrack (campaign report → group by (target ID used for the cost update) → check the list). If not, check this campaign, adset or ad in Facebook and ensure the dynamic parameters are added to pass the ID.
+
+
+
+2. Check if the correct roles are assigned to the Facebook IDs in RedTrack. This can be checked in your traffic channel settings:
+
+
+
+
+
+
+
+3. Check if the time zones match in your RedTrack account setting and in Facebook. 
+
+
+
+The timezone of the cost data received via the API can be checked in your cost logs. If the timezones of your traffic channel and RedTrack don't match or the timezone within your ad accounts in the traffic channel do not match (for the cases when you run traffic from different ad accounts to one RedTrack campaign), the cost data matching is impossible.
+
+
+
+
+
+
+
+4. Check the cost logs in RedTrack: if costs stopped coming for some time and caused this discrepancy, you might need to reconnect Facebook.
+
+
+
+5. Make sure the currency matches in both systems.
+
+
+
+If, after checking/doing all the suggested actions, you still experience the problem with the costs not coming, contact the support team.
+
+
+
+
+
+
+
+Sometimes, you might need to check if there are events coming to Facebook and how they come to understand if anything goes wrong.
+
+
+
+Business Manager&nbsp;→&nbsp;Data Sources&nbsp;→&nbsp;Datasets → choose the pixel → Open in Event Manager:
+
+
+
+
+
+
+
+Your events are displayed under the Review:
+
+
+
+
+
+

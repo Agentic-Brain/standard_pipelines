@@ -1,0 +1,81 @@
+# How to calculate & improve ROI in marketing
+
+Before you start scaling any marketing or advertising activity, you have to pay attention to the numbers. As marketers, it’s our responsibility to not only create fascinating concepts, articles, ads, and creatives but calculate that everything we do actually pays off. The best metric to use for it is marketing ROI. 
+It’s a fancy word that is used by many industries, but how to use and calculate ROI in marketing? 
+
+Without further ado, let’s investigate how to use ROI, attribute it to the right campaigns and channels, and level up your marketing. 
+What is ROI in marketing?
+ROI (Return on Investment) in marketing is a metric for performance measurement that takes control over how much you actually earn from your marketing efforts. 
+It is crucial for any marketing budget to know exactly the return on the effort (or investment). 
+What is the marketing ROI formula? 
+The simplest formula that marketer can use:
+ROI = (Sales revenue - Marketing Cost)/Marketing Cost
+Sales revenue — this is a total sum of the revenue was brought by sales of your product within a specific period of time. 
+
+Marketing Cost — the total cost for all the efforts that were made by the marketing department (e.g. PPC, influencer marketing, guest posting, etc.) during the very same period. 
+
+
+But how do you define Sales caused by marketing activities? 
+However, the usage of the simple ROI formula can be tricky. Sales revenue may be influenced by myriads of factors as usually there are multiple types of marketing campaigns and other partnerships that might have caused a spike. 
+
+First, we want to lose the part of the sales that were not affected by the marketing efforts. For that we do the following procedure:
+Marketing influenced Sale Revenue = Sales Revenue - Average Organic Sales Revenue 
+Therefore, the following formula for marketing ROI is a better option: 
+ROI = (Marketing Influenced Sales Revenue - Marketing Cost)/Marketing Cost
+This formula will keep you satisfied if you want to calculate the overall marketing ROI of your activities. However, we recommend diving deeper into understanding each marketing &amp; advertising campaign. 
+Other challenges of measuring marketing ROI
+Once we figured the Marketing Influenced Sales Revenue, comes another challenge. If we want to understand the return not only on the general investment that we throw in marketing campaigns, we need to evaluate the return on each campaign in order to cut the number of unprofitable ones. 
+
+Here a marketer reaches a point where you need to attribute the results of a particular campaign to the particular segment of growth. For that, we will need such a metric as Attributable Marketing ROI.
+
+Attributable Marketing ROI defines the return brought by each campaign, the return that correlates with particular marketing activity. 
+
+But how to calculate ROI on a campaign-specific basis? 
+How to calculate ROI on campaigns? 
+If we have data about attributable sales, we, therefore, are able to calculate Attributable Marketing ROI. 
+Attributable Marketing ROI = (Attributable Sales Revenue - Marketing Cost) / Marketing cost 
+This look at your marketing and ad spend will let you see the details behind each campaign you run to evaluate the overall contribution to the sales growth. 
+
+If we talk about digital marketing, there is a solution for digital marketers to effectively attribute the conversions/sales to a specific marketing channel/campaign and even an ad or creative. 
+Digital marketers use the functionality of multi-touch conversion attribution tools to know what specific advertisement moves the sales.
+
+At RedTrack, we offer not only a chance to consolidate all your marketing efforts in a single dashboard (like PPC, organic, affiliate links, partner marketing) for analytics but also to perform complex attribution. 
+
+&nbsp;
+
+
+
+The tool helps you define which action in a user funnel triggered the target action (like a purchase), but also attributes it to the correct channel and then to the campaign. 
+
+
+Good Marketing ROI — what is it? 
+Ideal marketing ROI is different from industry to industry. Basically, it depends on the type of business you do and on the margin. 
+A golden standard for mROI is 5:1. 
+If you reach this ratio, you are doing a good job with optimizing your marketing spend and return on it. However, some industries or particular campaigns can allow reach up to 10:1 ratio. 
+The better you use attributing features when calculating your returns on campaigns, the higher marketing ROI ratio you can aim for. 
+
+
+Why care about Customer Lifetime Value?
+CLV stands for Customer Lifetime Value and it’s a measurement that defines how much one client has brought you in sales over the course of interaction with your company. 
+
+For some companies, it can be months of interaction, but some manage to keep the customer returning for decades. 
+
+CLV is crucial when talking about ROI. It makes a difference for calculation if you have to pay to attract a customer only once or if you need to pay for each visit of his/her to your company’s website.
+ 
+The better the Customer Lifetime Value your business provides, the better marketing ROI ratio you are going to have. 
+
+Tracking tools (ad tracking and conversion attribution) allow you to see each interaction user has had with your business digitally. Another cool thing that you may consider using is reporting. With this feature, you are able to see detailed reports about each channel you run advertising and marketing. 
+How to improve your marketing ROI
+Here’s a list of recommendations that will help you achieve the best results when it comes to calculating marketing ROI and improve your metrics: 
+
+ 	Set your marketing goals and budget per activity accordingly 
+ 	Take control of each segment of your marketing: not only of every type of marketing you do (influencer, PPC, affiliate program), but of every campaign separately. This approach will help you spot the best and the worst performing campaign.
+ 	Use ad tracking features that will allow you to see the performance of each ad and creative you run with in-depth metrics: like what locations, devices, or other segments work better. Once you have all the data about the performance of your digital marketing channels at one glance, you will be able to move to do the marketing attribution. 
+ 	Attribute sales revenue to each campaign you run and calculate ROI by each campaign to see how much each campaign actually brings to your business. Focus on profitable campaigns and analyze why the worse-performing ones do not deliver the value you expected. 
+ 	Only then calculate the overall ROI on your marketing efforts once you know the numbers behind each activity you perform. You will receive the end number that shows the success of all your marketing efforts in just one number.
+
+Conclusion
+We as digital marketers have to take care of the numbers. No matter how tempting it is to create new strategies, creatives and try new marketing techniques. First, we have to evaluate the investments and expected returns. Marketing ROI is one of the most important metrics your business needs for flourishing.
+Never lose your budgets on unprofitable campaigns and tame marketing ROI according to your needs ;)
+
+&nbsp;

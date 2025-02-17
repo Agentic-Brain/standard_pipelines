@@ -1,0 +1,16 @@
+# RedTrack Assistant
+
+
+RedTrack has recently introduced a new AI assistant feature called RedTrack Assistant. With AI-powered insights, you'll experience smarter tracking, predictive analysis, and automated suggestions to enhance your workflow efficiency. 
+
+
+
+As for now, this is our beta version of AI co-pilot and it is available to all users except single user subscriptions. Check out our YT video for details on the feature's current version.
+
+
+
+To make use of RedTrack assistant go to the RedTrack Assistant section → type in your inquiry → Apply:
+
+
+
+

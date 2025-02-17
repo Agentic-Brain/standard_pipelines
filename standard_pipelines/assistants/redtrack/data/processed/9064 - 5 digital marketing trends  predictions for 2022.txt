@@ -1,0 +1,106 @@
+# 5 Digital Marketing Trends & Predictions for 2022
+
+It's important to start the marketing year with some inspirations &amp; knowledge boost, so I prepared for you 5 trends to follow in digital marketing in 2022. It's important to look at trends before jumping into the execution of your marketing strategy to be able to tap into the right field and get the best results this year.
+
+However, some trends have a negative side. It's more of a "possible hazards" and predictions that you have to analyze in order to be prepared for all possible outcomes and be equipped for possible changes.
+That's why we combined in this article not only must-follow trends, but predictions for digital marketing that can disrupt the way you do marketing.
+
+Let's dive right in exploring the following trends today:
+
+ 	video-domination
+ 	visual SEO
+ 	TikTok supremacy
+ 	last crumbles of cookies
+ 	partnering up
+ 	
+🎁 bonus
+
+
+1. The rise of video continues 
+I think it’s even cliche to say it out loud but yes, the video does continue to be the biggest trend. 
+
+Video is the best form of content out there in 2022, no matter what type you prefer to nail. You can go in several directions. 
+
+
+Short videos
+Many platforms now support short-format videos. It can be TikTok, Instagram reels, YouTube shorts, or even short clips for your Facebook and LinkedIn account strategies. Before you decide to invest in the short format, be sure to choose the platform wisely and adapt the content to the type of audience that hangs out around this platform.
+
+Long-form video content
+Even though there's a lot of fuss around short videos and marketers keep talking about a users' short attention span, long videos are not disappearing from our screens. Every type of content has the right platform for it. So if your target audience can be found watching videos on YouTube (or other platforms), be sure to use it. 
+Live events and streams
+Video helps us all connect and learn what and who stands behind the product or service. Live events and streams become especially important if we are talking about B2B marketing. Live events help see the team who creates the product, but most importantly it helps create this special connection during the digital era and improve the brand image. 
+With help of live streams, you can raise brand awareness, build trust with your audience and connect.
+2. Visual search (SEO)
+Well, we all love organic traffic. Also, I believe that at some point content marketers went a little crazy with all things SEO. We all know these keyword-abused pieces of content where you really miss just the language you want to understand as a human, not a Google algorithm.
+
+While you are choosing your side with SEO-based or human-based articles, I recommend paying attention to optimizing your product for visual search. 
+Visual search optimization or visual SEO is a process of optimization of your content to be searched through any pieces of visual content (pictures, diagrams, videos, etc.).
+Here I recommend focusing on 2 niches.
+
+
+Win Google visual SEO
+It's super hard to get on the first page of Google search queries with your content, even if it's great. Our experience shows that landing the first page under the picture or video tab is at least twice easier. Make sure to add alt text under pictures so it could be indexed in the search. And don't forget to create a video that could give the answer to the query and possibly make it to a snippet for you.
+Here's an example of a snippet from the video we produced for our Youtube channel which ended up on the first Google page.
+ 
+
+Explore Pinterest and YouTube 
+Pinterest is here to back you up with a picture search. YouTube — with video search.
+When it comes to Pinterest, users come to the platform to explore trends, inspiration, find certain products or lifehacks. If your product suites any of those purposes, you might wanna invest more in your Pinterest account and end up as a pin on someone's board (aka a purchased product in the cart).
+YouTube literally becomes the second Google as so many people look for answers in this media. Make sure to first follow trend #1 (using video content), create a certain strategy of your video presence, and then do your research with keywords you want to target through YouTube.
+
+And yes, one of biggest YouTube's advantages is that there's far less competition. Not all companies have either guts or resources to explore this platform, so be amongst the first.
+
+With that being said, if you prefer to learn the subject through video or audio, I recommend watching this video instead of reading this article. We optimize our content for your needs 😏
+
+
+3. All things TikTok
+It’s both exciting and slightly annoying to listen about TikTok all the time as a marketer. But here it is, one of the major social media and advertising platforms of 2022. 
+
+In May 2021, TikTok bit YouTube in average time spent in the app, which comes to 24 hours a week.
+
+And we, as marketers, have to go where user engagement goes. I want to believe it's an actual saying 😅
+
+Earlier, brands were saying that TikTok doesn’t have the right audience for them. Well, TikTok has around a billion monthly active users, and if you are not trying to reach this audience, somebody else does. Find a way to utilize TikTok whether you are B2B or B2C.
+
+
+
+With TikTok you have several options:
+
+ 	Create a TikTok account and find a passionate person to take care of the content
+ 	Advertise through TikTok Ads. Here you might wanna use our guide on best practices when using TikTok ads.
+ 	Create influencer campaigns on TikTok. Here don't forget to take care of the tracking software that will be able to issue links and promo codes for influencers and then track bloggers' performance.
+
+4. Cookieless advertising
+It's more of an anti-trend, but still. I have to mention it. Not everyone still understands the danger of cookieless future. In 2021 we got hit with ATT prompt. Will this year be any easier? Do we know what to expect?
+That's the most important part of this anti-trend, we don't really know what's coming. Though we definitely have to be prepared.
+Let's explore possible scenarios of 2022: 
+
+ 	Andriod can implement the same update as iOS did, since privacy issues are same for everyone, just different platforms take different time to implement changes. 
+ 	Other advertising channels can come up with similar restrictions as Facebook did after iOS 14 update. For example, same can happen to TikTok and then we will lose access to a well-performing TikTok advertising. 
+ 	Even though Google moved the effect of Google Privacy Sandbox to 2023, we can still experience the vibrations of the changes in the Google ecosystem. Most likely, the channel will be testing new protocols preparing us for cookieless future. 
+
+What can you do to prepare for cookieless future?
+Stop using pixels or any other examples of client-side tracking to measure the performance of your advertising. It's time to find the right solution for server-side tracking (S2S) that will be compliant with all privacy updates and ensure accurate conversion tracking at the times of privacy concerns.
+
+Some of the benefits of server-side tracking:
+
+ 	accurate conversion tracking, not interrupted by pixel misfires or ad blockers
+ 	conversion tracking for iOS 14 (and older) devices
+ 	compliant with all privacy updates &amp; future-proof
+
+RedTrack has been leading the market of cookieless tracking solutions. Implement server-side tracking with all of your marketing channels and play by the rules of the Privacy updates.
+
+
+5. Use partnership marketing 
+Partnership marketing is one of the key trends of the past marketing years. The reason is pretty simple: it gets really lonely and complicated to market products on your own. Much easier to use the power and influence of other partners. Whether it's affiliate marketers, referrals, or fellow brands &amp; companies. 
+All sorts of creative collaborations will be of use in 2022 to stand out, the more marketers or brands will be able to spread the word about you — the better. 
+When choosing to go with influencer campaigns, affiliate marketing, or other partner marketing thingies, don’t forget about the process of tracking the results of those. Since all of the numbers are on another side (side of your partner), it’s good if you settle tracking links or special promo codes to control the whole performance. 
+
+At RedTrack, we developed a Partnership Portal to help manage relationships with your partners. You can issue links, promo codes and get the reports on the performance of all partners in one place. Be sure to give it a try as part of 14-day free trial (no CC required).
+All-time digital marketing trend
+Besides, I'm gonna share with you one final tip. A piece of advice that never gets old, but always brings marketers to better places.
+Personalize, make it authentic, and quite boringly, don't lie.
+In a very competitive field where digital marketing specialists are fighting for the users' attention, it's super important to stay human, speak the same language as your audience does and be authentic with them.
+I wish you the best of luck and fortune this year to make it as far as you couldn't even imagine!
+
+&nbsp;

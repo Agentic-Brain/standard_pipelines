@@ -1,0 +1,58 @@
+# Google Parallel Tracking Panic
+
+Starting October 30, 2018, parallel tracking will be required for all Google Ads accounts. 
+
+Due to timeliness and importance of this topic, RedTrack users and all the affiliates and digital marketers engaged in online advertising are seeking to learn more about Google’s new parallel tracking and how it will influence their “tracking habits”. 
+
+We summed up everything you need to know about parallel tracking and how to prepare for the change on October 30.
+What is parallel tracking and how does it work?
+Simply put, ‘parallel tracking’ is a term that describes Google’s new way of monitoring clicks. It has come as an alternative to sequential tracking used before. Today both tracking approaches are applicable. However, since October 30, every user and advertiser dealing with Google ads are obliged to switch to parallel tracking. 
+
+Let’s define the difference between Google’s sequential and parallel tracking. 
+
+Sequential tracking flow:
+
+
+
+And here’s what parallel tracking looks like: 
+
+
+
+Since two actions, i.e. click direction and tracking, happen simultaneously, the term ‘parallel tracking’ occurred. 
+
+Important! With parallel tracking, every URL in the forwarding flow must support the HTTPS protocol. Data tracking will stop at the first URL prefixed with HTTP. This will not prevent the user to reach the landing page since the tracking is performed in the background, but information on clicks will not be registered.
+
+&nbsp;
+Why Google requires users to switch to Parallel tracking?
+Although the numerous redirects of the sequential tracking flow are completely invisible to the users, they still might slow down landing page load speed. 
+
+Google says: As page load time goes from one second to five seconds, the probability of bounce increases by 90%.
+
+With parallel tracking, once a user clicks your ads, they will be immediately directed to your Lander, while the browser will process the tracking request in the background. These measurements lead to the improvement of lander load time. 
+
+Google is all about better user experience. For the user, parallel tracking means less clunky landing page experience. For the advertisers, — a user is more likely to convert.
+
+&nbsp;
+How this change will affect me as a RedTrack user? 
+The first thing to tell is that RedTrack is “Parallel tracking ready”.
+
+To enable Google parallel tracking, you should consider the following:
+1. Ensure you have switched on the Parallel Tracking in your RedTrack account. Set this option at the level of a Traffic Source → Google Adwords template. 
+In order to track and record Google ads click identifier, you should also put the {gclid} parameter in Click Ref ID field.
+
+
+
+This options will guarantee that every click on your ad would be tracked with all metrics and attributes. 
+2. Set parallel tracking in your Google Adwords account. To turn on this function go to All Campaigns → Settings → Account settings
+Note: You should put two links here, where:
+
+Tracking template is the tracking URL that is generated in RedTrack once you save the Campaign.
+Final URL is the link of a final page (the lander that a visitor should see).
+
+
+3. Ensure that the Affiliate Network you are working with is ready to Google parallel tracking. Ask your affiliate manager if you need to change anything in your postback URL or offer URL.
+Why is this required? Affiliate Network (Advertiser) contains the final destination of the user direction flow. To receive the information about conversions from them, you use the postback with RedTrack {clickid} macro. Thus, make sure that the Network is ready to parallel tracking and knows how to pass the data on conversion. 
+
+&nbsp;
+
+Have more questions about Google parallel tracking and how it works for RedTrack users? Send them to info@redtrack.io, and we would be glad to answer all of them. 

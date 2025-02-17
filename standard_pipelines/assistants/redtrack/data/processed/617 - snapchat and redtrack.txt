@@ -1,0 +1,278 @@
+# Snapchat and RedTrack
+
+
+
+
+
+
+Snapchat&nbsp;is an American multimedia instant messaging app and service.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added&nbsp;custom tracking domain.
+
+
+
+
+
+1. Add Snapchat as a Traffic channel in RedTrack.
+
+
+
+Traffic channels → New from template → find Snapchat and Add it → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+In the Additional parameters section of the Snapchat template you can modify some parameters. Blocked (greyed) parameters should be used under the same sub-values with the same roles assigned as provided in the initial template.The following are essential for the API cost integration:{{ad.id}} should always be with Aid role{{adset.id}} should always be with Gid role{{campaign.id}} should always be with Cid roleIn the Additional parameters section of the Snapchat template you can modify some parameters. Blocked (greyed) parameters should be used under the same sub-values with the same roles assigned as provided in the initial template.The following are essential for the API cost integration:{{ad.id}} should always be with Aid role{{adset.id}} should always be with Gid role{{campaign.id}} should always be with Cid role
+
+
+
+Without saving the template first, the system won’t be ready for integration, so the cost and conversion data can be lost.
+
+
+
+2. Integrate your Snapchat account with RedTrack to receive costs.
+
+
+
+In the added Snapchat template navigate to SnapChat API integration → click on Connect Snapchat → Continue:
+
+
+
+
+
+
+
+
+
+
+
+Green Connected icon means the your integration has been successful:
+
+
+
+3. Add conversion types to RedTrack.
+
+
+
+Tools → Conversion tracking → Conversion types → use&nbsp;this guide&nbsp;to help you add the events.
+
+
+
+4. Add pixel, access token, and match the conversion events.
+
+
+
+RedTrack provides you with an opportunity to add Snapchat pixel(s) on the traffic channel level or on the offer/website level. Before you proceed with pixel adjustment consider the following:☝If you configure the Snapchat CAPI in the traffic channel template, RedTrack will only send conversions from Snapchat to Snapchat.☝If you configure the Snapchat CAPI in the offer/website template, RedTrack will send to Snapchat all conversions received on that offer/website from different traffic channels, not just Snapchat only. Plus in your offer/website template you can add multiple pixels.
+
+
+
+Do not configure the Snapchat CAPI in both templates - traffic channel and offer/website, or you'll receive duplicated conversions!
+
+
+
+Choose the preferred method and act accordingly:
+
+
+
+
+
+1. Go to your Snapchat account and copy the values for Pixel ID and Access Token:
+
+
+
+
+To get your Pixel ID go to Assets → Pixels:
+
+
+
+
+
+
+
+
+
+
+
+
+
+To get your Access Token go to Business Settings → Business details → Conversions API token section → Generate token → copy the generated token:
+
+
+
+
+
+
+
+
+
+
+
+
+2. Go to the settings of the added Snapchat traffic channel template → edit → Snapchat default data source (pixel) section → fill in the values for Pixel ID and Access Token:
+
+
+
+
+
+
+
+3. Match RedTrack Conversion Types with Snapchat Event Names:
+
+
+
+
+
+
+
+
+
+1. Go to your Snapchat account and copy the values for Pixel ID and Access Token:
+
+
+
+
+To get your Pixel ID go to Assets → Pixels:
+
+
+
+
+
+
+
+
+
+
+
+
+
+To get your Access Token go to Business Settings → Business details → Conversions API token section → Generate token → copy the generated token:
+
+
+
+
+
+
+
+
+
+
+
+
+2. Go to RedTrack → Offers → create the Offer / edit the already created one → tab CAPI → scroll down to the Snapchat section → add the copied pixel(s) and access token(s):
+
+
+
+
+
+
+
+3. Match RedTrack Conversion Types with Snapchat Event Names:
+
+
+
+
+
+
+
+
+
+5. Add Offer source and Offer
+
+
+
+Use&nbsp;this guide&nbsp;to add your Offer source and Offer. For better conversion attribution in the added Offer source template → Additional parameters assign the following roles:
+
+
+
+
+Phone
+
+
+
+Email
+
+
+
+First Name
+
+
+
+Last Name
+
+
+
+Zip Code
+
+
+
+
+
+
+
+
+6. Create a tracking Campaign in RedTrack
+
+
+
+6.1 Campaigns → Create new campaign → use&nbsp;this guide&nbsp;for Affiliates /&nbsp;this guide&nbsp;for Advertisers to help you add the campaign with Snapchat as your traffic channel → once your campaign is saved, copy the automatically generated&nbsp;click URL&nbsp;(your tracking link):
+
+
+
+
+
+
+
+We suggest using a no-redirect tracking method (the same is used with Facebook Campaigns) as your ad will most likely be banned with a redirect. 
+
+
+
+6.2 Enable the Auto update costs toggle in your campaign:
+
+
+
+
+
+
+
+Refer to this article for details on the auto update costs feature in RT.
+
+
+
+7. Set up the tracking in Snapchat
+
+
+
+7.1 Create Ads → Instant Create:
+
+
+
+
+
+
+
+7.2 Web visits → in the URL field add your main URL + tracking parameters copied from step 6.1 → Next:
+
+
+
+
+
+
+
+Proceed further with the traffic targeting and payment methods as per your needs. Once you’ve filled in the fields, click&nbsp;Publish&nbsp;and the ad will go for approval. When your campaign gets published it’ll be tracked with RedTrack.
+
+

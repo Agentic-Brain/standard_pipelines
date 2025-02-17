@@ -1,0 +1,366 @@
+# Typeform and RedTrack (draft)
+
+
+Typeform&nbsp;is a web-based platform you can use to create anything from surveys to apps, without writing a single line of code. 
+
+
+
+When integrating Typeform with RedTrack, it's essential for you to connect GTM to each added form in the Typeform account. According to the Typeform guidelines, you can add Google Tag Manager to a form only if you have a Business Typeform account. 
+
+
+
+
+
+1. Add the rtclickid parameter to Typeform
+
+
+
+1.1 Go to your&nbsp;Typeform profile → Create typeform:
+
+
+
+
+
+
+
+1.2 Create → Logic →&nbsp;Personalize with data →&nbsp;Hidden fields:
+
+
+
+
+
+
+
+
+
+
+
+1.3 Add new field → give these fields names&nbsp;rtclickid&nbsp;and&nbsp;contact_type → Save&nbsp;to apply the changes:
+
+
+
+
+
+
+
+2. Add Webhook to Typeform
+
+
+
+2.1 In your Typeform template go to the tab&nbsp;Connect →&nbsp;Webhooks →&nbsp;Add a webhook:
+
+
+
+
+
+
+
+2.2 Insert the URL for your Webhook→ Save webhook:
+
+
+
+
+
+
+
+The URL should be of the following format: https://yourdomain.rdtk.io/postback/custom/typeform/API key. Where:- instead of yourdomain.rdtk.io you put RT’s default subdomain which can be found in Tools→Domains→Create new domain:- your API key can be found in RedTrack→Tools→Integrations→General:
+
+
+
+
+
+1. Add&nbsp;custom tracking domain
+
+
+
+2. Set up&nbsp;conversion tracking
+
+
+
+So far, the only Typeform event that can be added to RedTrack is&nbsp;Lead. To set it up go to&nbsp;Tools → Conversion tracking → Conversion type → name the event&nbsp;Lead:
+
+
+
+
+
+
+
+Refer to this guide for details on conversion types functionality in RT. 
+
+
+
+If webhook doesn’t count the incoming conversions as Leads, these conversions will fall under the category of the Default Conversion type=Conversion.
+
+
+
+3. Add your&nbsp;Brand and Website&nbsp;(for Advertisers) /&nbsp;Offer source and Offer&nbsp;(for Affiliates)
+
+
+
+When you added the Brand/Offer source, remember to assign the following roles:*Email*Phone 
+
+
+
+4. Create a paid traffic campaign
+
+
+
+– For Advertisers, the campaign for the unattributed (organic) traffic is already in place once you add your Website.– Affiliates should add the campaign for the unattributed (organic) traffic as per this guide.
+
+
+
+To create a campaign for the paid traffic follow these simple steps:
+
+
+
+
+Add the&nbsp;Traffic channel. Most of them have a preset template in RedTrack.
+
+
+
+Launch a campaign&nbsp;for the paid Traffic channel. Your website/shop will be the main link added to the traffic channel. Be guided by&nbsp;this article&nbsp;for Advertisers /&nbsp;this one&nbsp;for Affiliates.
+
+
+
+
+
+
+To set up GTM correctly, you must have the already-generated universal tracking script.* For Affiliates: use this guide to help you with the universal tracking script.* For Advertisers: a universal tracking script was created automatically once you had added your Website.Both Affiliates and Advertisers can find the generated universal tracking script in Tools → Scripts:
+
+
+
+1. Adjust the settings in GTM
+
+
+
+1.1 Follow&nbsp;this guide&nbsp;on how to integrate Google Tag Manager (GTM) with RedTrack.
+
+
+
+Make sure you’ve created a 1st party cookie variable under the name rtkclickid-store. Without this variable, further GTM integration with RT will not work out.
+
+
+
+1.2  In GTM settings Create 3 types of Tags: 
+
+
+
+
+
+Essential elements:
+
+
+
+
+Tag&nbsp; = Custom HTML
+
+
+
+Triggering = All Pages (Page view)
+
+
+
+
+Script:
+
+
+
+Use the universal tracking script for this.
+
+
+
+
+
+Essential elements:
+
+
+
+
+Type= Custom HTML
+
+
+
+Triggering= All Elements (All Clicks)
+
+
+
+
+Script:
+
+
+
+&lt;script&gt;
+
+function setFormClickIdValue(clickid) {
+
+var currentUrl = new URL(window.location.href);
+
+currentUrl.searchParams.set('rtclickid', clickid)
+
+currentUrl.searchParams.set('contact_type', 'lead')
+
+var pageviewCount = getCookie("pageviewCount");
+
+console.log(currentUrl.href,window.location.href,pageviewCount);
+
+    
+
+if (typeof pageviewCount === "undefined" || parseInt(pageviewCount) &lt; 2) {
+
+window.location.href = currentUrl.href
+
+}
+
+if (!window.location.href.includes('rtclickid')) {
+
+var currentUrl = new URL(window.location.href);
+
+currentUrl.searchParams.set('rtclickid', clickid)
+
+currentUrl.searchParams.set('contact_type', 'lead')
+
+window.location.href = currentUrl.href
+
+}
+
+}
+
+function getCookie(name) {
+
+var value = "; " + document.cookie;
+
+var parts = value.split("; " + name + "=");
+
+if (parts.length == 2) return parts.pop().split(";").shift();
+
+}
+
+if (getCookie('rtkclickid-store') !== null &amp;&amp; getCookie('rtkclickid-store') !== undefined &amp;&amp; getCookie('rtkclickid-store') !== 'undefined') {
+
+setTimeout(function(){
+
+setFormClickIdValue(getCookie('rtkclickid-store'))
+
+}, 100)
+
+}
+
+&lt;/script&gt;
+
+
+
+
+
+Essential elements:
+
+
+
+
+Type= Custom HTML
+
+
+
+Triggering= Initialization (All Pages)
+
+
+
+
+Script:
+
+
+
+&lt;script type="text/javascript"&gt;
+
+var pageviewCount = getCookie("pageviewCount");
+
+ 
+
+if (typeof pageviewCount === "undefined") {
+
+pageviewCount = 1;
+
+} else {
+
+pageviewCount++;
+
+}
+
+ 
+
+setCookie("pageviewCount", pageviewCount, 30);
+
+function getCookie(name) {
+
+var value = "; " + document.cookie;
+
+var parts = value.split("; " + name + "=");
+
+if (parts.length == 2) return parts.pop().split(";").shift();
+
+}
+
+if (getCookie('rtkclickid-store') !== null &amp;&amp; getCookie('rtkclickid-store') !== undefined &amp;&amp; getCookie('rtkclickid-store') !== 'undefined') {
+
+setTimeout(function(){
+
+setFormClickIdValue(getCookie('rtkclickid-store'))
+
+}, 100)
+
+}
+
+function setCookie(name, value, expires) {
+
+var cookie = name + "=" + value + "; path=/; domain=." + location.hostname.replace(/^www\./i, "");
+
+ 
+
+if (typeof expires !== "undefined") {
+
+var now = new Date();
+
+now.setTime(now.getTime() + expires * 24 * 60 * 60 * 1000);
+
+cookie += "; expires=" + now.toUTCString();
+
+}
+
+ 
+
+document.cookie = cookie;
+
+}
+
+&lt;/script&gt;
+
+
+
+
+
+2. Connect&nbsp;GTM&nbsp;to Typeform
+
+
+
+For the integration to work, you need to connect GTM to each added form in your Typeform account. According to the Typeform guidelines, you can add Google Tag Manager to a form only if you have a Business Typeform account. 
+
+
+
+2.1&nbsp;Copy your&nbsp;Google Tag Manager Container ID.
+
+
+
+2.2&nbsp;Go to your Typeform account → open the needed form → activate the tab&nbsp;Connect → Integrations → find&nbsp;Google Tag Manager → Connect:
+
+
+
+
+
+
+
+2.3 Paste the GTM number to the popped-up form → Save:
+
+
+
+
+
+

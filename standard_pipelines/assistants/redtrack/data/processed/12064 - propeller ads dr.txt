@@ -1,0 +1,134 @@
+# Propeller Ads dr
+
+
+PropellerAds&nbsp;is an internet media company that is sharply focused on delivering the easiest, most effective, and reliable global digital advertising platform. Their advertising network offers multi-channel advertising solutions for display, desktop, video, mobile, and in-app. Ad formats need to be optimized for each channel, so it’s a good thing that they are obsessed with the modernization of algorithms and the use of the latest technologies. It’s their goal always to see where the next changes are coming from and adapt quickly to ensure that publishers and advertisers are always one step ahead of their competition.
+
+
+
+API integration gives you the following benefits:
+
+
+
+
+Pause campaign, placement, creative
+
+
+
+Create rules
+
+
+
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer and Offer source
+
+
+
+Conversion types
+
+
+
+
+
+
+1. Copy the PropelleAds unique values from the S2S Postback
+
+
+
+Go to your PropellerAds account→ Tracking→ copy the uid and tid values from the S2S Postback URL:
+
+
+
+
+
+
+
+2. Add PropellerAds as a Traffic channel in RedTrack
+
+
+
+2.1 Go to your RedTrack account→ Traffic channels→ New from template→ find PropellerAds→ Add→ Save the template
+
+
+
+2.2 Replace the [REPLACE] uid and tid values with the values from PropellerAds S2S Postback URL (copied within step 1):
+
+
+
+
+
+
+
+2.3 Integrate your PropellerAds account with RedTrack. To do that in your PropelledAds template go to the section Propellerads API integration→ insert the API key→ press Save changes:
+
+
+
+
+
+
+
+The Active button means the integration is up and running:
+
+
+
+3. Create a campaign in RedTrack
+
+
+
+3.1 Go to Campaigns→ New→ use this guide to help you create your campaign
+
+
+
+3.2 In Campaign settings scroll down to S2S Postback for PropellerAds.com→ press Add→ check if the uid and tid values are at place→ press Save:
+
+
+
+
+
+
+
+
+
+
+
+3.3 Once the Campaign is added, your tracking link is automatically created, copy Click URL:
+
+
+
+
+
+
+
+4. Run a campaign in PropellerAds
+
+
+
+Go to your PropellerAds account→ Create campaign→ paste the copied Click URL from RedTrack (step 3.3) into the Target URL field:
+
+
+
+
+
+
+
+5. Set up the&nbsp;automation
+
+
+
+Check out the following articles for the automation features:◥ Automated TCs (for a general overview of the automation features in RT)◥ Rules◥ Cost auto-update
+
+
+
+

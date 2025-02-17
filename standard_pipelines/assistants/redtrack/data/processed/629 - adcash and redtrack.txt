@@ -1,0 +1,140 @@
+# Adcash and RedTrack
+
+
+
+
+
+
+Adcash is a real-time advertising trading platform that centers around a high-performance self-service DSP with both direct and programmatic supply.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types you're planning to work with
+
+
+
+
+
+
+1. Copy the S2S Postback URL from Adcash.
+
+
+
+1.1 In your Adcash account go to Tracking → Goals → New goal:
+
+
+
+
+
+
+
+1.2 Fill in the mandatory fields within the Goal template → Get tracking code → put {ref_id} in the Click ID field and {offer_payout} in the Dynamic price value field → copy the resulting code:
+
+
+
+
+
+
+
+Finish setting up your goal in Adcash as per this article.
+
+
+
+2. Add Adcash as a Traffic channel in RedTrack and add the copied S2S Postabck URL from Adcash.
+
+
+
+2.1 Go to your RedTrack account → Traffic channels → New from template → find Adcash → Add:
+
+
+
+
+
+
+
+2.2 Paste the S2S Postback URL (copied in step 1.2) into the S2S Postback URL field → Save the template:
+
+
+
+
+
+
+
+3. Set up a campaign in RedTrack with Adcash as your traffic channel.
+
+
+
+Campaigns → Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create your campaign with Adcash as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL: 
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+4. Set up the tracking on the Adcash side.
+
+
+
+4.1 In your Adcash account go to Home page → Create a campaign:
+
+
+
+
+
+
+
+4.2 Fill in all the mandatory fields for Campaign creation → in the Creatives tab choose the needed type of it → paste the tracking URL (copied from RT Campaign in step 3) and paste it into the Creative URL field:
+
+
+
+
+
+
+
+Finish up with the rest of the campaign settings in Adcash as per this article.
+
+
+
+5. Set up a postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 3) → scroll down to&nbsp;S2S Postback for Adcash →&nbsp;Add → check if all the needed values and the {ref_id} macro is in place → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+

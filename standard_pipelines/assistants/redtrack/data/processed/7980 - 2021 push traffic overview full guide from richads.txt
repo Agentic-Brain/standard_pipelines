@@ -1,0 +1,149 @@
+# 2021 Push Traffic Overview: Full Guide From RichAds
+
+2021 prepared lots of challenges for affiliate marketers who work with push traffic all over the world. Last year, Google Chrome launched new updates that promised to block both offers for subscriptions and push subscriptions bases. That’s why this year, marketers should analyze traffic sources before launching a campaign. Today, our partners from the RichAds ad platform will share insights on running push traffic campaigns and making a profit with Push Traffic Guide for 2021. Find in the guide: niches, blacklists, targeting options, costs, converting examples, and more.
+The best niches for push traffic
+The audience that subscribes to push notification ads is quite diverse, so they perform well for quite a lot of verticals. The most important thing is that offers should be interesting for customers with a wide range of interests. 
+
+According to our statistics, the following verticals will perform great with push ads:
+
+ 	VPN Subscriptions
+ 	Mobile
+ 	Betting
+ 	Gambling
+ 	Dating
+ 	Games
+ 	Finance
+ 	Sweepstakes
+ 	Binary options
+ 	E-commerce
+ 	Nutra
+
+
+What is the cost of push traffic?
+Push traffic is relatively cheap if compared to other traffic types, for example, Facebook. If you want to start your way in affiliate marketing, we recommend testing push traffic. 
+
+You buy it according to the CPC model, where you pay for clicks only. In RichAds, the cost per click starts from $0.003 and varies according to the Tier of your GEO. For example, the minimum average CPC in India is $0.02992. In the USA, this value increases to $0.34608. 
+
+
+
+“Don’t forget to limit the number of clicks per day (it will help not to waste budget on useless clicks). The 2nd click more often leads to targeted action than the first one. After the 3rd click, the conversion decreases significantly. 2 clicks per day is a perfect option for making a profit”.
+
+Eugene Kuznetsov, RichAds Product Manager 
+
+
+
+Also, pay attention to the bid you choose. Aim for the average recommended bid for your GEO and setup as the ad network offers in the interface. Those who set up the highest bid become the bidding leader and get priority for showing their ad, but you can waste all your budget for a short period of time. Also, don’t set up a very low bid, as in this case, there is a risk that you will not get traffic at all. 
+
+
+How to make Blacklists for push ads?
+First of all, to make optimization it’s necessary to set up conversion tracking and ensure if it works properly. We recommend turning to your account manager not to lose money.
+
+You can blacklist non-converting sources in RichAds, using our auto-optimization feature called Automated Rules, without wasting your time. 
+
+For that, we have special ready-made presets, for example, you can Blacklist Expensive Publishers or Blacklist Non-converting Subscribers List
+
+This feature will help you save time, scale effectively, do ROI optimization, optimize micro-conversions, and import your media buying strategies from other platforms. 
+
+
+
+&nbsp;
+Let’s see the insights from Yan Gorbach,
+Head of Customer Success at RichAds
+&nbsp;
+
+ 	Make optimization according to CTR. Exclude sources with too high CTR as it's credible proof of bot traffic.
+ 	Optimize according to the landing page CTR excluding landing pages with too low CTR. The logic here is the same as in the previous point, but one step ahead. Clicks but no visits? We can make a conclusion about bot traffic.
+ 	The number of conversions is also a nice indicator for optimization. Exclude sources that wasted 2-3 conversions price and didn’t show any results.
+ 	Also, you can optimize on EPC. Blacklist sources where the profit from the click is less than its price.
+ 	If the advertiser knows the bounce rate, you can optimize on this data. Block sources that have the highest rejection rates.
+
+What about Chrome restrictions?
+Each year push traffic faces new and new difficulties, and 2021 is no different. There are risks of increased competition and market regulations, but all traffic sources are currently creating new kinds of push formats with new audiences and increased CR.
+
+
+
+Despite 2020 Google Chrome’s threats, push notifications are still alive and perform usefully. Moreover, two new converting formats appeared at RichAds: In-page push and Calendar push formats. 
+
+Let us tell you a bit more about Calendar push format. These notifications are similar to scheduled events on iOS and macOS devices. 
+
+What the format gives you:
+
+ 	High-quality traffic (the users of Apple devices are solvent).
+ 	High CR (premium sources, new untapped audience).
+ 	High visibility (ads are delivered even to the locked devices).
+ 	No images needed (just think of the title and text).
+
+
+Let’s dwell on the targeting options
+It may be hard to segment the audience on push ads by interest or demographics as users don’t leave their private data while subscribing. Push targeting options are less diverse (compared with social traffic), but they also allow segmenting audiences according to your client’s profile. 
+
+Moreover, you can use the golden opportunity some networks have - to target different subscriber quality levels according to their CR (Premium, Standard, or Remnant). In RichAds, we also have the New Subscribers Only function that allows showing ads to new users only. 
+
+The most popular targeting options on push traffic are Country, OS, Browser, and devices. For example, OS targeting allows you to target the latest versions only which helps to save your budget.
+
+
+
+“Localize creatives according to the country of your geo. Use language, elements in the images, and other tricks to add one more targeting option”.
+
+Eugene Kuznetsov, RichAds Product Manager 
+
+
+
+Push creatives: how to and how not to?
+Strategy 1: Upload a few creatives to improve CTR
+We always recommend uploading 3-5 (up to 10) creatives in one campaign. It’s a key to quality tests (and don’t be confused by the fact that the creatives will compete with each other). Very often, only one creative of the whole pack converts best. Why should you waste your budget on non-performing options?
+Strategy 2: Make creatives for special occasions
+People are always eager to get prizes and gifts with huge discounts. That’s why we recommend being especially active during Black Friday, New Year, Christmas, and other holidays. Customize your creatives and get lots of conversions.
+Strategy 3: Limit impressions and boost CTR
+Multiple impressions per day may be too intrusive and play against your profit. That’s why we recommend not forgetting about the impressions limit. RichAds experts say that campaigns with 2 impressions per day show the best performance. The higher the score, the lower the success of the campaign.
+Strategy 4: Update creatives timely
+All creatives tend to burn out as people become bored of the same creatives. The solution is easy: update creatives regularly (at least once a week).
+
+Also, we prepared a few examples of well and poor-performing creatives. 
+
+ 	Use clear images and don’t place many elements in the image. Try to avoid lots of phrases not to mislead users.
+
+ 	Use before/after images of real people to improve CTR. This trick works with nutra in 99% of cases. Don’t use Photoshop and professional photos while preparing the main images.
+
+
+ 	Use the AIDA rule for creating text for the creative.
+A = Attention 
+I = Interest 
+D = Desire 
+A = ActionTry to generate interest and desire.
+
+
+
+
+ 	Use localization tricks for the creatives. You can use the icons of famous messengers. For example, in Canada, Facebook is more popular than WhatsApp.
+
+
+ 	Emojis increase CTR significantly. Using them is a golden rule for making converting creatives. But remember about the sense of proportion: don’t use too many emotions at once. But this advice is very situational, as in some cases, creatives without emojis may work better.
+
+
+Creating a list of push subscribers
+Collecting push subscribers is a nice option for professionals who want to scale and make even more profit on a successful campaign.
+
+There are 2 ways of how you can do it:
+
+ 	Collect push subscribers and create your own list.
+ 	Collecting subscribers via special scripts offered by special networks.
+
+If you work with special affiliate programs, you should know that usually they offer 2 formats of cooperation:
+
+ 	CPL model (where you pay for subscription one time and the payment depends on the country you work with). You buy cheaper, sell expensive and earn on the margin.
+ 	RevShare model (you get a percentage of the sale of your subscriptions). This model is for more long-term cooperation as you get the payout within 1-2 months).
+
+Any of the ways above may help you make some extra money to pay for additional instruments like spy tools, forums, trackers, or other services. 
+
+Join RichAds platform, launch and optimize push campaigns with professional experts from the industry!
+
+Conversion Tracking for Push Traffic 
+Having an ad tracker while running push traffic ads is not a nice bonus, but a necessity. Here are the few features that you will need to keep your performance at the top:
+
+ 	conversion tracking for a deeper understanding of campaign performance 
+ 	automation &amp; rules that will help you let go of the controls of your campaigns 
+ 	reporting features to find any conversion discrepancies between affiliates, publishers, and advertisers
+
+You will find these and many other features embedded in RedTrack — SaaS solution for conversion tracking &amp; attribution chosen by affiliates &amp; advertisers around the globe. 
+

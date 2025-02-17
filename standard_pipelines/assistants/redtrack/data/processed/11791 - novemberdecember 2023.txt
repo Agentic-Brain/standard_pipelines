@@ -1,0 +1,72 @@
+# November-December 2023
+
+
+➲&nbsp;Table settings in reports:
+
+
+
+
+The adjusted width of the columns is saved automatically.
+
+
+
+Added the possibility to pin any number of columns on the left and right sides of the report table.
+
+
+
+Added the Table reset button which allows users to reset the table settings (column width, density, and column pin-ups).
+
+
+
+
+➲ СAPI FB pass parameter state:
+
+
+
+
+When transferring the conversion, RedTrack transfers the state for the USA.
+
+
+
+Updated the country transmission format to ISO 3166-1 alpha-2.
+
+
+
+
+➲ TikTok integration:
+
+
+
+
+Added the possibility to choose the needed Ad account in TikTok traffic channel template.
+
+
+
+Added the possibility to set the Pause and Restart rule on the Campaign/Adset/Ad level for TikTok users within RedTrack.
+
+
+
+TikTok was added to Ads Manager.
+
+
+
+
+➲ Reports:
+
+
+
+
+Added a new Parallel tracking type column to the Campaign report for tracking the status of parallel tracking campaigns.
+
+
+
+Added new Grouping filters to the reports.
+
+
+
+Added the possibility to create report templates for all 4 reports.
+
+
+
+Added the option to clear unnecessary filters in bulk.
+

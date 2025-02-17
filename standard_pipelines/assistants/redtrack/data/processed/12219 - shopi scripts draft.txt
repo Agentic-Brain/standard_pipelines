@@ -1,0 +1,209 @@
+# shopi scripts draft
+
+
+2. Add the needed scripts
+
+
+
+
+To find the scripts go to Website→Scripts:
+
+
+
+
+
+
+
+
+In case you don't have the generated scripts in your account, copy them from the templates below, but remember to replace yourcustom.tracking.domain with your actual custom tracking domain:
+
+
+
+
+
+
+Universal tracking script
+
+
+
+Web events tracking Events.js:
+
+
+
+
+&lt;script src="https://yourcustom.tracking.domain/events.js">&lt;/script>
+
+
+
+
+
+
+
+
+
+{% if first_time_accessed &amp;&amp; !post_purchase_page_accessed %} &lt;script src="https://yourcustom.tracking.domain/order_completed.js?shop={{ shop.permanent_domain }}&amp;orderid={{ order.id }}">&lt;/script> {% endif %}
+
+
+
+
+
+
+
+
+
+
+Universal tracking script
+
+
+
+Upsell Tracking:
+
+
+
+
+&lt;script> (function() {
+      var s = document.createElement( 'script' );
+      s.setAttribute('src', 'https://yourcustom.tracking.domain/order_completed.js?shop=&lt;shop_id>.myshopify.com');
+      document.body.appendChild(s);
+      })();
+      &lt;/script>
+
+
+
+
+
+
+
+
+
+
+To add the scripts act as follows depending on the script type:
+
+
+
+
+
+
+1. Online Store → Themes → Actions → Edit code:
+
+
+
+
+
+
+
+2. Copy the Universal tracking script&nbsp;and&nbsp;Web events tracking Events.js from RedTrack Website settings (or template)→ Layout→ theme.liquid→ add the copied scripts to the end of the &lt;head&gt; tag:
+
+
+
+
+
+
+
+If you decide to change the theme, remember to add the scripts to the new theme once again.
+
+
+
+
+
+
+
+
+
+Special additional script must be added to your Order status page if you use other checkout options besides the standard Shopify checkout. Without this script, you may face discrepancies in some cases. 
+
+
+
+To set it up in RedTrack copy the Custom checkout tracking script from the Website settings (or template)→ in Shopify go to Settings → Checkout and accounts → Order status page → Additional scripts → Custom checkout tracking:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Special additional scripts must be added to your Post-purchase page in case you use upsell apps. Without this script, you may face discrepancies in some cases. 
+
+
+
+To set it up:
+
+
+
+1. In RedTrack copy the Universal tracking script &amp; Upsell Tracking from the Website settings (or template)→ in Shopify go to Settings → Checkout and accounts → Post-purchase page → Additional scripts → add the scripts from RedTrack:
+
+
+
+
+
+
+
+2. Replace the store ID in the Upsell Tracking with your store:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

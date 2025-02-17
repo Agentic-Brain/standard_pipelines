@@ -1,0 +1,138 @@
+# RichPush dr
+
+
+RichPush&nbsp;is a leading push notification advertising network made for marketers, affiliates, and agencies. 
+
+
+
+RichPush API integration with RedTrack gives you the following benefits:
+
+
+
+
+Pause: campaign, creative
+
+
+
+Create automated rules
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer and Offer source
+
+
+
+Conversion types
+
+
+
+
+
+
+1. Add RichPush as a Traffic channel in RedTrack.
+
+
+
+Go to your RedTrack account → Traffic channels → New from template → find PropellerAds → Add → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+2. Integrate RichPush with RedTrack.
+
+
+
+In the added RichPush template go to Richpush API integration → add API key → Save changes:
+
+
+
+
+
+
+
+Active button means the integration is working:
+
+
+
+3. Set up a campaign in RedTrack with RichPush as your traffic channel.
+
+
+
+Campaigns→ New→ use&nbsp;this guide (for Affiliates)/ this guide (for Advertisers)&nbsp;to help you create your campaign → once the Campaign is added, your tracking link is automatically created, copy Click URL:
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking.
+
+
+
+4. Set up the tracking in RichPush.
+
+
+
+Go to your RichPush account → Campaigns → New campaign → Add&nbsp; your RedTrack campaign Click URL under the destination URL field:
+
+
+
+
+
+
+
+
+
+
+
+5. Set up a postback URL in RedTrack
+
+
+
+Go to Campaign settings (created within step 3) → scroll down to&nbsp;S2S Postback for RichPush → press&nbsp;Add → check if all the needed values for the&nbsp;parameters are in place → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+
+
+6. Set up the&nbsp;automation
+
+
+
+Check out the following articles for the automation features:▸&nbsp;Automated TCs&nbsp;(for a general overview of the automation features in RT)▸&nbsp;Rules▸&nbsp;Cost auto-update
+
+

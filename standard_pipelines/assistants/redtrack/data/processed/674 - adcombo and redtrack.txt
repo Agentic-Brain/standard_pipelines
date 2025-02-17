@@ -1,0 +1,114 @@
+# AdCombo and RedTrack
+
+
+
+
+
+
+AdCombo is an innovative CPA network that provides the best payout rates with high conversion offers and landing pages. The company was founded in 2014 but already has established itself as an effective and trustworthy affiliate network. They have really friendly and helpful affiliate managers who work closely with both publishers and advertisers.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Adcombo as an Offer source in RedTrack.
+
+
+
+RedTrack → Offer sources → New from template → add Adcombo template → copy the Postback URL → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up RedTrack Postback URL in Adcombo
+
+
+
+Go to your Adcombo account Postbacks→ Settings→ paste the Postback URL from RedTrack (step 1.2)→ add more postbacks if you plan to track conversions&nbsp;statuses or conversion types→ Save:
+
+
+
+
+
+
+
+3. Get the Adcombo offer URL
+
+
+
+In your Adcombo account go to the&nbsp;My Campaigns→ create a new campaign with the&nbsp;Offer&nbsp;you want to promote→&nbsp;Save. Once you’re done, the&nbsp;Adcombo tracking URL&nbsp;will be automatically generated:
+
+
+
+
+
+
+
+4. Add MaxBountyAdcombo Offer to RedTrack
+
+
+
+RedTrack→ Offers→ New→ give the offer a name and choose Adcombo as the offer source→ paste the URL from Adcombo (copied within step 3) → add&nbsp;clickid={clickid}&nbsp;to the URL→ Save:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create the&nbsp;Campaign&nbsp;with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To help you add the campaign refer to:
+
+
+
+
+this guide&nbsp;for Advertisers.
+
+
+
+this guide&nbsp;for Affiliates.
+
+
+

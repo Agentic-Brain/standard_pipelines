@@ -1,0 +1,10 @@
+# 21-May
+
+
+ 	Conditional postback for Google, Bing and Facebook
+ 	Bing auto-cost update
+ 	Show ClickID in Conversion API logs
+ 	FB integration connect button update
+ 	Add row numeration in all header tab
+ 	Conversions api logs errors
+ 	More numbers allowed for autooptimization - treshold

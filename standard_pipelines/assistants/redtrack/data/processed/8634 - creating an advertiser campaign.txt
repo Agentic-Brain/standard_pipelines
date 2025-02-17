@@ -1,0 +1,256 @@
+# Creating an advertiser campaign
+
+
+What is a campaign?
+
+
+
+It is a set of rules and elements that link together a traffic channel and the website being promoted. The main purpose of creating a Campaign as an element in RedTrack is to get the final link to which you will send the traffic and where you will check your website performance. A campaign is a combination of all possible settings you can have per promoted website.
+
+
+
+How to create a campaign?
+
+
+
+
+
+Before you proceed with campaign creation, make sure you already have the following elements in place these elements:
+
+
+
+
+Custom tracking domain
+
+
+
+Traffic channel
+
+
+
+Brand and Website
+
+
+
+
+
+
+1. Campaigns → &nbsp;Create new campaign:
+
+
+
+
+
+
+
+2. Edit/adjust each the needed blocks as per the tips below:
+
+
+
+
+
+1. Give your Campaign a name.
+
+
+
+2. Choose the&nbsp;Traffic channel.
+
+
+
+3. Select the&nbsp;custom tracking domain.
+
+
+
+4. Choose the&nbsp;Campaign Cost model&nbsp;and fill in the&nbsp;Value&nbsp;accordingly if applicable:
+
+
+
+
+
+
+
+
+
+Select the store / Website you added earlier.
+
+
+
+In case you have several websites or funnels, you can set a different weight for them (to make the system distribute the incoming traffic accordingly), but keep in mind that this option works only for redirect links. 
+
+
+
+
+
+
+
+
+
+This option can be changed if you plan to work with a redirect link. Be careful, as not all the traffic channels support it. 
+
+
+
+Redirect types decide how redirection to the offer is handled and whether the referrer data is passed through. First of all, click&nbsp;here&nbsp;to learn how the hidden referrer works and choose the required redirect type based on their explanation below:
+
+
+
+
+"Regular redirect (http/s 302)" is a standard temporary HTTP redirect that sends a visitor directly to the desired location (the offer you promote). The referrer data is passed to the campaign endpoint.
+
+
+
+"Meta refresh with hidden referrer" presupposes that after the redirect happens, another redirect takes place with the help of an HTML meta tag. As a result, the referrer points to RedTrack, not the initial referrer.
+
+
+
+"JS refresh" is similar to the meta refresh type, but it’s fulfilled with the help of JavaScript. That being said, this type is not generally recommended for SEO because search engines can have difficulty crawling and indexing sites that rely on them.
+
+
+
+"Server redirect (http/s 302) with hidden referrer" means the referrer is hidden when redirecting on the side of the TDS header.
+
+
+
+“Double meta refresh with hidden referrer”&nbsp;is similar to&nbsp;“Meta refresh with hidden referrer”&nbsp;but this method involves using two meta refreshes to mask the original source of the traffic, making it more challenging to identify where the user initially came from.
+
+
+
+“Regular redirect (http/s 307)”&nbsp;is similar to&nbsp;“Regular redirect (http/s 302)”&nbsp;but it’s working more efficiently with old version browsers.
+
+
+
+
+To sum up,&nbsp;Server redirect (HTTP/S 302) with hidden referrer&nbsp;is faster than&nbsp;Regular redirect (HTTP/S 302)&nbsp;and&nbsp;Meta refresh with hidden referrer. This is because a server redirect is processed on the server side, while a&nbsp;meta refresh&nbsp;and&nbsp;JS refresh&nbsp;are processed on the client side. Server redirects are faster because the server does the work of redirecting the request for you, whereas in a meta refresh or JS refresh the client has to do this work. Moreover, server redirects can be cached, making them even faster.
+
+
+
+
+
+
+
+
+
+This section is&nbsp;optional. It serves for adding tags and additional notes to distinguish the added Campaigns. Click&nbsp;here&nbsp;to learn more about tags and notes.
+
+
+
+
+
+
+
+
+
+Leave this field empty for Facebook, Google Ads, Bing Ads, Tiktok and all other traffic channels with RedTrack CAPI integration. 
+
+
+
+To add /edit the postback, go to S2S Postback for &lt;your traffic channel&gt; → Add → add/edit the postback URL (or multiple URLs if that’s the case) → make sure that all the needed values for the source parameters are in place → define the&nbsp;Payout sent → select the&nbsp;Postback method → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Postback method types explained:- GET requests only retrieve data and have no other effect. For retrieving resources without making changes, GET is preferred over POST, as they can be addressed through a URL.- POST method requests record data. For example, it is used for posting a message to an Internet forum, subscribing to a mailing list, or completing an online shopping transaction. Also for this method you can write your own JSON with the fields accepted by the 3d party platform.
+
+
+
+IMPORTANT!- If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.- Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the EVENT_NAME for Taboola or ap_key for Go2Mobi, etc.). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.The screenshot above is just for demonstrative purposes. The URL, its parameters, etc, depend on your Traffic channel.
+
+
+
+
+
+This option is available for traffic channels that have CAPI integration with RedTrack.
+
+
+
+
+
+
+
+Refer to this article to set up the API Integration conditional postback.
+
+
+
+
+
+3. Enable the Auto update costs feature if your traffic channel is eligible for it. Refer to this guide for details.
+
+
+
+
+
+
+
+
+
+There are some extra tabs that can be filled in as per your needs:
+
+
+
+
+
+
+
+
+
+These tabs are enabled only if you have access to and use the partner management portal and work with individual publishers who promote your offers. A traffic channel “For Publishers“ is to be used from the template. 
+
+
+
+Refer to this article for more details on the portal.
+
+
+
+
+
+
+
+
+
+Refer to&nbsp;this article&nbsp;to help you set up custom payouts.
+
+
+
+
+
+
+
+
+
+This is the manual cost update. Refer to&nbsp;this article&nbsp;for more details on the process.
+
+
+
+
+
+The URL field in this section serves as the destination URL where the impressions info is going to be sent in case impressions are collected within this campaign. Add the Impression forwarding URL only if your traffic channel supports this option. 
+
+
+
+
+
+
+
+
+
+
+
+4. Once you're done with all the Campaign elements, save it → go to Tracking links and parameters → choose the tracking method&nbsp;and copy the automatically generated&nbsp;values/URLs:
+
+
+
+
+
+
+
+Use the redirect link for the traffic channels that support the redirect method, website URL + no-redirect/universal script + the tracking parameters for those who accept no-redirect only.
+
+
+
+For more information on the tracking options, check out the following articles/videos:- Universal tracking script- No redirect tracking- Tracking impressions

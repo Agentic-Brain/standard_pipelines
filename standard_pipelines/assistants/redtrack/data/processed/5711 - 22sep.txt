@@ -1,0 +1,30 @@
+# 22-Sep
+
+
+ 	Pagination has been migrated to the new UI.
+ 	A tooltip was added for the Auto update costs toggle when creating a campaign in RedTrack. Click here for more details on the Auto update costs feature.
+ 	The Reports tab was added as a stand-alone page to the RedTrack main menu.
+ 	Bugfix: Select all Campaigns button is now available for ticking in the Campaigns stat report.
+ 	Bugfix: now when the user hasn't filled in the Conversion types, (s)he can still have access to the Conversion path report (provided (s)he is eligible for this feature). For the feature to work correctly user still will need to set up the correct Conversion types.
+ 	Publisher Panel updates:
+
+→ macros {{.Brand}} now changes to the name of the added Whitelabel in the customized e-mails;
+→ added a separate block of column settings in the Whitelabel setup for “Conversion logs” in the Publisher panel. Click here for more info on how to add and manage the Whitelabel;
+→ added the possibility to export reports by Campaigns and also export the data in the Conversion logs;
+→ bugfix: the Export button in the Pub panel is now up and running;
+→ Publisher fields Name and Lastname are unnecessarily required;
+→ Pub panel Campaigns will show the declared settings instead of the actual ones.
+
+
+ 	Bugfix: when using the "group by" filter in the Campaign Report you can now see the real data instead of the undefined value.
+ 	Bugfix: Custom range filter in the Reports by Campaigns is now working as specified by the user.
+ 	Now the Reports can also be filtered by the Deeplink grouping for those using it.
+ 	Bugfix: Offer source templates with all the preset parameters are now applied when choosing the button "New from template".
+ 	Bugfix: auto-optimization feature now works just fine when choosing any other value (not just the default one) from the Multiplier dropdown.
+ 	Bugfix: "Apply" button in Reports now responds when users have the auto_refresh feature.
+ 	Bugfix: funnel templates display the correct offers.
+ 	Added the CR column for the default conversions.
+ 	EPC value is displayed in the Pub panel Campaign Reports.
+ 	Auto optimization by conversion type feature has been introduced to the Campaign funnel settings. Click here for more info about funnel auto-optimization.
+ 	Outbrain auto costs update: bugfix on not actual costs after 8 PM. We check the cost one more time the next day.
+ 	Default sorting in the Reports has been temporarily removed.

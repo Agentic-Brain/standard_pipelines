@@ -1,0 +1,118 @@
+# KMA.biz and RedTrack
+
+
+
+
+
+
+KMA.BIZ is the marketing and advertising company for promoting offers.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add KMA.BIZ as an Offer source in RedTrack.
+
+
+
+Offer sources→ New from template→ find KMA.BIZ template→ Add → copy the Postback URL→ Save the template:
+
+
+
+
+
+
+
+
+
+
+
+In the Additional parameters section of the added template, you can add additional macros to the postback link (if needed). Here's the list of macros supported by KMA.BIZ: ​Refer to this article for more details on Offer source settings in RedTrack.
+
+
+
+2. Set up the postback URL in KMA.BIZ.
+
+
+
+KMA.biz allows you to either create a Global Postback URL that will apply to all Offers or set up individual Postbacks upon creating an Offer. We recommend you to use the "Global postback" option, it will be applied for all your Offers and you will not have to insert it separately for each Offer. 
+
+
+
+In your KMA.BIZ account go to Tools → Global postback → paste the RT Postback URL (copied in step 1) → Apply:
+
+
+
+
+
+
+
+3. Get the KMA.BIZ offer.
+
+
+
+In your KMA.BIZ account navigate to the Offers section for available Offers and click on Request access. Once you've received the one you wish to promote you need to create Stream, adjust settings (activate Global Postback for example) and click on create Stream button. Your tracking link will be generated automatically. Copy it:
+
+
+
+
+
+
+
+4. Add KMA.BIZ offer to RedTrack.
+
+
+
+RedTrack→ Offers→ New→ give the offer a name and choose KMA.BIZ as the offer source→ paste the KMA.BIZ offer URL → add data1={clickid} to the URL→ Save:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create the campaign in RT with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+Refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

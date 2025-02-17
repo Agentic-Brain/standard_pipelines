@@ -1,0 +1,12 @@
+# 22-Mar
+
+
+ 	Custom payouts: possibility to set custom payout on Campaign level based on os + geo filters and conversion subs
+ 	Duplicated LP clicks fixed: when clicking /click severals times on the Landing page, only one click gets to RedTrack.io
+ 	Events overspends (clicks, LPs, conversions) are counted now. Possibility to count overspends by Impressions for certain subscription plans
+ 	ROAS indicator is now depicted as a column
+ 	Bing auto costs update: bugfix on not actual costs after 8 PM. We check the cost one more time the next day
+ 	Google button instead of Connect in integrations was added
+ 	Publisher panel: e-mails on/off: possibility to switch on/off automatic letters for publishers
+ 	AOV (average order value) value is available in Reports
+ 	Video tutorial was added to RedTrack youtube channel: Adding a custom tracking domain to RedTrack.

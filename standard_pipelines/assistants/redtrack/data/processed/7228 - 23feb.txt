@@ -1,0 +1,24 @@
+# 23-Feb
+
+
+ 	Rules:
+
+ 	added action “Pause and restart” for Google Campaign/Adset/Ad.
+ 	added action “Pause” for Google Adset.
+ 	added action "Pause" for TikTok Campaign/ Adset/ Ad. More info about rules can be found in these 2 guides: Integrated Traffic channels and Rules.
+
+
+
+
+ 	Added section Marketplace to the RedTrack navigation menu.
+ 	Bugfix: datepicker now opens at the bottom of the page on large displays.
+ 	Publisher panel:
+
+ 	bugfix: conversion types are now displayed in the dashboard table header of the Publisher panel.
+ 	added new grouping “Publisher/alias subid/geo” to the tab "Custom payouts" in the Campaign settings.
+ 	bugfix: "Save" button is applied when adding a new Publisher.
+
+
+ 	Bugfix: conversion types are now displayed in the dashboard table header of the Reporting portal.
+ 	Conversions report was migrated from the old UI to the new one and can be found in the Offer form (for Affiliates) or Website form (for Advertisers).
+ 	Bugfix: script settings are now successfully saved in the Website form even after the page is refreshed.

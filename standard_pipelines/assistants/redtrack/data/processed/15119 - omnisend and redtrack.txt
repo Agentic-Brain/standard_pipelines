@@ -1,0 +1,108 @@
+# Omnisend and RedTrack
+
+
+Omnisend is a marketing automation platform for ecommerce businesses, focusing on email and SMS marketing.&nbsp;
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration steps, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Brand and Website
+
+
+
+Conversion types you're planning to work with
+
+
+
+
+
+
+In RedTrack
+
+
+
+1. Add Omnisend as a traffic channel in RedTrack.
+
+
+
+Traffic channels → New from scratch → add mandatory utm parameters and assign relevant roles to them in the Additional parameters section → Save:
+
+
+
+
+
+
+
+
+
+
+
+ParameterMacro/tokenRoleutm_source{replace}Rt sourceutm_medium{replace}Rt mediumutm_campaign{replace}Rt campaign
+
+
+
+2. Create a campaign in RedTrack with Omnisend as your traffic channel.
+
+
+
+Campaigns → Create new campaign → use this guide to help you add the rest of the fields in your campaign template. Once you saved the campaign go to Tracking links and parameters → Tracking parameters (UTMs) → copy&nbsp;the cmpid part of the tracking parameters:
+
+
+
+
+
+
+
+In Omnisend
+
+
+
+3. Check if UTM tags for Google Analytics Tracking are in place.
+
+
+
+When creating your campaign in Omnisend, make sure that standard UTMs are added to the client’s email/SMS campaigns via the “UTM tags for Google Analytics Tracking” in the campaign settings:
+
+
+
+
+
+
+
+Use this article for guidance in adjusting the UTMs in Omnisend.
+
+
+
+While creating UTM tags you have to be signed in to your Google Analytics account. If not, they won’t be tracked. The links in Google Analytics will appear after some 30-90 minutes. Refer to this article for details on the matter.
+
+
+
+4. Add cmpid=actualcampaignid (copied in step 2) manually to the end of the call to action link in the Link to field of your Button builder page:
+
+
+
+
+
+
+
+Remember that the cmpid=actualcampaignid from RT should be added to each email. Use this guide to help you set up your call to action link in Omnisend.
+
+
+
+5. Test your email and see if all the parameters (cmpid and utms) are in place when you click the call to action button. The CTA URL should look something like this: https://www.website.com/?cmpid=actualcampid&amp;utm_source={replace}&amp;utm_medium={replace}&amp;utm_campaign={replace}
+
+

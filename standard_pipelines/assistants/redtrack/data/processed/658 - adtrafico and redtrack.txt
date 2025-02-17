@@ -1,0 +1,42 @@
+# Adtrafico and RedTrack
+
+
+
+Adtrafico is one of the leading affiliate networks based in the UK. The revenue models of this network are CPA, CPL and CPS. They support both mobile and desktop traffic, and this network's software is managed by Hasoffers. Adtrafico reviews the websites or apps of publishers before approving their accounts. You can talk to your affiliate manager about highly optimized and converting offers.
+
+To integrate Adtrafico with RedTrack act as follows:
+
+1. Add Adtrafico template to RedTrack.
+
+Go to Offer Sources -&gt; New &gt; find Adtrafico -&gt; Add the template:
+
+
+
+2. The postback URL for Adtrafico will be as follows:
+
+
+
+3. Copy the postback for further implementation on the Adtrafico side and Save the changes.
+
+4. Set the postback URL in Adtrafico:
+
+Scroll down until you see the Your Pixels/Postbacks tab. Click Add New Pixel/Postback. Paste the Postback URL you have copied in Step 3 into the Code field and click Create. 
+
+
+
+5. Obtain the Adtrafico offer:
+
+Log into your Adtrafico account. Navigate the Offers tab and Browse/Search available Offers. Open the one you wish to promote. Your tracking link will be generated automatically, however, you need to manually add RedTrack click ID macro to the URL. In order to do that, click the Add Click ID button.
+
+in RedTrack, the click ID tracking parameter is named {clickid}. Hit the plus sign upon inserting it into the corresponding field to update the tracking URL.
+
+
+
+6. Add Adtrafico offer to RedTrack.
+
+Open Offers -&gt; New:
+
+
+
+7. Fill in the info -&gt; add Adtrafico offer link in the URL field -&gt; add the tracking parameters “aff_click_id={clickid}” at the end of the offer URL -&gt; Save the changes:
+

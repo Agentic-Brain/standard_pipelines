@@ -1,0 +1,78 @@
+# Parameters/UTMs: show on a page
+
+
+Why?
+
+
+
+You can use additional parameters on your lander to improve your page performance and make it more personal for a visitor. For example, show the city information based on the actual city of the visitor. RedTrack has a list of supported dynamic parameters available for that purpose. If you need to receive some additional information on your Landing page, you can add these macros to your lander's URL.
+
+
+
+How?
+
+
+
+1. Use the desired macro in your landing page URL, and we will identify it on the page. Let's use city as an example for this guide. Example: https://landingpage/?city={city}
+
+
+
+The list of other supported parameters is here.
+
+
+
+2. Put the script into your page code.
+
+
+
+&lt;script type="text/javascript">
+var parameterName;
+function getParameterData(name) {
+var query = window.location.search.substring(1);
+var vars = query.split("&amp;");
+for (var i=0;i&lt;vars.length;i++) {
+var pair = vars&#91;i].split("=");
+if(pair&#91;0] === name){
+return decodeURI(pair&#91;1]);}
+}
+"return";
+}
+
+parameterName = getParameterData('city')
+&lt;/script>
+
+
+
+3. Put another script to your page where it is supposed to place the dynamic value from the URL:
+
+
+
+&lt;script&gt;document.write(getParameterData('city'))&lt;/script&gt;
+
+
+
+The "city " parameter was used as an example, instead, you can use any of the parameters available in RT. 
+
+
+
+If you need to show several different parameters, add this line again:
+
+
+
+&lt;script&gt;document.write(getParameterData('city'))&lt;/script&gt;&lt;script&gt;document.write(getParameterData('sub6'))&lt;/script&gt;
+
+
+
+Since we use the parameter "city " here, the script will take the dynamic value for the city from the LP URL and place it on your page. 
+
+
+
+Here's how it might look on a page:
+
+
+
+
+
+
+
+

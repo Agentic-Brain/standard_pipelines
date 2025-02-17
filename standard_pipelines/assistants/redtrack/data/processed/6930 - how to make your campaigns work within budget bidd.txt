@@ -1,0 +1,91 @@
+# How to make your campaigns work within budget? Bidding strategy for pop!
+
+Depending on how experienced you are, there are different steps you take in preparation for running campaigns. You need to think about the right offer, a quality traffic source, an ad tracker, and ad creatives before you actually get down to business. But... How much money should you prepare? What is a good affiliate marketing budget for running pop traffic campaigns? 
+
+Affiliate marketing requires investment before you start making profits. So if you want to find out how to make your campaigns work within a budget, and what bidding strategy to use to save money with pop traffic, read effective tips form our partner Zeropark. Enjoy!
+The Optimal Monthly Affiliate Marketing Budget for Pop Campaigns
+The most important expense in affiliate marketing is traffic. To prepare an adequate budget you need to take into consideration the campaign’s vertical, geo-targeting, and the offer payout.
+
+In Zeropark, advertisers can set total campaign budgets, daily budgets, as well as specific placements caps — source and target daily budgets. These caps let you limit the total amount of money you are willing to spend on a chosen portion of traffic within a 24-hour time range. If you’d like to keep spending without any limit, you can always go for the ‘unlimited’ budget.
+
+Zeropark recommends setting $100 as their daily budget: $20 for a source budget, and $5 for chosen targets (also called target IDs or site IDs, depending on the traffic source). But if you’re a little bit short of the suggested sums, don’t worry! Pops are a forgiving ad format. You can make it work with a smaller budget (low payout offer + Tier 3 GEO could work with half the recommended budget or less). Just don’t forget to spread it evenly throughout the month. 
+Some other important things:
+1. Maintain the cash flow so that you let your campaigns run consistently and without long breaks. Let’s do the math now:  $100 multiplied by 30 days (the regular number of days in a pay period) gives you approximately $3000.
+
+2. Affiliate networks don’t immediately allow you to withdraw your earnings, though. Depending on your experience and relationship with the network, the waiting period before you can make a withdrawal can range between 1 and 30 days. If you are a beginner, then most likely you will need to wait a month before collecting your first earnings. That means your initial budget should be doubled. 
+
+So, how much money do you need to invest in traffic? More or less $3000 should give you a very good start running pop traffic. In case of the low payout offers, you could do well with less, and for high payout offers… the bigger the budget the better. 
+
+An offer from an affiliate network and a traffic source to buy traffic are the only essentials you need to start media buying. But it’s not really possible to achieve success without additional tools.  
+Additional Affiliate Marketing Expenses:
+Even though the majority of your budget should go into buying traffic, there are other things you need to account for in the list of your monthly expenses. Let me tell you about the optional tools you might want to consider.
+Affiliate Ad Tracker
+The most important additional tool is an affiliate ad tracker. You can start a campaign without a tracking solution, but you can’t optimize it without one. Having no granular data insights into what works and what doesn’t means your chances of success are rather slim. Monthly tracker prices range from free to nearly thousands of dollars, but going for more expensive options can be extremely beneficial. Additional features offered by trackers improve ROI and help you optimize your campaigns to profitability. 
+
+Pro tip: you can reduce your monthly expenses by choosing the annual billing option. 
+
+Stop wasting your money. Start tracking your campaigns. Try RedTrack Now.
+
+
+Useful Tools In Affiliate Marketing
+Other tools that can make your affiliate marketing career easier and more successful are spy tools and lander builders. Spy tools let you research the market and draw inspiration from how other people are running their campaigns. Landing page builders, on the other hand, allow you to create your own, unique landing pages that can perform really well in a market saturated with similar ideas.
+
+Don’t forget to localize your landers by translating them to the language of the GEO where you run your ads. Translation services are usually very cheap but can significantly improve your results. Landers that are easily understood by the audience will usually convert better. If you’re worried about additional costs of translation, you can always go for the less accurate, albeit free option of using Google Translate.
+
+What if you have a very tight affiliate marketing budget? Besides choosing the annual billing options you can also join community forums where experienced affiliates share free resources and useful tips. For the small price of a monthly forum subscription, you get access to landers, creatives, and help in translations from community members. Just the kind of support that can be invaluable to a beginner!
+
+
+Bidding Strategy for Pop Traffic
+When you’ve got your campaigns ready, now it’s time to let the traffic flow. But how to make your campaigns work without throwing away your budget?
+
+When setting campaign bids, you should always go slightly above the suggested bid. Traffic source says $0.004? You should start at $0.0045. That way you can make sure you have a competitive advantage right at the start.
+
+The next step is to let your campaign run for a couple of hours and watch the win ratio of each source. Once you’ve spent a portion of your daily budget, you should review the results and bid upon the sources that have a win ratio below 50%. If the sources with a low win ratio happen to be profitable already, you shouldn’t change the bids just yet. 
+
+Yes, you’re reading it right. While spending more money might seem contradictory to ‘staying within budget,’ it’s actually making sure you get the most out of the testing period. 
+
+The point of this strategy is to adjust the bid based on the win ratio and profitability. Poor performing sources with low win ratio only have access to cheaper and less attractive placements. So, by bidding upon such sources you access higher quality placements and a wider audience. By expanding the reach, you make sure your ads are easily accessible and displayed to enough people to catch someone’s attention. And that’s when the conversions start flooding in!
+
+If one of your sources is winning 100% of traffic, then you might try to slowly decrease the bid to see if you can keep the source profitable with slightly less exposure. 
+Optimization Tips for Pop Traffic
+Pop traffic is perceived as inexpensive and easy to learn, and therefore perfect for beginners. Landers are often provided to you by the affiliate network, hence, all you need to do is buy traffic and optimize the campaigns so that they spend less and earn more. Here are some useful optimization tips to help you get the most out of your campaigns:
+
+ 	Let your campaigns run for 3-4 days before deciding to limit targeting options.
+ 	While optimizing pop traffic, start with devices and then move on to OSes and OS versions.
+ 	Don’t cut sources or targets until they’ve reached a 70-90% win ratio and are still not profitable. 
+ 	Make whitelists out of profitable sources and placements, and run separate source/target campaigns.
+ 	Always test more than one landing page. 
+ 	Using landers provided by the affiliate network is quick and easy, but creating your own landers gives you a competitive advantage!
+ 	It’s also best to test more than one offer at once. Try starting with 5 offers and after two days stop those that have ROI lower than -50%.
+ 	Don’t forget to set the source and target daily affiliate marketing budgets. Make sure you get all the traffic without spending too much on a single placement. 
+ 	Don’t be scared to kill the campaign if you see it hasn’t been performing for too long. Getting too attached might cost you a lot of money.
+ 	Find your niche and stick to it. You should change the offer if it doesn’t perform well but rather than trying something completely different, try to learn one particular niche. 
+
+Looking for high-quality traffic recommended by professionals?
+
+
+When To Kill A Campaign?
+Staying within budget can be difficult when you see the campaigns are close to turning profitable, and yet it never happens. So, how to determine a good moment to kill a campaign?
+
+You need to take into consideration more things than just the performance of the campaigns. Your campaign has been running for a while and went from green to red? It might be because of market saturation. Are you outbid (lower win ratio)? Increase the bid, and if you think it’s creative fatigue - rotate more creatives!
+
+If you are unsure whether your creatives were a good choice, you can always ask your traffic source representatives about the current trends. They know what lenders perform well and can check yours too to see if they have potential. 
+Avoid Mistakes
+
+ 	Make sure your tracking is set up correctly and that your targeting is in agreement with the affiliate network requirements.
+ 	If you’ve only just launched your campaigns, the traffic is slowly coming in, you’ve spent a couple of dollars and are disappointed to see a negative ROI - you shouldn't kill the campaign just yet! The general rule is to wait until you spent 5 times the payout before pausing the campaign.
+ 	You can choose an aggressive strategy — test a lot of offers and landers at once, and kill them if they don’t perform within the first couple of days or a more steadfast strategy in which you take the time to optimize the campaigns that show a little bit of potential at the start. 
+
+The key is to keep testing and keep launching more campaigns. In the end, one of those campaigns will be your getaway to success. 
+
+Conclusions
+
+ 	Whatever your initial budget is, the biggest chunk of it should be spent on traffic. 
+ 	A good medium-range initial daily budget for pop is $100, but it can be lower in case of low payout offers run in Tier 3 GEOs and higher in case of high payout offers run in Tier 1 GEOs.
+ 	Remember to spread your budget evenly to run your campaigns without breaks.
+ 	Additional tools are very useful, but not all of them are necessary right from the start. 
+ 	As a beginner, you should consider investing in affiliate marketing forums subscriptions as they’re full of free resources and helpful experienced affiliates.
+ 	Remember to increase your bids slowly based on the win ratio of your sources and targets.
+ 	Don’t be too hasty in killing campaigns! Try changing bids and creatives before you make that choice. 
+
+&nbsp;

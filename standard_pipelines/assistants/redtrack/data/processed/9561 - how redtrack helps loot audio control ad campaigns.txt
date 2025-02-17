@@ -1,0 +1,74 @@
+# How RedTrack Helps Loot Audio Control Ad Campaigns
+
+Loot Audio is an online store for downloadable virtual instruments, plugins, and sounds designed for musicians, producers, and composers. The platform features 5,000 different products from the best manufacturers, instrument builders, producers, and sound designers on the planet. Among them are more than 1,000 Kontakt instruments for musicians and composers looking for unique sounds for their works. 
+
+Loot Audio is an e-commerce business meaning they have to sell their product online, and therefore, face a lot of advertising challenges. That's where marketing analytics tool like RedTrack comes in handy.
+Challenges of Loot Audio before using RedTrack 
+The company actively uses Facebook and Instagram to run advertising campaigns and AdWords to help with Google discoverability and search. But difficulties often arise during the tracking of results.
+
+One of the client's biggest problems was the lack of accurate tracking and results presented in the Facebook ads manager. Because of this, it is impossible to calculate the ROI of advertising campaigns correctly. In addition, you have to wait several days for the results, which has a negative effect on the work process.
+
+“Often we would find that the results were not matching real-world figures and therefore we could not rely on the Facebook ad manager to deliver us with accurate results.”
+
+Before contacting us, the client tracked conversions with a custom-built CMS and had no experience with tracker services. The company was looking for a simple yet effective, reliable, and feature-rich tool to help cover all tasks and problems.
+Why RedTrack for tracking &amp; analytics? 
+Loot Audio approached us with specific goals: 
+
+ 	accurate conversion tracking (to understand which ads drive conversions aka sales)
+ 	use of the Partnership portal (to use the power of affiliate marketers)
+ 	 accurate funnel tracking (to understand which funnels work)
+
+Conversions that needed to be tracked:
+
+ 	Purchase
+ 	Add to Cart
+ 	Begin Checkout
+ 	Provide Payment Details
+ 	Site Search 
+ 	Page View 
+
+
+
+“We expected to see completely accurate results regarding our campaigns and to be able to track traffic, clicks, spend and return for each campaign.”
+
+How RedTrack helps with tracking &amp; analytics 
+Based on the client's primary goals and objectives, we provided access to these RedTrack functionalities:
+
+ 	Tracking CR (conversion rates) for key channels selected by the client: FB, Instagram, Google.
+ 	Combining multiple advertising channels and multiple conversions into a single marketing funnel.
+ 	Convenient and intuitive dashboard with reports and real-time updates.
+ 	Affiliate tracking provided by Partnership Portal: ability to understand the performance of each affiliate marketer or influencer involved in marketing
+ 	Monitoring advertising effectiveness by channels, campaigns, and other criteria with customizable reports. 
+
+Completed integrations:
+
+ 	Google Tag Manager
+ 	Traffic from Organic
+ 	Facebook Conversion API
+ 	Google API
+ 	Partnership Portal for work with publishers
+
+
+
+“RedTrack went above and beyond what was expected. RedTrack customized their affiliate implementation just for us to make setting up affiliates even easier.”
+
+How Did Working With RedTrack Affect Loot Audio? 
+RedTrack has helped Loot Audio take ad campaign management to the next level, namely:
+
+ 	Increase the accuracy of conversion rates for Facebook, Instagram, and Google ads.
+ 	Reduce the waiting time for campaign results from days (as with ad manager FB) to a few minutes.
+ 	Establish control over each level of the marketing funnel, thereby making it easier to compare results with effort.
+ 	Simplify the calculation of the ROI (return on investment) in advertising thanks to informative reports.
+ 	Automate 90% of the routine tasks associated with reporting, performance analysis, and decision making.
+ 	Launch Loot Audio's affiliate program and flexibly adapt it to current business needs.
+
+
+“Instantly we could see that the data we were receiving in our dashboard was precise and easy to understand. Also, it delivers results almost instantaneously as opposed to several days out-of-date as presented in the FB ad manager.”
+
+Afterwords
+Loot Audio finds the ability to manage affiliate marketing, and all PPC advertising. Loot Audio is constantly expanding its coverage and creating mutually beneficial affiliate relationships thanks to RedTrack
+
+“Having an affiliate program built into a tracker such as the service offered by RedTrack was a big bonus for us as it allows us to use affiliate marketing to further our reach.”
+
+&nbsp;
+

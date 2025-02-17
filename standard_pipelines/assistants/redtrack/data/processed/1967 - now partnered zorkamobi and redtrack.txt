@@ -1,0 +1,17 @@
+# Now Partnered: Zorka.Mobi and RedTrack
+
+We continue to expand our collaboration with leading and most trustworthy networks. Today, we’re pleased to introduce our new partner — Zorka.Network by Zorka.Mobi, mobile Affiliate Network specializing in CPI offers. They’ve become one of the leading affiliate networks in CIS, and now they work globally, providing offers for worldwide traffic. 
+To save your time and efforts on setup process, we’ve already added Zorka.Network to the list of Trusted Networks inside our tracker. It means that the postback URL is automatically pre-filled for this network and their offers. 
+A detailed step-by-step guide on conversion tracking between RedTrack and Zorka.Network is available in our Knowledge Base. 
+Looking for mobile offers with high payouts but not yet joined Zorka.Network? We’ve summed up just a few weighty reasons why you should start working with them: 
+— 100+ direct CPI offers in the following verticals: games, shopping, gambling, software &amp; services, utilities, entertainment, travel, education, etc.
+— CPI Smartlink with tons of semi-direct offers
+— global reach — the geography of offers is the whole world
+— possibility to integrate via API/S2S
+— weekly payouts
+— friendly 24/7 support
+— 3% referral program
+You can have a look at all non-private offers that are currently active at Zorka.Network - here. Or pick the desired geo on their interactive map, and access the offer list from there.
+
+Go to signup form and grow ROI with conversion tracking between Zorka.Network and RedTrack.
+If you require any assistance with the setup process, please contact our team — support@redtrack.io.

@@ -1,0 +1,68 @@
+# 5 RedTrack Features to Prepare for the 'New Normal'
+
+We have to admit that the consequences of the COVID-19 will last long after the airlines will restore their flights and children go back to school. Advertisers and media buyers have to reinvent their strategies and take new approaches to manage the unexpectedly changing landscape and maintain the efficiency of their ad campaigns.
+
+Currently, among the top demands that digital marketers claim are:
+
+ 	new effective team management and collaboration methods;
+ 	the data accuracy;
+ 	the need for costs optimization;
+ 	routine processes automation and optimization.
+
+No doubt, it’s hard to handle all this alone. At RedTrack, we share the challenges digital marketers face today as 'new normal' relates to everyone. That's why we put forward 5 features that would help you to prepare for the future that is happening now with the least loss and the best result. 
+1. Effective Team Collaboration with Multi-access feature 
+Not only the global work-from-home movement proved its performance efficiency, but it also inspired some companies to shift to remote work forever. The ability to manage a distributed team is a must-have skill for every manager today. Ad campaigns management might seem like a challenge when it comes to remote teams until you try RedTrack multi-access feature.
+
+With the Multi-access feature, your team members can simultaneously work with campaign data in one RedTrack account from different devices in any part of the world. There are several levels of access that you can give to your team members, depending on their role in the project: view, edit, export. You can restrict access to all financial data, campaigns, traffic sources, publishers' or advertisers' data, for example. 
+
+&gt; Learn more: How to set up multi-access for my team. 
+
+
+2. Know your audience in detail
+Every day brings a whole bunch of unexpected surprises. People’s behavior and reaction to certain events are still difficult o predict, so keeping track of key metrics becomes more important than ever. The more you know about the audience, the more insights you have to make the right decisions.
+
+With the help of RedTrack's custom dashboards, you can track the wide range of specific performance metrics important to your business. Segment your audience, group it by country, city, language, device type, or any other characteristic, analyze the stats and choose the right strategy to go for.
+
+
+
+
+&nbsp;
+3. Optimize your spends
+Advertisers are cutting costs, some industries go into hibernation or survive a temporary lull. But, everything can be changed in an instant moment. Travel affiliate's revenues will start to grow the day their most profitable GEOs announce the opening of borders. Conversely, they will have to look for gaming offers or at least someplace in a more or less decent niche. 
+
+With RedTrack reports, you can analyze all the data you get depending on the day, month, and the hour and compare them all. 
+
+
+4. Work smarter, not harder with the help of automation
+Few companies can afford to hire new assistants now. And indeed, why do this at all? With RedTrack automation features you can save up to 20% of your time, which usually falls for monitoring, stressing out,  pondering wrong decisions, and jumping back and forth between tabs and websites.
+
+It's possible with the help of automated rules that can pause ad campaigns, placements, or creatives if the expected EPC, ROI, and CR are not met. There's no need to worry you miss the moment when something goes wrong. You'll receive notifications once set KPIs are not met or unexpectedly changed. 
+
+&gt; Learn more: How to set up auto-rules for my campaigns in RedTrack.
+If you'd like to learn more about how Automated Rules can help your business, book a free demo with our product specialist
+
+
+&nbsp;
+5. Measure the True Impact of Your Ad Campaigns
+There’s no secret that the ad fraud has risen significantly during the pandemic. Estimated by Business of Apps, fraudulent mobile ad installs were up 16% in March since the beginning of the year.
+
+RedTrack can help you get rid of both types of bots: malicious and good ones. For bad bots, you can leverage our Fraud Score integration. Fraudscore will analyze all your clicks and prepare a comprehensive ad fraud statistics to let you know where you lose your money. And if you activate the Known bots toggle in your Profile Settings, RedTrack will automatically exclude 16 well-known bots from your reports by Google, Facebook, Alexa, Yahoo and others. Now is not the best time for smoking money.
+
+
+
+&nbsp;
+
+By the way, we understand that you can be now pretty tired of using your laptop and desktop. But we’ve got a solution. Take a rest from your monitor and use our mobile app to stay up to date with everything that’s going on with your ad campaigns.
+
+&nbsp;
+
+               
+
+&nbsp;
+
+Want to learn more about RedTrack features and how you and your team can use them in 'new normal'? We would be happy to give you a first-hand look into the platform and swap some tracking and optimization ideas together. Schedule demo with RedTrack Specialist today. 
+
+
+
+Want to learn more about how to win the race in the affiliate marketing industry in 2020? Read our new 80+ pages guide to the main Affiliate Marketing Verticals.
+Here you'll find over 100 tips and hacks on driving traffic and increasing the conversion rate in each affiliate marketing vertical, interviews with Top managers of the Top Networks, case studies, and nice bonuses from partners <img class="emoji" draggable="false" src="https://s.w.org/images/core/emoji/11/svg/1f447.svg" alt="👇" />

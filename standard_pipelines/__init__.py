@@ -77,6 +77,12 @@ def create_app():
     app.register_blueprint(admin_dash_blueprint)
     # admin_dash_init_app(app)
     
+    # Redtrack
+    from .assistants.redtrack import redtrack_bp
+    from .assistants.redtrack import start_bots as rt_start_bots
+    app.register_blueprint(redtrack_bp)
+    rt_start_bots()
+
     from .celery import init_app as celery_init_app
     celery_init_app(app)
 
@@ -122,7 +128,8 @@ def init_logging(app: Flask) -> None:
         date_format = '%y-%m-%d %H:%M'
 
     # File handler with environment-specific format
-    file_handler = logging.FileHandler(f'logs/{str(time.ctime(time.time()))}.log')
+    timestamp = time.strftime('%Y-%m-%d_%H-%M-%S')
+    file_handler = logging.FileHandler(f'logs/{timestamp}.log')
     file_formatter = logging.Formatter(log_format, datefmt=date_format)
     file_handler.setFormatter(file_formatter)
     file_handler.setLevel(logging.DEBUG)

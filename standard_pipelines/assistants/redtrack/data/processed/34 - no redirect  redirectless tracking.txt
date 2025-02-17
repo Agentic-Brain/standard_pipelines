@@ -1,0 +1,92 @@
+# No redirect / redirectless tracking
+
+
+What is no redirect tracking?
+
+
+
+No redirect tracking method is the opposite of the redirect method. The principle of work comes from the name: there is no redirect from one link to another in the funnel. This tracking method is the only one accepted by such giants as Facebook, Google, and Bing. In simple words, it is when you use your landing page link or the direct link to your website for tracking, so the traffic goes directly to the target page without any additional redirects. The no redirect campaign is created&nbsp;the same way as the usual one, but you use your landing page/website URL instead of the campaign link.
+
+
+
+In RedTrack, no redirect tracking can be implemented in 2 ways: via Universal tracking script + Tracking parameters (aka UTMs) or via No redirect script + Tracking parameters.
+
+
+
+Universal tracking script vs no redirect script
+
+
+
+ScenarioUniversal tracking scriptNo redirect scriptCan be used by affiliatesyesyesCan be used by advertisersyesyes (limited functionality)Can be used for e-comyesnoOrganic traffic trackingyes, separatelyyes, under the same campaignSeveral campaigns per LP/websiteyesnoSeveral traffic channels per LP/websiteyesno1st party cookieyesyesLP viewsyesyesLP clicksyesyesOnly offer campaignsyesno
+
+
+
+To sum it up:
+
+
+
+
+If you are an affiliate marketer working with a couple of traffic channels and use different landing pages in your funnels, the no redirect script will be an easy and smooth option to implement.
+
+
+
+For advertisers and e-commerce shop owners, the universal tracking script is the best solution.
+
+
+
+
+Important!Any RedTrack scripts must be added at the end of the body section. Otherwise, they might fail to trigger correctly.
+
+
+
+How does it work?
+
+
+
+
+
+This is a detailed guide on generating the universal tracking script and adjusting it according to your needs.
+
+
+
+
+
+1. Create a Campaign and save it.
+
+
+
+2. Tracking links and parameters → No-redirect → copy the script from your RedTrack campaign and add it to your landing page code (or website, depending on your flow):
+
+
+
+
+
+
+
+3. To make the system work properly for the landing page click tracking, you will need to use the landing page click URL on the CTA button instead of the direct link to the offer. You can find it in the landing page edit window.
+
+
+
+
+
+
+
+
+
+
+
+Make sure that both the script and offer click URL (your.domain.com/click) are present in the page source and have the same domain.
+
+
+
+4. Copy the tracking parameters from your RedTrack campaign and add them to the appropriate field in the traffic channel (tracking template for Google, URL parameters for Facebook, etc.).
+
+
+
+
+
+
+
+Some traffic channels have no separate tracking parameters field. In that case, add the parameters directly after the main URL (your landing page). Example: https://my.amazing.website.com?sub1={{ad.id}}&amp;sub2={{adset.id}}&amp;sub3={{campaign.id}}&amp;ad_name={{ad.name}}&amp;adset_name={{adset.name}}&amp;utm_source=mysource
+
+

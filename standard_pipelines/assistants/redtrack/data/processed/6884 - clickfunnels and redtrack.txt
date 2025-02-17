@@ -1,0 +1,600 @@
+# ClickFunnels and RedTrack
+
+
+
+
+
+
+
+
+
+
+ClickFunnels is an online tool for building high-converting websites and sales funnels.
+
+
+
+To integrate ClickFunnels with RedTrack act depending on the type of integration and the funnel you have:&nbsp;
+
+
+
+
+
+This type of integration is usually used by the affiliates as Clickfunnels provides the landing page creation functionality. Act as per steps below:
+
+
+
+In RedTrack
+
+
+
+1.&nbsp;Add your&nbsp;Offer&nbsp;and&nbsp;Offer source&nbsp;to RT.
+
+
+
+1.1 Use this guide to help you add Offer sourсe and Offer
+
+
+
+1.2 Go to the added Offer source settings → Additional parameters → add the following parameters and assign corresponding roles:
+
+
+
+
+First Name
+
+
+
+Last Name
+
+
+
+Phone
+
+
+
+Gender 
+
+
+
+Email
+
+
+
+Zip Code
+
+
+
+
+ 
+
+
+
+2.&nbsp;Add the needed&nbsp;Traffic channel&nbsp;to RT.
+
+
+
+3.&nbsp;Add a&nbsp;custom tracking domain.
+
+
+
+4.&nbsp;Create a&nbsp;Campaign&nbsp;in RT.
+
+
+
+5.&nbsp;Create a&nbsp;universal tracking script.
+
+
+
+6. The landing page URL is to be taken from Clickfunnels.
+
+
+
+In Clickfunnels
+
+
+
+
+
+1. Go to the tab ClickFunnels → Funnels → choose the funnel:
+
+
+
+
+
+
+
+2. On the Sales page click Edit page:
+
+
+
+
+
+
+
+3. Go to Settings → Tracking code:
+
+
+
+
+
+
+
+4. Add the tracking script from your RT Campaign here:
+
+
+
+
+
+
+
+The basic script can be taken from your RedTrack campaign settings→ Tracking links and parameters → no-redirect script. If you are using the universal tracking script instead, add it there as well.
+
+
+
+
+
+A. For a regular CTA button use the landing page click URL. 
+
+
+
+It can be found in Landers → Edit → scroll down to the Click URL section.
+
+
+
+B. For an image CTA
+
+
+
+1. Add the Custom JS/HTML element:
+
+
+
+
+
+
+
+2. Once it's added, navigate to this element → Settings:
+
+
+
+
+
+
+
+3. Press Open code editor:
+
+
+
+
+
+
+
+4. Paste the code of your picture in the following format, but replace the domain for /click URL link with your actual domain and add the actual image URL:&lt;a href=“https://trk.domain.com/click”&gt;&lt;center&gt;&lt;img src=“https://image.url/image-folder/Image1.jpg”&gt;&lt;/center&gt;&lt;/a&gt;
+
+
+
+
+
+
+
+Check out this video explanation on the Image issue.
+
+
+
+
+
+
+
+A webhook integration can be useful if you are a direct advertiser or your flow is similar and you need Clickfunnels to fire the conversion data back to RedTrack. Act as per the steps below:
+
+
+
+
+
+1. Your RedTrack account → Tools → Integrations → Brands/Offer sources → Clickfunnels url webhook → copy your webhook:
+
+
+
+
+
+
+
+2. Go to your ClickFunnels account→ Click Funnels → Funnels:
+
+
+
+
+
+
+
+3. Choose the funnel where you need to place the webhook:
+
+
+
+
+
+
+
+4. Settings → Webhooks → Manage You Funnel Webhooks:
+
+
+
+
+
+
+
+
+
+
+
+5. New Webhook:
+
+
+
+
+
+
+
+6. Fill in the form with the needed values and press Create Funnel Webhook:
+
+
+
+
+
+
+
+Values to be added:1. URL = Redtrack webhook URL (copied within step 1 above)2. Event = contact_created, purchase_created, purchase_updated3. Version  = 14. Adapter = attributes
+
+
+
+If you are creating a webhook for the first time in СlickFunnels, there may be an error. In case it pops up, do the following: 1. Create a test webhook URL = your domain. Move it to the archive.2. After that, create a webhook for RedTrack.For more information on how to troubleshoot this error, please click here.
+
+
+
+
+
+1. In your ClickFunnels account go to ClickFunnels → Funnels:
+
+
+
+
+
+
+
+2. Choose the funnel → Edit page button on the preview of the sales page you want to edit:
+
+
+
+
+
+
+
+
+
+
+
+3. Elements tab → Add element → Form → drag the Input element to the needed place on the form:
+
+
+
+
+
+
+
+4. Press Settings to edit the added element:
+
+
+
+
+
+
+
+5. Fill in the following fields in the Settings window and save the changes:
+
+
+
+
+
+
+
+Values to be inserted:1. Input Type  = Custom Type2. Custom Type = rtclickid3. Placeholder text = {clickid}4. Required = Not Required6. press the "Hide" icon
+
+
+
+
+
+This is how you can add your custom tracking domain. 
+
+
+
+
+
+1. Use this guide to help you add Brand and Website.
+
+
+
+2. When adding your Brand template go to Additional parameters → add the following parameters and assign corresponding roles:
+
+
+
+
+First Name
+
+
+
+Last Name
+
+
+
+Phone
+
+
+
+Gender
+
+
+
+Email
+
+
+
+Zip Code
+
+
+
+
+
+
+
+
+
+
+Here is how you can add your traffic channel to RT.
+
+
+
+
+
+To create a campaign in RT refer to:
+
+
+
+
+this guide&nbsp;for Advertisers.
+
+
+
+this guide&nbsp;for Affiliates.
+
+
+
+
+
+
+To set up GTM correctly, you must have the already-generated universal tracking script.- For Affiliates: use this guide to help you with the universal tracking script.- For Advertisers: a universal tracking script was created automatically once you had added your Website.Both Affiliates and Advertisers can find the generated universal tracking script in Tools → Scripts:
+
+
+
+1. Integrate GTM with RT and add the needed tags.
+
+
+
+Follow this guide on integrating Google Tag Manager (GTM) with RedTrack and the steps below on ClickFunnels-related insights.
+
+
+
+Create 2 types of Tags:&nbsp;
+
+
+
+
+
+Elements:
+
+
+
+
+Tag&nbsp; = Custom HTML
+
+
+
+Triggering =&nbsp; All Elements (All Clicks)
+
+
+
+
+Script:
+
+
+
+&lt;script type='text/javascript'&gt;
+function setFormClickIdValue(clickid) {
+document.querySelectorAll('input').forEach(function(el) {
+if (el.placeholder.indexOf('{clickid}')&gt;-1) {
+el.value = clickid
+}
+});
+}
+function getCookie(name) {
+var value = '; ' + document.cookie;
+var parts = value.split('; ' + name + '=');
+if (parts.length == 2) return parts.pop().split(';').shift();
+}
+if (getCookie('rtkclickid-store') !== null &amp;&amp; getCookie('rtkclickid-store') !== undefined &amp;&amp; getCookie('rtkclickid-store') !== 'undefined') {
+setTimeout(function(){
+setFormClickIdValue(getCookie('rtkclickid-store'))
+}, 3000)
+}
+&lt;/script&gt;
+
+
+
+
+
+Elements of the Tag:
+
+
+
+
+Tag&nbsp; = Custom HTML
+
+
+
+Triggering = All Pages (Page view)
+
+
+
+
+Script:
+
+
+
+You should add your universal tracking script from RT:
+
+
+
+
+For&nbsp;Affiliates: use&nbsp;this guide&nbsp;to help with the universal tracking script.
+
+
+
+For&nbsp;Advertisers: a universal tracking script was created automatically once you had added your&nbsp;Website.
+
+
+
+
+Both Affiliates and Advertisers can find the generated universal tracking script in&nbsp;Tools&nbsp;→&nbsp;Scripts:
+
+
+
+
+
+
+
+
+
+2. Install GTM on the funnel in ClickFunnels.
+
+
+
+2.1 ClickFunnels&nbsp;→&nbsp;Funnels&nbsp;→ choose the needed funnel:
+
+
+
+
+
+
+
+2.2 Once you’re in the funnel go to the&nbsp;Settings&nbsp;and scroll down a bit:
+
+
+
+
+
+
+
+2.3 Copy the script from GTM &lt;head&gt; script and place it in the box Head Tracking Code in ClickFunnels → copy the universal tracking script from RT → place it in the box Body Tracking Code in ClickFunnels and under this script place the GTM &lt;body&gt; script:
+
+
+
+
+
+
+
+2.4 Once the scripts are added, scroll down this page and press&nbsp;Save And Update Settings&nbsp;to apply the changes:
+
+
+
+
+
+
+
+
+
+Here is the list of ClickFunnels events that can be added to RedTrack and easily mapped:Lead - in this event ClickFunnels passes the conversion when the user has filled in and sent his contacts in the form;Purchase - in this event, ClickFunnels sends the conversion when the user has paid for the purchase;Upsell - in this event, ClickFunnels sends the conversion when the user paid for the upsell. This applies only to forms that ClickFunnels offers for upsells.
+
+
+
+1. RedTrack → Tools → Conversion tracking → Conversion&nbsp;type → use this guide to help you set the needed events.
+
+
+
+2. Tools → Integrations → Brands → scroll down to the sections Clickfunnels event matching and match the events:
+
+
+
+
+
+
+
+3. (optional) If the ClickFunnels supported are not enough for you, you can add more events via one of the 2 ways:
+
+
+
+
+
+Please follow the steps in the guide&nbsp;Google Tag Manager integration with RedTrack.
+
+
+
+
+
+1. In ClickFunnels go to the tab&nbsp;ClickFunnels →&nbsp;Funnels → choose the needed funnel:
+
+
+
+
+
+
+
+2. On the needed Sales page click&nbsp;Edit page:
+
+
+
+
+
+
+
+3. Go to&nbsp;Settings →&nbsp;Tracking code:
+
+
+
+
+
+
+
+4. Add this script to the page settings in the tracking code section:
+
+
+
+&lt;script&gt;
+function getCookie(name) {
+var value = "; " + document.cookie;
+var parts = value.split("; " + name + "=");
+if (parts.length == 2) return parts.pop().split(";").shift();
+}
+var rtCookie = getCookie('rtkclickid-store')
+//create request with its properties (you can add to the postback &amp;type=transaction &amp;status= &amp;event= &amp;sum= like in custom image postback)
+var request = new XMLHttpRequest();
+request.open("GET", `https://tracking.domain/postback?clickid=${rtCookie}&amp;type=ViewContent`)
+//optional - to read our response code :create callback for success containing the response
+request.success = function(response) {
+console.log(response);
+};
+//optional - to read our response code : and a fail callback containing the error
+request.fail = function(error) {
+console.log(error);
+};
+//and finally send it away
+request.send();
+&lt;/script&gt;
+
+
+
+Remember to change the tracking domain and the event type which you want to track:
+
+
+
+
+
+

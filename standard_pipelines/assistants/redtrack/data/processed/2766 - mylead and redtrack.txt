@@ -1,0 +1,130 @@
+# MyLead and RedTrack
+
+
+
+
+
+
+MyLead is a comprehensive platform offering a variety of partner programs. It uses various cost models and provides offers from almost all verticals.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events you want to track
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add MyLead as an Offer source in RedTrack.
+
+
+
+RedTrack → Offer sources → New from template → Add MyLead template → copy the Postback URL → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Add Postback URL from RedTrack to MyLead.
+
+
+
+In your MyLead account go to the section For Webmasters → Postback → Add a new Postback URL → paste the Postback URL from RT (copied in step 1) → Save:
+
+
+
+
+
+
+
+
+
+
+
+3. Get the MyLead offer.
+
+
+
+3.1 In your MyLead account go to the List of Campaigns → select the offer:
+
+
+
+
+
+
+
+3.2 Once the offer is approved, copy the link:
+
+
+
+
+
+
+
+
+
+
+
+4. Add MyLead offer to RedTrack.
+
+
+
+In your RedTrack account go to Offers → Create new offer → add MyLead offer link in the URL field -> make sure the tracking parameters “ml_sub1={clickid}” are added at the end of the offer URL → Save changes to the template:
+
+
+
+
+
+
+
+Refer to this guide for details on filling in the rest of the fields in the Offer form.
+
+
+
+5. Create the campaign with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To help you create the campaign refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

@@ -1,0 +1,44 @@
+# RSOC
+
+
+What's RSOC?
+
+
+
+RSOC (Referrer Source of Conversion) method is used to identify and track the specific source of traffic that leads to a conversion (sale, lead, purchase, etc.). In RedTrack this attribution method is relevant for customers who want to send conversions to RedTrack via postback, but the conversions do not have our rtclickid. In other words you should use it to attribute conversions when a unique clickid is unavailable. With this attribution method, conversions will be recorded on the last click corresponding to the values specified in the new rsoc_id parameter.
+
+
+
+Example of your typical Postback URL with the RSOC attribution method will look like this: https://tracking.domain/postback?rsoc_id=12a3456789bc12b345de67fg-1234-123&amp;type=Lead. In this postback:- tracking.domain is the name of your actual tracking domain. - rsoc_id=12a3456789bc12b345de67fg is RedTrack campaign id (put instead of the campaign_id parameter). - 1234 is your traffic channel campaign id (put instead of the rt_campaign_id parameter, which is added to the traffic channel settings → Additional parameters → sub with the assigned Cid role)- 123 is your traffic channel ad id (put instead of the rt_campaign_id parameter, which is added to the traffic channel settings → Additional parameters → sub with the assigned Aid role)- type=Lead is the conversion type you've added in RT and want to track.- "-" sign between the elements of the postback serves to separate the values for parameters, it's there for the correct URL syntax purposes.
+
+
+
+RSOC attribution method will work in several scenarios/combinations. Postback URL will look differently depending on the chosen scenario: 
+
+
+
+RSOC attribution method combinationResulting Postback URL example with the values in placersoc_id={campaign_id}-{rt_campaign_id}-{rt_ad_id}https://tracking.domain/postback?rsoc_id=12a3456789bc12b345de67fg-1234-123&amp;type=Leadrsoc_id={campaign_id}-{rt_campaign_id} https://tracking.domain/postback?rsoc_id=12a3456789bc12b345de67fg-1234&amp;type=Leadrsoc_id={campaign_id}-{rt_ad_id} https://tracking.domain/postback?rsoc_id=12a3456789bc12b345de67fg-123&amp;type=Leadrsoc_id={campaign_id}https://tracking.domain/postback?rsoc_id=12a3456789bc12b345de67fg&amp;type=Lead
+
+
+
+How to enable the RSOC feature
+
+
+
+1. RedTrack → Traffic channels → settings of the added traffic channel template → Additional parameters → assign Cid role to the campaign_id parameter and Aid to the ad_id parameter. Parameters with the assigned roles are added depending on the chosen RSOC attribution combination:
+
+
+
+RSOC attribution method combinationParameter + the assigned role in the traffic channel templatersoc_id={campaign_id}-{rt_campaign_id}-{rt_ad_id}rsoc_id={campaign_id}-{rt_campaign_id} rsoc_id={campaign_id}-{rt_ad_id} rsoc_id={campaign_id}No need to add any parameters or assign roles.
+
+
+
+2. In the added campaign settings enable the RSOC toggle → Save changes to the campaign template:
+
+
+
+
+
+
+
+- If the toggle is off, only conversions with rtclickid will be counted. - If the toggle is on, both conversions with rtclickid and rsocid are counted, they do not cancel each other out. 

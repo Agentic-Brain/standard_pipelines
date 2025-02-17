@@ -1,0 +1,24 @@
+# Meet Our New Partner - Clickky
+
+In RedTrack we believe that a reliable traffic source allows skyrocketing your ad campaigns by providing efficient and diverse web channels. 
+
+We’re glad to announce our partnership with Clickky — a full-stack platform for mobile advertisers and publishers. 
+Working with Clickky you can benefit from their CPI AdExchange:
+• Simple and fast integration via single API for advertisers and publishers
+• Access to the live feed of 30,000 offers
+• Automated targeting of relevant users 
+• Payment for app installs or actions completed
+
+
+And here is a chance for mobile publishers that support API to earn more and win prizes. If you become one of the top 3 publishers, driving the most revenue on Clickky’s CPI AdExchange, you’ll get one of the following prizes:
+
+
+
+For advertisers, Clickky offers a Self-Serve Platform:
+• Mobile advertisers get connected to 15k traffic partners
+• CPI recommendation tool for ensuring that advertisers always pay the optimal price for the campaigns
+• High-quality non-incentive traffic sources
+• Advanced campaign optimization: blacklisting and the retention rate analytics
+With Clickky added as a Trusted Traffic Source to RedTrack.io, it becomes easier to set up and manage your traffic flows. Now, it takes only a few seconds to set up tracking between Clickky and RedTrack, as all the postbacks and macros are automatically pre-set. 
+
+Please refer to our Knowledge Base to learn the steps of setting tracking between Clickky and RedTrack.

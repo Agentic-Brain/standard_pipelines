@@ -1,0 +1,112 @@
+# Shopify: Recharge subscribers
+
+
+Shopify ↔ RedTrack integration for Recharge subscribers presupposes 2 additional event types: Subscription and Recurring. In addition to the standard integration workflow, for the events to sync up between the three platforms, extra settings are needed in:
+
+
+
+
+Shopify: adjusting the product section.
+
+
+
+Recharge: editing account permissions and generating API token.
+
+
+
+RedTrack: adding Subscription and Recurring as event types for tracking; adding API token from Recharge for integration.
+
+
+
+
+Explained
+
+
+
+
+
+Follow this article to integrate Shopify with RedTrack.
+
+
+
+Without following the standard workflow for Shopify ↔ RedTrack integration, extra settings for Recharge subscribers won't work.
+
+
+
+
+
+1. Shopify account → Settings → Apps and sales channels→ choose your app → Overview → Admin API integration:
+
+
+
+
+
+
+
+2. All→  Products → mark “read_products”:
+
+
+
+
+
+
+
+
+
+1. In your Shopify account go to Settings → Apps and Sales channels → find Recharge Subscriptions app and press three dots next to it → Open app:
+
+
+
+
+
+
+
+2. In your Recharge account go to Settings → Accounts (only store owner) → Edit store default permissions → tick API Tokens and update the permissions:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. In Recharge go to Apps → API Tokens → Create an API token → copy the generated token to paste it in RedTrack:
+
+
+
+
+
+
+
+
+
+1. Add Subscription and Recurring as conversion types in RedTrack
+
+
+
+Tools → Conversion tracking → Conversion&nbsp;type → add the event names → Save. Use this guide to help you add the events in RT.
+
+
+
+Type Subscription counts for the 1st time subscriptions. All the recurring subscriptions (starting from the 2nd one) go with the type Recurring.If the order consists of a subscription and an additional service/goods, then use the following tip:▸ subscription = conversion type Subscription▸ service/goods = conversion type Purchase
+
+
+
+2. Add the Recharge API token to RedTrack to finish the integration
+
+
+
+Tools → Integrations → Shopify → Token for recharging:
+
+
+
+
+
+

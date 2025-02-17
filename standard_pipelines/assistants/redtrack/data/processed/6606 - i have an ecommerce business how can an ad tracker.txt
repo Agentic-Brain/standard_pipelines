@@ -1,0 +1,160 @@
+# I have an eCommerce business. How can an ad tracker help me?
+
+Building an eCommerce business is hard. Rapidly evolving technologies and changing consumer trends put eCommerce business in a constant state of adaptation. The only way to keep up with market changes is to use reliable data analytics. In today's world, there's no better way to get valuable data-driven insights as to use an ad tracker.
+
+With a tracker, an eCommerce business can get a holistic view of all their media-buying activities and cover all ad tracking needs, including
+
+ 	accurate data tracking without redirects and 3rd party cookies;
+ 	detailed cross-channel marketing analytics;
+ 	efficient sales funnels building;
+ 	white-label customized drill-down reports; 
+ 	affiliate program management.
+
+Today, ad trackers' popularity is rising due to the upcoming dismiss of 3rd party cookies by the major browser. The most reputable ones have already come up with effective cookieless tracking solutions that help eCommerce business track their digital marketing activities in the most accurate and secure way. The data is neatly passed and stored, so there are no clicks, conversions, and impressions lose. Want to learn more about how your business can benefit from an ad tracker? Let's figure this out on the example of RedTrack. 
+
+
+----------------------------------------------------
+An Ad tracker for eCommerce business
+1. What is an ad tracker in detail? 
+2. What can you track with a tracker? 
+3. Most popular RedTrack features for e-commerce business.
+4. Having an Affiliate Program. The secrets of effective management with RedTrack.
+5. How to track Facebook Traffic and not get banned.
+6. RedTrack features to help you work with your team.
+7. How to start with RedTrack?
+
+&nbsp;
+Let’s start with the basics. What is an ad tracker?
+An ad tracker is a tool that helps you track all the traffic you buy or organically receive across the web. With a tracker, you can view data on impressions, clicks, add-to-carts, and sales from each traffic source. All in one place.
+Why is it important?
+
+If people are buying products from your website, but you're not sure how and where they find you, how often they visit your store, which ad banners bring you the most profitable leads, then you simply don't know how your business works. A reliable ad tracker can give you answers to all these questions, provide insights on your customers' preferences, and help to optimize and scale your business.
+
+&nbsp;
+What can you track with a tracker?
+The answer fully depends on the tool you use. RedTrack.io tracks all types of traffic and elements of your media buying campaigns to provide you with the full picture of your efforts. 
+
+Tracking various marketing channels 
+• Organic traffic. Understand the performance of your website and marketing campaigns.
+• Paid traffic / PPC. Currently, RedTrack is integrated with 70+ channels like Facebook Ads,TikTok Ads, Google Ads, Bing, Revcontent, Taboola, Outbrain, Propellerads, MGID, and others.
+• Social networks. Facebook, TikTok, Reddit, Snapchat, and MyTarget are integrated with RedTrack by default.
+• Email traffic. Email marketing proves its efficiency for the e-com business for years. Attribute clicks from your email campaigns with conversions on your website.
+Measuring the performance of your media-buying activities
+
+ 	Measuring impressions, clicks and conversions with every marketing channel you use
+ 	Tracking the full conversion path (like view content, add-to-cart, initiate checkout, purchase, etc.).
+ 	Measuring the cost of your advertising and revenue generated
+ 	Analyzing the performance through 30+ data points for interactions with your ads (like device type, OS type, location, language, time, etc.)
+ 	Comparing the results of various channels in a single dashboard
+ 	Syncing your Shopify or WooCommerce store with advertising channels
+ 	Analyzing ads for bot or fradulents activities.
+
+Most popular RedTrack features for e-commerce business.
+
+RedTrack.io is an ad tracking and conversion attribution platform. Handling big volumes of data, we provide tracking and analytics reports to media buyers, publishers, brands, and eCom agencies from 107 countries.
+
+The most common reason why eCommerce businesses apply RedTrack is to get accurate conversion attribution, i.e. understand real-time which clicks and traffic sources actually bring conversions.
+
+&nbsp;
+
+
+
+Among the most popular features for agencies and eCom brands, are:
+
+ 	Cross-channel tracking. This means that in one UI you can see the performance of your media buying campaigns, no matter if your traffic source is Google / Bing, Facebook, Taboola, affiliate websites, etc.
+ 	Cookieless tracking. Cookies are already blocked by Safari and some other browsers. Soon by all or most browsers. It means that if you still rely on cookie-based tracking, you lose a lot of your data. If you need an accurate and secure way of multiple traffic source tracking, then you should apply a 3rd party tracker. RedTrack records every click and shows the whole users' path from the first touchpoint to the conversion and further. It allows you to track both organic and paid traffic simultaneously with no redirects and limitations.
+
+
+
+
+ 	Attribution models. When you need to identify which click resulted in a conversion ('add-to-cart' or purchase), based on your goals you might want to track:
+
+- first-click attribution - means that a conversion is attributed to the date of the first click of a visitor, that later on might have made a number of subsequent visits that ended up in conversions.
+
+- last click attribution - the date of the visitor's last click is attributed to the conversion.
+What else?
+
+ 	Multiple post-conversion events tracking. If you work with commerce platforms, like Shopify, WooCommerce, and others, besides click and conversion tracking, you should be also interested in post-conversion events, as it may influence final ROI metrics. RedTrack offers the opportunity to add up to 10 post-conversion events and display them in your reports.
+ 	Easy integration with major eCom marketplaces. We have a private Shopify App, WooCommerce plugin that make it easy to connect your eCommerce platform to advertising channels.
+ 	Customized reports. You can fully customize the reports dashboards by adding, hiding, prioritizing the right data columns and metrics.
+
+
+
+-&gt;  Read: How to Skyrocket your business with RedTrack Data Reports
+• Automation Rules. They can save your time spending on routine tasks and save your ads budget clearing your media buying set from ineffective ideas.
+
+• A/B testing. Run multiple tests to find the offers and landing pages that work best.
+
+-&gt; Read: How A/B testing helps our clients to receive better ROI.
+
+&nbsp;
+Want to learn more about how RedTrack can help your business?
+
+
+
+ hbspt.cta.load(7519541, 'ef490f48-8ab0-4913-8668-57716f5d0600', {}); 
+
+&nbsp;
+Having an Affiliate Program. The secrets of effective management with RedTrack
+In RedTrack you can manage all your affiliates and publishers and track their performance in one place. You can create multiple Whitelabel panels with different domains and settings and build your own full-fledged e-commerce Affiliate Programs. All this is possible in just a few steps:
+
+
+ 	Create and Whitelabel the workspace;
+ 	Register your affiliates/publishers;
+ 	Add offers (i.e. products), set conditions, and add all required information;
+ 	Send invitations to your affiliates ;
+ 	Track and analyze their performance in real-time;
+ 	Manage all the payout activities.
+
+ 
+
+&nbsp;
+
+-&gt; Read: RedTrack management solution for ad agencies: keep all the traffic under control
+How to track Facebook Traffic and not get banned
+Let’s admit that Facebook is a very specific Traffic Source. There are probably no affiliates who have never been blocked by Facebook for unknown reasons. Keeping in mind their strict terms of use, e-commerce is a great niche to promote on Facebook. But you should always be prepared for being blocked if you:
+
+
+ 	
+
+ 	
+
+ 	promote health/beauty products and supplements using young Facebook Ads account;
+ 	try split-testing;
+ 	try to promote adult/crypto or financial offers;
+
+
+
+
+
+
+The worst thing is that in the case of blocking, you won’t get the exact reason for this. Therefore, there can be no single answer. RedTrack experienced clients often use several Traffic Sources to maximize their profit. According to our internal survey, native advertising shows the best results as an ad format for e-commerce affiliate marketing campaigns.
+By the way, if you'd like to learn more about how to gain profit with e-commerce using various Traffic Sources in e-com, download our free Supreme Guide to Affiliate Marketing verticals. Here you'll find tips from experts, successful cases, and useful stats.
+
+
+
+&nbsp;
+RedTrack features to help you work with your team
+RedTrack has a Multi-User access feature that can help your team to be more efficient and productive even if you’re in different parts of the world.
+
+With it, you can set different roles to your team members and provide them access to different levels of the campaigns' data:
+
+
+
+&nbsp;
+How to start with RedTrack?
+It's easy! Sign up for free for 14 days trial. (No Credit Card required).
+
+
+
+ hbspt.cta.load(7519541, '47a55023-9268-42a2-9db3-ac0014fe0749', {}); 
+
+And by the way, if you need any help or have questions, request a call with our specialist, so we guide you through the platform and answered the questions.
+
+ 	
+
+ 	
+
+
+
+

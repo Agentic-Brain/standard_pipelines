@@ -1,0 +1,310 @@
+# Google Ads and RedTrack
+
+
+
+
+
+
+
+
+
+
+Google Ads&nbsp;is an online advertising solution that businesses use to promote their products and services on Google Search, YouTube, and other sites across the web. Google Ads also allows advertisers to choose specific goals for their ads, like driving phone calls or website visits. With a Google Ads account, advertisers can customize their budgets and targeting, and start or stop their ads at any time.
+
+
+
+RedTrack has an API integration with Google Ads which allows you to:
+
+
+
+
+Send conversion data back to Google and attribute it to your customised conversion type
+
+
+
+Synchronize costs
+
+
+
+Pause: campaign, placement, creative
+
+
+
+Create automated rules
+
+
+
+
+
+
+
+Google Ads supports both no-redirect and parallel tracking.  We do not recommend using parallel tracking unless you are 100% sure you are allowed to do that and have approval from Google. The no-redirect tracking method works without any issues. Click on the corresponding Google Ads Help article for more details on the technical possibility of applying parallel tracking in Google Ads.
+
+
+
+Custom tracking domain usage is obligatory with Google.
+
+
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer &amp; Offer source&nbsp;(if you are an affiliate) /&nbsp;Brand &amp; Website&nbsp;(if you are an advertiser).
+
+
+
+Google Ads account Customer ID
+
+
+
+
+
+
+1. Add Google Ads as a&nbsp;Traffic channel&nbsp;in RedTrack. 
+
+
+
+Traffic channels →&nbsp;New from template&nbsp;→ Google Ads (no-redirect tracking) →&nbsp;Add → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+ Saving Google Ads template first is essential for successful integration between Google Ads and RedTrack.
+
+
+
+In the added template you can modify some Google parameters, although blocked (greyed) parameters should remain under the same sub-values with the same roles assigned as provided in the initial template. The following are essential for the API cost integration:{creative} should always be with Aid role{adgroupid} should always be with Gid role{campaignid} should always be with Cid role
+
+
+
+In case of IOS trafficking due to Apple’s iOS14.5 changes if the click occurs from an iOS device and the user has opted out of tracking, RedTrack can get WBRAID and GBRAID parameters:WBRAID is used for web-to-app measurement.GBRAID is used for app-to-app measurement. The new parameters work in tandem with the modeled online conversion that does not attribute conversions to an individual user but rather offers a holistic report on conversions in compliance with user privacy. These parameters use aggregation and de-identification techniques that ensure cross-site behavior cannot be tied back to an individual user. If you do conversions in-app, you need to remove the {wbraid} parameter from the Google Ads Traffic channel template in RT.
+
+
+
+A one-per-click counting setting may block the creation of conversions with such parameters as GBRAID/WBRAID in which case an error when sending such conversions will pop up. To resolve this issue you need to change the one-per-click setting in your Google Ads account:Check out this article for more details on changing the one-per-click setting in Google Ads.
+
+
+
+Refer to this guide for the Campaign Manager 360 integration. 
+
+
+
+2. Integrate&nbsp;Google Ads with RedTrack. 
+
+
+
+Connecting your account first is important for both sending the conversion data to Google and getting costs.
+
+
+
+2.1 Since it is a complex API integration, we need to get permission for integration from Google first, to do that press Sign in with Google:
+
+
+
+
+
+
+
+2.2 Once your account is verified and you give RedTrack all the required permissions, you will be redirected back to the RT Google Ads template automatically. Add the Google Ads Customer ID and (if needed) Google MCC Account ID → Save changes to the template:
+
+
+
+
+
+
+
+This is how you find your Google Ads Account ID.This is how you find your MCC Account ID.Add MCC account ID ONLY if you want to send conversions to it instead of the ad account. Combinations for account usage:1. Ads Account ID is filled in + MCC Account ID is empty:- Costs are received from Ads Account ID- Conversions are sent to Ads Account ID2. Ads Account ID is filled in + MCC Account ID is filled in:- Costs are received from Ads Account ID- Conversions sent to MCC Account ID
+
+
+
+The account you’re connecting to must be the same as the one where you run your Google Ads Campaigns. The integration will not work if you connect the Google Ads manager account while running campaigns from sub-accounts. The indicator for successful integration is the enabled Active toggle:
+
+
+
+The Auto Cost Update Depth and Frequency by default is set to the deepest possible according to your subscription. For Google PerformanceMax (PMax) campaigns, costs can be updated only on the Campaign level, as such campaigns send out only their Campaign IDs. That's why the only working Auto Cost Depth for your Traffic Channel in such cases is Campaign.
+
+
+
+3. Add conversion events you want to use.
+
+
+
+4. Map the conversion events.
+
+
+
+Go to the settings of the added Google Ads Traffic channel →&nbsp;Google API integration → set up the mapping:
+
+
+
+
+Conversion type is the custom conversion type from RedTrack.
+
+
+
+Conversion name is how this conversion type will be displayed in your Google account.
+
+
+
+Category&nbsp;is Google conversion event category. You no longer need to set the category manually in Google Ads, we will send the category with the conversion.
+
+
+
+Include in “conversions”&nbsp;– set yes to add this conversion to the conversions column in the Google Ads.
+
+
+
+
+
+
+
+
+▸ RT sends conversion to Google immediately, and if the upload is unsuccessful retries every 4 hours within the next 36 hours. The statistics for conversions passed from RedTrack will appear in your Google Ads account within approximately 24 hours, due to the architecture of Google. ▸ Conversion data is taken with the UTC zone.▸ It takes about 48 hours for Google to process IOS conversions without the clickid and make them appear in the Google Ads dashboard. However, there is a chance that Google will not attribute 100% of postbacks due to its logic or additional user settings.
+
+
+
+5. Create the campaign in RedTrack with Google Ads as your traffic channel.
+
+
+
+
+
+1. Use this guide to help you add the campaign. Once the campaign is created, all the tracking links and the parameters for the script will be generated automatically and include all the supported macros. 
+
+
+
+2. For Google tracking you will need to use the tracking script in most of the cases. Follow this guide to choose the one that suits your needs better and set it up. 
+
+
+
+You will have to use our script directly on the page code. 
+
+
+
+The tracking parameters are to be added to a Google campaign. You will need to use the "universal script" OR "no-redirect" tracking parameters later depending on the type of script you have chosen before. Copy and save them:
+
+
+
+
+
+
+
+3. Enable Auto-update costs toggle to receive costs automatically:
+
+
+
+
+
+
+
+
+
+1. Create a campaign in RedTrack using this guide. Once the campaign is created, all the tracking links and the parameters for the script will be generated automatically and include all the supported macros. 
+
+
+
+2. For Google you will need to use our universal tracking script (created automatically once you've added the Website) on the page code or for your e-commerce store. Click here for details.
+
+
+
+The tracking parameters are to be copied and saved for later. 
+
+
+
+
+
+
+
+3. Enable Auto-update costs toggle to receive costs automatically:
+
+
+
+
+
+
+
+
+
+6. Set up the automation.
+
+
+
+
+Use&nbsp;this guide&nbsp;to help set up&nbsp;rules.
+
+
+
+Use&nbsp;this guide&nbsp;for setting up the&nbsp;auto update cost&nbsp;feature.
+
+
+
+
+
+
+Set the&nbsp;tracking in your Google Ads account.
+
+
+
+1. Go to the list of your campaigns → choose the target campaign →&nbsp;Settings&nbsp;→&nbsp;Account settings&nbsp;→&nbsp;Tracking:
+
+
+
+
+
+
+
+
+
+
+
+2. Add the tracking parameters you have copied within the campaign creation to the corresponding field depending on your Campaign integration type:
+
+
+
+
+
+If you are working with Google Merchant Center (Performance Max campaign) add the parameters to the&nbsp;Final URL suffix, but remove the&nbsp;{lpurl}?&nbsp;in the beginning. Remember to add the name of your campaign instead of the&nbsp;{replace}&nbsp;parameter in the middle of the tracking URL:
+
+
+
+
+
+
+
+
+
+Insert the tracking parameters into the&nbsp;Tracking template&nbsp;field:
+
+
+
+
+
+
+
+
+
+Tracking parameters for YouTube are added on the Ad level only.
+
+

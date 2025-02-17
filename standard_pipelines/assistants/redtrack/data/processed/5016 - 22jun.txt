@@ -1,0 +1,23 @@
+# 22-Jun
+
+
+ 	Publisher panel updates:
+
+ 	publisher creation logic changed: when adding publishers you'll need to add a Whitelabel instead of the domain; Whitelabels should always have a title; you cannot add publishers without creating a Whitelabel first. For more details go to the article Publisher panel: overview and the embedded articles.
+ 	now in the Pub panel, you can also see the Referral balance right under the Balance value. For screenshots and more details go to the article Publisher panel: settings for publisher.
+ 	possibility to download invoices in PDF format. For more details go to the article Publisher panel: managing payouts.
+ 	new Multiple Postbacks feature has been introduced the Pub panel. For more details go to the article Publisher panel: adding whitelabel (step 7).
+
+
+
+
+ 	Updated Pricing for the Advertisers and Agency. Go to our site (tab Advertiser and Agency accordingly) for more details.
+ 	Tagging your Campaigns has become even easier. Check RT KB article Tags for more details.
+ 	When adding a domain a tip was added urging you to use 3rd level domain, not 2nd level domain. Ex: att.trk.agency, and not trk.agency. More about custom tracking domains can be checked out here.
+ 	Once generated, the Clickbank API key is now filled in automatically to the Offer source Postback URL. For more details check out our RT KB article ClickBank and our RedTrack-Clickbank video tutorial.
+ 	 In Google Ads and Bind Ads templates next to the Google/Bing API integration section were added labels not connected or connected in case access token was inserted
+ 	Fast grouping in Campaign report now has Traffic &amp; Offer Source in quick access. Go to the article Reports to learn more about filtering the data in Reports.
+ 	EPC for listicles is now working
+ 	ROI for conversion types is now available
+ 	Possibility to tranfer Facebook browser ID to Facebook CAPI
+ 	Higher possibility of the Facebook conversion to be delivered since RT now checks and considers all the parameters from user_data.

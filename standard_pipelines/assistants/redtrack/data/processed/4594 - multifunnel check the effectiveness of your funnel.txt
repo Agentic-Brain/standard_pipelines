@@ -1,0 +1,86 @@
+# Multifunnel: Check the effectiveness of your funnel
+
+You don’t need exact numbers to understand that affiliate marketing is becoming a more competitive industry. Affiliates are still looking for high paying offers, but not as much as free niches in more or less stable verticals. Some start to experiment with black hat tactics. Others come up with intricate schemes to lead their website visitors down the “right” white path. 
+
+The affiliate marketing industry is changing at space speed. Some tactics quickly become obsolete, and direct-linking doesn’t work so effective as it did 7 years ago. Today it's hard to reach financial heights not knowing how to create convertible sales funnels - a strategically designed combination of pages that turn a user into a customer. The subtle art of consistent marketing.
+
+We’re sure you’re great in it. Our only concern is how will you understand which stage of the funnel works, and where you have holes to be patched? To understand this you need to track your pre-landers and landers separately. How? Just use RedTrack Multifunel feature.
+What’s a Multifunnel?
+&nbsp;
+
+Multifunnel is a new RedTrack feature that allows you to track complex landers funnels and evaluate the effectiveness of their main collateral separately. This feature was created due to the numerous requests of our customers and fully consistent with their real-life needs. To try it, follow the following steps:
+
+1) Go to Campaign Tab and choose Multi Landing option your Stream block:
+
+
+
+
+2) Enter the required values in the appropriate fields:
+
+Link from LP 1 to LP 2 (for the pre-lander): https://your.tracking.domain/preclick
+
+Link LP 2 to the Offer (for the lander): https://your.tracking.domain/click
+Improve your Sales Funnel
+So, we have a landing page and a pre-lander working together. Let's look at each of these in turn. With landing pages, it’s more or less clear. They contain your actual offer or multiple offers which can appeal to different target groups. Groups can be separated by personality types, hidden needs or financial status. A multi-offer landing page doesn’t only help you adapt the offers to different types of users, but give the users a sense of control. They can choose.
+As to pre-landers, there can be two types of them: pre-selling pages and lead gen pages. Pre-sellings are warming up pages that you want your users to see before the actual landing page. Lead gens, on the other hand, are used to capture information about the user:  name, opinion, tastes, email, or some contact information. Affiliates can provide some free valuable service or product in exchange for this. The information will then allow you to sell, upsell and create a long term relationship with your audience. 
+
+Making effective pre-landers:
+Pre-landers can be performed in different variations and used in combination with other features. The only thing is that they are usually made with an eye on some verticals features:
+Nutra 
+The main purpose is to show the real results after using a particular product. There are many ways through which social approval can be conveyed. You can use photos, testimonials, expert opinions, profound analysis of the product ingredients, and so on. 
+Sweepstakes
+Sweepstakes rely on a different strategy as they offer people the chance to win a prize. Again, this may vary, but the prizes often consist of a new gadget or a similar item. Sometimes, they also feature a timer to urge people to participate.
+
+
+&nbsp;
+Games 
+The purpose of the pre-landing page: to show the graphics in all its glory, to make users interested in the gameplay.
+
+
+&nbsp;
+Gambling 
+2 most frequent messages affiliates translate: 
+
+
+ 	gambling/online casinos/social gaming is easy money
+ 	it's not difficult to succeed in gambling/online casinos/social gaming. They are interesting and easy games that bring a lot of fun
+
+&nbsp;
+Performance Boosters 
+These pre-landers often offer to clean up the user’s computer and improve its overall performance. They usually display a technical message about the computer’s performance and promise to fix the problem.
+
+
+&nbsp;
+E-commerce
+In competitive e-commerce content is the king. In this vertical pre-landers are usually longer and more informative. The main purpose is it to demonstrate the value the product provides. To make a successful pre-lander you need to consider the following elements: 
+
+&nbsp;
+  1. Identify the topic related to your product and in which your potential audience will be interested in. Don’t talk exactly about something you sell. Talk about the situation your product can improve
+&nbsp;
+
+
+  2. Choose an engaging headline on the assumption of three main angles: competitive, beneficial, or inspirational one
+&nbsp;
+
+
+
+&nbsp;
+3. An exclusive offer or free value
+&nbsp;
+
+
+
+&nbsp;
+4. Make an introduction to the product you sell (use leading questions, buyer persona image, values, and how it can be used)
+&nbsp;
+
+
+
+5. Find a creative way to demonstrate social proof: certificates, media publications, reviews, referrals, ratings, etc
+&nbsp;
+
+
+
+&nbsp;
+Conclusion
+Simply put, your success heavily depends on three factors: the choice of the right affiliate marketing offers, understanding customer mindset and effective creatives. Multifunnel is to help you define which of your creatives work best.

@@ -1,0 +1,119 @@
+# The Power of Affiliate Marketing in eCommerce
+
+You don’t have to hire a sales team so that someone can promote your products for you. You only need a good affiliate marketing program. If you’re ready to increase your sales with a marketing channel that generates 16% of global eCommerce sales, read on! 
+
+We’ll show you everything you need to know about harnessing the power of affiliate marketing in eCommerce. 
+Affiliate Marketing for e-commerce 101
+With affiliate marketing, you partner with an affiliate - a publisher - who recommends your products to their audience and gets a commission for each sale. All you have to do is provide the tracking link and regular payouts with a good commission structure. 
+The affiliate will then promote your products through various methods, including mentioning them on their blog, posting on social media, and perhaps even recording TikTok videos. And yes, influencers or bloggers are also affiliates, if you think about it. So affiliate marketing is a must-channel for e-commerce business.
+Ultimately, it’s an excellent way to boost sales while reducing upfront marketing costs. You’ll only give the affiliate their cut after successfully selling your product. 
+How to Build a Highly-Profitable eCommerce Affiliate Marketing Program
+Let's investigate which steps you gotta take to achieve amazing results with affiliate marketing when promoting your e-commerce business.
+2.1. Start with Data and KPIs
+Ground your affiliate program in cold, hard data. Most affiliate programs we see never rise to their full potential (although they are profitable) because they’re not data-driven. eCommerce store owners and managers could get even more sales if only they built a framework around their data.
+
+Establish your KPI framework early on:
+
+ 	Traffic
+ 	Conversions
+ 	Lead quality
+ 	Average order value (AOV)
+ 	Lifetime value from affiliate customers (LTV)
+ 	Performance and revenue per each affiliate
+ 	Performance per affiliate promotion method
+
+Most eCommerce businesses only track traffic and conversions. 
+
+Create foundations to track individual affiliates’ and channels’ performances, so you can cut inefficient channels and focus on the profitable ones.
+
+For example, you might realize your TikTok affiliates sell better than blog affiliates.
+How to Track Your eCommerce Affiliate Marketing Program
+Since we’re talking data, we have to talk organization: you need a system to keep track of your affiliates and the revenue they bring in. If you use additional marketing channels, sign up for RedTrack.
+
+
+
+RedTrack offers affiliate tracking software for e-commerce that allows you to:
+
+ 	Customize your affiliate portal
+ 	Invite and manage affiliates
+ 	Set up custom conditions and commission structures 
+ 	Generate, track, and attribute affiliate links and promo codes
+ 	Integrate affiliate marketing into your marketing ecosystem
+
+RedTrack offers a very flexible system to set conditions for various kinds of collaborations with influencers or affiliates. For example, you can choose to pay different commissions based on:
+
+ 	marketing channels affiliates use
+ 	geolocation of leads / customers they achieve
+ 	products they advertise (product X will mean commission X1, product Y will mean commission Y1)
+
+RedTrack specializes in marketing attribution. You can track all your marketing efforts under one roof, from PPC ads to organic reach.
+
+
+
+RedTrack will instantly show you how much each channel generates, so you can scale what actually works. 
+2.2. Know the Value to Define the Commission
+In the beginning, you’ll have to rely on competitor research to determine how to differentiate your affiliate program.
+
+However, as soon as you get data, analyze the value of your affiliates:
+
+ 	Which affiliates bring in the most revenue?
+ 	Which affiliates bring in the highest conversion rate?
+ 	Which customers tend to increase their lifetime value the most?
+
+Look at the customer lifecycle to understand whether your acquisition cost is reasonable or too high/low. 
+
+For example, if one affiliate’s customers generate $100 for every $1 you spend on that affiliate, it makes sense to broaden your partnership as you scale. However, paying an affiliate $30 for a customer that brings in $35 and never buys again might not make sense.
+Flexible Commission Structures for eCommerce Affiliate Marketing
+We’re big fans of flexible commission structures. 
+
+You don’t have to set a fixed fee (say, 2%) for all your products. If one product is priced higher and generates better long-term conversions, use RedTrack to set up custom rules and compensate the affiliates appropriately. 
+
+
+
+(RedTrack will also make it easier to pay affiliates commissions based on specific KPIs, including lifetime values, areas, and promotion channels.)
+2.3. How to Choose Your Affiliates
+
+
+(Hint: it’s easier than training your dragon.)
+
+You’ll come across many professional affiliates in your eCommerce affiliate marketing journey. 
+
+Traditional methods of finding affiliates for your eCommerce marketing include:
+
+ 	Reaching out to your own customers
+ 	Contacting industry bloggers and influencers
+ 	Searching on forums and marketplaces like Fiverr
+ 	Using an affiliate recruitment agency
+ 	Using affiliate marketing directories 
+
+However, we recommend expanding your network. 
+
+For example, influencers can join your affiliate program even if you initially scheduled them for a single campaign. If they liked your products, why not invite them to keep earning?
+2.4. Monitor Your Performance
+When done right, affiliate marketing can become your personal revenue generation machine. However, you shouldn’t accept just anyone into your affiliate marketing program:
+
+ 	Ensure the affiliate’s presence is legitimate and professional. (Bonus points if they specialize in your niche!)
+ 	Create a partner guide for any brand, style, tone guidelines, and visuals (product images, logos, graphics, etc.), you can even prepare banners that your affiliates could use. 
+ 	Stay in touch with your affiliates through a Slack community. Harness the feedback they get from their audience, too.
+ 	Discuss promotion methods with affiliates before the onboarding.
+
+💡 Evaluate KPIs regularly. Give your affiliates time to kickstart their promotion and then analyze your results (or check your RedTrack dashboard).
+
+Ultimately, you should identify the products, channels, and affiliates that work best for your business.
+2.5. Optimize Your eCommerce Marketing with Strategic Insights
+As you gather data, refine not only your affiliate program but your marketing strategy as well. 
+
+For example, affiliate marketing may turn out to be more successful than you’d initially thought, so it would make sense to replace an inefficient channel.
+
+
+
+Identify the products that sell best when promoted through affiliate marketing. Even if you started by casting a broad net, you should analyze the results and refine your affiliate-marketed product list in time.
+
+Experiment with different affiliate marketing methods. You could start with a sponsored discount link but switch to free shipping promotions, seasonal add-ons, and more. Keep an open mind and consult your successful affiliates to uncover the best methods for their audiences.
+
+Finally, remember to integrate your affiliate marketing with your other efforts. Capture leads with email marketing, coordinate your advertising efforts with your affiliates, and work on your conversion rate optimization.
+Increase Your Sales with Affiliate Marketing for e-commerce
+E-commerce businesses generate millions of dollars through affiliate marketing. If you’re ready to get a piece of that pie, starting is simple: sign up for RedTrack, establish your KPI framework, and recruit your first affiliates.
+
+Soon enough, you’ll get a network that promotes your products for you!
+

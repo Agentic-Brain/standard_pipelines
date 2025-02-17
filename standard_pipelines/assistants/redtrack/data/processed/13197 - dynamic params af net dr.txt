@@ -1,0 +1,114 @@
+# dynamic param-s: af net dr
+
+
+Macros (aka tokens) can be very useful, but not all affiliate networks support them. Usually, there are several ‘empty’ parameters available for integrations (one of them should be used for passing the click id value). These ’empty’ parameters do not contain any information themselves and are used to receive parameters (click ids, campaign ids, source ids) and then send this info back where/if needed. However,&nbsp;some of the networks provide additional information through the dynamic parameters.
+
+
+
+Working with macros in RedTrack
+
+
+
+
+
+Every tracking solution – including RedTrack – requires a postback integration to receive conversions from the affiliate network and send them to the traffic source when needed. The integration process requires the usage of dynamic parameters (macros/tokens).
+
+
+
+In general, this integration is established in 3 simple steps:
+
+
+
+1. Add the click id parameter to the Offer URL.
+
+
+
+You will need to use both the network and RedTrack parameters.
+
+
+
+You need to send RedTrack parameter to the affiliate network, and thus the macro order will be as follows:…offer_url?affiliate_network_parameter={clickid}
+
+
+
+Our click id data will be recorded under&nbsp;affiliate_network_parameter&nbsp;in your network account.This parameter can have various names, starting from clickid and ending with some abstract ones, such as aff_sub or utm_medium.
+
+
+
+2. Add the click id parameter to the postback URL.
+
+
+
+Again, you will need both the corresponding parameters from the network and RedTrack here.The only difference is in the macro order: since the postback URL sends click id data recorded in the network back to RedTrack, the order will be opposite to the offer.
+
+
+
+https://your.dedicated.tracking.domain.com/postback?clickid={affiliate_network_parameter}
+
+
+
+This parameter is inserted with the specific placeholders used by your network ({}, [], ##, etc.) and should be the same as used in the offer URL (offer_url?affiliate_network_parameter={clickid})
+
+
+
+3. Add the postback URL to the Affiliate Network.
+
+
+
+Just grab the URL with the replaced click id parameter (the one described in step 2) and copy it to your affiliate network postback settings. We recommend using it for a global postback if there is such an option.
+
+
+
+
+
+Some affiliate networks have dynamic parameters with data: {status}, {targetid}, {campaignid}, etc.. You can use this data for your campaigns: to track them in RedTrack and send them to your traffic source campaign. To do that, you need to put these parameters to your affiliate network postback URL. It’s very simple – RedTrack allows you to do that automatically:
+
+
+
+1. Go to Offer sources (your Network settings)→ Additional parameters→ put them into the available Parameter fields and the added subs will appear in the Postback URL field→ copy the generated Postback URL:
+
+
+
+
+
+
+
+2. Put the copied Postback URL to your affiliate network postback (preferably under the global postback).
+
+
+
+
+
+Yes, it is also possible – RedTrack has a set of ‘empty’ parameters exactly for that purpose. Make sure you need it, though: some traffic sources want to receive extra parameters, while most of them do not even require any conversion postback at all.
+
+
+
+Your custom parameters for Affiliate Network→ RedTrack→ Traffic Source&nbsp;
+
+
+
+{psub1}{psub2}{psub3}{psub4}{psub5}{psub6}{psub7}{psub8}{psub9}{psub10}{psub11}{psub12}{psub13}{psub14}{psub15}{psub16}{psub17}{psub18}{psub19}{psub20}
+
+
+
+
+
+Assuming you have set the postback integration with your Affiliate Network and it supports additional parameters (in this example – {status} and {targetid}), let’s return to your Traffic Source settings in RedTrack.
+
+
+
+We will need to adjust the postback URL with the corresponding parameters:
+
+
+
+Your traffic source should support receiving these parameters. In our example, we used {status} and {targetid} macros. To get info on the parameters you can use, ask your account manager.
+
+
+
+
+
+
+
+Simply put, you will see your affiliate network {status} data received via the postback with conversion under your traffic source ‘status’ parameter and {targetid} under the traffic source ‘target_id’ parameter in your traffic source account.
+
+

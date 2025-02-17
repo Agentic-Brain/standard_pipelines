@@ -1,0 +1,28 @@
+# 
+
+Сonversion tracking software
+
+&nbsp;
+Conversion tracking solution for top media buyers
+Media buyers worldwide count on RedTrack for precise, real-time tracking of their conversions and events from all major traffic sources. With 100% accuracy and built-in automation tools, RedTrack is built to keep everything running smoothly, so you stay focused on results.
+
+100% accurate attribution
+With RedTrack, nearly 100% of your conversions are matched to their original ads based on your chosen attribution model. Say goodbye to delayed or missing conversions — know exactly which ads to scale and which to cut.
+
+&nbsp;
+Pre-built Conversion API integrations
+RedTrack offers built-in Conversion APIs for Facebook, Google, TikTok, and other major ad networks — no need for extra tools or in-house builds. We work closely with hundreds of top media buyers to keep our Conversion APIs up-to-date and optimized, so you get the most efficient tracking possible.
+Enhanced Data Quality (“rich payload”)
+RedTrack has smarter ways to collect data and handle Conversion API calls. Send all your conversions to one or multiple event managers at once, and get good match rates without needing personal info like emails or phone numbers. We help you get the most value from the data you send back to your ad networks, boosting your ad performance without the extra hassle.
+Receive ad cost updates as frequent as possible. At a flat fee
+With RedTrack, you’re in control of update speeds. Choose 30, 15, or even 5-minute intervals for automation, and get real-time updates on your performance, instantly.
+
+&nbsp;
+Smart rules
+We combine server-side tracking with first-party data, so you get accuracy without compromising privacy. And with AI-based attribution, every click and conversion is tracked smoothly, no matter the browser or channel.
+
+&nbsp;
+Hassle-free maintenance
+Our team gathers feedback from hundreds of clients using Conversion API, keeping everything not just up-to-date but ahead of best practices. With RedTrack, you can focus on media buying while we handle the integrations.
+
+&nbsp;

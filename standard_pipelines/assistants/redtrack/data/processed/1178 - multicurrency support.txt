@@ -1,0 +1,70 @@
+# Multi-currency support
+
+
+What is multi-currency support?
+
+
+
+Multi-currency support feature allows you to receive the payouts and costs in different currencies and transform them into your account currency based on the European Central Bank rate. Rates are updated twice a day.
+
+
+
+Mind that for the payouts to be counted correctly the currency in your RT Traffic channel/ Offer source/ Brand settings should correspond to the value of the currency set in your partner account.
+
+
+
+How to set up multi-currency feature?
+
+
+
+To set up the multi-currency, perform the following simple steps:
+
+
+
+1. Set the default account currency in your account settings. To do that go to the burger menu→ Settings→ General→ select the needed currency from the drop-down:
+
+
+
+Be careful as currency can be set only once. A change can be made only upon the request. For more details on this matter contact your sales representative or support@redtrack.io.
+
+
+
+
+
+
+
+2. Set the default currency for your Traffic channel and Offer source/ Brand:
+
+
+
+
+
+Traffic channels→ Currency drop-down:
+
+
+
+
+
+
+
+⚑ Traffic channel currency is the currency of your traffic costs.⚑ The currency you set in RedTrack in the settings of your Traffic channel should be the same as the currency set in your partner's account (Facebook, Google etc.), otherwise, there will be miscalculations in the payout reports.
+
+
+
+
+
+Offer source/Brand → Currency drop-down:
+
+
+
+
+
+
+
+⚑ Offer source/ Brand currency is the currency of your conversion payouts.⚑ The currency you set in RedTrack in the settings of your Offer source/Brand should be the same as the currency set in the account of your affiliate network, otherwise, there will be miscalculations in the payout reports.
+
+
+
+
+
+Now your costs and payouts will be transformed into your account's default currency. For example, if your conversion payout is in EUR, RedTrack will change it to USD based on the European Central Bank rate so like that you have accurate statistics if your costs are in USD or any other currency.

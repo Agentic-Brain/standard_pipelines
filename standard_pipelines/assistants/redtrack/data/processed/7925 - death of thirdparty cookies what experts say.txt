@@ -1,0 +1,130 @@
+# Death of third-party cookies. What experts say?
+
+They have been threatening us with a cookieless future for quite a while now. Not many believed at first, but here we are: standing on the porch and not ready to move out from the house where we all grew up. Cross-site tracking, digital fingerprinting, good-old targeting, pixels, and third-party cookies are behind us. But what still awaits?
+
+We must move on from the past by 2022 as it’s the year when Google promises to eliminate third-party cookies. How do we do that with the most benefit for our businesses?
+
+Let’s learn in this article along with experts at Admitad, FraudScore, Admixer, MaxBounty, and last but not least RedTrack (I know that’s us, but we are still honored to share our view)! 
+Cookieless changes in advertising 
+Pretty much every single company (willingly or not) on the market either has eliminated or is on the edge of third-party cookies' death. And we are talking about giants like Google, Apple, Facebook who play a vital role in the whole ecosystem of advertising.
+
+Let’s have an overlook of the timeline of all the Privacy Updates introduced by major companies in recent years: 
+
+
+
+Here we see that Google is closing the round of cookieless updates. By 2022 we will appear in a new reality. 
+So are cookies dying? 
+It’s worth remembering that not all cookies are dying. Only the most 'unhealthy' options out there on the internet — third-party cookies. 
+
+Third-party cookies are little pieces of code that are stuck to your browser. Third-party cookies are responsible for transmitting your data (even personal) to third-party entities and for targeted ads that sometimes feel overwhelming.
+
+If you are better with audio and visual content, make sure to check out our YouTube video about cookies and Privacy Updates ❤️
+
+
+Is targeting and remarketing dying? 
+Targeting the way we used to do it is truly dying. However, advertising depends on it. Google is working on a bunch of new protocols and APIs that will create an ability to maintain targeting and remarketing. 
+
+It will be an interest-based “healthy” option for targeting &amp; remarketing where users' interests are considered within a group. If you want to learn more about 5 APIs introduced by Google by 2022 be sure to read this article: Google Privacy Sandbox: Approaching Cookieless Future in 2021. 
+Ad Tech experts explaining cookieless future
+We know a lot of theories by now about the world without cookies, but you probably still didn't figure out which strategy is the best. Therefore, we decided that the best way is to ask advertising industry experts for advice and maybe a little sneak pic of their strategy for cookieless future. 
+
+We asked various players of the AdTech industry like affiliate networks, spy &amp; tracking tools, DSPs to give their comments about the future that awaits. Companies as Admitad, Fraudscore, Admixer, MaxBounty, and RedTrack (yeah, that’s us 😉) two main things: 
+
+1. How the market will change after all the cookieless implementations? 
+
+2. To share a sneak pic of their strategy after third-party cookies will die.
+
+&nbsp;
+CPA NETWORKS WILL HAVE NO OTHER WAY BUT TO UPDATE THEIR TRACKING
+
+
+&nbsp;
+
+Mozilla Firefox and Safari already announced their plans to protect user cookies from third-party tracking, however they were responsible for a relatively small share of the market. With Google Chrome joining them, CPA-networks will have no other way but to update their tracking, if they haven’t done it yet.
+Anna Gidirim
+Head of Russian Department of Admitad Affiliate Network 
+
+These restrictions will only hit companies that use third-party cookies to store сlick IDs. To prepare for the changes to come, they will have to modify their tools to keep track of customers. 
+What is Admitad Strategy?
+Admitad hasn’t used third-party cookies for a few years by now, so publishers and advertisers won’t suffer any losses due to the Google update. Apart from the first-party cookies, they use other means of data storage — cookieless tracking and storing click ID’s on the advertisers’ server.
+
+Admitad is doing its best to keep a hand on the trends and be ahead of the curve, so the tracking solutions are designed to last, and they always aim to improve them. Recently, they released Admitad Teleport — the new tool for publishers to replace redirect tracking in its current form. 
+Publishers who channel traffic from their sites or browser extensions can now bring customers directly to the advertiser’s store, without affiliate redirects. This is how we will be able to give credit for even more orders. According to our estimates, introducing the tool can help publishers improve their current conversion rates roughly by 10% — the very 10% of orders that used to get blocked. Teleport has already been tested by our partners, so we can be sure about its efficiency. A blog about video games, for instance, boosted its monthly CR from 3% to 6,5%. Another publisher — a coupon site — started receiving some extra 270 orders per 100k clicks after it installed the Teleport API.
+
+This is why we believe our tracking solutions are more than enough to align businesses with the changes and to protect our partners from the potential threats having to do with browser policies.
+SEEMS LIKE THE WALLS OF THE WALLED GARDEN HAS GROWN HIGHER FOR THE INDUSTRY
+Ad agencies are the ones that must 
+
+deal with new Google’s rules and get prepared the most. Trackers use cookies to learn more about each user. In a world without cookies trackers need to adapt to deliver effective targeting, as they are used to do now, with cookies.
+
+in general, it seems that Google’s decision to implement these measures is, somehow, logical. As the whole industry is claiming to fight for a more transparent and secure world for users, one can say that Google’s intentions are understandable. But to be honest, for now, it seems that the walls of this walled garden have grown higher for the industry. As Google, on the one hand, keeps postponing those changes, but, on the other hand, doesn’t give enough information on how “the new cookie-less world” will exist, what rules will be applied, and how agencies and advertisers can research more about those changes.
+Dmitry Isakov
+CEO AT FraudScore
+
+
+What is FraudScore's strategy?
+To cut the long story short, FraudScore’s fraud detection will not be affected by these measures. Their algorithms are based on processing another data type for conversions analysis and they do not use third-party cookies in traffic evaluations at all. Of course, FraudScore will be waiting for the situation to unravel to understand more about how trackers will deal with Google’s policies. But for now, Dmitry can say for sure that FraudScore’s fraud detection has never used third-party cookies for traffic check-ups, hence their solution is not under the pressure of upcoming updates from Google.
+It is also fair to say that in these circumstances when the goal of delivering ads to the target audience becomes more crucial and complex, it seems that an anti-fraud solution, like ours, becomes a must-have and not just an optional tool for advertisers. It will probably become harder to reach the right target users, so the expenses will increase. In this case, making sure that all the users are real becomes vital.
+A POTENTIAL SOLUTION CAN BECOME A SINGLE-SIGN ON (SSO)
+
+
+When 3rd-party cookies are phased out, it will be impossible to cross the audience between sites without additional technology. The potential solution for this nearly-anonymous web can become a single-sign on (SSO) solution with a privacy-compliant ad ID. 
+
+Potential common ID solutions include Unified ID 2.0 by TradeDesk, which is already getting mainstream adoption among US industry players; ID5, backed primarily by UK publishers, and Net ID adopted by the consortium of German publishers and media agencies. Most of these technologies still rely on 3rd-party cookies, so the future of the solution may be questionable.
+
+Also, identity solutions require an agreement between a large number of publishers, ID vendors can provide fragmented audiences and limited inventory in certain niches if providers choose to build a closed ecosystem with limited interoperability. It is highly unlikely that the market will get behind a single identity provider, rather it will establish a common framework built on principles of the IAB initiative project Rearc.
+Yaroslav Kholod
+Director of Programmatic Operations at Admixer
+
+What is Admixer strategy?
+It is a system of logging users on sites and in mobile apps using emails/phones (saved in a hashed format) that allows them to accurately target users without compromising their identity. The upcoming SSO solution will also seamlessly integrate with other identity solutions through an API (Unified IDs/Telecom/Measurement partners and verifiers),
+
+Admixer SSP aspires to create an effective advertising ID for Eastern European media owners, leveraging our relationships with agencies, local premium publishers, and advertising networks in Belarus, Ukraine, and Kazakhstan that work on our technology. 
+The solution will be interoperable with the major identity providers and allow web advertisers to conduct cross-site campaigns, measure and verify reach without compromising user identity. Admixer ID will add value to web inventory and make it competitive with data-rich Walled Gardens.
+AFFILIATE MARKETING CAN BECOME A MORE VIABLE OPTION FOR CERTAIN ADVERTISERS
+
+
+The entire affiliate marketing industry has always had to quickly adapt to changes from large tech companies like Google, Facebook, and Apple. This has been the case for our network and our affiliates since MaxBounty was launched 17 years ago. The benefit to this is affiliates have become proficient at quickly transitioning their campaign strategies. 
+
+Affiliates who are currently utilizing re-targeting features on third-party platforms may end up losing a traffic source. Although that’s unfortunate, we’re confident that they will be able to pivot their strategy. 
+
+Alternatively, we’ve also witnessed in the past changes to the general online landscape actually benefiting affiliate marketing. If the removal of cookies on Chrome were to negatively impact traditional digital advertising, affiliate marketing could become a more viable option for certain advertisers.  
+Matt McEvoy 
+CEO At Maxbounty 
+
+What is MaxBounty strategy
+MaxBounty copes with changes by continuously tweaking the network’s proprietary tech. For instance, a while ago they shifted their own tracking away from cookies. It’s now primarily based on server calls which negate any sweeping changes to browser or phone OS technology. This ensured the network wasn’t negatively affected when Apple gave their users the ability to opt-out of apps that track their online history and behavior. 
+
+Once Chrome makes the full transition away from cookies to FLoC, MaxBounty will closely monitor its impact on our business. We’ll then use that information to make any potential changes that we feel are necessary at that time. 
+
+Matt from MaxBounty believes it’s important for affiliates to be aware of this upcoming change and its potential impact. He always recommended that everyone is better to prepare themselves for the current campaign strategy one day becoming less effective. That’s accomplished by applying their technique to other avenues, whether that be a different campaign vertical, traffic source, or target audience. 
+We’ll make sure we do our part on educating people on Google’s planned transition and how they can prepare moving forward. 
+DATA IS A FUEL BEHIND MARKETING &amp; ADVERTISING AND WE WILL SEE A SHIFT TO FIRST-PARTY DATA SOURCES 
+
+
+A lot of things will change. And that will cover multiple areas important to digital marketers. from something that everyone used to: from audience targeting &amp; remarketing to attribution. Definitely there will be a lot of changes. However the key one will relate to data sources.  Data is the fuel behind marketing and advertising and we will see a shift from 3rd party to 1st party data sources.
+Vlad Zhovtenko
+ CEO at RedTrack
+
+
+ 	The big winners will be publishers, either with large coverage or niche content. Their first-party data will now become unobtainable without their permission.
+ 	Ad tech companies who will find a way to leverage that first-party data for targeting &amp; remarketing will emerge as adapted winners. And of course, Google and Facebook will benefit as they are the biggest holders of first-party data between all their products.
+ 	Tracking and attribution will switch to first-party data, making implementation a bit more complex and cutting the ability of those companies for additional monetization.
+ 	Fraud detection will be the only industry that will not change as it does not rely on cross-site tracking.
+
+What is RedTrack's strategy
+At RedTrack.io we cope with consequences less now, as we stopped relying on third-party cookies ever since Safari announced the switch. We started preparing solutions back then in 2017 and 2018 to make sure we will be well-equipped for cookieless future. 
+However, the biggest challenge is created by other tools used by RedTrack's customers that adapt to the market and force us to adapt fast. A recent example is almost “instant”  (in terms of technology impact) switch in Facebook tracking and attribution. A lot of affiliate marketers were not able to continue running their campaigns in a usual way. Therefore, thanks to users' requests and needs we were able to improve the product by implementing Native Facebook CAPI implementation.
+In a nutshell, RedTrack strategy now is to focus on customer needs and continue development in the direction where market points. 
+RedTrack as a cookieless solution
+As mentioned above by our CEO, RedTrack stopped relying on third-party cookies back a few years ago when the market started showing the signs. 
+
+By now we are fully equipped with S2S (server to server) Postback technology which serves as a first-party data tracking system and does not depend on changes introduced by  Google, Apple, or Facebook. 
+
+Moreover, to deal with the most recent problem of Facebook CAPI we developed a Native Facebook Conversion API Solution for advertisers dealing with the whole setup. Besides, we made an out-of-the-box solution for affiliate marketers to verify affiliate landing pages (third-party domains) in order to continue advertising with Facebook Ads. You can learn more about Facebook CAPI in this article — How Facebook CAPI changes your advertising. 
+
+
+Conclusion
+Digital marketers always had to adapt. So we have to do it one more time. This time the change feels more fundamental. Cookies, targeting, and remarketing always was a simple thing to hold on to. However, we recommend you follow the advice that our partners from the ad tech industry in the article above mentioned. It might be not easy, but your ROAS will be grateful for you to take a step in a new direction. Have a safe &amp; sound ad tracking ⚡️
+
+&nbsp;

@@ -1,0 +1,19 @@
+# Digital Element: Unmatched Geotargeting Accuracy for RedTrack Users
+
+Location is a big part of an advertising targeting and crucial criteria for ad campaign performance optimization. 
+
+But how accurate is this information? Accuracy of geotargeting depends on the database used to identify the user location. 
+
+RedTrack has recently partnered with Digital Element — the best global geolocation data and service provider, to offer an unmatched geo-accuracy to the traffic tracking.  
+What is Digital Element? 
+Digital Element’s NetAcuity Solution Suite delivers the most accurate data in the industry. The solution’s global accuracy is more than 99.9 percent at the country level and is up to 97+ percent accurate at a city level. As for coverage, NetAcuity provides coverage for 99.9999 percent of the Internet and collects more than one million points-of-view daily. This type of accuracy and coverage is unmatched in the geolocation space. (Source: Market Watch)
+
+By using Digital Element’s NetAcuity IP Intelligence and geolocation technologies, RedTrack is able to track and compile granularly accurate data reports on the level of visitor’s location. Besides, it can precisely identify other attributes important for ad targeting, such as ISP (internet service provider), user connection type, whether the user is a mobile user or is behind a proxy.  
+Online location targeting improves success of
+digital advertising campaigns by upward of 30% to 40%
+
+With RedTrack &amp; Digital Element partnership, affiliates, online marketers, and media buyers can:
+• improve reach and response for ad campaigns. Deliver ads to relevant audiences and increase the CTR and message reach;
+• receive granular geo data reports regardless of the user’s platform;
+• detect proxies. Identify accesses from proxies, hosting, transparent, or anonymous — the latter is one of the major marks in online fraud detection and prevention.
+Our RedTrack Team has chosen Digital Element to provide the best possible solution to our users through the provision of enhanced targeting and reporting for their ad campaigns. Have questions regarding the NetAcuity IP Intelligence and geolocation technologies? Forward them to info@redtrack.io, we would be glad to provide you with the answers! 

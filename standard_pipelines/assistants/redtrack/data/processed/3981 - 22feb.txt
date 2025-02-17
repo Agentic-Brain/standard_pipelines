@@ -1,0 +1,5 @@
+# 22-Feb
+
+
+ 	Possibility to set rules based on conversion type
+ 	Offer sources for conversions are pulled from Offer settings as opposed to click settings

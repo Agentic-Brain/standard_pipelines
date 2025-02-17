@@ -1,0 +1,66 @@
+# How to get more profit with Push Ads? Tips from RichPush
+
+Today it becomes more and more difficult to choose the type of ads which will be both effective and catchy. Users’ “blindness” became a particularly urgent problem for all affiliate marketers, regardless of experience. One may wonder if there's a perfect ad type that can reach these high requirements we all expect it to reach? Or the game doesn't worth the candle and the affiliate marketing is really dead? Good news, there is at least one ad type that proves its efficiency with a variety of verticals - push ads. The lowest bid price, one of the highest CR (4.9% for iOS, 10.7% for Android), a wide range of GEOs available, and other cool advantages.
+Now let’s see how we can generate profit here. We asked our partners from the RichAds ad network to share some tips on making money with push ads. Check the list:
+
+ 	
+Set up impressions/click limits in your campaigns
+
+
+Many affiliate marketers think that if they don’t pay for impressions there is no need to limit them. Indeed, in this case, an impression costs nothing. Sounds logical, but inefficient. Such an approach will bring you neither more clicks nor conversions. Why? Because it will irritate the users. Imagine yourself seeing the same ad several times a day. What will be your most likely action? Click? Buy? Ban, most likely. So, limiting impressions is important if you want to get more conversions, save the reputation of your ad account and brand you promote.
+
+We recommend choosing 1 impression per day as an impressions limit.  
+
+Similar logic applies to clicks limits in your ad campaigns. Don't expect your target audience to go to your landing page several times a day to make a final purchase decision. One-two times a day is enough.
+
+
+
+&nbsp;
+
+ 	
+Use more than one creative for successful optimization 
+
+
+Making and choosing creatives is a kind of lottery. This skill usually comes with time and experience. Each case is individual, especially if you are keen on experimenting. The only key to learn what will work in this particular case is testing. The best strategy is to choose 3-5 different creatives for one campaign and try to identify the one with the highest CTR. If you make your first steps in affiliate marketing or starting with a new niche, you can even use up to 10 creatives. And always keep in mind the golden rule - change only one element at a time.
+
+After you define the best working variant remake all your creatives according to this best option. Want to learn more about how A/B testing help affiliates and media-buyers to maximize their profit? Read some case studies.
+
+&nbsp;
+
+
+
+&nbsp;
+
+ 	
+Use conversions tracking 
+
+
+Clear statistics is the key to successful ad campaigns. You will hardly get any stable profit if you don't know which of the hypotheses work, when, and why. Data analysis shouldn't always be the final point of your ad campaign. If you see that something isn't going so well or your results are below the benchmark, you can always optimize your campaign and save money. The secret of accurate statistics lies in your ad tracker choice. A good one will provide you with detailed information about your campaigns and customers (device, language, OS, etc) and their targeted actions ( conversions, transactions, statuses). 
+
+Today there are 3 ways of conversion tracking: postback, image, and pixel. We recommend using postback as is one of the most credible ways as the data about a user and his actions will go directly to the advertiser's, ad tracker's, and affiliate network's servers.
+
+As RichAds ad network is integrated with RedTrack, you can start enjoying all the benefits of quality ad tracking and push traffic right now.
+
+ 	
+Disable non-converting sources during optimization 
+
+
+
+This step is one of the most important during optimization. If any website doesn’t bring conversions it means that it doesn't have your target audience and you just leak your budget. You will pay for clicks and just waste money instead of getting high-quality traffic for a reasonable price. With Richpush you can easily blacklist ineffective sources.
+To do it you need to understand the levels on which you can implement this function. There are 3 of them: website, publisher, and sublist (see the scheme below). Sublists consist of publishers, publishers, in their turn, consist of multiple websites. The get the most out of the non-converting sources blacklisting feature you need to constantly monitor your performance and update the list of traffic sources that worsen your statistics.
+
+
+ 	
+Pay attention to the optimization of devices
+
+
+There are two main types of traffic affiliates and media-buyers work with - mobile and desktop. They suggest completely different strategies and suggest different user behavior. Here are some good examples:
+
+ 	Average mobile bounce rate is around 45%,  desktop - 38%,
+ 	65% of all digital media time is spent on mobile devices,
+ 	Users spend more time on mobile but spend more money on a desktop.If you don’t divide these types of traffic into two separate campaigns, your statistics may not be fully correct. After that, you will see which one works better with your offer and will disable non-converting traffic type via targeting option.
+
+Speaking about mobile traffic, new operation systems tend to work better. Target Android 8,9, or 10 and profit will be forthcoming. 
+Want to learn more useful tips for successful push campaigns? Download RichAds guide “Growth with push ads” 🤓
+
+ hbspt.cta.load(7519541, '5c85502a-9a0c-4079-904e-b67e72d361dc', {});  

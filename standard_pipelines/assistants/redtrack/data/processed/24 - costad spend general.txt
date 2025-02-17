@@ -1,0 +1,156 @@
+# Cost/Ad spend: general
+
+
+What's ad spend/campaign cost?
+
+
+
+Campaign Cost (cost model) defines the cost of traffic you buy. CPM/CPC is good for most media-buying campaigns across Google, FB, etc. CPA/Revshare is good for affiliate/partner campaigns and CPA ad networks. 
+
+
+
+With RedTrack, you have 2 ways of tracking the cost data:
+
+
+
+1. Statically by adding the cost data to the tracking link or directly per campaign.
+
+
+
+2. Dynamically: via the macro or with the help of the API for those traffic channels that support it.
+
+
+
+
+
+
+
+This is the most obvious and simple way. You set the cost value per campaign in the campaign settings. Once the click/conversion comes, the cost is recorded automatically based on the cost model chosen:
+
+
+
+
+
+
+
+Campaign cost models explaned:
+
+
+
+
+CPC - the cost per each click.
+
+
+
+CPA - the cost per conversion.
+
+
+
+CPM / PopCPM - the cost for 1000 impressions, and it will not work for clicks.
+
+
+
+RevShare - the % from each conversion revenue.
+
+
+
+Do not track - no costs will be recorded.
+
+
+
+
+Do Not Track cost model is designed for non-API integrated traffic channels. If you prefer not to receive ad spend data, switch off the "Auto update costs" toggle within your campaign settings:
+
+
+
+
+
+You can set it up dynamically via the Macro or with the help of the API for those traffic channels that support it.
+
+
+
+API
+
+
+
+This type of integration is available for the integrated/automated traffic channels.
+
+
+
+1. Check if your traffic channel is eligible for the API cost update.
+
+
+
+2. Follow this guide to help you enable the Auto update cost feature. 
+
+
+
+Auto-cost update feature will not work for CPM/CPA/Revshare campaigns.
+
+
+
+Macro
+
+
+
+If your traffic channel does not support the API cost update, you can try to do this with the help of the macro. This option works for the cases where the traffic channel you work with has the macro for the cost (bid, etc.).
+
+
+
+Follow this guide for more info on the matter. 
+
+
+
+
+
+
+
+Depending on your needs, you may set the customised campaign costs related to the additional values received for each clickid (subs, country, etc.). To do that within the added Campaign settings go to the tab Custom payouts → choose the needed payout type → add the values for your payouts → Save changes to the Custom payouts tab and the to the main campaign window:
+
+
+
+CPA cost model custom payout sums should be represented by the fixed payout value.Revshare cost model custom payout sums should be represented by the percentage.The exception is the Hybrid cost model where:- if the cost model is CPA, the custom payout sum should be represented by the percentage- if the cost model is Revshare the custom payout sum should be represented by the fixed payout value.
+
+
+
+
+
+
+
+Payout types explained:
+
+
+
+
+GEO– set different payout based on click location.
+
+
+
+GEO/OS&nbsp;– OS (without versions), Geo and payout amount separated by a comma with no spaces.
+
+
+
+HYBRID&nbsp;– define conversion type to force change them to CPA (this could be helpful if you work with RevShare but want a CPA model for some conversion types).
+
+
+
+CONVERSION SUBS&nbsp;– subid you receive with the conversion (sub1, sub2. etc.), sub value, and payout amount separated by a comma with no spaces.
+
+
+
+TYPE/GEO/CONVSUB&nbsp;– conversion type, geo, subid you receive with the conversion, sub value, and payout amount separated by a comma with no spaces.
+
+
+
+TYPE/CONVSUB – conversion type, subid you receive with the conversion and payout amount separated by a comma with no spaces. 
+
+
+
+
+Conversion sub-parameters are the additional parameters you send with the conversion to enrich the data. They differ from click subs parameters string.
+
+
+
+All other publisher-related options are to be used only in that case.
+
+

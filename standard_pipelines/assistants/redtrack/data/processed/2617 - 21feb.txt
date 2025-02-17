@@ -1,0 +1,22 @@
+# 21-Feb
+
+
+ 	Fingerprint/Attribution reporting (cross campaign attribution)
+ 	Add an option to delete white-labels for the publisher panels
+ 	{postbackid} macro for a conversion id
+ 	Offer upload fix
+ 	Add possibility to copy group value in reports
+ 	Publisher panel improvements: sign-up date and current balance
+ 	Facebook Conversion API improvements due to the recent policy updates:
+Action Source
+Event URL
+ 	Duplicate management on a global level for conversion types
+ 	Postback for publishers management in admin account
+ 	Auto optimization - V2.0: we will be choosing the best path to lead to the best result
+ 	Realtime facebook postbacks
+ 	Logs for an auto cost update
+ 	Custom domains can now be added only with an SSL
+ 	Auto optimization - visualize the path
+ 	Facebook cost update is 5 minutes (not for all subscription plans)
+ 	Rules are now available for publisher traffic sources
+ 	Custom postback types in shared accounts

@@ -1,0 +1,168 @@
+# PrestaShop and RedTrack
+
+
+
+
+
+
+PrestaShop is an online platform that allows users to create an e-commerce presence, enabling them to sell products and services through the web to an online audience. Business owners looking to move their company online can use PrestaShop to build their website, add features, and, with SumUp, take payments.
+
+
+
+Integration
+
+
+
+
+
+1. Add&nbsp;custom tracking domain.
+
+
+
+2. Add conversion events:
+
+
+
+Go to Tools → Conversion tracking → Conversion type → use&nbsp;this guide&nbsp;to help you add the needed events.
+
+
+
+The full list of Conversion types used with PrestaShop includes:▸ViewContent▸AddToCart▸InitiateCheckout▸Purchase
+
+
+
+3. Add PrestaShop as a Brand in RedTrack:
+
+
+
+3.1 Brands → New from scratch → use&nbsp;this guide&nbsp;to help you with Brand editing.
+
+
+
+
+
+
+
+The specified title of the shop will correspond to the Brand’s name. The newly created Brand will serve as a placeholder for the tracking parameters.
+
+
+
+3.2 To send the PII data for better attribution go to the added Brand settings →&nbsp;Additional parameters&nbsp;→ add the following parameters with the corresponding roles:
+
+
+
+ParameterMacro / TokenName / Description (what you will see in reports instead of subx)RoleInfo we receive under these parameterseventid{replace}Event IDEvent IDYour order ID or the external ID for the conversionfname{replace}First NameFirst NameCustomer First Name from the orderlname{replace}Last NameLast NameCustomer Last Name from the orderphone{replace}PhonePhoneCustomer phone number from the orderemail{replace}EmailEmailCustomer email from the orderzip{replace}Zip CodeZip CodeCustomer zip code from the ordercontentid{replace}Content IDContent IDsExternal product IDcontent{replace}ContentContentsProduct titlecontenttype{replace}Content CategoryContent CategoryThe type of product
+
+
+
+
+
+
+
+4. Add your Website:
+
+
+
+Websites → New → use&nbsp;this guide&nbsp;to help you add the website (your offer).
+
+
+
+Once you’ve added your Website, the universal tracking script is generated automatically. To get it go to the added Website form → Scripts → scroll down to the field Universal tracking script →  copy the script since you'll need to add to PrestaShop later:
+
+
+
+5. Create a paid traffic campaign:
+
+
+
+The campaign for the unattributed (organic) traffic is already in place. Now you need to create the one for the paid traffic. To do that act as follows:
+
+
+
+
+Add the&nbsp;Traffic channel. Most of them have a preset template in RedTrack:&nbsp;API-integrated traffic channels/&nbsp;Non-API integrated traffic channels.
+
+
+
+Launch a campaign&nbsp;for the paid Traffic channel. Your website/shop will be the main link added to the traffic channel.
+
+
+
+
+
+
+1.&nbsp;Login to your store in PrestaShop&nbsp;and add RedTrack module/plugin to PrestaShop
+
+
+
+1.1 Navigate to the&nbsp;Modules&nbsp;section → go to&nbsp;Module Manager:
+
+
+
+
+
+
+
+1.2 Press the&nbsp;Upload a module&nbsp;button at the top right corner → drag the&nbsp;RedTrack module&nbsp;to the pop-up drag-and-drop window:
+
+
+
+
+
+
+
+1.3 Once the file is detected, the installation will start automatically:&nbsp;PrestaShop will upload the module from your computer to its server, unpack it, place the files in the correct location, and update the page, all this in a handful of seconds.&nbsp;PrestaShop will then display&nbsp;Module installed!:
+
+
+
+
+
+
+
+Here you can find details on working with modules in PrestaShop.
+
+
+
+2. Add the universal tracking script to PrestaShop and the needed Order Status for Purchase Event
+
+
+
+2.1 Press&nbsp;Configure&nbsp;next to the added RedTrack module → insert the&nbsp;Universal tracking script&nbsp;in the RedTrack Universal Script field:
+
+
+
+
+
+
+
+
+
+
+
+2.2 Choose the needed value from the drop-down of the field&nbsp;Order Status for Purchase Event&nbsp;→ press&nbsp;Save&nbsp;to apply the changes:
+
+
+
+
+
+
+
+You can define what a purchase is and fix it at different stages (e.g.: purchase=paid, or purchase=delivered, or else). You decide it based on the needs and specifics of your business.
+
+
+
+Click here to learn more about managing your store using the PrestaShop platform.
+
+
+
+For additional setup within the case where the domains of the landing page (aka website) and the PrestaShop store are different, click here.
+
+
+
+If you add some orders to your PrestaShop store manually and want them to be displayed in RedTrack, please turn to support@redtrack.io for additional assistance.
+
+
+
+
+
+

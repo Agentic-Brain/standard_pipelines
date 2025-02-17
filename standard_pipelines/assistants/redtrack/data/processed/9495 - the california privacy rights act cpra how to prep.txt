@@ -1,0 +1,99 @@
+# The California Privacy Rights Act (CPRA): How to Prepare Your Business
+
+Are you a California resident? If you are, then the CPRA is something you should be concerned about. Especially if you want to open up a business there and collect sensitive information from your consumers. 
+
+Like the GDPR, the CPRA was created to set standards for the United States, and avoid misunderstanding and misuse of consumers' personal data. Moreover, even though the CPRA won’t be enforceable until the beginning of 2023, any type of data collected after January 1st, 2022, is subject to the CPRA. 
+
+There are many things to learn about the CPRA, and we have much more to tell you. So don’t go anywhere because, in this article, we will intensely discuss the CPRA. 
+How to prepare your business for the CPRA 
+CPRA compliance
+Companies that are operating in California or  collect personal information from California residents, regardless if it’s for marketing purposes or not, are subject to CPRA if it: 
+
+ 	Manages to have a revenue higher than $25 million annually 
+ 	Manages to make more than 50% of revenue from selling and sharing personal information of California residents 
+ 	Buys, shares, and sells the personal information of more than 100,000 Californian households 
+
+A significant change that has been made from the CCPA to the CPRA is to remove the requirement of using personal information only for marketing purposes. So now, even if the company isn’t profiting from consumers’ personal information, you are still required to comply with the law. 
+
+CPRA compliance is quite interesting because if you are a small or medium-sized business, you may not have to comply with the CPRA but rather with the CCPA. Initially, you have to identify if your business should comply with the CCPA or the CPRA. Many think they’re both the same, but the truth is that they have some key differences. Comparatively, the CPRA loosens many restrictions the CCPA has, whereas some small and mid-sized businesses don’t fall under the compliance of the CPRA. However, at the same time, it strengthens many weaknesses of the CCPA as well. 
+
+Note: If you’re interested in learning about the CPRA, you can read more on Osano's website.  
+What are the differences between the CCPA and CPRA? 
+The CPRA is considered an amendment of the CCPA by offering a GDPR approach, expanding individual rights, and much more. Here are the two major differences between the two:
+
+ 	Complying with the CCPA means you buy, sell, or receive shares for business marketing purposes. It’s also applicable if you buy, sell, or receive shares from the personal information of around 50,000 consumers and households. However, the CPRA requires more than 100,000 consumers and households. 
+ 	Complying with the CCPA means you are receiving at least 50% of annual revenue from selling consumers' personal information. With the CPRA, it’s from selling and sharing personal information. It is necessary to have an SSL certificate when you share personal information with the website. So, it is important to buy SSL certificates from reputed SSL providers like ClickSSL that offer the same encryption level authenticated SSL certificates.
+
+The CPRA also included the creation of the Californian Privacy Protection Agency (CaIPPA), a dedicated privacy agency that five board members govern. These members have to be experts in privacy, consumer rights, and technology. Otherwise, they aren’t able to qualify. Additionally, they can serve no more than eight years within the privacy agency. 
+Amendments 
+Following the CCPA, individuals can only request access to their personal data for one year from when it was stored and collected. However, with the CPRA, you have the right anytime you wish to do so. 
+
+Moreover, when the CCPA defines “selling,” it doesn’t precisely mean sharing. On the other hand, the CPRA includes “Sell” and “Share.” Additionally, the CPRA clarifies the right to stop (opt-out) businesses from sharing and selling their personal information to other parties. 
+
+Finally, let’s not forget that both the CCPA and CPRA allow companies to be sued. Consumers can do this should a company expose sensitive information without authority, and cause data breaches that reveal passwords and usernames. 
+What’s new with the CPRA, and how does it impact your business? 
+New amendments have been made both to the CPRA and the CCPA in order to include new rights that businesses are obliged to comply with. Why so? According to SalesForce, about 46% of consumers feel they don’t have enough control over their private data. Sadly, only 10% think they have enough control over their personal data. 
+
+Nevertheless, businesses that violate these laws will face huge fines of thousands of dollars and be sued for intentional private data violations. 
+
+Now, let’s clarify a few important things here. First, when you are a business, under the CPRA, you are obliged to explain why you are collecting personal information and who you are sharing the information with. However, under the CCPA, you have the right to ask why your personal data is being collected. Moreover, people have the right to inform businesses of inaccurate information or if any amendments need to be made. 
+
+Under the CPRA, consumers have more rights. This includes gaining knowledge of where their information is being used, and how to correct inaccurate information that they may see. 
+
+Here are a few things your business can apply to adapt to these regulations: 
+
+ 	Define the purpose of why you are collecting the data 
+ 	Apply security measures in order to protect personal information 
+ 	Show a list of entities data is being shared with and why your business is sharing it with them collecting personal information 
+ 	Provide all the sources of information your business is using and collecting 
+ 	Keep updating your privacy information and show that your business always complies with the latest laws. Don’t forget to deliver updates through email, website, phone, and social media. 
+ 	Implement procedures that ensure you are processing and reviewing data for authenticity. Additionally, add an “opt-out” feature so that users can stop sharing their personal information if they wish to do so. 
+
+A new category of protected data 
+The CPRA has introduced the idea of sensitive personal information (SPI). This forces businesses that collect this type of information to provide more robust data protection. The SPI includes the following type of personal information:
+
+ 	Health data
+ 	Genetic data
+ 	Religious data
+ 	Ethnic origin 
+ 	Geolocation
+ 	Data concerning a person’s sexual orientation
+ 	ID cards, driver’s licenses, Social Security numbers, and more 
+ 	Ethnic and racial origin 
+
+The CPRA places restrictions on a new category of data. It also adds new requirements for companies who collect SPI, including updated purpose and disclosure, opt-out requirements, and more. 
+Data minimization and storage limitations 
+Businesses are required to minimize or limit the retention, use, and sharing of personal information whenever possible. Overall, the CPRA stops businesses from retaining personal information longer than required. Furthermore, companies must inform the CPRA about their retention periods for each personal data they collect. 
+
+So, what do you have to do about this? First, your business should state how long it’ll retain personal data and if it’ll be longer than necessary. This should be noted in the company's policies, including data deletion, and ensure that all laws are followed. 
+Retaliation isn’t allowed 
+It’s important to know that the CPRA doesn’t accept discrimination against consumers who opt-out of their information. This includes the following: 
+
+ 	Denying the types of goods and services to the consumer
+ 	Providing a different level or quality of goods and services to the consumer 
+ 	Charging different prices for your goods or services, including discounts or any other benefits 
+ 	Going against a team member, a candidate that has applied to your company, or even an independent contractor for condemning opt-out rights 
+
+Use privacy-friendly tools for your marketing
+When you invest big budgets in marketing &amp; advertising, you have to make sure that your investments are actually paying off. To do that you need a marketing analytics platfrom that will be collecting data from all of your marketing channels and give you valuable reports to make further data-infromed decisions. 
+
+RedTrack is your privacy-friendly solution (that complies with GDPR, CCPA, CCPR, etc.), but still provides results with analyzing your marketing efforts and showing you the real numbers about your performance. 
+
+
+
+Consider using a consent management platform (CMP) 
+CMPs are an excellent way of helping your business manage any company documents and user consent legally before data is collected, stored, or even shared. They ensure you remain compliant with privacy laws and even inform you whenever changes are made. Additionally, CMPs can manage requests you make for data information and monitor all third-party vendors. 
+
+Here are some CMPs you can consider using to help you stay updated with privacy laws and manage data requests: 
+
+ 	OneTrust 
+ 	Quantcast 
+ 	TrustArc 
+ 	Cookiebot 
+ 	Crownpeak 
+
+Wrapping it up
+That’s all for this article. These are the new amendments that have been made to the CPRA. However, don’t think these will be the only ones ever made, the CPRA continuously changes! 
+
+The overall aim of the CPRA is to ensure that consumers have sufficient control over their data and do not feel insecure about data breaches or losing control over their personal data. After all, the data belongs to consumers, and they can decide how their data is being used. 
+

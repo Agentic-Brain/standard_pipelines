@@ -1,0 +1,24 @@
+# Click expiration
+
+
+What's click expiration in RedTrack?
+
+
+
+The purpose of the Click expiration toggle is to filter out irrelevant conversions from your tracking report. It's useful for cases when you work with a CPA model for a certain period of time (a discount period).
+
+
+
+How to apply click expiration?
+
+
+
+Go to Offer soucres/Brands → choose the needed one → scroll down to the Click expiration section → enable the toggle → set the target period → save the changes:
+
+
+
+
+
+
+
+Once you set it up, conversions with the expired clickid data will be ignored by our system, and they will not be added to your tracking report.

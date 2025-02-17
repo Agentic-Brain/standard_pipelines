@@ -1,0 +1,146 @@
+# digistore dr
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add digistore24 as an Offer source in RedTrack
+
+
+
+1.1 Offer sources→ New from template→ find digistore24 template→ Add:
+
+
+
+
+
+
+
+1.2 Copy the Postback URL→ Save the template:
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up RedTrack Postback URL in digistore24
+
+
+
+2.1 Go back to your&nbsp;digistore24&nbsp;account→&nbsp;Account→&nbsp;S2S postback→&nbsp;Add new connection→ paste the copied (from step 1.2) Postback URL:
+
+
+
+
+
+
+
+Tips on how to fill in other checkboxes in this window:▸Affiliate partnerships – choose the offer for this postback. With digistore24 you can set different postbacks on different products and several postbacks on the same product.▸For order event – select the events you want to track and see in your RedTrack account▸Postback URL – paste the postback  URL you have copied in your RedTrack account within step 3▸Currency – you have the possibility to convert the payout amount to some other currency on digistore24 side. This could be very useful if your RedTrack account is in USD and you work with all other partners with USD but the offer in digistore24 is paid in EUR. If you set the rule to convert the amount to USD, the payout information in your RedTrack account will be accurate.▸Active – set “yes”▸Email address for error notifications – could be useful in order not to miss any conversion data in case of any errors and fix them immediately.
+
+
+
+2.2 Since&nbsp;digistore24&nbsp;allows you to track several different types of events, you can receive those events in your RedTrack account under different columns and thus have even more data to analyze. To do that:
+
+
+
+
+Add these events in RedTrack→ Tools→ Conversion tracking→ Conversion type. Refer to this guide for details.
+
+
+
+
+
+
+
+
+
+Those conversion type names should be the same as you have in your&nbsp;digistore24&nbsp;account postback settings. In these settings tick all the needed events: 
+
+
+
+
+
+
+
+
+
+Once done, go to your postback settings and update it with the {type} macro: &amp;type={order_type}:
+
+
+
+
+
+
+
+
+There are 4 different macros supported by digistore24 and all of them can be used for that purpose:{transaction_type} – e.g. payment, refund, chargeback{billing_status} – e.g. paying, completed, aborted{billing_type} – e.g. single_payment, subscription, installment{order_type} – e.g. initial_sale, upsellYou can use all of them as different conversion types in RedTrack (we support up to 20). Add a new postback for this product and simply replace {order_type} with any other from the list. One macro per one postback. So for example, if you want to track {transaction_type}, {order_type}, and {billing_type}, you will need to add 3 different postbacks for that product on the digistore24 side. The names of incoming events should match those you set in your RedTrack conversion types settings (they are case-sensitive).
+
+
+
+The following error may pop up when you click on the “Test” button:
+
+
+
+3. Get the digistore24 offer URL
+
+
+
+In your digistore24 account go to Marketplace→ choose the offer you want to promote and request access→ once approved copy the tracking link:
+
+
+
+
+
+
+
+4. Add digistore24 Offer to RedTrack
+
+
+
+RedTrack→ Offers→ New→ give the offer a name and choose digistore24 as the offer source→ paste the URL from digistore24→ make sure ?cid={clickid} parameter is added to the URL→ Save:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create the&nbsp;Campaign&nbsp;with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To create a Campaign refer to:▸ this guide for Advertisers.▸ this guide for Affiliates.
+
+

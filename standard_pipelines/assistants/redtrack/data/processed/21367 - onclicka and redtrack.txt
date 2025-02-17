@@ -1,0 +1,152 @@
+# OnClickA and RedTrack
+
+
+
+
+
+
+OnClickA is a global ad network for advertisers and publishers.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Landing page&nbsp;(if you have one)
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types&nbsp;you’re planning to work with
+
+
+
+
+
+
+1. Get the OnClickA token.
+
+
+
+In your OnClickA account go to Tracking → Conversion tracking → copy the token value from the Postback URL:
+
+
+
+
+
+
+
+2. Add the OnClickA template to RedTrack.
+
+
+
+In your RedTrack account go to Traffic channels → New from template → find OnClickA → Add → put in the OnClickA token value instead of [REPLACE] in the Postback URL → Save:
+
+
+
+
+
+
+
+
+
+
+
+3. Create a campaign in RedTrack with OnClickA as your traffic channel.
+
+
+
+3.1 In your redTrack account go to Campaigns → Create new campaign → use this guide (for Affiliates)/ this guide (for Advertisers) to help you add your campaign → once the campaign is added, your tracking link is automatically created, copy Click URL:
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+3.2 To apply your postback within your campaign settings navigate to S2S Postback for OnClickA section → Add → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.
+
+
+
+4. Create campaign in OnClickA and add RT tracking link there.
+
+
+
+RT tracking link in OnClickA is added on the Ad level. Then you create the campaign with this Ad. 
+
+
+
+4.1 Create Ad and add RT tracking link to this Ad. 
+
+
+
+Ads → Create Ads → add RT tracking link (copied in step 3.1) to the Common URL link → fill in the rest of the fields → Save the Ad:
+
+
+
+
+
+
+
+
+
+
+
+Refer to OnClickA KB for guidance on how to fill in the rest of the Ad page fields.
+
+
+
+4.2 Create campaign and choose from the drop-down the created Ad with RT tracking link in it.
+
+
+
+Campaigns → Create campaign → choose from the drop-down the Ad with RT tracking link in it:
+
+
+
+
+
+
+
+
+
+
+
+Cost models in OnClickA and RT campaigns should match. So if you chose CPC in OnClickA campaign, you should choose CPC in the settings of the already created RT campaign: - set under the Pricing section in OnClickA. - set under the Campaign Cost section in RedTrack.
+
+
+
+Refer to OnClickA KB for guidance on how to fill in the rest of the Campaign page fields.
+
+

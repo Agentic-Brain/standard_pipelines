@@ -1,0 +1,114 @@
+# lospollos with RedTrack
+
+
+
+
+
+
+lospollos help publishers improve conversions and profits while saving them millions of work hours.&nbsp;
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Los Pollos as an Offer source in RedTrack.
+
+
+
+Offer sources→ New from template→ find Los Pollos template→ Add → copy the Postback URL→ Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up the postback URL in Los Pollos.
+
+
+
+In your Los Pollos account go to Postback → insert the RT Postback URL (copied in step 1) into the Global Postback URL field → Save:
+
+
+
+
+
+
+
+3. Get the Los Pollos offer.
+
+
+
+In your Los Pollos account navigate the Smartlinks tab and click the one you wish to track with RedTrack → enable conversion tracking by adding {clickid} tracking macro into the Click ID field → once the link is generated, copy it: 
+
+
+
+
+
+
+
+4. Add Los Pollos offer to RedTrack.
+
+
+
+RedTrack→ Offers→ New→ give the offer a name and choose  Los Pollos as the offer source→ paste the URL from  Los Pollos (copied within step 3) → add cid={clickid} to the URL →  Save:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create the campaign in RT with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+Refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

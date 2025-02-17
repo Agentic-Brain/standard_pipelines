@@ -1,0 +1,118 @@
+# Top 10 RedTrack Features: May edition
+
+&nbsp;
+
+May has been a busy month for all the RedTrack.io team. We visited a couple of affiliate conferences in Ukraine, RedTrack Product Manager, Vlad Zhovtenko took the stage at AdSummit Kyiv and provided a deep overview of DSP as a technology; we worked hard on GDPR compliance, and never stopped improving the functionality of the tracker.
+
+As a result, this May we have released quite a few new features and prepared ground for even more updates in June. Keep reading to see Top 10 features we've released in May.
+
+&nbsp;
+Campaign report slices/grouping
+More data is now available as part of Campaign reports for even more in-depth tracking and analytics. 
+
+
+
+Moreover, you are able to group your Campaigns by custom subids, as well as the following parameters:
+
+- Offer
+- Landing
+- Date
+- Date parting
+- Connection
+- IP
+- Device
+- OS
+- Browser
+- Geo
+- Referrer
+- Sub's
+
+Additionally, you can Export your extended Campaign Report as .csv file.
+Cost Models
+Upon creating a Campaign, you are able to choose the cost model used by your Traffic Source to enable the most accurate tracking.
+
+
+
+RedTrack now supports the following cost models:
+
+ 	CPC - cost per click - net cost of a click brought from a Traffic Source. 
+ 	CPA - cost per action (acquisition) - a fee for a certain action (form submission, registration, download, install etc).
+ 	RevShare - revenue share - a set % of commission fee paid upon conversion.
+
+&nbsp;
+
+Note: For Offer Payout value to be tracked correctly, make sure that RevShare value in Postback isn't set to "0".
+
+RevShare "0%" will pass 0 as {offer_payout} value for all campaign types. Please, adjust accordingly.
+
+&nbsp;
+Custom Postback Domain
+By default, your Postback links contain RedTrack default service domain rdtrck2.com. You can now change it manually to your custom tracking domain and/or select default from the Tools --&gt; Conversion Tracking tab.
+
+
+
+Your changes will be automatically applied to new Postbacks upon creating an Offer.
+
+&nbsp;
+LP Data
+Thanks to LP Views/LP Clicks columns you can now track the performance of your Landing pages straight from Campaign reports. Make sure to submit your Landing pages in "Landers" tab and choose the appropriate Lander from the drop-down menu upon creating a Campaign.
+
+
+
+
+&nbsp;
+HTTPS Tracking Links
+
+Many platforms require you to submit links in HTTPS format only. RedTrack allows you to choose which type of link will be generated for your Campaign. In order to switch to HTTPS, navigate the Domains tab and toggle the "Enable HTTPS" switch. Enter your Certificate and Privatekey and click Save.
+
+
+Note: You have the ability to switch the format used for your Campaign URL. Just choose the type you prefer from the drop-down list upon creating a Campaign.
+
+
+&nbsp;
+Multiple Offers from one Landing Page
+If you wish to use a Landing page that contains links to multiple Offers with a separate button each, make sure that you add different tracking links for each Offer accordingly. 
+
+Use this link structure if you want to link multiple offers simultaneously. Please make sure that the number of offers in a Stream is equal to a number of Multi-offer click URLs in a Landing page.
+
+Offer Link Template:
+
+http://your_tracking_domain.com/click/1
+
+&nbsp;
+
+&nbsp;
+Improved Conversion Tracking Page
+Managing your Domains, Postbacks and Pixel is now easier than ever - we have gathered all our powerful tracking tools in one Place. The updated Conversion Tracking Page can be found under Tools --&gt; Conversion Tracking.
+
+
+
+&nbsp;
+Some more news!
+&nbsp;
+We are GDPR compliant! 
+We updated quite a few things including our practices, our functionality, and our formal documents.
+
+We advise that you check our:
+- updated Terms of Use
+- updated Privacy Policy
+- Cookie Policy
+
+We have also prepared the document explaining our and your roles according to GDPR regulations.
+
+&nbsp;
+
+We are now on Telegram! 
+
+Follow this link to join our community channel! You will be able to:
+
+- chat with our team
+- ask any question about our tracking solution - RedTrack.io
+- be the first to hear about feature updates and tracker news
+- participate in special discount giveaways and lotteries
+- access our 24/7 support bot
+
+We are excited to get to know each one of you! See you there!
+
+
+

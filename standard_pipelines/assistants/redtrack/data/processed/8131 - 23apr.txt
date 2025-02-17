@@ -1,0 +1,74 @@
+# 23-Apr
+
+
+
+Added the possibility to add matched conversions when integrating Bing Ads source with RedTrack. Click here to learn more about Bing Ads integration in RT.
+
+
+
+Bugfix: while signing up in the Publisher panel, choosing the needed country from the dropdown is now possible.
+
+
+
+Bugfix: Impression URLs in Campaign settings are now shown correctly.
+
+
+
+Bugfix: removed unnecessary columns that do not show conversion subs parameters for the chosen report.
+
+
+
+Bugfix: default settings can now be applied to the list of Campaigns and Columns.
+
+
+
+Bugfix: all the conversions are now successfully displayed in the Logs of the Publisher panel.
+
+
+
+Added role names to the Subs in the Campaign report within the Reporting portal.
+
+
+
+Added the possibility to add landing pages to the funnel in the Campaign form once the advertiser enables the feature of creating landing pages and funnel templates.
+
+
+
+Add validation of mandatory field "Title" to the Funnel templates.
+
+
+
+Bugfix: now the exported report file only contains the columns that the user has selected.
+
+
+
+Bugfix: the Campaign form no longer crashes if convtypes do not exist.
+
+
+
+Added the field Alias channel to the Traffic channel form. It helps to identify the origin of this TC: whether it was added as paid traffic or added as organic and then cloned/edited→ named as the paid traffic channel. Click here for more info on Traffic channels in RT.
+
+
+
+Bugfix: postback status is now shown in the Logs.
+
+
+
+A new condition type "Add Frequency "Last" was added to RT Rules functionality.
+
+
+
+Added the option to hide unnecessary tracking links in the Publisher panel.
+
+
+
+Changed the logic of the toggle “Don’t show cost”: if it's turned on in one report page, it'll be by default turned on in all the other report pages and vice versa.
+
+
+
+Updated the table versions of such pages as Landers, Traffic channels.
+
+
+
+Name of the Campaign Status was changed from Archived to Paused.
+

@@ -1,0 +1,288 @@
+# Universal tracking script
+
+
+What is a universal tracking script?
+
+
+
+Universal script is one of the options we provide for the no-redirect tracking. It generates the click id in the cookie → records the click in RedTrack (based on the parameters from URL and additional info from UA) → records the traffic to the default RT campaign.
+
+
+
+
+
+RedTrack universal tracking script has the following functions:
+
+
+
+
+For affiliate marketers: it can help send traffic from multiple sources to one landing page.
+
+
+
+For those owning an online store: it offers the possibility to track visits from various paid and organic channels.
+
+
+
+For those using Facebook, Google, etc., alongside monitoring organic traffic on the same page: our universal tracking script can track your purchased and organic traffic separately.
+
+
+
+
+
+
+RedTrack universal tracking script can be of the following types:
+
+
+
+
+default - for direct advertisers and e-commerce (for those who don't have any landing or pre-landing pages).
+
+
+
+/click support -&nbsp; for those who work with landing pages.
+
+
+
+/pre-click support - for those who have 2 landing pages one after another before the offer page.
+
+
+
+
+
+
+How to create a script
+
+
+
+Important!The script must be added at the end of the body section. Otherwise, it might fail to trigger correctly.
+
+
+
+
+
+1. Create target Campaigns. One of them should be a Default campaign for the unattributed (aka organic) traffic. Other campaigns are related to your paid traffic channels. Create as many as you need.
+
+
+
+2. Generate your unique script based on your needs.
+
+
+
+Tools → Scripts → New fill in the mandatory fields → Save:
+
+
+
+
+
+
+
+Script type - select one of the 3 types:
+
+
+
+
+default - choose this one if you plan to work with your own website (e.g. e-com store) where a visitor can click on any link or visit any tab while the target action is always tracked on some other page no matter what the visitor path was before.
+
+
+
+/click support - use it when you lead the visitor from your landing page to a 3rd party offer and use domain.com/click CTA link format
+
+
+
+/pre-click support - same as /click support but for a prelanding page with domain.com/preclick CTA link
+
+
+
+
+Title - give your script a name.
+
+
+
+Domain - choose a custom tracking domain that will be used in that script. Tying a concrete domain to the concrete landing page is not necessary. You can use one custom tracking domain for everything.
+
+
+
+Default campaign - organic traffic campaign.
+
+
+
+Attribution - set the attribution model you want to use:
+
+
+
+
+First click - first recorded inbound click.
+
+
+
+Last click&nbsp; - last recorded inbound click.
+
+
+
+Last paid click - last recorded inbound click with tracking parameters.
+
+
+
+
+We always recommend using Last paid click attribution since that is the most accurate way, measures which marketing touchpoint a customer last clicked on or engaged with before purchasing, and gives it 100% of the credit. For the First click attribution data, RT has a conversion path report.
+
+
+
+Attribution window - set the attribution window, the period for the first click, and the last paid click models.
+
+
+
+Cookie domain - the root domain to place a cookie. This is the root domain of your custom tracking domain.
+
+
+
+Example: your script will run on name1.domain.com and name2.domain.com. Add domain.com as the root domain (not https://domain.com and not www.domain.com)
+
+
+
+3. Copy the generated script and add it to your landing page code:
+
+
+
+
+
+
+
+4. Campaign (the one for the paid traffic channel) → Tracking links and parameters → Universal script → copy the tracking parameters → add the parameters string to the traffic channel you use.
+
+
+
+
+
+
+
+RedTrack will identify the incoming traffic based on the "cmpid" parameter. If there is no "cmpid" in the URL, the traffic will be attributed to the default organic traffic campaign.
+
+
+
+Remember that changes to the scripts in RedTrack do not affect thescript used on your page code. If any changes are made, remember to update the script in the page code, too.
+
+
+
+
+
+Automatically created universal tracking script
+
+
+
+1. Add your brand. In RT go to Brands → New from scratch → use this guide for details.2. Add your website. In RT go to Websites → New → use this guide to help add your website URL and the rest of the fields in the template.
+
+
+
+In the Scripts tab follow the suggested steps to generate your universal tracking script → proceed with the rest of the settings according to your needs → save the changes → the script can be copied from here:
+
+
+
+
+
+
+
+Manually created universal tracking script
+
+
+
+Apart from the website settings where you have the ready-to-use script for this particular website, you can also find the list of your scripts in Tools → Scripts. Here, you can create a new one and edit the existing one:
+
+
+
+
+
+
+
+
+
+
+
+Fields explained: 
+
+
+
+
+
+Select one of the 3 types:
+
+
+
+
+default - choose this one if you plan to work with your own website (e.g. e-com store) where a visitor can click on any link or visit any tab while the target action is always tracked on some other page no matter what the visitor path was before.
+
+
+
+/click support - use it when you lead the visitor from your landing page to a 3rd party offer and use domain.com/click CTA link format
+
+
+
+/pre-click support - same as /click support but for a prelanding page with domain.com/preclick CTA link
+
+
+
+
+
+
+Give your script a name.
+
+
+
+
+
+Choose a custom tracking domain that will be used in that script. It’s better to use a custom tracking domain for the concrete website where you plan to put a script.
+
+
+
+
+
+Organic traffic campaign.
+
+
+
+
+
+Set the attribution model you want to use:
+
+
+
+
+First click - first recorded inbound click.
+
+
+
+Last click&nbsp; - last recorded inbound click.
+
+
+
+Last paid click - last recorded inbound click with tracking parameters.
+
+
+
+
+We always recommend using Last paid click attribution since that, in the most accurate way, measures which marketing touchpoint a customer last clicked on or engaged with before purchasing and gives it 100% of the credit. For the First click attribution data, RT has a Conversion path report.
+
+
+
+
+
+Attribution window - set the attribution window, the period for the first click, and last paid click models.
+
+
+
+
+
+Cookie domain - the root domain to place a cookie. This is the root domain of your website.
+
+
+
+Example: your script will run on name1.domain.com and name2.domain.com. Please specify domain.com as the root domain (not https://domain.com and not www.domain.com.
+
+
+
+
+
+Keep in mind that changes to the scripts in RedTrack do not affect the actual script used on your page code. If any changes are made, remember to update the script in the page code, too.
+
+

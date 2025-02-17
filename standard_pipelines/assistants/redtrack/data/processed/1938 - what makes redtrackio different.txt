@@ -1,0 +1,46 @@
+# What Makes RedTrack.io Different?
+
+RedTrack.io is an easy-to-use affiliate campaign tracking software and analytics platform. The tracker is designed for affiliate marketers and media buyers to tackle complex performance and data tracking using a single and ultimate solution.
+Our Team is constantly working on the development and improvement of a whole new way to work with traffic. With this in mind, we develop the solution that equally combines sophisticated feature-set and ease-of-use to support the needs of both expert affiliates and starters. 
+
+What makes RedTrack.io different:
+We create great user experience by removing impediments
+
+ Free SSL support.
+If you're using RedTrack system tracking domains, they already come up with https support. And if you need one for custom domain — we are ready to help.
+
+ Unlimited custom domains.
+We do not limit the number of custom domains you add, starting with a Professional subscription.
+
+ Free onboarding. 
+We offer a one-on-one session to all our paid customers. And we are not surprised this offer is not in high demand — since our tracking software is known for its ease-of-use. We can even help you transfer campaigns — just drop us a line to support@redtrack.io.
+
+ Prompt support.
+Pro support via tickets, email, skype. Video tutorials, detailed Knowledge Base, and integration guides with 30+ Networks — we got you covered and make your tracking with RedTrack hassle-free. We also have a Telegram channel where we share all our news and updates and assist our users with the questions they have. 
+
+ Flexible postbacks. 
+From 2 conversion events for 4 conversions types to 10 conversion sub-ids, we help you pinpoint winning combination with extra precision! Visit RedTrack TV inside your RedTrack account, and watch a detailed video on the postback setting-up. 
+
+ Unique visitor cap.
+The filter allows you to limit the number of times each particular offer will be shown to the same visitor. If the user has already seen the offer, he will be shown a different offer within the same Campaign, so your non-unique clicks are not wasted.
+
+ Min 12-month data retention 
+ Not sure if you need this, but we do anyway.
+
+ No servers required.
+We are SaaS, so you have nothing to install or hassle with — just sign-up and go. And we scale as you grow!
+
+ Pricing starts at USD 29/month 
+And we offer 3 mln tracking events for USD 79/month
+ 
+We constantly develop the product to keep up with growing user requirements:
+
+— direct tracking pixel (tracking with no redirects) — we can track organic traffic and also Facebook and Google Ads traffic when you want to run those ads without redirects. 
+— API access — yes, all account and data are available via API — automate and integrate as much as you want.
+— Fast redirects and reporting at scale — we operate proprietary technology that handles billions of click per day.
+— Impression tracking and postbacks — yes, we can track impression (even impression cost) and postback the calls further.
+— CPC/CPM/CPI/CPA/RevShare campaign tracking — whatever is your campaign type — we can accurately report all metrics and postback to traffic source if needed.
+— 30+ data attribution points — we offer you a lot of data to make optimization decisions. 
+— Multiple pre-sets for Networks and Traffic sources — and we make adding new stuff easy.
+
+Now, if you want to know what else is coming — message us to support@redtrack.io / Telegram channel or sign up for a free package and stay in touch.

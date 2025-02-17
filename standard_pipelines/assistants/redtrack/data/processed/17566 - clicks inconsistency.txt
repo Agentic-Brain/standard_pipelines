@@ -1,0 +1,110 @@
+# Clicks inconsistency
+
+
+Click inconsistency can be presented in the following ways: - Traffic channel is showing higher clicks amount compared to RedTrack.- RedTrack is showing higher clicks amount compared to traffic channel data.- No clicks in RedTrack.- There are clicks but they are attributed to the wrong campaign.
+
+
+
+Here is what can be checked/done in these situations:
+
+
+
+
+
+
+Check if the tracking links have all the necessary parameters and set properly.
+
+
+
+If the tracking script is used, make sure it is fired.
+
+
+
+Check if the time zones are the same in both systems.
+
+
+
+Make sure the traffic channel is not sending you bot traffic (by analysing reports, IPs, etc.).
+
+
+
+Check if you have set campaign filters or offer caps by mistake.
+
+
+
+Your traffic channel might have many redirects which slow down the system (e.g: there are a lot of their internal redirects before the visitor is redirected to your tracking URL, as a result – he quits the page before the click comes to RedTrack).
+
+
+
+Check if the custom tracking domain is up and running.
+
+
+
+
+If everything is okay with your RedTrack settings, we cannot control the number of clicks in your traffic channel and cannot provide the reason for such a discrepancy on their side. 
+
+
+
+What can be done: go to RedTrack → Logs → Clicks → choose the time period → export the clicks log report and ask your traffic channel account manager for advice.&nbsp;
+
+
+
+
+
+
+Check if the correct links with correct parameters are used on the traffic channel side.
+
+
+
+Check if the clicks coming from the traffic channel contain the dynamic parameters (this can be done in logs).
+
+
+
+Make sure there is no bot or organic traffic coming to the paid traffic campaign.
+
+
+
+Exclude the time zone difference.
+
+
+
+If the tracking script is used, make sure it is triggered on the page only once.
+
+
+
+
+RedTrack tracks the number of visits to your campaigns. Since we are not integrated with your traffic channel, we do not get the numbers of clicks reported by their system directly. The primary purpose of tracking is to track&nbsp;all visits&nbsp;going through your campaign URL/website/shop, no matter what is shown in the traffic channel.Analyse your&nbsp;reports&nbsp;for the different data slices to check your click parameters.
+
+
+
+
+
+
+Check if the tracking links are set correctly if you work with redirect method.
+
+
+
+Check and ensure the scripts are correct and are fired properly on the page for no redirect method.
+
+
+
+Make sure the tracking domain is up and running.
+
+
+
+Exclude clicks being redirected to the organic campaign.
+
+
+
+
+
+
+
+Check if the correct tracking links are used on the traffic channel side - each contains the unique campaign id, it should be the one you attribute your traffic to.
+
+
+
+If it is a no redirect tracking, check for the correct tracking parameter to be used on the traffic channel side or in the script itself.
+
+
+

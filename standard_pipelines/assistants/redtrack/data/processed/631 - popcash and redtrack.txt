@@ -1,0 +1,100 @@
+# Popcash and RedTrack
+
+
+
+
+
+
+Popcash is a highly specialized popunder advertising network. It uses a popunder ad scheme when ads are shown in a new window, underneath the current browser. Ads are triggered by visitors clicking anywhere on a website that has loaded the Popcash.Net ad code. 
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types you're planning to work with
+
+
+
+
+
+
+1. Add Popcash template to RedTrack.
+
+
+
+Traffic channels → New from template → find Popcash → Add → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+2.&nbsp; Set up a campaign in RedTrack with Popcash as a traffic source.
+
+
+
+Campaigns → Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create your campaign with Popcash as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL:
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+3. Set up the tracking on the Popcash side.
+
+
+
+In your Popcash account go to Campaigns → Create Campaign → paste the RedTrack Click URL (copied in step 2) into the Landing URL field → Start Campaign:
+
+
+
+
+
+
+
+4. Set up the postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 2) → scroll down to&nbsp;S2S Postback for Popcash →&nbsp;Add → update the "aid" value with the real value from your Popcash account and check if all the needed values for the&nbsp;parameters are in place → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+

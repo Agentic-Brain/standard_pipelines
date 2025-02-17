@@ -1,0 +1,51 @@
+# Facebook Conversion API for eCom (Shopify, WooCommerce & others)
+
+We are sure it’s not the first time you hear about the iOS 14 update this year. Apple made the life of those who use Facebook Ads a bit harder. Every advertiser had to find a workaround solution that could help with Facebook conversion tracking and optimization. But how did the iOS 14 update influence the life of eCom store owners, vendors, and publishers? 
+In our previous articles, we have been focusing primarily on the consequences of FB CAPI for affiliates. This article is going to explore what Facebook Conversion API means for eCom and direct advertisers. Together we will learn the solutions that can save your FB Ads if you run an eCom business. 
+What changed in Facebook conversion tracking? 
+We have created a lot of content about privacy updates that influenced changes in Facebook Ads performance. The main reason behind that is iOS 14 update that introduced ATT prompt. This update influenced the way Facebook does conversion tracking &amp; attribution tremendously. 
+To learn more about the changes, I recommend watching this video created by our team: 
+
+But in a nutshell, the beloved Facebook Pixel was not able to serve anymore to provide the same results as before 2021. In order to track, analyze and optimize for conversions, you need a new player for the game — Facebook Conversion API. 
+Why do you need Facebook Conversion API for eCom? 
+Facebook Ads was always one of the main advertising channels for the eCom industry. FB Ads are efficient when reaching your potential audiences with the use of targeting &amp; remarketing. However, Facebook attracts sales (and other target actions) to your eCom store only if you know how to properly use optimization.
+Facebook algorithms require the conversion data in order to perform optimization for the events of your choice (sale, add to cart, etc.)
+And that’s where many eCom stores face a major problem. The problem starts when trying to deliver the data about conversions (and other target actions) to Facebook. 
+
+Many Shopify / Woocommerce / other platforms users started noticing a huge discrepancy between the real sales happening in their stores and the data that Facebook shows about conversions. 
+
+Previously, everything was pretty easy. You had 10 sales displayed on Shopify, 10 sales shown on the Facebook side. You had your Facebook Pixel solving all the issues you could have while running FB Ads, targeting, and optimizing. However, those times are gone. 
+Problems of eCom owners who run Facebook Ads
+1. Facebook doesn’t receive all the required data to further use it for optimization 
+Facebook Pixel lost its power as a trustworthy way to deliver the data about conversions from the 'thank you' page back to Facebook. Without accurate data, accurate optimization is not possible.
+2. Facebook doesn’t show you the exact results of the campaigns as they use modeling 
+Facebook is a so-called self-attribution network. That means that Facebook is performing all the tracking and attribution. But do they really want to share that other channels brought you conversions? It’s way easier to keep all eggs in one basket and force you to invest your budgets in FB Ads by making you believe that Facebook brings all the conversions.
+
+Therefore, if you invest bigger budgets in advertising and you are using multiple channels at a time, you really want to know the truth behind your conversions. Only independent tracking &amp; attribution solutions can guarantee you unbiased data. 
+3. Shopify (or other eCom platforms) does not show ad spend for the campaigns you are running. 
+You see sales on the products you advertise, but you can’t really always connect them to a specific Facebook Ad. Besides, you are not able to see the drop-down of your spending per campaign, ad set, or ad. In that case, your data about results and spends is separated. 
+4. eCom store owners need a trustworthy source to make decisions affecting their business. 
+In a situation where Facebook doesn’t show exact conversion data and your Shopify does not show the ad spend/revenue, you are pretty much left in a black box, not being able to make decisions based on facts (accurate data). Rather only on guesses. 
+Facebook Conversion API solution for eCom
+If you want to enjoy the result driven by Facebook Ads and see the sales flowing in your Shopify / Woocommerce / other stores, you need a hand from Facebook Conversion API. But there’s a trick. 
+
+If you go through the problems mentioned above, you realize that there is a real need for an independent unbiased platform that will collect all the data, send the required conversion data to Facebook for optimization, but at the same time will give you accurate insights for your marketing &amp; advertising strategy.
+
+At RedTrack, we adopted a native solution for Facebook Conversion API at an early stage and kept close contact with specialists from Facebook to be sure we can solve advertisers’ issues. 
+RedTrack as eCom Facebook Conversion API solution
+RedTrack has API-based integration with Facebook. This allows RedTrack to step as an independent platform that, on the one hand, collects data about every click from your source (Facebook) and, on the other, attribute those clicks to conversions (purchases, add-to-cart, checkout, other conversion events) and send back to Facebook via API for further optimization.
+
+With RedTrack, you can: 
+
+ 	track your purchases / add to carts / abandoned carts (or other target actions);
+ 	provide accurate reports on campaign performance;
+ 	send conversion data back to FB via API; 
+ 	provide unbiased data about your advertising.
+
+You can use a 14-day free trial to give this solution a try and see if it works for your business objectives.
+
+To start smart FB conversion tracking, you might find this guide of use. It goes through necessary steps to integrate CAPI, also exploring tips &amp; insights from our team on work with Facebook Conversion API.
+
+
+Conclusion
+Facebook conversion tracking after iOS 14 hasn't been easy. However, finding the right solutions helps simplify the pain. If you haven't been able to become friends yet with FB CAPI as an eCom business, consider trying out RedTrack. You can schedule a demo with our team and explore what kind of problems RedTrack will help solving. 

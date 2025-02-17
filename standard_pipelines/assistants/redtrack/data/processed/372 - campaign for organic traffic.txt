@@ -1,0 +1,48 @@
+# Campaign for organic traffic
+
+
+Organic/unattributed traffic is those visitors that land on your website from unpaid sources, essentially free traffic. To spot this traffic in RedTrack, you need to have a separate campaign for it.
+
+
+
+Campaigns with paid traffic contain tracking parameters (for example, cmpid=62593afd6ef9dd0001221f51), meaning we already know to which traffic these clicks are attributed. Thus, for the unpaid traffic (unattributed/organic traffic) to be attributed somehow, you need to create a default campaign to collect info about all the clicks coming without the tracking parameters and to differentiate this traffic from the paid campaign. 
+
+
+
+To create this campaign, act as follows:
+
+
+
+1. Create a traffic channel unrelated to any paid channels.
+
+
+
+Traffic channels&nbsp;→ New from template →  Other → Add → in the name field, add your website's name or go creative, but remember to distinguish this traffic channel somehow (put Other, for example) to tell it from the regular added campaigns:
+
+
+
+
+
+
+
+2. Add the offer source and offer.
+
+
+
+Your website or lander will act as the offer, and the offer source can have the same name. Name it accordingly so you can differentiate it later. 
+
+
+
+3. Create a new campaign as a regular campaign and save it. 
+
+
+
+The traffic channel is the one added for the organic traffic, and offer/lander+offer is your website URL (depending on the funnel you have).
+
+
+
+4. Generate/copy the universal script associated with this campaign and paste it on your website if you are installing this script for the first time. 
+
+
+
+Your campaign for organic traffic is ready. It is used for the universal tracking script as the default campaign. This allows the script to attribute all the clicks (and conversions generated from those clicks) without the parameters to the organic campaign. 

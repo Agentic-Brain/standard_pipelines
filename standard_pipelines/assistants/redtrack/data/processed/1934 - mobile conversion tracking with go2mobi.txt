@@ -1,0 +1,16 @@
+# Mobile Conversion Tracking with Go2mobi
+
+We’re excited to share good news with our users, as RedTrack.io announces its partnership with Go2mobi.
+What does this mean? Now, it only takes a few seconds and the same amount of clicks to set up tracking of your mobile advertising campaigns with Go2mobi.
+Go2mobi is a mobile-first programmatic advertising platform that helps agencies, brands, trading desks, and app marketers reach the specific mobile audience segments that drive performance and ROI.
+As an industry-leading platform, Go2mobi offers many advanced features in mobile marketing, including:
+• Access to over 750M apps, games and leading mobile websites through their mobile DSP;
+• Ultra granular realtime reporting and micro bidding on deep traffic pockets;
+• Control over the KPIs with Go2mobi’s performance targeting features;
+• Access to top-tier customer service, with fast approvals;
+• Daily budget/placement spending cap;
+• Audience, geo, domain and bundleID targeting;
+• Auto-optimization and much more.
+Don’t miss your chance to get a special Go2mobi bonus for RedTrack users only — 20% discount on your first deposit of $500 or $1000. To access the bonus, email the code REDTRACK to support@go2mobi.com and the discount will be applied to your account.
+With Go2mobi added as a trusted traffic source, RedTrack users save time on the setup process, as all the necessary settings for postback URL are already pre-set.
+Access our step-by-step user guide to integrate mobile conversion tracking with Go2mobi, found in our Knowledge Base here.

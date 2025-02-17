@@ -1,0 +1,97 @@
+# How to Use TikTok Ads in Affiliate Marketing: Ad Types, Audience Targeting, Costs, and ROI Tracking
+
+In affiliate marketing, we live and thrive by our cost per acquisition. The cheaper the channel, the higher our commissions. So if you’ve already tested other methods, it may be time to consider TikTok ads for affiliate marketing.
+
+With 67% of TikTok users saying that the social network inspires them to shop, it’s the place to be. And today, we’ll show you everything you need to know.
+TikTok Ads for Affiliates 101
+TikTok offers an excellent organic reach but if you want to earn more faster, paid TikTok ads are the best option. 
+
+TikTok for affiliates works the same as any other brand; just make sure you use the CTA URLs that include your affiliate link and track your success (more on that later).
+Types of TikTok Ads
+You can choose from a few different video ad types:
+
+ 	In-feed TikTok ads. Appear organically as your target audience scrolls down their For You Page, and make sure to stop the scroll with engaging content.
+ 	TopView ads. Appear as the first video in your audience’s feeds. You’ll get increased views and conversions if your ad is engaging. 
+
+
+
+ 	Brand Takeover TikTok ads. As one of the rare TikTok ad types users can’t skip, Brand Takeover can be fantastic for your targeted affiliate marketing campaign.
+ 	Branded Hashtag ads. If you’re doubling down on products with viral potential, consider launching a Branded Hashtag challenge.
+ 	Branded Effects. Interesting for younger demographics and affiliate products they can “try on” (e.g., makeup, clothing).
+
+Of course, you can also work with influencers. 
+
+TikTok has a Creator Marketplace where you can reach out to micro and big influencers for collaboration. Depending on your commission, it may make sense to collaborate, but in most cases, you’ll find in-feed and TopView ads most effective. 
+Finding Your Affiliate Target Audience on TikTok
+If you’ve used Facebook advertising, you’ll find TikTok targeting simple. You can select a custom audience, use a lookalike audience, or target your audience based on:
+
+ 	Demographics (gender, age, location, language)
+ 	Psychographics (interests, behavior, devices)
+
+Targeting is really the key to successfully advertising your affiliate products on TikTok. 
+
+You want to ensure you’re targeting an audience with the purchasing power and demonstrated interest in topics related to your product.
+
+For example, suppose you were selling a finance affiliate product. In that case, you’d look at users who are a part of the so-called FinanceTok, follow the community influencers, and engage with finance content.
+
+ 💡 Ready to launch?
+
+Check out our in-depth guide to TikTok ad campaigns.  
+Is My Affiliate Audience on TikTok?
+If your audience is younger than 55, they’re using TikTok. 43% of TikTok’s audience is 18-24, and 32% are aged 25-34. 
+
+Yes, TikTok is best known for promoting consumer products. However, even your B2B audience could be using it. For example, Shopify successfully uses organic and paid TikTok to reach potential entrepreneurs.
+
+Remember: even VPs in tech companies kick back and relax. If they use TikTok, it’s the place to be. ;)
+@shopify
+TIL i could use my iphone for irl shopping via shopify. you can, too.
+
+♬ original sound - Lauren Agans
+
+
+How Much Do TikTok Ads for Affiliates Cost?
+Much like Google Ads, your TikTok ad cost is decided through bidding. You’ll pay for video views or clicks. 
+
+TikTok ads used to be expensive, but these days, you can run a campaign for as little as $50 per day. 
+The minimum daily and lifetime budgets are $50 on a campaign level. On an ad group level, your minimum daily budget should be $20. 
+Then, multiply it by the number of days you plan to run the ad to get your minimum lifetime budget.
+How to Determine Your TikTok Ad ROI
+Your ROI really depends on your niche, audience, and campaign setup. However, once you launch your campaign, you need to understand precisely how much revenue you generate with TikTok.
+
+For that, we recommend using a marketing attribution tool like RedTrack.
+
+
+Why You Should Track Your TikTok Ads
+TikTok offers client-side tracking. This means the tracking pixels come with visitors; if their privacy settings block tracking, you won’t understand where the conversions are coming from.
+
+On the other hand, RedTrack offers server-side tracking, i.e., your website monitors and reports visits accurately. 
+
+At the end of the day, you can determine if TikTok is making you - or losing - money. 
+
+You can go even deeper to identify which creatives, campaign types, and targeting options bring in the most profits. Double down on what works, and stop wasting money on ineffective channels and campaigns.
+
+Finally, TikTok - like any other ad platform - needs data to optimize your ad placement. Since RedTrack allows you to share the data it harnesses with TikTok, you can run more effective ads. 
+Ad Tracking API for TikTok
+The easiest way to track your affiliate income from TikTok ads is with RedTrack’s API integration. Once you connect it to your TikTok campaigns, you’ll be able to share RedTrack data with the ad platform, including:
+
+ 	Conversion data
+ 	Cost data
+
+This way, TikTok will know to optimize your ads, and you will understand how much you’re getting back for every dollar you spend.
+Compare TikTok to Your Other Affiliate Marketing Channels
+As the adage goes: never put all your affiliate income in one basket. (We’re pretty sure they said affiliate income.) 
+
+You likely use different channels, including other PPC platforms, organic traffic, and more.
+
+Unless you want to find yourself wasting money on ineffective channels, you need razor-sharp analytics.
+
+RedTrack monitors all your marketing channels and analyzes the cost and the revenue attribution, so you know where to pull the plug and where to invest.
+
+For example, you might play around with data visualization filters and find out that most of your revenue comes from a special TikTok offer (as opposed to a Facebook ad).
+Ready to Earn More with TikTok?
+TikTok is a 2022 marketing powerhouse. However, you can’t understand your TikTok ad ROI without proper revenue attribution. 
+
+And when you’re an affiliate marketer, every cent counts.
+
+So give TikTok a go - but don’t forget to bring RedTrack with you!
+

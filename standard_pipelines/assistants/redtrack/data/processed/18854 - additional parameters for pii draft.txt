@@ -1,0 +1,44 @@
+# additional parameters for PII (draft)
+
+
+3. Add PrestaShop as a Brand in RedTrack:в
+
+
+
+3.1 Brands → New from scratch → use&nbsp;this guide&nbsp;to help you with Brand editing.
+
+
+
+
+
+
+
+The specified title of the shop will correspond to the Brand’s name. The newly created Brand will serve as a placeholder for the tracking parameters.
+
+
+
+3.2 To send the PII data for better attribution go to the added Brand settings →&nbsp;Additional parameters&nbsp;→ add the following parameters with the corresponding roles:
+
+
+
+ParameterMacro / TokenName / Description (what you will see in reports instead of subx)RoleInfo we receive under these parameterseventid{replace}Event IDEvent IDYour order ID or the external ID for the conversionfname{replace}First NameFirst NameCustomer First Name from the orderlname{replace}Last NameLast NameCustomer Last Name from the orderphone{replace}PhonePhoneCustomer phone number from the orderemail{replace}EmailEmailCustomer email from the orderzip{replace}Zip CodeZip CodeCustomer zip code from the ordercontentid{replace}Content IDContent IDsExternal product IDcontent{replace}ContentContentsProduct titlecontenttype{replace}Content CategoryContent CategoryThe type of product
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

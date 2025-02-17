@@ -1,0 +1,132 @@
+# Zero-party data VS first-party data: why you should not forget about first-party?
+
+It all started with one LinkedIn post. Then another one. Then I saw it’s not just sporadic info, but rather a HUGE trend for zero-party data content and solutions, even companies being created for its sake. I wanted to figure out why so much buzz and understand whether it can possibly substitute first-party data. 
+
+That is how this blog post was born: in pursuit to get it all right between all types of customer data: 3rd party, 1st party, and the newbie — zero-party data.
+In this article, we will go over the difference between all these data types, as well as understand whether zero-party data is worth the hype created around it. 
+
+
+Types of customer data
+Apparently, we all marketers were just fine figuring out how to live with 3,2,1. I mean, third-party, second-party, and first-party data. When we sorta reached the peak of this mountain range (let’s call it Big 3 to save my time writing this again and again), a new mountain started to clear out of nowhere — zero-party data. 
+
+Let’s try to understand the main difference between those types of data. 
+
+&nbsp;
+Third-party, first-party and zero-party data at a glance
+
+
+
+Third-party
+First-party
+Zero-party
+
+
+It is indirect customer data, usually aggregated and collected without the direct consent of the user to share this information. Usually inaccurate and not reliable. 
+Direct customer data, but collected with all the privacy regulations taken care of and with the consent of the user. It is the data of high accuracy that you can rely on for advertising &amp; marketing purposes.
+Direct customer data that the user willingly shared with the brand. It is accurate and reliable, usually helps understand the customer better and identify preferred communication ways.  
+
+
+
+
+ 	Email
+ 	Income 
+ 	Website visits
+ 	Search history
+
+
+
+
+ 	Email
+ 	Website visits 
+ 	Click data 
+ 	Conversion data
+
+
+
+
+ 	Email 
+ 	Age
+ 	Communication preferences 
+ 	Personal details 
+
+
+
+
+
+As you can see, there are not many differences in the data itself, but rather the differences are in the way this data is collected. Also, the trustworthiness of the data differs from one type to another. 
+Let’s go over each type and try to understand better how it works. 
+What is third-party data? 
+Third-party data is indirect customer data collected without the users' consent for using it.
+Third-party data used to be collected through website cookies and include all the customer info. Usually, this data is obtained through aggregators, is easily resold and the reliability is really questionable. 
+
+It used to work the following way: various companies collect users’ data through cookies and then resell it through various third-party data marketplaces. 
+Another way you might have been using third-party data is by using Facebook pixel or any other old-fashioned tracking methods. Those technologies are also enabled by 3rd party cookies. 
+
+Even though third-party data improves advertising &amp; targeting, there are serious disadvantages of relying only on this type of data in 2022. 
+Disadvantages of third-party data
+
+ 	It can be inaccurate because the technologies are outdated 
+ 	It’s getting harder to use third-party data for optimization &amp; targeting because of the cookieless changes in the industry
+ 	This data is usually not individual and raw, but rather aggregated
+
+What is first-party data?
+First-party data is the data you collect directly from your organic &amp; paid channels with the users' consent. 
+Data comes from paid advertising, your website, as well as other marketing channels. 
+Examples of first-party data include:
+
+ 	Demographics
+ 	Website activity
+ 	Email engagement
+ 	Click data
+ 	Conversion data 
+ 	Conversion path data 
+
+When privacy regulations appeared in the day-to-day life of marketers, the value of first-party data skyrocketed.
+First-party data ensures this privacy and avoid the difficulties caused by cookieless updates because it’s gathered in a privacy-friendly way. 
+Biggest advantage of first-party data for your advertising 
+Not only first-party data is accurate and privacy-compliant, but it also serves as a magic boost for your advertising. 
+All the data collected from users' interaction with advertising, website, and the product can and should be used for optimization, targeting, and remarketing which improves the way you allocate your advertising budget.
+
+
+For example, first-party data can help you map a conversion path of the user by detecting every click on his/her way before they make a final purchase. 
+Or you can create complicated funnels according to the individual interaction of the user with the website. E.g. he added something to the cart, but later abandoned it. You can retarget this or similar products to this user.
+Raw first-party data is that source that enables the technology for optimization and crazy algorithms. 
+And finally, what is zero-party data? 
+It's the data that user has every single intention to share with your brand. That means that you also have the consent to use this data. Usually, it's the data that you receive through forms on your website, or you can also get it through support chats, for example.
+
+The most common example of zero-party data is communication preference: when a customer shares with you email or phone number and gives permission to contact him or her that way.
+
+But you can collect much more through zero-party data: age, personal details (like clothes size, skin type, employment status, etc.), place of residence, languages spoken. Basically, it can be anything that is relevant to your brand.
+And why exactly do we need zero-party data? 
+Depending on the type of business that you run you might find different ways to use zero-party.
+1) You can improve communication with your customers
+By knowing what is the best channel for communication, you can achieve better response &amp; communication results for your sales (or any other) team.
+
+You can also benefit from an omnichannel contact center approach by adopting a suitable solution for that.
+2) You can improve messaging
+Not only zero-party data is useful for sales teams, but also for marketing departments. You can use this data for better messaging, positioning, and overall understanding of your target audience. By carefully crafting those forms and choosing to ask the right questions, the answer will help you understand the real pains of your customers which you can use in campaigns.
+3) You can create a better product
+When receiving zero-party answers from your customers, you can understand how to craft the product for it to answer all the requirements of the user.
+Zero-party data will be useful for product managers and C-level employees to start new initiatives.
+What’s the main difference between first-party and zero-party data? 
+You can see that first-party and zero-party data often overlap, except few important data elements: data collected through paid channels. Here I'm talking about conversion data, click data, etc.
+
+And here can be found the main difference between these types of data. First-party data collected through your paid ads can be used to improve your paid performance by feeding algorithms. In this regard, first-party data becomes a big boost to your efforts in advertising and serves for better performance on every dollar invested in paid ads.
+
+As an example, by choosing RedTrack as your marketing analytics solution that collects first-party data through our privacy-compliant technologies from all the marketing channels you use, you can choose to send this data back to Facebook &amp; Google for algorithms to do their jobs better. Besides, having all the performance data in one dashboard will help you understand which channels you should scale and which are better to cut.
+
+On the contrary, even though zero-party data is very good to understand your customers, communicate with them, and craft amazing messaging, it will not help you advertise better.
+Finally, is zero-party data worth the hype? 
+Even though LinkedIn gurus create an image that 0-party data is the new black, I have to disagree with its exclusive importance. Yes, it’s super important to collect as much data directly from a customer to build better marketing personas, improve the ways you communicate with your audience, to improve your understanding of your TA. 
+
+However, zero-party data can not replace the capabilities of first-party data in times of cookieless updates. 
+
+The answer is to join the forces of two powerful tools: first-party and zero-party.
+
+Zero-party data will be serving in the front line, while first-party data will be contributing from the back end.
+
+If you want to improve your advertising efforts with the power given by first-party data and marketing analytics, find RedTrack as your trusted partner in taking the numbers and delivering them right in the hands of algorithms of advertising networks (like Facebook and Google).
+
+
+
+&nbsp;

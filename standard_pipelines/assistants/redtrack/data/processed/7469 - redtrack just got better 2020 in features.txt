@@ -1,0 +1,90 @@
+# RedTrack just got better. 2020 in features
+
+The end of the year always makes us feel a little nostalgic. 2020 was something unusual for all of us, but we can't deny the fact that it was a game-changing year. We spoke a lot about the influence of COVID on the industry in our posts, we launched several excellent pdf guides related to this topic, but now we want to put it aside for a moment. RedTrack ends the year as it started it: with many updates, improvements, and enhancements - all possible thanks to our users. 
+
+For the past year, RedTrack had almost weekly updates! All in all, 
+
+We have made no fewer than 76 feature updates in 2020.
+
+2020 in RedTrack updates - how was it? 
+Twelve months of 2020 just flew by. But we offer you to look back - do you know that each month reflects a particular feature that went live then and enhanced the way RedTrack users addressed tracking, reporting, and automation?
+01 JAN: Multi-access: new rules
+Multi-access is one of the top RedTrack features used by media buyers, agencies, and publishers. While the multi-access itself was released a couple of years ago and made collaborative work on ad campaigns and budgets much easier for teams. In January, our team released an update and added more rules to the feature, i.e.: 
+
+ 	additional access rules: if you're an admin of a RedTrack account, you can share with your team members additional permissions to your data, like logs (clicks &amp; conversions) and publishers' data.
+ 	additional levels of access to data: besides 'read-only' mode, you can also grant 'edit' and 'export' permissions to your team members.
+
+02 FEB: Auto-rules &amp; alerts: more options
+Again, RedTrack was the first ad tracker that released auto-rules on the market of trackers. It happened in 2019 and marked the in-depth API-integration of RedTrack with several traffic sources, like Google, MGID, ExoClick, and others. This feature made possible the connection of different sources to RedTrack to perform automated actions, like auto-update cost, campaign optimization based on performance, auto-pause of poorly performing elements, etc. 
+
+&gt; Learn more: Automation revolution: new RedTrack feature-set
+In 2020, we've improved and updated:
+
+ 	the frequency of auto-update cost for the integrated traffic sources from 1 hour to 15 minutes;
+ 	added webhooks as the method of getting alerts when the rule doesn't perform  as expected (before, only email notifications);
+ 	included extra options for auto-rules, based on subID performance (example of subID can be bidding keyword, ad position, etc.)
+
+03 MAR: 10+ traffic sources added to Auto-rules 
+In 2020, we API-integrated more than ten traffic partners with RedTrack. At the moment, we have 23 sources added to the auto-rules, and we keep growing the list.
+→ Check the full list of API-integrated traffic sources. 
+Haven't found the one you work with? Contact us with the request, and we would put it on our priority board. 
+04 APR: Universal tracking script
+With the RedTrack Universal tracking script, you can see everything that happens to your traffic and leads across all your funnels. One script helps you attribute all incoming traffic across all paid, affiliate, and direct campaigns without making additional changes. You don't need to adjust any tracking parameters -- just put the script on every page of your website and get accurate and transparent analytics on the traffic you get. 
+
+Contact our team to set the Universal tracking script for your website. 
+05 MAY: Multiple improvements in Publisher panel 
+The publisher panel is a separate portal developed by the RedTrack team to provide our users with a customizable white-label solution for managing publishers, affiliates, campaigns, offers, and more.
+
+[caption id="attachment_7502" align="alignnone" width="2880"] Create a campaign in your white-label Panel[/caption]
+
+The most popular scenario of using the Publisher panel among RedTrack users are:
+- building an affiliate network with the white label;
+- launching your own affiliate program and giving the public access to it;
+- managing influencers and providing them a workspace to track the value and revenue they bring in the overall marketing efforts;
+- attracting affiliates to promote your direct offers and products.
+
+2020 was a fruitful year for the Publisher panel as well. Besides some minor enhancements and updates, we also released: 
+
+ 	Conditional postbacks. It allows you to choose the type(s) of conversions you want to send to your publishers (e.g., only approved ones);
+ 	Additional white-label &amp; workspace settings. Now you can set the way you want your publishers to see the dashboards (columns and reports) and attach your own Privacy Policy / Terms and Conditions links; 
+ 	Sync your email domains. So your publishers would receive emails from name@your_brand.com and not from admin@redtrack.io;
+ 	Limited access. You can choose if you want to grant public access to the registration in your Panel or just by invitation. As well as limit access of your publishers to payment and financial information.
+
+06 JUN: Multiple improvements in Reporting portal
+
+The reporting portal is a go-for-solution for every mature agency that values transparency and privacy. You can set-up a white-label reporting portal for advertisers and provide them with real-time access to performance reports. It's a win-win solution, as you save time by not doing a 'cut-n-paste' job with tons of data and numbers, and your partners value the transparency and convenience you give them with a customized portal provided just for them.
+07 JUL: Workspace settings 
+
+We added more flexibility in the way you see and work with your dashboards. You can now show/hide and reposition the columns you see in your reports and create report templates to access the data even faster. 
+08 AUG: Custom conversion events 
+For the cases where you need to track more than one conversion event, we released 11 customizable types. So if you have a complex flow with several targeted events, like 'add-to-card' and 'purchase' flow, or 'conversion' and 'transaction', and 'renewal' flow - you can now track all these events as separate actions and see the performance of each step in your reports. This feature found pure love among our users who work with e-commerce in particular. 
+
+By the way, we use RedTrack in our sales and marketing activities as well. In our SaaS-scenario, we use multiple conversion events to track such events as 'trial', 'subscription', and 'renew', for example. So as you can see, the feature's usability is broad and can be applied in any industry. 
+
+
+09 SEP: Multi-currency 
+Probably this was one of the top requested features, and we've finally moved it from beta to live. This feature allows you to receive the costs and payouts in different currencies and automatically transform them into your account currency. The rates are updated twice a day based on the information provided by the European Central Bank. 
+Learn more: Set-up currency for my account 
+
+10 OCT: Real-time fraud detection 
+As someone said - "Bots were, are, and would be a permanent part of web traffic." Still, everyone hopes that the ratio of human and bot traffic would be on the side of the first ones. Nevertheless, we launched our Fraud Report feature (in collaboration with our partners from FraudScore) last year, we keep improving it in 2020. 
+
+
+
+Today, as an Anti-fraud suit at RedTrack, you get:
+
+ 	Real-time reporting on traffic quality. With the FraudScore technologies, we process and check every click based on 10+ criteria and report them in real-time in your RedTrack account. 
+ 	Bad traffic filtering. If you don't want to run bot traffic to your main offers but still don't want to exclude it entirely from your campaigns, you can now filter specific categories of this traffic (e.g., bad device clicks) and send them to a separate stream.
+ 	Automatic exclude of known bots from your reports. As you know, besides fraud traffic (e.g., click injection and cookiespamming, etc.), there are so-called 'good' bots. These are the bots by Google, Facebook, 3rd party tools that scroll your web pages. Still, they also generate clicks that influence your stats and contribute to inaccurate reports. In RedTrack, all known bots are automatically detected and excluded from your statistics (but if you want these bots to be displayed, you can set this rule in the workplace settings of your RedTrack account)
+
+11 NOV: Time period (performance) comparison 
+In 2020 we released the time period comparison feature that is so loved by Google Analytics users, but ad trackers lacked it. With this new feature, RedTrack users can now visually compare their campaigns' performance within different periods. For example, you can compare the number of clicks/sales and CR of the last week against the current one and react to the changes straightaway. 
+12 DEC: Traffic source multi-account integration
+
+We received dozens of requests for this feature in 2020. Now you can connect several Traffic Source accounts to one RedTrack account. This feature would be especially handy if you work with several Google / Facebook ad accounts. 
+Learn more: How to integrate several accounts to my RedTrack account
+&nbsp;
+Instead of a summary...
+These are just a few of the overall features that made it till the release in 2020. In everything we did and keep doing, be it onboarding assistance or lines of code, we always do it with our users in mind. In the end, RedTrack is not about technology only, but about our users: what they are looking for in the software, what can anticipate their needs, how new features will help them, and so on. 
+
+Happy New Year 2021, everyone! 

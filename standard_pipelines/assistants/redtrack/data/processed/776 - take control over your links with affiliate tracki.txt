@@ -1,0 +1,48 @@
+# Take Control Over your Links with Affiliate Tracking Software
+
+Chances are, 7 out of 10 ad campaigns you’ve launched, would start off unprofitable.
+Why?
+It’s not a matter of accident or luck.
+When an advertiser/ affiliate launches a campaign, they make it based on assumptions about what might work and what not. There are too many settings combinations that influence the efficiency of advertising. And you wouldn’t know it, until launching an ad campaign and starting get some real traffic to it.
+So is there any chance to become profitable after an unsuccessful beginning?
+The answer is yes. Still, you shouldn’t beat the bushes looking for a four-leaved clover and wait for success, but start tracking the ad performance and keep constantly analyzing it. You can do all that and even more by using an affiliate tracking software.
+Good tracking software can save you a lot of money before you find the winning campaign.
+
+What is affiliate tracking software?
+It is the software that allows users to create links that, in turn, are used for tracking purposes, as well as managing and optimizing all the traffic that they drive. Tracking software is a way to understand the performance of your campaigns across various traffic sources, landers and offers at a glance.
+Putting it simply, tracking software shows all the impressions, clicks and conversions, like the traffic source, the country from where they arrived, what time of the day, what type of phone the visitor used and much more.
+
+With this information, you get access to profound real-time statistics, which is essential for optimizing your further campaigns to profitability.
+Here’s an example:
+
+Where,
+
+Click time — identifies clicks by their creation date and time
+Campaign — indicates which campaign clicks belong to
+Offer — indicates which offer has brought clicks
+Country — indicates where clicks were created
+OS — indicates OS of the device where clicks were created 
+Browser — indicates Internet browser where clicks were created, etc
+
+Can an affiliate run ad campaigns without this data? Sure they can. Would it be as effective and profitable, as it can be with the availability of that data? Resounding “no”.
+
+Where,
+
+Traffic Source — the source where traffic comes from
+Clicks — the number of clicks
+Conversions — the number of conversions
+CPA — the cost per action 
+CR — conversion rate
+EPC — earnings per click
+Revenue — the total amount your affiliate networks earned
+Cost — the total amount paid to affiliates
+ROI — profitability rate, etc
+The difference between a successful affiliate and a poorly-performing merchant is, that the latter one knows only how much money he earns, while the former know how he earns them. For that reason, only a small percentage out of the thousands of new affiliates actually become profitable and choose to quit their day job.
+There are a lot of good tracking options nowadays, among which RedTrack.io stands out due to its technologically advanced affiliate marketing tracking &amp; analytics solution.
+What is RedTrack.io?
+• Fast click redirects;
+• Advanced analytics and instant reports;
+• Custom dashboard and easy-to-use interface;
+• Automatic offer integration through CPAPI and more.
+With our coming Smartlinks feature, the detection of profitable combinations becomes automatic for large-scale campaigns. A solution for seasoned affiliated with large volumes of offers and traffic, SmartLinks employ the power of the AI and machine learning to substitute manual testing. It means that an advertiser shouldn’t test each link manually anymore. The algorithms automatically detect most profitable combinations and show each specific user an offer that is most likely to bring conversion.
+Automate the control of your links with SmartLinks, by sending a request to support@redtrack.io.

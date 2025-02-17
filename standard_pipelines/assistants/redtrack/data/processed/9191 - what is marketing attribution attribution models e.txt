@@ -1,0 +1,80 @@
+# What is Marketing Attribution? Attribution models explained!
+
+On average, from the experience of our clients, you have anywhere from 3 to 5 different touchpoints with the customers before the magical conversion happens. 
+And here’s the question: which touchpoint is more important in the joined forces towards the conversion result? 
+Here comes marketing attribution to demystify the reality behind your conversion and the performance of each campaign and help connect all the dots behind the real value of each channel, campaign, and ad. 
+Some marketers consider marketing attribution too complicated of a subject, so let’s try to make it as simple as possible and reveal the nature of marketing attribution and marketing attribution models, as well as learn how to apply it in your marketing activities. 
+
+
+What is marketing attribution? 
+Marketing attribution is a process of identifying the touchpoints (aka channels or campaigns) which contribute to the revenue results while assigning different values to the touchpoints in the funnel. 
+Attribution helps understand the behavior of the consumer and evaluate the importance of each marketing channel for your business. 
+
+In order to to do that, we need to use marketing attribution models. Let's see what is it.
+Marketing attribution models are
+Attribution models are sort of frameworks to analyze customer behavior. 
+Depending on the model you choose — you will see a different picture. And that’s the beauty of marketing attribution models. 
+Examples of marketing attribution models: 
+
+ 	First-click — assigning 100% of the value to the very first interaction with your funnel.
+ 	Last-click — assigning 100% of the value to the very last interaction with your funnel
+ 	Assisted clicks — assigning value to all the intermediate clicks 
+ 	Linear — assigning an equal value between all touchpoints. 
+ 	Time-decay — assinging bigger value to the channel with time. 
+ 	U-shaped — assigning more value to the first and the last touchpoint, and minimal value to the assisted touchpoints. 
+
+
+Marketing attribution modeling in action
+To understand better the attribution models in action, let’s take an imaginary conversion path. 
+
+
+
+We can see that first touchpoint in this case was the influencer campaign. That was the first click in the funnel. And the last event before the conversion happened was just an organic search.
+
+If we take a first-click attribution model, we would give all the credits for the conversion to that one influencer.
+
+If we take last-click attribution, we would give the credit to organic traffic. If we act smarter and choose last paid click attribution model — Google Search ad would be the hero. 
+
+If we take assisted click model, then Facebook campaigns would be of importance to make sure user converts.
+Marketing attribution modeling allows us to look at the conversion funnel from different angle and understand that there is no single answer when it comes to the question "why conversion happened".
+What can you learn from attribution reports? 
+There is a limitless number of things you can learn from attribution reports, it all depends on your creativity and what you want to learn. Let's take a look at a couple of examples:
+
+ 	You can learn which channel usually brings attention to your company. That would be a first-click attribution model. When you use attribution and find the channel or campaign that usually becomes the first in the funnel, you may make a natural conclusion on which channel serves best for the first touchpoint with the audience.
+ 	Learn which channel serves better for conversion purposes. That would be last-touch attribution model. Find out the pattern of which channel usually becomes the last touch-point before conversion happens.
+ 	Learn how long it takes for the user to convert. Measure the length of the conversion path for the user and find out which touchpoints are key to make conversion happen.
+ 	Understand the importance of individual advertising campaigns in the funnel. See the performance by campaigns and ads in the funnel and find their value towards the conversion goal.
+
+The data you receive depends on the marketing attribution model you choose. But here's the important question: which model is better?
+How to choose a marketing attribution model?
+That's a very interesting question. And there is no single answer to that. Since attribution model is just a framework for the analysis of your performance, it's your call to choose this framework.
+
+But, there is one thing we can surely recommend to you — usage of multiple attribution models. As it is the only way to look at the data from different angles and get all the possible insights from numbers behind your marketing.
+
+In order to do that, you have to choose software that allows an easy switch between multiple attribution models.
+Marketing conversion attribution software
+RedTrack is one of the tools that helps understand user behaviours in the funnel with use of marketing conversion attribution. Let's go through easy steps to see how RedTrack becomes a trusted partner in user behiviour insights:
+1. Access to attribution reports
+RedTrack is a tool for ad tracking &amp; conversion attribution that tracks all of your advertising and marketing channels (PPC, influencers, email, organic, etc.). With all the data that RedTrack gathers around your performance, you get access to marketing attribution reports.
+
+
+2. Choose various attribution models
+Currently, we support several attribution models: first-click, last-click (paid), assisted clicks.
+
+What you can do with RedTrack is choose the weight (or the value) for each of those models, and the software will generate the report accordingly. It will give each of the models the value which you predefine in this step.
+
+You can also define the conversion attribution window (up to 56 days) and choose the timing for the report (for example, conversions from the last 30 days).
+
+
+3. Control attribution reporting by choosing different settings
+Once you chose your settings, you will see the magic happening in the report. The beauty of it is in the ease of manipulation of those reports. You can change the setting (change the weight for each model) and the report will instantly change and give you different insights.
+
+
+Your turn to try marketing attribution
+Now you know what stands behind the infamous marketing attribution and it's time to give it a try in your marketing routine.
+
+How do you do that? Just talk to our team and we will find a way to make numbers work for your improved ROAS and ROI. Your subscription starts with a 14-day free trial.
+
+
+
+&nbsp;

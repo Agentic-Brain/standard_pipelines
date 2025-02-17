@@ -1,0 +1,391 @@
+# What are the best ad formats in affiliate marketing?
+
+We bet that at least once in your life you had these questions in your mind:
+
+ 	What are the best traffic sources for affiliate marketing? -   quora.com 
+ 	Please, can you suggest me any other good traffic source with not many bots?  - affiliatefix.com
+ 	How does web push notification work on adult traffic? - stm.com
+
+
+
+
+&nbsp;
+
+Currently, there are more than 30 different ad formats ( including subformats). Tough choice, isn’t it?  Fortunately or not, it's limited by several factors: ad network specifics and offers settings. Some ad networks may specialize exclusively in one ad format: desktop banners or mobile pop traffic, for example. While some advertisers may put severe restrictions on ad formats/traffic sources available for their offers promotion. 
+
+So, it’s certainly reasonable to make thorough field research before starting building the campaigns:
+
+1. Investigate the market and make a list of trustworthy ad networks with their capabilities and offers.
+2. Find data on how effective is the combination of your chosen vertical and ad format.
+3. Make sure you have several promotion strategies to test.
+
+In this article, you'll learn:
+1. Overview of key digital ad formats:
+— banner ads 
+— pop-unders
+— native ads
+— push notifications
+— pre-roll videos
+2. Tips from UngAds Ad Network — how to work with different ad formats?
++ find a nice 50$ bonus from UngAds at the foot of the page.
+
+
+
+
+
+Bonus Section:  To learn what ad format works best with your chosen verticals, read our new 80+ pages guide to the main Affiliate Marketing Verticals.
+                              Over 100 tips and hacks on driving traffic and increasing the conversion rate in each affiliate marketing vertical, interviews with Top managers of the Top Affiliate Networks and Traffic Sources, case studies, nice bonuses from partners.
+
+
+&nbsp;
+Digital ad formats
+All ad formats can be divided into two big categories: mobile ad formats and desktop ad formats. 
+
+Mobile ad formats:  pops (popunder &amp; popup), redirect, instant message, push notifications, interstitial ads, native ads, banners, rich media ads, video ads, expandable ads, in-video ads, in-stream video, zero-click, widgets, search, overlays, etc.
+
+Desktop ad formats: desktop web ads, video ads, banner ads, native ads, rich media ads, widgets, redirects. etc. 
+
+Сurrently, we all can observe an increase in mobile traffic share in the affiliate marketing industry.
+
+
+
+According to IAB survey, mobile ad formats expenditures grow by 36% yearly. if in 2017 global mobile advertising spending made up $107 billion, then in 2019 it will be around $198 billion, won't it?
+
+Does this rise mean better conversions? Our experts will tell. 
+
+But first, let's focus on the most important things: ad formats themselves. Let's start with classic banners, pop-unders, push notifications, native ads, and pre-roll videos. 
+
+&nbsp;
+Banner ad
+The banner ad is still one of the most popular and widely-used ad format to monetize traffic. 
+
+How they can be used?
+
+ 	
+
+ 	directly placed on the website or landing page
+ 	as an author box in the blog
+ 	in email campaigns
+ 	thank you or post-opt-in pages
+ 	in-between
+
+The best-performing verticals: well, all of them
+
+
+
+
+Banner Size
+The most popular banner sizes are: 
+
+ 	
+
+ 	
+
+ 	300×250 – medium rectangle
+ 	125×125 – square button
+
+
+
+
+
+As to other popular sizes
+
+
+Banner ad effectiveness
+
+(appromter research)
+Quality: Average
+User Experience impact: Low
+Average CTR: 1-3%
+Average CR: 2-6%
+Average eCPM: $1-3 
+
+&nbsp;
+Pop-under 
+A pop-under is an elegant version of pop-up ads. It's a webpage which opens in a new window/tab under users' current browsing window. 
+
+
+
+The best-performing verticals: coupons, pin submits, gambling, adult and dating, betting, sweepstakes, finance, gambling, software and all kind of entertainment products.
+
+The user journey may develop in several scenarios with pop-unders.
+
+First, a user clicks on special links at 3-rd party websites and gets on your pop-under
+
+1. then the user is redirected to main landing page or advertiser's website
+
+2. or redirected to a pre-lander where he can get compelling information about the offer, leave his contacts or go to another website. 
+
+The second kind of a pre-lander may include a deadline, strong CTA, lead magnets or prize announcement. Which way is better for you? Split-tests will tell.
+Examples of pop-unders:
+
+
+&nbsp;
+
+
+Pop-under main advantages:
+
+ 	much less intrusive and distracting than most of ad formats. 
+ 	maintains the integrity of your website and you will never lose visitors.
+ 	insensitive to ad blocker
+ 	mobile-friendly ads that don't force user to download apps
+
+
+&nbsp;
+Native ad
+The idea behind this ad format is to match an ad with the surrounding context. It integrates into the environment and may look like a regular social media post or Google search result. What's more important, native ads allow to interact with users on a deeper level and get better engagement.  
+
+The best-performing verticals: works well with all verticals, but the best results are with automotive, travel, health &amp; fitness, and finance &amp; insurance niches
+Types of Native Ads (IAB) :
+
+
+ 	
+
+ 	in-feed advertisements — appear in the “content buffet” on news, editorial sites, and social media platforms.
+ 	paid search advertisement — appear in search results
+ 	recommendation advertisement — appear as a recommendation in a special section based on what you search, read, watch, or purchase
+ 	promoted listings — appear in the liss of such websites as Esty or Amazon
+ 	in-ad with native elements — appear outside of the editorial field and contain contextually relevant content within the ad, links to an offsite page
+ 	custom solutions
+
+
+
+
+
+Native ad main advantages:
+
+ 	
+
+ 	Effectively captures consumer attention
+People view native ads 53% more often than banner ads. They check native ads out 4.1 times per session on average, versus 2.7 times for banners with 18% higher purchase intent compared to a banner ad
+
+ 	Shareable
+Native ads take the form of valuable and contextually significant content
+ 	Helps to build relationships with users
+
+ 	Increases the reach of the ads significantly
+It's easily deployed across devices including desktop, tablets, or smartphones. 
+
+
+
+Native ad effectiveness
+Quality: Above average
+User Experience impact: Medium
+Average CTR: 0.5-5%
+Average CR: 1.5-4%
+Average eCPM: $2-4
+
+&nbsp;
+Push notifications
+Push notifications are alert-style messages that appear on your web browser page or in the app. 
+In a web browser, you can see them at the top or bottom-right corner, while in the app you'll see them at the center of your screen. 
+Types of  push- notifications:
+
+ 	
+
+ 	In-app push notifications (sent directly from the apps)
+ 	Web push notifications (delivered in web browsers or to the home screen of your smartphone)
+
+
+
+A user journey map looks like this:
+
+ 	
+
+ 	A user comes to the website, sees a popup asking if he wants to receive notifications
+ 	User agree or disagree with the offer
+ 	In a positive case, he's automatically added to the list
+
+
+
+
+
+According to Localytics research on audience preferences, regarding push notifications,
+
+43% of users want to see a special offer based on their preferences, 
+35%  - breaking news alert
+34% - new content personalized to his or her preferences
+34% - a special offer based on users' location
+
+
+The best-performing verticals: eCommerce, travel, finance, coupons/vouchers, apps, video streaming, health&amp;beauty 
+
+
+What to remember about push-notification:
+
+
+ 	
+
+ 	unavailable on iOS
+ 	Doesn't work with direct linking  (create a landing page for your offer)
+ 	High CTR doesn’t always lead to a high CR
+ 	Rising competition
+ 	More high paying bid 
+
+
+
+Push-notifications effectiveness
+Average click rate  is of 7.8% (4.9% on iOS, 10.7% on Android)
+Click rates are the highest on Tuesdays - 8.4%.
+Click rate is higher in non-working hours.
+The highest average click rate is at its maximum at 11 pm - 11.4%. 
+
+&nbsp;
+Pre roll-video
+A pre-roll ad is a video that's automatically playing before your featured video. These ads are typically 5, 15, 30, or 60 seconds long.
+
+
+
+We know, sometimes they are annoying. We also know that most people don't like them at all. But. Who told they are ineffective or can't be engaging? 
+
+Effective pre-roll videos are always about providing value in a short time. If you have a long, intricate message, pre-roll ads are not the place/time to share them. Pre-roll is about generating a click, not an impression. So, the worst things you can do with your pre-roll videos are:
+
+ 	
+
+ 	long sophisticated narration
+ 	cuttings from a commercial or just copying
+
+
+
+
+
+
+You should deliver your key message in the first five seconds when your video is unskippable. Feature your message after those first five seconds and you won’t maximize exposure for your marketing message.
+Pre-roll video main advantages
+
+ 	
+
+ 	Interactivity
+
+ 	Brand awareness
+As pre-roll ad is unmissable, it grabs your customer attention anyway
+
+ 	Brand recall
+In the group of 11,338 people, 65% skipped pre-roll ads, but 10% of the participants could have recalled the brand even if they didn’t watch the video from the beginning to the end
+ 	Relatively low level of audience irritation
+
+
+
+
+
+
+Now let's see what our friends from UngAds will say about ad formats and what peculiarities have each of them.
+
+
+UngAds Ad Network
+- Let’s talk about you first. What distinguishes you from other Ad Networks and attracts your clients?
+
+UngAds is a full-service well-trusted ad network that covers almost all the targeting options of an ad platform. It has a powerful system for advertisers and publishers with optimal solutions for both sides. The UngAds is a perfect choice for those who want to make money with fully fledged, transparent, and advanced ad network
+
+
+We would name 6 of our most notable features:
+1. access to 500k publishers in 190 Geos;
+2. clean statistics with API supported by 10+ servers all around the world;
+3. protection from malware, bot, and unsolicited traffic;
+4. personal account manager;
+5. direct access to publishers with the highest quality of traffic;
+6. multi-channel advertising solutions by CPM/CPC/CPA/CPL/CPI price models. 
+Platform overview
+UngAds provides a vast opportunity for expanded targeting. The campaigns can be targeted by countries, cities, languages, mobile carriers, OS, etc. Plus, you get to track publisher id and go on to exclude bad ones or create a whitelist. The campaigns can be created on the self-service platform or with your personal manager.
+
+
+
+&nbsp;
+
+- Which ad formats do you work with?
+We work with push notifications, classic banners, pop-unders, native ads, and pre-roll video ads. The most popular offers are from gaming, finance, software, dating, glamor, app, and eCommerce verticals. But you can see much more of them.
+-How newbie-friendly is your ad network?
+There’s actually no difference for us if you’re newbie or experienced affiliate. We have a friendly interface and high-quality support that is always glad to help clients and share our experience to boost results. When an affiliate is happy, his ad net is doubly happy. 
+
+All our clients get a 3 in 1 support solution:  personal manager, optimizing team manager and support manager. Our support works 24/7, so don’t be afraid to start your work at night. We’ll help despite the difference in time zones and the presence of the sun outside the windows. We're extremely proud of our highly skilled technical department that is well versed in all aspects of online advertising. 
+
+UngAds makes it easy for advertisers to join its ad network. They simply need to register and then deposit money into your account and their campaign will be live in an hour.. The minimum deposit is a deposit of only $100. The campaigns can be live within one hour.
+
+
+&nbsp;
+Trends
+- Do Google ad-blocks and browser limitations influence the popularity of certain ad formats among your users? What do you think — should we expect more restrictions from their side in the nearest future? 
+There’s been a lot of rumors about Google restrictions on some ad formats. During several last years, every affiliate has heard about popunder’s great collapse, because of Google new policy ( as we know Google wants to forbid some ad formats at all). But popunders are still alive and feel perfect. I'm sure there are a lot of ways to circumvent obstacles if they'll appear in future. So, don't worry about this :)
+-Do you witness any trends/shifting towards a particular advertising format?
+At the moment push notifications still show excellent results, but in the same time such old formats as popunders and banners don't lose ground. As always much depends on offers you want to promote, creatives and main thing - people's interest. Internet auditory don't like intrusive ads, but native ads - the thing that is not annoying user's eyes and it's the first step to your leads.
+Recommendations
+
+-What ad format(s) is/are most newbie-friendly to your mind? Could you share some pieces of advice — how to start working with them.
+There’s no such simple answer to your question. It much depends on the chosen offer. At the beginning, we advise not to work with offers that need complex conversions (various CPA offers). We advise to all our newcomers not to give in high payouts. If you’re not confident in your expertise, we advise you to start with push notifications for collecting subscriptions. This is simple to deal with it and further to optimize.
+
+Due to our statistics already long time push notifications prevail other formats in volumes and user’s interest too - but it’s really very popular and efficient ad format at the moment.
+-Any recommendations which criteria should new users consider when choosing an ad format? For example, type of traffic or its volumes?
+According to our statistics, the overall ads volume is more than 15 millions impressions daily. But it’s important to say that today volumes hardly depend on traffic type, as there are many sources for mainstream and adult traffic as well. The thing that you should consider the most while choosing ad format is the competition for this traffic.
+
+It's not so rational to talk about the traffic volumes for each ad format that we work with. Just because they are changing every minute.
+Tips on using ad formats
+-Since you see data in your network, what are the top geos for each ad format? 
+Let's leave a little intrigue and don't reveal all the cards right now - our experienced managers always glad to prompt you! But our top geo - America, Europe, Asia, Latin America, Asia, Brazil. As for formats - we have nice traffic volume chart on our platform, you just need to register to get access for it.
+-Do you witness particular cases among your affiliates on how analytics and tracking tools affect their success?
+Sure, but we constantly ascertain the fact that success is very often depends on experience, huge amount of practice and experiments with creatives, landings, bundles. Of course we know some outstanding examples when people get nice profit from their the first tries, but it's just lucky. Need to deal with big amount of statistics, know new methods and instruments, always be in touch with affiliate community and in this case you'll be on a horse ;)
+-It is said that mobile devices convert better that desktop and tablets do — whether this is the case or not? Which ad format performs better on which device?
+Many things depend on offer, landing page, creatives, target, etc. That’s why it’s not entirely correct to say that mobile devices convert better than desktop. Every campaign needs to be optimized and checked every day or even more often to reach its best results. But, as to our statistics, pop-unders and banners have better results on desktop, while push notifications and pre-rolls work better on mobile.
+&nbsp;
+Ad formats overview
+
+-Could you please tell us more about each ad format? Their user experience impact, minimal bids, budget, and the best payment models?
+
+
+
+
+User experience impact
+Mobile/web performance
+Lowest bid recom-n
+Minimal start(daily)budget 
+Payment models
+
+
+popunder
+med
+desk/mob
+0.45
+30$
+CPM, SmartCPA
+
+
+push
+high
+desk/mob
+0.02
+30$
+CPM, CPC, SmartCPA
+
+
+pre-roll
+high
+desk/mob
+1.2$
+30$
+CPM
+
+
+banner
+med
+desk/mob
+0.02
+30$
+CPM, CPC, SmartCPA
+
+
+
+&nbsp;
+
+- Any bidding recommendations for each traffic type?
+This question is not so simple to answer in few words. Need to clarify many details - our managers always glad to help our advertisers in this. So, feel free anytime to ping us, thanks for your time! :)
+&nbsp;
+Time for Bonuses:
+Use our promotional code  RedTrack=4499 while signing up with UngAds and get $50 bonus on your first deposit as a new user. (Minimal deposit is 100$).
+
+
+Conclusion:
+Thank you, UngAds, for sharing your expertise and experience.
+Do you have anything to add? Maybe any questions? Please, drop us an email or share your ideas in our  Telegram Community!
+
+&nbsp;
+
+&nbsp;

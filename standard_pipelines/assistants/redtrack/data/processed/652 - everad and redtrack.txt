@@ -1,0 +1,146 @@
+# Everad and RedTrack
+
+
+
+
+
+
+Everad is a supplier of offers in the Health &amp; Beauty vertical. As a direct advertiser, Everad works with affiliates without intermediaries and can provide very profitable terms. Thanks to their expertise in Nutra vertical and control of all business processes Everad's offers and promo assets demonstrate top performance on every stage.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Everad as an Offer source in RedTrack.
+
+
+
+Offer sources→ New from template→ find Everad template→ Add → copy the Postback URL→ Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up the Postback URL in Everad.
+
+
+
+2.1 In your Everad account go to Campaigns → Global Postback:
+
+
+
+
+
+
+
+2.2 Paste the RT Postback URL (copied in step 1) into the Global postback URL field and save it:
+
+
+
+
+
+
+
+3. Get the Everad offer.
+
+
+
+3.1 In your o to the Sources tab → select the type of source you advertise in → provide the name of that source → click the Create source button:
+
+
+
+
+
+
+
+3.2 In Everad, you have a selection of offers for you to choose from. After you find your offer, you will have to request it. To do that, perform the following steps:
+
+
+
+
+In Everad, go to the Offers tab.
+
+
+
+
+
+
+
+
+
+Set any filtering options you want by selecting appropriate options from the drop-down menu → locate the offer you like from the list below and click the Request Access button → confirm the pop-up window by clicking the Request Access button again. Once your offer is approved, you can create a campaign in Everad. Creating a campaign allows you to get the offer link. Campaigns tab → Add campaign → provide a name for your campaign → select the offer you requested by selecting it from the Offers drop-down menu after completing all the steps and creating the campaign → click the   icon next to the campaign that you created → copy the popped-up link:
+
+
+
+
+
+
+
+
+4. Add Everad offer to RedTrack.
+
+
+
+RedTrack→ Offers→ New→ give the offer a name and choose Everad as the offer source→ paste the Everad offer to the URL field → add "sid1={clickid}" to the URL →  Save:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create the campaign in RT with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+Refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

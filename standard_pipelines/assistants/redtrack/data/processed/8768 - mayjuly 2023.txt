@@ -1,0 +1,35 @@
+# May-July 2023
+
+
+ 	Rules:
+
+ 	all the time counts and calculations for the condition type "Add frequency "Last" values are done based on the "account timezone";
+ 	rule logs are displayed in the account's timezone.
+
+
+
+
+ 	Report in the Logs by "API Postbacks" can now be extended up to 1000 rows.
+ 	Data in the Logs by "Conversions" is now rounded to 5 characters after the decimal point in the "Payout" column.
+ 	Facebook updated the API to the latest version 17.
+ 	Since Facebook can update ad spending within 24 hours RedTrack now updates the previous day's costs every day after 15:00 UTC.
+ 	Changed the naming of the Funnel components for Affiliates: "Only Offer"-&gt;"Offer"; "Single Landing"-&gt;"Landing&gt;Offer"; "Multilanding"-&gt; "Pre-landing&gt;Landing&gt;Offer".
+ 	Added opportunity to manually switch on/off Facebook Campaigns, Ad sets, or Ads without leaving RedTrack UI (MCM feature). Click here for more info on the matter.
+ 	Acquisition report:
+
+ 	added colors to rows to differentiate the data just like in all RT reports;
+ 	added the possibility to click &amp; copy the information from RT objects and ID columns.
+
+
+ 	Conversion subs report:
+
+ 	added colors to rows to differentiate the data just like in all RT reports;
+ 	added sorting just like in all RT reports.
+
+
+ 	Added the column "Uniqueness" to the Logs by Сlicks.
+ 	Due to the changed TikTok CAPI protocol, RT brought it the possibility of adding such roles as "Email", "Phone", "Content Category" and "Contents" to the Offer source settings for better ad generation. More info about TikTok integration can be found here.
+ 	Added a new postback mode for conversion tracking "Create new conversion: new or repeated". More info about conversion tracking can be found here.
+
+
+ 	Added new status for Campaigns, it's called "Active with clicks" and serves for filtering the Campaigns with data.

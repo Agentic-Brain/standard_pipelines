@@ -1,0 +1,37 @@
+# How to add SSL Certificate in RedTrack
+
+SSL Certificate is a special sign that shows to user’s browser that your website can be trusted, allowing a secure connection. More precisely, it’s a cryptographic key that contains details about your organization. Lately, it became the new standard in web browsing, and now all trusted websites have an installed SSL Certificate. It is made to secure credit card transactions, data transfers, and logging in to websites. You can apply SSL Certificate in RedTrack if you have connected a custom tracking domain in Domains settings.  
+Custom tracking domain vs. default tracking domain
+When user is clicking on the ad, he is being redirected through the tracking domain of RedTrack. That’s where we get all the data about his session and are creating a click id for his event. Default tracking domain (http://rdtrck2.com) already has an SSL Certificate. Adding your own SSL Certificate is available only if you have added your own website domain.
+
+Choosing which tracking domain to use is pretty similar to the case when you are choosing domain for your website. You can always use a third-party free domain that is provided by the platform (for example, when you have made a landing page in the landing page builder), which is a default tracking domain in this case. But you can also buy and use your own domain, which is equal to a custom tracking domain. Here are the key ideas that you need to know about tracking domains:
+
+Default tracking domain (http://rdtrck2.com)
+
+– Provided for free
+
+– You don’t need to do anything. It will work from the start. 
+
+– Because it is used by the majority of RedTrack users, and due to the variety of advertising campaigns that they are running, sometimes it can be blocked by antivirus software and ad blocking plugins. 
+
+Custom tracking domain (any domain that you possess) 
+
+– You need to buy it if you don’t have one already.
+
+– Adding a custom domain isn’t hard at all, but you will need to work for 15 minutes.  
+
+– Custom domains look attractive and secure for users, advertising networks, antiviruses and ad block plugins. Especially, when they correlate with products that you promote in your advertisement.  
+Adding SSL Certificate
+There is a huge variety of websites where you can buy SSL Certificates. Our clients are often buying them at gogetssl.com.
+
+After the purchase, you will receive an SSL Certificate and Key. You need to copy and paste them to appropriate fields in RedTrack Domains settings. It will look like this:
+
+
+
+Without an SSL Certificate, Google will warn users that your website can be unsafe for visiting. It also looks unsafe for the majority of browsers and security software systems.
+
+But you shouldn’t think that SSL Certificates can give you indisputable preferences. If you will run advertising campaigns with content that is not approved by major advertising networks like Google or Facebook, they will ban you even if you have an SSL Certificate.
+
+We recommend everyone to use custom tracking domains and SSL Certificates to run your ads, except in cases when you are testing your advertising campaigns and want to make it swift and easy. Drop us a line if you still have questions: support@redtrack.io
+
+&nbsp;

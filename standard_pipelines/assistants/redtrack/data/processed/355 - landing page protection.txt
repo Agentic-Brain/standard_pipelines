@@ -1,0 +1,74 @@
+# Landing page protection
+
+
+What is landing page protection and why?
+
+
+
+Protecting a landing page from a spy is becoming more and more popular and important nowadays. RedTrack gives you options on how to hide your funnel a little bit in both cases:
+
+
+
+
+
+You have found a nice way to promote a 3rd party product and for sure want to hide the winning combination from those who plan to "rip and run". You cannot hide the landing page or creatives but you can hide the offer which makes the "rip and run" process complicated since without the target offer landing page information is useless.
+
+
+
+Since the clicks from the ads library do not have the real dynamic parameters, only the FB clickid, you can filter those empty parameters in RedTrack to be redirected somewhere else (google.com for instance).
+
+
+
+1. Set up the fallback URL.
+
+
+
+Tools → Fallback URL → Add anything you want. This is where the non-matching traffic is going to be redirected. It can be a Facebook page, google search, some other offer you promote but not from that campaign, etc.
+
+
+
+
+
+
+
+2. In your RedTrack Campaign settings go to the funnel filters → add filter → Subs → Exclude → scroll down to the sub6 and place {{campaign.name}} in the field:
+
+
+
+
+
+
+
+Now all the traffic that comes with the empty default {{campaign.name}} parameter will be redirected to the fallback URL. You can add also other empty dynamic parameters but also the one we suggest is enough.
+
+
+
+
+
+By using this method, a user will be able to visit the landing for 5 minutes only. After that, the same user will not be able to do that. Your landing page will be opened for the real entries but not for the repetitive ones.
+
+
+
+Example:
+
+
+
+This is a direct tracking link (Click URL) which users can always have access to:https://tracking.domain.com/5c5808c2ec173600012aa1da?sub1={pln}&amp;sub2={uid}&amp;sub3={crid}&amp;sub4={plid}&amp;sub5={campaign}&amp;sub6={cc}&amp;sub7={isp}&amp;sub8={country}&amp;sub9={ip}&amp;ref_id={clickid}&amp;cost=1When you click on it, you are redirected to a page with a URL like this:http://your-landing-page-url.com/?lpkey=ab53ff920f5569d54e6d5d0ecb803774.1549368473&amp;rdtrckcbp=1549368173
+
+
+
+However, when you try to access this page without a tracking link by сlicking http://your-landing-page-url.com, you will only see a blank page:
+
+
+
+1. Add&nbsp;?lpkeyua={lpkeyua}&nbsp;at the end of your landing page URL.
+
+
+
+2. Landers → Edit → Optional settings → LP protect script → copy the LP protect script (it is the same for all of your landing pages) to your landing page body. 
+
+
+
+The script works only with a .php extension. Make sure your hosting supports .php. 
+
+

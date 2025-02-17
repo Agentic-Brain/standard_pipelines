@@ -1,0 +1,169 @@
+# Bot traffic
+
+
+What's a Bot?
+
+
+
+In terms of affiliate marketing, a bot is an automatic user (not a real visitor) that generates traffic. There are 2 types of bots:
+
+
+
+
+good bots (like those from Google or Facebook) which simply check your campaign whether it is up to the rules or not. For good bots RedTrack has soft filters, i.e. those bots are still able to go through your campaign but you do not see them in your statistics.
+
+
+
+bad bots which can cause a lot of problems for affiliates as this traffic never converts but spends your traffic source and tracker budget. For bad bots RedTrack introduced a bot blacklist feature.
+
+
+
+
+Good bots
+
+
+
+Not always "Bot" means bad clicks. There are a lot of good and friendly bots who simply check your campaigns to make sure they are safe for real visitors.&nbsp;Still, they generate automated clicks that may screw up your reports.
+
+
+
+With RedTrack there is a good solution: you can simply filter those good bots from your reports. They will still be able to check your campaigns but you will not see those clicks in your statistics.
+
+
+
+To enable this feature go to burger menu → Settings → General → enable the toggle Remove known (by user agent) bots/crawlers from data → Save changes:
+
+
+
+
+
+
+
+ 
+Bad bots: blacklist
+
+
+
+Bot blacklist feature works with a redirect tracking option only:
+
+
+
+To add a bot rule to RedTrack, act as follows:
+
+
+
+1. On the main RedTrack menu navigate to Tools→ Blacklist bots→ New:
+
+
+
+
+
+
+
+ 2. Fill in the needed fields→ Save:
+
+
+
+
+
+
+
+Fields explained:1. Give your rule a name2. Add values to either IP addresses/IP ranges or User agent field(optional) 3. Give a small description note to your rule. This field is not mandatory.4. Press Save to apply the changes
+
+
+
+Once enabled, traffic sent to your campaigns will be filtered based on the bot rules: bots will be excluded from the campaign report. Blocked traffic will not be counted towards your RedTrack events limit.
+
+
+
+Ways of spotting a bot
+
+
+
+There are 2 ways (methods) to spot a bot with RedTrack: via a Bot trap and Reports (IP or UA) :
+
+
+
+
+
+This method does not require programming skills. You need to analyze your click logs and reports. Since in real conditions the same visitor cannot click on the same offer too many times, this method can be considered quite reliable.
+
+
+
+This may take some time as this kind of report is taken directly from the backend and usually contains a lot of unique parameters.
+
+
+
+1. Go to reports→ filter the data by either User agent or IP depending on the report:
+
+
+
+
+If you want to analyze the data by UA (User agent) go to Campaigns→ choose the needed campaign and dive into report→ filter the data by User Agent:
+
+
+
+
+
+
+
+
+
+
+
+
+
+If you want to analyze the data by IP go to Reports→ IP report:
+
+
+
+
+
+
+
+
+2. The clicks are grouped by the set parameter. On the screen below you see that one IP has got a lot of clicks, which is pretty unusual, as, in real conditions, the live unique visitor will not click on the same campaign link that many times (it depends on your ad of course but in general they won't).&nbsp;Now you can identify bad IPs (IP ranges) and then block them:
+
+
+
+
+
+
+
+You will need to block an IP range for the cases when the suspicious IP in your report ends with 0. That means this IP was hidden due to privacy policy. But the IP range can still be blocked. This will be something like: 69.208.0.0-69.208.0.255. The first ends with 0, the last one with 255. Take the IP from the report you want to block: 46.216.64.0. The range for this IP will be: 46.216.64.0-46.216.64.255
+
+
+
+
+
+This method works best with landing page campaigns. In general, you will need to have access to the page code.
+
+
+
+There are almost no traffic sources that are free of bot traffic. But it becomes a serious problem when the % of fake traffic reaches a high level, as a result, campaign optimization is very complicated. Bot trap is not a 100% reliable method of detection, some advanced bots can pass, but the majority have a very primitive structure.
+
+
+
+Since RedTrack allows you to track multi-offer landing pages, you can add an offer for bots in your campaign, so the bot traffic can be filtered after.
+
+
+
+To implement this method act as follows:
+
+
+
+1. Create 2 offers: a blank offer for bots and your real offer for your product (or several offers).2. Create a Campaign.3. Put an “invisible” clickable link on your landing page.
+
+
+
+The link:▸should contain https://your.domain.com/click/1 – it sends the bot click to offer 1 (the bot detection offer).▸can be 1×1 pixel image, the text of the same (or very similar) colour as the background.▸should be placed very low on the page.This link is not visible to real visitors, but almost every type of Bot can click on it. So whenever you see clicks to our offer 1, you know that visitors are not real, it's from bots.
+
+
+
+4. Add other multi-offer links to your landing page. For example, in our case, it is https://your.domain.com/click/2 – it sends real visitors to offer 2 (a real offer).5. After that, you can check your campaign reports and see what IPs (or UAs) have clicked on the trap offer and block them.
+
+
+
+Check out the article Tracking listicles (multi-offer landing page) for more information on the correct landing page setup.
+
+

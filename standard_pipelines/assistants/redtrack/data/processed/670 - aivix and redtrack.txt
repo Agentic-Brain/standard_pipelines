@@ -1,0 +1,44 @@
+# AIVIX and RedTrack
+
+
+
+AIVIX is the finance affiliate program in affiliate marketing. It works with direct and verified advertisers, can offer great conditions on the market for your traffic source, promotion, and profits. The AIVIX Affiliate Network distributes your traffic to advertisers based on over 20 main triggers of inbound traffic, thus squeezing the maximum results out of every web platform.
+
+To integrate AIVIX with RedTrack act as follows:
+
+1. Add AIVIX template to RedTrack.
+
+Go to Offer Sources -&gt; New &gt; find AIVIX -&gt; Add the template:
+
+
+
+2. The postback URL for AIVIX will be as follows:
+
+
+
+3. Copy the postback for further implementation on the AIVIX side and Save the changes.
+
+4. Set the postback URL in AIVIX:
+
+Go to your Profile -&gt; Global postbacks -&gt; paste the postback URL you've copied in Step 3 into the Default postback URL field and press Update:
+
+
+
+5. Obtain the AIVIX offer:
+
+Go to the tab Offers in AIVIX -&gt; click the Offer:
+
+
+
+Copy the Offer URL:
+
+
+
+6. Add AIVIX offer to RedTrack.
+
+Open Offers -&gt; New:
+
+
+
+7. Fill in the info -&gt; add AIVIX offer link in the URL field -&gt; add the tracking parameters “aff_sub={clickid}” at the end of the offer URL -&gt; Save the changes:
+

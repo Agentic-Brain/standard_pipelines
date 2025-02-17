@@ -1,0 +1,146 @@
+# August-October 2023
+
+
+➲ Ads manager: 
+
+
+
+
+Acquisition report tab was renamed into Ads manager.
+
+
+
+Added the possibility of sorting out the columns.
+
+
+
+Removed the "don't show costs" toggle.
+
+
+
+
+➲ Traffic channels: added feature to change the depth of cost update. Follow this guide for details on the cost auto-update feature.
+
+
+
+➲ Campaign report: 
+
+
+
+
+Added a tooltip for grouping by hours. It shows correct data only in the account timezone. 
+
+
+
+Added a new column "Domain" which depicts the custom tracking domain used for a campaign.
+
+
+
+
+➲ Multi-user access feature: added the possibility to search for an object; changed the logic of adding objects for multiaccess. Follow this guide for details on the multi-user access feature.
+
+
+
+➲ Reports section: 
+
+
+
+
+Added a new tab (report subtype) "IP Report" which serves for grouping the data by IP.
+
+
+
+Added the possibility of aligning the data in the tables under the columns as per user needs (compact, standard, comfortable).
+
+
+
+
+➲ Columns: 
+
+
+
+
+Added the possibility for the user to save the default set of columns.
+
+
+
+Added the button to select and cancel the columns in bulk.
+
+
+
+Added the "Profit" column to the set of default columns.
+
+
+
+
+➲ Rules: added metrics Total CPA, default type CPA, custom type CPA, ROAS, ROAS%, EPC, CR %, CPC, &nbsp;LP CTR% to the Add Frequency "Last" type of rule.
+
+
+
+➲ Landing page form UI was updated.
+
+
+
+➲ Campaigns: added new field "Final URL suffix parameters" for campaigns with Google Ads traffic channel.
+
+
+
+➲ Logs: 
+
+
+
+
+Added an "Order" column to the Logs by Conversions. It contains order numbers from Shopify.
+
+
+
+Added a "Campaign ID" column to the Logs by Conversions and Clicks.
+
+
+
+
+➲ API postbacks: added new column "Destination". It shows the data on conversions sent by RT  from different sources to the pixel if a Facebook pixel is added at the offer level.
+
+
+
+➲ Shopify: added a new conversion type “BuyNow”.
+
+
+
+➲ Publisher panel: 
+
+
+
+
+Added 2 more grouping filters to the Campaign report. Now the limit by grouping is 5.
+
+
+
+Added conversion subs to Conversion logs.
+
+
+
+Added possibility to set individual % for certain publishers within the Referral program. Follow this guide for details.
+
+
+
+Disabled the button on publisher creation, if there is no added Whitelabel first.
+
+
+
+
+➲ Customer journey report: 
+
+
+
+
+Added column and filter by "Web-sites".
+
+
+
+Added "First touch" and "Last touch" filers and columns to the report.
+
+
+
+
+➲ Dashboard UI was updated.

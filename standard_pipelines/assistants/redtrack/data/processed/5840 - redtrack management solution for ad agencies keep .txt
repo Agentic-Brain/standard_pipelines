@@ -1,0 +1,150 @@
+# RedTrack management solution for ad agencies: keep all the traffic under control
+
+RedTrack presents the new ad management &amp; optimization solution for ad and performance marketing agencies to help them manage all their traffic and deliver the results their clients can truly value. 
+
+Ad agency business development is hard. The whirlpool of thoughts about getting more clients, keeping them, optimizing costs and hiring top talents keeps the owners awake for months. The most difficult part of this process is to find an effective way to match advertisers' expectations and publishers' capabilities. But, saying is one thing, and doing is another. Half a year ago our team has developed the new Publisher Panel feature to help ad agencies manage all their publishers with no workarounds. Many of our clients have tested its effectiveness and helped us create a full-fledged ad management platform. With it,  you can take full control of all the traffic flows, by tracking, optimizing and analyzing them in real-time at an affordable price. 
+
+RedTrack ad management system FAQ:
+1. What RedTrack can offer to ad agencies?
+RedTrack functionality goes far beyond reliable ad tracking. It is a full-lifecycle management platform designed to meet the needs of small and medium-sized teams who decided to expand their basic media-buying activities into working directly with publishers and/or advertisers. Today RedTrack offers a wide suite of services, including:
+
+- advanced tracking,
+- workflow automation,
+- full-access API,
+- multi-channel reporting,
+- publishers management,
+- campaign performance optimization and others.
+2. How does RedTrack help ad agencies to reach higher results?
+Every business is unique. They have different goals and needs. The best way to understand if an ad tracker can help you solve your business problems is to talk about it directly with product specialists. 
+Request FREE demo with RedTrack specialist
+
+
+&nbsp;
+
+In general, we can highlight 5 most popular issues clients address to RedTrack:
+
+improve the performance of the ads with advanced tracking &amp; optimization &amp; automation features,
+increase ROI by optimizing their ad campaigns,
+reduce the overall workload for planning, analyzing and launching ad campaigns,
+establish clear and open communication with publishers and advertisers,
+get elegant consolidated reports across all their channels to present to their customers.
+
+3. How exactly do ad agencies use RedTrack today?
+To answer this question, we interviewed several RedTrack clients -  global performance marketing agencies &amp; SMB resellers - to get to know what features help them most in their daily activity and how they use them:
+
+
+1) Advanced ad tracking set of features
+RedTrack was initially started as an ad tracking company that provided reliable no-sampling trackable data. We grow through focusing on our key strength - handling ad data / supporting customers and expanding internal development and 3rd party integrations:
+
+ 	S2S postbacks tracking, 
+ 	cookieless tracking,
+ 	event-tracking,
+ 	impression tracking and forwarding,
+ 	last click conversion attribution,
+ 	120+  templates with Affiliate Networks and Traffic Sources
+
+2) Ad optimization solutions
+At the end of 2019, we've had a huge release of revolutionary automation features set. With an ambitious goal of automating media-buying, our team was able to help thousands of ad agencies avoid wasting money on ineffective campaigns with the help of special algorithms. Since that time, they have acquired an army of fans among ad agencies and media-buyers that have been looking for reliable alternatives to today's AI-based offers. You can learn more about AI and Automation from our webinar by this link.
+The mechanism behind RedTrack automation features is simple but sophisticated. Algorithms enforce conditions you set up for your traffic performance. They work independently in accordance with the benchmarks you’ve set.
+
+&nbsp;
+
+
+
+&nbsp;
+Among them are
+1) Campaign automation feature that pauses your campaign if it doesn't show the desired results,
+2) Placement optimization feature that pauses the ineffective ad placement,
+3) Creative Optimization feature that distributes traffic between your offers/landers and creatives if their performance changes.
+
+
+&nbsp;
+
+
+Among other optimization features, our clients distinguish A/B redirects,  landing page offer rotation, and landing page multi-offer which allow running multiple offer URLs simultaneously. Read how it helps the Mobifolio agency here.
+3) Solutions for your team management
+Multi-access feature
+
+Multi-access allows several members of your teamwork simultaneously in one RedTrack account. There are several levels of access that you can give to them, depending on their qualification and the particular role in the project: view, edit, export. You can restrict access to financial, campaigns, traffic sources, publishers and advertisers data. Read here how to do it.
+
+
+Consolidated Reports
+Through API,  all campaigns' data is automatically pulled into a report in a twinkling. You can organize all the data into buckets and make your own personalized workspace only with those parameters you want to check. RedTrack allows ad agencies to not only have all their statistics in one place but also provide a better service for the advertisers. Excel sheets have long been out of fashion. 
+
+&nbsp;
+
+
+
+&nbsp;
+
+Recently our team has released RedTrack mobile apps, so you have all your data in your pocket. Now you can track and analyze your campaigns anywhere and anytime. The apps are available in both stores: App Store and Google Play. Check them now!
+
+
+
+&nbsp;
+4) Publisher control Panel
+The control panel makes it possible to track, manage, and control publishers in one place. At the request of our customers, we’ve also made separate branded workspaces for publishers and advertisers. But first things first.
+
+Publisher Control Panel
+To enable the workspace, ad agencies just need to create campaigns with needed settings and sign in publishers into the system. The whole set-up process can be completed in 5 simple steps. 
+
+ 	Activate the publisher panel for your account. Please note that the RedTrack Business subscription plan has this panel activated by default. Contact our specialists at support@redtrack.io for detailed information on how to add publisher panel to your account.
+ 	Add publishers to your Publishers Management Panel. Set passwords, logins and choose Traffic Sources they should work with.
+ 	Create campaigns for publishers that they should promote and add specific details for each one of them
+ 	Set up the publisher panel domain. 
+ 	Provide publishers with a password to log in his workplace
+
+
+
+All publishers' statistics will be displayed in the Publishers Statistics tab. So, if something goes in the wrong way, ad agencies can change the strategy, settings, and performers easily and quickly.
+
+
+
+
+When you want to give a payout to your publishers, simply add through the admin panel. 
+
+
+
+Pub Panel 
+It’s an easy-to-use white-labeled digital workspace for publishers that provides them with all the information and tools necessary to promote, track, and manage the performance of their chosen offers.
+
+How does it work?
+
+1) Publishers insert their login and password and fill out the registration form
+2) They are getting approved or disapproved by the ad agency they work with
+3) Publishers start working on the campaigns that were assigned to them
+
+
+
+Inside their workspace, the publishers can see the list of offers, traffic reports, postback set-up, and payout history. All the data is accurately gathered and sorted in the most effective way. Publishers can immediately track their 
+
+ 	CPA,
+ 	Revenue,
+ 	Conversions,
+ 	Clicks,
+ 	EPC — Earnings per Click
+
+
+
+Advertiser panel
+If you work with the advertisers directly, you know that the Client agency relationships are as important for your business as your performance indicator. The main idea of the Advertisers' panel is to make the communication process between you and the brands you work with more effective. The Advertiser gets its personal password and login and can check the course of his campaigns anytime, download the reports, and lets you know if something goes in the wrong way.
+
+
+4. Is there any way I can see how all this works?
+Absolutely. The best way to see all the tracking and management features together is to schedule a free demo with RedTrack Product Specialists. There you'll be able to:
+
+
+ 	get a personalized screen sharing session with one of the RedTrack product representatives,
+ 	take a walk through RedTrack functionality and special features,
+ 	see how RedTrack can help your business grow,
+ 	get comprehensive answers to all your questions.
+
+
+
+&nbsp;
+5. How can I get all the ad management features and how much it will cost me?
+We understand that cost-effectiveness is one of the major factors of ad agencies' tracking tools choice. That's why our team has made the pricing plans as much affordable as possible. If you're only at the beginning of a journey and try to find your place in the world of media-buying,  the core ad tracking features included in the Basic plan can be enough. However, if your ad agency has big plans for growth, you most likely would like to focus on what you do the best and take advantage of RedTrack advanced management and optimization features. In this case, you'll have to choose between PRO nad Business subscription plans, depending on the traffic volume and the number of team members you have.   
+
+
+
+By the way, if you have an unusual case and need a custom solution, we'll be happy to help you create an individual package with the needed features. Please, contact our team for assistance: sales@redtrack.io.

@@ -1,0 +1,59 @@
+# Publishers: adding a domain
+
+To add a domain to your branded portal act as follows:
+
+1. Domain is an essential thing to start working with your branded portal:
+
+ 	if you do not have a domain yet, you need to purchase one first with the help of any domain name registrar you know. Google the available registrars and choose the one suitable for you. In this guide, we will show how to add a CNAME and TXT on the example of the GoDaddy domain registrar. Once you've purchased a domain, proceed with step 2.
+ 	if you already have a purchased domain move on to step 2.
+
+Important disclaimer!
+
+The settings below are demonstrated on the example of the GoDaddy registrar. Your settings may differ depending on the registrar you bought your domain in.
+2. You need to integrate your domain which is made the same way as a custom tracking domain - via creating a CNAME record, but in case of the branded portal domain settings, your CNAME record should point to pub.redtrack.io. Check out the guide on how to add a CNAME record to your domain by pressing here.
+
+3. Create a TXT record in your domain settings to make sure that your partners/publishers get your e-mails
+
+[expand title="Expand to see how to create the TXT record"]
+
+3.1 login to your domain registrar-&gt;go to your products-&gt;find the needed domain and press Manage DNS:
+
+
+
+3.2 press Add-&gt; fill in the pop-up fields with the proper values (see the ones below) and press Add record:
+Values to be added to the fields:
+
+Type: TXT
+
+Name: pub.redtrack.io
+
+Value: v=spf1 include:mail.redtrack.dev~all
+
+TTL: choose the lowest option possible
+
+
+
+
+3.3 your TXT record has been added:
+
+
+
+The domain will be ready to use once the data replication is completed (it can take up to 24 hours for some registrars, but in general, it takes about an hour).
+
+[/expand]
+
+4. Purchase the SSL certificate. It is an obligatory step. Gogetssl is a good service for this purpose. A more detailed guide is available here.
+
+5. Add your domain to RedTrack
+
+[expand title="Expand to see how to add your domain to RedTrack"]
+
+5.1 go to your RedTrack account-&gt;navigate to the section Publishers-&gt; Domains-&gt; press New:
+
+
+
+5.2 add your domain with certificate and key and press Save:
+
+
+
+[/expand]

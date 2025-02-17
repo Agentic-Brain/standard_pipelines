@@ -1,0 +1,61 @@
+# What happened with Google Ads after iOS 14.5
+
+I know we are all kinda tired from “iOS 14” titles, but it’s still here. And only now we begin to realize all the consequences of the updates released by Apple. The question that we want to answer today is — what is happening with Google Ads after iOS 14.5 Update? What was the real influence of iOS 14.5 and ATT prompt on Google Ads? 
+
+In this article, we will try to find answers to what happened and try to predict the future of the AdTech giant. 
+
+What does iOS 14 Update mean for marketers? 
+We have to circle back first and remind you what is iOS 14 Update and what it means for advertisers and marketers. With iOS 14 Apple rolled out ATT (Apple Tracking Transparency) prompt which forced apps to ask users whether they want to opt-out of tracking. 
+What influence did it have on advertisers? iOS 14 Update meant that all traffic coming from iOS devices using the latest update had issues with tracking &amp; proper attribution. 
+
+That means that every app on the Apple AppStore had to be ready for changes and for the fact that users will be opting out of tracking. We could see a vivid example of Facebook, which introduced Facebook Conversion API, Aggregated Events Measurement, and new privacy requirements (like domain verification) in order to maintain gathering data about conversions and keep the advertisers’ ability to target and optimize their ads. 
+What does Google do with the privacy updates? 
+Google is kind of late to the party. Apple has been introducing privacy updates since 2017, this year Facebook followed Apple’s lead and got us some alternatives for tracking &amp; conversion attribution. But what does Google really do? 
+
+Google is preparing its Google Privacy Sandbox which will introduce 5 APIs as substitutes for targeting, remarketing, and conversion attribution functionality. Google Sandbox was supposed to take full effect by 2022 and make sure that third-party cookies are actually phased out of Google Chrome. But in June 2021 Google confirmed that the full rollout of Google Privacy Sandbox is postponed until 2023.
+
+By the way, if you still didn't figure out how to integrate CAPI, start conversion tracking &amp; optimize for the events of your choice, check out the guide our team prepared! 
+
+
+
+Does it mean we can forget about problems with cookies? 
+Google's delay kinda gives us more time to prepare, we do have to thank them for slipping us more seconds enjoying the company of third-party cookies. However, don't think that you can waste this time for running ads blindly.
+Google continues working on and testing features that will allow not to track users individually, but instead — group them in order to perform targeting &amp; remarketing. Two protocols are supposed to give advertisers access to targeting and successful ads: FLoC (Federal Learning of Cohorts) and FLEDGE (First Locally-Executed Decision over Groups Experiment). 
+FLoC is there to ensure gathering users in groups according to their interests and browsing history to further allow targeting according to their group IDs. 
+FLEDGE is making sure that less data is released about individual users by giving limited data to bidding algorithms through browsers (instead of an ad server like it used to be).
+ 
+Both solutions are supposed to help us advertisers survive through the changes and keep running Google Ads / YouTube Ads, etc. 
+
+
+But what was the influence of iOS 14.5 Update on Google at the moment?
+The main change that we have noticed after the 26th of April (Introduction of iOS 14.5 Update) that Google stopped sending unique conversions through Google click identifier (GCLID) for traffic coming from iOS.
+
+GCLID is a unique parameter in your ad URL that helps with conversion attribution by carrying data about clicks, campaigns, etc. It is required for you to be able to perform ad tracking &amp; conversion attribution for your ads.
+
+
+
+Now for iOS traffic GCLID is replaced with WBRAID as an identifier. It’s not really clear yet what is WBRAID as Google documentation doesn’t have a clear description.
+Therefore, we can’t be sure at the moment that attribution will work as it supposed to with the new parameter WBRAID. 
+How did iOS 14.5 influence Google Ads Search targeting?
+Google Search targeting is tied to keywords, rather than your preferences. So search targeting shall keep working as it used to. 
+However, if you are going to use RLSA (remarketing lists for search ads), you might face some issues. In the logic of FLoC, users coming from iOS14 traffic would not be individually identified, but grouped by interests. So the targeting for your RLSA might be slightly inaccurate for iPhone users at this point. 
+Will iOS 14.5 affect Google Display Ads?
+Again, FLoC and FLEDGE protocols will identify healthier web when it comes to running Google Ads. Since Display Ads work on an auction basis, before showing up the ad to a specific user, they need to access the data about the user's preferences and interests. 
+Since FLoC is grouping users by interests, Google Display Ads might not work with the same quality as it used to. 
+
+It’s too early to say anything as we will have to test things in the process and evaluate whether the substitutes from Google are working to deliver good results.
+
+
+
+
+Keep learning about Privacy Updates in our Simplified MarTech series on Youtube!
+
+
+Conclusion
+As we see, Facebook was a little bit better prepared for the changes coming from iOS Privacy Updates. More or less the tracking &amp; attribution on Facebook Ads is accurate. The influence of iOS 14 on Google Ads was pretty silent but still noticeable. And yet, we don’t know still the full scope of consequences on the performance of your ads. 
+
+First-party data is still the answer to most of the questions that are yet to arrive. If you want to move your tracking &amp; attribution to solutions, relying solely on 1st party cookies, make sure to check out the solution from RedTrack. 
+
+
+&nbsp;
+

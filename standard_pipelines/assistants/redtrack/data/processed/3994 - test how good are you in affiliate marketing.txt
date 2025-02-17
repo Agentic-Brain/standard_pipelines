@@ -1,0 +1,9 @@
+# Test: how good are you in affiliate marketing?
+
+Affiliate marketing is an extremely unpredictable sphere. There are lots of variables that you can't control, regardless of your experience, qualification and the number of successful cases. But it's not just luck. It's a good knowledge of the sphere and the breadth of vision.
+
+Let's check it!
+
+&nbsp;
+
+(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src='https://embed.playbuzz.com/sdk.js';fjs.parentNode.insertBefore(js,fjs);}(document,'script','playbuzz-sdk'));

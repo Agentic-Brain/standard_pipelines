@@ -1,0 +1,146 @@
+# Newsbreak and RedTrack
+
+
+
+
+
+
+
+
+
+
+
+
+Newsbreak is America's leading local news app. The platform consists of thousands of publishing partners and independent contributors. Newsbreak is integrated with RedTrack via API, which allows you to automatically update the costs.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+
+
+
+
+
+
+
+1. Add Newsbreak template to RedTrack.
+
+
+
+1.1 Traffic channels → New from template → find Newsbreak → Add → save the template:
+
+
+
+
+
+
+
+
+
+
+
+1.2  Change the Cost update depth level (if needed) → Save changes to the template:
+
+
+
+
+
+
+
+Refer to this article for more details on the auto cost update feature.
+
+
+
+2. Integrate Newsbreak with RedTrack.
+
+
+
+In the added Newsbreak traffic channel template, go to NewsBreak API integration → add the API access token from Newsbreak (the token is provided by Newsbreak support) → Save changes to the template:
+
+
+
+
+
+
+
+Active button means the integration is on:
+
+
+
+3. Set up a campaign in RedTrack with Newsbreak as a traffic channel.
+
+
+
+3.1 Campaigns → Create new campaign → use&nbsp;this guide&nbsp;if you are an Affiliate/&nbsp;this guide&nbsp;if you are an Advertiser&nbsp;to help you create your campaign with Newsbreak as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL:
+
+
+
+
+
+
+
+Refer to these articles for more details on the tracking methods available:– Universal script– No-redirect– Impressions
+
+
+
+3.2 In your campaign settings enable the Auto update costs toggle → Save changes to the campaign:
+
+
+
+
+
+
+
+ Auto update costs feature allows you to receive your cost data directly from Newsbreak via the API. Refer to this article for more details.
+
+
+
+4. Set up the tracking on the Newsbreak side.
+
+
+
+4.1 Set up the Postback in Newsbreak. Refer to this article for guidance. 
+
+
+
+4.2 Add RT Click URL to the Newsbreak Ad Campaign. 
+
+
+
+Create your campaign in Newsbreak → Extra tracking Options → add the Click URL from RedTrack (copied in step 3.1) to the Third party click tracking URL field:
+
+
+
+
+
+
+
+5. Set up the Postback URL in RedTrack.
+
+
+
+In RedTrack go to campaign settings (created within step 3) → scroll down to&nbsp;S2S Postback for Newsbreak → Add → replace the conversion_event part with the actual conversion event type → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+

@@ -1,0 +1,146 @@
+# Natifico and RedTrack
+
+
+
+
+
+
+Natifico unites professional affiliates, high-quality traffic sources, and reliable advertisers. They operate based on CPI and CPL models and launch downloads, extensions, installs, sweepstakes, casinos, dating, and game offers.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events you want to track
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Natifico as an Offer source in RedTrack.
+
+
+
+RedTrack → Offer sources → New from template → add Natifico template → copy the Postback URL → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up the Postback URL in Natifico
+
+
+
+2.1 Login to your Natifico account → Offers: 
+
+
+
+
+
+
+
+2.2 Select the offer you want to promote → click the Get link button: 
+
+
+
+
+
+
+
+2.3 Postback settings will be available at the bottom of the page: Your postbacks → Global postbacks: 
+
+
+
+
+
+
+
+2.4 Click on the Add postback button → add RedTrack Postback URL in the appropriate field and save it:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. Get the Natifico offer URL.
+
+
+
+In your Natifico account open the offer information tab and add RedTrack {clickid} parameter as Sub1 → copy Natifico Tracking link and go back to RedTrack: 
+
+
+
+
+
+
+
+4. Add Natifico link as an offer in RedTrack.
+
+
+
+In your RedTrack account go to Offers → Create new offer → fill in the mandatory fields → add Natifico offer link in the URL field → make sure ref_id={clickid} parameter is added to the end of the URL → Save: 
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create a campaign in RedTrack with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To help you add the campaign refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

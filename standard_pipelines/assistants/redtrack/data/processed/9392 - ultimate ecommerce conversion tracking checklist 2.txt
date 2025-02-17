@@ -1,0 +1,129 @@
+# Ultimate eCommerce conversion tracking checklist 2023: How to make data-based marketing decisions
+
+Day by day eCommerce becomes a more competitive field. Success in the “populated” business niche comes with constant adaptation and invention, especially for marketing necessities.
+However, in order to adapt and create new strategies you need to measure the influence of every single initiative you run for eCom. 
+How do you do that in 2023? 
+
+
+Well, that’s a great question that I would like to answer in this blog post: how to perform accurate conversion tracking and measure the results of all of your marketing campaigns in 2023. 
+
+In this blog post you will find info about: 
+
+
+ 	Fundamental transformations in performance marketing for eCommerce 
+ 	Measurement of Facebook Ads 
+ 	Consolidation of the data from FB Ads, as well as other paid &amp; non-paid channels 
+ 	And how to achieve an accurate data transmission between your eCom platform (like Shopify), marketing channels, and analytics solution
+ 	How to switch your decision-making to a data-based approach 
+
+
+Before proceeding with the article, check our newest eCommerce series — Figure{It}Out!
+
+
+
+What changes in eCommerce marketing performance in 2023? 
+Let’s start with understanding why we have to switch things around in order to achieve accurate performance tracking &amp; precise decision-making in eCommerce marketing.
+
+1. The universal shift towards a privacy-oriented industry
+Firstly and most importantly, we have to remember that it’s not just about eCommerce, but it’s a global shift towards a privacy-regulated future where the personal data of the users is treated in a secure way. We have a couple of acts (GDPR, CCPA, etc.) influencing the regular work of advertising channels (like Facebook, Google, TikTok, etc.) as well as the way we as business owners and marketers should treat the data collected on the website.
+This shift influences marketers on every single level: from fear of getting fines for not complying with laws to a drop in the performance of advertising channels (because of the loss of access to conversion data.
+Additional reading: What is privacy-friendly tracking &amp; analytics?
+2. Facebook Ads is not as easy for eCommerce as before
+
+Now let’s review the most popular advertising channels for any eCom player — Facebook Ads.
+What used to be easy-peasy lemon-squeezy even for newbie marketers now gets more confusing. Now Facebook requires not only a better understanding of the process but also third-party tools to at least keep the performance stable. Why does that happen?
+Privacy regulations mentioned above made Apple introduce its ATT prompts in iOS 14 and later devices. Facebook also had to start moving towards a more privacy-friendly approach (meaning elimination of third-party cookies and disruption of FB pixel).
+
+These 2 reasons combined caused a huge conversion data loss that was used in algorithms to ensure that you have a very smart targeting &amp; optimization of your campaigns.
+So, your Facebook machine learning does not receive enough data now to make proper optimization and that’s exactly why you need a third-party tracking &amp; analytics tool to integrate Facebook with your eCommerce platform and consolidate data accordingly.
+3. You kinda have to move beyond FB Ads
+Because of increasing competition and a drop in the performance of FB Ads, you should consider moving beyond Facebook Ads. Whether it’s including other paid channels or experimenting with good old email / SMS marketing. Another great thing to implement is influencer campaigns.
+But again, how do you measure and evaluate all of those efforts and make decisions not like ‘flipping a coin”?
+Let’s find out.
+How to track ALL conversions in eCommerce 
+Now let’s find out how to navigate our way through conversion tracking in the times of privacy updates, dropped Facebook performance, inaccurate FB reports, and a multitude of marketing channels. 
+
+1. Let’s start with identifying target conversion events 
+Conversion events are pretty conventional for eCommerce, but it’s good to set this part straight before you start your conversion tracking journey.
+The common events would be: 
+
+
+ 	view content
+ 	add-to-cart
+ 	abandoned cart
+ 	purchase
+ 	recurring purchase
+
+Be sure to adapt events towards your brand and your strategy, later it will allow you to have more flexibility with tracking. 
+
+2. Create a structure for your tracking parameters (UTMs)
+Now it’s time to understand what you wanna capture from your advertising channels: set tracking parameters. Or as Google names them — UTMs. 
+
+
+Now parameters are super important in conversion tracking as they are basically recording all the data pieces from different levels of your advertising campaigns.
+
+Through tracking parameters you can identify: 
+
+ 	Which channel brought conversion
+ 	Which campaign resulted towards success
+ 	Which adset / ad group influenced conversions 
+ 	Which creatives performs better &amp; other cool stuff
+
+Consider using these tracking parameters in eCommerce: 
+
+
+ 	source
+ 	medium
+ 	campaign
+ 	content
+ 	keyword &amp; others
+
+3. Choose your instrument to perform conversion tracking
+Now it’s time to settle on a tool that will become your conversion tracking partner. The first assumption you might have is Google Analytics. It’s a great beginner to medium level tool that allows performing essential analytics, however, GA also comes with a few restrictions.
+With Google Analytics for performance measurement: 
+
+1) You can’t access the data about the costs of the campaigns or particular ads.
+The absence of cost data can be crucial for prompt reaction towards the performance of your campaigns. Since the “money” variable is one of the most important in a marketing job, it’s crucial to track these metrics and react accordingly.
+For example, you won’t be able to measure the cost of each add-to-cart. 
+2) Poor offline event tracking
+If you wanna measure events that happen on your website or platform (like upsell, additional purchase, etc.) it’s good to have offline conversion tracking. Google Analytics is not an appropriate tool for that.  
+3) GA uses aggregated data
+Due to the very same privacy issues, Google Analytics uses aggregated data for analytics which can decrease the effectiveness of your decisions based on data. I recommend choosing tools that operate with raw data for advertising by collecting everything independently.
+How to choose a tool for conversion tracking in eCommerce
+Therefore, I suggest you try using alternative tracking &amp; analytics tools that will answer a few criteria: 
+
+
+ 	Use ONLY first-party data to comply with all privacy regulations 
+ 	Has data cost control (meaning you will receive real-time costs of your advertising campaigns) 
+ 	Has an integration with eCommerce platforms to allow data consolidation &amp; matching 
+ 	Has API integrations with advertising channels you use (like Facebook Conversion API, Google API, TikTok API, etc. 
+ 	If you invest in influencer marketing, it will be very nice to have a “promo code tracking” feature to measure performance not only through links but through promo codes automatically.
+
+4. Add tracking scripts to your shop
+When the tool for tracking &amp; analytics has been chosen, it’s time to take probably the most precious element from it — your tracking script/scripts.
+This piece of code will be helping record all of the tracking parameters we decided to implement in our strategy.
+Please, pay close attention to the fact that your tool has an integration with an eCommerce platform (like Shopify or WooCommerce), it will ensure you can implement the tracking script easily.
+For example, in the case of RedTrack, we have a feature called a Universal tracking script.
+You can automatically generate it when choosing all the required settings of your choice, then you can place it on your website. The universal script will be ensuring that conversions or other target events will be taken care of from all of your marketing &amp; advertising channels. 
+Besides, RedTrack has a Shopify Private App for seamless integration and a WooCommerce conversion tracking plugin, so the integration prerequisite is covered!
+
+
+5. Generate tracking parameters
+Then proceed to generate tracking parameters through your analytics tool or manually, follow the structure you already created in steps 1 and 2.
+
+
+6. Add tracking parameters to all campaigns  
+Now it’s time to add those tracking parameters to all of your active campaigns. Tracking parameters will be transmitting required data from ads / adsets or campaigns to your analytics tool, from where you can access accurate performance reports and make further decisions. 
+Make sure to implement tracking parameters for organic social channels (like a link to your website on social networks), for all the email campaigns, and for all your third-party tools (like social commerce ones).
+If you leave some of the channels without tracking parameters, you might have some spare clicks &amp; conversions coming from unknown sources or simply being recorded as organic, which is not good for decision-making in a data-based approach. 
+
+7. And lastly, launch, test, create and invent 
+When you went through these conversion tracking steps, you will find access to accurate reports and peace of mind.
+You will know exactly which campaign wins, which campaign should be stopped, which channels require better optimization and the cost behind each advertising initiative.
+
+Accurate reports are your free pass towards transparent growth and scaling. It also allows you to be backed by data every time you make a marketing decision.
+
+Even though marketing intuition is amazing, performance marketing is all about performance. And we can measure this performance with the use of tools like RedTrack.
+Integrate your eCommerce stack and measure the performance from every single channel. Your subscription starts from $124/month. Start your advertising control journey here, and book a demo. 
+
+&nbsp;

@@ -1,0 +1,271 @@
+# Dynamic Parameters/Tokens/UTMs
+
+
+
+
+URL syntax
+
+
+
+Uniform Resource Locator (URL or web address)&nbsp;refers to a web resource that specifies its location on a computer network and a mechanism for retrieving it.
+
+
+
+The general form of this syntax is as follows: &lt;protocol&gt;://&lt;hostname&gt;/&lt;pathname&gt;?&lt;query&gt;https://help.redtrack.io/knowledgebase/kb/automation/traffic-source-integration-status-2/?sub1=testvalue
+
+
+
+Elements of this syntax explained:&lt;protocol&gt;&nbsp;Hypertext Transfer Protocol, which can be https (secured) or http (not secured)&lt;hostname&gt; An Internet host. RedTrack.io provided the service domain&nbsp;something.rdtk.io for that purpose. Usually, it is changed to a custom tracking domain for your tracking links. In our example above it is help.redtrack.io.&lt;pathname&gt; A resource location path. This is usually a full directory path.&nbsp;knowledgebase/kb/automation/traffic-source-integration-status-2/ in the example&lt;query&gt;&nbsp;An optional query or other information to be passed to the server when the resource is accessed.sub1=testvalue in the example
+
+
+
+If there are several parameters, they need to be separated with the “&amp;” symbol: sub1=testvalue&amp;country={country}. The parameters are not obligatory for the link to work and can be skipped if its usage is not required.
+
+
+
+The &lt;query> part should be obligatorily divided from the previous part of the URL with the “?” symbol - that means the main link part is ended, and additional parameters will be applied further.
+
+
+
+RedTrack supported parameters/tokens
+
+
+
+A dynamic parameter is something that is dynamically replaced with real value during the tracking process. A dynamic parameter is also known as a variable, token, macro, or variable.
+
+
+
+
+
+These are the parameters you can use for your own purpose for a traffic channel, affiliate network, or a Lander the way you need it:
+
+
+
+ParameterDescription{os}OS Macro{browser}Browser Macro{sourceid}TrafficSource ID{country}Country Macro{city}City Macro{lpkeyua}LP Key Macro{campaignid}CampaignID Macro{isp}ISP Macro{region}Region{ip}IP address{useragent}User agent{brand}Device brand{model}Device model{prelanderid}Prelander ID{prelandername}Prelander name{landerid}Lander ID{landername}Lander name{offerid}Offer ID{offername}Offer name{browserversion}Browser version{osversion}OS version{countryname}Full Country name{connectiontype}Connection type{referrerdomain}Referrer domain{clicktime}Time of the click recorded in UTC{timestamp}Unix timestamp of conversion creation. This parameter gets data from the Offer source/Network. If postback has this parameter, then conversion will be recorded in the time defined within this parameter.{campaignname}Campaign name{trafficsourcename}Traffic source name{postbackid}Conversion ID{domain}Passes domain to the lander
+
+
+
+
+
+ParameterDescription{ref_id}Click id for receiving&nbsp; clicks from your traffic channel{imp_id}Impression id {impcost}Impression cost{cost}Click cost{offer_payout}Offer payout to pass the data to the traffic channel{sub1}{sub2}{sub3}{sub4}{sub5}{sub6}{sub7}{sub8}{sub9}{sub10}{sub11}{sub12}{sub13}{sub14}{sub15}{sub16}{sub17}{sub18}{sub19}{sub20}Empty parameters that can be used to pass any traffic channel data to RedTrack{psub1}{psub2}{psub3}{psub4}{psub5}{psub6}{psub7}{psub8}{psub9}{psub10}{psub11}{psub12}{psub13}{psub14}{psub15}{psub16}{psub17}{psub18}{psub19}{psub20}Parameters to be used to pass any additional conversion data back to the traffic channel. It works for the cases when you receive this conversion data in a postback with the help of sub-values.
+
+
+
+Before using any impression-related parameters, make sure your traffic channel supports them.
+
+
+
+
+
+ParameterDescription{clickid}Used to pass the click id from and back to RedTrack{sum}Offer payout{sub1}{sub2}{sub3}{sub4}{sub5}{sub6}{sub7}{sub8}{sub9}{sub10}{sub11}{sub12}{sub13}{sub14}{sub15}{sub16}{sub17}{sub18}{sub19}{sub20}Empty parameters that can be used to pass any additional conversion data to RedTrack
+
+
+
+
+
+Renaming/using UTMs
+
+
+
+RedTrack offers you 20 additional parameters to pass the needed traffic channel data to RedTrack, from sub1 to sub20. These parameters are called subs (sub1, sub2, sub3, etc.) by default but you can easily rename these parameters as you need to match your tracking needs (e.g. utm_source, utm_campaign, utm_medium, adname, etc.). We call it aliases. 
+To update the aliases for the target names, go to the Traffic channel → Additional parameters. If your parameter field is greyed and prevents you from renaming it, just remove the assigned role to this parameter → move over to the enabled parameter field and rename it as per your needs → assign the role back → save changes to the template:
+ 
+
+
+
+
+
+
+
+Clickid
+
+
+
+Clickid is the core element of tracking. It is generated both on the traffic source and on the RedTrack side. This is a unique click identifier that helps to send and receive the conversion data after the conversion happens.
+
+
+
+It is important to pass the click identifier to RedTrack, make RedTrack generate it's own clickid and to pass it to the offer, CRM, shop, etc. In this regard, here is where you need to make sure the clickid is in place:
+
+
+
+
+
+The clickid should be in place regardless of the tracking method (redirect or no-redirect).
+
+
+
+For the preset templates, it will be added to your tracking link automatically upon creating a campaign. The name of RedTrack parameter which stores the click identifier from the traffic channel is {ref_id} (there are some exceptions such as Facebook).
+
+
+
+At the same time, RedTrack also generates its own id for this click. Like that, each click can have 2 click identifiers: from RedTrack and from the traffic channel. 
+
+
+
+The script plays the main role for no-redirect tracking: it generates the clickid and records it in the system. If there are any dynamic parameters, the script catches also, same as it does with the clickid.
+
+
+
+Click here for details.
+
+
+
+
+
+1. If you want plan to receive the conversion data from your affiliate network, partner, CRM, etc. you need to put the postback URL (the one you can take from RedTrack) with the clickid parameter to your affiliate network. Each time the URL is fired,  we will get the conversion data for the right clickid and record it in RedTrack.
+
+
+
+To make this URL work as expected, you need to add the {clickid} parameter:http://your.dedicated.tracking.domain.com/postback?clickid={affiliate_network_parameter}.Affiliate Network parameter is to be inserted with specific placeholders supported ({} or [], or ##, etc.). It should be the same as used in the Offer URL:offer_url?affiliate_network_parameter={clickid}
+
+
+
+2. There can be scenarios where you do not work with any affiliate network or a partner via S2S. In that case, it is essential to have RedTrack clickid generated in place and pass it to the place/system where conversion happens to be able to use it later to tell RedTrack that this clickid has brought the conversion.
+
+
+
+
+
+Partner parameters tracking
+
+
+
+In addition to RedTrack parameters, there are also partner parameters that can be tracked, recorded and used for the data analysis. Check out how to work with them:
+
+
+
+
+
+As a tracker, we record a lot of essential data: country, city, OS, browser, language, ISP, IP, etc. However, there are a lot of parameters we do not have (creative id, banner id, site name, etc.). Still, they are significant: if you see that some creative gives you most of your conversions, you can send all the traffic through it and switch off other creatives without wasting your time and money.
+
+
+
+In RedTrack, we have a list of ‘empty’ parameters, which can be used to receive data from your traffic channel.
+
+
+
+Where do you find them?
+
+
+
+We have a lot of pre-set traffic source templates with pre-filed parameters. If your target traffic channel is not on the list, add it manually as a custom. Usually, the necessary parameters can be found in your traffic channel account postback settings (alongside the postback template). They may have different names, but the purpose remains the same: variables, tokens, macros, dynamic variables, dynamic parameters, etc.
+
+
+
+Check for the account, postback, campaign, tools, or tracking settings in your traffic channel account. Target variables can be listed in a column or a row or even hidden under some text. You can always ask your Traffic Source Account Manager for help.
+
+
+
+What can be done after?
+
+
+
+
+
+1. Record
+
+
+
+To receive the additional parameters from the traffic channel, you must add the parameters string to the tracking URL (=campaign URL for the redirect tracking) or to the parameters field (for example, to the tracking template for the no-redirect tracking).
+
+
+
+2. Analyze
+
+
+
+Open your campaign or traffic channel report and group the data based on sub ids received. You can choose any data slice for analysis: date+IP+sub3, device+browser+sub4, etc.:
+
+
+
+
+
+
+
+Check out the reporting section for more information.
+
+
+
+
+
+All the data you have received from your traffic channel can be provided to your affiliate network. The only bottleneck here is whether your affiliate network supports it or not.
+
+
+
+Lots of networks have ‘empty’ parameters available for tracking (e.g., {utm_medium}, {affsub}, [affiliate_sub], etc.),&nbsp;but you still need to clarify the question with your Account Manager.
+
+
+
+Assuming your network has some parameters you can use for that purpose here is an example of how to send the data received from the traffic source. Here are the parameters supported by your affiliate network:{utm_source}{aff_sub1}{aff_sub2}Here are the parameters supported by your Traffic Source and recorded in your RedTrack profile:That means these parameters were recorded under the corresponding subs: {zoneid} under sub1, {campaignid} under sub2, etc. Here is your Offer URL in RedTrack:Put the desired parameters to your Offer URL under the affiliate network parameters:In our case {campaignid} received from the Traffic Source will be recorded in your Affiliate Network account under {utm_source}, {device} under {aff_sub1}, {browser} under {aff_sub2}
+
+
+
+
+
+
+
+Not all affiliate networks support receiving or sending additional parameters. Usually, there are several ‘empty’ parameters available for integrations (one of them should be used for passing the clickid value). These ’empty’ parameters do not contain any information themselves and are used only to receive  some data(click ids, campaign ids, source ids) and then send this info back where/if needed. However,&nbsp;some of the networks provide additional information through the dynamic parameters.
+
+
+
+How do I set it up?
+
+
+
+In general, this integration is established in 3 simple steps:
+
+
+
+1. Add the click id parameter to the Offer URL. You will need to use both the network and RedTrack parameters.
+
+
+
+…offer_url?affiliate_network_parameter={clickid}
+
+
+
+Our click id data will be recorded under&nbsp;affiliate_network_parameter&nbsp;in your network account. This parameter can have various names, starting from clickid and ending with some abstract ones, such as aff_sub or utm_medium.
+
+
+
+2. Add the click id parameter to the postback URL.
+
+
+
+Again, you will need both the corresponding parameters from the network and RedTrack here. The only difference is in the macro order: since the postback URL sends clickid data recorded in the network back to RedTrack, the order will be opposite to the offer.
+
+
+
+https://your.dedicated.tracking.domain.com/postback?clickid={affiliate_network_parameter}This parameter is inserted with the specific placeholders used by your network ({}, [], ##, etc.) and should be the same as used in the offer URL (offer_url?affiliate_network_parameter={clickid})
+
+
+
+3. Add the postback URL to your Affiliate Network.
+
+
+
+Just grab the URL with the replaced click id parameter (the one described in step 2) and paste it to your affiliate network postback settings. We recommend using it for a global postback if there is such an option.
+
+
+
+What else can be done?
+
+
+
+Some affiliate networks have dynamic parameters with data: {status}, {orderid}, etc.. You can use this data for your campaigns: to track them in RedTrack and send them to your traffic source campaign. To do that, you need to put these parameters to your affiliate network postback URL.
+
+
+
+1. Go to Offer sources (your Network settings)→ Additional parameters→ put them into the available Parameter fields and the added subs will appear in the Postback URL field→ copy the generated Postback URL:
+
+
+
+
+
+
+
+2. Put the copied Postback URL to your affiliate network postback (preferably under the global postback).
+&nbsp;
+
+

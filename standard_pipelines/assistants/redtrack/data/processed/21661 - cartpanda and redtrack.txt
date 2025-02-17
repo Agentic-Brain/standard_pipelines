@@ -1,0 +1,158 @@
+# Cartpanda and RedTrack
+
+
+
+
+
+
+Cartpanda is an e-commerce platform for merchants based in Brazil. It enables smaller sellers, including creators and entrepreneurs, to sell and promote their digital goods, services, events, and physical items with an online store solution, checkout, and payment gateway.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Cartpanda as an Offer source in RedTrack.
+
+
+
+Offer sources→ New From Template → fill in the mandatory fields → copy the postback URL → Save:
+
+
+
+
+
+
+
+Mandatory values for the fields:
+
+
+
+
+
+Give your offer source a name Cartpanda to distinguish it from the other added offer sources.
+
+
+
+
+
+CLICKID = {cid}
+
+
+
+
+
+SUM = {total_price}
+
+
+
+
+
+In the Additional parameters section add extra parameters for the PII data enhancement: 
+
+
+
+Parameter Macro / Token Role fname{first_name}First Namelname{last_name}Last Namephone{phone_number}Phoneemail{email}Emailcontentid{product_id}Content IDsproduct{product_name}Product Name
+
+
+
+
+
+Copy the Postback URL to set it up later in Cartpanda.
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up RedTrack Postback URL in Cartpanda.
+
+
+
+2.1 In your Cartpanda account go to Admin → Rastreamento e Script → S2S Tracking → Nova integração:
+
+
+
+
+
+
+
+2.2 Fill in the mandatory fields in the integration form → add RT Postback URL (copied in step 1) to the Postback URL field → Salvar:
+
+
+
+
+
+
+
+Refer to this Cartpanda guide for more details on the setup within the integration form including the way you can test your integration.
+
+
+
+3. Get the Cartpanda offer URL.
+
+
+
+The offer link in Cartpanda is indentified as Promolink.
+
+
+
+4. Add Cartpanda Offer to RedTrack.
+
+
+
+RedTrack→ Offers→ New→ give the offer a name and choose Cartpanda as the offer source→ paste the Cartpanda offer link to the URL field → add cid={clickid} to the URL→ Save:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create a campaign in RedTrack with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To add your campaign refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

@@ -1,0 +1,104 @@
+# Kadam and RedTrack
+
+
+
+
+
+
+Kadam is the largest advertising network that uses the most modern technologies to comprehensively solve customer tasks. 
+
+
+
+Integration 
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Landing page (if you have one)
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types&nbsp;you’re planning to work with
+
+
+
+
+
+
+1. Add&nbsp;Kadam&nbsp;template to RedTrack.
+
+
+
+Traffic channels → New from template → find Kadam → Add → save the template:
+
+
+
+
+
+
+
+
+
+
+
+2. Set up a campaign in RedTrack with&nbsp;Kadam&nbsp;as a traffic channel.
+
+
+
+2.1 Campaigns → Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create your campaign → once the campaign is added, your tracking link is automatically created, copy&nbsp;Click URL: 
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+2.2 To apply your postback within your campaign settings navigate to S2S Postback for Kadam section → Add → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.
+
+
+
+3. Set up the tracking on the&nbsp;Kadam&nbsp;side.
+
+
+
+To add RedTrack tracking link in Kadam log in to your Kadam account → Campaigns → Create campaign → Base settings → add RT tracking link (copied in step 2.1) to the Campaign URL field:
+
+
+
+
+
+
+
+ Refer to this Kadam guide or the platform's support team for assistance with the rest of the campaign fields.
+
+

@@ -1,0 +1,348 @@
+# TikTok and RedTrack
+
+
+
+
+
+
+
+
+
+
+TikTok is a social media platform for&nbsp;creating, sharing and discovering short videos.
+
+
+
+TikTok has an API integration with RedTrack, which allows you to:
+
+
+
+
+pass all the conversion data back to TikTok.
+
+
+
+pause non-converting creatives and campaigns directly on the TikTok side, with no manual work.
+
+
+
+auto update your cost data.
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure you already have:
+
+
+
+1. Added custom tracking domain.
+
+
+
+2. TikTok pixel and access token.
+
+
+
+The following parameters are sent to TikTok upon conversion creation:PixelId - identifies where the conversion is going (e.g.: ABC123XYZ789).PixelKey - API key for pixel access.EventName - type of conversion defined by matching types of conversions between RedTrack and TikTok (e.g.: purchase).EventTime - time for conversion action (it's recorded in UTC and taken from the created_at conversion value).ClickId - click in TikTok (e.g.: EAIaIQobChMI3oztgOuugQMV1uLtCh1Q8A2tEAAYASAAEgIe8PD_BwE). Page - value for the page field from your conversion. Referrer - value for the referrer field from your conversion.Phone - hashed phone value taken from the sub parameter with the assigned Phone role (Offer source → Additional parameters). Email - hashed email value taken from the sub parameter with the assigned Email role (Offer source → Additional parameters). IP - value for the IP field from your conversion. UserAgent - value for the UA field from your conversion.ContentType - hashed value taken from the sub parameter with the assigned Content Category role. e.g.: Entertainment (Offer source → Additional parameters). Contents - hashed value taken from the sub parameter with the assigned Contents role (Offer source → Additional parameters).Currency - a constant USD value.Revenue - conversion sum (in USD), value for the revenue_default field from your conversion.
+
+
+
+To get your pixel and access token from TikTok, do the following:
+
+
+
+
+
+1. If you already have a pixel for your website, copy it from the settings:
+
+
+
+
+
+
+
+2. Stay in the Settings → scroll down →&nbsp;Generate Access Token&nbsp;→ copy the created token. 
+
+
+
+
+
+
+
+To learn more about TikTok Pixel go to the related TikTok guide.
+
+
+
+
+
+If you don't have the pixel you'll need to create it first:
+
+
+
+1.  Go to Assets → Events:
+
+
+
+
+
+
+
+2.&nbsp;Web Events&nbsp;→&nbsp;Manage:
+
+
+
+
+
+
+
+3.&nbsp;Set Up Web Events&nbsp;at the top left corner:
+
+
+
+
+
+
+
+4. In the pop-up windows&nbsp;give your pixel a name → &nbsp;Events API → Manually Set Up Events API → Next:
+
+
+
+
+
+
+
+
+
+
+
+5. Go to settings:
+
+
+
+
+
+
+
+6. That’s it, your pixel has been created. Copy the Pixel ID:
+
+
+
+
+
+
+
+7. Stay in the Settings →&nbsp;Generate Access Token&nbsp;→ copy the created token.
+
+
+
+
+
+
+
+To learn more about TikTok Pixel go to the related TikTok guide.
+
+
+
+
+
+
+
+1. Add Tiktok as a Traffic channel in RedTrack. 
+
+
+
+Traffic channels → New from template → Add → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+&nbsp;2. Integrate RedTrack with your TikTok account. 
+
+
+
+
+Go to the saved TikTok template → TikTok API integration → Connect TikTok:
+
+
+
+
+
+
+
+
+Remember to save the TikTok template first to show the system that it is ready for the API integration, otherwise, the Connect TikTok button won't be available for pressing.
+
+
+
+
+Log in with the email that gives you access to the target ad account → Confirm to accept the integration permissions → select the TikTok ad account from the drop-down list:
+
+
+
+
+
+
+
+
+
+
+
+
+3. Add Offer &amp; Offer source (if you are an affiliate) / Brand &amp; Website (if you are an advertiser).
+
+
+
+Parameters (their number, spelling, etc.) that can be set for data enrichment differ depending on the offer source/affiliate network. If you're not sure that your network can accept/send them, please contact your Account Manager before setting this up. Find the general principle of the PII data enrichment process here. 
+
+
+
+To send the PII data for better attribution for TikTok go to the added Offer source/Brand → Additional parameters → add the following tokens and assign the relevant roles to them:
+
+
+
+ParameterMacro / TokenName / DescriptionRole (the role should be selected from the drop-down)phone{r}phonePhoneemail{r}emailEmailcontenttype{r}contenttypeContent Categorycontents{r}contentsContents
+
+
+
+
+
+
+
+4. Add conversion types to RedTrack.
+
+
+
+Tools → Conversion tracking → Conversion types → use this guide to help you add the events.
+
+
+
+5. Fill in the default data source in the traffic channel settings.
+
+
+
+
+Pixel ID - add your TikTok pixel ID
+
+
+
+Access Token - add your access token from TikTok
+
+
+
+
+
+
+
+
+6. Set up the mapping for your conversion events in the traffic channel settings.
+
+
+
+
+Conversion type: your RedTrack conversion types
+
+
+
+Event name: the TikTok event name you want to match your RedTrack conversion type
+
+
+
+
+
+
+
+
+We send the following information to TikTok: - conversion type- currency - sum- IP- UA- conversion date
+
+
+
+7. Create a campaign in RedTrack.
+
+
+
+
+
+1. Campaigns → Create new campaign → use this guide to create your campaign in RT. Once the campaign is created, all the tracking links and the parameters for the script will be generated automatically and include all the supported macros.
+
+
+
+2. For TikTok tracking you will need to use the tracking script. Follow this guide to choose the one that suits your needs better and set it up.You will have to use our script on the page code.
+
+
+
+3. Once the campaign is saved, copy the tracking links and parameters. 
+
+
+
+The tracking parameters are to be added to the TikTok campaign. You will need to use the "universal script" or "no-redirect" tracking parameters later depending on the script type you have chosen.
+
+
+
+
+
+
+
+
+
+1. Campaigns → Create new campaign → use this guide to create your campaign in RT. Once the campaign is created, all the tracking links and the parameters for the script will be generated automatically and include all the supported macros.
+
+
+
+2. For TikTok you will need to use our universal tracking script (created automatically once you've added the Website) on the page code or for your e-commerce store.
+
+
+
+The tracking parameters are to be copied and saved for later. 
+
+
+
+
+
+
+
+
+
+8. Set up the automation.
+
+
+
+
+Here is how you can add rules.
+
+
+
+Here is how you can set up cost auto-update.
+
+
+
+
+
+
+1. Launch a Campaign in TikTok
+
+
+
+TikTok Ads Manager structures ads into three parts: Campaigns, Ad groups, and Ads. Creating a campaign is the first step where you will need to set up your advertising objective, campaign name, and budget. Please use the dedicated TikTok guide on creating Campaigns and handling settings within ad groups, and ads.
+
+
+
+2. To finish integrating TikTok with RedTrack go to Ad → Ad details → insert your landing page/website URL + the tracking parameters from your RedTrack Campaign into the URL field:
+
+
+
+
+
+

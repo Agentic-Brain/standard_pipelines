@@ -1,0 +1,28 @@
+# May-June 2024
+
+
+➲ Taboola API integration: added a new level of cost updates by placement (site_id).
+
+
+
+➲ Added the possibility to highlight rows in the report table based on the chosen metric.
+
+
+
+➲ RedTrack became integrated with NewsBreak via API (eligible for cost update on 3 levels: campaign, ad set, ad).
+
+
+
+➲ Shopify integration: scripts for tracking upsell apps were replaced by one pixel which can be found in the Website form of the client's RT account.
+
+
+
+➲ Google Ads integration: as of now RedTrack updates last day's costs 2 times: at 9:00 UTC and 14:00 UTC.
+
+
+
+➲  Snapchat is now integrated with RedTrack via API (eligible for cost update on 3 levels: campaign, ad set, ad).
+
+
+
+➲  Implemented the possibility to add custom columns to RedTrack reports.

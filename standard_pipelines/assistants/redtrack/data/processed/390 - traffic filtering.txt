@@ -1,0 +1,240 @@
+# Traffic filtering
+
+
+Traffic filtering: overview
+
+
+
+Traffic filtering means blocking or redirecting your traffic based on the set criteria (geo, ISP, OS, etc.). This feature is useful for those working with more complex funnels where you may have different landing pages for different geolocations or different offers for mobile and desktop visitors. In RedTrack we have one of the best end-expensive proxy bases which distinguishes us from other similar services. Having the possibility to sort out the traffic by these criteria is very important for our clients as some offers may not be paid by the reason of so-called proxy-users as in many cases it is related to fraud. In order not to lose reputation, it is sometimes better to filter the traffic this way. 
+
+
+
+Supported filters can be viewed and applied in Campaigns → chosen campaign settings → Funnels → Filters → Add filter. RedTrack can currently offer the following filter categories:
+
+
+
+
+Countries
+
+
+
+Regions
+
+
+
+Cities
+
+
+
+ISP
+
+
+
+Browser
+
+
+
+Browser version
+
+
+
+OS
+
+
+
+OS version
+
+
+
+Device brand
+
+
+
+Device model
+
+
+
+IP
+
+
+
+Subs
+
+
+
+Languages
+
+
+
+Referrer
+
+
+
+Referrer domain
+
+
+
+Device type
+
+
+
+Connection types
+
+
+
+Proxy types
+
+
+
+Fraud check
+
+
+
+Unique path (contact sales@redtrack.io to activate this filter)
+
+
+
+
+Traffic filtering works only with redirect tracking, that’s why this functionality won’t be useful for Campaigns with such Traffic sources as Google Ads, Facebook, and others requiring no-redirect tracking. The reason for that is that the no-redirect method / universal script presupposes tracking via a script which means that the click is recorded when it's already on the page meanwhile filters work out before the click gets to the page.
+
+
+
+How to apply filters
+
+
+
+RedTrack allows you to create custom filters that can be added either as pre-set templates or directly on the Campaign level. To set it up act depending on the chosen method:
+
+
+
+
+
+In your campaign settings go to Funnels → choose the needed one (if you have multiple funnels) → Filters → choose the filter from the Add filter drop-down → choose the Type and the Value for it (type and value define how the filter works out) → Save changes:
+
+
+
+
+
+
+
+
+
+Most of the filters are self-explanatory. That being said, some of them are specific in a way: 
+
+
+
+Filter's nameDetails about this filterProxy typeThis filter has the following types:Anonymous Proxy protects the user's personal information by hiding identifying information about the client's computer.Transparent Proxy does not hide identifying information about the client's computer (other than what is required for authentication and identification).Hosting Proxy displays the IP addresses of users on the internal network.SubsThe sub-value you want to put inside the filter should be the same as you have received from your source of traffic with the click. If several values under the same sub are to be used, simply put them in the same field separated by a comma:Unique pathThis filter will work only if you have the same IP and User agent, otherwise, it may fail to work out and lead traffic in different paths.
+
+
+
+
+
+Include vs Exclude
+
+
+
+
+Include type means that the page will be available for a certain group of people only. All the conditions should be met for the click to be sent to this funnel.
+
+
+
+
+ExampleYour filters are:Filter by countries → Include → GermanyFilter by OS → Include → WindowsResult:Your funnel will be shown only for people from Germany with Windows OS, non-matching clicks will be redirected to another funnel or the default fallback URL (make sure you set it up). 
+
+
+
+
+Exclude type means that your offer will be shown for everyone except those values in the filters. With excluding filters only one of the conditions can be met for the filter to be triggered.
+
+
+
+
+ExampleIf you add Exclude filter for Germany, it means clicks from Germany will be redirected to another funnel in this campaign (if it is available) or to the default fallback URL (make sure you set it up). 
+
+
+
+Contains vs No contains
+
+
+
+Contains and No contains filter types are meant for partial matching. These types allow to apply filters to the hit-and-miss data.
+
+
+
+ExampleIf your filter is Subs → Contains 1,2,3,4,5, but Subs data includes 1,2,3,4,5,6, the system will count all the incoming traffic with all its values (even the value 6, which wasn't defined in the Subs filter). 
+
+
+
+
+
+The traffic is filtered on the RedTrack level only. Non-matching traffic will be sent to the 'forbidden' page or to the fallback URL (it is available).
+
+
+
+
+
+1. Go to Tools → Filter presets → Create new preset → give it a name → choose the filter → add Type and Value (type and value define how the filter works out) → Save: 
+
+
+
+
+
+
+
+
+
+Most of the filters are self-explanatory. That being said, some of them are specific in a way: 
+
+
+
+Filter's nameDetails about this filterProxy typeThis filter has the following types:Anonymous Proxy protects the user's personal information by hiding identifying information about the client's computer.Transparent Proxy does not hide identifying information about the client's computer (other than what is required for authentication and identification).Hosting Proxy displays the IP addresses of users on the internal network.SubsThe sub-value you want to put inside the filter should be the same as you have received from your source of traffic with the click. If several values under the same sub are to be used, simply put them in the same field separated by a comma:Unique pathThis filter will work only if you have the same IP and User agent, otherwise, it may fail to work out and lead traffic in different paths.
+
+
+
+
+
+Include vs Exclude
+
+
+
+
+Include type means that the page will be available for a certain group of people only. All the conditions should be met for the click to be sent to this funnel.
+
+
+
+
+ExampleYour filters are:Filter by countries → Include → GermanyFilter by OS → Include → WindowsResult:Your funnel will be shown only for people from Germany with Windows OS, non-matching clicks will be redirected to another funnel or the default fallback URL (make sure you set it up). 
+
+
+
+
+Exclude type means that your offer will be shown for everyone except&nbsp;those values in the filters. With excluding filters only one of the conditions can be met for the filter to be triggered.
+
+
+
+
+ExampleIf you add Exclude filter for Germany, it means clicks from Germany will be redirected to another funnel in this campaign (if it is available) or to the default fallback URL (make sure you set it up). 
+
+
+
+Contains vs No contains
+
+
+
+Contains and No contains filter types are meant for partial matching. These types allow to apply filters to the hit-and-miss data.
+
+
+
+ExampleIf your filter is Subs → Contains 1,2,3,4,5, but Subs data includes 1,2,3,4,5,6, the system will count all the incoming traffic with all its values (even the value 6, which wasn't defined in the Subs filter). 
+
+
+
+
+
+2. To apply this filter go to your campaign settings → Funnels → choose the needed one (if you have multiple funnels) → Filters → choose the added filter preset from the Select a preset field → Save changes to the campaign:
+
+
+
+
+
+

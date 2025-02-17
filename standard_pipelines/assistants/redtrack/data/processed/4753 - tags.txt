@@ -1,0 +1,90 @@
+# Tags
+
+
+Tags: overview
+
+
+
+Tags in RedTrack are special symbols (emojis) or text added to the RT entities (campaigns, offers) to distinguish them from / relate them to each other, or emphasize some of them:
+
+
+
+
+
+
+
+Specifics of tags:
+
+
+
+
+They are added to campaigns and offers and tracked by the same principle.
+
+
+
+Can be added in both cases: when creating a new entity or editing an already existing (added) one.
+
+
+
+You can add either some text or an emoji, or you can add both, they can work together as well as independently from each other.
+
+
+
+
+Applying tags
+
+
+
+Let's see how the tags work on the example of the already created Campaign (the same principle is applied for offers):
+
+
+
+1. Within the added campaign settings go to the section Tags and notes → Show more → add the Text and/or Icon for your tag → Save changes to the campaign: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. With the help of the added tag you can view the tagged campaign in the report and filter campaign by certain tags:
+
+
+
+
+
+Campaigns → Columns → add the Tags column to the campaign overview (report):
+
+
+
+
+
+
+
+Once you've saved the changes, the chosen tags will appear next to the Campaign in the Tags column:
+
+
+
+
+
+
+
+
+
+Campaigns → select the needed tag from the Tags filter → Apply: 
+
+
+
+
+
+

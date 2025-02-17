@@ -1,0 +1,81 @@
+# Facebook Conversion Attribution 2023 Explained
+
+How does Facebook Attribution work? How does Facebook count conversions? How does Facebook attribute conversions?
+
+If you find yourself constantly rolling those questions in your head, it’s time to learn about Facebook Ads conversion tracking &amp; attribution. In this article you may find: 
+
+ 	How Facebook Ads does conversion tracking after iOS14 update 
+ 	How Facebook attribution works 
+ 	Common myths and truths about Facebook 
+
+Without further ado, let’s jump into all things Facebook Ads attribution to get this favorite advertising channel of ours under control. 
+Facebook conversion tracking before iOS 14 update 
+Before the iOS 14 update, we all used Facebook pixel. 
+
+FB pixel was responsible for capturing the performance data (clicks, conversions, also a lot of personal information about the users used for targeting later). 
+Facebook pixel was tracking the full conversion path of everything that’s going on with your advertising. The tracked data was going to Facebook Machine Learning to optimize your campaigns and reach even better results. 
+
+How Facebook conversion tracking works after iOS 14 
+After the ATT prompt by Apple, Facebook lost the ability to track the users on iOS 14 and later versions.
+
+Instead of a full conversion path, Facebook is able to track only the last event (see the scheme below). 
+
+
+
+So instead of view content, initiate check out, add-to-cart, Facebook will track only the “purchase” event. 
+Because of the influence of the update, Facebook is suffering a significant data loss from Apple devices. 
+How does Facebook attribution work in 2022? 
+Facebook takes data from both: iOS 14 and non-iOS 14 devices and uses data modeling.
+Data modeling by Facebook is the process of building a model from all the data sets it has. 
+The model also means that it’s an estimated count of your conversions, an estimated attribution. Just an average picture behind your conversions and sales. 
+
+There would be nothing wrong with modeling if all the data used for the process was accurate. However, in the case of Facebook, it’s a mix of 2 different types of data sets: from iOS14 devices and all the other devices. Therefore, if you have a big chunk of iOS users in your funnel, the model can show a lot of discrepancies.
+
+Data modeling by Facebook is based on probability, rather than accuracy.
+
+
+What's Facebook Attribution model? 
+It brings us to another important point of this article: the Facebook attribution model. 
+Facebook is using probabilistic attribution, even though many believe the platform uses deterministic attribution models. 
+
+
+When all the data is modeled, Facebook is attributing your conversions to certain campaigns, ad sets, or ads with the probability that it happened in a specific way. Because after the update described above, Facebook has no ability to make it according to the deterministic attribution model. 
+
+Later when Facebook modeled the data, performed an attribution, you can see all the numbers in Facebook Ads Manager. This same data is used for machine learning and optimization of your ads. And that’s exactly why optimization &amp; targeting in 2022 is not working as great as it used to. 
+
+
+
+&nbsp;
+Facebook attribution myths and truths of 2022
+Now let’s explore a couple of myths and truths connected to Facebook conversion tracking and attribution in 2022. 
+1) Goal optimization is not working anymore 
+It’s a myth. Facebook machine learning is still trying to feed the algorithms as much data as possible to make goal optimization thrive, but this data is not sufficient which causes disruption. So the truth is: it works, but not as great as before. 
+2) Facebook uses a deterministic attribution model
+If you read this article carefully, you already know it’s a big no-no. Facebook is using probabilistic attribution models and is working with your conversions based on probability.
+3) Facebook Ads Manager is a source of truth 
+Well, it’s a myth, because Facebook is a self-attribution network that uses data modeling. It means that Facebook is not displaying an accurate picture and will always try to attribute as many conversions as possible back to Facebook. 
+
+We have a detailed article on the difference between raw data in advertising and modeled data, so check it out if you wanna learn more on the subject. 
+
+
+Facebook VS RedTrack conversion attribution
+Unlike Facebook, RedTrack uses deterministic attribution, which means we do not attribute conversions with probability. Rather give you a chance to decide how you want your conversions to be assigned.  With deterministic attribution, you can choose between:
+
+ 	First click
+ 	Last click 
+ 	Assisted clicks for your attribution settings
+
+You can also set a particular attribution window (e.g. 30 days) to control how your conversions will be assigned. 
+
+To perform accurate conversion tracking for Facebook, RedTrack developed Smart Attribution. Smart attribution ensures the accuracy of your conversion tracking &amp; attribution because of the following qualities: 
+
+ 	Cross-browser attribution 
+ 	Raw data 
+ 	First-party data 
+
+If you would like to try Smart Attribution by RedTrack and get the accuracy for FB Ads conversion tracking, consider taking on a 14-day free trial (no CC required). 
+
+
+
+
+&nbsp;

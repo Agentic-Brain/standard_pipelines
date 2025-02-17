@@ -1,0 +1,378 @@
+# Adding Landing page
+
+
+Landing page (aka LP / lander / prelander / gift page etc.) in terms of RedTrack is the page prior to your main offer page with the target product promoted. It needs to be editable, meaning, if your Affiliate Network provided you with a Landing page and Offer but you cannot edit the page code, then this is not a Landing page in terms of RedTrack settings.
+
+
+
+
+
+Landing pages and their settings are kept in&nbsp;Funnels. A sales funnel is a series of landing pages that are intentionally crafted to make sales or get leads. Each page in a sales funnel is meant to drive a visitor to the next page with the end goal being conversion.
+
+
+
+Example 1: The Landing page provided by the Affiliate Network / Advertiser / your own (you have access to the page code) → Offer URL (the product page either provided by the affiliate network or your own product) → “Thank you” page.Explanation: a. LP is added to RedTrack, and the page core is adjusted accordingly.b. Offer is added to RedTrack.Example 2: The Landing page provided by the Affiliate Network / Advertiser / your own (you have no access to the page code) → Offer URL (the product page either provided by the affiliate network or your own product) → “Thank you” pageExplanation:In this example the LP URL will act as the Offer, so you add only the Offer.
+
+
+
+With RedTrack you can track the following types of funnels and combinations within them:
+
+
+
+
+Standard funnels: tracking link → offer.
+
+
+
+Standard funnel with a landing page: tracking link → landing page → offer.
+
+
+
+Standard funnel with a landing page without a tracking link: landing page → offer.
+
+
+
+All types of standard funnels with your own offers: … → offer → “thank you” page where the conversion fires.
+
+
+
+Listicle funnels with or without a tracking link: listicle landing page → offers.
+
+
+
+Listicle funnels with or without a tracking link with your own offers: listicle landing page → offers → “thank you” page where the conversion fires.
+
+
+
+Multi-funnels with or without a tracking link: 1 landing page → 2 landing page → offer.
+
+
+
+Multi-funnels with or without a tracking link with your own offers: 1 landing page → 2 landing page → offer → “thank you” page where the conversion fires.
+
+
+
+The traffic of your own website: offer.
+
+
+
+
+To learn more about funnels, follow these articles:- Multi-step funnel setup- Funnel auto-optimization (AI)
+
+
+
+
+
+To add your Landing page act as follows:
+
+
+
+1. On the main RedTrack menu go to Landers&nbsp;→&nbsp;Create new lander:
+
+
+
+
+
+
+
+2. Fill in the mandatory fields → Save to apply the changes:
+
+
+
+
+
+
+
+Fields explained:
+
+
+
+
+
+Give your landing page a name.
+
+
+
+
+
+Once you've chosen the needed landing page type, Click URL field is filled in automatically with the correct URL syntax depending on the selected type. Pay special attention to the hints under the Click URL fields:
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. Paste the URL of your landing page into this field:
+
+
+
+
+
+
+
+2. If you need to improve your page and make it more personal ( i.e show subs, traffic channel name, the visitor’s city, OS, etc.) you can add additional dynamic parameters to your URL string:
+
+
+
+
+
+
+
+Follow these guides to learn more about dynamic parameters in RedTrack:  - Dynamic parameters: show on page  - Dynamic parameters
+
+
+
+DISCLAIMER! This is just a sample (ready-to-use) script, but if you need to use your script, you can write it on your own, our dynamic values will work well with any script.Example:1. Add the desired dynamic parameter to your page URL:2. Now you are ready to parse and use it where needed. Put this script to your page code where you want this value to change:&lt;script type="text/javascript"> var parameterName; function getParameterData(name) { var query = window.location.search.substring(1); var vars = query.split("&amp;"); for (var i=0;i&lt;vars.length;i++) { var pair = vars[i].split("="); if(pair[0] === name){ return decodeURI(pair[1]);} } return ""; } parameterName = getURLParameter('city') &lt;/script>Here is the example of the Landing page and pending page code with this script used:
+
+
+
+
+
+In order to appear in the drop-down, your custom tracking domain has to be added first. 
+
+
+
+Tracking script and /click URL should have the same custom tracking domain.
+
+
+
+The selected tracking domain is duplicated to the Click URL field:
+
+
+
+
+
+
+
+
+
+Press Show more if you want to add tags to certain landing page templates so that you can distinguish them in the lp list. Tags article will help you with details. 
+
+
+
+
+
+Press Save to apply the changes to your landing page template.
+
+
+
+
+
+3. Add the corresponding scripts to your landing page code:
+
+
+
+
+
+For RedTrack to identify your Landing page and perform the redirect to the offer correctly (with tracking and sending all the necessary data further), you need to 
+
+
+
+1. Copy the Click URL script and LP views script:
+
+
+
+
+
+
+
+2. Paste them as follows:
+
+
+
+
+LP Click URL is supposed to be added to the CTA (call to action) button instead of the offer URL. No worries, RedTrack will know where to redirect the visitor even if there is no direct offer URL used on the page.
+
+
+
+LP views tracking script should be added to the head section of the page code.
+
+
+
+
+Example of the page with a CTA button:The page code setting may look like a simple setup, you see the LP Views tracking script and LP Click URL:
+
+
+
+
+
+For RedTrack to identify your Landing page and perform the no redirect tracking to the offer correctly (with tracking and sending all the necessary data further), you need to:
+
+
+
+3.1 Copy the Click URL:
+
+
+
+
+
+
+
+3.2 Paste it to the CTA (call to action) button instead of the offer URL. Don’t worry. RedTrack will know where to redirect the visitor even if no direct offer URL is used on the page.
+
+
+
+3.3 Add the tracking script to the head section of the page code. The tracking script is taken from the Campaign settings. More info can be found here.
+
+
+
+Example of the page with a CTA button:
+
+
+
+
+
+
+
+The flow the visitor goes through is the following: сlicks the ad on some website → the click goes through the tracking link (or directly to the landing page you use direct traffic script) → visitor lands on the landing page and clicks on the CTA button. Thus:
+
+
+
+
+Landing page views&nbsp;are the number of visitors who saw your landing page.
+
+
+
+Landing page clicks&nbsp;are the number of visitors who clicked on the CTA button.
+
+
+
+
+Both LP views and LP clicks data are available in your reports.
+
+
+
+
+
+Ideally, LP views and clicks number should be equal but there are reasons it may differ:
+
+
+
+
+a lot of people are using antiviruses and adblockers;
+
+
+
+slow internet connection so the visitors&nbsp; prefer not to wait for the page to load;
+
+
+
+slow redirects (it’s quite a rare case but still – the click may go from Brazil server on a traffic source side and the target offer is on Singapore server so the clicks are physically lost during this long way).
+
+
+
+
+That’s why it’s important to see how many clicks converted to LP views. This can be done by using the LP views tracking script or the&nbsp;no-redirect&nbsp;script.
+
+
+
+Do not use both as they may conflict.
+
+
+
+
+No-redirect script example:
+
+
+
+
+
+
+
+
+
+LP views tracking script example:
+
+
+
+
+
+
+
+
+
+
+To be able to see LP clicks and for the correct redirect to the offer, an LP click URL should be used on your landing page. This click URL is to be placed to the CTA button instead of the offer URL. RedTrack will know how and where to redirect the visitor.
+
+
+
+Adding LP click URL to the CTA button is obligatory for all campaigns with landing pages. Otherwise, the information on the visitor will not be sent to the affiliate network and you will not be able to see the conversion data in RedTrack.
+
+
+
+Example of the LP click URL:
+
+
+
+
+
+
+
+
+
+
+
+Listicle&nbsp;in affiliate marketing is a landing page with a list of different offers on it, usually with some kind of extra detail to each item. Each offer has a separate button and leads to a different product. Thus, if you have a landing page that contains links to multiple Offers with a separate button each, you can track their performance in RedTrack.
+
+
+
+To set up listicle tracking act as follows:
+
+
+
+1. When adding your landing page choose the type&nbsp;Listicle landing:
+
+
+
+
+
+
+
+2. Add your&nbsp;offers&nbsp;to RedTrack→ create a&nbsp;Campaign&nbsp;→ within campaign settings add the target landing page and the offers to the funnel:
+
+
+
+
+
+
+
+3. Go to your landing page editor and add separate LP click URLs to the CTA buttons for each offer accordingly.&nbsp;The template will be as follows and can be found in the&nbsp;added landing page&nbsp;settings anytime:
+
+
+
+
+
+
+
+For example, if you have 3 offers, you need to add 3 click URL links to your landing page code:
+
+
+
+
+https://tracking.domain.com/click/1&nbsp;
+
+
+
+https://tracking.domain.com/click/2&nbsp;
+
+
+
+https://tracking.domain.com/click/3&nbsp;
+
+
+
+
+In this case, RedTrack will redirect any visitor to the corresponding offer depending on the chosen CTA button.&nbsp;
+
+
+
+The number of offers in the campaign settings should equal the number of click URLs (your.tracking.domain/click/1) you put on your landing page. The order of your offers in the funnel settings should correspond to the links (your.tracking.domain/click/1) with numbers you add to your landing page.
+
+

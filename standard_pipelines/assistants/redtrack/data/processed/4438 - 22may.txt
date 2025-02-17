@@ -1,0 +1,19 @@
+# 22-May
+
+
+ 	Bugfix: missing Report button was restored in the tabs Traffic sources, Offers, Offer source
+ 	Bugfix publisher panel: Payouts feature can now be enabled, Publisher revenue was added to the Reports by Publishers
+ 	Bugfix: the ability to sort Reports given %, fractions, and payouts
+ 	Bugfixes in Logs: elaborated tooltips for errors in Logs by Conversion API, clickid filter in Logs by Conversions is now up and running
+ 	Bugfix: Time zone of the account is now visible and it’s possible to change to the client's needs
+ 	Changes in terms of new RedTrack UI: Conditional postback functionality was migrated to the new RedTrack UI, Cached data toggle was added to the new UI, Fraudscore functionality was added to the Traffic source templates
+ 	Bugfix: the Campaign report's data gets saved when choosing a Template and pressing the "Apply/Refresh" button
+ 	Bugfix: possibility to save S2S Postback for For publishers changes
+ 	Added a tooltip for the campaign cost models (CPC vs RevShare / CPA)
+ 	Bugfix: Offers in the Funnels can be chosen from the dropdowns
+ 	Added possibility to set an alias for Traffic source templates
+ 	Clicks from Corporate FaceBook Traffic (Detect Moderators) are not shown in Reports
+ 	Bugfix: calculation of Publisher Revenue for conversion tracking is implemented by the Traffic source currency, not the Offer's
+ 	Bugfix: LP views column in the Reports by Offers now shows a valid value instead of N/A
+ 	Bugfix: all the subid parameters can be viewed when creating a new Traffic source
+ 	Tracking options section was added to Campaigns allowing users to choose the preferred Redirect type from the dropdown. For more details go to article Adding a Campaign.

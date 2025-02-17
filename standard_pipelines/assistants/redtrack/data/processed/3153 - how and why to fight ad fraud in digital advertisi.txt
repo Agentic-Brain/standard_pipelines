@@ -1,0 +1,104 @@
+# How and Why to Fight Ad Fraud in Digital Advertising?
+
+It’s been a month since we launched our brand-new feature — Fraud Report. 
+Fraud Report is a cutting-edge solution that evaluates the traffic you buy and reports whether the money is being served to bots and non-human traffic.
+If you missed our previous post that reveals the essence of our new anti-fraud solution and how you can benefit from it, then I would advise starting with it first — Fraud: to pay or not to pay? – Brand new feature by RedTrack. 
+2018 has been a year of botnets. And as a reasoned outcome, many marketers started to require transparent reports from networks, agencies, and affiliates they work with. 
+At RedTrack we work hard in order to provide the solution that would timely respond to all the market challenges. With this in mind, we contacted our longtime partner FraudScore, an ultimate fraud detection tool, and started negotiating closer cooperation between our platforms. As a result, great expertise and technologies of FraudScore in detecting and fighting fraud, and advanced feature-set combined with a user-friendly interface of RedTrack, have translated into Fraud Report.
+
+Now, with Fraud Report, RedTrack users can receive a holistic overview of the traffic they buy in real-time and have in-depth fraud reporting within their RedTrack accounts.
+&nbsp;
+
+In this article, we’d like to focus more on the technologies used in the Fraud Report and how big the problem of fraud traffic is, in general. To that end, we grabbed the questions and addressed them to Dmitry Isakov, CEO of FraudScore. Keep on reading our interview with Dmitry, and find out how to save your ad campaigns and your advertising investments in the age of fraud explosion. 
+
+&nbsp;
+
+Dmitry, you're engaged in the "fight with the dark side" of online advertising for a while now. In your opinion, how big of a problem is digital ad fraud? 
+
+I would say that ad fraud is one of the most important and complex challenges that marketers face these days.
+&nbsp;
+Digital ad spend is rising every year, from $93 billion in 2018 to estimated $105 billions in 2019. And around 65% of marketing budgets are spent on mobile advertising.
+&nbsp;
+If we take a look at FraudScore statistics for 2018 - 22% of global ad traffic, both mobile and web, was fraudulent.
+&nbsp;
+
+[caption id="attachment_3182" align="aligncenter" width="600"] Image source: https://fraudscore.ai/blog/results-2018[/caption]
+The estimated cost of digital ad fraud worldwide is up to $19 billion in lost revenue in 2018. By 2022, that total is expected to grow up to $44 billion! So it goes without saying that ad fraud is a huge problem and it’s not going to just disappear, but marketers are able to partner with solutions to protect their budgets.
+
+If ad fraud is a multi-billion dollar problem — is there still a place that is fraud-free? 
+
+
+Every time an advertiser takes a dollar out of his pocket to run an online campaign, whether it is a programmatic campaign or click-based campaign or performance-based, with installs and conversions as KPIs, there always are guys on the dark side ready to steal part of this marketing budget, very often a really big part.
+
+What ad formats / digital ecosystems have the highest ad fraud rates? What is the reason for this?
+
+
+Ad fraud is a problem that has affected every part of the digital ad ecosystem, including desktop and mobile web, mobile in-app, and the quickly expanding market of Connected TV/OTT. I would mention the most fraudulent formats in this order:
+&nbsp;
+First, video ads. It’s the most attractive area for fraudsters because of money.
+While video budgets are about 45% of total ad spend, it is tied to 64% of all ad fraud, according to Forrester! Fraud is found in video twice as often as it is in display.
+&nbsp;
+Second, Connected TV/OTT. As more money is being spent on video ads, fraudsters are turning their heads towards it. In a Q3 2018 study, Pixalate found that 19% of worldwide OTT impressions were invalid, because of fraud and technical malfunctions. So it is the next big challenge.
+&nbsp;
+And of course, mobile apps and mobile web. Even though these categories are less at risk than OTT and desktop video, mobile web and apps are still formats to watch.
+If we talk about programmatic, mobile display inventory presents the highest risk of fraud.
+&nbsp;
+Of course, fraudsters go where the money is. And they’re also attracted to new markets and technologies, such as connected TV, where the ad tech market is really young. That is why I think we’ll see a huge shift in fraud scale towards OTT by the end of 2019.
+
+Affiliate marketing involves a lot of players, like advertisers, networks, publishers, and affiliates. Does all of them are subject to ad fraud? 
+
+
+If we take a look at the ads money flow — we’ll see that all the stages of it are prone to fraud. So basically everyone starting from advertisers, agencies, networks to affiliates and publishers are at risk of losing their money to fraudsters. Advertisers are likely to lose budgets by paying for fraudulent traffic. Affiliates and networks are losing money by getting rejects, losing contracts and advertisers. When a network gets a bad reputation or an affiliate has several sources that are suspicious — next time an advertiser would think twice to invest in such traffic and probably would choose another network. 
+&nbsp;
+So everybody involved is suffering. But to be honest, of course, the party who suffers the most - is the Advertiser, the one who pays money. All the other parts of the (supply) chain are more tolerant of fraud :-)
+
+Well, it's hard to deny that click fraud is a big challenge for all marketers. But are there any evident warning signs that indicate that I run into fraud? 
+
+
+Running online ads is all about multi-level campaign statistics. When you’ve just launched a campaign and it’s giving you results way better than you could have expected - it’s probably too good to be true.
+&nbsp;
+Of course, there are some basic parameters that you need to keep an eye on. IPs and if they are blacklisted or coming from datacenters; proxy IPs; some vital parameters of device\browser &amp; user specific information. These can be controlled by either in-house or 3rd party fraud detection platform like FraudScore. But unless you have big analytics and tech team I would not recommend you spend your time &amp; money on that.
+&nbsp;
+
+[caption id="attachment_2988" align="aligncenter" width="700"] Image source: https://fraudscore.ai/blog/results-2018[/caption]
+
+&nbsp;
+Dmitry, I know that you've been working in IT-industry for about 20 years. Thus, I can't but ask what technologies do you use to detect fraud within your solution FraudScore? 
+
+
+We use Unsupervised ML to detect new anomalies and suspicious patterns that might indicate that fraudsters have come up with something new. When something is detected - our data scientists start to drill down the data to understand the nature of each particular anomaly, to learn more about the source and to find the pattern. If we see that it’s a new pattern or scheme - we develop new algorithms and methods that shall automatically detect this new type of fraud. When the development is done - we upgrade the platform. It’s a constant process that requires a lot of time and expertise, but we have the best data science team and our technologies are known for fast-tracking new ad fraud patterns.
+&nbsp;
+It’s worth mentioning that FraudScore was established in 2015 and since then we’ve gained the reputation of a trustworthy anti-fraud solution. Our expertise covers both mobile and web traffic, we work with all types of marketing campaigns - from CPM &amp; CPC to CPI &amp; CPA. So we possess great experience and technologies that are all aimed to fight ad fraud and detect new malicious schemes that fraudsters develop.
+
+Then, tell me please more about the feature - Fraud Report that your team developed together with RedTrack for their users. 
+
+
+Together we’ve developed a joint anti-fraud solution for RedTrack’s customers that is aimed to detect fraudulent clicks and give users easy to read traffic analytics. The solution combines the FraudScore click scoring platform and wraps it with a user-friendly fraud report inside of RedTrack platform. So from now on, every RedTrack customer is able to have its traffic checked for fraud without the need to log in to FraudScore, set up integration and send clicks for analysis.
+&nbsp;
+Our solution guarantees that RedTrack customers shall now have all the FraudScore platform updates, new releases and improvements of fraud detection technologies automatically.
+&nbsp;
+
+
+
+&nbsp;
+Users are now able to analyze fraudulent clicks divided by types of fraud, campaigns, sources. Various slices and modes enable advertisers to analyze traffic, understand fraud reasons and make informed decisions on whether to reject or block it. RedTrack users now get a professional fraud report that gives vast opportunities for analysis and reliable data for further business decisions.
+&nbsp;
+This solution allows RedTrack to be one of a very few ad tracking solutions that provide a professional anti-fraud solution for their customers within their own platform. Our combined efforts shall protect RedTrack’s customers from losing money.
+
+To your mind, what are the most apparent benefits of the Fraud Report?
+
+
+1. Pay only for real clicks – don’t buy a new car for a guy, you even don’t know.
+&nbsp;
+2. FraudScore is an independent anti-fraud solution. In fraud detection – it’s vital that traffic is checked by a company who has no affiliation with other industry players and shall give an unbiased traffic audit while keeping your data safe.
+&nbsp;
+3. Reliable, comprehensive and detailed report. Our joint feature is devoted to one task – make fraud detection easy and effective. The report combines both marketing parameters of a campaign and FraudScore fraud categories within RedTrack platform.
+&nbsp;
+4. Constant updates and improvements. FraudScore data science team and their machine learning algorithms are constantly working on finding out new malicious schemes. And advanced integration with RedTrack allows us to keep all the updates available for RedTrack customers asap.
+&nbsp;
+5. All-Inclusive. RedTrack is a unique company who made great efforts to provide its customers with a convenient and reliable fraud detection solution right in their platform. Advertisers are now able to have all the data for their campaign efficacy and detected suspicious clicks in RedTrack interface. I think that it shows how serious RedTrack is about the safety of their customers and we are sure that our joint solution is the best way to save your time and money.
+
+&nbsp;
+
+Thanks for the answers, Dmitry!
+Have questions regarding our click quality monitoring feature? Let`s have a talk. Reach out to support@redtrack.io and ask for an in-depth demo of the Fraud Report.

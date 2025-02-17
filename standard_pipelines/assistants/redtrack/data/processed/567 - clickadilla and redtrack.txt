@@ -1,0 +1,120 @@
+# ClickAdilla and RedTrack
+
+
+
+
+
+
+ClickAdilla is an Innovative Self-Serve platform where you can acquire High-Quality Traffic from Exclusive sources. With ClickAdilla, you have full control over your expenses, set a bid, see the volume expectations, and change the bid whenever you need. Advertisers can use many targeting options, create white/blacklists, set hourly/daily caps, etc.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types&nbsp;you’re planning to work with
+
+
+
+
+
+
+To integrate ClickAdilla with RedTrack act as follows:
+
+
+
+1. Cope the unique token from ClickAdilla to place in the postback URL in RedTrack.
+
+
+
+In your ClickAdilla account go to Tracking → Conversion tracking → copy the unique token:
+
+
+
+
+
+
+
+2. Add ClickAdilla template to RedTrack.
+
+
+
+2.1 Traffic channels → New from template → find ClickAdilla → Add:
+
+
+
+
+
+
+
+2.2 Paste the token value from ClickAdilla (copied in step 1) into the S2S Postback URL of the ClickAdilla template in RedTrack instead of YOUR_TOKEN_HERE:
+
+
+
+
+
+
+
+3. Set up a campaign in RedTrack with the ClickAdilla traffic channel.
+
+
+
+Campaigns→ Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create the campaign with ClickAdilla as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL:
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+4. Set up the tracking in ClickAdilla.
+
+
+
+In your ClickAdilla account go to Campaigns → Create Campaign → fill in the mandatory fields → paste the Click URL from RedTrack (copied in step 3) into the URL field of your Ad:
+
+
+
+
+
+
+
+5. Set up the postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 3) → scroll down to&nbsp;S2S Postback for ClickAdilla → Add → paste the copied Postback URL and check if all the needed values for the&nbsp;parameters are in place → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+

@@ -1,0 +1,13 @@
+[
+    {
+        "name": "schedule_call",
+        "strict": true,
+        "description": "Send a link to the client that will allow them to schedule a call with a human.",
+        "parameters": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false,
+            "required": []
+        }
+    }
+]

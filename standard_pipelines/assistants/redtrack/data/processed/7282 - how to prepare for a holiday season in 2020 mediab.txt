@@ -1,0 +1,105 @@
+# How to prepare for a holiday season in 2020: media-buyers kit
+
+The holiday season is coming closer. The whole world is waiting for sales, special deals, and cozy home photos with a delicious roasted turkey on a plate. A lot of media-buyers have already accustomed to slightly reduced CPCs caused by COVID-19. However, with the holiday season price per click typically goes up, especially in e-commerce, nutra, and other verticals related to popular consumer products. Want to know how to boost your sales during this profitable season? Here are the 5 main lessons we've learned from our customers.
+Why 2020 Holiday Season is special
+In 2019 National Research Found has calculated that retail sales in November and December can account for nearly 1/3 of annual sales. In 2020 Due to COVID-19, most shoppers will prefer to purchase their favorite goods online. Criteo says that 64% of consumers still miss going to physical stores, while 88% are pretty sure they will do their annual shopping routine via smartphones and laptops. These stats can tell us about three main trends of this holiday season: consumer demand growth, increased competition, higher error's price.
+
+The following holiday media-buying tips will help you beat your competitors and boost your sales with no big losses:
+
+ 	Starting early. Literally now;
+ 	Learn from your past experience;
+ 	Experiment with multiple ad placements, channels, and budgets;
+ 	Think about the Refer-a-friend program or Loyalty Rewards;
+ 	Don't play with false urgency. Create a real reason to buy.
+
+
+1. Start your media-buying activities earlier
+
+
+Prosper Insights and Analytics state that 89% of consumers research products online before buying. In the holiday season, they start making a shopping list and pre-holiday research in October already. In some cases - at the end of September. Most of their purchases, however, still occur in November. Given all this, the best thing you can do now: 
+
+ 	analyze your consumers' preferences;
+ 	start testing your campaigns now;
+ 	invest in engagement with your target audience. Engaged users are more likely to convert into buyers. Don't be afraid of being too early. Now is the time. If not you, it will be your competitors that will grasp your audience's attention.
+
+
+2. Learn from past experience
+The holiday season lasts 3 months a year. It's totally okay if you don't know where to start. If you're an experienced media-buyer, a good way to start will be analyzing the performance of your previous campaigns during this time. Yes, the time has changed and your 2019 strategies might not work today. But going back will help you find insights, create a framework, and avoid mistakes you made back then. If you have any issues with your ads analytics tools, you can always migrate your data from multiple traffic sources to RedTrack and analyze it with the help of drill-down reports. 30+ metrics are all at your disposal. Here you can: 
+
+ 	customize your entire dashboard. Do whatever you'd like to do: add, hide all the available columns and metrics;
+ 	create special reports based on one or several subIDs (tokens). Choose country, device type, detailed users' data, and others;
+ 	compare the ad data from several time periods;
+ 	create templates to save your time in the future;
+ 	export it all to CSV file;
+ 	share it with your team with the help of a multi-access feature.
+
+
+
+Read: How to Skyrocket your business with RedTrack Data Reports
+
+&nbsp;
+
+Need inspiration? Use Spy Tools.  
+
+They will help you know your competitors and industry leaders:
+
+ 	Unique selling points
+ 	Traffic sources choice
+ 	Creatives they make
+ 	Their strategy effectiveness
+
+&nbsp;
+3. Experiment with multiple ad placements, channels, and creatives
+Novice media-buyers are often afraid of competition from large brands and more experienced colleagues. Science says that today even the most conservative consumers are more open to new products, brands, and stores. Many of them have changed their consumer habits during the lockdown and are more likely to buy from websites they haven't known before. During the lockdown:
+
+ 	33% found small merchants they didn't previously know about and purchased from them;
+ 	83% said they’re likely to keep purchasing from the new stores they discovered.
+
+So, everything is in your hands now!
+
+There's no proven recipe that will help you beat the competition during this time.
+
+&nbsp;
+The best strategy that always works is experimenting!
+&nbsp;
+
+Remember that holiday planning isn't limited to landing pages, email layouts, and creatives look. Before finding the fit, you'll have to spend a certain part of your ad budget on failures. It's really hard to predict which channel or placement will be the most profitable for you.
+
+To minimize the loss, keep your data in one place, and constantly check its performance. So, when you see that something goes wrong with your holiday campaigns, you can always add the enhancements and test another channel. Be careful when buying traffic from Google and Facebook. They don't allow redirects, so you have to be careful. In RedTrack you can track the traffic coming from these traffic sources separately with the help of a no-redirect script. 
+
+It will neatly place your stats in reports and provide all the updates in real-time. If you'd like to learn more about media-buying on Facebook &amp; Google and keeping your account safe, watch our latest Product Stream.
+
+
+
+&nbsp;
+4. Think about the Refer-a-friend program or Loyalty Reward
+Referral programs have a lot of advantages. But the main one is the cost per acquisition reduction. There are three main time intervals to offer your customers refer your product or service to their friends, colleagues, or social media friends : 
+
+ 	before purchase to stimulate them to convert;
+ 	right after purchase;
+ 	the moment they received the benefit from the purchase.
+
+By offering both pre-purchase and post-purchase referrals, you’re giving users more opportunities to accept the offer. How to figure out which strategy will suit best to your referral program? Again, Test! Remind your customers about your referral program several times,  analyze the results, and determine the time when the response is better. To track your customers' involvement in your initiative, you can use RedTrack and its Publisher Panel. Here you can add an unlimited number of offers, set the needed traffic sources (if you want your customer to share it on Facebook, for example), and track it all in one place.
+
+&nbsp;
+
+
+
+
+5. Don't play with false urgency. Create a real reason to buy.
+Urgency is one of the most popular tactics media-buyers use to convert their leads into customers at this time of year. The problem is that everyone does it. Some brands do it so often that customers don't react to urgency incentives at all.
+
+A sense of urgency works great in four main cases.
+
+ 	Work with a brand that doesn't hold any sales or does it very rarely throughout the year;
+ 	Promote premium brands;
+ 	Donate a percentage of profit to the charity or support non-profit organizations;
+ 	Use it as a last-minute impulse for the shoppers you've already established a connection.
+
+In other cases, you need to think out of the box. Don't devalue the brand you work with and make it cheaper in your customers' eyes. Find this line between unmethodical discounting and building relationships with customers.
+Conclusion
+The demand growth along with increased competition makes the holiday season an exciting and challenging time for all media-buyers. To position your offer above others, you need to apply both: a research-based data-driven approach paired with creativity. Don't be afraid to apply tactics you never used before: start among the first,  build relationships with your customers, create a refer-a-friend program, experiment with new traffic sources, and reconsider your attitude standard ways of attracting and engaging new customers. If done right, the results won't keep you long. 
+
+&nbsp;
+
+&nbsp;

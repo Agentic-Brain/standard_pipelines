@@ -1,0 +1,45 @@
+# Customer Story: How YNOT Media makes more profitable decisions with RedTrack
+
+YNOT Media | Global media agency 
+YNOT Media is a digital advertising agency "that helps companies all around the globe to reach their potential customers at the right moment at the right place with the right message". The agency provides a unique portfolio of customer services including multi-channel media-buying, building marketing strategies for e-commerce, and providing full-fledged digital advertising strategies. For 4 years already, the team assists different businesses in increasing their brand awareness, driving new users, and converting leads in the most efficient way.
+
+
+Challenge
+Active growth is an exciting time for any media agency.  But with all the exciting growth things, new challenges also come up. Having clients all around the world means you have multiple campaigns in different GEOs and multiple strategies about what to do with them to get a higher ROI. In this case, sooner or later, all your day-to-day media-buying activities will need optimization and automation to spend less time on routine tasks and make better decisions faster. YNOT media came across the same kind of problems.
+
+&nbsp;
+Solution: Better decisions with well-organized data
+
+Every day we have to deal with a huge amount of ad data. The more clients we have, the more campaigns we need to manage. That's why finding a reliable ad tracking tool was one of our strategic goals. After testing period, RedTrack has become an essential tool for our team which is used by the specialists of all levels. RedTrack helps us in 5 main ares:
+
+ 	gives the whole picture of all ad campaigns efficiency so we can make better investment decisions;
+ 	saves time on data consolidation from multiple clients' campaigns;
+ 	allows set up custom reports which help us to stay focused on important metrics in each case;
+ 	reports information real-time with no delays so we can quickly adjust our strategy in order to reach the needed ROI.
+ 	makes it easier for us to work within a team with the help of multi-access feature.
+
+
+&nbsp;
+Andrius Valatka,
+YNOT Agency
+&nbsp;
+Results
+Ynot Media was among the first clients of Thrive tracker − one of the first ad trackers on the market then. After a while, they decided to transfer their ad campaigns to RedTrack. As Andrius said, RedTrack seemed to be a far more user-friendly and supportive tracker with more tracking opportunities available on the fly. Now RedTrack plays an important role in their day-to-day activities and helps solve their problems regarding a myriad of their advertising campaign optimization. Having all campaigns in one place helped them manage their resources wisely and scale their business while defining and investing in more profitable activities.
+
+&nbsp;
+RedTrack for ad agencies
+Ad agencies make up a big part of RedTrack clients. One of the main reasons for their choice in favor of RedTrack are:
+
+ 	easy migration of resources;
+ 	a user-friendly and customizable interface that makes it easy to start working with RedTrack and reach goals;
+ 	accurate tracking with no 3-rd party cookies, sampling, and data aggregation;
+ 	ability to build the work processes of the whole team within one admin account with multi-access;
+ 	optimize and export drill-down reports that will fully meet the clients' needs;
+ 	friendly support team, who is always happy to help.
+
+Would you like to learn more about how RedTrack can help you optimize the work of your team and provide better services to your clients? Let's see how we may help.
+
+
+
+
+ hbspt.cta.load(7519541, 'ef490f48-8ab0-4913-8668-57716f5d0600', {}); 

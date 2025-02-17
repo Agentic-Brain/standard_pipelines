@@ -1,0 +1,382 @@
+# Affiliates: creating campaign
+
+
+What is a campaign?
+
+
+
+
+Campaign in RedTrack&nbsp;is a set of rules and elements that link together a traffic channel where you buy the traffic and the offers that are being promoted. In RedTrack terms, a Campaign works as the combination of an offer, a landing page, a traffic channel, a domain, filters and the automation you have set up. 
+
+
+
+The main purpose of creating a Campaign in RedTrack is to get the final link you will send the traffic to. This link allows you to route your traffic, collect all the possible data on the clicks and have the option to change anything inside without changing the link itself for the traffic channel (we know how important it is).
+
+
+
+How to create a campaign?
+
+
+
+
+
+Before you proceed with campaign creation make sure you already have the following elements in place:
+
+
+
+
+Custom tracking domain
+
+
+
+Traffic channel
+
+
+
+Offer and Offer source
+
+
+
+Landing page (if you have one)
+
+
+
+
+
+
+1. Campaigns → &nbsp;Create new campaign:
+
+
+
+
+
+
+
+2. Edit/adjust each the needed blocks as per the tips below:
+
+
+
+
+
+1. Give your Campaign a name.
+
+
+
+2. Choose the&nbsp;already added&nbsp;Traffic channel.
+
+
+
+3. Select the corresponding&nbsp;custom tracking domain.
+
+
+
+4. Press on the needed&nbsp;Campaign Cost model&nbsp;and fill in the&nbsp;Value&nbsp;accordingly:
+
+
+
+
+
+
+
+
+
+You don't need to add/remove/adjust anything here at this point. This block will automatically generate the links and the tracking parameters for you to copy and paste into your platform settings later. 
+
+
+
+
+
+
+
+
+
+This option can be changed if you plan to work with a redirect link. Be careful, as not all the traffic channels support it.
+
+
+
+Redirect types decide how redirection to the offer is handled and whether the referrer data is passed through. First of all, click&nbsp;here&nbsp;to learn how the hidden referrer works and choose the required redirect type based on their explanation below:
+
+
+
+
+“Regular redirect (http/s 302)” is a standard temporary HTTP redirect that sends a visitor directly to the desired location (the offer you promote). The referrer data is passed to the campaign endpoint.
+
+
+
+“Meta refresh with hidden referrer” presupposes that after the redirect happens, another redirect takes place with the help of an HTML meta tag. As a result, the referrer points to RedTrack, not the initial referrer.
+
+
+
+“JS refresh” is similar to the meta refresh type, but it’s fulfilled with the help of JavaScript. That being said, this type is not generally recommended for SEO because search engines can have difficulty crawling and indexing sites that rely on them.
+
+
+
+“Server redirect (http/s 302) with hidden referrer” means when redirecting on the side of the TDS header, the referrer gets hidden.
+
+
+
+"Double meta refresh with hidden referrer" is similar to “Meta refresh with hidden referrer” but this method involves using two meta refreshes to mask the original source of the traffic, making it more challenging to identify where the user initially came from.
+
+
+
+"Regular redirect (http/s 307)" is similar to “Regular redirect (http/s 302)” but it's working more efficiently with old version browsers. 
+
+
+
+
+To sum up, Server redirect (HTTP/S 302) with hidden referrer is faster than Regular redirect (HTTP/S 302) and Meta refresh with hidden referrer. This is because a server redirect is processed on the server side, while a meta refresh and JS refresh are processed on the client side. Server redirects are faster because the server does the work of redirecting the request for you, whereas in a meta refresh or JS refresh the client has to do this work. Moreover, server redirects can be cached, making them even faster.
+
+
+
+
+
+
+
+
+
+This section is&nbsp;optional. It serves for adding tags and additional notes to distinguish the added Campaigns. Refer to this article for details on tags and notes.
+
+
+
+
+
+
+
+
+
+Leave the fields in this section empty for Facebook, Google Ads, Bing Ads and Tiktok as RedTrack passes conversion data to these sources via API.
+
+
+
+To add /edit the postback go to the section S2S Postback for &lt;your traffic channel&gt; → Add → add / edit the postback URL (or multiple URLs if that’s the case) → make sure that all the needed values for the source parameters are in place → define the&nbsp;Payout sent → select the&nbsp;Postback method → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Postback method types explained (step 4):- GET requests only retrieve data and have no other effect. For retrieving resources without making changes, GET is preferred over POST, as they can be addressed through a URL.- POST method requests record data. For example, it is used for posting a message to an Internet forum, subscribing to a mailing list, or completing an online shopping transaction. Also for this method you can write your own JSON with the fields accepted by the 3d party platform.
+
+
+
+IMPORTANT!- If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.- Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually. The screenshot above is just for demonstrative purposes. The URL, its parameters, etc, depend on your Traffic channel. If you're not clear about the mandatory parameters for your postback please turn to your Account Manager.
+
+
+
+
+
+This option is available for Facebook, Google Ads, Bing Ads and Tiktok
+
+
+
+
+
+
+
+Refer to&nbsp;this article&nbsp;to set up the API Integration conditional postback.
+
+
+
+
+
+3. Add the needed funnels:
+
+
+
+
+
+
+
+A funnel&nbsp;is a set of landing pages, offers, filters, auto-rules, and weights applied. You can add more than one funnel (and more than one Landing page and Offer) when creating/editing your Campaign. Clicks will be distributed between funnels (landing pages and offers) according to the weight. Consider this for the advanced tracking while conducting&nbsp;A/B (split) tests.
+
+
+
+
+
+Choose an offer → assign the weight:
+
+
+
+
+
+
+
+You can add more than one offer to the funnel. RedTrack will distribute the traffic between offers according to the specified weight.
+
+
+
+
+
+Choose Landing+Offer → Add your landing and offer and assign the weights to them:
+
+
+
+
+
+
+
+☝ You can add more than one landing page and offer to the funnel. RedTrack will distribute the traffic between Landing pages and Offers according to the specified weight.☝ If you have a landing page that contains links to multiple offers with a separate button each, you can track their performance in RedTrack with the help of Listicle functionality. Refer to this article for details. 
+
+
+
+
+
+Choose Prelanding+Landing+Offer → Add your prelander, landing page, and offer and assign the weights to them:
+
+
+
+
+
+
+
+
+
+Imagine you are using complex flows that include several landing pages/offers/filters/complex weights and you need to use one of these combinations within several campaigns with different traffic sources. You don’t want to spend more time creating the same funnels each time (especially if there are hundreds of campaigns). A&nbsp;funnel template&nbsp;is a solution for you in that case: you will need to create it once and then only choose the correct template for as many campaigns as you need.
+
+
+
+To set up a funnel template act as follows:
+
+
+
+1. Funnel template → Create new funnel:
+
+
+
+
+
+
+
+2. Fill in the mandatory fields in the funnel template →&nbsp;Save:
+
+
+
+
+
+
+
+Fields explained:(1) Give your template a name.(2) Choose the Funnel template type:(3) Switch on the Show filters for funnel toggle if you want to preset the filters for your funnel template:- you can adjust the filters by the Filter preset (if you already created one) or manually by choosing the needed value from the Add filter field:- once you decide on the way and choose the filter you may need to choose the Type and Value for your filter. Use the article Traffic filtering to figure out how to effectively set your filters(4) Add the values to your Pre-Landing/Landing/Offer blocks. These blocks will appear depending on the option you chose in the Funnel template type (Single landing, Multi landing, Only offer):● Single landing → Landing&amp;Offer:● Multi landing → Pre-Landing&amp;Landing&amp;Offer:● Only Offer → Offer:Add your Pre-Landing&amp;Landing&amp;Offer press Add or New Pre-Landing&amp;Landing&amp;Offer → set the Weight for your Pre-Landing/Landing/Offer → add filters to the added entities:
+
+
+
+Additional filters for objects (Pre-Landings/Landings/Offers) inside the funnel serve for distributing the traffic not only for funnels but also for offers/landings/pre-landings inside this funnel. Use the article Traffic filtering to determine how to set your filters effectively.
+
+
+
+3. Add this template to your campaign. To do this go to your Campaign settings → Funnels →&nbsp;Template&nbsp;→ find your&nbsp;funnel template: 
+
+
+
+
+
+
+
+4. If necessary, you can convert your template back to a regular funnel. To do that, press the&nbsp;Convert&nbsp;button:
+
+
+
+
+
+
+
+You can make any changes to your funnels when needed. The changes will be replicated within the campaigns where this template is already in use.
+
+
+
+
+
+4. Switch on the auto optimize toggle to set the funnel optimization and add the filters.
+
+
+
+
+
+
+
+5. Enable the&nbsp;Auto update costs&nbsp;feature if your traffic channel is eligible for it. Refer to&nbsp;this guide&nbsp;for details.
+
+
+
+
+
+
+
+6. Set the advanced rules for your campaign to get more from the data you have. Refer to&nbsp;this article&nbsp;to help you set up&nbsp;rules.
+
+
+
+
+
+There are some extra tabs that can be filled in as per your needs:
+
+
+
+
+
+
+
+
+
+These tabs are enabled only if you have access to and use the partner management portal and work with individual publishers who promote your offers. A traffic channel “For Publishers“ is to be used from the template. 
+
+
+
+Refer to&nbsp;this article&nbsp;for more details on the portal.
+
+
+
+
+
+
+
+
+
+Refer to&nbsp;this article&nbsp;to help you set up custom payouts.
+
+
+
+
+
+
+
+
+
+This is the manual cost update. Refer to&nbsp;this article&nbsp;for more details on process.
+
+
+
+
+
+The URL field in this section serves as the destination URL where the impressions info is going to be sent in case impressions are collected within this campaign. Add the Impression forwarding URL only if your traffic channel supports this option. 
+
+
+
+
+
+
+
+
+
+Email to support@redtrack.io for assistance with the setup of the throttling feature.
+
+
+
+
+
+
+
+
+4. Once the Campaign is saved go to Tracking links and parameters → choose the tracking method&nbsp;and copy the automatically generated&nbsp;values:
+
+
+
+
+
+
+
+Use the redirect link for the traffic channels that support the redirect method, no-redirect script for your Landing page code, etc. Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions

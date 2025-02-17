@@ -1,0 +1,74 @@
+# January-February 2024
+
+
+➲ 2 new Rt roles were added to the Traffic channel role settings. Added the possibility of filtering data in reports by these roles.
+
+
+
+➲ Auto update costs toggle was made active by default for Facebook, Google Ads, TikTok and Bing.
+
+
+
+➲ Added the possibility of doing a partial search in the Reports.
+
+
+
+➲ Added templates for widespread reports in the Reports tab:
+
+
+
+
+For Affiliates: campaign performance report, data grouped nested campaigns, adsets, ads.
+
+
+
+For Advertisers: campaign performance, website /store cross-campaign performance and unattributed traffic analysis reports. Each report type can be filtered by the relevant data slices.
+
+
+
+
+➲ Implemented solutions for RedTrack clients using Shopify:
+
+
+
+
+Recharge subscriptions
+
+
+
+Other platforms (Appstle, Skio, etc.)
+
+
+
+
+➲ Added the possibility to delete funnel templates.
+
+
+
+➲ Carried out the work on optimising the API cost update in Google.
+
+
+
+➲ New "Hashed placement" roles/macros were added to the following RedTrack instances:
+
+
+
+
+Traffic channel: {rt_placement_hashed} + role RT placementhashed.
+
+
+
+Offer/Website: rt_placement_hashed={rt_placement_hashed}.
+
+
+
+Reports: added grouping by the Rt Placement Hashed parameter.
+
+
+
+
+➲ A Notes column has been added to the set of columns available for generating the Campaigns report.
+
+
+
+➲ RedTrack became integrated with Snapchat via CAPI.

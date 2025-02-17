@@ -1,0 +1,106 @@
+# What is privacy-friendly tracking & analytics in advertising?
+
+For every business owner or marketer, it had to be clear by now that we stepped into a highly privacy-regulated world. 
+
+Those changes touch marketing and analytics tremendously. Therefore, we have to figure out how to perform our job taking into consideration privacy regulations and the way we handle personal data for marketing purposes. 
+
+In this article, we will be unfolding: 
+
+ 	what is privacy-friendly tracking &amp; analytics
+ 	how to find a solution that is compliant with all the regulations
+ 	what are the benefits of relying on privacy alternatives besides compliance with regulations
+ 	how to implement privacy-friendly tracking to be sure that no billion-dollar fines await your business
+
+
+
+Why you should invest in privacy-friendly measurement now 
+Control over the data flow has become one of the most important subjects of the 2020s. We entered a world where we realized how much personal data leaks to the world wide web and how it can damage your privacy &amp; security at times. 
+
+It’s important for both: business owners and individuals. 
+
+To ensure that both parties are able to have their freedoms and also perform their job, privacy regulations stepped in. And even though I believe there has not been a perfect middle ground yet, this train is moving towards a safe &amp; privacy-compliant future. 
+
+Here are some of the acts that ensure that your personal data stays personal, as well as acts that regulate how we advertisers and marketers should be doing our job: 
+
+ 	GDPR (Europe’s General Data Protection Regulation);
+ 	CCPA (California Consumer Privacy Act);
+ 	LGPD (Brazil’s General Personal Data Protection Law).
+
+&nbsp;
+What does privacy-friendly mean in the advertising industry? 
+The main objective of all those restrictions is to keep personal data private and out of use for corporations.
+
+You should know here about two notions: personal data and PII (personally identifiable information). 
+
+There is not much difference between those terms, but personal data is broader and more of a "legal" notion used in regulatory acts meaning any sort of data about living creatures.
+PII is the sort of data that can be linked and connected to a very specific human being.
+When we talk about privacy-friendly advertising &amp; marketing, we mean that businesses do not own, store or use personal or PII data in order to achieve their goals. 
+But how do business owners get access to this data? 
+Cookies' role in privacy issues
+Here we can NOT skip the talk about cookies as they (almost) solely are responsible for marketing being not compliant with all those regulations in 2022. 
+
+We have an amazing video describing how cookies work and how they affect privacy, so check it out if you wanna understand this subject better. 
+
+However, cookies store in their bodies this precious personal or PII data that should not be accessed so easily. Therefore, we see all those acts “restricting” the influence of cookies and the requirement to place those huge consent banners on the websites. And this marks the cookieless era — aka the time when rules of the game for advertisers change. However, it's not cookieless per se, it's about the death of third-party cookies and exchange for a "healthier" version — first-party cookies.  
+How industry changed with the arrival of privacy regulations
+Not only the fear of huge fines should be bothering you in the times of privacy-regulated marketing.
+
+In fact, it's not us mere advertisers that have to follow regulations in the first place, it's big advertising networks and channels whose primary revenue was relying on you investing in paid ads through them: Apple, Facebook, Google, etc.
+
+These are the changes with those giants in the past 2 years:
+
+ 	Apple introduced an ATT prompt requiring people to consent to in-app tracking
+ 	Facebook introduced Facebook Conversion API as a first-party data alternative since Apple ATT prompt limited the data flow from iOS devices
+ 	Google announced a privacy-oriented initiative called "Google Privacy Sandbox" which targets to change the whole ecosystem towards the extinction of third-party cookies and prioritization of personal data importance.
+
+Those changes influenced the performance you get through your day-to-day advertising strategies, and influenced the results that you have when spending the exact same budget on ads. Therefore, privacy regulations are not harmful for advertising only because of the threat of law suits, but rather it's a complex problem for the whole industry.
+
+Therefore, privacy-friendly advertising means that you follow everything prescribed by regulatory acts and do not use personal data from cookies without the consent of users. 
+Privacy-friendly tracking &amp; analytics is built on first-party data which is being obtained directly, with users’ consent. 
+Let’s go over the prerequisites for privacy-friendly tracking &amp; analytics
+If you don’t wanna get impossible fines for breaking the “privacy” rules, you have to invest in privacy-friendly analytics. Not only it is a legal way to do business, but it also ensures a better performance. 
+
+Here is the list of qualities that will help you identify that you are tracking marketing performance in a privacy-compliant manner:
+1. Usage of first-party data through first-party cookies
+When looking for the solution for tracking &amp; analytics, be sure to see that it uses first-party data and does not rely on third-party cookies. Usage of third-party cookies is a sure way to “get caught” by regulations like GDPR. 
+
+When we say using first-party cookies, it means that all the data is stored on your website and accessed via secure tracking technologies through API integrations directly from your website. The data is not openly stored or shared in any other way.
+2. Your solution does not openly store PII data and uses data hashing
+PII (personally identifiable information) should not be openly stored when it comes to privacy-compliant solutions. For example, in the case of RedTrack (an all-in-one marketing analytics solution), we hash the PII data on the flow.
+To hash personal data means to substitute part of the symbols with the code and make personal data non-human-readable.
+So RedTrack "codes" part of the PII data (like email, phone number, etc.) while sending it to the RedTrack's system, and our platform does not receive any human-readable personal data.
+3. You are in control over the exchange of the data between systems 
+When choosing your privacy-compliant solution, you have to be sure that it does not exchange any of the data it receives with other companies and that you are the only full owner of the data. You are the only person who can initiate the exchange and stop it at any time.
+
+For example, any of the API integrations you connect to your stack (whether it's Facebook, Google or affiliate network), you are in control of this integration and how the data is being processed and you can disconnect those tools at any time.
+4. You have access to data logs 
+One of the sure methods to check your solution for the privacy compliance is access to data logs. It's a special tab in your tracking software that gives you a glance at all the conversions, clicks, and other pieces of data in one place.
+
+Here's an example of conversion logs in RedTrack's platform.
+
+
+
+But data logs are not only a great way to distinguish a privacy-compliant tracking tool. It's also a handy way to control your performance and test if everything is correctly set up. Through data logs, you can access every single conversion or click that happened to your ads, which gives you total control over your performance.
+5. You can delete or request the removal of data at any time
+And lastly, you should be able to delete or request to delete any of the personal data at any time with your solution. Better to find out the opportunity to do so in advance.
+A privacy-compliant marketing analytics solution
+One of the biggest missions that our team at RedTrack had is to build a future-proof tool that would be acting like a lifeline for marketers at times of privacy turbulence.
+
+Catching the trend of "cookieless" future back in 2017 we started building what RedTrack is now — a privacy-compliant and secure solution for marketing analytics.
+Now RedTrack can perform the following activities without any breach of data compliance:
+
+ 	Ad tracking: track the performance of all PPC (paid ads) campaigns you run and analyze it in-depth;
+ 	Conversion attribution: find out which channel contributes more towards the expected result;
+ 	Marketing automation: find out best-performing offers or creatives and automatically send traffic there;
+ 	Partnership Portal: launch your affiliate program or referral program, also manage influencer marketing.
+
+At RedTrack we make sure that all the data is stored in first-party cookies and is not passed to any third-party systems. You are the only data owner and you have full control over all the data that RedTrack collects for you: you can request to delete it at any time.
+
+All of the integrations that we run with RedTrack (like Facebook Conversion API or Google API) have an in-built hashing process when the information gets into a non-human-readable form before it reaches RedTrack.
+
+Also, RedTrack hides the last 3 digits of all the API addresses while processing and before sending it to the database.
+
+Besides all the obvious compliance benefits, RedTrack gives you an opportunity to optimize your advertising according to the accurate conversion data that you track and get better performance results.
+
+Make every single dollar invested in marketing work for you, not against you.
+

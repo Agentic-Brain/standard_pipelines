@@ -1,0 +1,143 @@
+# 5 ways to automate your campaigns: Overview of Advanced Automation by RedTrack
+
+2022 was the year of amazing features here at RedTrack. But ofc, the release of our Advanced Automation has absolutely stolen the show. It's THE solution for automation, scaling, and reduction of tedious and manual media-buying jobs.
+So today, let's go over all the possibilities to scale your revenue in 2023 with the use of the Automation toolset by RedTrack. In this article, we will talk about:
+
+ 	What are cost updates, and how can help cut ad waste, as well as scale ROI;
+ 	Use cases of Automated Rules by RedTrack;
+ 	How to use automation by RedTrack;
+ 	And 5 examples of Ruled you can apply now!
+
+Let's start this year with crazy profits together with RedTrack!
+What is Advanced Automation By RedTrack?
+We have implemented a new segment of the RedTrack platform — Advanced Automation. It is meant to cut your manual work with the use of our algorithms and give your the opportunity to focus on creating more.
+While RedTrack will be cutting non-performing ads, scaling the best ones, or scheduling ads upon your needs.
+
+There are various types of Rules we are implementing to the platform:
+Pause &amp; Restart Rules
+This set of Rules is here for you to test your strategies! You can easily pause campaigns, ad sets, or ads that are underperforming in a certain span of time. 
+
+If you choose Pause &amp; Restart Rule action, your campaigns will also automatically reactivate if additional conversion data has been received and the KPI is met!
+Scale Rules
+This set is here for you to scale revenue. You can change budgets, bids, or duplicate ads that bring the biggest profits. 
+
+You can also use this rule in reverse and decrease the budget if the campaign is losing its traffic.
+Manual campaign management
+This one is for all of you, marketers, who are tired of jumping between the tabs, but still want more manual control over your campaigns. If you notice some issues with one your Facebook campaigns, you can pause it directly from the RedTrack interface! 
+
+This Rule currently works just for Facebook, but TikTok and other platforms are coming soon! 
+Schedule Rules (coming later in 2023)
+And a special rule to help you schedule your ads ahead of time, or to run them to run only at a certain time of the day! Will be released later in 2023.
+Campaigns' Cost Updates: Why is it so important for advertising automation?
+Costs are important for several reasons:
+
+ 	It's important to have data about all of the costs of your paid campaigns in one place so you can track how much you spend in total. You will also be able to track each ad channel, campaign, and ad set efficiency in a centralized way without a need to create reports via third-party solutions or jump between the tabs of Ads Managers.
+ 	It's the most crucial value that your ad tracking solution should be pulling to calculate returns: ROI and ROAS
+ 	And finally, the costs of the campaigns is probably the most important variable for the automation of your paid campaigns.
+
+How can you receive cost updates for your campaign?
+For that, your tracker or analytics solution is required to have an API-based integration with the needed channel. 
+For example, RedTrack can receive cost updates via API integration with these channels (and still counting): Facebook Ads, Google Ads, TikTok Ads, Revcontent, Bing Ads, Exoclick, Outbrain, Richpush, Taboola, Traffic Junky, Zeropark, etc. 
+Importance of cost updates for advertisers
+How do you know which campaigns or ads bring your dollars back as ROI? Here the cost update feature comes really handy. Without consistent cost updates, we don't know the actual and timely ROI of every campaign, ad set, or ad.
+Let's remember the marketing ROI calculation:
+mROI = (Sales revenue – Marketing Cost)/Marketing Cost
+If your ad channels (Facebook, Google, TikTok Ads &amp; others) show the costs of the campaigns more or less instantly in the according ads managers, the actual conversions data takes days to be calculated for your ads.
+That means that in order to get accurate ROI, you need close to real-time cost and conversion data. RedTrack helps get this data in real-time, in a single interface.
+
+Whether you are automating your performance with Rules or not, cost updates is still a crucial number to take charge of. To understand that, we need to make a simple example.
+Let's think of the number you spend on ads a month.
+
+Let's say it's $100k of ad spend each month.
+
+That means that every day you spend approximately $3500. It’s $150 per hour. It means that every single hour you can either take this $150 and turn into revenue, or just spend it = waste it. With timely cost updates, you can make decisions about stopping certain campaigns or scaling if it’s needed on the spot. 
+
+And without timely updates, you might be losing ad budget and now even realizing it. 
+
+Attribution on Facebook / Google / TikTok takes up to 72 hours (or up to $450 of your budget in uncertainty). 
+
+While RedTrack offers 30-min updates by default, and you can customize it to 15 or 5-min costs &amp; rules updates. That means that at least every 30-min we help you either to cut ad waste or to scale best-performing ads! 
+
+If you want real revenue, delays are the worst enemy of the media buyer. With RedTrack, you can forget about late decisions!
+How to choose the frequency of your campaigns' cost updates?
+This is a common question from advertisers: "What's the benefit of 15 or 5-min automation frequency over the standard 30-min option?".
+
+Here we can circle back to the value of your ad spend. The bigger your daily ad spend is, the more money you possibly might lose because your ad is not-performing. Or the more revenue you can get because the algorithm finds a rocking ad instantly and scales it. 
+
+Generally, we recommend for those with more than $10,000 daily ad spend to invest at least in 15-min frequency for cost updates and automated rules. 
+
+And for those with over $50,000 daily ad spend — a 5-min frequency would be a must.
+How to use Automated Rules by RedTrack
+Let’s start with a general understanding about setting up automated rules with the use of RedTrack. As for now, you can automate Facebook (Meta) Ads, TikTok Ads, and Google Ads, even though we are working on increasing the list of channels you can automate. 
+
+When you want to set up a rule in RedTrack, you need to set up a campaign within RedTrack. 
+
+A single campaign in RedTrack can help you automate either a corresponding campaign in Facebook / Google / TikTok or you can automate multiple campaigns at once. You can also choose to automate all existing campaigns in RedTrack and the rules will apply to everything we have in RT. 
+Depth of Rules in RedTrack 
+The rules you set up in RedTrack will help you automate your ads either on the campaign level, either on the ad set level, or even on the creative / ad level. This gives plenty of space for experiments and even more precise optimization of your campaigns. 
+KPIs you can use with RedTrack’s Automation
+Another important part of Automation Extension by RedTrack is flexibility and the variety of metrics you can use to set up KPIs for automation. 
+RedTrack supports a custom metrics model — meaning you can invent any KPIs you want. Here’s a list of some of the most common metrics you can optimize with:
+
+ 	Clicks;
+ 	Conversions;
+ 	Costs;
+ 	ROI;
+ 	ROAS;
+ 	CPA;
+ 	Price per page visit;
+ 	All conversions (total actions); 
+ 	Sign-ups;
+ 	Add-to-carts;
+ 	Subscriptions;
+ 	Upgrades;
+ 	Downgrades;
+ 	Leads;
+
+When you find the rights metrics and events to use for optimization, you can put them into a simple equation for automation! We will have more automation scenarios with examples below in this article. 
+
+Another cool addition, you can set multiple conditions for a single rule for better optimization. Basically, you can go as deep as you want in the process of automation to decipher your best-performing offers. 
+Use cases of automation by RedTrack 
+Since RedTrack combines a tracking &amp; analytics platform with an automation toolset, you can use RedTrack as a single control center for your ads. 
+Our hyper-accurate tracking will ensure the collection of real-time data about the performance of all your campaigns across various channels. As a result, you will have all the most important data sets under one roof. 
+
+And as the next step, you can optimize your performance according to the data RedTrack collected on the same platform.  RedTrack becomes a software that helps you: 
+
+ 	Test your creatives: simply set KPIs to test your ads during the first 3 days after the launch to help you sort out winning creatives. 
+ 	Control costs spike: you can be notified when one of your campaigns or creatives rises in costs to not waste any ad budget! 
+ 	Optimize your campaigns instantly without the delays of sending reports to another solution that could use it for automation. 
+ 	Manual campaign management from RedTrack interface: and one more step towards eliminating jumping between the tabs! If you invest in automation by RedTrack, you can also pause or resume your FB / TikTok campaigns straight from RT interface!
+
+5 Automated Rules to use in your next campaign
+And now let’s look at the favorite Rules combinations our clients love to use in reality! We will include screenshots from the interface for your convenience! 
+1. Pause ad if X$ spent and below X ROAS  
+Probably the easiest way to eliminate ad waste is to pause ads that don’t bring the right ROAS. When it comes to understanding what numbers to use for this Rule, you have to rely on your business figures. 
+
+What we would recommend is the following: 
+
+Pause the ad if $500 spent and ROAS is &lt; 200%. 
+Take a look at how it works from RedTrack!
+
+2. If ROI &gt;X%, increase budget X times
+This is an example of one of our scale rules: you can easily scale the budget for the best-performing campaign to increase returns! 
+
+Again a recommendation from us would be: If ROI &gt; 400%, increase the budget by 50%. 
+
+Don’t forget that whenever a certain rule is triggered and applied, you can also receive notifications about all the actions: simply choose your notification option during the rule setup.
+
+
+3. If CPA is &gt;X, pause the ad
+This example also works perfectly for cases of testing new campaigns. Your ads will be paused if they don’t reach a certain CPA KPI. 
+
+Keep in mind, that if you choose as an action not just Pause, but Pause &amp; Restart rule, your campaigns can be reactivated if additional conversions appear and improve the CPA metric! 
+4. If ROAS is &lt;X%, decrease the budget X times
+And sometimes, you need to save your budget. With RedTrack you can easily do so with a custom rule. This functionality allows you to do bidding for your campaigns within RedTrack interface!
+5. Send an email (notification) if costs are &gt; X$
+And last but not least, it’s nice to stay updated about the status of your campaigns. You can set the most important spikes (like increases in costs, or decrease in the number of conversions) in a notification! It can be sent to your email, or via the webhook you set!
+
+
+Final words
+We hope that this article brought a bit more clarity to the world of automation. Please, be sure to stay ahead of your competition and optimize with the use of the latest technologies. In our field, it’s extremely important to make every dollar count! 
+
+If you need a tool to help you figure out automation, be sure to book a demo with RedTrack to see how we can help you scale your ROI!
+

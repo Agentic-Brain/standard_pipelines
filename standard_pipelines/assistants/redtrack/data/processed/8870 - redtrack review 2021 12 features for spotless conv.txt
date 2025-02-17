@@ -1,0 +1,97 @@
+# RedTrack Review 2021: 12 features for spotless conversion tracking & attribution
+
+This was both: a fruitful and challenging year for marketers. The same goes for RedTrack. We had to face every challenge the industry has thrown our way, but I guess we responded in a way that can amaze any marketer.
+
+Without long introductions, meet the best 12 features our team developed this year to make sure RedTack backs you up in any ad tracking &amp; conversion attribution adventure.
+
+Even if the privacy updates winds are blowing your way.
+2021 Takeaways
+I must say, it was really hard to choose these 12 features as top inventions of 2021, as we did much more. But guess what, it's not only about the features.
+
+RedTrack grew its team and now we work from 10 locations being fully remote, but still finding power to connect no matter what.
+
+Few facts about our achievements as a team this year:
+
+ 	We had our first offline team-building, gathering people from 10 locations, check the video about our amazing remote team here.
+ 	Forbes featuring RedTrack! It was our first, but definitely not last.
+ 	We tracked more than 36 billion events 😳
+ 	Crozdesk named RedTrack users the happiest
+
+1. Attribution &amp; Fingerprint Reporting
+
+
+&nbsp;
+
+In January RedTrack introduced attribution reporting. Now you are able to build cross-campaign reports by choosing the attribution mode. RedTrack is capturing the first click (the first interaction of the user with your advertisement), the last click (last interaction before the conversion), and also all the assisted clicks (basically everything that happens in between).
+
+&nbsp;
+With the use of attribution you as a marketer gain ability to look at reports at different angles, play around with the statistics and choose what kind of interactions play the biggest role for your business.
+
+2. Facebook Conversion API support 
+
+
+Back in January, we faced the biggest hit of 2021 in terms of advertising. iOS 14 influenced Facebook and Facebook Conversion API changed conversion tracking &amp; attribution on FB. 
+As always, RedTrack reacts instantaneously. In February we released the first version of our FB CAPI integration which kept getting improved throughout the year to make sure you can successfully track all of the conversions coming from this advertising channel. 
+3. Auto-optimization 2.0 
+Imagine running a couple of offers or even funnels with various publishers, it’s hard to keep track of all of them, analyze the stats and control the performance.
+Here comes the improved auto-optimization by RedTrack that analyzes all of your offers and landers, and can distribute traffic to the best performing combinations. 
+
+Rumor has it that it’s one of the best automation in the industry, but I guess you have to see it for yourself 😉
+4. Frequency and Cost Updates for Facebook CAPI
+In April we improved the frequency for Facebook CAPI down to 5 minutes (depending on the subscription plan you have) and also made available cost updates on different levels: campaign, ad set, or ad. 
+If you are spending huge budgets on FB advertising, this is a must-have set of features.
+
+Both of these features were heavily requested in our Facebook community where we help marketers make their way through FB Ads conversion tracking &amp; attribution.
+5. Bing &amp; Google cost update improvements 
+In May we improved our API integrations with two major advertising channels: Google and Bing.
+
+RedTrack introduced cost updates for Bing and cost updates on different levels for Google (the same logic as for Facebook). 
+
+With this update, RedTrack offers high efficiency for all major advertising channels, helping you receive &amp; deliver customized data sets to and from your favorite advertising channels.
+6. Coupon-based tracking
+With this feature going live we unlocked plenty of opportunities for those investing in influencer marketing. 
+
+If you missed this news, RedTrack has a Partnership Portal — a place where you can use the power of affiliates, referrals, and influencers for your marketing.
+
+
+Now as a RedTrack customer you are able to create promo codes, share them with your influencers or partners, and attribute sales and purchases accordingly.
+You can also take a look at the performance of all of your links and promo codes in a single report, which makes it super convenient for analytical tasks.
+7. Customization of the Partnership Portal
+To improve the Partnership Portal mentioned above, we also rolled out few customization tricks.
+
+Sign up and login page customization 
+This allowed you to personalize the experience for your future affiliates signing up for the program, as well as gather more information about their expertise while signing up.
+Email personalization
+Allows establishing warmer relationships with affiliates through personalization of the emails you send out automatically.
+These updates help you out when you decide to collaborate with all sorts of affiliates, influencers, or referrals for your marketing purposes.
+8. Multilevel Marketing (MLM) support 
+Another feature joining the improvement of the Partnership Portal club. Multilevel marketing or MLM is a very requested feature that allows establishing an affiliate program but on several levels of affiliates.
+
+Basically, you can attract several affiliates and you will be earning a percentage of their commissions, as well as the percentage of the commission brought by the affiliates attracted by them... Never-ending cycle of attracting affiliates and being rewarded! Check more details on how it works in this video.
+9. Universal tracking script in UI
+Universal tracking script allows to track all of the conversions coming from multiple sources.
+
+Now generating it is as easy as tracking conversions!
+
+We moved the universal tracking script setting to the UI allowing you to choose all the right modes you need for your tracking within a few clicks (set domain, choose attribution mode, etc.).
+
+By the way, you can find it under the Tools — Scripts.
+10. Cross-browser attribution
+A very important update for those who rely heavily on Facebook Ads as an advertising channel. RedTrack improved its attribution by introducing cross-browser attribution.
+
+So now when the user clicks on your ads and chooses to view them from the other browser, information about this user's click and conversion won't be missed.
+11. Shopify App
+One of the biggest updates of 2021 for RedTrack is the introduction of the Shopify App for better experience tracking conversions for eCommerce. Shopify App from RedTrack is responsible for making accurate conversion count, as well as better attribution.
+
+It also helps to match data between Facebook and Shopify, feeding more information about conversions to FB algorithms and improving optimization and targeting.
+
+More amazing updates for eCommerce are on the way!
+12. TikTok API Integration
+And last but not least, we finally completed our full API integration with TikTok. Now if you choose to advertise with TikTok Ads, RedTrack got your back by collecting data about conversions and costs, also sending it back to the advertising channel.
+
+More updates regarding TikTok integration are coming soon in 2022!
+Take RedTrack to 2022 with you
+If you would like your marketing analytics software to keep improving alongside your business, as well as comply with all changes of the industry. You do need to take RedTrack with you.
+
+If you haven't tried the power of RedTrack yet for your conversion tracking &amp; attribution, feel free to take a demo to learn all the benefits hidden in this smart tool.
+

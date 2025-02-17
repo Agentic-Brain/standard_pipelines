@@ -1,0 +1,212 @@
+# Shopify: adding manual orders
+
+
+Shopify ↔ RedTrack integration for clients wishing to have the data by manual orders presupposes extra settings in addition to the standard&nbsp;integration workflow. For this setup to work you should:
+
+
+
+
+Integrate Shopify with RedTrack.
+
+
+
+Create a custom clickid in RedTrack.
+
+
+
+Add the created custom clickid to Shopify.
+
+
+
+
+Setup explained
+
+
+
+
+
+Follow&nbsp;this article&nbsp;to integrate Shopify with RedTrack.
+
+
+
+Without following the standard workflow for Shopify ↔ RedTrack integration first, custom clickid setup for counting manual orders won’t work.
+
+
+
+
+
+1. Create a new Campaign for manual orders to track them, record the click and get the clickid:
+
+
+
+
+
+
+
+2. Record the click and get the clickid. To do that go to the list of your Campaigns → find the campaign created within step 1→ copy the campaign’s link → open this link in another tab to create a click:
+
+
+
+
+
+
+
+3. Go to Logs → Clicks → copy the Click ID value next to the Campaign created within step 1:
+
+
+
+
+
+
+
+
+
+Manual orders in Shopify can be added via the app called Metafields Guru. If you don’t have it already, download the Metafields Guru app in your Shopify account.
+
+
+
+1. In your Shopify account go to Apps → Metafields Guru:
+
+
+
+
+
+
+
+2. Further settings for manual orders in Shopify will differ depending on the subscription type of the downloaded app: free subscription or paid subscription:
+
+
+
+
+
+1. In the Metafields Guru app → Shop:
+
+
+
+
+
+
+
+2. Create metafield → choose A Single line text from the drop-down:
+
+
+
+
+
+
+
+3. Fill in the mandatory fields → Save the changes:
+
+
+
+Values to be inserted:Namespace=redtrack Key=clickid Value= the Click ID value you copied in RedTrack (Setup in RedTrack → step 3)
+
+
+
+
+
+
+
+4. Create your order and add a “manual order” Tag to link this order with the added clickid. To do that:
+
+
+
+4.1 On the main Shopify menu go to the section Orders → Create order:
+
+
+
+
+
+
+
+4.2 Fill in all the mandatory fields in the form → scroll down to the end of the form and add the manual order tag to the Tags field → Save:
+
+
+
+
+
+
+
+If you forgot to add a tag when creating an order, you shouldn’t just edit the already existing order by adding the Tag, but instead, follow this workflow:1. Delete all items from the order and save them.2. Add the deleted items again and save them.3. Add the tag to the order.
+
+
+
+
+
+1. In the Metafields Guru app → Shop:
+
+
+
+
+
+
+
+2. Metafield sets → choose Shop option from the drop-down→ Create set:
+
+
+
+
+
+
+
+3. Put Redtrack in the Label field → press Create:
+
+
+
+
+
+
+
+4. Fill in the mandatory fields → Save:
+
+
+
+Values to be inserted:Label=Click id Namespace=redtrackKey=clickid
+
+
+
+
+
+
+
+5. Get back to the main page of the Metafields Guru app → Shop 
+
+
+
+
+
+
+
+6. Go to the tab Redtrack and insert the Click ID value you copied from RedTrack (Setup in RedTrack → step 3) → Save:
+
+
+
+
+
+
+
+7. Create your order and add a “manual order” Tag to link this order with the added clickid. To do that:
+
+
+
+7.1 On the main Shopify menu go to the section Orders → Create order:
+
+
+
+
+
+
+
+7.2 Fill in all the mandatory fields in the form → scroll down to the end of the form and add the manual order tag to the Tags field → Save:
+
+
+
+
+
+
+
+If you forgot to add a tag when creating an order, you shouldn’t just edit the already existing order by adding the Tag, but instead, follow this workflow:1. Delete all items from the order and save them.2. Add the deleted items again and save them.3. Add the tag to the order.
+
+
+
+

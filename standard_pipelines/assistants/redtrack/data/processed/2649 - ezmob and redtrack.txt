@@ -1,0 +1,116 @@
+# EZmob and RedTrack
+
+
+
+
+
+
+EZmob is a self-serve advertising network, which provides monetization for website owners and SSPs and enables advertisers, agencies, and app developers with access to over 1 Billion users.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types you're planning to work with
+
+
+
+
+
+
+1. Add EZmob as a Traffic channel in RedTrack
+
+
+
+In your RedTrack account go to Traffic channels → New from template → find EZmob → Add → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+2. Set up a campaign in RedTrack with the EZmob traffic channel.
+
+
+
+Campaigns → Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create your campaign with EZmob as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL:
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+3. Set up the tracking on the EZmob side.
+
+
+
+In your EZmob account click Manage Campaigns → set up your campaign in EZmob → place the tracking URL from RedTrack (copied in step 2) into the Destination URL field:
+
+
+
+
+
+
+
+
+
+
+
+4. Copy the S2S Postback URL from EZmob.
+
+
+
+In order to see conversions on your dashboard and help you optimize your campaign you need to set up conversion tracking. Tracking is made by placing the S2S postback URL from EZmob into the "S2S postback" field in RedTrack. A postback is unique for each advertiser. To find it in your EZmob account go to Profile → copy the Postback URL: 
+
+
+
+
+
+
+
+5. Set up the postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 2) → scroll down to&nbsp;S2S Postback for EZmob → Add → paste the Postback URL (copied in step 4 ) → check if all the needed values for the&nbsp;tokens are in place → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+

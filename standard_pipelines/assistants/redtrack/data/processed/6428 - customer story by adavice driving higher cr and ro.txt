@@ -1,0 +1,83 @@
+# Customer story by Adavice: Driving higher CR and ROI with RedTrack ad tracker
+
+Adavice | International Ad Agency | 7 years of experience 
+
+Adavice is an international ad agency with a strong focus on mobile ads platform technology. The company was founded in 2012 and since then they've provided not just the traffic, but marketing services and their own in-house DSPs. Today, as they call themselves, they are a one-stop-shop for advertisers with offices in Eastern and Southern Europe and Asia. Their great experience, in-house tools, and extensive knowledge in global media buying let them strive in difficult times and show high results to their customers.
+
+Challenge
+It's hard to be profitable in any business if you don’t understand how to analyze your results. The good thing about digital marketing is that everything can be measured. A quality ad tracking solution makes it possible for companies to get all the right data in one place and helps to turn insights into actions. 
+
+The Adavice team's day starts with a review of the previous day's reports. They check all the metrics of user activity in order to:
+1. understand the current results they have,
+2. improve future metrics and bring the current results closer to the final clients' needs.
+
+We are working on bringing the highest possible results to our advertisers every day . We make hundreds of tests on different levels: creatives, pre-landers, landing pages, devices, etc, in order to find the best converting model. Such tests require us to set up a bunch of test campaigns, and resources to structure and analyze data at different angles.
+
+
+&nbsp;
+Olga Yakimaha,
+Head of Supply Department,
+Adavice
+
+Solution
+Before choosing RedTrack, Adavice team has tried different ad tracking solutions. But the bigger the agency becomes, the more requirements they have for the ad tracker. In the end, Adavice came to the conclusion that it needs a reliable solution, that can handle a large amount of data from different traffic sources, on one hand, and optimize all the activities related to its processing, on the other hand. That's why they came to RedTrack.io.
+We do a lot of testing in order to find the best solution for our clients. Proper testing always implies working with a large amount of data from different sources. Without an ad tracker, it just took too much time for our team to structure, analyze, and visualize all the data. Before we found RedTrack, we’ve worked with several ad tracking systems, where we needed to create our own reports. So, there was still a lot of manual work, which isn’t what we were looking for.
+
+&nbsp;
+
+RedTrack tracking and automation features along with convenient reports made it much easier for us to make things done and gain valuable insights and trends with less efforts. All this has certainly had a positive impact on our operational efficiency as well as the quality of services we provide to our clients.
+Among the generic reasons why Adavice has chosen RedTrack:
+1. the ability to cover the whole range of tracking needs;
+2. responsive support team which is always ready to help solve issues in a fast and friendly way,
+3. reasonable pricing, which is based on usage.
+&nbsp;
+Why RedTrack.io?
+
+
+Adavice rolled out the RedTrack platform in phases. First, they experienced all the benefits of RedTrack ad tracking features and extensive drill-down reports. Over time, they moved on to RedTrack optimization features that help clients in 107 countries manage their traffic and teams in the most effective way. Among key RedTrack benefits, Adavice team has identified the following:
+- All data in one place
+With RedTrack we have all advertiser and publisher stats in one place. On the one hand, It’s very comfortable, as you don't need to go back and forth between different sources. On the other hand, it significantly reduces the chance of data loss and its misinterpretation. With all this, our team can focus more on ad strategy optimization and generating fresh ideas.
+- Advanced A/B testing 
+Experimenting with different headlines, images, CTAs, landing pages, and pre-landers helps Adavice to find the best combinations. They use RedTrack to:
+
+
+ 	set-up simple and complex A/B tests in a very short time to find the winning combination,
+ 	rotate several offers assigned to one landing page click URL,
+ 	run multiple offer URLs simultaneously.
+
+- Google Ads tracking
+Google Ads is one of the main Traffic Sources Adavice use to help their clients reach their goals. For each case, they have a unique tracking method that allows them to track clicks, impressions, and conversions, depending on the specific situation:
+
+ 	Parallel Tracking when using redirects,
+ 	Direct Traffic Tracking, while sending Google Ads Traffic directly to landing page from one Traffic Source,
+ 	Multiple Direct Traffic Source, while sending Traffic from multiple Traffic Sources. It simply allows to have your organic and paid traffic stats all in one place.
+
+Learn more: How Google Ads Traffic Tracking works.
+- Multiaccess
+RedTrack feature that came in handy during forced remote work period in times of COVID-19 pandemic is Multi-access feature. It allows users to work on advertising projects together effectively regardless of their location. An admin can invite team members involved in the project and specify the role for each one of them by limiting and giving access to specific RedTrack functionality.
+
+
+We have 2 teams working on advertisers quality. And it is very convenient to give each team appropriate access to the stats, omitting some permissions according to each member responsibility.
+&nbsp;
+
+
+The Result
+With the help of RedTrack ad tracking features, Adavice was able to improve the key metrics of their campaigns and improve the overall performance:
+
+
+
+This is how Adavice could have improved their key performance metrics with the help of a/b tests:
+
+Initially, they started testing a standard landing page with a blue background (A) which had 21% of Conversion Rate and generated ROI of 83%. They switched to a dark background that was more related to their Crypto offer. This change made the time and reaction rates much faster than with the first LP. As you may calculate, this A/B test helped Adavice to increase their personal ROI by 47%.
+
+
+
+
+
+Ad agencies beyond ad tracking:
+COVID-19 and the work of ad agencies:
+The biggest changes that we see today is that advertisers are becoming more cautious and change their business processes according to newly adopted working from home policy. Aviation, travel, restaurants, leisure ads will carry immense consequences and will not be as they were before COVID-19. Major players such as Google and FB are going to lose revenues and shrink parts of their activities (which today mostly rely on the above verticals)
+Learn more: How to win the race in the affiliate marketing industry in 2020, read our new 80+ pages guide to the main Affiliate Marketing Verticals.
+
+Over 100 tips and hacks on driving traffic and increasing the conversion rate in each affiliate marketing vertical, interviews with Top managers of the Top Affiliate Networks and Traffic Sources, case studies, nice bonuses from partners 
+

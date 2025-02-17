@@ -1,0 +1,89 @@
+# Track These 7 Metrics to Grow your E-commerce Business
+
+Looking to measure the success of your social media marketing efforts in growing your e-commerce business? This article breaks down the key social media metrics for e-commerce companies to track. 
+
+For an e-commerce company, social media is a critical tool for building brand awareness, driving traffic, and ultimately, increasing sales. But in the race of creating content, one can lose sight of goals and judge if their efforts are adding value to the business or not. That's where social media content metrics come in.
+
+In this article, we'll discuss the top social media content metrics that e-commerce companies should be tracking, what they mean, and how to use them to improve your social media strategy. 
+
+From engagement rate and click-through rate to conversion rate and social media share of voice, these metrics can help e-commerce companies effectively analyze and optimize their social media content and campaigns. 
+
+Additionally, the article delves into the method of calculating these key metrics for measuring the effectiveness of an influencer campaign, including Return on Ad Spend (ROAS), brand awareness, impressions/views, brand mentions/hashtag use, and clicks. By tracking these key metrics, e-commerce companies can gain valuable insights into their social media marketing efforts and make data-driven decisions to drive business growth. 
+1. Engagement Rate
+The engagement rate measures the level of interaction between your audience and your content. It includes likes, comments, shares, and saves. A high engagement rate means your audience is interested in your content and is more likely to buy from you.
+
+To calculate your engagement rate, divide the total number of engagements by the total number of followers, and multiply by 100 to get a percentage. 
+
+For example, if you have 10,000 followers and your content receives 1,000 likes, 100 comments, and 50 shares, your engagement rate would be:
+
+((1,000 + 100 + 50) / 10,000) x 100 = 11%
+
+It's important to note that the engagement rate can vary depending on the platform and the type of content you're posting. 
+
+For example, Instagram tends to have higher engagement rates than Twitter, and videos often receive more engagement than static images.
+
+To improve your engagement rate, focus on creating content that aligns with the interests of your target audience. Use elements of storytelling (a hook, conflict, and resolution). Try to use titles that create curiosity and resonate with your audience. This could include sharing user-generated content, asking questions, and responding to comments and messages in a timely manner.
+
+2. Impressions
+
+Impressions measure the number of times your content is seen. It's a helpful metric to track to gauge the overall reach of your content.
+
+To calculate your impressions, simply add up the total number of times your content has been displayed. Keep in mind that impressions do not necessarily indicate that someone has engaged with your content, only that it has been seen.
+
+Source                                 
+To increase your impressions, define your ideal customer profile and focus on creating content that is visually appealing to your target group, informative, and shareable. Use hashtags and other strategies to make your content more discoverable, and consider running paid social media campaigns.
+3. Click-Through Rate (CTR)
+Click-through rate measures the number of clicks your content generates. It's an important metric to track because it shows how many people are interested enough in your content to visit your website.
+
+To calculate your CTR, divide the total number of clicks by the total number of impressions (or views), and multiply by 100 to get a percentage. For example, if your content received 10,000 views and 500 clicks, your CTR would be:
+
+(500 / 10,000) x 100 = 5%
+
+A high CTR indicates that your content compels people to know more, and is effective in taking them to the next step. To improve your CTR, consider using strong calls-to-action, optimizing your content for the platform you're using, and opening up a loop at the end so people would like to know more by clicking on links. 
+4. Conversion Rate
+Conversion rate measures the percentage of people who complete a desired action, such as making a purchase or signing up for a newsletter, after clicking through your social media content. To calculate your conversion rate, divide the total number of conversions by the total number of clicks, and multiply by 100 to get a percentage.
+For example, if your content received 500 clicks and 50 conversions (sales), your conversion rate would be:
+
+(50 / 500) x 100 = 10%
+ Source
+
+To improve your conversion rate, make sure your landing pages are optimized for conversions and easy user onboarding, offer clear and compelling calls-to-action, and ensure that your product or service is aligned with your audience's needs and desires.
+
+
+5. Return on Ad Spend (ROAS)
+Return on ad spend measures the revenue generated from paid social media campaigns compared to the cost of those campaigns. This metric can help you determine whether your ad spend is delivering a positive return on investment (ROI).
+
+To calculate your ROAS, divide the revenue generated from your paid social media campaigns by the cost of those campaigns. For example, if your campaigns generated $10,000 in revenue and you spent $1,000 on ads, your ROAS would be:
+
+$10,000 / $1,000 = 10
+
+A ROAS of 10 means that for every dollar you spent on ads, you generated $10 in revenue. To improve your ROAS, focus on targeting the right audience, using compelling ad creative, and continually optimizing your campaigns.
+
+Since we now have a plethora of social media platforms, keeping a track of platform-wise returns is more important now than ever to maximize our efforts on the top-performing platforms and increase the returns. Tracking the customer’s inflow and attributing it to the right channel is the toughest part but once done it helps in cutting costs and scaling the ROI rapidly. 
+6. Social Media Share of Voice (SOV)
+Social media share of voice measures the percentage of conversations and mentions about your brand versus your competitors on social media. By tracking your SOV, you can understand how your brand, as well as your logo design, a key component of your brand, is perceived in the market and how you stack up against your competitors.
+
+
+Source
+
+To calculate your SOV, divide the number of mentions and conversations about your brand by the joint total number of mentions and conversations about your brand and your competitors, and multiply by 100 to get a percentage. 
+
+For example, if there were 100 conversations about your brand and your competitors on social media, and 60 of those conversations were about your brand, your SOV would be:
+
+(60 / 100) x 100 = 60%
+
+A higher SOV generally indicates that your brand is more top-of-mind and more visible than your competitors. To improve your SOV, focus on creating engaging and shareable content that encourages your audience to talk about your brand on social media.
+7. Social Media Referral Traffic
+Social media referral traffic measures the number of website visits that come from social media platforms. This metric can help you determine which social media channels are driving the most traffic to your website.
+
+To track your social media referral traffic, use Google Analytics or another website analytics tool to monitor the source of your website traffic. You can also use UTM codes to track the performance of specific social media campaigns or posts.
+
+To increase your social media referral traffic, focus on creating content that is tailored to each social media platform and encourages users to click through to your website. Use trackable links and calls-to-action to make it easy for users to visit your website.
+Final thoughts
+By tracking these social media content metrics, e-commerce companies can gain valuable insights into the effectiveness of their social media strategy and make data-driven decisions to improve their performance. 
+
+Make sure to regularly review and analyze your metrics, test new content and strategies, and stay up-to-date on the latest social media trends and best practices. Keep an eye on other growing industries’ strategies. 
+
+With the right approach, social media can be a powerful tool for driving growth and increasing revenue for your e-commerce business. If facing issues in figuring out the right social media platform and tracking conversion rate, try Redtrack's free trial to grow your business.
+
+Remember, social media is all about building relationships with your audience and providing value. Doing that means converting the audience into customers.

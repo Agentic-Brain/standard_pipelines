@@ -1,0 +1,100 @@
+# PPCMate and RedTrack
+
+
+
+
+
+
+PPCmate is a self-serve advertising platform, that can offer you your own branded and customized DSP (demand-side platform). They can also provide you with all the tools you may need to run your own successful digital advertising business.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types&nbsp;you’re planning to work with
+
+
+
+
+
+
+1. Add PPCmate template to RedTrack.
+
+
+
+Traffic channels → New from template → find PPCmate → Add → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+2. Set up a campaign in RedTrack with the PPCmate traffic channel.
+
+
+
+Campaigns→ Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create the campaign with PPCmate as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL:
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+3. Set up the tracking on the PPCmate side.
+
+
+
+In your PPCmate account go to Campaigns → choose the traffic type desired → paste the Click URL from RedTrack&nbsp;(copied in&nbsp;step 2) into the Destination URL section:
+
+
+
+
+
+
+
+4. Set up the postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 2) → scroll down to&nbsp;S2S Postback for PPCmate → Add → check if all the needed values for the&nbsp;parameters are in place → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+

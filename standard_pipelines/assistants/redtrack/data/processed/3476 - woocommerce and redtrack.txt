@@ -1,0 +1,238 @@
+# WooCommerce and RedTrack
+
+
+
+
+
+
+
+
+
+
+WooCommerce (WooCom)&nbsp;is a flexible, open-source commerce solution built on WordPress. WooCommerce empowers small and medium businesses to build exactly the store they want and sell online.
+
+
+
+Integrations steps
+
+
+
+
+
+Make sure to have the added сustom tracking domain.
+
+
+
+RedTrack supports plugins for Subscription tracking such as YITH WooCommerce Subscription and official WooCom subscriptions. As for the upsells, RedTrack supports WooFunnels Funnel Builder Pro. For more details on WooCom subscription info click here.
+
+
+
+
+
+1. Create custom conversion events.
+
+
+
+1.1 Before you add the events for WooCom in RedTrack study these 2 categories of WooCom events which can be tracked with RedTrack:
+
+
+
+
+
+1st category includes standard events which will be tracked once these events are&nbsp;added to RT&nbsp;and the WooCom &lt;-&gt; RT integration is done as per this guide. These events are:
+
+
+
+
+ViewContent
+
+
+
+AddToCart
+
+
+
+InitiateCheckout
+
+
+
+Purchase
+
+
+
+
+
+
+2nd category of events are custom ones. They are:
+
+
+
+
+Subscription
+
+
+
+Upsell
+
+
+
+Downsell
+
+
+
+OrderBump
+
+
+
+
+In order to track the events of the 2nd category, in addition to the WooCom plugin you also need to get WordPress (WP) plugins aka funnel builders. These plugins/funnel builders are:&nbsp;One Click Upsell,&nbsp;WooFunnels, and Upsell Order Bump.
+
+
+
+Check out which events can be tracked with each additionally added plugin/funnel builder for WooCom:
+
+
+
+WP type of the plugin/funnel builder for WooComOnce Click UpsellWooFunnelsUpsell Order BumpYITH WooCommerce SubscriptionConversion events, that will be counted when using this plugin typeViewContentViewContentOrder BumpSubscriptionAddToCartAddToCartInitiateCheckoutInitiateCheckoutPurchasePurchaseUpsellUpsellSubscriptionSubscriptionDownsellDownsellOrderBump
+
+
+
+Pay special attention to the following:☛ Although such events as “Subscription” and “Upsell” are tracked 100 % with such additional plugins as “One click upsell”, “WooFunnels” or “YITH WooCommerce Subscription”, in theory, they can also be tracked with any other plugins. That being said, the decision to test other plugins (except for “One click upsell”, “WooFunnels” or “YITH WooCommerce Subscription”) for tracking these events can be a bit risky due to this workflow not being entirely tested and verified.☛ For the “Purchase” event to be tracked in RedTrack, the order must have the status Completed / event marked payment_complete in WooCom.☛There is a difference between Upsell and Downsell:Upsells are products that you recommend instead of the currently viewed product.Downsell offer is the one that you make to your customer after they’ve turned down your initial upsell offer. So if the customer didn’t accept your upsell offer, you can still increase their AOV by offering a downsell:☛ Purchase vs Subscription:If a customer sells subscriptions, his purchases = subscriptions.If the customer sells goods or services, his purchases = purchases.
+
+
+
+
+
+1.2 To add the events in RedTrack go to Tools → Conversion tracking →&nbsp;Conversion types → set the events for WooCommerce. Use this guide to help you with conversion events in RedTrack.
+
+
+
+2. Create a custom&nbsp;Brand.
+
+
+
+Brands → New from scratch → use this guide to help you add your Brand
+
+
+
+The specified title of the shop will correspond to the Brand name. The newly created Brand will serve as a placeholder for the tracking parameters.
+
+
+
+3. To send the PII data for better attribution go to the added Brand settings →&nbsp;Additional parameters&nbsp;→ add the following parameters with the corresponding roles:
+
+
+
+ParameterMacro / TokenName / Description (what you'll see in reports instead of subx)RoleInfo we receive under these parameterseventid{replace}Event IDEvent IDYour order ID or the external ID for the conversionfname{replace}First NameFirst NameCustomer First Name from the orderlname{replace}Last NameLast NameCustomer Last Name from the orderphone{replace}PhonePhoneCustomer phone number from the orderemail{replace}EmailEmailCustomer email from the orderzip{replace}Zip CodeZip CodeCustomer zip code from the ordercontentid{replace}Content IDContent IDsExternal product IDcontent{replace}ContentContentsProduct titlecontenttype{replace}Content CategoryContent CategoryThe type of product
+
+
+
+
+
+
+
+4. Add your&nbsp;Website.
+
+
+
+Websites → New → use this guide to help you add your website
+
+
+
+Once you’ve added your Website, you already have the universal tracking script generated for you automatically. To get it, in your Website form → Scripts → choose WooCommerce from the E-com integrations drop-down → copy the script:
+
+
+
+5. Create a paid traffic campaign.
+
+
+
+The campaign for the unattributed (organic) traffic is already in place. Now you need to create the one for the paid traffic. To do that:
+
+
+
+
+Add the&nbsp;Traffic channel. Most of them have a preset template in RedTrack.
+
+
+
+Launch a campaign&nbsp;for the paid traffic channel. Your website/shop will be the main link added to the traffic channel.
+
+
+
+
+
+
+Check out our video tutorial on how to add the RT plugin for WooCommerce and a universal tracking script to it or continue with the steps below.
+
+
+
+1.&nbsp;Download the&nbsp;RedTrack.io plugin for WooCommerce&nbsp;to your computer:
+
+
+
+
+
+
+
+2. Login into the WordPress admin panel and navigate to the&nbsp;Plugins →&nbsp;Add New Plugin → Upload Plugin:
+
+
+
+
+
+
+
+3. Press Choose file → upload the downloaded&nbsp;RedTrack.io plugin for WooCommerce&nbsp;from your computer → Install Now → Activate Plugin:
+
+
+
+
+
+
+
+
+
+
+
+4. Go to Plugins → Installed Plugins → find the downloaded plugin → press Settings:
+
+
+
+
+
+
+
+5. For the events to be tracked accurately you need to do these 3 actions precisely:
+
+
+
+
+Add the universal tracking script.
+
+
+
+Check the boxes next to the needed events in settings of the added WooCommerce plugin.
+
+
+
+Add the checked events in RedTrack.
+
+
+
+
+Act as per your tracking scenario:
+
+
+
+Events you want to trackActions in WooCom pluginActions in RedTrackStandard Purchase:Purchase (Completed)RedTrack Settings → add universal tracking script to the Script field → check the Purchase (order status Completed) box in the Advanced conversion settings section:Note!Depending on your needs, mark either Purchase (order status Completed) or Purchase (order status Processing). Marking both types of Purchases within this plugin may lead to duplicated conversions under the name Purchase in RedTrack.Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionDownsellOrderBumpStandard Purchase:Purchase (Processing)RedTrack Settings → add universal tracking script to the Script field → check the Purchase (order status Processing) box in the Advanced conversion settings section:Note!Depending on your needs, mark either Purchase (order status Completed) or Purchase (order status Processing). Marking both types of Purchases within this plugin may lead to duplicated conversions under the name Purchase in RedTrack.Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionDownsellOrderBumpAdvanced Purchase:PurchasePurchase with CODRedTrack Settings → add universal tracking script to the Script field → check the Purchase and Purchase with COD (Purchase (Cash on Delivery)) boxes in the Advanced conversion settings section:Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchasePurchase (Cash on Delivery)UpsellSubscriptionDownsellOrderBumpAdvanced Purchase:Purchase with COD (Cash on Delivery)RedTrack Settings → add universal tracking script to the Script field → check the Purchase with COD (Purchase (Cash on Delivery)) box in the Advanced conversion settings section:Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchase (Cash on Delivery)UpsellSubscriptionDownsellOrderBumpAdvanced Purchase:Purchase with COD (Purchase)RedTrack Settings → add universal tracking script to the Script field → check the Purchase with COD (Purchase) box in the Advanced conversion settings section:Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchase UpsellSubscriptionDownsellOrderBumpAdditional conversions:Purchase TAX ShippingRedTrack Settings → add universal tracking script to the Script field → check the Purchase, Tax and Shipping boxes in the Advanced conversion settings section:ExampleProduct $44 + TAX $6 + Shipping $10 = Purchase $60  Events:Purchase = $60TAX = -$6Shipping = -$10Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpTAXShippingAdditional conversions:PurchaseRefund (include TAX andShipping)RedTrack Settings → add universal tracking script to the Script field → check the Purchase and Refund boxes in the Advanced conversion settings section:ExampleProduct $200 + TAX $44 + Shipping $20 = Purchase $264Events:Purchase = $264Refund = -$264Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpRefund Additional conversions:Purchase RefundRedTrack Settings → add universal tracking script to the Script field → check the Purchase and Refund boxes in the Advanced conversion settings section:Example:Product $200 + TAX $44 + Shipping $20 = Purchase $264Events:Purchase = $264Refund = -$200Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpRefundAdditional conversions:Purchase TAX Shipping RefundRedTrack Settings → add universal tracking script to the Script field → check the Purchase, Refund, TAX and Shipping boxes in the Advanced conversion settings section:ExampleProduct $200 + TAX $44 + Shipping $20 = Purchase $264Events:Purchase = $264TAX = -$44Shipping = -$20Refund = -$200Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpTAXShippingRefundAdditional conversions:Purchase Cancelled (include TAX andShipping)RedTrack Settings → add universal tracking script to the Script field → check the Purchase and Cancelled boxes in the Advanced conversion settings section:ExampleProduct $200 + TAX $44 + Shipping $20 = Purchase $264Events:Purchase = $264Cancelled = -$264Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpCancelledAdditional conversions:Purchase CancelledRedTrack Settings → add universal tracking script to the Script field → check the Purchase and Cancelled boxes in the Advanced conversion settings section:Example:Product $200 + TAX $44 + Shipping $20 = Purchase $264Events:Purchase = $264Cancelled = -$200Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpCancelledAdditional conversions:Purchase TAX Shipping CancelledRedTrack Settings → add universal tracking script to the Script field → check the Purchase, TAX, Shipping and Cancelled boxes in the Advanced conversion settings section:ExampleProduct $200 + TAX $44 + Shipping $20 = Purchase $264Events:Purchase = $264TAX = -$44Shipping = -$20Cancelled = -$200Tools → Conversion tracking → Conversion type → add the following events:ViewContentAddToCartInitiateCheckoutPurchaseUpsellSubscriptionRecurringDownsellOrderBumpTAXShippingCancelled
+
+
+
+
+
+(optional) For additional setup within the case where the landing page (aka website) domain and the WooCom shop domain are different domains, click here.
+
+
+
+If you are migrating from the GTM setup, remember to pause tracking tags and postbacks in your GTM.

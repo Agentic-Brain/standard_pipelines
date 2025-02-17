@@ -1,0 +1,369 @@
+# Highlevel and RedTrack
+
+
+
+
+
+
+HighLevel&nbsp;(aka&nbsp;GoHighLevel/ High Level/ GHL) positions as the go-to solution for agencies. It is an all-in-one tech stack for agencies or marketers, eliminating the need for other tools.
+
+
+
+Integration
+
+
+
+
+
+1. Add&nbsp;custom tracking domain.
+
+
+
+2. Set up&nbsp;conversion tracking.
+
+
+
+3. Add your&nbsp;Brand and Website&nbsp;(for Advertisers) /&nbsp;Offer source and Offer&nbsp;(for Affiliates).
+
+
+
+When you add the brand/offer source, in the Additional parameters section remember to add {r} to Macro/Token fields and assign the following roles:- First Name- Last Name- Phone- Email
+
+
+
+4. Create a paid traffic campaign.
+
+
+
+– For Advertisers, the campaign for unattributed (organic) traffic will already be in place once you've added your website.– Affiliates should add the campaign for the unattributed (organic) traffic per this guide.
+
+
+
+To create a campaign for the paid traffic follow these simple steps:
+
+
+
+
+Add the Traffic channel (API integrated traffic channels/Non-API integrated traffic channels). Most of them have a preset template in RedTrack.
+
+
+
+Launch a campaign&nbsp;for the paid traffic channel. Your website/shop will be the main link added to the traffic channel. Be guided by&nbsp;this article&nbsp;for Advertisers /&nbsp;this one&nbsp;for Affiliates.
+
+
+
+
+
+
+1. Add RedTrack Webhook URL to HighLevel. 
+
+
+
+For those who don’t have a Workflows&nbsp;tab, there is a workaround to set it up via the Triggers&nbsp;tab. Act as follows depending on your case:
+
+
+
+
+
+1. Copy the GoHighLevel URL webhook from your RedTrack account.
+
+
+
+RedTrack → Tools → Integrations → Offer sources → copy the GoHighLevel URL webhook:
+
+
+
+
+
+
+
+
+
+
+
+2. Add the copied webhook to HighLevel. 
+
+
+
+2.1 Your HighLevel account → Automation → Workflows → Create Workflow:
+
+
+
+
+
+
+
+2.2 Press "+' → select the action Webhook:
+
+
+
+
+
+
+
+
+
+
+
+2.3 Fill in the mandatory fields → enable the Publish toggle → Save Action: 
+
+
+
+
+
+
+
+Values in the screenshot explained: 
+
+
+
+(1) Method: POST
+
+
+
+(2) URL: paste the GoHighLevel URL webhook from your RedTrack account (copied in step 1)
+
+
+
+(3), (4) In the Custom data section add the following items:
+
+
+
+
+Key: rtclickid, Value: {{contact.rtclickid}}
+
+
+
+Key: convtype, Value: conversion event you added in RedTrack, in our example it's "Purchase".
+
+
+
+
+If the webhook passes the clickid but does not pass the conversion type or the conversion type does not match the types in RedTrack, the conversion will be recorded in RedTrack as the default conversion type.
+
+
+
+(5) Enable the Publish toggle, otherwise, the webhook action will not be triggered.
+
+
+
+(6) Press Save Action to apply the changes.
+
+
+
+
+
+1. In your RedTrack account go to Tools → Integrations → Offer sources → copy the GoHighLevel URL webhook:
+
+
+
+
+
+
+
+
+
+
+
+2. Go to your HighLevel account →&nbsp;Automation → Triggers →&nbsp;Add Trigger:
+
+
+
+
+
+
+
+3. In the pop-up window give your&nbsp;Trigger&nbsp;a name → select the folder you want to put it in →&nbsp;Save:
+
+
+
+
+
+
+
+4. Paste the generated RT webhook URL to the form → select&nbsp;Active:
+
+
+
+
+
+
+
+
+
+2. Set up your funnel.
+
+
+
+Settings are implemented for one funnel and form at a time. Thus, if you want to track several funnels and forms, you need to adjust them separately, since the same settings are not applied to all of them by default. 
+
+
+
+2.1 Sites → choose the needed funnel → edit → Settings → Body tracking code field → paste RT universal tracking script → Save:
+
+
+
+
+
+
+
+
+
+
+
+3. Adjust the Form within the funnel.
+
+
+
+This setup is valid for HighLevel-based forms only. It may not work out for third-party platform forms. 
+
+
+
+Within the already adjusted funnel go to Forms → choose the needed one → edit:
+
+
+
+
+
+
+
+Within the form add the following:
+
+
+
+
+
+1. Styles and Options →  Advanced Settings: 
+
+
+
+
+
+
+
+2. Custom CSS → add the piece of code below → Save:
+
+
+
+input&#91;data-q="rtclickid"] {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+1. Add Form Element → Custom Fields → select Contact from the drop-down → Add:
+
+
+
+
+
+
+
+Single Line → Save:
+
+
+
+
+
+
+
+Fill in the mandatory fields in the popped-up form:
+
+
+
+
+Name: rtclickid
+
+
+
+Placeholder: {clickid}
+
+
+
+Object and Group: Contact
+
+
+
+
+
+
+
+
+2. Drag the created contact element  to the Form → navigate to this element in the form with your mouse → in the settings on your right do the following:
+
+
+
+
+erase the Label name
+
+
+
+make sure Placeholder = {clickid} value and Query Key&nbsp;= rtclickid
+
+
+
+
+
+
+
+
+
+
+1. Add Form Element → Quick Add → drag the Html element to the main Form → navigate to this element in the form with your mouse → Edit HTML: 
+
+
+
+
+
+
+
+2. Add the code below → Yes, Save it → Save the changes to the Form overall:
+
+
+
+&lt;script&gt;
+  // Function to get the value of a specific cookie
+function getCookie(name) {
+    const value = document.cookie;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+// Function to fill the input field and dispatch the event
+function fillInputField() {
+    const cookieValue = getCookie('rtkclickid-store');
+    if (cookieValue) {
+        const inputField = document.querySelector('&#91;data-q="rtclickid"]');
+        if (inputField) {
+            inputField.value = cookieValue;
+
+            // Create and dispatch the input event
+            const event = new Event('input', {
+                bubbles: true,
+                cancelable: true,
+            });
+            inputField.dispatchEvent(event);
+        }
+    }
+}
+
+fillInputField()
+&lt;/script&gt;
+
+
+
+
+
+
+
+It's important that the script element is to be added after the clickid element in the form:
+
+
+
+

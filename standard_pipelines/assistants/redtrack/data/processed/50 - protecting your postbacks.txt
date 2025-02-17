@@ -1,0 +1,64 @@
+# Protecting your postbacks
+
+
+RedTrack developed 2 special features: Postback protection and Whitelist IPs that allow protecting your link from fraudulent conversions in your CPA campaigns.
+
+
+
+To set them up follow the steps below:
+
+
+
+Postback protection
+
+
+
+1. Add your offer source (either from the template or a custom one).
+
+
+
+2. In your Offer source setting enable the Postback protection toggle: 
+
+
+
+
+
+
+
+3. Once you've enabled it, you will see the unique ptoken value is added to the Postback URL template → copy the ptoken value → save changes to the template:
+
+
+
+
+
+
+
+4. In order to work properly, the protected postback URL with the unique ptoken should be obligatorily inserted to the offer source (affiliate network, advertiser) postback settings.
+
+
+
+If this feature is enabled, each conversion will be checked against the uniqueness of "ptoken", in case it does not match, a conversion will be ignored by RedTrack.
+
+
+
+Whitelist IP
+
+
+
+Whitelist IP feature allows to record only certain conversions that came from a certain IP or IP range. To set it up:
+
+
+
+1. Add your offer source (either from the template or a custom one).
+
+
+
+2. Scroll down the template → enable the Whitelist IP toggle → paste the needed IP address → save changes to the template:
+
+
+
+
+
+
+
+Once it's enabled, conversions with different IPs (IP ranges) will be ignored by RedTrack.

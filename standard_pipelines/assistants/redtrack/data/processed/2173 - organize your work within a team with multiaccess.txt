@@ -1,0 +1,49 @@
+# Organize your Work within a Team with MultiAccess
+
+Working on your ad campaigns in team yields much better results. In fact, it often becomes a reason why many affiliates and webmasters start cooperating together and increase the overall ROI cutting down the time and spend costs. 
+
+But how to perform the collaborative work efficiently without the necessity manually download csv. data files, and distribute this information among your team then? You’re going to need a support tool that can help you to collaborate with your team on the campaigns you’re running. Now you’ve got one right here in your RedTrack account. 
+
+Let’s check out our new Multiaccess feature that is now available for all RedTrack users! 
+What is multiaccess in RedTrack? 
+As mentioned above, our new feature is used for collaborating on your advertising campaigns. Now, within your RedTrack profile, you can provide access to your account to other people or use the data from the account that has been shared with you. 
+
+Multiaccess is your ultimate way to separate and share data elements with your team members. Add users to your account and give them different access levels to different data tabs. This, in turn, allows managing the performance of each user in the most transparent and efficient way. 
+When use multiaccess?
+The multiaccess feature comes into play in various cases. For example, if you’re:
+— an affiliate and want to share the performance reports with your publishers to ensure transparency;
+— an agency and prompt your media buying team to collaborate within the master account;
+— an online marketer and collaborate on your ad campaigns with your team.
+Have a different case that is not described above? Share it in our Telegram Community, and we would be happy to feature it with other users.
+How multiaccess works in RedTrack? 
+In order to use the multiuser feature, go to the Settings tab within your RedTrack account and click Multiaccess. You can create a new user, or see the user, you have already invited. 
+
+Important: You can invite only existing RedTrack.io users. You may need to create additional RedTrack.io accounts in order to use this feature.  
+
+
+
+Click “Add new user”, and provide the following information on the member you want to share your data with: 
+— email (the email that a user has already registered in RedTrack system);
+— comment (not obligatory);
+— show financial data — this switch is responsible for the option either show all the financial data to the user or no.
+&nbsp;
+
+Note: Financial data is basically revenue and all the data that is based on revenue, like Profit, ROI, EPC (earnings per click), etc. If you restrict access to financial data, the user won’t see data in these columns in any of the tabs you’ve shared with them.
+— access sections — here you decide what sections of the interface, like Campaigns, Offers, Domains, Landings, Sources, or Networks this user will / won’t be able to access. Give extensive access to information and provide “edit” rules to the user, or restrict their involvement, and limit them to “view” rules only.
+Note: access to such tabs of your RedTrack account as logs and tools, can’t be shared.
+
+&nbsp;
+
+
+
+&nbsp;
+— limit access by Traffic Source — here you can specify what data the user will see on the Traffic Source level. For example, you can provide access to just one particular Source, and the user will see the ad performance data for this Source only.
+
+
+As soon as you invite a new user, they will receive an invitation email. If they accept the invitation, the user is able to switch between their personal account and the shared master account by clicking the multiaccess button.
+
+Check the video for a visual guide on how to use Multiaccess in RedTrack.
+
+Note: The multi-access feature is available for Pro, Agency, and Business customers. With Agency plan you can add 2 more users for free, and Business account allows you to add up to 5 additional users.
+
+Currently, we’re working on enlarging the functionality of Multiaccess in RedTrack, so other helpful updates are ahead. In the meantime, be sure to share your thoughts and suggestions about this feature in RedTrack Telegram Community.

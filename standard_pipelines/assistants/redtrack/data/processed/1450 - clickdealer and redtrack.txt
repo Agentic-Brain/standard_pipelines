@@ -1,0 +1,154 @@
+# Clickdealer and RedTrack
+
+
+
+
+
+
+Clickdealer is a GDM Group company, that provides performance marketing solutions for publishers, advertisers, and agencies worldwide. The company offers a comprehensive range of advertising services to fit any specific set of KPIs for its clients.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events you want to track
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Clickdealer as an Offer source in RedTrack.
+
+
+
+RedTrack → Offer sources → New from template → add Clickdealer template → copy the Postback URL → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up the Postback URL in Clickdealer.
+
+
+
+2.1 In your Clickdealer account go to Tools→ Global postback tab:
+
+
+
+
+
+
+
+2.2 Paste the postback URL into the Global S2S postback URL field and save it:
+
+
+
+
+
+
+
+3. Obtain the Clickdealer offer URL.
+
+
+
+3.1 Open Offers and select the offer you want to promote:
+
+
+
+
+
+
+
+3.2 You will see the offer details. Check the box if you agree to promote this offer and click Apply for offer button:
+
+
+
+
+
+
+
+3.3 Select the traffic type from the drop-down menu and click the Apply button:
+
+
+
+
+
+
+
+3.4 Once your offer is approved, it will become available in My campaigns tab:
+
+
+
+
+
+
+
+3.5 Click on the offer link and scroll down till the Get tracking links block → select the creative for your offer → Copy URL to clipboard:
+
+
+
+
+
+
+
+4. Add Clickdealer offer to RedTrack.
+
+
+
+In your RedTrack account go to Offers → Create new offer → fill in the mandatory fields → add Clickdealer offer link in the URL field → make sure to add the tracking parameters “s2={clickid}” at the end of the offer URL → Save:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create a campaign in RedTrack with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To help you add the campaign refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

@@ -1,0 +1,18 @@
+# 20-Dec
+
+
+ 	Publisher alias instead of publisher id
+ 	Additional tracking parameters for language, browser version, and unixtime
+ 	Save UA + IP + OfferID combination for each click
+ 	New columns settings views
+ 	Multi executions for automated rules
+ 	Facebook cost update frequency increase.
+ 	Consolidated report based on publishers
+ 	Report export fix
+ 	Open cloned object when cloning.
+ 	Multi-currency general improvement
+ 	New Rules: triggers on the conversion amount, spend, LP CTR, and traffic quality (Fraudreport)
+ 	Conversion upload template
+ 	Auto-cost update in RedTrack - one to many campaigns
+ 	Facebook conversion upload baced on the conversion  types
+ 	Proxy type filter

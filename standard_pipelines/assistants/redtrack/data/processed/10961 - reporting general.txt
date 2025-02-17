@@ -1,0 +1,42 @@
+# Reporting: general
+
+
+RedTrack offers multiple reports with quite a detailed data visualization for our customers to optimize their Campaign performance even more.
+
+
+
+These are the reports you have in your account to enjoy all the aspects of data analysis:
+
+
+
+
+Dashboard
+
+
+
+Ads Manager
+
+
+
+Conversion path
+
+
+
+Customer Journey
+
+
+
+Campaigns
+
+
+
+Logs
+
+
+
+Attribution
+
+
+
+
+☛ The data in "Hour of day" is shown based on the time zone set in your account, not the data chosen in the Time timezone filter.To change the time zone in your account go to Settings → General → choose the time zone from the drop-down.☛ The rules used by RedTrack to calculate your data are here.☛ Before you can start checking the reports and see if the data is enough to make decisions, the real traffic should be sent to the campaign, at least a couple of hundred clicks.

@@ -1,0 +1,176 @@
+# Zeropark and RedTrack
+
+
+
+
+
+
+Zeropark is an advertising network specializing in domain and pop traffic.
+
+
+
+RedTrack has an API integration with Zeropark, which gives you the following benefits:
+
+
+
+
+Synchronize costs
+
+
+
+Pause: campaign, placement, creative
+
+
+
+Create automated rules
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types&nbsp;you’re planning to work with
+
+
+
+
+
+
+1. Add Zeropark template to RedTrack.
+
+
+
+Traffic channels → New from template → find Zeropark → Add → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+2.&nbsp; Integrate Zeropark with RedTrack.
+
+
+
+2.1 To get the API key from Zeropark go to My account&nbsp;→ Security&nbsp;→ Add new token → copy the generated token:
+
+
+
+
+
+
+
+
+
+
+
+Important about Zeropark API key:1. Once it's generated write it down somewhere safe, since you will not be able to view it again.2. A general piece of advice from Zeropark: rotate API access tokens at least every 30 days to keep your account safe. When the time comes, just create a new API access token, start using a new one in your application(s), and revoke the old one.
+
+
+
+2.2 Get back to RedTrack → Zeropark traffic channel settings → scroll down to ZeroPark API integration → paste the copied API key from Zeropark → Save changes to the template:
+
+
+
+
+
+
+
+Green Active button means the integration is on:
+
+
+
+3. Set up a campaign in RedTrack with the Zeropark traffic channel.
+
+
+
+Campaigns→ Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create the campaign with Zeropark as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL:
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+4. Set up the tracking on the Zeropark side.
+
+
+
+In your Zeropark account press New Campaign → fill in the needed sections → paste the RedTrack Click URL (from step 3) into the Destination URL field: 
+
+
+
+
+
+
+
+5. Get the Postback URL from Zeropark.
+
+
+
+In your Zeropark campaign settings go to the section Tracking → Postback URL → copy the generated Postback URL:
+
+
+
+
+
+
+
+6. Set up the postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 3) → scroll down to&nbsp;S2S Postback for Zeropark → Add → paste the copied Postback URL and check if all the needed values for the&nbsp;parameters are in place → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+
+
+7. Set up the&nbsp;automation.
+
+
+
+
+Use&nbsp;this guide&nbsp;to help set up&nbsp;rules.
+
+
+
+Use&nbsp;this guide&nbsp;for setting up the&nbsp;auto update cost&nbsp;feature.
+
+
+

@@ -1,0 +1,204 @@
+# Custom domain for tracking
+
+
+Why do you need a custom tracking domain?
+
+
+
+Custom tracking domain&nbsp;is essential for tracking. Such giants as Google, Facebook, or Bing do not accept default tracking domains, thus, using a custom tracking domain prevents your campaigns from being blocked.
+
+
+
+Another good reason is to replace the default dedicated tracking RedTrack domain with something that belongs to you only. 
+
+
+
+Using custom tracking domain helps you to:
+
+
+
+
+control your traffic better;
+
+
+
+protect you from being blocked by the traffic channel;
+
+
+
+have more control over the cases when your custom domain is compromised so you can easily update it to the new one.
+
+
+
+
+The difference between a custom tracking domain (you should add) and a dedicated domain (RT gives you by default) is explained here.
+
+
+
+How to add a custom tracking domain to RedTrack
+
+
+
+
+
+To add the custom tracking domain, you will need to have a purchased domain. It can be obtained from anywhere. Examples of the most commonly used domain registrars are Godaddy, Namecheap, Cloudflare, etc.
+
+
+
+You don't need a separate custom tracking domain for each website/online store/client. It's enough to use one custom tracking domain for all the websites you integrate with RedTrack or use many for each.
+
+
+
+
+
+1. Add a CNAME record in your registrar. Settings will depend on the system you are using. Below are the most commonly used:
+
+
+
+
+
+1.&nbsp;Go to&nbsp;Manage&nbsp;DNS → Add:
+
+
+
+
+
+
+
+2.&nbsp;Fill in the fields → Add record:
+
+
+
+
+
+
+
+Fields explained:✎Type: CNAME✎Name: it can be anything you like. This is the word that will be placed at the beginning of your domain (e.g: mytracking.domain.com)✎Value: your RedTrack dedicated tracking domain here (Tools → Domains → New ):✎TTL: the lowest possible
+
+
+
+
+
+1.&nbsp; Select the domain where you want to add the CNAME record → DNS&nbsp;→ Add record:
+
+
+
+
+
+
+
+2. Fill in the details:
+
+
+
+
+
+
+
+Fields explained:✎Type: CNAME✎Name: it can be anything you like. This is the word that will be placed at the beginning of your domain (e.g: mytracking.domain.com);✎Target: your RedTrack dedicated tracking domain✎Proxy status: DNS only✎TTL: the lowest possible
+
+
+
+ When managing your DNS with Cloudflare, make sure to use the "DNS only" Proxy status instead of "Proxied":If "Proxied" is on, that means the traffic will not go to RedTrack directly but first to the Cloudflare servers. In that case, RedTrack is not responsible for the domain's proper work. Click here to learn more about DNS records management in Cloudflare.
+
+
+
+
+
+1. &nbsp;Domain List → &nbsp;Manage:
+
+
+
+
+
+
+
+2. Advanced DNS&nbsp;→&nbsp;Add new record:
+
+
+
+
+
+
+
+Fill in the needed details:
+
+
+
+
+
+
+
+Fields explained:✎Type: CNAME✎Name: it can be anything you like. This is the word that will be placed at the beginning of your domain (e.g: mytracking.domain.com)✎Value: your RedTrack dedicated tracking domain here (Tools → Domains → New ):✎TTL: the lowest possibleClick here for more info about DNS management via Namecheap.
+
+
+
+
+
+Follow the&nbsp;dedicated Shopify guide.
+
+
+
+
+
+The domain will be updated and ready to use once the data replication is completed. In general, it takes about an hour, but in the case of some registrars, it can take up to 24 hours.
+
+
+
+▸ Make sure there isn't an already created CNAME record for the same host, as it will lead to a conflict.▸ Do not remove the CNAME record from your DNS settings as long as you are using it, as without it, your custom tracking domain won’t work properly.
+
+
+
+2. Once the CNAME record is added, add the custom tracking domain to RedTrack. 
+
+
+
+Tools →&nbsp;Domains →&nbsp;New:
+
+
+
+
+
+
+
+Fill in the fields:
+
+
+
+
+
+
+
+
+(1) URL: sub-domain you have just added to your registrar (example: mytracking.domain.com)
+
+
+
+
+In the example ilona.redtrackfan.club:- ilona is the name you put in your domain registrar in the field “Name”.- redtrackfan.club is the domain you have purchased and for which you added the CNAME.
+
+
+
+
+(2) Root domain: here, you can put the URL visitors will be redirected to in case of a direct entry to the domain URL, or you can leave it blank. 
+
+
+
+
+In case you still decide to put the root domain there, remember to type in https:// in front of it.
+
+
+
+
+(3) Install the SSL: turn on the toggle to enable the free SSL certificate.
+
+
+
+
+RedTrack provides free SSL certificates for all paid clients, where everything can now be done in one click. We are extra cautious about our service, so RedTrack generates certificates using open-source Let’s Encrypt technology, which claims to be free, automated, and open certificate authority (CA) run for the public’s benefit (it is a service provided by the Internet Security Research Group (ISRG)).
+
+
+
+Check out our video tutorial on how to add your custom tracking domain.
+
+

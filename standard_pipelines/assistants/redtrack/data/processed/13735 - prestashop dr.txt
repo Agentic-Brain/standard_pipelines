@@ -1,0 +1,164 @@
+# PrestaShop dr
+
+
+Integration steps
+
+
+
+
+
+1. Add custom tracking domain
+
+
+
+2. Add conversion events
+
+
+
+Go to Tools → Conversion tracking → Conversion type → use this guide to help you add the needed events.
+
+
+
+The full list of Conversion types used with PrestaShop includes:▸ViewContent▸AddToCart▸InitiateCheckout▸Purchase
+
+
+
+3. Add PrestaShop as a Brand in RedTrack
+
+
+
+3.1 Brands → New from scratch → use this guide to help you with Brand editing.
+
+
+
+
+
+
+
+The specified title of the shop will correspond to the Brand’s name.
+
+
+
+3.2 In the Additional parameters section add the needed parameters and assign&nbsp;relevant roles to them:
+
+
+
+
+
+
+
+You are the one to choose the parameters you want to apply for tracking. Here is the full list of supported parameters:eventidemailphonelnamefnamezipcontentidcontenttypecontentbrand
+
+
+
+4. Add your Website 
+
+
+
+Websites → New → use this guide to help you add the website (your offer)
+
+
+
+5. Add the needed Traffic channel
+
+
+
+Traffic channels → use this guide to help you add your source from the template or from scratch
+
+
+
+Follow this link to check out the list of traffic channels integrated with RedTrack / having preset templates.
+
+
+
+6. Create a paid traffic campaign
+
+
+
+The campaign for the unattributed (organic) traffic is already in place. Now you need to create the one for the paid traffic. Follow these simple steps:
+
+
+
+
+Add the&nbsp;Traffic channel. Most of them have a preset template in RedTrack.
+
+
+
+Launch a campaign&nbsp;for the paid Traffic channel. Your website/shop will be the main link added to the traffic channel.
+
+
+
+
+
+
+1. Login to your store in PrestaShop and add RedTrack module/plugin to PrestaShop
+
+
+
+1.1 Navigate to the&nbsp;Modules&nbsp;section → go to&nbsp;Module Manager:
+
+
+
+
+
+
+
+1.2 Press the&nbsp;Upload a module&nbsp;button at the top right corner → drag the&nbsp;RedTrack module&nbsp;to the pop-up drag-and-drop window:
+
+
+
+
+
+
+
+1.3 Once the file is detected, the installation will start automatically:&nbsp;PrestaShop will upload the module from your computer to its server, unpack it, place the files in the correct location, and update the page, all this in a handful of seconds.&nbsp;PrestaShop will then display Module installed!:
+
+
+
+
+
+
+
+Press here to check out more on how to work with modules in PrestaShop.
+
+
+
+2. Add the universal tracking script to PrestaShop and the needed Order Status for Purchase Event
+
+
+
+2.1 Press&nbsp;Configure&nbsp;next to the added RedTrack module → insert the&nbsp;Universal tracking script in the RedTrack Universal Script field:
+
+
+
+
+
+
+
+
+
+
+
+2.2 Choose the needed value from the drop-down of the field&nbsp;Order Status for Purchase Event&nbsp;→ press&nbsp;Save&nbsp;to apply the changes:
+
+
+
+
+
+
+
+You can define what a purchase is and fix it at different stages (e.g.: purchase=paid, or purchase=delivered, or else). You decide it based on the needs and specifics of your business.
+
+
+
+Click here to learn more about managing your store using the PrestaShop platform.
+
+
+
+For additional setup within the case where the domains of the landing page (aka website) and the PrestaShop store are different, click here.
+
+
+
+If you add some orders to your PrestaShop store manually and want them to be displayed in RedTrack, please turn to support@redtrack.io for additional assistance.
+
+

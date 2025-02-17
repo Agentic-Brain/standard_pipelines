@@ -1,0 +1,94 @@
+# How to track TikTok Ads: TikTok Pixel VS Custom Tracking Solution
+
+Since TikTok Ads is running the show in 2022, we as marketers have to find the best way to track this channel. Measuring results of your TikTok advertising campaigns is crucial to control the performance and perform better targeting &amp; optimization.
+
+There are 2 major options when it comes to tracking TikTok Ads: TikTok Pixel or getting a custom tracking solution. In this article, we are going to explore how to track TikTok Ads with both of those methods. What are the benefits and disadvantages of each of them?
+Let's get in this article to find out!
+How to track TikTok Ads performance
+Just like with any paid ads channel, you will have to go through a hassle of a technical setup when figuring out ad tracking. If you start out with small budget, you probably will be good with the TikTok platform for monitoring the performance. But once you are starting to raise your ad costs, the lack of proper tracking of your TikTok advertising campaigns can result in huge losses. 
+
+In order to prevent this, you have to make your choice: TikTok Pixel or a custom tracking solution.
+
+
+TikTok Pixel to track TikTok Ads
+TikTok Pixel is basically same thing as Facebook pixel. It's a piece of code that performs tracking for you and is considered to be client-side tracking (which means usage of third-party cookies). 
+The main benefit of using a TikTok pixel for tracking is that it’s relatively easy to set up. You are able to place the code on your website's "thank you" page and it will do the tracking job for you. Check out official tutorial from TikTok. 
+Advantages of TikTok Pixel:
+
+ 	Conversion tracking: you will be able to track conversions (or sales) coming from TikTok Ads. 
+ 	Optimization. TikTok pixel allows you to improve optimization by feeding the algorithms more data about the users who are more likely to purchase. The more sales your pixel captured — the better goal optimization you may expect. 
+ 	Ability to integrate with partners (like Shopify or WooCommerce).
+ 	Access to custom audiences. When you connect TikTok pixels you get a chance for remarketing activities, creating custom audiences from the data sets that TikTok pixel gathers. For example, you can check where the user drops off the funnel and remarket to this audience later on with a specific ad. 
+ 	Easy setup. If you worked with Facebook Ads before, you won’t find any problem setting up TikTok pixel, the process is very similar. 
+
+However, as mentioned above, TikTok pixel is using third-party cookies and is an example of coookie-based tracking (or client-side tracking).
+
+ We already created a detailed explanation on what's the difference between pixels and server-side tracking solutions, so be sure to check it out. But let's go over a few disadvantages of using TikTok pixel for tracking. 
+TikTok pixel misfires
+
+ 	TikTok pixel can easily get blocked due to the activity of the ad blockers
+ 	TikTok pixel is using third-party cookies and we all know that cookieless advertising future is being forced by Apple, Google, Mozilla, and other major players of the market. Tracking with use of third-party cookies is reaching it's last breath.
+
+Tracking solution for TikTok Ads
+An alternative for TikTok tracking would be using a custom solution from ad tracking software. It can be more complicated when it comes to the setup at the beginning. However, it's more trustworthy and reliable. Especially if your tracker is using only first-party data and server-side tracking (S2S), as we discussed above. 
+
+As S2S tracking works without third-party cookies and is not affected by ad blockers, conversion data will have more accuracy, especially if you have a lot of post-iOS 14 device traffic (those devices have more privacy-related restrictions). It’s a secure, privacy-compliant tracking method, which is crucial when we are talking about the cookieless era of advertising. 
+Benefits of a third-party tracking solution for TikTok Ads
+
+
+ 	Ad tracker will measure TikTok Ads with more accuracy
+ 	It can't get blocked by ad blockers or other events
+ 	Cookieless friendly solution (if you tracker support first-party data)
+ 	Feeds more data to the algorithms (improves optimization and targeting)
+ 	You can get granular reports on your campaigns (learn more datapoints about the performance of your ads, like time, location, device type, etc.)
+ 	Ability to control the costs of your advertising campaigns: the tracker will get the data about ad costs to the report
+
+How to use tracker for TikTok Ads
+When choosing to track TikTok ads with specialized software, the setup process will vary depending on the solution you are using. 
+
+RedTrack is one of the pioneers in TikTok tracking and supports API integration with TikTok and makes tracking process seamless.
+
+Despite the fact that custom tracking solution are more complicated to set up, we have a pretty easy workflow.
+1. Create TikTok pixel
+Yes, everything still starts with a TikTok Pixel. You can use the same guide for TikTok Pixel setup in order to create one. TikTok pixel will be serving as a designated place to store data from TikTok.
+2. Connect your tracker with TikTok
+With RedTrack, it's gonna be as easy as filling in a few fields and pressing "connect" button. You will also need to confirm a few permissions and fill in pixel tokens.
+
+
+3. Create mapping for TikTok
+In order to send conversion data (data about sales, add-to-carts, abandoned carts, etc.) back to TikTok you will need to create mapping. When using RedTrack, you have universal conversion types (see left column on the picture below) for all of your marketing channels (e.g. Facebook, Google, Bing, etc.).
+
+In this part you will have to match RedTrack conversion types with the data you want to send to TikTok for optimization.
+
+
+4. Install universal tracking script
+The universal tracking script is a unique feature that lets you track events on your website from various channels (e.g. TikTok Ads, Facebook Ads, Google Ads, Organic traffic, etc.).
+Once you set up a universal tracking script for your website, you will be able to send data about all the conversions to RedTrack. And then RedTrack will be sending the data you determine to advertising channels (like TikTok, for example).
+
+
+5. Get a custom tracking domain
+Custom tracking domain is a special type of domain used for tracking.
+
+Custom domains are more secure for users, advertising networks and help you avoid being blocked by ad blockers, etc.
+When you use a custom tracking domain, you are making sure your conversion data is accurate and no blocking is gonna happen. It can be slightly confusing in terms of the setup. But good news is that you only have to do it once and this domain will be used for tracking of all your advertising channels/
+
+For more info on custom tracking domains follow this guide.
+6. Launch a campaign on TikTok
+Once all the techy tracking job is done, you are ready to get the TikTok ads running and measured!
+
+
+Why using ad tracker for TikTok ads?
+Besides the accuracy provided by ad trackers for measurement of TikTok ads and getting control over the efficiency of the campaigns, there are a couple other benefits.
+For example, you are able to unite all of your marketing activities in one dashboard. In case of RedTrack, you are able to go deep with reports on each ad channel, each campaign or ad set. You will see the data you wanna see (from clicks to the revenue generated from each particular ad).
+
+That makes it easy to make well-informed decisions about the advertising campaigns and prevents you from losing ad budget on non-performing campaigns or even channels.
+
+
+
+You can start your adventure of getting control over your advertising with a 14-day free trial (no CC required).
+
+We also offer a helping hand in figuring out how to analyze various marketing channels and offer onboarding (if you want to delegate technical setup).
+
+
+Final Words
+Amplify your TikTok advertising campaigns with the right tool for performance management. TikTok pixel or a custom tracking solution, be sure that you are controlling the efficiency of your ads.

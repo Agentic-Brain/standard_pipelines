@@ -1,0 +1,112 @@
+# Conversions: conditional postback
+
+
+What's a conditional postback in RedTrack?
+
+
+
+Conditional postback is a rule you set for sending the conversion data back to your traffic source.
+
+
+
+Some affiliate networks allow tracking several conversion events (sign-up, deposit, pending, approved, lead. etc.) and sending us this data in the postback URL. Or maybe you work with your own website and track different types of events?
+
+
+
+But if you work with CPA campaigns, you might need to send only the paid leads to your source of traffic. At the same time, it might be useful to receive all possible conversion events for a better analysis. In this case, a conditional postback is the best option.
+
+
+
+Conditional postback can be set based on conversion statuses and conversion types:
+
+
+
+Conditional postback is the sort of filtering, so if you choose both conversion status and conversion type at the same time, the postback will be fired only when 2 of those conditions are met.
+
+
+
+How to set up conditional postback?
+
+
+
+
+
+To set a condition to fire the postback only for a certain conversion type act as follows:
+
+
+
+1. Add the needed conversion type(s).
+
+
+
+2. Go to your Campaign edit window → S2S Postback for &lt;your source&gt; section → Add → activate Conditional postback toggle → choose the conversion type → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+
+
+If we do not receive any status data with the conversion, by default, we record all conversions with the status you have set in the offer source/brand settings, which can easily be changed.
+
+
+
+To set a condition to fire the postback only for a certain status condition act as follows:
+
+
+
+1. Set the conversion status in your offer source/brand.
+
+
+
+2. Go to Campaigns → S2S Postback for &lt;your source&gt; section → Add → activate Conditional postback toggle → choose the conversion status →  Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+If chosen, the postback only for the target conversion status will be sent.
+
+
+
+
+
+The same as with the S2S, API integration also allows sending only chosen conversion types to Google, Facebook, TikTok, or Bing. 
+
+
+
+Go to your Campaign → API Integration postback → activate Conditional postback toggle → choose the condition → save the changes:
+
+
+
+
+To add the custom conversion type select it from the Choose conversion types to postback dropdown:
+
+
+
+
+
+
+
+
+
+To add the status, select it from the Postback when conversion statuses dropdown:
+
+
+
+
+
+
+

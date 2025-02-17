@@ -1,0 +1,13 @@
+# 21-Jun
+
+
+ 	Allow using an alias instead of pubid
+ 	Coupon Tracking  for publisher panel
+ 	FaceBook multiple pixel support starting
+ 	Calculate CPA (Default) in the campaign tab
+ 	Publisher panel: custom text and custom e-mails
+ 	Postback to publisher log
+ 	Manual cost update cost by subs
+ 	10 new subs
+ 	New rule for auto-optimization: remove landers and offers with the lowest figures
+ 	Add Integration postback block

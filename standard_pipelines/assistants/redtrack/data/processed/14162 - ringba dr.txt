@@ -1,0 +1,124 @@
+# Ringba dr
+
+
+
+
+
+
+
+
+1. Add&nbsp;your&nbsp;custom tracking domain.
+
+
+
+To add the custom tracking domain, you need to have a purchased domain and add a CNAME record. Refer to this article for details on how to add custom tracking domain in RedTrack.
+
+
+
+2. Add the tracking&nbsp;events
+
+
+
+You need to create 3 custom conversions to track our Pay Per Call campaigns properly:
+
+
+
+
+RAWCall
+
+
+
+AnsweredCall
+
+
+
+ConvertedCall
+
+
+
+
+To add the events in RedTrack go to Tools → Conversion tracking → Conversion type → add the needed types (use this guide to help you in case of questions):
+
+
+
+
+
+
+
+3. Add&nbsp;the Offer source and the required tracking parameters
+
+
+
+To track the Ringba Pay Per Call campaign with&nbsp;Redtrack, you should add&nbsp;Ringba&nbsp;as the offer source in RT. To do that go to Offer sources → New from scratch → name it Ringba → Additional parameters section → add parameters for tracking, like Phone, Zip, callid etc. → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for more info about Offer sources in RedTrack.
+
+
+
+4. Add your Offer to RedTrack
+
+
+
+Offers → New → give your offer a name → select the added Ringba offer source from the drop-down → paste your Offer URL → Save → use this guide to help you with the rest of the Offer template settings:
+
+
+
+
+
+
+
+5. Add the&nbsp;Traffic channel&nbsp;you work with
+
+
+
+6. (Optional) Add the&nbsp;Landing page if you're using one
+
+
+
+7. Generate a&nbsp;universal tracking script
+
+
+
+8. Create&nbsp;a tracking&nbsp;Campaign
+
+
+
+Campaigns → New → use this guide to help you fill in all the mandatory fields:
+
+
+
+
+
+
+
+Values in the screenshot explained:(1) Give your campaign a name(2) Select the Traffic channel you created within step 5(3) Select the custom tracking domain you added within step 1(4) Select the Offer you added within step 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

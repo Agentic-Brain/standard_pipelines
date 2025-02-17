@@ -1,0 +1,48 @@
+# Parameters/UTMs: CTA button
+
+
+What it is
+
+
+
+For affiliate marketers who need to test various complex funnels, RedTrack provides an opportunity to track landing page click parameters in case your strategy includes variations of landing pages when the address of the page (URL) stays the same. This feature will help you identify which variation of your landing page brings more traffic.
+
+
+
+This feature usually works out for the scenario lander → offer.
+
+
+
+How it works
+
+
+
+You should have landing page edit rights to change the CTA button.
+
+
+
+Go to your landing page → edit code → in the CTA button link after the /click insert the parameter (e.g. sub9) and the name of your landing page variation (e.g. variation):
+
+
+
+
+
+
+
+Choose only empty subs which aren't filled in with any parameters. On the screenshot below sub 9 to sub 15 parameters are empty and can be used for that purpose:
+
+
+
+It's called a "variation" only in our example, you can name your landing page variations as you wish and add them in accordance with the quantity. Remember to put the correct signs in the code. Meaning, separate /click with "?", put "=" after subs and separate the parameters with "&amp;".  Example: https://club.rdtk.io/click?sub9=variation1&amp;sub15=variation2
+
+
+
+If you need that additional parameter value to be passed to the affiliate network, they work the same way as the traffic channel subs. Here is more info. 
+
+
+
+Check the results
+
+
+
+These additional parameters are checked the same way as those you receive from the traffic channel. Check out this guide for a more detailed explanation.

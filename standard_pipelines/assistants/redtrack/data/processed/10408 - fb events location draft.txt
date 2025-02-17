@@ -1,0 +1,24 @@
+# FB: events location draft
+
+
+After sending your events (fake warm-up of conversions), verify that Facebook has received them in the overview and breakdown views:
+
+
+
+1. Go to&nbsp;Business Manager&nbsp;-&gt;&nbsp;Data Sources&nbsp;-&gt;&nbsp;Datasets-&gt; choose the needed pixel-&gt; press Open in Event Manager:
+
+
+
+
+
+
+
+
+
+
+
+2. Your events are displayed under the tab Review:
+
+
+
+

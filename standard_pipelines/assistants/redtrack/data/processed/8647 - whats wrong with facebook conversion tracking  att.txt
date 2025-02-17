@@ -1,0 +1,39 @@
+# What’s wrong with Facebook conversion tracking & attribution? 
+
+There’s no need to state again that from the beginning of 2021 Facebook conversion tracking and attribution got messed up. Facebook needing to adapt to cookieless advertising ended up creating a couple of sleepless nights for us, marketers. 
+
+One of the most popular concerns we have witnessed was the increase in Organic conversions which didn’t seem to be just right. That’s because one of the most popular scenarios for after iOS 14 FB conversion tracking has not been paid attention to. 
+
+Let’s find out the reason for this conversion discrepancy. 
+Facebook conversions do not match 
+As a Facebook or Instagram user (on your mobile device), you definitely face the following scenario: 
+You see an ad — click on it — the ad opens through the Facebook mobile version (here it gets uncomfortable) — you open the ad in Safari (or another browser). 
+
+
+In this case, most of the tracking software will recognize conversion coming from this click as organic, as Safari blocks third-party cookie tracking by default. 
+If you witnessed a lot of conversions for your business coming from Organic source and it just didn’t feel right, here’s the answer. You simply lacked cross-browser attribution in your conversion tracking adventure. 
+How to do accurate Facebook conversion attribution? 
+There are a couple of features you’ll need to make sure that your Facebook conversion will satisfy you. 
+1. Support cross-browser attribution
+As we described above, this feature makes it possible to do a correct attribution in the scenarios when click and conversion happen in different browsers. 
+2. First-party data based
+Coming back to the fact that after iOS 14 the game for Facebook has changed, your tool has to rely only on first-party data. Otherwise, the browser will be blocking any tracking activity. 
+3. Raw non-aggregated data 
+We’ve talked about aggregation a lot lately. But in a nutshell, aggregated data is a model of your actual conversions, an average value for every activity that happens to your conversions. On a contrary, if you want to have accurate attribution, you need raw non-aggregated data. This means that you need to have info about every single click and conversion that happens on your website. 
+
+&nbsp;
+Learn all the myths and truths of Facebook conversion tracking &amp; attribution in our latest video!
+
+What is Smart Attribution by RedTrack? 
+
+
+
+In order to cover all of the possible scenarios of your advertising campaigns and to ensure consistent accurate attribution, RedTrack introduced Smart Attribution.
+Smart attribution covers those 3 essential features described above: cross-browser, based on non-aggregated first-party data. 
+This feature makes your Facebook Conversion tracking still possible after Privacy Updates and blockage of third-party cookies.
+
+
+
+If you want to level up your marketing with FB by introducing a smart tool to do conversion tracking &amp; attribution, consider taking on a 14-day free trial at RedTrack.
+If you have more questions about how it all works and how it can benefit your business, book a call with one of our tech team members. 
+

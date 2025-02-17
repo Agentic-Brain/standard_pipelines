@@ -1,0 +1,150 @@
+# Taboola and RedTrack
+
+
+
+
+
+
+
+
+
+
+Taboola is&nbsp;the world's largest discovery platform serving 360 billion content recommendations to over one billion people across the web each month. 
+
+
+
+RedTrack has an API integration with Taboola, which gives you the following benefits:
+
+
+
+
+Synchronize costs
+
+
+
+Pause: campaign, placement, creative
+
+
+
+Create automated rules
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer (if you're an Affiliate)/ Brand and Website (if you're an Advertiser)
+
+
+
+
+
+
+1. Add Taboola template to RedTrack and integrate the two platforms.
+
+
+
+1.1 Traffic channels  → New from template → find Taboola and press Add → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+1.2 In Taboola template scroll down to the section Taboola API integration → fill in the fields Account Id, Client ID, and Client Secret → press Save changes:
+
+
+
+
+
+
+
+Taboola API integration insights:1. In case you have a manager account you must remember that the data for the integration should be taken from the account where your traffic is coming from. Meaning:☛ you are connected to the network account type→ your traffic and Campaigns should be attributed to this account;☛ you are connected to the sub-account type→ your traffic and Campaigns should be attributed to this account.2. Account Id value cannot consist of just numbers or just letters. It’s a combination of letters + number(s) or/and special characters which usually looks in the code like “som2ething-sc” or "example-network"3. Turn to your Taboola Account manager for the Client ID and Client secret.4. Costs in the Taboola Traffic channel can be updated on the level Сampaign + Placement + Geo
+
+
+
+3. Add conversion types.
+
+
+
+
+Here is the guide on how to add conversion events in RedTrack.
+
+
+
+Here is the guide on how to add conversion events in Taboola.
+
+
+
+
+▸ Names of the conversion events in RedTrack and Taboola should match. Without adding the matching conversion events in Taboola, S2S Postback for Taboola may not fire.▸ Taboola accepts conversion types (event names) typed only in small letters.
+
+
+
+4. Create the Campaign in RedTrack with Taboola as the Traffic channel.
+
+
+
+Campaigns → Create new campaign → use&nbsp;this guide&nbsp;for Affiliates /&nbsp;this guide&nbsp;for Advertisers to help you add the campaign → once your campaign is saved, copy the automatically generated&nbsp;click URL&nbsp;(your tracking link):
+
+
+
+
+
+
+
+5. Follow this guide to help you set up RT's tracking link and manage settings on the Taboola side.
+
+
+
+6. Set up the Postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 4) → scroll down to&nbsp;S2S Postback for Taboola → press&nbsp;Add → check if the value for the EVENT_NAME parameter is replaced as needed → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+
+
+7. Set up the&nbsp;automation.
+
+
+
+
+Use&nbsp;this guide&nbsp;to help set up&nbsp;rules.
+
+
+
+Use&nbsp;this guide&nbsp;for setting up the&nbsp;auto update cost&nbsp;feature.
+
+
+

@@ -1,0 +1,362 @@
+# Service Level Agreement (SLA)
+
+
+What is an SLA?
+
+
+
+A service level agreement (SLA) is a documented agreement between a service provider and a client that identifies both the services required and the expected level of service.
+
+
+
+Overview
+
+
+
+Effective Date: 01/03/2021Last Review: 08/01/2023Next Scheduled Review: 20/11/2024
+
+
+
+This Service-Level Agreement, effective as of March 1, 2021,&nbsp; is made by RedTrack.io and between RedTrack.io and its clients.
+
+
+
+RedTrack.io cares about all clients and tries to do its best to keep an excellent service level. This document aims to make the interaction with clients most effective to deliver service always on time.
+
+
+
+Here, you will find the terms and conditions for the system availability, all types of additional services we provide, and the types of interactions.
+
+
+
+The objectives of this Agreement are to:
+
+
+
+
+Provide a thorough understanding of service ownership and the roles and responsibilities.
+
+
+
+This Agreement represents a description of the services provided by RedTrack.io.
+
+
+
+Match understandings of expected service provision with actual service support &amp; delivery.
+
+
+
+
+
+
+Definitions
+
+
+
+Client - any RedTrack.io paid clientService Specialist - RedTrack.io Activation, Support or Development SpecialistActivation - the process of helping a client to start using our product and receive the first results to scale his businessFeature implementation - the process of implementing a feature not currently available in the appReasonable availability - evaluate the risks and be available if anything urgent happens or if immediate assistance is required, provide all the necessary informationService Packages - a combination of features included in a subscriptionExpected response - &nbsp;a response/resolution to the client's query or the ETA provision if&nbsp; the issue requires more investigation. Does not include the autoresponse, it is the first interaction with a real specialistDowntime - is the overall number of minutes RedTrack.io was unavailable during a quarter (i.e., February 1 through April 30 and every three months).
+
+
+
+
+
+Service scope
+
+
+
+This Agreement covers the following Services:
+
+
+
+
+&nbsp;Product
+
+
+
+&nbsp;Client Support
+
+
+
+&nbsp;Client Activation
+
+
+
+
+
+
+Service agreement
+
+
+
+
+
+Product: downtime
+
+
+
+RedTrack.io calculates unavailability using server monitoring software to measure the server-side errors, ping test results, web server tests, and website tests.
+
+
+
+Downtime excludes the cases:
+
+
+
+
+Slowness or other performance issues with individual features (custom scripts used on the page, "heavy" pages, additional redirects, apps, and plugins used)
+
+
+
+Issues that are related to external apps or third parties (slow internet connection, "heavy" applications open, various browser extensions)
+
+
+
+Any features identified as beta or similar
+
+
+
+Scheduled downtime for releases
+
+
+
+
+
+
+Product: uptime commitment
+
+
+
+Uptime is the percentage of total possible minutes RedTrack.io was available during a quarter.
+
+
+
+Our commitment is to maintain at least 99.9% Uptime.
+
+
+
+
+
+Product: scheduled downtime
+
+
+
+Sometimes, we need to perform short maintenance for a release to keep RedTrack.io working smoothly and have all the useful features you may need.
+
+
+
+The downtime period is up to 10 seconds in that case, and it does not affect tracking.
+
+
+
+
+
+Urgency levels and priority for Support Service
+
+
+
+  
+
+
+
+Live chat support
+
+
+
+The live chat service was created for quick question resolutions: something fast or extremely urgent (for us to react as fast as possible). It's 1-line support.
+
+
+
+In live chat support, we do not cover funnel setup, onboarding/funnel activation, complex integrations, or script implementation as they require additional time and sometimes the involvement of several specialists. These kinds of questions are to be addressed to the 2-line support.
+
+
+
+Interaction is established by using an in-app chat window available in your account's left corner if included in the subscription.
+
+
+
+The expected first response for a live chat is 10 minutes. Grown up to 60 minutes within the high load periods and for non-urgent cases.
+
+
+
+
+
+Email support
+
+
+
+This service covers all types of questions and is available any time of the day, any timezone. That means you can write anytime. We will receive your request and put it in a queue. If it is out of working hours, the morning specialist will start processing it as soon as the working hours start. 
+
+
+
+Email support covers the 2-line support and also all requests from the clients who do not have a live chat included in the subscription.
+
+
+
+The processing of email inquiries is as follows: we prioritize the request (impact + subscription + urgency defined by a client) and address it to an appropriate department or specialist. The higher the priority we define is, the faster the processing is.
+
+
+
+Interaction is established by writing to support@redtrack.io
+
+
+
+Expected response  - either a response/resolution of your case or the ETA for the resolution
+
+
+
+ImpactType of requestExpected response/resolutionCriticalService downImmediateHighRisk of service downtimeWithin 1 hourMediumHigh end-user impactWithin 5 hoursLowPotential for performance impactWithin 8 hoursInformationalThe issue addressed is potentially impactful in the futureWithin 1 business dayFeatureA request for the missing featureWithin 5 business days
+
+
+
+Urgency levels and priority for other services
+
+
+
+
+
+Activation assistance
+
+
+
+It's a standard account activation for our clients.
+
+
+
+We do understand RedTrack is not plug-and-play software and help you to start so you can see the value of the product. Activation services available vary depending on your subscription package and the particular use case.
+
+
+
+Terms of activation are defined individually after the setup evaluation with our specialist.
+
+
+
+
+
+On-demand service
+
+
+
+An extra cost service is provided upon request after the activation is finished or not included in the subscription.&nbsp;
+
+
+
+The pricing and terms are stated only after the request evaluation and are individual from case to case.
+
+
+
+
+
+Personal manager
+
+
+
+Your personal manager will guide you through the product, be available to answer any questions afterwards, provide advice on the best platform usage, and escalate any of your issues with a higher priority.
+
+
+
+A personal manager is available 10:00 A.M. to 7:00 P.M, Monday to Friday GMT+3. The request resolution depends on the complexity (deep analysis, check, dev team involvement, etc.)
+
+
+
+
+
+Responsibilities
+
+
+
+
+
+RedTrack.io responsibilities
+
+
+
+Our responsibilities and requirements include:
+
+
+
+
+Meeting response and resolution times associated with service-related requests.
+
+
+
+Reasonable availability of a Service Specialist when solving a request.
+
+
+
+Act as a primary support provider of the services
+
+
+
+Inform a client regarding scheduled and unscheduled service outages due to maintenance, troubleshooting, disruptions
+
+
+
+Inform a client regarding new feature releases
+
+
+
+
+
+
+Client responsibilities
+
+
+
+Client responsibilities include:
+
+
+
+
+Payment for all product costs at the agreed interval
+
+
+
+Reasonable client representative(s) availability when resolving a service-related request (by mail, in a chat, for a call).
+
+
+
+Provide all necessary information and assistance related to the issue that allows RedTrack.io to meet the performance standards and keep the support level high
+
+
+
+A client should inform RedTrack.io regarding changing business requirements that may necessitate a review, modification, or amendment of the SLA
+
+
+
+
+
+
+Exceptions and limitations
+
+
+
+This SLA is subject to the following exceptions and special conditions:
+
+
+
+
+RedTrack.io provides the service within the agreed period, depending on the service level included/obtained.
+
+
+
+RedTrack.io will act as a primary support provider of the services except when third-party vendors are employed, who shall assume appropriate service support responsibilities accordingly.
+
+
+
+For the cases when a third-party tool support team involvement is required, SLA is extended accordingly.
+
+
+
+RedTrack.io may not be liable for the payment reimbursement for service impact in cases where the service setup was done without RedTrack.io Specialist involvement.
+
+
+
+Response to requests can be delayed outside of business hours, during the weekends and holiday season.
+
+
+
+Response to high and critical-level requests can be delayed for up to 24 hours outside of business hours, during the weekends and holiday season.
+
+
+
+Requests for the client's special arrangements may be re-evaluated and fulfilled as per the pricing structure specified in Service Packages.
+

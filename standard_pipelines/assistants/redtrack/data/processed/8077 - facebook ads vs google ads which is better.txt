@@ -1,0 +1,157 @@
+# Facebook Ads vs. Google Ads: Which Is Better
+
+When we choose to run paid ads we face a major question: Google Ads VS Facebook Ads. Even though many companies successfully run campaigns on both sources, sometimes we want to choose which platform suits our needs best. 
+
+When the battle of Facebook Ads VS Google Ads comes, what do you choose? Let’s dive into the most prominent characteristics of both channels and review what you can get from each of them. We will review similarities, differences and advantages of Google and Facebook advertising platforms. 
+What is Google Ads
+It’s a paid advertising platform created by Google that allows you to place your ads on all channels owned by Google. Until 2018 we would find it as Google Adwords. There are two types of Google Ads: banners and paid search. In this article, we are going to refer to the second type. 
+
+Terms “Google Ads” and “Paid Search” are usually used interchangeably. 
+It works on an auction basis which means that your ads are placed every time a user is typing a keyword search. The ads that companies place are “competing” to be displayed by a specific keyword according to a few parameters, like Quality Score and Bid amount.
+What is Facebook Ads
+Facebook Ads is probably the number one paid advertising channel on social media. When using Facebook Ads, you get a chance to place your ads on #1 Social Media (Facebook) as well as on Instagram. Facebook Ads come in many formats: promoted posts, stories, carousels, news feed, etc. 
+
+At this point, it may seem Facebook Ads is not that different from Google Ads. Just the same paid advertising, but on a different platform? Not really. 
+
+
+
+The approach both platforms use is radically different. What defines Facebook Ads the most is the ability to target people by their interests. That gives you a chance to find new audiences that you might not have stumbled upon before. 
+
+Let’s find further similarities and differences in the next chapters!
+Google Ads VS Facebook Ads: comparison of paid ads giants
+Let's dive right into comparison of those advertising platforms.  
+What is similar between Google and Facebook Ads? 
+Both Facebook and Google Ads function on pay per click basis. The budgets you can start with are relatively small: starting $5-10 a day to test your campaigns and understand whether it’s something worth investing in. 
+
+Both platforms allow you a chance for advanced targeting and retargeting. However, the approach on how they target is different. We will learn it further. 
+
+Google Ads and Facebook Ads both own a big share of the market which means that you get a chance to advertise on different platforms and via various ad formats. 
+Where you can advertise with Facebook Ads: 
+
+ 	Facebook Ads (FB News Feed, Marketplace, Video feeds, right column)
+ 	Instagram Ads (Feed or stories)
+ 	Messenger
+ 	Audience network
+
+Where can you advertise with Google Ads: 
+
+ 	Google Search
+ 	Youtube Ads
+ 	Google Play
+ 	Display network 
+ 	Google shopping
+ 	Google maps
+
+How do Google Ads and Facebook Ads differ?
+The amount of differences between Google and Facebook Ads definitely outnumbers the similarities. Below you can find infographics which reveal most prominent differences in one picture. 
+
+
+1. Paid Search VS Paid Social 
+The key difference is in the fact that Facebook Ads is a paid social when Google Ads is a paid search. What does it mean in reality? 
+
+
+
+Google Ads work perfectly if the user knows what he/she is looking for: whether it’s a product or even a specific company to purchase from.
+ So Google Ads step out as a boost for the purchase, but this type of advertisement rarely introduces to customers new products/companies. 
+While Facebook Ads can enrich your audiences because your ads pop up during the social media scrolling. 
+Facebook Ads work better for brand awareness, attracting new users and clients that might never even thought of using your product before. 
+That being said, it becomes obvious that the combination of Google Ads with Facebook Ads is kind of an ideal mix for the company. When one type of ads work for your brand awareness and reaching new audiences, another one helps users complete the purchase by choosing your company over the others.
+
+If you choose to run both types of PPC, you have to know which channels and campaigns connected to this channel actually converts and which creates holes in your advertising budgets. For that, you might need to learn about marketing attribution. This feature helps you attribute the conversions to a particular channel - campaign - ad unit and gives you a chance for in-depth analysis of the user funnel. Attribution will step up as a performance judge when you use both Google and Facebook Ads. 
+
+At RedTrack, we provide a multi-touch attribution solution to analyze all your media-buying activities and define converting strategies. You can start with a 14-day free trial to test what attribution can bring to your business. 
+2. Audience Size
+Even though both channels have an outstanding reach when it comes to available audiences, we still can compare those numbers. 
+
+There are over 5.9 billion of searches performed daily on Google in 2021. All of those searches  become ads that serve sales. 
+
+On the contrary, Facebook has 1.8 billion daily active users. All of these users are the potential customers that you can target for your product/offer. 
+
+&nbsp;
+
+
+Find more statistics at  Statista 
+3. Google VS Facebook Ads costs
+When we talk about budgets that we are going to need to run successful campaigns on both platforms, we will need to understand the target industry first. 
+
+Each niche has a different price for the performed ads, so for some industries, it makes more sense to invest in Google Ads and for some — in Facebook Ads. 
+
+The general number for CPC (cost per click) in Facebook Ads as of April 2021 is $0.97.
+
+If we talk about the average CPC for Google Ads, we see the number between $1 to $2 per click. And the average ROI (return on investment) at an 8:1 ratio. That means that for every $1 investment you get $8 in return. 
+
+Learn more details on how to calculate marketing ROI.
+Advantages of Google Ads 
+If we sum up everything discussed above, there are the following advantages of using Google Ads over Facebook Ads. 
+Google Ads work better for sales
+Google Ads is perfect for users with high buyer intent. If they are googling your keyword, they are most likely to convert and actually make a purchase. Of course, if you win the auction and get your ad placed on the top of the search. 
+
+If you want Google Ads to work for skyrocketing your sales, make sure to take care of two imporant factors.
+1. Improve Quality Score for higher performing campaigns 
+Quality score is metric that shows how relevant and useful the ad will be to the user.
+
+It is a compound of relevance of your ad to the search query, relevance of the ad to the ad group, historical data fro your ads (CTR, CR), overall account performance overtime. 
+
+The exact measurement of the Quality Score is a secret kept by Google so noone can actually figure out what could improve your performance.
+
+Another metric to take care of is Bid amount. It is an amount you are willing to pay to attract a user. 
+
+If you want to improve your ad positioning, you need to have higher Quality Score with the right bid amount. It is crucial to establish a high Quality Score if you want your ads to run smoothly and have lower costs per ad.
+2. While running Google Ads, prepare your website to convert
+Even if your ad is on the top of the search query, but the UX on your website is not leading the customer to the purchase, you are more likely to lose. 
+
+Once the user clicks on your ad, your website has to send a definitive message to the customer that this is the product for her/him. 
+Google Ads has a massive reach
+Google has almost triple the Facebook audience which allows you to target more potential customers. Google is the number one place on the Internet where people go to look for answers and solutions. If your ad becomes one of the solutions to people’s problems, you have a high chance of winning. 
+When running Google Ads, let your solution become the answer to the question. 
+Learn how to track conversions received from Google Ads in a guide. 
+Advantages of Facebook Ads 
+But why would Facebook Ads work better for your needs? 
+Find audiences that do not know about you
+Facebook gives advertisers a unique chance for targeting and retargeting. Because of the social media experience and all the data that Facebook managed to gather around its users, they know precisely what they might need. 
+
+Targeting by interest allows you to find new customers by creating a need that they did not need prior to stumbling upon your ad. Get creative and try testing new audiences, you never know which crowd will bring you a crazy CR. 
+Use smart algorithms with Facebook Ads 
+Facebook had quite a lot of time to accumulate data about its users. We will not go into details about whether it’s good or bad for us. But it’s definitely beneficial for Facebook algorithms! Facebook targeting options are famous for reaching all the users you wanted. 
+
+Their targeting options include:
+
+ 	Location
+ 	Custom Audiences
+ 	Interests
+ 	Behavior 
+ 	Demographics
+ 	Lookalike audiences 
+
+All of them work perfectly for your advertising needs, but Interests and Lookalike audiences might give you a lot of coverage within users that you didn’t think of attracting. 
+
+Not sure how to track Facebook Ads performance? Check out this guide!
+Increase brand awareness
+This had to be the number one reason to choose Facebook Ads over Google Ads as it makes it more distinctive. While people are casually browsing their Facebook Feed, your ads may appear as natives. People may learn about new, innovative products, about something they have never heard of before while doing their day-to-day activities. 
+
+If you want your brand name to appear within a huge crowd — Facebook Ads is the right choice for you.
+
+However, don't forget that for proper work with Facebook Ads you will need help from Facebook CAPI.
+
+Check out our latest video-explainer on what is Facebook CAPI and how to use it!
+
+&nbsp;
+
+
+So what do you choose: Google or Facebook Ads? 
+In this article, we covered the most prominent differences and similarities of Facebook and Google Ads. I hope that by this point it is obvious for what reasons you should choose either of the platforms. However, considering two different approaches that Google and Facebook Ads carry, it’s best to combine them in your marketing mix. 
+
+While Facebook Ads bring you the desired coverage, introduces your brand name to the crowds, and creates a buyer intent, Google Ads step up as a sales boost. Once a person knows what product he or she needs, your ad at the top of the search results will do the job.
+
+However, if you choose to divide the marketing budget between those 2 platforms, you need a fabulous analytics tool that will analyze the performance and help you make better advertising decisions. 
+How to compare Google Ads vs Facebook Ads performance 
+Ad tracking and conversion attribution are essential if you run any type of advertisement in digital marketing. At RedTrack, we offer you a chance to consolidate all your media-buying activities and get a “bird-eye” view of your performance across all channels. With RedTrack you receive: 
+
+ 	Single dashboard with insights across all channels (PPC, referrals, partner &amp; influencer marketing, affiliate marketing, etc.);
+ 	Conversion attribution to find what exactly leads a user to a conversion;
+ 	Automation of performance according to the CR rules you set within our platform;
+ 	Reports for collaboration with your team or sharing with advertising partners (like affiliates).
+
+
+
+&nbsp;

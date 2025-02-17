@@ -1,0 +1,153 @@
+# How to Promote Affiliate Links with Native Ads
+
+As an affiliate marketer, you must be continuously looking for new strategies to promote your links and boost your profits. 
+
+Running Facebook Ads is getting more and more challenging with competition growing rapidly. Moreover, if you have ever taken any affiliate marketing course, you must have been told that keeping all your eggs in one basket is a huge risk for an affiliate. It’s time to add a new strategy to your marketing mix.
+
+Native advertising has become increasingly popular among affiliate marketers for the last few years. But you can still enjoy moderate competition levels and great ROAS if you jump in now. 
+
+Read on to learn more about the advertising approach and get guidance on how to build your first native ad campaigns.
+
+What’s native advertising?
+Native advertising is a paid advertising technique that uses ads blending in with the environment where they’re placed. Just like any other advertising method, you can use it to promote your website or run promotional campaigns for specific landing pages.
+Native ads are equally effective for boosting brand awareness, building email lists, and driving sales. Of course, affiliate marketers usually focus on selling their products through native ads rather than simply driving traffic or generating leads.
+
+The key peculiarity of native ads is that they’re placed within designated widgets on blogs, news websites, and media outlets. However, they have nothing to do with display ads or banner ads. 
+
+Native ads are also called sponsored content or content recommendations, and they look the following way:
+
+
+
+At the top, there are editorial articles marked by the NBC logo. Below, you see native ads by Fiverr and HumanN. The only thing that distinguishes them is the ‘sponsored’ label right below each ad image.
+But how do you display your ads on publishers’ websites? 
+If you needed to negotiate each placement with a publisher directly, it would cost a lot. Native advertising is made possible by networks that partner with publishers and allow advertisers to run their ads across all the available websites through a centralized solution.
+
+Native ad platforms, like Taboola and Outbrain, function similarly to Facebook Business Manager. To launch a campaign, you add your content, choose targeting options, set bids, and create an ad schedule if necessary. 
+Why native advertising is popular among affiliate marketers
+So, why is native advertising particularly effective for affiliate marketers?
+
+First of all, it’s less expensive than other popular advertising methods. The average cost-per-click (CPC) for native ads that target mobile devices is $0.3, and the median CPC for desktop ads is $0.6. 
+
+These are the average numbers. You can lower the costs by optimizing your campaigns.
+
+Next, native ad platforms are less restrictive about ad design and landing pages that you can promote. Top-notch networks do have guidelines for sponsored content, but if you follow them, they won’t ban your account out of blue.
+
+On any platform, native ads are checked manually by content review teams, which helps to eliminate random ad rejections. 
+
+Moreover, if you have trouble with getting your product approved by one of the networks, you can always find a platform with less strict policies.
+
+Lastly, native advertising perfectly aligns with affiliate marketing content. The most popular content formats used by affiliates are listings, tutorials, and product comparisons – these are also very common for editorial content that readers of publishers’ websites got used to.
+Native ads vs. Facebook ads
+Although the process of campaign creation is very similar across Facebook and native ad platforms, there are some key differences between Facebook Ads and native ads:
+
+ 	Content formats. Traditional product pages might perform well on Facebook, but not on native. Readers of publishers’ websites behave differently than paid social users (even though these are the same people). You need to provide content that entertains or educates and – only after visitors are hooked – converts. That’s why pre-sell pages are so common among native advertising experts. Before putting the core offering in front of visitors’ eyes, they drive them to a page with an introductory video, quiz, or a how-to article. As an affiliate marketer, you’ll find this approach extremely effective.
+ 	Targeting. You might have got used to granular targeting on Facebook. If you want to start with native advertising, you should forget about it. You can access interest-based and lookalike audiences on native ad platforms, but it’s typically better to go for broader targeting. How will you filter out irrelevant audiences? There’s a simple solution: your ad creatives will do that for you. Be specific about what’s on your landing page, and you won’t get clicks from the wrong people.
+ 	Ad creatives. One more important aspect is the way ad creatives look on Facebook and on publishers’ websites. Facebook allows for really long ad copies. Who needs a pre-sell page when your ad copy can be used to fully cover the topic, right? Native ad platforms typically support headlines up to 100 characters. It means you should do your best to present the key message of your campaign in one sentence. No clutter – straight to the point.
+
+3 affiliate marketing campaigns promoted with native ads 
+We’ve already said many affiliate marketers are already enjoying the benefits of native advertising. Here are some of our favorite native ad campaigns containing affiliate links.
+Underscored
+Underscored is CNN’s resource for tech reviews, lifestyle tips, and eCommerce product recommendations. In their guides, you’ll find a lot of contextually relevant affiliate links.
+
+To increase traffic and conversions, the Underscored team runs multiple native advertising campaigns. Below you see an example of a native ad and landing page used within one of the campaigns. 
+
+
+
+In the actionable guide on making cold brew coffee, relevant recommendations on products that facilitate the process look natural and not forced.
+NerdWallet
+Nerdwallet is an affiliate site for financial product reviews.
+
+They successfully use one of the most effective approaches to native advertising, which is promoting interactive calculators.
+
+
+
+Quizzes and calculators are great for attracting audiences in the decision stage of the buyer’s journey and direct them right towards the checkout.
+
+In this campaign, the advertisers have used a very descriptive headline that appeals to a very specific audience segment. By posing a pre-qualifying question and including a clear CTA, they set the right expectations with people who click on the ad.
+SheKnows
+SheKnows is a lifestyle magazine that monetizes content by including affiliate links in articles.
+
+The campaign below shares the best methods for waking up refreshed, and one of them is – surprise-surprise – using Sleep &amp; Shine’s supplement. 
+
+
+
+&nbsp;
+
+The campaign is promoted across other publishers’ websites and fits perfectly with the environments it’s placed in.
+How to sell your affiliate products with native ads
+These were the native ad examples by some of the most successful affiliate websites. And how can you make native advertising work for you?
+Analyze other advertisers in the niche
+Before you start, check out how and whether your competitors are doing native advertising.
+
+You can find their campaigns with the help of a competitive intelligence tool, like Anstrex or PowerAdSpy. Just search for their brand names or keywords they might be using in ad headlines and bookmark the most remarkable examples.
+
+Pay attention to the types of content they promote, campaign messaging, ad headline formulas, publishers they get the biggest portion of traffic from, etc. This information will help you to build a basic structure to build your future campaigns. As you gain insights into the performance of your campaigns, you’ll be able to test different approaches and develop your own style.
+Zero in on engaging content
+Forget about boring product pages if you want to make native advertising work for you. 
+
+The following content types will help you to get visitors hooked and introduce your affiliate products naturally:
+
+ 	Pre-sell pages
+ 	Customer stories
+ 	Video tutorials
+ 	Product comparisons
+ 	Listings
+ 	Seasonal content
+ 	Quizzes
+ 	Calculators
+ 	How-to articles
+ 	Influencer-driven content
+
+These content formats allow you to capture prospects’ attention and move them down the funnel right to the purchase decision. Of course, you should also keep your content relevant to the offers and avoid topics that are too generic. 
+Create ads that blend in with the editorial environment
+Just look at some of the best native ad examples. All of them use real photos of people or objects being promoted. 
+
+Publishers rarely use graphic illustrations as thumbnails. And if you don’t want your ads to be mistakenly recognized as banner ads, try to avoid banner-like imagery and illustrations.
+
+Same works for ad headlines. Most commonly, editorial content is associated with the following headlines:
+
+ 	X Reasons you haven’t done something yet
+ 	Here’s how you can do something without paying a fortune
+ 	Are you experiencing some problem? Experts offer the following solution
+ 	X Cheap tools a famous actress recommends
+
+For instance, instead of promoting a headline that says ‘A keyword research tool all SEO experts are using,’ you might want to go for something like ‘Want to brand new website on Google? Here’s what you need.’
+Go away from granular targeting
+Remember we’ve said you should avoid getting too granular with targeting on native ad platforms? This is just another reminder.
+
+To realize the full potential of broad targeting, follow these steps:
+
+ 	Always split your campaigns by device. It allows you to create different bidding strategies for separate campaigns as desktop traffic is typically more expensive.
+ 	Consider building separate campaigns for iOS and Android traffic. 
+ 	If you run campaigns for multiple markets, always target different countries with separate campaigns.
+ 	Pre-qualify your audiences by calling them out in ad headlines.
+
+Give your campaigns some time 
+Native ad campaigns won’t show positive results overnight. It will take weeks or even months to build a stable setup that drives good performance. 
+
+With this in mind, stay patient and persistent. It’s also worth mentioning that reducing your budget dramatically ‘to test the waters’ won’t work. At the end of the day, you’ll have a bunch of campaigns that haven’t managed to drive quality traffic (because of low budget and bids) and have hardly delivered any conversions.
+Keep track of performance on the publisher level
+One more way to keep control of the type of audience that sees your ads is by carefully examining the websites your ads are displayed on. 
+
+After you launch your first campaigns, you’ll get access to the publisher-level performance report. It often happens that some websites drive a lot of clicks that result in zero conversions. Watch out for those sites and exclude them once you identify performance issues.
+
+Sometimes, it’s also a good idea to check websites manually if you aren’t sure about the publisher quality. Visit sites you’re concerned about and see whether there’s any chance your audience reads them or not.
+Launch new tests regularly
+What’s most important, don’t limit your campaigns to 2-3 ads and one landing page. You’ll need to combine dozens of headlines and images before you identify a handful of creatives that catch the attention of the right people. 
+Important: Every time you want to test a new variable – be it a headline, image, or landing page – create a new campaign. For creative tests, pick 6-10 versions of a headline you think might work and mix them with 1-2 images. Check the campaign performance every day and pause ads that perform poorly (low CTR &amp; conversions). The test is considered successful when you finally identify 1-2 ad creatives that drive high CTR and have the potential of becoming cost-effective as a result of the consistent optimization effort.
+It’s time to boost your profits
+This is how you get started with native advertising. If you’re ready to explore a new advertising channel and build a strategy from scratch, you’ll rely less on the approaches you’re using now and boost your profits. 
+
+To get started, take these simple steps:
+
+ 	Pick a native ad platform;
+ 	Create content specifically for native ad campaigns;
+ 	Follow our tips on the campaign setup;
+ 	Keep track of performance and exclude irrelevant publishers;
+ 	Always test new variables within separate campaigns.
+
+How to keep track of the performance of your native ads? 
+As with any other paid ads channel, a tracker is a must for data analysis and consolidation. How many clicks do your ads get? Which creative converts better? Which geo works better? If you are using the right ad tracking &amp; conversion attribution software all these questions will find answers.
+RedTrack is one of the examples of top-notch marketing analytics software that help you make smarter advertising decisions in your marketing routine.
+If you want to learn more about introducing data into your decision-making, consider booking a demo to see the full picture of opportunities. Subscription starts with a 14-day free trial to test all the key features.
+

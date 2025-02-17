@@ -1,0 +1,32 @@
+# Shopify: other platform subscribers
+
+
+In addition to the standard&nbsp;workflow, Shopify ↔ RedTrack integration for clients using different application subscriptions (Appstle, Skio, anything else except for Recharge) presupposes some extra steps.
+
+
+
+If you're a Recharge subscriber, refer to this article for the setup.
+
+
+
+Integration steps
+
+
+
+1. Follow&nbsp;this article&nbsp;to integrate Shopify with RedTrack.
+
+
+
+2. Go to Shopify → Settings → Apps and sales channels→ choose your app → Overview → Admin API integration:
+
+
+
+
+
+
+
+3. All → Products → mark “read_products”:
+
+
+
+

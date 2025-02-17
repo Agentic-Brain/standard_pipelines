@@ -1,0 +1,312 @@
+# Conversion tracking: types, statuses, duplicates
+
+
+In RedTrack conversion events tracking can be set up via types or statuses. Each way has its peculiarities:  
+
+
+
+TypeStatus- allows custom naming- has extended analytics- works with API integrations- extended Clickbank, Google and Tiktok mapping supported- needs additional setup in the interface- no custom naming- limited analytics- is not suitable for API integrations and conversion mapping- works without any additional setup- works for COD offers
+
+
+
+Conversion statuses do not work for the traffic channels with the API integrations (Facebook, Google, Bing). For such cases use conversion types event tracking method instead.
+
+
+
+General advice is to use types as they work the same way and allow more customization.
+
+
+
+Act depending on the preferred event tracking way:
+
+
+
+
+
+How to set up
+
+
+
+1. Tools → Conversion tracking → Conversion type → add the events you want to track → Save:
+
+
+
+
+
+
+
+
+
+
+
+The fields are case-sensitive. The name should be exactly what you plan to send to RedTrack.The names remain the same and will be sent to the traffic channel exactly as you've added them to RedTrack.
+
+
+
+2. For the added event to be tracked you need to add type=Conversion_Event_Name to the Postback URL. For example: https://my.postback.com/postback?clickid={sub}&amp;type=Upsell. 
+
+
+
+The way to track the added events may differ depending on your flow, but the main principle is appending the desired type parameter to the postback. If your flow differs turn to the specific guide on KB or email to support@redtrack.io for assistance. 
+
+
+
+How the tracked conversions are shown in RedTrack
+
+
+
+Data on conversions recorded in RedTrack can be viewed in the reports: 
+
+
+
+
+
+If you want the assigned events to be counted and shown in the Customer Journey report, you have to enable the report next to the event:
+
+
+
+
+
+
+
+To choose more than 2 conversion types to be depicted in the Customer Journey report, you need to upgrade your subscription plan. Refer to the Customer Journey report guide for details. 
+
+
+
+
+
+You can check the data on the added conversion events as follows:
+
+
+
+
+In&nbsp;reports,&nbsp;once you’ve added the columns with the names of your conversion events:
+
+
+
+
+
+
+
+
+
+
+
+
+
+In logs by conversions, you can check out the data on the duplicate status of the conversion event with the assigned duplicate postback mode Create new conversion: new or repeated:
+
+
+
+
+
+
+
+
+New for the first conversion.Repeated for the repeated (duplicated) conversions.Unknown for conversions with this postback mode not configured.
+
+
+
+
+
+
+
+How to set up
+
+
+
+Conversion statuses are used in cases where using simple naming is enough for you. They are added within the Offer source/Brand template in RT, we have 4 types of Statuses:
+
+
+
+
+other
+
+
+
+approved
+
+
+
+pending
+
+
+
+declined
+
+
+
+
+All of the statuses are available as separate columns with separate statistics. The main difference between types is that you cannot change the status naming, it is only like that.We recommend using the approved status as the default to avoid editing the Postback URL and simplifying the process.
+
+
+
+1. When adding the offer source/brand,&nbsp;choose the Approved status under the section Conversion status → Save:
+
+
+
+
+
+
+
+If we do not receive any status data with the conversion, by default, we record all conversions with the status you have set in the offer source/brand settings, which can easily be changed.
+
+
+
+2. Once you’ve saved the changes, copy the generated postback URL and paste it to your affiliate network account under the target postback field (or use it wherever you plan to):
+
+
+
+
+
+
+
+Change the status manually per postback if you need to send another one. Use lowercase. 
+
+
+
+How the tracked conversions with statuses are shown in RedTrack
+
+
+
+Conversions with the assigned statuses can be tracked in the offer source report, once you add the column with the status name to the report table:
+
+
+
+
+
+
+
+
+
+
+
+
+
+RedTrack offers a handy Duplicate postback mode functionality that manages how the platform processes multiple postback requests for the same conversion event. You can assign a dedicated duplicate postback mode to the chosen event type/ status and the system will act accordingly (create a new conversion, ignore the postback, edit conversion with new data, etc.). 
+
+
+
+Duplicate postback modes can be applied to both types and statuses, but you should know that the duplicate postback mode set in conversion types prevails over the one set via statuses in your offer source/brand template. 
+
+
+
+Act as per your way of setting up the conversion tracking (types or statuses):
+
+
+
+
+
+To apply a certain duplicate mode select it from the dropdown menu on the right next to the needed event type → Save:
+
+
+
+
+
+
+
+Duplicate postback modes explained:
+
+
+
+With API-integrated traffic channels when you apply duplicate postback modes, the conversion is also updated API-based.  How it works: chosen duplicate postback mode is applied → conversion is updated in RedTrack → the updated conversion is sent to the traffic channel where the system recognizes this conversion by its clickid and edits this very conversion without creating any duplicates.
+
+
+
+
+Create new conversion:&nbsp;duplicate postback data will be added as a separate conversion.
+
+
+
+Create new conversion: new or repeated: means duplicated postback data will be added as a separate conversion with different statuses.– New for the first conversion.– Repeated for the repeated (duplicated) conversions.– Unknown for conversions in which this postback mode is not configured.
+
+
+
+
+
+Ignore duplicate postbacks:&nbsp;no data on the duplicate will be added.
+
+
+
+Edit conversion with new data:&nbsp;the original conversion&nbsp;will be edited with new data.
+
+
+
+
+When you apply the “Edit conversion with new data” mode, only payout can be updated, time of the conversion can’t be changed.
+
+
+
+ExampleYou have a lead conversion that can transform into either a purchase or rejection later. You want to receive first the Lead, and send the data about this to the traffic channel, then you want the Lead to be changed to Purchase, also with sending the data to the traffic channel. In that case, edit conversion with the new data is the postback mode you need.
+
+
+
+
+Keep original data, Increment payout: only revenue will be edited.
+
+
+
+
+Use this mode for tracking upsells for example.
+
+
+
+
+Ignore duplicate postbacks by event id: to make this mode work, first, you need to send RedTrack the unique id for the system to be able to compare the data. For example, adding rdtk_event_id={replace} to the postback URL. It can be an order id/transaction id or something of this matter by which RedTrack will implement the deduplication. Once this mode is applied, no data by the mentioned event id will be added to the tracking report.
+
+
+
+
+
+
+To set it up go to the added Offer source /Brand template → scroll down to the&nbsp;Default duplicate postback mode&nbsp;section → choose the needed mode → Save the changes to the template:
+
+
+
+
+
+
+
+Default duplicate postback modes explained:
+
+
+
+
+Create new conversion: duplicate postback data will be added as a separate conversion.
+
+
+
+Create new conversion: new or repeated: duplicated postback data will be added as a separate conversion with different statuses.– New for the first conversion.– Repeated for the repeated (duplicated) conversions.– Unknown for conversions in which this postback mode is not configured.
+
+
+
+
+
+Ignore duplicate postbacks: no data will be added to the tracking report.
+
+
+
+Edit conversion with new data: the original conversion will be edited with the new data.
+
+
+
+
+When you apply the “Edit conversion with new data” mode, only payout can be updated, time of the conversion can’t be changed.
+
+
+
+ExampleYou have a lead conversion that can transform into either a purchase or rejection later. You want to receive first the Lead, and send the data about this to the traffic channel, then you want the Lead to be changed to Purchase, also with sending the data to the traffic channel. In that case, edit conversion with the new data is the postback mode you need.
+
+
+
+
+Keep original data, Increment payout:&nbsp;only revenue will be edited.
+
+
+
+
+Use this mode for tracking upsells for example.
+
+
+
+

@@ -1,0 +1,193 @@
+# Complete Facebook Business Manager toolset guide: Ads Manager and Events Manager Explained
+
+Facebook is a complex ecosystem that allows businesses or advertisers to achieve crazy goals in terms of revenue or marketing ROI. But in order to achieve those results, you need to navigate within Facebook Business Suite and find yourself comfortable with the Business Manager. 
+
+In this guide, we will explore the most important tools that will allow reaching your marketing goals: Facebook Business Manager, as well as Facebook Ads Manager with Events Manager. 
+In this blog post you will find answers to the following questions: 
+
+ 	What is Ads Manager?
+ 	What is Events Manager? 
+ 	Why does Ads Manager and Events Manager show different conversion data?
+ 	Why correct Events Manager setup is crucial for growth.
+ 	What are the 9 steps for better results with FB ads
+
+Now, let’s dive right in! 
+What is Facebook Business Manager 
+Facebook Business Manager is a special tool that helps you manage your business on Facebook. It unlocks you advertising possibilities and a chance to use those famous Facebook algorithms that will help you achieve your marketing goals. 
+
+Once you create your Business Manager (BM), you will be able to use Ads Manager and Events Manager.
+BM creation is super easy and consists of a few simple steps, you might follow Meta tutorial if you find any problem along the way.
+
+Inside Facebook Business Manager you will find a variety of tools that will help manage or advertise your business. But in this article, we will talk about the most important tools — Facebook Ads Manager and Events Manager. 
+What is Facebook Ads Manager
+Facebook Ads Manager is that one tool that helps you run advertising campaigns with famous Facebook (or Meta) algorithms to make your product or service seen by millions.
+
+
+In Facebook Ads Manager you can have multiple ad accounts and multiple pixels connected. 
+So in your FB Ads Manager, you can manage ad accounts for multiple clients if you have the right permissions. Facebook Ad account is a particular account tied to a business page where you can manage all the ads associated with this page.
+ 
+
+
+So FB Ads Manager is the tool you wanna learn to run advertising campaigns to reach your business goals.
+
+Structure of Facebook Ads Manager: Campaigns, Ad sets, and Ads
+In Facebook (Meta) Ads Manager you will find: 
+
+ 	Campaign level
+ 	Ad set level
+ 	Ad level 
+
+Campaigns in Facebook (Meta) Ads 
+On the campaign level as an advertiser, you are able to choose the campaign objective aka choosing a goal for your advertisement. For example, choosing a conversion objective will result in optimization for conversions (=purchases).
+
+
+
+Depending on the goal you choose, the algorithms will be working differently. But choosing certain goals is possible only after configuring events in Event Manager (scroll down to learn what is Events Manager). 
+Ad sets in Facebook advertising 
+On the ad set level, you are going to choose your audience for targeting and where you are gonna lead with your ad (for example, to the website). 
+
+Again, Meta algorithms allow you to target people by certain interests and behaviors and you can explore variety on ad set level. 
+
+
+Ads level 
+On the Ad level, you can choose to upload your ad creatives.
+
+
+
+Here you will also find tracking parameters easy to use for tracking the performance of your Facebook ad campaigns. With the right setup of your tracking, you will find which creative is responsible for high ROI and revenue and therefore will be able to optimize for better results. 
+Great things about Facebook (Meta) Ads Manager 
+Once you launch your campaigns, ad sets, and ads and start getting some traction on your advertising, you will see the numbers of your performance unfolding in reports in Ads Manager.
+
+Meta Ads Manager allows you to see all the metrics you wanna know about your ads: clicks, cost per click, reach, amount spent, etc. Also, you can look into breakdowns and see how each location, gender, age group performs to understand how to target your ads better.
+
+If you have your Facebook Pixel and Facebook CAPI set up, you will also know the conversion rates on your ad campaigns and the revenue they bring to your business. Facebook will attribute conversions and sales to a particular campaign or ad set. 
+If you wanna learn more about the Facebook attribution process, check out our latest video 🔽
+&nbsp;
+
+However, many advertisers stop the exploration of FB Business Suite with Ads Manager. 
+But advanced targeting and optimization are only unlocked for those who dig deeper into Events Manager. So let’s learn how it works. 
+What is Facebook Events Manager 
+Facebook Events Manager is a place where you can manage how Facebook gathers data about events from Facebook Pixel of API integration and what kind of events you want to keep track of. 
+To put it simply, Facebook Events Manager allows to collect and consolidate the data about purchases and other conversions events (view content, add-to-cart, etc.).
+And since purchases (aka conversions) are the very reason why you are doing FB ads, you should take Events Manager super seriously and take care of the accurate setup.
+Why Events Manager is so important?
+Events Manager is basically a rocket fuel for Facebook optimization. Events manager deliver this precious data that is used for further analysis and optimizing your campaign for better results. 
+Advanced optimization &amp; improved targeting after Events Manager configuration
+Facebook (Meta) optimizes your advertising campaigns based on the data that Events Manager gatherers through Pixel or API integrations. Everything that the Events Manager will receive will be used to improve targeting mechanism. Therefore, the more data you are able to gather in Events Manager — the better. 
+
+Moreover, optimization based on conversions (conversion objective for your ad campaign in Ads Manager) will be possible only after the configuration of Events Manager and after the needed event will get enough traction. A special protocol by Facebook, Aggregated Events Measurement (AEM) is responsible for it.  
+Advanced remarketing with Events Manager
+Based on the events you configure in Events Manager, you can create custom audiences and use it for advanced remarketing. For example, if you have an “abandoned cart” event set up in your Event Manager, later you can create ads and target this specific group of users to drive purchase intent. 
+Online and offline events in FB Events Manager 
+There are different types of events you can use on Facebook. There are online and offline events.
+
+Offline conversion events are the type of events that happen in your CRM, example. For example, if you want to configure purchases that were recorded in your CRM, you would need to set up this event in Events Manager and then perform offline conversion upload. 
+
+Online events are divided into standard events that Facebook has a template for and custom conversions. These events are recorded by Facebook with use of Facebook Pixel or Facebook CAPI to feed FB algorithms.
+The biggest difference between online and offline events is the access to fclid. 
+Fclid — is a special click ID identified by Facebook that helps bind a unique click on a Facebook ad with a conversion that happened later on.
+
+Online events have a record of a fclid, while offline events don’t. That’s why you will need an alternative tool in order to upload your offline conversions to Facebook. 
+Since offline events have no special FB id, there has to be hashed (anonymized) personal data like a phone number or email address in order to make attribution possible. 
+
+At RedTrack, you can use the offline conversion upload feature in order to perform this task without any hassle. 
+
+
+
+&nbsp;
+
+Officially, Meta says that offline conversion upload does not improve optimization or targeting. But what we know for sure, is that it helps to see more accurate attribution reports. 
+What are Data Sources in Events Manager? 
+Data Sources are places where the conversion events data is gathered for further work on attribution and optimization. 
+Data sources are sort of buckets that gather the data, later FB will take this data to perform attribution and then optimize your campaigns for further results. 
+Your trusted “buckets” are Facebook Pixel and Facebook CAPI. 
+
+Generally, Data sources are divided as web, offline, and app. 
+Why Events Manager and Ads Manager show different conversion data?
+
+One of our missions at RedTrack is to help advertisers fight limitations that appeared after iOS 14 update on Facebook Ads arena.
+Yet, one of the most important questions our users have is this one:
+“But why do I see X number of conversions in Events Manager, Y number of conversions in Ads Manager and Z number of conversion in my RedTrack account?”
+Well, in order to understand this difference we have to understand how Facebook attribution works. 
+
+But the short answer would be Facebook attribution models. 
+Facebook is using data modeling when showing conversions in Ads Manager. It means that FB is showing a hypothesis of how conversions happened and which campaigns contributed to the result. 
+Events Manager gets the data about events and then Facebook takes this data and processes it by building an attribution model of the performance of your campaigns. It means that numbers in Ads Manager are not precise.
+
+In the meantime, RedTrack is working independently gathering conversion data and also matching it across all of your advertising channels. We use only raw 1st party data and we do not support data modeling and aggregation. 
+
+So when RedTrack sends conversion data to Events Manager, Facebook applies its attribution logic, and in the end Ads Manager shows conversion data in FB logic (meaning modeled and aggregated).
+Let’s take a look at the scheme below to understand how it works. 
+
+
+Imagine that you had 20 sales on Shopify and take a look at the data flow. 
+RedTrack has captured 20 events: 5 of them were offline and 15 — online. 
+Your FB Pixel captured only 15 because it can not record offline events.
+Data appears in Data sources through FB CAPI and Pixel. RedTrack allows to upload those 5 offline conversions and send 15 online conversions automatically through Facebook Conversion API.
+Then data from the Data source is taken by Facebook for some machine-learning time: processing and modeling. 
+
+Once data has been modeled, you see numbers on your performance appear in Ads Manager. 
+
+It will contain modeled conversion data for online events and simply attributed data for offline events. 
+And what you see in the end, is a different number of attributed conversions in Ads Manager. 
+
+
+This same machine learning uses all the data from Data sources for optimization of your campaigns in Ads Manager. 
+9 Steps to accelerate growth with Events Manager setup
+Now when we discovered what is Ads Manager and what is Events Manager, let’s learn how to make them work together effectively. 
+
+Remember that Events Manager is rocket fuel for your optimization? So let’s see how to achieve these results.
+1. Don’t ignore Facebook CAPI
+We know that many marketers still stick to Facebook Pixel. We have an explanation why Facebook Pixel is not a viable solution in 2022, so do consider setting up Facebook Conversion API as well. 
+
+
+2. Verify your domain 
+Domain verification is an essential step for your Facebook (Meta) Ads in 2022. It ensures privacy-friendly environment that Facebook is sicking right now. Also, without domain verification events configuration is not possible. 
+If you are an affiliate marketer and you have no direct access to the domain, make sure to follow our guide on domain verification.  
+3. Set up events in Events Manager 
+Each domain can have up to 8 conversion events set up. Be sure to choose the right events needed for your Facebook advertising. And don’t forget that you can use both: Standard Facebook events and set up custom conversion events. 
+
+
+4. Configure your events
+Test your configuration and don’t forget that events in Events Manager need “warming up”. It means that they should receive enough traction and the event has to receive around 20-30 conversions.
+
+If your advertising isn’t that active or you are testing on low budgets, consider using the fake conversion upload method to speed up the warming up of your events.
+
+RedTrack allows doing that with a conversion upload feature.
+5. Prioritize events 
+When you warmed up the events you will be able to choose prioritization. Events Manager can have up to 8 events and it uses a prioritization model. This means that the first event will have the biggest priority for the optimization and the last event will have the least. 
+6. Choose the right campaign objective
+After all the previous steps you can launch your new campaigns and expect better optimization towards conversions (purchases) if you choose the right campaign objective. 
+If you are driving advertising campaigns for a very reason of conversions we recommend using the “conversions” objective. And all the work we’ve done up to this point helps us achieve a great result.
+7. Check your conversion window
+After iOS 14 update Facebook conversion window changed to a 7-day click and 1-day view (which was a severe cut of the conversion window). But Facebook can also automatically switch you to a 1-day click window, make sure to turn it back to 7-day. 
+
+By the way, at RedTrack we offer up to 56-day conversion window. So the conversions you will see in RedTrack account performance dashboard could be dated to a very “old click”. 
+
+Facebook might not accept this conversion data as it supports up to 7-day conversion window, but at least you can see a more accurate performance report in your RedTrack reports and make further conclusions. 
+8. Use data from the Events manager for remarketing 
+One of the greatest advantages of using an Events Manager setup is the usage of advanced remarketing. You can create custom audiences in your Events Manager that are based on events (like add-to-cart).
+
+
+
+Then choose this audience for targeting when launching your new campaign and enjoy a very personalized approach to advertising. 
+9. Consider using broad targeting
+As Facebook receives way fewer data after iOS devices are cut off from tracking as we used to know it, FB algorithms did suffer a few changes and we all felt that the performance dropped.
+
+ However, FB algorithms are still a crazy advanced technology, just consider giving it more freedom to find your perfect customer. 
+
+Choose broad targeting when launching your next ad campaign and compare results to a usual ad setup. 
+
+
+Final words
+Whew! That was a lot! But I hope it was all the necessary info for you to accelerate your marketing with the use of Facebook advertising tools like Ads Manager and Events Manager. 
+
+If you are looking for a technological partner that can take up the heavy lifting behind Facebook Conversion API technology, be sure to check out RedTrack’s Facebook conversion tracking solution. 
+
+Starting is easy — a 14-day free trial with no credit card required for a sign-up. If you don’t wanna be bothered with tech setups we also have onboarding services to back you up. 
+
+
+
+&nbsp;
+
+&nbsp;

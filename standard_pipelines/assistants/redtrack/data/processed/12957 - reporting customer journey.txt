@@ -1,0 +1,128 @@
+# Reporting: customer journey
+
+
+What's a customer journey report?
+
+
+
+The customer journey report shows a customer's path before deciding on the target actions. This report demonstrates the analyzed data on clicks, conversions, purchases, and more. Applying these insights can help you improve and target your campaign content. 
+
+
+
+Customer journey report in RedTrack is composed based on the chosen conversion type:
+
+
+
+
+
+
+
+Thus, if you choose Purchase → add all the relevant filters → press Apply, and you'll see the analyzed data on all the actions that led the customer to make this purchase. By data, we mean clicks, conversions, traffic sources, advertisements, etc.
+
+
+
+Currently, the customer journey report in RedTrack:
+
+
+
+
+is available for all e-com subscription plans. If you're an affiliate, contact sales@redtrack.io for advice.
+
+
+
+can be composed only for one conversion type at a time.
+
+
+
+generates data only for your Orders. In the future, more slices of data are planned to be added.
+
+
+
+
+Prerequisites for building a report
+
+
+
+To make the Customer Journey report work:
+
+
+
+1. Activate the conversion type. 
+
+
+
+Tools → Conversion tracking → Conversion type → enable the customer journey feature for the chosen conversion type:
+
+
+
+
+
+
+
+2. Add parameters such as email and phone to your offer source/brand template. 
+
+
+
+Offer sources/Brands → Additional parameters → add the 2 parameters → assign the roles:
+
+
+
+
+
+
+
+It's essential to have this data on your shop/website side and send it with the conversion, otherwise the report will not work.RedTrack will receive the data with your purchases/orders and build the report. 
+
+
+
+How to work with the report
+
+
+
+1. Customer journey → fill in the filters → Apply/Refresh:
+
+
+
+
+
+
+
+
+Traffic channels: you can choose multiple channels of traffic.
+
+
+
+First touch and Last touch: if in the Traffic channels field, you chose several channels, in the First/Last touch fields, you can choose only the channel you're interested in. 
+
+First touch is the channel from which the customer starts his journey toward buying the product.
+
+
+
+Last touch is the field showing the channel where this journey ended and the action that led to the purchase or any other chosen event type.
+
+
+
+
+
+Search by order: you can type in your order number and filter the data only for a specific order. So far, the order number is taken from Shopify and WooCommerce.
+
+
+
+Search by customer_id: The RedTrack app is trained to provide you with customer_id info. Thus, you can filter by this ID which purchases (or any other actions/events) a certain client is interested in and the sums of money (s)he spends for this purchase.
+
+
+
+Lookback period: is attributed to the data within a chosen order.
+
+
+
+
+The difference between the Date filter and the Lookback period filter:☛ In the Date filter, you sort out all the orders for a certain period. ☛ The Lookback period filter shows the statistics only within a certain chosen order. This data picker is set for 30 and 60 days. 30 days are granted by default. To get the 60 days filter, you must address sales@redtrack.io to upgrade your subscription plan.
+
+
+
+2. Navigate and dive into order number to study the data on your event:
+
+
+
+

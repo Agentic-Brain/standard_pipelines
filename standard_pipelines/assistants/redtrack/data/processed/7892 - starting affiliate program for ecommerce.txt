@@ -1,0 +1,124 @@
+# Starting Affiliate Program for eCommerce
+
+The affiliate program can become the number one driver to your sales while running an eCommerce business. Imagine having a huge marketing department, but fully outsourced and independent. You don't need to control them, all you need is — to track performance and evaluate your ROAS. If you still didn’t start an affiliate program, this is a guide for you! 
+The benefits of running an affiliate program for eCommerce business are:
+
+ 	You pay only for results thanks to the commissions model as a reward. Therefore you have to pay affiliates only if they brought sales to your store. 
+ 	Affiliate programs allow almost limitless growth and scale for eCommerce, almost like no other type of marketing &amp; advertising could do. The more affiliates you involve — the more customers you are gonna get if you do everything right, ofc!
+ 	The results of affiliate marketing are easily trackable thanks to affiliate tracking links. Every action that is done on your store by customers can easily be led to affiliates that brought this client.
+
+Sounds good? Let's learn the basics of a successful affiliate program for eCom!
+
+What is an affiliate program for eCom?
+Affiliate marketing is a type of promotion when you advertise your offers/products with help of affiliate marketers by offering them commissions (or other payouts) for sale. 
+
+There are two key players in affiliate marketing: affiliates (also called publishers)  and advertisers. Advertisers own an offer (e-com products in your case) and the affiliate marketer is using all means (that are approved by the advertiser) to promote the offer for wider audiences. 
+Therefore, an affiliate program is a type of marketing relationship that involves affiliates as advertisers for your products or services on a particular condition that you predefine. 
+
+&nbsp;
+The reward for the affiliates is usually a commission from the sale or other target action (e.g. sign-ups, submissions, joining the waiting list, add to carts). 
+Usual affiliate commission/reward is anywhere from 5% to 20% from a sale, depending on the type and margin of the product you are selling. 
+The best part is you don’t have to pay for this promotion until the sale is complete. While usually, you have to pay for marketing campaigns before you know the result, this approach saves your budget from unprofitable campaigns. 
+
+&nbsp;
+Who are affiliate marketers (publishers)? 
+Basically, anyone could become a publisher from your offer. Typically affiliates drive the sales/traffic through their influence on the internet. It could be a written blog, YouTube channel, Facebook page, or any other source. 
+
+As well it could be affiliates who drive paid ads to their affiliate landing pages and then to your store. 
+Affiliate marketing models for eCommerce
+The most common models for eCommerce are:
+
+ 	Sale commission — payout as a percentage of the sale that affiliate has driven. 
+ 	Leads commission — payout for the lead that affiliate has brought. 
+ 	Click commission — payout for traffic that your website received due to affiliate campaigns. 
+
+Generally, you can find 2 types of payouts for the commissions:
+
+ 	CPA (Cost per action) — fixed sum for a target action or a purchase.
+
+For example, if you sell a product that costs $100 and you decide to set a commission rate to 10% of the sale. Then your CPA for the affiliate would be $10 as a one-time payment. 
+This model is one of the key payout types across all affiliate programs. 
+
+ 	RevShare — it is a percentage of the revenue driven by a customer, it can be a one-off payout or a RevShare for a couple of months.
+
+For example, your affiliate attracts a customer that makes several purchases within a 6 months period. If you decide to choose RevShare as 10% of the purchase you will have to pay 10% to the affiliate from the whole amount that the customer spent within 6 months.
+
+ 
+This model is more popular with subscription models but still takes place within eCom. RevShare attracts the attention of affiliates as it is a more promising reward. 
+
+No doubt, the most popular model is the Sales Commission as it’s the most important metric for eCommerce business. However, you can consider other models if you have different goals at a certain point in the development of your business. 
+Most popular eCommerce affiliate programs
+&nbsp;
+
+ 	Amazon Associates 
+Amazon is one of the most successful examples of affiliate marketing sales. Their affiliate program generates around 40% of the revenue for the company. They use the sale commission as a payment model (CPA). It’s super easy to sign up for their affiliate program for anyone, but that was truly one of the triggers for the extreme growth of the company. 
+
+&nbsp;
+
+ 	
+Fiverr Affiliates 
+One of the biggest marketplaces of freelancers and professionals. At the moment 5 of Fiverr products are available for advertising with affiliates. They use different payment models to attract more affiliates and show a good example of the competitiveness of the market. Fiverr uses both CPA (like a regular sales commission of $15-$150) and a RevShare (with 10% of the Revenue for 12 months period). This model attracts more high-end affiliates (e.g. bloggers) as the earning can be pretty high.
+
+&nbsp;
+
+ 	
+Shopify Affiliate Program 
+As one of the main platforms for eCommerce, Shopify successfully implements its affiliate program. For each sign-up to a paid plan on average Shopify pays out around $60 to the affiliate marketers. Therefore, it is another example of the CPA model which s extremely popular for affiliate programs. 
+
+
+Tips for creating an affiliate program for eСommerce
+If you are just starting and you don’t have enough of the budget for marketing campaigns, affiliate marketing for sure can become a trigger for your growth. But here are a few steps we recommend taking before diving into affiliate program creation. 
+1. Choose your payments model
+The commissions you are going to pay are probably one of the most important things for your affiliate program. There is huge competition on the market for eCom affiliate programs and you have to fight for publishers’ attention. If the commission is too low no affiliate will want to work with your business.
+Try to analyze your business margin and that shall help you evaluate what percentage of the sale you can give away to your fellow publishers. 
+Doing competitive research can help you establish the right payment model. Look what others in your or adjoining industries are doing and find the right strategy for your rewards to stand out.  
+2. Choose advertising conditions wisely 
+Before you set up the affiliate program you have to choose conditions for publishers. It’s not only about the type of payouts they are going to receive, but also about the means they can use to achieve results. 
+
+Look at the following conditions to describe in your affiliate program: 
+
+ 	Qualified type of traffic affiliate can run (paid ads, push, pop, blog posts, videos, etc.)
+ 	Qualified countries (for customers)
+ 	Qualified traffic sources 
+ 	Qualified OS (Windows or iOS)
+ 	Different payouts for different sets of actions
+ 	Qualified creatives for usage
+With the last point, you might find a great idea to create custom creatives for your brand that affiliates can use. It will help to keep a consistent brand image and avoid situations when affiliates use creatives that you would never approve of. 
+
+3. Affiliate tracking &amp; management as a must
+Probably one of the most important steps is analysis, optimization, and control, or simply called affiliate tracking &amp; management. All of that can be performed with ad tracking solutions. 
+
+
+When running an affiliate program you will need to issue special links to your affiliates to understand that the conversion happened from their influence. Each affiliate receives a unique link and when users follow the link and make a purchase — you need to somehow withdraw the data about the conversion.
+
+
+
+
+Affiliate tracking solutions can help resolve any disputes arising (spoiler: affiliates can cheat) and keep the relationship transparent as the tracker keeps data about all the clicks, conversions, and other actions in a single dashboard.
+
+Another solution that is offered by some trackers is a branded panel to run and manage your own affiliate program. The white-label panel helps publish your offer, state all the conditions that you set for the affiliate program, offer different types of payouts for different affiliates and attach creatives of your choice for the campaigns.
+
+That’s what we help doing at RedTrack. RedTrack's Publisher panel offers you a white-label program to control the performance of your affiliates and their influence on your sales and ROI.  Have all your marketing &amp; advertising activities across all channels and their results available in a single interface.
+
+You will be able to define the most profitable channels, optimize ad spend, and analyze the conversion attribution of the funnels you create. 
+
+
+4. Set your KPIs and adjust the strategy
+Before you start an affiliate program, set the KPIs you want to achieve with it. Do you want more traffic? More sales? Or maybe increased brand awareness? 
+
+Each of the KPIs requires different strategies with publishers. Different conditions for cooperation should be set and therefore different payment models have to be used.
+If you don’t meet your KPIs quickly, adjust and transform your affiliate program to meet the results you wish for.  
+5. Pay attention to the СLV (customer lifetime value) and retention rates
+When you invest in affiliate marketing, you have to understand that your goal is not attracting one-off customers. Your goal is to make them stay with you. The longer the customer will continue purchasing from you, the better will be the ROAS for you. Therefore you will be able to offer bigger payouts to affiliates, become more competitive in the field of eCom affiliate programs and attract even more customers. This is really a snowball effect. 
+
+It’s your duty to give customer experience people will remember and will keep coming back to. Create funnels and experiences that help a customer stay with you. It will double the influence of the affiliate program you are starting to run.
+6. Take control of the ROAS of the affiliate program
+It is very important to keep track of the numbers in any marketing campaign. Even though affiliate programs can be way more cost-efficient than any other marketing, it would still be of help to understand the math behind your sales. 
+What is a good ROAS? Good question, but unfortunately there is no right answer to that. It depends on profitability and the margin of your product. 
+The standard for eCommerce could be considered a 4:1 ROAS ratio. This means that for every $4 of revenue there is $1 of ad spend. 
+
+When you calculate your ROAS, take into consideration all the marketing channels you utilize, not only the affiliate campaigns. This way you will be able to optimize your ad spend and direct it only to valuable resources. You can do those complex analytics with the help of an ad tracker. If you never used such a solution before, consider trying the 14-day trial period to define the worth of your business. 
+Conclusion
+We believe that if eCom stores are still not utilizing the potential from affiliate programs — they’re missing out. No matter all the tricks you may face while learning how to manage your affiliates properly, it’s worth the growth you can gain. Remember to always keep track of the numbers and analyze the performance of each affiliate. Ignite your brand with the best affiliate marketers available⚡️
+
+Learn more about the use of the ad tracker in your eCommerce business in this guide. Affiliate tracking may become just the thing you were looking for to grow your eCom store. 

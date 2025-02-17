@@ -1,0 +1,49 @@
+# A for Antifragile
+
+If you have not heard about Antifragility book we suggest find time and read it. Written by Nassim Taleb, renowned thinker and author of the “Black Swan”, it offers a view on the world, people, systems, and processes around us through their capability of being antifragile. As Taleb explains in his book, antifragility is fundamentally different from the concepts of resiliency (i.e. the ability to recover from failure) and robustness (that is, the ability to resist failure).
+The core idea is simple and quite fascinating. Everything can be divided into three categories: the fragile, the robust and the antifragile.
+• Fragile — avoid disorder and disruption for fear of the mess they might make: things look safe, but in reality, you are vulnerable to the shock that will tear status quo apart.
+• Robust — can stand up to shocks without flinching and without changing.
+• Antifragile — shocks and disruptions make system in question stronger and more creative, better able to adapt to each new challenge it faces.
+Here is the definition by the author:
+
+
+“ Some things benefit from shocks; they thrive and grow when exposed to volatility, randomness, disorder, and stressors and love adventure, risk, and uncertainty. … The antifragile loves randomness and uncertainty, which also means — crucially — a love of errors, a certain class of errors.
+By grasping the mechanisms of antifragility we can build a systematic and broad guide to nonpredictive decision making under uncertainty in business, politics, medicine, and life in general — anywhere the unknown preponderates, any situation in which there is randomness, unpredictability, opacity, or incomplete understanding of things.
+We can almost always detect antifragility (and fragility) using a simple test of asymmetry: anything that has more upside than downside from random events (or certain shocks) is antifragile; the reverse is fragile.” 
+
+
+
+What has Antifragile to do with affiliate marketing?
+The affiliate space is always changing, there are always new opportunities and new challenges to what used to work. It perfectly fits the descriptor like volatility, randomness, disorder, and stressors. Some affiliate marketers are seeing growing profits, others fail. There are many explanations for it, but when you view it through the Antifragility lens it all becomes very simple and clear. Fragile and antifragile are relative — there is no absolute.
+Nissim Taleb defines three types of systems —
+Fragile, Robust and Antifragile
+
+
+
+
+
+If we apply the same approach to the affiliate marketing we will derive 3 theoretical type of affiliates
+
+
+
+
+
+Again — it is important to understand that Fragile and antifragile are relative — there is no absolute. One affiliate marketer may be less fragile than the other but he will still be fragile.
+The book offers a number of tools and strategies you can implement to reduce the level of fragility and increase the level of antifragility. One of them seems particularly suited for affiliate marketing.
+
+Let’s focus on the barbel — Applying Antifragile concepts to affiliate marketing
+“ The barbell (or bimodal) strategy is a way to achieve antifragility and move to the right side of the Triad. Monogamous birds put it into practice by cheating with the local rock star and writers do better by having as a day job a sinecure devoid of writing activities.”
+The premise is, you want to play on both sides of the extremes rather than in the mediocre middle (what Taleb calls Mediocristan). In the example of the (non)monogamous birds mentioned above, they settle down with a stable, predictable, albeit boring mate for life, but fool around with the rock star bird (more alpha-male) in hopes of getting better genes for their offspring. The lifetime mate is a long term, stable investment while the rock star is a volatile investment with high upside (in the form of better genes).
+The barbell strategy is a way to control the risk of catastrophe while ensuring unlimited gains on the upside. It applies across many domains and especially useful for activities where people involved are agile and able to tinker and take risks that larger, more established business and/or corporations are unwilling to take.
+This definition cries “affiliate marketers” for whom the constantly changing environments, experiments, and risks are daily routine.
+To implement a barbell strategy, one implements a system of tinkering for the smaller, riskier operations with offers and traffic sources while staying rational on set-ups that yield predictable ROI, even if it is small.
+• If the risk offer or traffic source tanks, the loss is not large enough to be catastrophic. However, if the experiment sky-rockets, there is no ceiling to the amount of profits one can take as long as you can pour in more.
+• “Rational” part should stay out of the risk zone.
+Now, there are three more things to consider:
+• a set of criteria to move traffic source or offer from one side of the barber to the other.
+• your own definition for the “weights” of the sides — or the budget allocation. it may be 90/10, 80/20 or even 70/30 — as long as losing all on the risk side is not catastrophic and would not influence the predictable side.
+• the discipline to follow the rules you set for yourself.
+Smartlinks skyrocket your barbel strategy.
+So, what role would RedTrack play? With our coming Smartlink feature, you can apply machine learning to test thousands of offers and identify the most profitable one. Automatically. Consider this the ‘risk” side of the barber where AI helps you to make experiments at inhuman scale. You can then hand-pick and move some of them to the “chosen” group that you manage manually to ensure predictable ROI and minimize risks.
+What`s next? Ask us about Smartlinks :) 

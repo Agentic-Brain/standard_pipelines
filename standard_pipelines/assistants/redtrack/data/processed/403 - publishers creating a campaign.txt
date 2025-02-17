@@ -1,0 +1,72 @@
+# Publishers: creating a campaign
+
+To create a Campaign for your branded portal act as follows:
+
+1. Add the For Publishers Traffic channel to your RedTrack account
+
+[expand title="Expand to see how to add For Publishers TC to RT"]
+
+1.1 go to Traffic channels -&gt; New from template -&gt; find the template called For publishers and press Add:
+
+
+
+1.2 you can rename your Traffic channel the way you want in the Channel name field:
+
+
+
+1.3 {replace_me} parameter in the Click Ref ID field is added for your publisher to see this value in the tracking link and replace it with his real value (macro for the click id used on his side):
+
+
+
+1.4 in the Additional parameters section you see that the sub1 parameter is blocked - it will be populated with your publisher's unique id. Nevertheless, you may provide your publishers with additional tracking sub-parameters in the field available for editing. These parameters will be added to the offer URL in the pub panel. Your publisher should replace the {replace} value with some macro/token. The data received from this token will be recorded in your account. Once you are done, press Save to apply the changes to the added Traffic source template:
+
+
+
+[/expand]
+
+2. Add the following mandatory components:
+
+ 	 Offer source and Offer
+ 	Landing page
+
+3. Create a Campaign in RedTrack
+
+[expand title="Expand to see how to create a Campaign in RT"]
+
+3.1 fill in all the obligatory fields, remember to select the Traffic source you have created for your partner/publisher within step 1 of this guide:
+
+
+
+3.2 After you choose this Traffic source from the Source dropdown, next to the Campaign details tab you will notice the activated tab called Details for publishers. Go to this tab:
+
+
+
+3.3 set additional information for your partners/publishers and press Save details:
+
+
+
+
+Hints on what to insert in the Details For Publishers fields:
+
+ 	Set some description
+ 	Choose the advertiser and direct traffic URL (if you want to provide your publishers with this option)
+ 	Put Preview and Preview Image URLs (you can use any file sharing service for the purpose)
+ 	Set the traffic type, categories, countries and OS
+
+Important!
+
+Such details as Campaign type and Campaign rate are pulled in to the Details for Publishers tab by default from the main Campaign settings. So, in case you need to have different values in the Details for Publishers tab you have to manually put these values in the related fields-&gt; press Save details (to apply the changes in the Details for Publishers tab)-&gt; press Save changes (to apply the changes to the Campaign overall):
+
+
+3.4 To add the needed creatives go to the tab Creatives:
+
+
+
+[/expand]
+
+4. Proceed with the custom settings. For details go to the article Publishers: managing payouts
+
+5. Now your partners/publishers can see, and promote this campaign in their affiliate panel and check the report anytime.
+
+
+

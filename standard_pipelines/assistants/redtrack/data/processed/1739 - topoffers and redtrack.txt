@@ -1,0 +1,122 @@
+# TopOffers and RedTrack
+
+
+
+
+
+
+TopOffers provides access to more than 2000 offers, covering over 150 GEOs. The network’s database of exclusive offers showcases the most lucrative offer types in such verticals as Dating, Sweepstakes, and Crypto.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events you want to track
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add TopOffers as an Offer source in RedTrack.
+
+
+
+RedTrack → Offer sources → New from template → add TopOffers template → copy the Postback URL → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up the Postback URL in TopOffers.
+
+
+
+2.1 In your TopOffers account open the S2S Postback Setup section → Edit tracking code:
+
+
+
+
+
+
+
+2.2 Add the RT Postback URL (copied in step 1) → Save the tracking code:
+
+
+
+
+
+
+
+If you want to receive various conversion events with TopOffers and RedTrack:a. Set the conversion types in your RedTrack account.b. Add the &amp;type=conversiontype to the postback URL and add it under Informational events postback in TopOffers:Alternatively, you can use {conversionType} in the main postback token instead:
+
+
+
+3. Obtain the TopOffers offer.
+
+
+
+In your TopOffers account open Offerwall → select the offer you want to promote → Apply → once it's approved, copy the offer link.
+
+
+
+4. Add TopOffers offer to RedTrack.
+
+
+
+In your RedTrack account go to Offers → Create new offer → fill in the mandatory fields → add TopOffers offer link in the URL field → make sure to add the tracking parameters “data2={clickid}” at the end of the offer URL → Save:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create a&nbsp;campaign in RedTrack&nbsp;with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To help you add the campaign refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

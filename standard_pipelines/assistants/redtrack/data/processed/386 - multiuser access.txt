@@ -1,0 +1,98 @@
+# Multi-user access
+
+
+The multi-user access feature allows several users to work in one RedTrack account. This is essential when you have a team where everyone needs access to edit the data or even different levels of access (for example based on Traffic channels). Each invited user will have access to your account (Admin account) and you (Admin) will be able to manage the performance of each user.
+
+
+
+For more on available subscription plans and costs study RedTrack Pricing section. In case of any confusion or extra questions on the price range please contact sales@redtrack.io.
+
+
+
+To invite a new user to RedTrack, act as follows:
+
+
+
+1. A user needs to sign up to RedTrack via&nbsp;https://app.redtrack.io/signup&nbsp;or sign in to the already existing account.
+
+
+
+2. Once it’s done, contact support@redtrack.io to change the user's status to Shared. When you've got confirmation that the user's status was changed, proceed further with step 3 below.
+
+
+
+3. Go to your RedTrack account→ press on the burger menu→ Multiaccess→ New button:
+
+
+
+
+
+
+
+4.&nbsp;Fill in the user profile and access details
+
+
+
+4.1 Type in the user's email→ turn on the toggle Show financial data to reveal the financial data (or turn the toggle off to hide it)→ choose the elements that will be accessible for the shared user within your account:
+
+
+
+
+
+
+
+☝ Full access provides the ability to see and edit all data in your RedTrack account.☝ Selected access type will be applied to all elements from the list. If you switch the "Campaign view" toggle off, the Campaigns tab will not be available for this user. If it is required to use "read-only" mode, you can switch "Edit" and "Export" toggles off. RedTrack tabs will be available only in view mode.
+
+
+
+4.2 If you want your users to work with individual Traffic channels, Campaigns, or Affiliate networks, you can limit access by them:
+
+
+
+
+
+
+
+Let's break down the logic of the limited access based on the Traffic channels in the screenshot above:
+
+
+
+
+If you add Facebook and TikTok traffic channelsto the "By Traffic Channels" field, &nbsp;then in the "By Campaigns" field you can select only the Campaigns that were created with the added Traffic channels Facebook and TikTok.
+
+
+
+"By Campaigns" field depends on the "By Traffic Channels"&nbsp;field, so if you delete Facebook and TikTok channels from the&nbsp;"By Traffic Channels" field, then the Campaigns that refer to these traffic channels are also automatically deleted from the "By Campaigns" field.
+
+
+
+"By Traffic Channels"&nbsp;field does not depend on the "By Campaigns" field, so if you delete&nbsp;Campaigns that refer to Facebook ad TikTok from the "By Campaigns" field, they won't be deleted from the "By Traffic Channels" field.
+
+
+
+"By Brand/Offer source" field is an independent field, so you can choose there any added Brand/Offer source regardless of the info selected in the "By Traffic Channels" or "By Campaigns" fields.
+
+
+
+
+5.&nbsp;Once the added user accepts the invitation sent to him/her by email, (s)he can log in as a multi-user. To do that press the&nbsp;Shared access&nbsp;icon next-&gt; find the needed account name:
+
+
+
+
+
+
+
+To exit the multiaccess account, click on the multiaccess button and press&nbsp;Exit Shared Access&nbsp;option:
+
+
+
+
+
+
+
+6. The access type may be modified anytime for any user. To do that go to the&nbsp;burger menu→&nbsp;Multiaccess→ press the icon Edit next to the name of the needed user:
+
+
+
+

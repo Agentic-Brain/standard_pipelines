@@ -1,0 +1,22 @@
+# 22-Aug
+
+
+ 	New set of macros was added for redirects and postbacks: {rt_aid}, {rt_gid}, {rt_cid}, {rt_pid}
+ 	The number of users for multi-access is now limited
+ 	New integrations with ClickFunnels, Gravity Forms, GoHighLevel, and PrestaShop were added on the backend
+ 	Bugfix: when filtering the data in the Dashboard tab from 7 days/months and more it also shows the data not just for the filtered period, but for the present day as well
+ 	Acquisition report feature: clicks from the Traffic source "Other" (aka organic/unattributed) will be interpreted in the Referrer field and the RT_source and RT_Campaign values will be written based on them
+ 	Costs in the Outbrain Traffic source can now be updated on the level Сampaign + Placement + Geo
+ 	Bugfix: dates in the Publisher panel conversion logs are now shown correctly
+ 	Added possibility to export/download csv-reports in the Publisher panel
+ 	Added page pagination for payments list in the Publisher panel
+ 	Bugfix: if the user exports any report, the report is sent to the email of the user who exports the report instead of the general admin email
+ 	Dashboard report tab: for unattributed campaigns was made a modification that assigns a specific name to such campaigns depending on the Referrer
+ 	Added a new button "Decline" next to the Publisher. Once it's pressed, the publisher will get an email notification that his application was rejected and his status will changed to "Declined". See more in the article Adding publishers.
+ 	The Cached data toggle was renamed into Show costs. It should be turned off to see the data in the report by Costs
+ 	New feature added: in the Funnel templates section it is possible to search an offer by typing its name, not just by choosing from the dropdown
+ 	Costs in the Taboola Traffic source can now be updated on the level Сampaign + Placement + Geo
+ 	Now cost auto-update is cleared when the source in the Campaign doesn't support this feature
+ 	Now it's possible to filter the Campaign, Traffic sources, Offers, Offers sources reports by week
+ 	2 columns with different parameter calculations were added: ROAS = Revenue/Cost = $ and ROAS,% =(Revenue/Cost)*100 = %
+ 	Bugfix: when charging Pub revenue both filters by conversion types and statuses are now counted

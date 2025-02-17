@@ -1,0 +1,91 @@
+# What is the difference between Tracking Pixel and S2S Postback URL tracking?
+
+What kind of conversion tracking method you should use is one of the most important questions that you need to find an answer to. Currently the two biggest tracking protocols out there are Pixel and S2S Postback tracking. Deciding which one to choose can be difficult but there are things that can help you pick the right one!
+
+We've compiled a quick summary and some information about both tracking methods: what's the difference, which one is better, and when.
+Tracking Pixel
+Tracking Pixel is a tracking method based on fact that every browser temporarily stores information about the user's visit to a website and his activity there. This information is stored in so-called cookies. When conversion happens, cookies are getting reviewed again to authenticate the session of the user and attribute the conversion to the visit. Tracking Pixel can track webpage visits, ad impressions, conversions, and a whole bunch of other metrics.
+But what is Tracking Pixel at its core? 
+Tracking Pixel is a piece of HTML code that is being placed on your website or landing page to track user activity and conversions. To track conversions of your offers, you need to put Tracking Pixel (HTML code) on the page that follows the sales page. Often it’s called a confirmation or thank you page. When a user visits this page, Tracking Pixel HTML code registers a conversion in RedTrack (if the user came there because of our advertising campaign). 
+
+The great thing about pixels is that they are very easy to set up! Within just a few minutes you can have your pixel up and running and track different kinds of metrics. All you need to do is to copy a chunk of code and paste it into your website! As simple as that!
+
+The tracking pixel can also be used on pretty much all networks (if you have access to the landing page code/constructor), while S2S has to be supported in order to work. Nevertheless tracking pixel it is not a perfect solution to everything. Some websites prevent proper tracking with cookies without full authorization and pixels tend to be not as reliable as S2S Postback URL tracking. This problem will likely get worse with time. Such browsers as Safari and Mozilla already started blocking the storage of web users' data in cookies. The most popular browser - Chrome would release the same update in 2021. All these make the pixel-based method a vulnerable tracking solution.
+Then what are the pros and cons of the tracking pixel method?
+
+⇒ pros
+– Quick and easy to implement. The setup is very simple and can be used if you need to be fast. Just copy and paste the HTML code to the page that follows the sale confirmation.
+
+– Good for Organic traffic. 
+
+– You can use tracking pixel when your system or your affiliate network does not support S2S Postback URL tracking set-up.
+RedTrack is constantly helping to implement S2S Postback tracking even in those cases, when it seems impossible, like in the case of our integration with ClickBank. 
+⇒ cons
+– Sometimes inaccurate. A tracking pixel is not as reliable as S2S Postback URL tracking. Since all information about the user is stored in his own browser cookies, once they are deleted, there is no tracking. Users can delete cookies (clear their cache) themselves, which happens quite often. Especially for more tech-literate users who know that removing app cache or browser solves crashing, sluggish performance, and other potential problems.
+
+– All browsers are limiting support for it. The web browsers started to prevent unsanctioned tracking with the use of cookies. Mozilla Firefox and Apple Safari have already implemented Intelligent Tracking Prevention, which, in many cases, doesn’t let you spot conversions with third-party cookies. Chrome will update its cookie policy in 2021 as well.
+
+Learn more about the difference between Tracking Pixel and S2S Postback URL in our YouTube video: 
+
+
+S2S Postback URL
+Server-to-Server (S2S) tracking is a more complicated, but better way of tracking information about the user and what he clicked on. This method generates a click ID value via an HTTP request that is used for tracking. Once a conversion happens, the affiliate network sends the value and info to your tracking software, like RedTrack, and gives you detailed information about everything. 
+
+It is a very accurate tracking method and you get a lot more information about the user’s actions. It is also extremely secure and reliable (Pixels can sometimes misfire). 
+How does S2S postback tracking look like?
+
+ 	A user sees an ad and clicks on it.
+ 	 With the click, a user goes through several redirects in a blink of an eye. In a few milliseconds, he visits RedTrack (as a tracking solution), Affiliate Network, Advertiser (the offer owner), and a landing page. Now every party has information about this user’s session. Click is being recorded and gets a new generated ID for this session.
+ 	The user immediately proceeds to the landing page after the first click, and now he has a user ID in his URL.
+ 	The user buys something on a landing page and conversion is correctly attributed.
+
+RedTrack is well-known as a feature-rich and easy-to-use tool for S2S Postback Tracking at any scale. That's why neither Safari nor Google restrictions can't affect your ability to track ads if you work with multiple Traffic Sources. Want to learn more about how S2S postback tracking works?
+
+
+
+ hbspt.cta.load(7519541, 'ef490f48-8ab0-4913-8668-57716f5d0600', {}); 
+
+What are the pros and cons of the S2S postback tracking method?
+
+⇒ pros
+– Accurate tracking. S2S Postback URL tracking is the most accurate method for tracking conversions. Tracking is done server-side, therefore there is less randomness in results. Users can’t affect tracking by simply deleting their cookies as in the case with a tracking pixel.
+
+– Secure and reliable. Less troubled with fraud and there are various options to prevent postback fraud.
+
+– Flexibility. There are more options for sending a signal about a successful event, instead of firing a conversion at the loaded thank you page. This can be helpful when the offer owner wants to register conversion after shipping an order, or a successful call.
+
+– Transparency. Can be used for verifying if there are any differences or distinctions in the number of conversions because RedTrack gets all the information about users' sessions with every click.
+⇒ cons
+– S2S Postback URL tracking is harder to setup. First-timers can have some difficulties setting it to work for the first time.
+What can you track with Tracking Pixel and S2S Postbacks URL?
+Actually, you can track any parameter of your campaign with both of them.
+
+ 	Clicks;
+ 	Conversions;
+ 	Statuses: pending (used when decision is in the process);  approved (when it's paid); declined (when it isn't paid); other (anything else happened).
+ 	Transactions;
+ 	Events.
+
+Both, Pixel and S2S postback tracking methods are available with RedTrack. Contact us if you'd like to discuss what tracking method will better fit your particular goals. 
+RedTrack Advanced Integrations with the most popular Traffic Sources
+RedTrack has advanced easy-to-set-up postbacks integrations out-of-the-box with Facebook, Google, and Bing Ads. 
+
+
+
+In minutes you can establish a connection between your Traffic Source and RedTrack and have your conversions automatically passed to your traffic sources' side. 
+
+ 	save your time on manual work;
+ 	get all your data in one place.
+
+Note that besides фutomatic conversions uploads, RedTrack advanced auto-rules are available for these Traffic Sources. You can get your ad costs updated automatically every 60 minutes and have your campaigns auto-paused if they don't meet KPIs. Want to learn more about RedTrack auto-rules?
+
+-&gt; Learn more about automation or contact us to learn more.
+
+&nbsp;
+
+Conclusion
+
+Which tracking method should you use? This depends on what you do. If your network doesn’t support S2S, you dabble mostly in organic traffic, and you are not very tech-savvy, the pixel could be a perfect choice for you. If you prefer a more secure and accurate method, then choose S2S! We would recommend S2S for everyone that can implement it, as it is the superior method of tracking. But the choice is completely yours!
+
+Feel free to join our Telegram chat, if you want to discuss these tracking methods.
+

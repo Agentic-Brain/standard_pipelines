@@ -1,0 +1,43 @@
+# How Create the Movement found every media-buying solution within RedTrack: Case Study
+
+Create the Movement is a conversion-centric media-buying agency for e-commerce and lead generation, located in the USA (Colorado, Oklahoma). 
+
+Create the Movement can assist your business in several directions: from running paid ads to SEO, SMM, website design, and video production.
+
+Running thousands of dollars in ad budget for dozens of clients requires a solution that will be able to manage the ad tracking volume, provide accurate ad results, and is easy to use to prove to the clients the value of the marketing agency. And RedTrack became a perfect fit for Create the Movement. 
+
+In this case study, we delve into the intricate details of challenges and solutions the agency found within RedTrack features.
+
+Watch a live version of the case study ⬇️
+
+
+Challenge 1: Figuring out tracking for multiple clients
+Create the Movement had to find a single solution with a simple way to integrate any traffic channel, ad network, and other tools affiliate media buyers need. Every tool has a different way to start the tracking process. However, RedTrack has caught Create the Movement's eye with simple and easy integrations with 200+ tools and networks.
+Redtrack's Solution: Unified Simplicity
+RedTrack has a simple way to integrate all the needed paid ads channels, as well as affiliate networks. You can easily follow the templates, plug in all your variables, and enjoy accurate tracking.
+Challenge 2: The iOS 14 disruption
+The notorious iOS 14 privacy updates changes the way paid ads attribution and tracking were made. Create the Movement was looking for a solution that has expertise in handling attribution even after privacy update.
+Redtrack's Solution: A Breath of Fresh iOS Air
+Redtrack entered the scene as a breath of fresh iOS air. It not only adapted seamlessly to the changes brought about by iOS 14 but also bid farewell to convoluted workarounds. RedTrack ensures saving time and ensuring accurate data in the face of privacy updates.
+Challenge 3: Reporting to the clients
+An important part of an agency work is delivering the results and showing the scope of work that was done. Create the Movement needed a solution that could help set up an easy reporting way for the clients of the agency to enjoy the ad stats in a clear way.
+Redtrack's Solution: Agency reporting portal &amp; customer journey report
+RedTrack offers a solution for agencies to create the own portal for each client with all the needed KPIs and metrics. In a few clicks the report for the client is ready and it's easy to justify any ad spend and showcase achieved ROAS.
+On top of that, RedTrack offers customer journey reporting that helps identify all the touchpoints that user had before the final conversion. Just like that, it's easy to show to the clients not only achieved ROAS, but also what kind of channels become first or last touchpoints.
+Challenge 4: Automated Ad Workflow
+Letting go of the control and maximizing profits is a dream of every marketer. Having a solution that combines tracking, attribution, and automation is a must in 2024. Therefore, RedTrack again became a top choice for Create the Movement.
+RedTrack's Solution: Ads Manager by RedTrack, Automated Rules 
+RedTrack has 2 important solutions for those who want save time monitoring their ads.
+1) Automated Rules:
+Rules by RedTrack help you prevent ad waste, or scale winners. You can set up Pause &amp; Restart Rule to make sure that ads that don't bring you the right result, will be automatically paused. Alternativaly, if the campaign reached required KPIs — you can scale the budget for this campaign automatically.
+2) Ads Manager by RedTrack
+Ads Manager allows to have a quick overview of all of your campaigns in one place. Instead of opening Facebook Ads, Google Ads, TikTok Ads, Taboola, Outbrain, and other ad channels, you can see all of these campaigns in a single dashboard of Ads Manager. And the best part is, you can pause / restart campaigns or ads straight from Ads Manager without opening other tabs. Currently, this feature works for Facebook and TikTok campaigns.
+
+
+
+
+  hbspt.forms.create({
+    region: "na1",
+    portalId: "7519541",
+    formId: "572dc2f7-2e6a-4e9f-8a7b-698e3e7340b9"
+  });

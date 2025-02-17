@@ -1,0 +1,52 @@
+# Increasing the event match quality
+
+
+Why I need this feature
+
+
+
+If you work with an affiliate offer, having a 10/10 match quality is impossible. Every network has a list of parameters it wants to receive, but only  half of them can be covered by any third-party tool. Absence of the required parameters causes low match quality level. And it’s not something you should struggle with.
+
+
+
+RedTrack has a feature that can help you improve the event match quality with your network. It does not take any additional values from the network itself, but if you have them on your website/affiliate network side (for example, order ID at Shopify) or store them on your side, you can send them to RedTrack and back to the network to increase the event match quality. This feature is enabled by adding additional parameters for data enhancement to the Offer source / Brand template settings and assigning relevant roles to them. 
+
+
+
+Important!- Before working with additional parameters for data enhancement, contact your Account manager to clarify which parameters can / should be sent and processed on your platform’s side. You must be sure that the website (affiliate network) is able to send additional target parameters.- If you do not work with any offer source and promote your offers, this feature can be used only if you store the data on your side and have the technical capabilities to add this data to the conversion triggered.
+
+
+
+How to add additional parameters and assign roles to them
+
+
+
+1. Make RedTrack identify and accept this data with a postback first
+
+
+
+Offer sources / Brands → Additional parameters → add the required parameters, macro, name and assign the roles: 
+
+
+
+
+
+
+
+Mandatory fields: ◉ Macro/Token: insert {r} or {replace}.◉ Role: assign your parameters a certain role. This list of roles for parameters is fully supported and recorded (processed) in RedTrack:Optional fields: ◉ Parameter: that’s where you give your parameter a name, but can leave it empty and in the tracking URL your parameters will be called sub1,2,3 etc.◉ Name / Description: that’s the name you’ll see in the reports instead of sub1,2,3. For your convenience you can customize these names as you wish.
+
+
+
+2. The added parameters will be appended to the Postback URL which you should copy:
+
+
+
+
+
+
+
+3. Paste it in your offer source S2S postback settings as usual (or in any other postback option you use on your side).
+
+
+
+That's it. Once the conversion postback containing those values is sent to RedTrack, we will grab it, attribute it to the appropriate campaign, and send it to your network with the specified role.

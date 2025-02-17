@@ -1,0 +1,70 @@
+# What is server-side advertising tracking and why you should implement it?
+
+Have you heard about GDPR, CCPA, CCPR, ATT prompt, Facebook Conversion API things, Google Privacy Sandbox? 
+
+It’s all about the same thing — a cookieless future or a future without third-party cookies. S2S tracking is one of the methods that work even during times like that. 
+
+Server-side tracking gradually replaces the pixel that misfures. But how does it actually work and what are the benefits for advertisers?
+
+Let’s explore in this article:
+
+ 	Background of cookieless updates 
+ 	What is S2S (server-side) tracking 
+ 	Pixel tracking method VS server-side tracking 
+ 	Why pixel is outdated
+ 	Server-side tracking as a new standard 
+ 	Why use RedTrack as a solution for server-side tracking? 
+
+
+
+The importance of cookieless updates 
+Understanding the urgency and ultimate importance of cookieless updates is crucial when introducing yourself to the topic of server-side tracking. 
+Privacy matters have been around for a while and third-party cookies gained a really bad reputation. 
+
+What we have to understand as marketers, is that pixels are not gonna work in the nearest future. And even if they continue functioning technically, it will not show you the accuracy behind your performance because of all of the privacy updates happening on the market. 
+Starting with GDPR, and CCPA and finishing with updates from companies like Facebook (introduction of Facebook Conversion API) and Google (introduction of Google Privacy Sandbox).
+
+S2S tracking is the only way now to track your clicks&amp; conversions accurately and align marketing between channels (imagine you have multiple marketing channels, platforms, and networks you are working with, that means you need to establish data flow between all of them and S2S will allow you to do that. 
+What is S2S (server-side) tracking? 
+Server-side tracking (S2S) is a privacy-friendly and secure way to track your conversions.
+
+In S2S tracking, when a user clicks on a tracking link or generates an ad impression, a unique identifier (unique ID) is generated and stored. Later, when the conversion happens, the same unique ID is being pulled out to match the initial click with the latter conversion. That’s how tracking solutions know that it was that particular user making a conversions without breaching any privacy rules.
+
+
+
+In order to get this job done, you need an ad tracking solution to perform server-side tracking. Otherwise, you will spend a lot of time &amp; financial resources developing such solutions. When investing in a privacy-friendly solution, you get the S2S tracking method by default and get reliable marketing data for further analysis.
+
+The unique ID also comes with some data about the user. Unique user information such as browser, country, operating system, internet service provider, time and date at which the information was sent, etc. can be understood simply based on the click ID alone.
+
+When the conversion happens, the affiliate networks (or other marketing channels) send back the value along with the unique ID (that’s also why this method being called postback). 
+
+Server-to-server conversion tracking will help you to know exactly when and where and at what time the conversion was generated. This helps to make the optimization process quick and easy when compared to other forms of the campaign.
+
+Server-side tracking VS pixel tracking 
+Pixel tracking is also known as the cookie-based tracking method. When going for such an option, you simply install a piece of HTML code on your website. Therefore, all the data is being stored not on the server-side, but on the client-side.
+
+This is exactly what makes this tracking method less accurate.
+
+Pixel can easily be blocked by ad blockers and users may simply delete cookies (which will affect your statistics). Therefore, the performance reported by pixels is not precise. 
+Why pixel is an outdated tracking method 
+As the pixel is a typical representation of “cookies times”, the performance of pixels is severely affected by all the changes from Apple (ATT prompt), Facebook, Google, etc. 
+
+All of the platforms are slowly going towards server-side integrations to ensure that you as marketers can have access to an accurate performance report &amp; comply with privacy regulations. Therefore, pixels just become crumbles of cookies from the past that can not provide you with performance data like they used to even though technically these codes still function. 
+Server-side tracking as a new golden standard for marketers 
+Marketers turn to server-side tracking as a way to track marketing channels, have access to performance data, and analyze and optimize marketing activities towards better and more effective results. 
+
+Your unique ID generated during a server-side tracking will give you the data about the date &amp; time of the conversion, as well as some other important variables like OS, browser, location, etc.
+
+This data will allow you to optimize your marketing for better results. 
+
+Server-side tracking also opens the opportunity to integrate all of your marketing channels through a trusted ad tracking software and establish the data exchange between systems. Your affiliate networks will receive data from all the marketing channels, your ad channels (Facebook, Google, Taboola, TikTok, Bing) will be fed with data for algorithms optimization, and your ad tracking system will have a joint report from all the channels to give you an overview of your marketing efforts and results. 
+RedTrack as a tool for server-side conversion tracking 
+If you are looking for a trusted marketing analytics tool to perform s2s tracking, you should consider turning to RedTrack for several reasons: 
+
+ 	RedTrack has integration with 200+ channels: affiliate networks, ad channels, and e-commerce platforms. You will find built-in templated from all the needed platforms to easily start analyzing performance. 
+ 	By default, you get server-side tracking with all the important marketing channels (Facebook, Google, TikTok, Bing, ClickBank, etc.) 
+ 	RedTrack is an unbiased source of marketing data that shows you your performance from different angles in a single report. 
+ 	You don’t have to worry about technical implementation, you have templates, out-of-the-box integrations, and plenty of tutorials to help you along the way. Besides, RedTrack has an outstanding customer support team and onboarding services. 
+
+&nbsp;
+

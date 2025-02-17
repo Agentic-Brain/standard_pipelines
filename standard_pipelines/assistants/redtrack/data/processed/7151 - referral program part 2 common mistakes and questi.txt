@@ -1,0 +1,107 @@
+# Referral program Part 2: Common mistakes and questions
+
+During COVID-19 building strong customer engagement has become more important than acquisition. A happy client is a paying client. Moreover, your loyal customer base can become a great source of organic lead generation. The power of recommendation is much bigger than the power of ads. Numbers show that referred clients typically have 16 % higher LTV and 18 % less churn than those that were acquired by other methods. So, why not to try?
+
+Unfortunately, just saying your customers about your referral program ideas often isn’t enough. That’s why building a referral program requires a truly personalized approach. Do you want to know how to avoid mistakes at the very beginning?
+
+First, you may find our previous blog post useful: Referral Program Part 1: 5 strategies that will help you earn money by referral link.
+
+We also discussed how our clients use RedTrack to attract and engage their referrals. In this second part, we’d like to share our observations about the TOP 3 most common mistakes beginners make while building and promoting their referral programs. 
+
+Ready? Let’s go!
+
+Mistake #1. Making your Referral Program ideas too hard to understand
+This applies to both the mechanics and messages you sent to referrals. They both should be simple and intuitive. Make sure that your referral signup is frictionless and the access to the offers is barrier-free. If you see that something goes wrong, help your referrals to find the right way and provide them with everything they might find useful while promoting your products or services.
+
+This can be documentation, blog posts, presentations, creatives, and even text scripts. We use this strategy at RedTrack ourselves. Want to see how?
+
+First, we enhanced our core ad tracking product with special features to provide our clients with a seamless user experience of managing and tracking their referrals. Both the referral program's owners and users have different workspaces and feature sets.
+
+If you're the owner of a referral/affiliate program, you can add an unlimited number of offers, set available traffic sources, track and manage your referrals all in one place. Here's how it looks like.
+
+ 	
+Create a Campaign with the right Traffic Source and go to 'Details for Publishers' Tab
+
+&nbsp;
+
+&nbsp;
+
+
+
+2. Write down your Referral Offer Description and finish your settings
+&nbsp;
+
+
+3. Click on the Publisher Panel Tab, add your Referrals, and generate special links for them
+If you want to see how your offer will be seen by your Publisher, click on the Login as a Publisher button. Here's what we got:
+
+
+
+&nbsp;
+
+Read more about Publisher Panel settings here
+
+4. Track your Referrals performance all at once
+
+The other workspace is designed specifically for publishers and is called the Pub Panel. Here Referrals might see the available offers, go deep into details of your offer 9 traffic sources/GEO restrictions/creatives).
+
+
+
+How to make these separate workspaces work together?
+
+1. Gather your referral contacts. You may find new audience by creating a special landing page or take emails from your user base.
+2. Enter their contact details into RedTrack;
+3. Enable the right offers to the right people;
+4. Send them the activation URL.
+
+All set! Now let them earn by referral link
+
+Sounds easy, isn't it? But let's go through the most typical mistakes marketers often make.
+Mistake #2. You promote what you think your customers would like
+It's important to ensure that your rewards are worth your client's effort. If your customers need to make a lot of effort to find new users for your product, he or she will require a corresponding reward. Too small or irrelevant ones will demotivate customers from going into your referral program.
+
+And yes, don't forget about your competitors and companies that target the same audience. While working on awards, our team used all of the above-mentioned methods and also provided in-depth customer satisfaction research. By the way, how do you find our awards? If you find anything interesting, please, sign up for our Referral Program and earn by referral link.
+
+
+
+
+
+ hbspt.cta.load(7519541, '48fd2073-7b69-4423-b882-d7a59726ba06', {}); 
+
+&nbsp;
+Mistake #3. Don't put enough efforts into your Referral Program Promotion
+1. Not enough promo channels
+It may sound like a platitude, but today a lot of referral program ideas fail simply because customers don’t know about it. Creating a separate tab on your website isn't enough. Don’t be afraid to reach a new audience that never worked with your product before. Reaching out to as many people as possible is a crucial factor that will determine the success of your referral program. The more people know about your initiative, the more chances you'll be able to acquire new customers that will drive more sales. Treat it as a separate campaign and use several traffic sources for its promotion. Yes, increasing referral traffic is twice as harder if you're a small brand of a beginner,  but it's absolutely possible.
+
+Organic traffic sources:
+
+ 	Guest posting on Industry Blogs;
+ 	Cross-promo activities with companies/ product with the same audience;
+ 	Commenting on forums and blogs;
+ 	Social Networks activities;
+ 	Build trust on thematic forums;
+ 	Add information about referral program to your online signatures and bio where it's relevant;
+ 	Adding Share Button on your website and post-purchase messages;
+ 	Insert it into the users' interface.
+
+Paid traffic sources:
+
+ 	Social media Ads;
+ 	Search Ads;
+ 	Retargeting;
+ 	Video Promotion.
+
+We won't lie. There’s no guarantee that all of them will work. To get a better understanding of what works and what's not, you may try  RedTrack to track the efficiency of your multiple traffic sources using just one tracking link. 
+
+&nbsp;
+2. Bad CTAs
+The CTA color or its name can make a serious change in your funnels metrics. If your CTA is buried on your website or resting somewhere in the website footer, there is much less opportunity for a customer to interact with it. Plus, make sure you have a clear call-to-action in each of your communication form that directs the audience to the right destination. One of the easiest ways to make your CTA stand out is to make it contrast with the surroundings.
+
+Here are some examples of bad and good CTAs:
+
+&nbsp;
+
+3. Wrong incentives
+Do you know what really motivates your customers? More money? Social proof? Networking with your other customers? One of the biggest mistakes is that companies are usually trying to save their resources by offering lackluster incentives to their clients. Here we're not talking about bonuses or awards. Here we're talking about the users making a choice to participate or not into your initiative. Applying specific incentives to your offers and add some kind of urgency. Customers are usually much more likely to respond to exclusive offers than an ordinary promotion lacking inclusion and intrinsic value.
+Conclusion
+Selling Referral Program ideas that actually work requires a lot of effort. Before going into it we recommend exploring how other programs work and try to promote several of them to check how everything works from a referral's side. If you don't know which program to choose for a start, try RedTrack ad tracker.  Receive 15% commission for each referral deal and enjoy custom rewards.

@@ -1,0 +1,318 @@
+# Bing Ads and RedTrack
+
+
+
+
+
+
+
+
+
+
+&nbsp;
+
+
+
+Bing Ads helps you reach a new group of high-quality customers and increase your return on advertising spend (ROAS). In addition, clients with Bing Ads campaigns often have lower cost-per-click (CPC) and costs-per-acquisition (CPA) than with comparable Google AdWords campaigns.
+
+
+
+RedTrack has an API integration with Bing Ads, which gives you the following benefits:
+
+
+
+
+Pause: campaign, creative
+
+
+
+Create automated rules
+
+
+
+Auto-update cost data
+
+
+
+Receive conversion data automatically in your BingAds account.
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer (if you're an Affiliate)/ Brand and Website (if you're an Advertiser)
+
+
+
+
+
+
+1.&nbsp;Add Bing as a&nbsp;traffic channel&nbsp;to RedTrack.
+
+
+
+1.1&nbsp;Traffic channels →&nbsp;&nbsp;New from template → find&nbsp;Bing&nbsp;template and press Add:
+
+
+
+
+
+
+
+1.2&nbsp;All the essential parameters are already filled in, so no need to change anything. You can only remove the macros you don’t want/need to use in the&nbsp;Additional parameters&nbsp;section → Save the template:
+
+
+
+
+
+
+
+The blocked (greyed) parameters cannot be changed as these parameters are required for Bing-RedTrack API integration. Leave it as is and do not change the parameters later in the tracking template.
+
+
+
+2.&nbsp;Integrate Bing with RedTrack
+
+
+
+2.1&nbsp;Once you’ve saved the source template, the “Connect” button under the Bing Ads API integration section becomes active. Since it is a complex API integration, we need to get permission to integrate from Bing first. Press Connect:
+
+
+
+
+
+
+
+2.2&nbsp;Verify your ad account by entering your credentials → allow access to your data:
+
+
+
+
+
+
+
+
+
+
+
+Once it’s done, you will be redirected back to your RedTrack account settings. This means Bing ads accepted the integration, and you can proceed with adding your account ID.
+
+
+
+2.3&nbsp;Copy your Bing Ads Account Id (aid consisting of 9 digits), which can be found in the URL once you log in to your Bing account:
+
+
+
+
+
+
+
+2.4&nbsp;Get back to your BindAds Traffic channel in Redtrack → add the copied account ID (from step 2.3) to the&nbsp;Bing Ads Account Id&nbsp;field in the template →&nbsp;Save changes:
+
+
+
+
+
+
+
+Once you’ve saved the changes in the template, the Active toggle will appear at the top right corner next to the Connected button, which means your account in RedTrack is integrated with your Bing Ads account.
+
+
+
+To enable the auto-cost update feature, follow this short guide.
+
+
+
+3. Set customized conversion events and map them.
+
+
+
+3.1 Use this guide to help you set the customized conversion types to track different conversion events separately and send them to your Bing account.
+
+
+
+3.2 Get back to your Bing Traffic channel settings → scroll down to the Bing Ads API integration block → set the mapping → press Save changes to apply them:
+
+
+
+
+
+
+
+Info in the columns Conversion Type, Conversion name, and Category gets to your Bing account settings by API, so you won’t need to adjust any settings related to conversions mapping in Bing, just be mindful of what you are inserting in these columns in RedTrack.▸Conversion type – is the custom conversion type you have set within step 3.1.▸Conversion name – how this conversion type will be displayed in your Bing account.▸Conversion Category – Bing conversion event category. You no longer need to set the category manually in Google Ads, we will send the category with the conversion.▸Conversion scope - determines if the goal applies to all accounts or a specific account.▸Include in “conversions” – set "yes" to add this conversion type to the conversions column in the Bing Ads.If you have filled the event field in the Bing TC settings, the Conversion name field will be filled by the pattern "event name - conversion type" will still be sent:
+
+
+
+4. Create a Campaign in RedTrack.
+
+
+
+4.1 Follow&nbsp;this guide (for Affiliates)/ this guide for Advertisers to help you create the Campaign in RT
+
+
+
+4.2 Once your Campaign is created, copy the script depending on the type you're using:
+
+
+
+
+If you use a universal tracking script, use this guide to help you create one.
+
+
+
+If you use a no-redirect script, copy it from your Campaign → Tracking links and parameters → No-redirect tab:
+
+
+
+
+
+
+
+
+With Bing Ads you can use only no-redirect tracking method of tracking: either universal tracking script or no-redirect script.
+
+
+
+4.3 Paste the copied script to your landing page code.
+
+
+
+5. Launch&nbsp;the Campaign in your Bing Ads account
+
+
+
+This article focuses on RedTrack↔Bing Ads integration. If you have questions regarding Bing Ads setup, please turn to Bings Ads internal KB or their support team.
+
+
+
+5.1 In your Bind Ads account go to Campaigns → Create:
+
+
+
+
+
+
+
+5.2 Fill in the mandatory fields as per your needs → go to the tab Ads and extensions → mandatory steps for Bing Ads&lt;-&gt;RedTrack integration within the settings of this tab are as follows:5.2.1 press Create ad:
+
+
+
+
+
+
+
+5.2.2 set your LP URL in the Final URL field:
+
+
+
+
+
+
+
+5.2.3 get back to RedTrack Campaign settings (step 4.2) → Tracking links and parameters section → copy the needed tracking parameter depending on the script you're using:
+
+
+
+
+
+If you use a&nbsp;universal tracking script, copy the tracking parameters from the tab&nbsp;Universal script:
+
+
+
+
+
+
+
+
+
+If you use a&nbsp;no-redirect script, copy the tracking parameters from the tab&nbsp;No-redirect:
+
+
+
+
+
+
+
+
+
+5.2.4 in your Bing Ads account (step Ads &amp; ad extensions→ Create your ad) scroll down to the section Advanced URL options&nbsp;section and paste the additional parameters to the Tracking template field:
+
+
+
+To avoid any errors you should add {lpurl}? to your tracking parameters:Example:{lpurl}?sub1={AdId}&amp;sub2={CampaignId}&amp;sub3={Device}&amp;sub4={AdGroupId}&amp;sub5={MatchType}&amp;sub6={lpurl}&amp;sub7={ProductId}&amp;sub8={QueryString}&amp;sub9={TargetId}&amp;sub10={KeyWord}&amp;ref_id={msclkid}Do not change the order of the parameters as it is required for the extended API Integration!
+
+
+
+
+
+a. Go to your RT Campaign settings (created within step 4) → Tracking links and parameters → Universal script → copy the Tracking parameters:
+
+
+
+
+
+
+
+b. Insert the parameters into the Tracking template field:
+
+
+
+
+
+
+
+
+
+a. Go to your RT Campaign settings (created within step 4) → Tracking links and parameters → No-redirect → copy the Tracking parameters:
+
+
+
+
+
+
+
+b. Insert the parameters into the Tracking template field:
+
+
+
+
+
+
+
+
+
+5.2.5 fill in the rest of the mandatory fields → press Save and run the campaign. Conversion data will be sent to Bing automatically once it's integrated. No need to put anything in the postback section on the RedTrack side.
+
+
+
+When adjusting the Settings in the Conversion goal details step make sure to choose the option Conversion action value may vary under the Revenue section:
+
+
+
+&nbsp;6. Set up the automation.
+
+
+
+
+Use this guide to help set up rules.
+
+
+
+Use this guide for setting up the auto update cost feature.
+
+
+

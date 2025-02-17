@@ -1,0 +1,98 @@
+# How to use partnership marketing with RedTrack? Partnership Portal explained!
+
+Lately, there’s so much buzz around partnership marketing. While it’s hard to figure out which types of marketing are fitting the “partnership marketing” label, we can learn how to deal with 3 main directions: affiliate programs, referral marketing, and influencer marketing.
+
+Let’s investigate together how Partnership Portal by RedTrack is able to support your marketing whether you choose to partner up with affiliates, referrals, or influencers. 
+What is partnership marketing? 
+Partnership Marketing is a way to collaborate with other businesses or simply partners in order to achieve the marketing (and therefore, financial) goals of all the partners. 
+Partnership marketing can take many forms: from cross-promos of 2 businesses to affiliate links. But the core of the method is simple: to use the power of another person, business, or brand to promote your own. 
+Different types of partnership marketing 
+Today we are going to talk about 3 ways to collaborate through partnership marketing: affiliate program, referral program, and influencer marketing using RedTrack’s Partnership Portal. 
+How to start an affiliate program with Partnership Portal by RedTrack
+Affiliate program — is a special type of marketing when you introduce affiliate marketers as advertisers for your business.
+We already made another article covering the intricacies and benefits of starting an affiliate program, so be sure to check it out. 
+
+
+
+Partnership Portal has a super easy and intuitive UI that makes a creation of a new affiliate account seamless. 
+
+With RedTrack Partnership Portal you get:
+
+ 	Easy sign-up for new affiliates
+ 	Customization of the sign-up, login pages (to gather the right information from your affiliates)
+ 	Customization of the e-mails you sent out to affiliates (to create a personalized experience for all the affiliates)
+
+
+How to track affiliates' performance with Partnership Portal
+Once your affiliates are signed up, they get access to the Portal with all the conditions of the affiliate program you run. You can set custom conditions for each campaign you run, or even customize it depending on the affiliate.
+
+This is the list of rules and conditions you can set for your affiliate program:
+
+ 	type of payout (RevShare, CPA, etc.)
+ 	amount of payout (whether it's a percentage or fixed sum)
+ 	allowed OS for traffic
+ 	allowed devices for traffic
+ 	allowed locations for advertisement
+ 	you can also add creatives that affiliates can use for campaigns
+
+Once you fully describe the future campaign (on the admin side), your affiliate will see the campaign description in the Portal, as well instantly receive different types of tracking links to control the performance.
+
+&nbsp;
+
+
+
+&nbsp;
+
+Affiliates can use direct and redirect tracking links, also allowing them to track impressions (if the channel supports it). Affiliates also can see their performance in the main dashboard and control how many clicks and conversions they are bringing to your business.
+
+
+
+&nbsp;
+
+As an affiliate program owner, you can control the performance of the affiliates through a separate affiliate report, as well as look at it in the main Dashboard (that combines all of your advertising channels).
+Just like that, you are able to compare the results from affiliates' campaigns with the rest of marketing channels you are using.
+
+Test Partnership Portal during a 14-day free trial (no CC required).
+Manage referral marketing with Partnership Portal 
+If you don't want to bother yourself with creating an affiliate program, you can always go with referral marketing. It can be simpler in the process setup, but still very fruitful.
+
+You can easily share referral links and enjoy the results of people spreading the word about you, while rewarding them with a small commission.
+How to use Multilevel marketing (MLM) with RedTrack
+Another way to advance your referral marketing is using Multilevel marketing.
+Multilevel marketing (MLM) is a practice of promotion where you reward each level of referral marketers accordingly. That means that all marketers can recruit other members of the network that can work on your promotion.
+In order to use MLM in digital marketing, you need special software like RedTrack that allows to reward each level of recruited referral marketers according to their performance automatically.
+
+In the Partnership Portal, you can set the amount of the commission, how "deep" the referral program can go (aka how many levels it can have), and finally what's the decrement for each level (meaning how much less each level of referrals will get). Once you set your requirements, the rest of the process will be performed automatically by RedTrack.
+
+
+
+To understand better how MLM works, take a look at the example below. This picture showcases how MLM works on 3 levels, rewarding each referral participating in the recruitment of other partners.
+
+
+
+If you need more details about how referral marketing with RedTrack works, feel free to book a demo and get a consultation from our specialists.
+Collaborate with influencers 
+And finally, probably the trendiest advertising tactic of 2021-2022 is influencer marketing.
+
+Partnership Portal also gives you a chance to successfully collaborate with influencers.
+The unique advantage of Partnership Portal by RedTrack is ability to use both: tracking links and promo codes for influencer campaigns.
+
+
+The ability to use both tracking methods gives full control over the influencer's performance and allows you to make decisions, based on the real data about the numbers behind each influencer campaign.
+
+Access to tracking links and special unique promo codes is also given through a Partnership Portal. You can either create an account for your influencer or just send them over all the necessary links and coupons.
+
+
+Partnership Portal Takeaways
+Partnership Portal is a unique platform developed by RedTrack in order to support your adventures in partnership marketing.
+
+RedTrack combines advanced features coming from ad tracking &amp; attribution field with collaboration tools that help manage relationships with all of your partners:
+
+ 	issuing needed links or promo codes
+ 	tracking the performance of each partner
+ 	comparing the performance of all of your advertising channels
+ 	simplify relationships with your partners by automating the process (bye-bye performance spreadsheets👋)
+
+
+
+&nbsp;

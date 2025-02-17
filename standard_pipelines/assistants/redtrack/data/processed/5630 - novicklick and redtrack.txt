@@ -1,0 +1,120 @@
+# Novicklick and RedTrack
+
+
+
+
+
+
+Noviclick is focused on performance and conversions. With its advanced targeting options and fraud filter Noviclick makes sure that the clients get real quality clicks that are proven to have high interaction and conversion rates. 
+
+
+
+Integration
+
+
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types you're planning to work with
+
+
+
+
+
+
+1. Get YourPersonalKey from Nociclick
+
+
+
+1.1 In your Novicklick account go to Campaigns → Create campaign:
+
+
+
+
+
+
+
+1.2 Scroll down and copy YourPersonalKey from the end of the Postback URL:
+
+
+
+
+
+
+
+2. Add Noviclick as a traffic channel in RedTrack and add your personal key in the Postback URL
+
+
+
+2.1 Go to your RedTrack account → Traffic channels → New from template → find Noviclick → Add:
+
+
+
+
+
+
+
+2.2 Paste YourPersonalKey (copied within step 1.2) to the end of the S2S Postback URL → Save:
+
+
+
+
+
+
+
+3. Create a campaign in RedTrack
+
+
+
+3.1 Campaigns → Create new campaign → use&nbsp;this guide&nbsp;for Affiliates /&nbsp;this guide&nbsp;for Advertisers to help you add the campaign with Noviclick as your traffic channel → once your campaign is saved, copy the automatically generated&nbsp;click URL&nbsp;(your tracking link):
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+3.2 In your Campaign settings go to the section S2S Postback for Noviclick → press Add → check if the&nbsp;value for the key parameter is in place → Save changes:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+
+
+4. Add tracking URL from RedTrack to your campaign in Noviclick
+
+
+
+In your Noviclick account go the campaign (created within step 1) → paste the copied Click URL (from step 3.2) to the URL field → fill in the rest of the mandatory fields → press Create campaign:
+
+
+
+
+
+
+
+
+
+

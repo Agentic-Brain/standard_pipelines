@@ -1,0 +1,212 @@
+# MGID and RedTrack
+
+
+
+
+
+
+MGID, Inc. is a&nbsp;global pioneer in native advertising&nbsp;that provides&nbsp;tailored solutions for advertisers, affiliate marketers, online stores, webmasters, web marketers, brand managers, performance-driven media buyers, and publishers on one integrated platform. 
+
+
+
+RedTrack has an API integration with MGID, which gives you the following benefits:
+
+
+
+
+Pause: campaign, placement, creative
+
+
+
+Create automated rules
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types&nbsp;you’re planning to work with
+
+
+
+
+
+
+1. Add MGID template to RedTrack.
+
+
+
+Traffic channels → New from template → find MGID → Add → save the template:
+
+
+
+
+
+
+
+
+
+
+
+The new MGID template will become available with an S2S Postback URL for MGID and already added tracking parameters:Some of the parameters in the Additional parameters section are greyed, which means you cannot change them as they are required for the extended API integration.
+
+
+
+2. Integrate MGID with RedTrack.
+
+
+
+Go to the added MGID traffic channel settings → Mgid API integration → fill in the necessary details → Save changes:
+
+
+
+
+
+
+
+Active button means the integration is on:
+
+
+
+3. Set up a campaign in RedTrack with the MGID traffic channel.
+
+
+
+Campaigns → Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create your campaign with MGID as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL:
+
+
+
+
+
+
+
+To pass the conversions data back to MGID, Campaign URL contains the {ref_id} macro: https://att.trk.agency/64463a82e56a12000163a16f?sub1={campaign_id}&amp;sub2={teaser_id}&amp;sub3={widget_id}&amp;sub4={category_id}&amp;sub5={geo}&amp;ref_id={click_id}&amp;cost={click_price}.
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+4. Set up the tracking in MGID.
+
+
+
+4.1 In your MGID account go to the tab Advertisers → Add Campaign → use this guide to help create the Campaign in MGID:
+
+
+
+
+
+
+
+4.2 Navigate the Tracking Tags tab and make sure the slider is on → tick the&nbsp;Add custom tracking tag. Make sure to put click_id={click_id} here:
+
+
+
+
+
+
+
+4.3 You already have a postback URL available in your MGID Traffic channel settings in RedTrack. The only thing you will need to adjust is the event name. To do that:
+
+
+
+
+scroll down&nbsp;to the Conversions Sensors block → switch on the MGID CONVERSION TRACKING slider → choose the template for RedTrack:
+
+
+
+
+
+
+
+
+
+you will get the three postbacks generated automatically - for INTEREST, DESIRE, and ACTION → press OK:
+
+
+
+
+
+
+
+
+
+the postbacks will be added to your settings → copy the one you need (or all of them):
+
+
+
+
+
+
+
+
+Remember that you can change the names of your events. For a postback for BUY type replace {revenue} with the {offer_payout}.
+
+
+
+4.4 Press Save to apply the changes → once you've saved the settings on the MGID side, it will automatically suggest you create teasers for your new campaign:
+
+
+
+
+
+
+
+
+
+
+
+4.5 Copy the Click URL from your RedTrack campaign (created within step 3) and paste it in the URL field here:
+
+
+
+
+
+
+
+Fill in the rest of the fields in this block as per this MGID guide.
+
+
+
+5. Set up the Postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 3) → scroll down to S2S Postback for MGID → dd → check if all the needed values for the parameters are in place → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸Make sure it contains the correct MGID event name.▸If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+
+
+6. Set up the automated rules. Refer to&nbsp;this article&nbsp;for guidance.
+
+

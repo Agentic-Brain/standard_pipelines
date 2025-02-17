@@ -1,0 +1,80 @@
+# Advanced Hacks to Improve Your Push ADS ROI [+video]
+
+The average US smartphone user gets 46 push notifications/day. How could someone 
+not get annoyed with such a high load of intrusive information?
+The truth is, most of the time he couldn't. Push ads are real weapons that may madden users and destroy their confidence in notifications. Or, if carried out with precision, make them happy members of your converted leads the list with just one shot.
+
+
+WHAT'S NOW?
+Due to coronavirus, mobile app usage has grown significantly, so push traffic has spiked along with this. In addition to it, Apple has finally allowed using push notifications for advertising and marketing purposes, so long as users agree to receive the ads first. Today people are immersed in the news, endless movies, and video games. Most of them are either distracted, or bored, or in panic. It's time to make them happy with the offer they wanted to take. How?
+
+We asked two Push Traffic experts to answer your most commonly asked questions and shared some tips about boosting your push campaign effectiveness. Here we published some of their answers. No registration and fees are required. Please, welcome 
+ Eugene Kuznetzov,                                                                                                           Pavlo Bunakalia, 
+Product Manager at RichPush &amp; RichPops                                           RedTrack.io Product Specialist
+
+STARTING A SUCCESSFUL PUSH ADS:
+
+4 things you should take care of :
+
+1) choose the reliable Affiliate Network and become friends with your Manager
+2) find and test a good offer
+3) set up your tracker
+4) choose and set up your Ad Network
+
+Let's start from the very beginning:
+
+Where can I find a good offer?
+
+- There are two options here. You either try to find the offer by yourself or seek help from your Affiliate Network. The 1st option implies you having direct contact with an advertiser. Pick up a reliable spy tool to learn what is trending and what gets more conversions. The second option may take more time as good offers usually go to those people who have good relationships with Affiliate Networks Managers. No big science here. Just show your sheer interest, be nice and don't be afraid to ask questions. Their job is to help you and make you happy. 
+
+After choosing the Network and the offer, go into your RedTrack account, insert the tracking link, choose the Traffic Source and get ready for the start.
+
+What verticals do you advice to run now, while coronavirus is everywhere?
+
+-In general, we would advise going for intangible goods first. They are less vulnerable to demand fluctuations and supply chain hurdles. So, check how's your chosen region doing.
+
+Half a year ago, we would definitely you to look at this picture with average Push CTR by industry:
+
+&nbsp;
+
+But today this chart doesn't make any sense at all. The verticals worth trying list include
+
+ 	Online Education/Freelancer Jobs
+ 	Dating &amp; Adult
+ 	Healthcare and pharmaceutical
+ 	Communications devices
+ 	Gaming
+ 	Entertainment
+ 	Surveys &amp; Sweeps
+ 	Streaming
+ 	Gambling
+
+To demonstrate campaigns set up process and tips for improving your Push Ads CTR, we chose a gambling offer. To see how it was, watch the webinar here.
+OPTIMIZING YOUR PUSH ADS:
+
+What is the biggest mistake affiliates make while launching campaign?
+
+- One of the biggest mistakes affiliates make at the very beginning is expect millions coming into their accounts in 5 minutes after the launch. The harsh truth about all this is that, regardless of your actions, you'll lose money in almost 100% of cases. The question is how much? To lose less,  take care of creatives, targeting settings, blacklists of inefficient traffic sources, and look for some features to help you control traffic and budget losses.
+
+1.Never choose one creative. Test 3-5 creatives per one campaign. If you are not an expert in digital marketing analytics, try A/B tests redirects and Landing Page management features. Just look at the case one of our clients sent us. Adding additional CTA at the bottom of their page increased the performance of the landing page by 18% percent.
+
+
+
+&nbsp;
+WHAT ELSE?
+2. Try  Emoji and macros with geolocation 
+3. Learn how people in your chosen GEO consume digital content, their habits, cultural specifics, etc. The more you know, the better.
+4. If you work with mobile traffic and hesitating between Android and IoS versions, choose the latest and exclude the old ones. A good rule of thumb is that all-new operation systems tend to work better.
+5. To not annoy the audience, start with 1 impression per day. To track it, first set the impression cap value inside RichPush, turn on the Impression tracking option inside your campaign setting in RedTrack,  and that's it!
+6. Reduce the error price with Automation Rules.
+
+To make sure you still didn't do any crucial mistakes in your settings, set up automation rules for your traffic. If your expected results with RichPush are not met, your traffic flow will be automatically stopped. In RichPush case, the Campaign Pause and Creative Pause Rules are available. See the whole list of integrations here. If you want to see how to set them up, request a demo, and our Product Specialists will help you with it.
+
+&nbsp;
+
+
+
+HACKS TO RUN AND TRACK YOUR PUSH CAMPAIGNS
+Learn advanced tips on tracking and analyzing your push ads , please watch the whole webinar with Pavlo and Eugene on our Youtube Channel.
+
+

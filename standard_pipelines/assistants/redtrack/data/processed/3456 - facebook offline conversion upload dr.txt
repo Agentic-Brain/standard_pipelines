@@ -1,0 +1,74 @@
+# Facebook: offline conversion upload dr
+
+
+
+
+RedTrack allows you to send back the conversion information via the CAPI. However, CAPI accepts only the data attributed to your Facebook campaign, meaning only the conversions with Facebook click id and additional parameters can be accepted by Facebook as original conversions and be attributed to your campaigns and still, there are a lot of exceptions.
+
+
+
+But Facebook, like many other traffic sources, has a tool that allows you to upload a bit more conversions offline. This is not the same as if the CAPI sends those conversions, but they can also teach the algorithm. Conversions uploaded offline will not necessarily be attributed to your Facebook campaigns, but they will still be used in the optimization process.
+
+
+
+For example, let's say your campaign has brought 10 conversions and only 5 were from Facebook. But the other 5 can also be used to show Facebook what converts better. Like that, you have twice as many conversions that can be used for the optimization.
+
+
+
+Offline conversion upload suits those who own an online store website can get the PII data from the partner. Facebook will not accept offline conversions without a Facebook Email set in the Additional parameters section of the Offer source/Brand template:
+
+
+
+
+
+
+
+
+
+To upload offline conversions act as follows:
+
+
+
+1. Go to Events Manager→ Data sources→ choose the Offline event set→ Settings→ copy the Offline event set id:
+
+
+
+Check out this article in case you're missing the default offline event set.
+
+
+
+
+
+
+
+You don't need to upload any .csv files. Everything is done with the API. Why it's better? No manual work. All your conversions are uploaded offline once RedTrack records them.
+
+
+
+Make sure you have connected your target ad account (accounts) to that offline pixel:
+
+
+
+2. Go to your RedTrack Offer/Website settings→ CAPI→ Connect Facebook:
+
+
+
+
+
+
+
+You can’t use offline event sets until the terms of service are accepted.
+
+
+
+3. Once integration permissions are accepted, add your Offline event set id→ match your RedTrack conversion types with Facebook conversion events→ Save the changes to the template:
+
+
+
+
+
+
+
+This matching will show Facebook where and to what category to add your offline conversions. Keep in mind that there is no option to customize Facebook conversion types.
+
+

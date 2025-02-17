@@ -1,0 +1,227 @@
+# RedTrack: 2019 in Review
+
+Well, it seems that the time to sum up the year has come. Everyone relives all their victories, failures, pleasant moments, and instructive experiences. As to RedTrack team, we are infinitely grateful to 2019 for all the useful feedback, demanding users, friends, and partners that helped us to make the world of ad tracking and management a little bit better, easier, and tech-advanced. Throughout all these 12 months we did our best to make our users tracking activities the easiest and the most enjoyable part of their daily routine. 
+
+So, we thought: why not to remember all those great moments we shared this year together? Don’t worry, in this blog post there will be no rants and long speeches. Just take your cup of coffee or tea and let’s go back to the past for 5 minutes.
+
+
+&nbsp;
+RedTrack victories
+
+&nbsp;
+
+
+
+First, we should admit to you we kept one secret from you. And it seems to us that New Year holidays are the most suitable time to make this kind of confession. 
+
+We’re happy to say that RedTrack has become an official Google tech partner. We became one of the few who graduated from Google Tech Incubator and improved our product and strategy according to Google recommendations. We met a great number of new partners along the way there that help us to resolve any issues concerning this traffic source in the fastest way possible. More perks are coming ;)
+
+
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+But that's not all. This April our team has got the Best Support Award from Software Suggest team. Since the foundation, our customers’ well-being and happiness have always been our top priority. Today we take all the masks off. Meet our customer success and support managers. It was they who managed and helped you to set up your campaigns, edit scripts and answered all sophisticated questions all over the year.
+
+&nbsp;
+
+
+
+
+
+&nbsp;
+
+This year we also launched regular Q&amp;A sessions and webinars where we revealed all ad tracking and management secrets and gave detailed answers to your most frequently asked questions.
+
+If you still have not subscribed to our channel, now is the time to do this. Do not miss our exclusive educational videos next year. A little secret, we’ve already prepared a lot of interesting things:)
+
+
+RedTrack features that changed it all
+&nbsp;
+
+In 2019, we took several big steps towards the realization of our main goal — to automate the processes of ad tracking, management &amp; optimization as much as possible. Based on your requests, we launched three big features, which unexpectedly for us already managed to make a noise in the industry:
+1. Publisher Panel 
+This feature was designed to help SMEs and media-agencies effectively manage publishers with less burden of routine and zero workarounds. The Panel has become a perfect solution for those who struggled with functions overloading and the high cost of available performance marketing platforms.
+
+Learn more: RedTrack Publisher Panel: track and manage your affiliates with no workaround.
+
+&nbsp;
+2. Fraud Report
+We can’t do anything with fraud traffic increasing volumes, but we can protect ourselves from its negative impact. Fraud Report was designed together with experts from Fraud Score and has become the solution that already helped RedTrack users to save thousands of $. It gives the full overview of the traffic your buy and inspects the quality of every ad click based on 13 metrics and provides the ratio of human clicks and fraud ones with the reason of fraud behavior. 
+
+On top of that, it shows you the exact reason why your clicks were marked with fraud labels: cookie stuffing, proxy-connected user, hijacked device, and others.
+
+Learn more: Fraud: to pay or not to pay? – Brand new feature by RedTrack
+
+&nbsp;
+3. A set of automation tools
+This is probably our biggest 2019 pride. The release of the RedTrack auto-rules feature is a step towards our key mission – to automate as many tasks of the work of an affiliate marketer as possible. 
+
+You start your campaign, set KPI and RedTrack algorithms start working. If the benchmark is not met they automatically stop or redistribute the traffic flow. One of the best things is that they notify you as soon as changes to your campaign were implemented. So, basically, all the rules can be divided into three categories:
+
+
+ 	Rules that pause campaign when metrics drop
+ 	Rules that redistribute traffic for stream/lander/offer based on performance.
+ 	Rules that stop your campaign when the amount of fraud traffic exceeded the allowable amount
+
+Check the full list of integrated Traffic Sources with RedTrack auto-rules.
+
+
+
+Traffic Source
+Pause campaign
+Blacklist publisher
+
+Pause creatives
+
+
+
+
+MGID
+
+
+
+
+
+
+
+Propeller
+
+
+
+
+
+
+
+Google
+
+
+
+
+
+
+
+FaceBook
+
+
+
+
+
+
+
+Exoclick
+
+
+
+
+
+
+
+Bing
+
+
+
+
+
+
+
+Zeropark
+
+
+
+
+
+
+
+RevContent
+
+
+
+
+
+
+
+ReachEffect
+
+
+
+
+
+
+
+Adnium 
+
+
+
+
+
+
+
+Megapush
+
+
+
+
+
+
+
+RichPush
+
+
+
+
+
+
+
+&nbsp;
+4. Auto-update cost
+This requested solution automatically updates your campaign cost. RedTrack receives the latest data directly from traffic sources through API and immediately displays it on your screen and reports regardless of your payment model. 
+
+&nbsp;
+
+RedTrack new integrations
+&nbsp;
+
+ 	
+The long-awaited Integration with Google Analytics
+
+
+
+
+Now all Google Analytics users can easily track and report their conversions inside Google account without let or hindrance. 
+
+Once conversion appears in RedTrack, it sends S2S postback to your Google Analytics account. The set-up is easy and fast. You can request a detailed guide at sales@redtrack.io.
+
+ 	
+Integration with that very CJ Affiliate
+
+
+Believe it or not, but CJ Affiliate doesn’t support S2S postback tracking, so to track their offers effectively you have to be integrated with it via API. RedTrack users became the first to implement this solution. 
+
+With RedTrack S2S Postback Tracking feature, CJ Affiliate users can easily track ads across all browsers with no-cookies. The best part is that it can be easily done in 4 simple steps. The guide is here.
+Seamless integrations through API with 64 Traffic Sources
+Having your Traffic Source properly connected to RedTrack allows you to transfer any updated data between them in the easiest, fastest, and most reliable way. You can also be sure about data integrity across your stack without worrying about versioning issues.
+
+More than 6o Traffic Sources are now integrated with RedTrack with the help of API.
+
+&nbsp;
+
+&nbsp;
+RedTrack global expansion 
+In 2019 RedTrack has officially become a global international startup with servers located all around the globe. It allows us to serve the client’s needs from every part of the world without any delay. It concerns the speed of redirects, data loading, and Affiliate Networks and Traffic Sources data processing speed.
+
+&nbsp;
+Thank you all for being with us in 2019
+This year we’ve met a bunch of new friends at a variety of international conferences and events. We were very happy to meet some of our users there and talk face to face. Thank you for your interest in our product, team and for taking part in our activities. Hope to meet you at one of the events next year!
+
+&nbsp;
+
+&nbsp;
+Happy Christmas and Happy New Year, guys! May your wishes all come true!
+
+
+&nbsp;
+Happy Tracking!

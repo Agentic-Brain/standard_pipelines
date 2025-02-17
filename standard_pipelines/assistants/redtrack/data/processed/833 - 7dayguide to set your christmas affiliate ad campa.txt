@@ -1,0 +1,72 @@
+# 7-Day-Guide to Set your Christmas Affiliate Ad Campaign
+
+It’s the time of year when digital marketing actually goes out of control. The internet is flushing with social media posts and blogs that suggest what to buy for Christmas or what to wear on Christmas.
+Christmas gifts, by certain, is one of the most trending and lucrative topics for retailers now, and it’s a big deal for affiliate marketers too.
+The importance of planning cannot be downplayed especially during such a busy holiday period, like Christmas. Thus, we put together 1-week-guide of key actions that would help you to get your ideas in order and ensure your Christmas campaigns to be as successful as possible.
+
+
+Day 1: Analyzing
+Start the preparation-Christmas-week with the analyzing phase — probably the most important part of a successful holiday campaign.
+The scale of this phase would largely depend on your prior experience launching Christmas ad campaigns.
+For those, who are not engaged in this holiday rush for the first time, it would be insightful to address the performance of their prior Christmas campaigns. Knowing what traffic sources and keywords perform best during the previous holiday season, will be invaluable to you in planning.
+Nevertheless, keep in mind that trends come and go, and what has played off in 2016, might not bring the same results in 2017. But more on that later.
+For those, who launch Christmas ad campaigns for the first time, we would recommend having a look at what others do during this holiday period. The goal is not to steal their ideas and make money with it, but to detect their strengths and weaknesses and disarm them with your own innovations.
+Here are 5 online tools that will help you to spy on the ads, your competitors are running:
+• AdEspresso — the library of Facebook ads from businesses all over the world;
+• Adsvantage — the database of ads that can be sorted by number of likes, share counts, country, and date;
+• Adbeat — a great tool if you know which particular brand you want to monitor. Adbeat gives you access to all the advertiser’s ads, their performance data, ad channels, and many more;
+
+• MixRank — the platform that helps you have a look at the display and contextual ad campaigns of brands that are monetized with the help of Google AdSense.
+• Moat — allows you to input your competitor’s brand name, and it will generate you a selection of the ads they’ve recently posted.
+
+
+Day 2: Budgeting
+Your strategic plan would be incomplete without having a budget in place.
+Keep in mind that the fourth quarter, December in particular, is the season when all numbers, i.e. the amount of retailers and advertisers, the number of shoppers and ad impressions, are rising. What follows next, is the increase in ad costs and bids.
+Don’t be afraid to spend more money during the holiday season. It’s inevitable that all months shouldn’t be treated equally. Raise the bids, but do it strategically, based on the information you’ve collected on Day 1.
+On average, be ready to the 30% increase of your ad costs. Besides, always retain some of your budget as a reserve.
+
+
+Day 3: Deciding on your traffic sources
+Let’s put some clarity here, on Day 3 you should not start choosing your traffic sources, but finish testing them.
+The traffic sources, ad deals, and creatives — all that should have been already prepared on November (September, the best). Today, you should check the readiness of each one and make some final corrections, if necessary.
+In case you didn’t manage to meet the Christmas deadlines, we’ve summed up the key takeaways for you.
+The first step is to decide which traffic sources, i.e. advertising channels you will be using for a holiday promotion. You will definitely want to base your choice on the advertising channels you’re most successful with, or the ones that have proved to be the best in previous seasons. That’s the right attitude. Nevertheless, there are some traffic sources that are certain Christmas must-haves, among them:
+Email marketing:
+Email marketing is the most widely used channel during the holiday season for 2 reasons — it’s free and highly successful:
+The number of e-mails users worldwide is forecasted to rise to 2.9 billion users by 2019. (Statista, 2016)
+According to Mailchart’s Holiday Email Marketing Guide, email marketing is responsible for 20% of holiday sales.
+Social traffic
+The best channel here is, for sure, Facebook, due to its exceptional targeting capabilities. Want to target French that lives in Spain, who are aged between 27–56 and have “Fashion” and “Books” listed as interests? Facebook can do it.
+Display ads
+If done right, it is probably the best converting channel for Christmas period. Still, keep in mind, the competition is extremely high, as well as the ad bids.
+We would definitely not advise you to use search traffic during holiday season, unless you’ve started optimizing ad-related keywords in advance (at least three months before the X-day).
+
+
+Day 4: Building creatives
+Of course, it’s important that among a sea of Christmas creatives around the Internet, yours to stand out.
+
+When building the banner don’t fill it with cliches. Your creatives don’t have to be all about Christmas trees, deer, and green-red decorations. Instead, try to think out-of-box, think about your audience. Incorporating unique elements like Christmas photo postcards can add a personal and festive touch, helping you connect with your audience in a more meaningful way.
+
+If for some reason you postponed building your creatives till now, have a look at this list of last-minute creative tools:
+• Canva — free online graphic design tool. The platform already has some free templates for social ad banners and also offers generative AI art features to help you create unique, custom designs effortlessly.
+• DesignBold — design platform with pre-built templates, that’s quite similar to Canva.
+• Snappa — tool that again resembles the previous two. Snappa has a free plan that allows 5 creative downloads per month. It also sustains dimensions for social media, display ads, emails, etc.
+
+
+Day 5: Tracking
+Without the proper ad campaign tracking, you are just on your way to lose a great sum of money. With Insights by Facebook and Google, for example, you can definitely provide yourself with the generic stats like clicks and conversions, but you pass over much more important information.
+With tracking software, you get valuable insights on your leads — where they came from, what time of the day, the ROI they bring, and much more. Besides, the chances are high that you would expand your Christmas ad campaign among more than one or even two traffic sources, and you would want to track the performance of each one. You could do this through multiple affiliate links, but in turn, it would take most of the time you might have rather spent on the optimization of your ads. Using a marketing tracking software like RedTrack.io would allow you to track every aspect of your ad campaigns, and at the same time, automate the execution of some tasks.
+
+
+Day 6: Testing
+Today is the day of testing the results of your intense 5-day-preparation-campaign. The sooner you can start testing creatives, ad messages and setting combinations, the sooner you can make the adjustments necessary to improve your results and increase the ROI.
+Again, tracking software is your tool to understand the performance of your ad campaigns across various traffic sources, landers, and offers.
+Note: Christmas campaign is by nature a short-term one. So don’t delay on testing, as you might rich the time when the holidays are over and the learning are no longer applicable.
+
+
+Day 7: Optimization
+Don’t you actually think that it’s time for the rest? Definitely not during the busiest month of the year. Once you have finished testing, it’s the high time for you to uncover some pain points and optimize them.
+Working hard on the optimization of your ad campaigns performance will ensure that you get the most for your marketing spend.
+With the coming Smartlinks feature by RedTrack.io, the detection of profitable combinations becomes automatic. SmartLinks employ the power of the AI and machine learning to substitute manual testing. It means that an advertiser shouldn’t test each link manually anymore to find best performing variables. The algorithms automatically detect most profitable combinations and show each specific user an offer that is most likely to bring conversion.
+Automate the control of your links with SmartLinks, by sending a request to support@redtrack.io.

@@ -1,0 +1,79 @@
+# Answered: Your Most Burning Questions About How to Get Traffic
+
+This article was originally published in Affbank Blog. The original version can be viewed here.
+
+There has been a lot of talks lately about Google ad ban and Facebook news feed change. This news has shattered some publishers and affiliates, and not without reason. Traffic sources constantly propose new restrictions and regulations, while affiliates should find angles to address them and get around restrictions. Affiliate Marketing is an extremely dynamic industry.
+
+The good thing about traffic sources though: if one isn’t working for you, you always have other options to choose from.
+
+The following Q&amp;A session was organized by RedTrack.io - affiliate campaign tracking solution together with Go2mobi DSP, PopCash PopUnder Network, and Zorka.Network - CPI/ CPA Affiliate Network in order to discuss the factors that change affiliate industry and detect the new ways how to leverage new traffic possibilities.
+
+- What should affiliates consider when choosing a traffic source?
+
+
+
+    
+
+Breanne Cozzolino, Sales Director in Go2mobi:
+You, as an affiliate might want to evaluate a source’s ease of use, speed of compliance, traffic volume and diversity of publishers. Also, don’t forget to take note of service levels - look for support that is quick and helpful. Optimization is also a very important consideration when selecting a mobile traffic source. Finding a pocket of high-performing traffic is only a good thing if you can isolate it and scale it.
+
+
+
+&nbsp;
+
+
+
+
+
+Ilarion Ispas, COO in PopCash:
+My first piece of advice would be to stay away from the new networks, i.e. traffic sources, which pretend to have lots of years of experience when they actually just launched their website. Most likely you will end up buying very, very bad traffic with them, which won’t give you any good.
+Secondly, I would advice always searching for direct traffic. Keep in mind that the traffic coming directly from the visitor has better conversion rates than the one which is being redirected and passed through several systems.
+
+
+
+&nbsp;
+
+
+
+
+
+Katya Temchenko, Senior Affiliate Manager in Zorka.Network:
+First of all, affiliates should consider their experience in working with different traffic sources. If you are expected to provide quality, don’t risk to drive traffic to the offers from the traffic source you’ve never worked with. Then estimate the KPI and analyze what traffic source you can use to reach KPI goals and satisfy the advertiser’s needs. Furthermore, you should consider the ad pricing model, the ad format, targeting opportunities, systems, budgets, how direct the traffic is and if it matches the product. 
+
+
+
+&nbsp;
+- What types, formats work well? Which are declining?
+Breanne Cozzolino, Go2mobi:
+I would recommend trying out native ads as they’re super hot right now, particularly mobile native ads, which are outperforming standard display ads in many metrics. Video is another highly effective ad format.
+Static display banners, in turn, have been on the decline the past few years, and are being replaced by more engaging formats like native and video.
+
+Ilarion Ispas, PopCash:
+It’s a tough question. And depends mostly on the offers which are going to be launched. Nevertheless, I’m sure everyone is aware of the banner blindness effect and how intrusive the popups can become. These are aspects which can determine a major negative impact for your performances. This is where the popunders shine by having something which other ads lacks, increasing chances of generating a lead.
+
+Katya Temchenko, Zorka.Network:
+According to the experience, the native ads always work well for gaming vertical. They’re informative, fill much place on the screen and you can display enough information there to attract a user. Though everything depends on the offer and traffic source. The apps can be advertised using fullscreen ads formats, banners or video ads, especially if we’re talking about in-app traffic. The games can be promoted using native ads, fullscreen ads. The subscriptions - only by fullscreen ads.Nutra offers require long reads. Nevertheless, that doesn’t mean you shouldn’t try other formats, e.g. you can advertise games using narrow banners and reach the required goals. Most of the result depends on the creative quality rather than on the ads format.
+- What would you advise to new affiliates?
+Breanne Cozzolino, Go2mobi:
+To begin, make sure that you’re using the resources available to you: ask your affiliate network representative for top-converting offers, and invest time in seeking out and using competitive intelligence tools.
+
+Ilarion Ispas, PopCash:
+First of all, choosing between two most popular pricing models CPA and CPM, we’d recommend to start on CPM due to lower prices. When your campaign starts to demonstrate a stable performance behavior, it can be switched on CPA. Also, do not underestimate targeting features: country targeting, operating system, device types, connection type, mobile carrier, browser and categories. The more you’d use, the better! Besides, I would recommend to separate mobile and desktop traffic, as they convert differently. Thus, should be optimized in different ways too.
+
+Katya Temchenko, Zorka.Network:
+We keep holding to a stand that the affiliate job requires a lot of testing and learning new information constantly. You should be ready to great spends but don’t be afraid of that. Think long-term, try new things, stay always updated with the trends, or even a step ahead. You can repeat someone’s success, but in that case you have no chance to become super rich. The only way to your success is creating new approaches and keep to your own strategy. Don’t hesitate to ask your manager anything you don’t understand, they are always ready to assist you.
+- Considering all of the above - why should affiliates choose you as a traffic source/ affiliate network?
+
+Breanne Cozzolino, Go2mobi:
+Our platform is built for programmatic performance marketers, with highly targeted mobile traffic and high volumes of inventory. Affiliates can access over 750M apps, games and leading mobile websites, and perform deep optimization on signals that lead to maximum ad ROI.
+We have a ton of experience in running successful mobile ad campaigns, and our friendly Account Managers are happy to share insights to help affiliates reach their KPIs.
+
+Ilarion Ispas, PopCash:
+Established in 2012, PopCash.Net proved to be a reliable source of online ads solution for both advertisers and publishers around the globe. As we accumulated experience by working exclusively with popunders, together we can benefit from the advantages of using these ads and yes, there is plenty of them.
+Based on our motto: “Support makes the world go around”, the users will experience a very active customer service support, ready to offer the assistance required and answer to all queries. We want to offer a chance to every person interested in this industry, no matter their experience. 
+
+Katya Temchenko, Zorka.Network:
+Some facts: we suggest direct mobile CPA/CPI offers for worldwide traffic, all necessary technical facilities: 5 subID, integration via S2S and API key, and lots of filters for convenient tracking settings. Also we’ve developed an improved smartlink for those who prefer automatic campaigns setup.
+Closer to people: affiliates know Zorka.Network for the support team. Our managers are first of all friends to affiliates. We assist affiliates in all issues, create trust-based relationships and maintain individual approach. We have common goals, so we do our best to achieve them by listening attentively to the affiliates, understanding their needs and abilities, trying to find the best offers for their traffic and experience, giving detailed information.
+
+As you can see, there are hundreds of places where you can buy traffic, and affiliates make money with every single one of them. RedTrack.io has both Go2mobi and PopCash added as pre-sets, so you don’t have to struggle with adding a postback URL or setting the parameters. Everything is automatically added to the tracker and you just need to sign in to start tracking.

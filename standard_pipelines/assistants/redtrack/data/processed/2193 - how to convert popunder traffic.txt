@@ -1,0 +1,114 @@
+# How to Convert Popunder Traffic?
+
+Popunder traffic is the easiest entry point in affiliate marketing world.
+
+How often have you heard that before? We bet quite often. Our RedTrack Team decided to investigate this statement and find out whether this is the case. By the end of this post, you would receive a comprehensive overview of Popunder traffic and how to convert it effectively. Namely, you will know: 
+— What is Popunder.
+— How Popunder works.
+— Tips: how to convert Popunder traffic.
+— Super bonus: Interview with PropellerAds, the leading Popunder Ad Network in the world (Besides this ad format, they also focus on native advertising and native push notifications, in particular). Even more actionable tips and pieces of advice await you there!
+Let’s dive into Popunder world, and start with the basics.
+What is a Popunder ad? 
+Popunder ad is a type of a full-size window that opens in the browser just under the main active window. To fully understand this ad format, it’s often opposed to Pop-up ad. In contrast to Popunder ad, Pop-up opens over the browser window.
+
+An aggressive and intrusive approach of Pop-ups has shaped the future of this ad format. It is almost forgotten by now and replaced by Popunder. Since Popunder advertisement appears once the user closes their main browser window, it makes them less intrusive and more acceptable to users. 
+How does Popunder ad work?
+Popunder is often used not just for attracting traffic (both web and mobile), but for capturing contact information like email, as well. 
+
+Since Popunder runs perfectly on different platforms (desktop, tablet, or mobile), it makes them rather popular as they allow to reach the audience wherever they are. When a user clicks on the Popunder ad they would be either redirected straight to the advertiser’s page with an offer, or directed to a pre-lander first. 
+
+Note: there is no the only right answer — should you convert Popunder traffic via redirect to advertiser’s page or by means of the pre-lander. The best solution would be to split-test both scenarios and decide on the winning solution. 
+
+Two most popular pricing models for Popunder traffic are CPM and CPA. Still, other models, like CPI (cost per install) and CPL (cost per lead) are available with this traffic type as well.
+
+Popunder is quite a popular ad format among both newbies, and some expert affiliates, who from time to time shift to this traffic type to promote particular product types. Among best-performing verticals are coupons, pin submits, gambling, adult and dating, nutra.
+Some tips while working with Popunder traffic:
+• split ad campaigns by GEO. Every geography has certain best time which brings “best” conversions. Thus, you’d better pay attention to this variable while scheduling the ad campaign;
+• split-test direct to the offer / lander redirect advertising;
+• use caps. Don’t annoy the user with one and the same pop ad over and over again throughout the day. Set unique visitor cap and display alternative ad to every unique user. Set the limit of unique visits depending on the audience size;
+
+• work side-by-side with a tracker. No, seriously! Don’t cut anything (lander, geo, timeframes, etc.) without drilling down into data;
+• consider testing different landers from the very start. You would be surprised what a huge impact a lander might have when working with Popunder. Consider using a spy tool to know the trends;
+Ready to start with Popunder traffic? I bet you want even more actionable tips at this stage. 
+
+We asked Andrey Veselov, Sales Team Lead from PropellerAds, a few questions about Popunder trends in general and how to convert this traffic effectively. With no further delay, let’s dive into secrets and tips of Popunder. 
+
+1. Question: Quite a while ago, Popunder once and forever shifted Pop-up traffic. Since then it is considered to be one of the top ad formats. What are the reasons for such success?
+
+Answer: Despite the popular belief, Popunder is not an aggressive ad format – compare it to Popups, and you’ll have an idea of what kind of difference it made when first hit the market.
+
+Popunder is, in fact, all about users and their free choice, because an ad doesn’t block the website content and doesn’t force users to click – it’s pretty easy to close.
+
+Unraveling the secret of Popunder’s success, I can tell that it’s kind of an ad solution that makes the entire advertising ecosystem profitable. Webmasters are the main Popunder devotees – you can see this ad format on the majority of the biggest websites: it allows publishers to maintain the balance between the high profits and the positive user experience.
+
+And advertisers are getting conversions at low cost while creating immense brand awareness. It’s plain to see that Popunder is a fantastically versatile instrument, capable of handling a wide variety of tasks. Moreover, it’s extremely easy to use.
+
+Altogether these factors help Popunder preserve its place as one of the top ad formats.
+
+2. Question: What future do you see for Popunder traffic?
+
+Answer: The future looks bright for Popunder. PropellerAds is the biggest provider of pop traffic worldwide with the enormous user database. The format also continues to evolve, now there are even more advanced opportunities to reach a target user.
+
+Recently, we’ve launched a unique targeting option – User Activity targeting. I can see that it seriously expanded advertisers’ toolkit, contributing to a higher CTR. We have great feedback from our clients.
+
+Apart from creating new features, we have been seriously researching the format with the final goal to understand what combinations of tools are leading to the best results. We ended up developing our own strategy: precise settings plus retargeting. You can read about it here.
+
+Not just technology changes, we can see that now Popunder attracts bigger brands that use Popunder as a part of their marketing funnel. So, the trend is obvious, key players are already here. I believe this process was triggered by the recent Google’s policy changes and intensified fight with misleading advertising.
+
+The perception of the format has shifted considerably, and the whole market will most likely benefit from this change.
+
+3. Question: What pricing model do you recommend — CPA or CPM while working with Popunder traffic?
+
+Answer: Pricing model depends on the product you promote. For example, CPM and CPC give better testing opportunities, you can actually gauge the lead quality.
+
+Again, here we have our proprietary solution SmartCPM, and a new addition to our automated tools collection – CPA Goal that works in conjunction with SmartCPM.
+
+As for CPA – it doesn’t work for every product. From my experience, CPA is a better choice if you are eyeing easier conversions or your flow is short.
+
+4. Question: What are the hottest GEOs for Popunder traffic?
+
+Answer: Traditionally, the U.S. is at the top by revenue. The entire Tier-3 is a major destination for testing offers, but overall, I can’t name specific GEOs because the popularity of regions and countries is tied to products and offers.
+
+5. Question: Any piece of advice on targeting Popunder traffic?
+
+Answer: Always start with analyzing your product/offer. Once you are done with basic targeting settings, set up the User Activity targeting. If it’s a new product or you are testing completely fresh creatives – do begin with “High” activity group. These users are the most engaged ones.
+
+After that, see the campaign results and amount of leads generated. Worked well? Scale the campaign to other activity groups to expand the reach.
+
+6. Question: Since you see the data in your network, are there verticals that perform best with Popunder traffic now? Or maybe, which offers should not be promoted with this traffic at any cost?
+
+Answer: From my experience, B2B offers don’t really perform on Popunder, other than that, this ad format works perfectly for the most verticals: betting, sweepstakes, finance, gambling, software and all kind of entertainment products.
+
+7. Question: Would you suggest Popunder traffic for newbies?
+
+Answer: Well, Popunder is an incredibly easy format. Normally, newbies don’t face any problems while launching Popunder campaigns.
+
+8. Question: What budget size is enough for testing new campaign?
+
+Answer: To define the testing budget, you should look at the popularity of the offer. If there are lots of similar offers in the market and the competition is high, you would need a higher testing budget.
+
+If the offer is exclusive, you can go for a lower budget.
+
+The testing amount would also depend on the vertical. The general recommendation for sweepstakes and software is to start with $100 – you can understand whether the campaign is getting enough traffic and if you are happy with the lead quality.
+
+If your conversion flow is somewhat complicated (a user is required to perform multiple actions), you will need to increase the testing budget to $500, because you have to test more zones to understand where your leads are.
+
+9. Question: Let’s think of a practical scenario: let’s say I’m a newbie affiliate and I want to start with Popunder traffic. Which vertical should I choose? Should I start with low or high bid? Do I need lander or run traffic directly to the offer? How much time should I spend on a/b testing? Maybe something I should stay away from as a total newbie in here?
+
+Answer: I can’t recommend you a particular vertical, mainly because I strongly believe you should be passionate about what you promote and be initially interested in the vertical.
+
+Conduct your own research, talk to other affiliates, go through forums to form an opinion on what’s hot now.
+
+As for the bids, from my standpoint, it’s more practical to test campaigns with higher bids. Got the results – reduce the bid and scale your campaign. Very often good campaigns with perspective creatives fail due to a lean budget.
+
+Have doubts? Contact your account manager or Support team via live chat to scout out the situation. We have a strong team with years of experience, who can give you viable advice on how to better launch your ad campaign.
+
+Let’s talk about pre-landers. It’s a debatable topic. Some offers require pre-landers, while using pre-lander for betting or software offers might kill conversion. I recommend you to check our blog post, where we discussed all the pros and cons.
+
+All in all, with PropellerAds you have nothing to be afraid of. We are rolling out a totally new anti-fraud system, we have very qualified support and friendly account managers.
+
+Thanks for the answers, Andrey!
+To wrap everything up:
+Popunder ad is a good idea for both newbies and expert affiliates. Still, it just doesn’t work the same way for everyone. Testing, cutting and optimizing your Popunder ad campaigns are the crucial steps of profit increase. 
+
+Try to follow the above tips and convert your Popunder traffic. Share your experience in our Telegram Community, and we would be glad to distribute it further among RedTrack users.

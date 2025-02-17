@@ -1,0 +1,69 @@
+# July'18 Product Update - RedTrack.io
+
+This first day of August we're happy to announce a brand new set of features released in July. Don't miss a single one of them, as they are assigned to not just increase the efficiency of your work, but they open just a new range of tracking opportunities for RedTrack users.
+
+Let's dive into the details!
+Campaign cost update
+This feature would be of particular interest to those who work with the CPM cost model. As you can now update Campaign costs in just a few clicks right from RedTrack interface. Access the function directly from the Campaigns Dashboard:
+
+
+Or, alternatively, from the Campaign creation/edit window. Updates can occur as often as every five minutes.
+
+&nbsp;
+SubID alias
+SubIDs not only provide you with additional information about your Traffic Source, they also give extra insight into your Traffic when you use filters or group your reports by a certain parameter. To make the utilization of subIDs easier for you, we are introducing subID alias — the ability to assign custom names to subIDs for future reference.
+
+To set a custom name for any of subIDs go to create/ edit field of Traffic Source tab, and set a desired name in the Parameter column.
+
+&nbsp;
+Free SSL certificates 
+As you probably know, Google marks all HTTP Landing Pages as "not secure" since July 1st, 2018.
+
+To make sure that none of your Campaigns are jeopardized due to the link format, we strongly recommend you to use HTTPS encryption for your Landing Pages.
+
+Good news is, RedTrack now makes it possible without any additional expenses! Every customer who is subscribed to Professional plan and above can reach out to us and have their SSL certificate issued for free.
+
+UPD: We now stopped the free issue of SSL certificates. If you have questions, please send them to support@redtrack.io.
+
+&nbsp;
+HTTPS tracking links for default domain
+Sometimes your Network requires you to use tracking URL in HTTPS format only. From now on, you may adjust your links even if you use our default tracking domain, which is https://rdtrck2.com.
+
+This feature may be enabled in Campaign creation/edit window using the Protocol button.
+
+&nbsp;
+Transaction tracking
+For certain affiliate programs, you may need more than one Postback based on the number of targeted actions you want to track (for example, separate tracking of sign-up and deposits).
+
+In this case, you can use our Transaction tracking Postback URL. if multiple Postbacks are supported by your Network, simply enter this link in addition to your regular tracking URL. Find transaction tracking function under the Tools tab --&gt; Conversion tracking.
+
+Transactions will be recorded and reported separately from conversions allowing you to have a deeper insight into your Traffic performance.
+
+&nbsp;
+Extended reports
+To receive complete and comprehensive data overview, select a Campaign and hit the Report button. We have enabled information grouping by subID and added more parameters.
+
+Additionally, you can now create custom filters for each subID, and create reports limited to the only filter.
+
+&nbsp;
+More information in Logs
+Even more data is now available in the Logs tab.Aside from Clicks and Conversions, you can generate a report about Postbacks that we send to your Traffic Sources. The data can be grouped by ref_id, Campaign, and Traffic Source. Export your report in .csv format as well.
+
+&nbsp;
+New data provider 
+At RedTrack, we invest in quality data and infrastructure, providing the highest level of security for our customers. Recently we have switched to a new data provider. Our company of choice is Digital Element.
+
+Most of you are likely familiar with this famous name. For those who aren't — they are the industry's best data provider.
+
+&nbsp;
+Referral program
+Welcome our updated referral program that was made even more attractive! Find your personal links by clicking on your username in the upper right corner and selecting the Referral Program menu. Share any of the two link types with your friends and earn 10% lifetime commission on all of their subscription payments.
+
+&nbsp;
+
+
+
+
+We still have an impressive set of functions coming really soon. So subscribe to our Telegram channel and stay tuned with all the recent and hottest product updates!
+
+

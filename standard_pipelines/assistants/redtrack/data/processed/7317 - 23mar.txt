@@ -1,0 +1,40 @@
+# 23-Mar
+
+
+ 	Bugfix: default conversion types CR/CPA/AOV are now calculated correctly for grouped data.
+ 	Added AOV parameter to Conversion report for custom and default conversion types.
+ 	Bugfix: Campaign and Offer names are now shown in the Dashboard dropdown for multi-users.
+ 	Tracking domain in Shopify scripts is now pulled in automatically when adding a Website entity to RedTrack.
+ 	Bugfix: the color of the table header is now black when enabling the "dark" theme in the RT account.
+ 	Added a new default set of columns for the Campaign list, Campaign report, and Conversion report. It'll be selected by default for the new users. However, once the user decides on the set of columns important to them, they can customize (add/remove) their columns in the Templates.
+ 	Added a new currency PKR (Pakistani rupee).
+ 	Added possibility to open in a new tab the following entities: Campaigns, Traffic channels, Offers/ Web-sites, Offer sources/ Brands, Landers.
+ 	Bugfix: EPC column in Publisher panel now shows the correct data.
+ 	Bugfix: patched up the sorting in the produced parameters within the Website report data.
+ 	Bugfix: adjusted the sorting for shared access users.
+ 	Bugfix: when selecting multiple conversions, the status changed only for the first conversion.
+ 	Bugfix: corrected the possibility to edit text colors and tables in the dark theme.
+ 	The following subs were added to the Conversion report:
+
+ 	CPA (default), CPA conversion type 1-20;
+ 	Conversion CR, CR conversion type 1-20 CR;
+ 	ROI conversion type 1-20.
+
+
+
+
+ 	Implemented the workflow of overwriting the last-day costs in Google. Meaning, at 12 PM (UTC) RedTrack will overwrite yesterday's costs. This will make the cost data more accurate, since some of the costs Google can add to the ad account within 24 hours.
+ 	Added additional filters to funnel templates. Now we have additional filters for objects inside the funnel. Thus, traffic can be distributed not only for funnels but also for offers/landings/pre-landings inside the funnel.
+ 	Enabled the possibility to transfer the currency from the Facebook account to RedTrack.
+ 	Bugfix: Campaign report data is now successfully exported with all the columns.
+ 	The following new parameters were added:
+
+ 	"ROAS", "ROAS,%" for custom conversion types;
+ 	"Profit" for custom  conversion types;
+ 	EPC ROI (%) = EPC/CPC.
+
+
+ 	Bugfix: data on the cost update depth/frequency in Traffic channels is now visible for the shared users.
+ 	Added section "Notes" to the Offer form.
+ 	New formulas were added such condition parameters as ROI / ROAS in Rules.
+ 	Bugfix: cap alerts are now sent as intended.

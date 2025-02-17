@@ -1,0 +1,118 @@
+# Lucky Online and RedTrack
+
+
+
+
+
+
+Lucky Online is the top affiliate platform in the CPA network's ranking. This is a direct advertiser and affiliate network (2 in 1).
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events you want to track
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Lucky Online as an Offer source in RedTrack.
+
+
+
+RedTrack → Offer sources → New from template → Add Lucky Online template → copy the Postback URL → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up the copied Postback URL from RedTrack in Lucky Online.
+
+
+
+In your Lucky Online account go to your profile settings → Global postback → paste the Postback URL from RT to the URL field → mark "Enable global postback for all the streams" and "Send confirmation" fields → Save:
+
+
+
+
+
+
+
+Postback settings in Lucky Online may vary depending on your workflow. We recommend contacting your Lucky Online manager to be on the safe side.
+
+
+
+3. Get the Lucky Online offer.
+
+
+
+In your Lucky Online go to Offers → select an offer → create stream → choose a Lander → save stream → copy stream link: 
+
+
+
+
+
+
+
+4. Add a Lucky Online offer to RedTrack.
+
+
+
+In your RedTrack account go to Offers → Create new offer → add Lucky Online offer link in the URL field -> make sure the tracking parameters “subid1={clickid}” are added at the end of the offer URL → Save changes to the template:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create the campaign in RedTrack with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+Refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

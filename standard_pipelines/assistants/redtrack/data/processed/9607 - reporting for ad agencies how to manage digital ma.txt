@@ -1,0 +1,92 @@
+# Reporting for Ad Agencies: How to manage digital marketing agency with ease
+
+If you are running an ad agency, you most likely face the issue of disorganization. Tons of clients, tons of channels, business accounts, employees with different access levels, and most importantly — lots of data.
+
+The more data you have — the smarter solution you should have in order to use this data properly and get value from it. And in the case of ad agencies, successfully scale the revenue of their marketing clients.
+
+In this article, we will investigate how RedTrack helps solve challenges of data collection, consolidation, and optimization for ad agencies.
+
+How to manage your digital marketing clients as an ad agency
+It can be quite confusing to manage a multitude of clients' marketing endeavors. That's why every digital marketing or ad agency needs a bunch of quick rules to make sure they can provide the best result possible when scaling the revenue coming from marketing or advertising.
+1. Organize all clients' reporting in a single workspace
+The first and most important step is to make sure you have one solution to access the data for each and every client in a single place and intuitive dashboard.
+It might sound simple, but in order to entrust the management of your clients to a single solution (ad tracking &amp; conversion attribution solution, to be precise) you gotta make sure it meets several criteria.
+
+Your Reporting Portal should make it easy for you to navigate between different clients. Here's an example of a Reporting Portal by RedTrack — a solution for digital marketing agencies.
+
+You can easily set up new members and clients in order to control their advertising metrics and KPIs.
+
+
+A perfect ad tracker for an ad agency
+But what are other prerequisites for an ad tracker for a digital marketing agency?
+
+ 	It should be a privacy-friendly marketing analytics solution in order to make sure that you collect data in a compliant way to avoid fines.
+ 	Have API integrations with major marketing channels and tools to be sure you can collect data accurately and establish data exchange between different solutions.
+ 	Have excellent customer support. Sometimes any bug or not understanding of the solution can cause huge data losses and therefore, missed revenue. Your ad tracking solution should be able to support you on your way to delivering the best to the clients.
+ 	Have various kinds of reports to allow you to look at marketing results using different angles.
+
+If you are looking for your one of a kind solutions to manage marketing &amp; advertising activities for your clients, consider trying RedTrack.
+RedTrack.io is an ad tracking &amp; conversion attribution solution that works even in the post-cookies era with 100% accuracy and flexibility. Book a demo or start with a 14-day free trial. 
+
+
+
+&nbsp;
+2. Give your team different permissions to access data
+As an owner or an employee of the agency, you might want to set different conditions for each team member. For example, the financial team should have access to the budgets, marketers should have access to metrics and results.
+
+With RedTrack's Reporting Portal you can issue various permissions to each team member. But what's more important — you can give access also to the client to check the performance stat. As the manager of this portal, you will be able to choose what clien can or can not see. But this way the Reporting Portal because the guarantee of the transparency as clients can observe the performance at any time.
+
+
+You can customize your Reporting Portal: add logo, add desired metrics or hide those which are not valuable to your business, you can control each ane every step that client will be able to take inside the report.
+
+3. Scale revenue for your clients as a digital marketing agency
+When it comes to scaling revenue with the use of marketing, what would be that one ingredient to help you do it?
+Creativity? Thinking outside of the box? High budgets for advertising? Or maybe first-class marketing professionals?
+It all may be true, but there is one thing that is incredibly important when you have any of those components. And it's the data. Good old data.
+Data helps you track and analyze the outcomes of your creative tricks, tactics of your team, and every dollar spent on marketing and advertising.
+But how do you get the precious marketing data and see reports?
+
+Solutions like RedTrack help you find your way to get data. But raw data can do too little to help you gain success.
+In order to extract the insights from the data, you need to see clear reports, you need to be able to play with them, twist and turn them and find winning combinations in the end.
+RedTrack gives access to several types of reports and drill-downs to help you gain not just marketing data, but marketing insights.
+Monitor Campaign performance for digital marketing clients
+As a user of RedTrack, you will get access to multitude of the ways to analyze the campaigns for your digital marketing clients. You will be able to monitor the performance of each and every campaign, from any marketing channel with ease using just one dashboard. But if you wanna go deeper, you can always analyze each campaign separately, go into the details of each marketing channel or specific campaign.
+Use data breakdowns to see the following:
+
+ 	which location works better
+ 	what time of the day conversions usually happen
+ 	which devices are more likely to convert
+ 	which marketing channels deliver results for each particular product or service
+
+These and more metrics are available with RedTrack ad tracking &amp; conversion attribution solution for ad agencies.
+Conversion Path Report to help you evaluate the true impact of every channel
+A conversion Path report is a special kind of reports that sort of works like Google Analytics attribution. It helps you see the journey customers take before the conversion happens.
+
+
+Acquisition Dashboard by RedTrack — intuitive interface to measure advertising performance
+Acquisition Dashboard by RedTrack is another type of report that simplifies the process of finding insights through data. Acquisition reports use a very familiar logic of Facebook Ads Manager and help you analyze the performance by campaign / ad group / ad.
+
+
+Smart attribution — always attribute the sale to the right channel
+Another feature by RedTrack is Smart Attribution, which is based on two pillars:
+
+ 	First-party data
+ 	Cross-browser attribution
+
+These 2 things ensure that the data you collect about the marketing performance is gonna be attributed to the right channels, campaigns, or ads.
+4. Get data via API to show accuracy and flexibility
+As mentioned above, it's super important to make sure that your ad tracking solution has API integration with major marketing channels and tools that can simplify your work as a marketer.
+An absolute must for your solution in 2022 are:
+
+ 	Facebook Conversion API integration to make sure you can track Facebook Ads with accuracy and no influence from iOS 14 update
+ 	Google API integration to send cost and conversion data back to the channel for the better optimization
+ 	TikTok API since it's one of the trendiest advertising channels today
+
+
+💡Wondering how to track TikTok Ads? Check out guide!
+
+In order to simplify the performance reports for your clients you can also look for Google Data Studio, Tableu integrations. It will help you get the data via API and visualize it with these applications.
+
+RedTrack has out-of-the-box integrations with 200+ channels and tools, so be sure to check out our solution for ad agencies. 
+
+&nbsp;

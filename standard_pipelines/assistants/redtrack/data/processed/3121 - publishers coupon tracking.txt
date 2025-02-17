@@ -1,0 +1,36 @@
+# Publishers: coupon tracking
+
+What is a coupon and why it may be useful?
+Coupon is a unique code that may be assigned to your publisher/partner in order to promote the links. You can assign conversions to a publisher/partner based on the coupon value used. Coupons will override any click data and will attribute conversion to the publisher/partner that used coupons.
+How to create a coupon?
+To create a coupon, you need to set your coupon token for a publisher/partner and coupon value for the campaign. When combined, they will give a unique publisher/partner coupon for a campaign that will look like “token-value”.
+To set the coupon tracking act as follows:
+
+1. Go to the created Campaign and press the Edit icon next to it:
+
+
+
+2. Once you are in the Campaign settings go to the tab Details For Publishers:
+
+
+
+3. Add the {pubtoken} token and the value to it:
+
+
+
+4. Go to the Publishers section-&gt;Publishers -&gt; Edit:
+
+
+
+5. Scroll down to the Coupon token field and set your coupon there:
+
+
+
+6. Now, you can Login as publisher/partner:
+
+
+
+7. Go to Campaigns -&gt; choose the target campaign and check the coupon. This is how your publishers/partners will see it on their side. They can copy it and use it for tracking:
+Note!
+
+To send coupon data to RedTrack please use postback macro: coupon=coupon_value (example: coupon=vandatest-20off).

@@ -1,0 +1,17 @@
+# All You Need to Know about HTTPS and RedTrack
+
+Starting on July 1st, 2018, Google Chrome will mark all HTTP sites (i.a. Landing Pages) as “not secure” — stats Chrome security product manager in their official blog. 
+The image below shows what the address bar will look like for your site next July:
+
+The upcoming policy change might greatly affect your ad campaigns for the worse. To avoid possible risks, we strongly recommend you to use HTTPS encryption for your Landing Pages. 
+What do you need to know? 
+Our team has taken all the necessary steps to ensure RedTrack users are fully compliant when it comes to HTTPS tracking links. In RedTrack, you can either: 
+1. Switch between HTTP/ HTTPS tracking links for your custom domains in one click in Domains tab;
+2. Use RedTrack default service domain rdtrck2.com, as it HTTPS compliant as well.
+Visit our Knowledge Base to know about the HTTPS tracking links setting-up in details. 
+We admit the fact that some of you have to buy special SSL certificates to protect your domains. Thus, we’ve decided to giveaway a welcome bonus for you. Use promocode  — https_30 while signing up with RedTrack or upgrading your current account, and receive 30% discount for 1 month with any RedTrack subscription plan.
+Otherwise! 
+
+Subscribed to RedTrack Professional plan and above? Reach out to us and have your SSL certificate issued for free. To claim your SSL certificate, message us at support@redtrack.io.
+
+For more information, you can also chat with our experts in our Telegram channel.

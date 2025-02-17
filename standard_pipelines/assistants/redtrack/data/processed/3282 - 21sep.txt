@@ -1,0 +1,12 @@
+# 21-Sep
+
+
+ 	Google Ads conversions upload: new rules for the conversion upload allowing to pass it to the correct conversion name inside Google
+ 	Universal Tracking Script generator added to UI
+ 	Auto-update costs currency logic update
+ 	New Postback Mode: ignore duplicates by event id
+ 	Offers: Tags and Notes added
+ 	Postback for Bing: pass 2 symbols after the separator while sending the conversion data to Bing
+ 	Facebook auto costs limits fix
+ 	Email notification for the API integration expiration
+ 	TikTok integration: auto costs update

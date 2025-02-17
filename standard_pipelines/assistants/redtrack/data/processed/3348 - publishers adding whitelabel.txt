@@ -1,0 +1,336 @@
+# Publishers: adding whitelabel
+
+
+With RedTrack you have the option to make your branded portal 100% white-labeled and customized. To do that, follow the steps below:
+
+
+
+On the main RedTrack menu, navigate to the section Publishers -&gt; Whitelabel -&gt; New:
+
+
+
+
+
+
+
+Fill in the info in all the sections of the Whitelabel template:
+
+
+
+
+
+Fill in the fields in the New Whitelabel section. Basically, it's the essential information for your Whitelabel:
+
+
+
+
+
+
+
+1. Domain - set the domain you have already added. If you have several domains, you can set several Whitelabels.Multiple whitelabels are billed additionally. Please contact your Product Specialist for more information.2. Default Traffic Source  -  access to the Campaigns for your publishers/partners is based on the Traffic sources. Set the default source for this Whitelabel. Later you can also restrict access to the Campaigns for different publishers/partners.3. Default Campaigns  - if you want to limit access for your publishers/partners to some Campaigns under the approved Traffic sources, use this option. Only the chosen Campaigns will be available for the publishers/partners.This could be useful for the cases when you run paid traffic to some Campaigns under the Traffic source you use for your publishers/partners but don't need your publishers/partners to have the access to those Campaigns. 4. Title - this is the name of the panel for your publishers/partners.5. Allow Sign up - this toggle allows or restricts sign-up to limit access to your panel.6. Show Balance &amp; Payment history - this toggle allows to show or hide the payment history from your publishers/partners.7. Approved by default - switching this toggle on means that if the new publishers/partners registers, they can be approved by default or manually in your admin account.8. Show alias/id - this toggle allows to show or hide the unique alias for the publishers/partners account (the alias you will set for a particular publisher):9. Use alias as id - this toggle allows to show a readable unique identifier in a publishers/partners tracking link.10. Show logs - this toggle allows you to show or hide the postback log from your publishers/partners.11. Pub panel - Show accrued conversions - when this indicator is enabled, your publishers/partners in the Pub panel will only see the conversions for which you've assigned payouts in their reports.12. Logo URL  - your panel logo. Generate the URL of your logo using any tool that allows you to generate an image link. The Whitelabel logo's image should be square (e.g. 640x640 px, 1080x1080 px).13. Favicon URL  -  your panel favicon. Generate the URL of your logo using any tool that allows you to generate an image link. The Whitelabel favicon's image should be square (e.g. 640x640 px, 1080x1080 px).14. Add Banner -  once added, the banners are placed in the footer of the pub panel on all pages.15. Terms and conditions, privacy policy enabled - if you have your own terms and conditions and privacy policy, enable it so affiliates can have access to.16. Terms and conditions URL  - put the link to your terms and conditions here.17. Website - put the link to your website if any.18. Privacy policy URL -  put the link to your privacy policy here.19. Manager Contact - add the account manager contact  if any.20. (optional) Columns settings -  choose what data slices you want to show to your affiliates.21. (optional) Columns logs settings - choose which columns you want to be shown in the “Conversion logs” tab of the branded portal.
+
+
+
+
+
+
+
+
+
+Set the conditions for a payment request. To do that fill in the required info in the Payment request section:
+
+
+
+1. Press the Change settings button next to the Payment request name:
+
+
+
+
+
+
+
+2. Select the available payment types and minimum payout amount for them-&gt; choose the notification option and insert your Webhook URL-&gt;press Apply:
+
+
+
+
+
+
+
+3. Once you've applied the changes, the selected options will be depicted in the following fields:
+
+
+
+
+
+
+
+● The defined minimum payment amount for each payment method will affect the payment request conditions for the publisher/partner account (it will not be possible to request a payment if the amount is lower).● The desired notification option is the way you will receive a notification on the requested payment.
+
+
+
+
+
+To customise the login and signup page, act as follows:
+
+
+
+1. Fill in the fields in the section Сustomize login and sign up page (texts in the fields below are just an example; it's up to you how to customize Login and Sign-up pages):
+
+
+
+
+
+
+
+2. This is how publishers/partners will see it:
+
+
+
+
+
+
+
+
+
+
+
+3. Switch on the toggle Show second Sign Up page if you want to collect more information from the publishers/partners during the signup, then enable the toggles on your right to decide what information you want to collect:
+
+
+
+
+
+
+
+
+
+There are 5&nbsp; types of email notifications available for customization:
+
+
+
+
+
+
+
+E-mail types explained:Signup requested - email for manually approved registrations.Signup Successful - email for automatically approved registrations.Password reset - password reset notification.New campaign - notification on a newly created campaign.Campaign status changed - notification on an existing campaign status change.
+
+
+
+The structure for each e-mail notification type is the same. To customize a certain e-mail type act as follows:
+
+
+
+1. Press on the Subject button next to the chosen e-mail type:
+
+
+
+
+
+
+
+2. Add the needed info to the Subject, Greeting, Body, and Signature tabs:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. See how it looks in the Preview type and if the added text is ok, press Add to apply the changes. This is what your publisher/partner will receive when the target action triggers the email notification: 
+
+
+
+
+
+
+
+
+
+The Referral Program allows publishers/partners to earn additional commission from referrals they will attract to the system. Referral gets the commission based on the Campaign cost settings. It can be either the campaign cost itself or a custom payout set on the campaign level. You as a publisher/partner who has attracted the referral will gain a commission from the referral commission.
+
+
+
+This Referral program feature is activated upon the request for an additional fee. Please get in touch with your Product Specialist or support@redtrack.io for advice.
+
+
+
+The referral program can be activated in 3 ways:
+
+
+
+
+
+If you want all of your Publishers within this Whitelabel to get a commission, switch on the Activate Referral Program toggle within the settings of the Whitelabel your Publishers belong to-&gt; fill in (customize) the fields in this section:
+
+
+
+
+
+
+
+Here are the things you can customize:
+
+
+
+ ▸Additional program URL - any custom link you want to use for the purpose. It can be a link with your own backend integration, or some API integration. We will&nbsp; still add a unique value to the link so the system can identify the referral and attach him to your account correctly.
+
+
+
+ ▸ First level commission - a&nbsp; commission earned by a publisher/partner who has attracted the referrer directly
+
+
+
+ ▸ Number of steps - the depth of your referral program (how many publishers/partners in the funnel will be able to get the commission from a newly acquired referral)
+
+
+
+ ▸ Commission decrement - how much less the publishers/partners in the funnel will get compared to the one who has attracted the referral directly.
+
+
+
+
+
+
+
+
+
+If you want the commission to be paid only to certain (most earning) Publishers:
+
+
+
+1. Go to the section Publishers-&gt; choose the needed Publisher account (s):
+
+
+
+
+
+
+
+2. Scroll down to the section Referral program-&gt; switch on the Activate Referral Program toggle-&gt; fill in (customize) the fields in this section:
+
+
+
+
+
+
+
+Here are the things you can customize:
+
+
+
+▸Additional program URL - any custom link you want to use for the purpose. It can be a link with your own backend integration, or some API integration. We will&nbsp; still add a unique value to the link so the system can identify the referral and attach him to your account correctly.
+
+
+
+ ▸ First level commission - a&nbsp; commission earned by a publisher/partner who has attracted the referrer directly
+
+
+
+ ▸ Number of steps - the depth of your referral program (how many publishers/partners in the funnel will be able to get the commission from a newly acquired referral)
+
+
+
+ ▸ Commission decrement - how much less the publishers/partners in the funnel will get compared to the one who has attracted the referral directly.
+
+
+
+Since you want to pay only to certain publisher(s), toggle Activate Referral Program should be deactivated within the Whitelabel settings for all the other publishers:
+
+
+
+
+
+
+
+
+
+
+
+
+
+You can also have both scenarios: pay a certain percentage to certain Publisher(s) and pay a certain percentage for the rest of your Publishers. To implement these scenarios, use the settings from both tabs "For all publishers" and "For certain publishers only".  
+
+
+
+
+
+
+
+
+
+Example:Let’s imagine we have the following setup for a referral program:  · First level commission is 50%  · Number of steps is 2  · Commission decrement is 25%This is how it will work:
+
+
+
+
+
+Multiple Postbacks feature presupposes that only certain conversion types (chosen by the branded portal Admin) will be sent to the publishers/partners.This feature is pretty tricky so get in touch with your Product Specialist to make sure you really need it.
+
+
+
+To apply this feature:1. Add the needed conversion types to RedTrack. To do that you go to Tools-&gt;Conversion tracking-&gt;Conversion type. Click here for more info on how to manage conversion types:
+
+
+
+
+
+
+
+2. Turn on the Multiple Postbacks toggle:
+
+
+
+
+
+
+
+3. From the list of added conversion types enable the ones you want your publishers/partners to see and press Save:
+
+
+
+
+
+
+
+4. Go to Publishers-&gt; next to the needed Publisher Id navigate to the icon Login as publisher/partner:5. Select the tab Postback:
+
+
+
+
+
+
+
+6. Add the Postbacks to the enabled (within step 7.3) conversion types and press Save:
+
+
+
+
+
+
+
+
+
+You can add your GTM code to the Whitelabel if needed:
+
+
+
+
+
+
+
+
+
+

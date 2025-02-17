@@ -1,0 +1,34 @@
+# Track with No Redirects
+
+This question comes up quite often with our users:  
+— how do I track organic traffic?  
+— can I run campaigns on Google and Facebook without redirects but with all the other benefits of using the tracker? 
+
+Let`s talk about one really important feature RedTrack has — direct traffic tracking, that has quite a mystery name inside our tracker — LP Pixel. 
+Why use direct traffic tracking? 
+With LP (direct traffic tracking) Pixel, you can now track the events that come both from the paid and organic / direct traffic. In other words, this function allows you to send traffic without redirects, and get all the information like you normally do. 
+
+And of course it is specifically interesting to those who run campaigns on Google AdWords and Facebook. Thess sources “love” banning for redirects, but with LP Pixel there is nothing to worry about. 
+How track direct traffic with RedTrack.io? 
+First thing to mention is that at RedTrack, LP Pixel is generated each time you create and save a Campaign. So apparently to generate your pixel, go to Campaign tab and create a new one. 
+
+
+
+Once you save a Campaign, the LP Pixel is automatically generated. The direct traffic tracking pixel consists of the tracking URL itself and the macros with additional parameters that you’ve specified in advance. 
+
+E.g.: &lt;img src=“http://rdtrck2.com/5b33a3fe2c822c0001c891a8?ref_id={click_id}&amp;sub1={campaign}&amp;sub2={zone}&amp;sub3={country}&amp;sub4?format=img” height="1" width="1" /&gt;     
+
+Copy the generated link and add it within the &lt;body&gt; section of your landing page. 
+
+Once done, every visitor to this landing page will be attributed to the campaign you took LP pixel from. With LP Pixel by RedTrack, you can get the same comprehensive overview of your traffic as you receive for the redirect tracking method, when the tracking URL is used. 
+
+Note! We would advise you to create a dedicated Campaign to track the organic traffic. Basically, you would have two types of Campaigns for the same funnel: one for tracking direct traffic, and the other one (or more) for redirect traffic. This will make A/B split testing even more clean and transparent. 
+
+Use LP Pixel by RedTrack, track Google, Yandex, Facebook, MyTarget Ads, and other sources including organic traffic with no redirects and eliminate the risk of being “unloved” and banned. 
+
+We know video speaks louder than words, so check our guide about direct traffic tracking, and learn everything about running and analyzing ad campaigns with no redirects with the help of RedTrack:
+
+Have questions regarding direct traffic tracking? Just contact our team emailing to support@redtrack.io or let’s discuss the tracking with no redirects in RedTrack Telegram Community. 
+&nbsp;
+
+&nbsp;

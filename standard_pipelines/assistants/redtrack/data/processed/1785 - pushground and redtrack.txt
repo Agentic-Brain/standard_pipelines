@@ -1,0 +1,132 @@
+# Pushground and RedTrack
+
+
+
+
+
+
+Pushground is a self-service advertising network providing comprehensive advertising and ad optimization solutions for ad agencies, marketers, and affiliates.
+
+
+
+RedTrack has an API integration with Pushground, which allows you to pause campaigns.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types you're planning to work with
+
+
+
+
+
+
+1. Add Pushground template to RedTrack. 
+
+
+
+Traffic channels → New from template → find Pushground → Add → save the template:
+
+
+
+
+
+
+
+
+
+
+
+2. Set up a campaign in RedTrack with Pushground as a traffic source. 
+
+
+
+Campaigns→ Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create your campaign with Pushground as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy Click URL:
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+3. Integrate Pushground with RedTrack.
+
+
+
+Go to the traffic source settings → Integration → fill in the necessary details → save the changes:
+
+
+
+The "Active" button means the integration is active.
+
+
+
+
+
+
+
+4. Set up the tracking on the TS side.
+
+
+
+Go to Campaigns → Create Campaign:
+
+
+
+
+
+
+
+Place your RedTrack campaign Click URL here:
+
+
+
+
+
+
+
+5. Set up a postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 2) → scroll down to&nbsp;S2S Postback for Pushground → press&nbsp;Add → check if all the needed values for the&nbsp;parameters are in place → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+
+
+6. Set up the automated rules. Refer to this article for guidance. 
+
+

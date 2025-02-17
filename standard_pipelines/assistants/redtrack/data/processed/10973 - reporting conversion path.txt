@@ -1,0 +1,118 @@
+# Reporting: conversion path
+
+
+What's a Conversion Path report in RedTrack?
+
+
+
+Conversion path report in RedTrack shows you the most popular paths users take to complete conversions. Basically, this report demonstrates you how the clients make a decision before the actual purchase (your Offer added to RedTrack).
+
+
+
+Conversion Path report is available only for the Advertiser plans: Grow, Scale, Prevail, Custom.
+
+
+
+How to work with the Conversion Path report?
+
+
+
+1. Conversion path select the needed Offer → choose the data filters: Granularity (source type), Conversion event, Date, Lookback period → press Apply:
+
+
+
+
+
+
+
+Filters explained:
+
+
+
+
+
+Granularity is the source type. Number of data slices shown in the Granularity filter depends on the type of subscription you're on.
+
+
+
+Core granularity types explained:
+
+
+
+
+Source: traffic channel.
+
+
+
+Rt Source: parameter set in your traffic channel settings → "Additional parameters" section.
+
+
+
+Campaign: campaign which you created and launched to set the process of tracking in motion.
+
+
+
+RT Campaign: parameter set in your traffic channel settings → "Additional parameters" section.
+
+
+
+Entry page: this filter is still under development, but in the future, it's going to be named Funnel and tracked correspondently.
+
+
+
+
+
+
+For the events to be shown in this filter you need to add them first.
+
+
+
+
+
+Add the filter by Date and Loockback period to get the data within the set period.
+
+
+
+The difference between the Date filter and the Lookback period filter:☛ In the Date filter, you sort out the data for a certain period.☛ The Lookback period filter shows the statistics only within a certain chosen path. This data picker is set for 30 and 60 days.30 days are granted by default. To get the 60 days filter, you must address sales@redtrack.io to upgrade your subscription plan.
+
+
+
+
+
+2. Once you see the report pay attention to the special markers:
+
+
+
+
+
+
+
+
+
+Colors represent different traffic channels:
+
+
+
+
+green - Google.
+
+
+
+blue - Facebook.
+
+
+
+grey - referral traffic etc.
+
+
+
+
+
+
+Numbers next to traffic channels mean the number of users clicking on this very page / choosing this conversion path.
+
+
+
+
+
+For more details feel free to check out a brief conversion path report overview on YT (starts from 01:33).

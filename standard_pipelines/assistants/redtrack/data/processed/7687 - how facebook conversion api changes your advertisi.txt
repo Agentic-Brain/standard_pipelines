@@ -1,0 +1,76 @@
+# How Facebook Conversion API changes your advertising?
+
+What is happening with Facebook Ads?
+Right from the start of the year, we got hit. There was no time for rest this January since Apple released the Privacy Update which forced Facebook to implement few changes too. (Oh, was Apple really to be blamed?😜) So all this time we were figuring out how to not get your Business Manager blocked, what the hell is  Facebook CAPI, why do we need to verify the domain? 
+
+So many questions and so few solutions. In this article, we are going to shed some light on what is happening and what is changing as well as propose solutions to everything that hurts with Facebook Ads. Get on board!
+
+By the way, if you still didn’t figure out how to integrate CAPI, start conversion tracking &amp; optimize for the events of your choice, check out the guide our team prepared!
+
+
+What has changed in Facebook Ads Manager?
+First, let's define all the changes that we witnessed in January and February 2021:
+
+ 	Click-Attribution window changed from 28-day to 7-day (hell yeah!)
+ 	View-attribution is changed from 7-day to 1-day (hell yeah! x2)
+ 	8 Conversion events per domain restriction
+ 	Only 1 event prioritization
+ 	Facebook CAPI introduction as an alternative to Facebook Pixel
+ 	Recommendation (or requirement 🧐?) to verify domains
+
+We can see a very vivid trend of a decrease of available information for advertising. It affects information for Facebook algorithms which have now fewer opportunities to improve your campaigns. We are talking about targeting, remarketing, and basic tracking of your campaigns' performance.
+Why Facebook is going crazy?
+Our approach actually contradicts the general opinion. We believe that everything that is happening now around Facebook Ads is good for us because these actions prepare us for something bigger and scarier. Apple already released its' Privacy Update, but Google Chrome is just preparing the biggest attack on third-party cookies. How are third-party cookies and Facebook changes connected?
+
+Well, Facebook Pixel is a technology that will not work once third-party data disappears since pixels sit on a webpage and work on a user side. A similar problem caused the need for domain verification. This way Facebook authenticates the source of the advertisement as a way to promote privacy.
+
+So Facebook is preparing us for yet to come grand problems we will face with the Google Privacy Sandbox Ecosystem (we already made a very detailed article about it — Google Privacy Sandbox: Approaching Cookieless Future).
+Primarily, the things that are going on right now is just a huge rehearsal for cookieless marketing &amp; advertising.
+In the light of these events, we decided to create a community for marketers who face problems with Facebook Ads and are looking for solutions. We want to promote an approach where we help. each other out, support fellow advertisers and find the coolest insights from industry experts. Don't hesitate to join to learn about conversion tracking &amp; attribution with Facebook Ads 😏
+
+
+If you are not a product owner, you need to take action now
+Changes in Facebook Ads don't affect vendors and advertisers as much as they do for affiliate marketers and other advertising partners. Why did this problem occur?
+
+In the picture above, you can see that information from the vendor (advertiser) now is not passed to Facebook Pixel (or other Data Sources). And since affiliate marketers do not have access to websites where conversion actually happens, we end up in trouble. At RedTrack, we have been focusing our powers on figuring out how to make Facebook Conversion API work in the best possible way at this unprecedented time and we made a few out-of-the-box solutions for Facebook Ads. Let's get into it!
+Domain Verification Solution for Facebook Ads
+As mentioned above, there is now a requirement to verify domains where conversion event happens. But what do you do if you don't own this domain? RedTrack offers a solution that helps pass the information from a domain where conversion happens to Facebook Data Source and Facebook Ad Account. All you have to do as third-party advertisers in this case — verify your landing page and RedTrack will take care of the rest. In the picture below, you can see how our technology works.
+
+
+Seamless Facebook CAPI setup
+Another issue that we faced was the need to switch to Facebook Conversion API instead of Facebook Pixel. Firstly, let's discover how Facebook Pixel is different from Facebook CAPI.
+
+Facebook Pixel:
+
+ 	Sits on the web-page
+ 	Core info is collected by Facebook, after you set it up
+ 	Additional info is collected by Facebook
+
+Facebook Conversion API
+
+ 	Works from server-side
+ 	You need to collect and provide core and additional info to Facebook directly
+
+
+
+What are Facebook CAPI benefits?
+
+ 	Complements Facebook pixel (until it works)
+ 	Can duplicate events in pixel, when Facebook has event deduplication
+ 	Works for online and offline conversions
+ 	Works great for affiliates with no access to thank you page through pixel
+ 	Can feed data you need to Facebook
+
+ 	Event types (different cost value in eyes of Facebook)
+ 	Event URLs (so affiliates can work around limitations)
+
+
+
+So how do you set up Facebook CAPI?
+You can do it yourself, but at RedTrack we offer a seamless CAPI setup, that allows you to feed data about conversions to RedTrack and then pass it to Facebook Ad Manager. Using the RedTrack solution also gives you access to more settings that help you improve attribution on the Facebook side. RedTrack allows you to go beyond the click and view-attribution windows in Facebook set for 7 and 1 days, accordingly. Apart from that, you get access to automated cost-updates via Facebook API, ability to set rules and alerts for the management of your campaigns and their auto-optimization.
+
+If you want to learn more about the set of solutions that RedTrack offers you to improve your advertising, be sure to contact us and book a demo with our technical specialists.
+
+
+Conclusion
+No doubt, it's been a stressful couple of months. Our team is doing its' best to help educate marketers about the cookieless world as well as developing amazing solutions to help you survive without it. Remember to always be ready to adapt to marketing &amp; advertising challenges. And we are going to cover your bases with first-party data tools. 😎

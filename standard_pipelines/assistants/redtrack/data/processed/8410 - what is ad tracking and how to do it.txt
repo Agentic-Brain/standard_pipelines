@@ -1,0 +1,271 @@
+# What is Ad Tracking?! And How to Do it?
+
+Millions of creatives, copies, designs, tests, brainstorms. It’s very easy to get caught up in a daily marketing routine of constantly trying to create more to achieve those revenue milestones finally.
+
+However, without analysis, the creation sometimes becomes a waste of resources and time. Ad tracking is that one thing that can help you analyze your results to achieve your marketing financial goals. 
+
+But what is ad tracking in reality, how does it work, and most importantly, how can you do it? Let’s open the world of ad tracking in this article. 
+What is ad tracking?
+Let’s start with some basics and try to decipher what ad tracking really is. 
+Ad tracking is a process of collecting various sets of data about your ad campaigns' performance to further use for analysis and improvements in your advertising.
+Quite often, tracking has a pretty bad connotation and scares people away. Instead, when we talk about ad tracking from advertisers' side, it's simply a process of collecting data about their advertising efforts. 
+
+Just imagine running multiple campaigns on different channels, with different targeting and a set of various creatives. In order to understand which campaign, ad set, or ad unit brings you conversions, you need to implement ad tracking.
+
+
+
+The data you may collect is anything from the origin of clicks and conversions, to advanced drill-down reports on locations, devices, etc.
+What can you track with ad tracking? 
+As a marketer, you might run a bunch of channels for advertising &amp; marketing. Each channel needs its approach not only in terms of the ads you place but also the way you track it. 
+
+ 	Paid Ads (Facebook Ads, Google Ads, Bing Ads, etc.)
+ 	Partners advertisements (promotion with the help of referrals, affiliate marketing)
+ 	Direct placement 
+ 	Programmatic channels 
+ 	E-mails 
+ 	SMS campaigns
+
+All of these channels need different approaches but still are a part of the daily marketing routine. But before understanding how to track chosen channels, we need to dig into a few more bites of the theory of ad tracking. I promise we’ll make it as simple as possible.
+
+If you are more of a video type of person, just watch our explanation on what is ad tracking on YouTube ❤️
+
+
+The principle behind ad tracking is
+Before jumping into types of ad tracking or how to track a particular channel, let’s learn the goal of ad tracking and the 'magical components' that make it all possible.
+What is the goal of ad tracking? 
+The biggest issue that any experienced marketer has is the inability to make decisions based on data rather than guesses when it comes to advertising campaigns and budget allocation. 
+
+To make so-called data-informed decisions, you need real-time and unbiased data. As a marketer you have to find a way to get the data about the following: how, when, and why conversions happen. 
+
+And besides all the cool statistics you receive when doing ad tracking, the core thing you get is connecting the right click to the right conversion.
+
+
+
+When you are able to bind the click with the conversion, you are able to gain all the other insights about your advertising. 
+Types of conversions you can track 
+In the big picture there are only 2 types of conversions:
+
+ 	On-web property event or simply online conversion; 
+ 	Events besides web property — offline conversions (phone call, test drive, delivery, etc. — that’s usually something your CRM should capture).
+
+Our goal is to correctly track both types of conversions and attribute those conversions to the right clicks, campaigns, and ads. Let’s learn what helps do that. 
+How ad tracking works
+The first thing you need to do is get accustomed to the tracking link. 
+
+Most marketers have worked with tracking links, but let's see what lays behind links and how they really work. 
+A tracking link is your link that contains some magical components (tracking parameters) and unique click ID that make matching clicks with conversions (aka tracking and further attribution) possible.
+&nbsp;
+
+Let’s disassemble each component in the tracking link one by one. 
+1.Tracking (UTM) parameters
+Tracking (UTM) parameters are special parameters that compose the tracking link and help group the data from the traffic source to track the clicks. 
+UTM parameters were implemented by Google for Google Analytics tracking, but today most tracking systems implemented their own tracking parameters for analytics. 
+Example of a tracking link with UTM parameters
+https://bootsshop.com?cmpid=5e6c7b85c6565a0001718aa0&amp;sub1={replace}&amp;utm_keyword={keyword}&amp;sub4={adgroupid}&amp;sub5={creative}&amp;sub6={campaignid}&amp;sub8={adposition}&amp;ref_id={gclid}
+
+Everything that goes in {} are tracking parameters: keyword, adgroudID, creative, position etc. 
+
+After a user clicks this link the parameters will be exchanged on real values coming from this particular user: which keyword was used, which ad group the ad corresponds to, the campaign ID, etc.
+
+This way, tracking parameters help group the data about the user click. This data will later be used for matching clicks and conversion and providing you further analytics. 
+2. Unique Click ID
+Click ID is probably the most significant component of a tracking link. This ID is responsible for saving data about the user creating a unique identifier for their click. 
+Click ID is a unique ID that identifies a unique click and helps the tracking systems connect a particular click with conversion while performing attribution. 
+If we take that same link we will find a place where a unique click ID will be further saved at the end of the link (highlighted in bold). 
+
+https://bootsshop.com?cmpid=5e6c7b85c6565a0001718aa0&amp;sub1={replace}&amp;utm_keyword={keyword}&amp;sub4={adgroupid}&amp;sub5={creative}&amp;sub6={campaignid}&amp;sub8={adposition}&amp;ref_id={gclid}
+
+Click ID is a unique value and is crucial when it comes to finding out who exactly made the conversion (or any target action that you set). 
+3. Script 
+To make tracking parameters and unique click IDs work for tracking &amp; attribution, we need another player — script. 
+
+
+The script activates all the tracking components and helps deliver all the required data to the tracking system for further matching. 
+After the user clicks the tracking link, the script first collected tracking parameters from the link, creates a record in a tracking system, generated a unique click ID, and saves everything in a first-party cookie (we will talk about the importance of first-party data tracking a bit later).
+
+The script is usually placed on all the pages of your website that receive traffic. 
+The example of how tracking script works
+Now let’s see how it would work in reality in the following picture: 
+
+
+
+Supposedly you have an initial tracking link that you placed under your banner with shoe promotion. That’s how your initial link looks like: 
+
+https://bootsshop.com?cmpid=5e6c7b85c6565a0001718aa0&amp;sub1={replace}&amp;utm_keyword={keyword}&amp;sub4={adgroupid}&amp;sub5={creative}&amp;sub6={campaignid}&amp;sub8={adposition}&amp;ref_id={gclid}
+
+Then the user clicks on your banner and is directed to your website, but since there were a bunch of tracking parameters, the link is being filled with all the info about the user: tracking parameters are exchanged for the real values, and click ID is being generated in order to store a unique click. 
+
+That’s how the link looks like after the user clicked on it: 
+
+https://bootsshop.com/?cmpid=5e6c7b85c6565a0001718aa0&amp;sub1=D-Banner-Boots-USA&amp;utm_keyword=sport_boots&amp;sub4=117989060862&amp;sub5=woman_in_boots&amp;
+sub6=12720532498&amp;sub8=display&amp;utm_term=sport_boots&amp;utm_campaign=D-Banner-Boots-USA&amp;utm_source=adwords&amp;utm_medium=display&amp;gclid=EAIaIQobChMIzomEtO-68gIVAQOLCh2pbAnUEAAYASAAEgIGifD_BwE
+
+After the user has made a purchase on your website, the tracking system that received all the info with help of the script recognized that it was a particular click with ID (EAIaIQobChMIzomEtO-68gIVAQOLCh2pbAnUEAAYASAAEgIGifD_BwE) that made a conversion. And this banner was related to a display ad which was found by the keyword “sport boots”, creative “woman in boots”, etc. 
+
+Why tracking with first-party data?
+Earlier everything used to work through cookies and redirects. That’s why you as a marketer might not know all these tracking terms. Redirect worked magic and did all the steps mentioned above within seconds. Redirect was creating a cookie for tracking, generating click ID, and binding the incoming conversions in a time of a single blink. With 1st party data tracking the script and all the fuss around it becomes more visible. However, neither Facebook nor Google allows redirects anymore.
+
+In addition to that, the cookie times are gone, so we recommend not looking to third-party tracking. If you want to learn more about cookieless advertising, check out this video explainer.
+
+
+
+How can you do ad tracking?
+You need the components listed above: tracking link with tracking parameters, unique click ID, and script to make it work. It doesn’t matter how you find those components.
+
+Usually, novice marketers go for Google Analytics and Google Tag Manager to set it up. Google Analytics requires quite a few bits of tech knowledge to create complex setups; however, it gives a great functionality for core tracking. 
+
+Another way to handle tracking is to use ad trackers. 
+
+Ad trackers simplify it all by creating a script for you, issuing tracking links, and performing attribution (connecting the right clicks with the right conversions).
+
+In order to invest in the right ad tracker, make sure you find these features: 
+
+ 	Relies only on first-party data (we discussed the importance above);
+ 	Gives data breakdowns and provides advanced reports;
+ 	Supports Facebook CAPI (after 2021 updates);
+ 	Enables you with automation &amp; optimization (&amp; some other extra functionalities).
+
+Nice to have:
+
+ 	Multi-touch attribution: helps build user funnels in order to understand which touchpoint brings you the highest returns 
+ 	Raw data by click ID: your tracker can store all the data about unique clicks or can create data models. We recommend sticking with raw data, more details will also follow in the next paragraphs. 
+
+How to start doing ad tracking (like a pro) 
+Starting ad tracking depends on what kind of events or channels you are going to track. 
+
+Let's take aside the “tech-type” of tracking, but rather focus on the channels that you need to take control over. Let's look at the diagram below to see the full picture of the types of channels and ads you can track. 
+
+
+
+To track the performance on any of those channels, you will need tracking links, tracking parameters, and click ID. All of this we learned in previous chapters, so if you skipped the theory, scroll back 🙃
+1. Paid Ads (PPC) tracking 
+PPC tracking is a way to perform ad tracking on pay-per-click (PPC) channels. We are talking about search ads, display ads, video ads, native ads, remarketing etc. 
+Since you pay for each click made on your ads, it’s extremely important to track this advertising to allocate budgets accordingly. 
+
+Even though there can be a ton of channels where you can run your paid ads, we are going to look at the most common examples — Google Ads tracking and Facebook Ads tracking. 
+
+Usually, these are the first places where marketers find a need in ad tracking. Most marketers start from tracking &amp; reporting that Facebook or Google has in their ecosystem: Facebook Ads Manager (+Events Manager) for FB Ads or Google Analytics for Google Ads.
+Both Google and Facebook systems work the way we described above. They create unique IDs and add parameters to later find the matched click &amp; conversion inside their analytics tool.
+
+Unique parameter from Google — {GCLID}, Google usually asks whether you want to add it.
+
+Unique parameter from Facebook — {FBCLID}, Facebook just adds it while you blink.
+
+These unique parameters are responsible for sending data back to Facebook or Google to further make all the analytical decisions. 
+But, what’s the problem with FB and Google ad tracking systems? 
+1) Self-attribution networks
+Both Facebook and Google are self-attribution networks. That means that they are the owners of the network where you run ads, as well as they do all the tracking and conversion attribution for those ads. 
+To describe it in another way, they take payments for their ad services from advertisers and give them reports on how well their ad campaigns performed. Obviously, they want to give you a very good report and show impressive numbers, so you invest more in their ad services.
+
+Marketers in 2021 prefer to invest in unbiased tools that do not depend on you investing back to their service. So Facebook and Google are not good sources of independent data tracking &amp; attribution because it’s simply in their interest for you to see the bright picture.
+2)Usage of data aggregation and modeling
+Both Facebook and Google use data aggregation and modeling, rather than using raw tracking data and analyzing it.
+In a nutshell, the difference between those methods is the following: 
+
+ 	Aggregation and modeling is a sort of a middle-ground with an average value for your advertising effort. It means that you see on your dashboards only the approximate value.
+ 	Raw data consolidation means that every single click is counted and shown to you in the statistics &amp; analytics. 
+
+If you want to receive raw, unbiased, and independent data while tracking you need assistance from ad trackers which rely on first-party data. At RedTrack, we work on becoming a trusted source of data for marketers. Consider taking a 14-day free trial to see how we can help you. 
+Another issue with tracking after iOS14 
+However, problems with Google and Facebook do not end here. The latest privacy update by Apple influenced both of the networks, especially their tracking. 
+1) Google Ads tracking after iOS14 
+Even though many thought that iOS14 influenced only Facebook Ads, it turned out that Google got its shot too. 
+
+Google stopped transferring Google Click ID {GCLID} for iOS14 devices traffic (coming from apps specifically). What does it mean? 
+
+It means that now Google can not receive back the data about clicks and conversion from iOS14 devices, which means that clicks and conversions from YouTube Ads or Gmail (apps from Google ecosystem) can not be tracked. 
+P.S. It doesn’t influence your setup if you don’t want to do an offline conversion upload back to Google. 
+2) Facebook Ads Tracking after iOS 14
+For Facebook Privacy Update by Apple meant a few big changes: 
+
+ 	Integration with Facebook CAPI;
+ 	Transfer to Aggregated Event Measurement (you already understand what aggregated here means);
+ 	Modeled data in Facebook Ads Manager reports;
+ 	Breakdowns in reports disappeared.
+
+In order to start working with CAPI, you need the help of a developer or a third-party tool that can figure it out for you. 
+But even if you are happy with the DIY CAPI setup, you should keep in mind that you should not expect to see accurate data in the Facebook Ads manager if you have a lot of iOS14 users. 
+
+Below, you can see an example of how we solve the issue with Facebook Conversion tracking at RedTrack.
+2. Affiliate/referral tracking
+Affiliate/referral program is one of the popular ways to advertise your product with help of other marketers. It means that affiliate marketers will start promoting your product/offer for a small commission (you can set your own payout model). 
+Affiliate/referral tracking is a way to track the individual performance of your affiliate marketers, affiliate networks, or simply referral links that promote your product or service.
+If you start your own affiliate program, you will need to start affiliate (or referral) tracking. 
+
+What you need as an owner of the affiliate program: 
+
+ 	Create tracking links to issue them to your affiliates in order for them to advertise your product or service. 
+ 	See the reports about the performance of the affiliates (see who performs better or worse in order to issue correct payouts)
+ 	Present the reports to the affiliates in order to resolve any disputes, as well as to show their results. 
+
+Of course, you do need your magic trio for the tracking link: click ID, tracking parameters, and script to make it all happen. You can either:
+
+ 	Issue tracking links yourself (for example with help of GA) and control the performance in spreadsheets;
+ 	Use affiliate management software that helps create affiliate programs (generate tracking links and run reports for you). 
+
+I expect you to now even think about trying to run an affiliate program in excel and do as most marketers do: invest in affiliate management software (Tapfiliate, Affise, Postaffiiliatepro, etc.).
+
+However, I have a smart tip for you. You can save your resources on the number of tools you use. RedTrack has been known as a go-to tracker for marketers, but we decided to step this game up and developed our own affiliate management system — a White-label partnership portal.
+
+This way you get a chance not only to do all the complex ad tracking &amp; attribution with RedTrack software but to manage affiliates in the same tool (generate links, track affiliate’s performance, use reporting). Minimize the number of solutions that eat your marketing budget with us — book a demo. 
+
+
+
+&nbsp;
+3. Influencer tracking 
+As one of the most popular marketing methods in the past 5 years has been influencer marketing, a new issue arose — how to track the performance of ad placement within bloggers. 
+Influencer tracking is a way of collecting data about the performance of the ads you run with influencers. 
+Basically, it’s almost the same process as affiliate (referral) tracking, but we decided to make it a separate point because of the specificity of the platforms you use to track influencers. 
+
+The most popular platform for influencer marketing is for sure Instagram, followed up by TikTok and YouTube.  
+How to track influencers on Instagram, TikTok, and YouTube
+Usually, you have 2 options when it comes to ad placement with influencers: 
+1. Using a tracking link
+Instagram allows adding links to stories for influencers who have over 10k followers, so it could be a good option for bigger size bloggers. If your blogger does not have the ability to place a link, you might consider the second option. 
+2. Using a promo code 
+Promo code is a special code that you can generate for your influencers (e.g. track50off) in order to decipher which influencer brings you sales. 
+
+Or obviously, you can use both: a code and a tracking link.
+
+In order to work with this data you still need a unique click ID, parameters and script in order to use it for analysis. Instagram, as well as YouTube, are great because they allow you to include links with a lot of parameters (which will later help you sort things out by campaign, influencer, etc.). 
+
+However, what you need for successful collaboration with influencers is:
+
+ 	Ability to use link shortener without losing the functionality of the tracking hidden in all the parameters that you set 
+ 	Track the performance of each individual promo code created for each influencer
+
+You can generate links manually, making sure that you do not use dynamic parameters (otherwise the link shortener will break the link) and also manually export the performance on each promo code. 
+
+But also you can use the white-label publisher panel at RedTrack in order to all at once:
+
+ 	Create tracking links and issue them to influencers 
+ 	Create coupons (promo codes) and track their performance (promo codes will be unique for each influencer and human-readable, which is very important for Instagram, Youtube, and TikTok audience)
+ 	Do proper attribution of each promo code (or link) and connect it to the right influencer
+ 	Use reports for your convenience and to show results to influencers
+
+4. Direct ad placement tracking
+As direct ad placement traffic, we count those banners, links, ads that have been placed directly on a website (whether it’s your own or the websites of those publishers and partners. It can be any website that allows the placement of the banners/links.
+If traffic on your own website can easily be tracked with Google Analytics, links on other properties (for example media outlets) have to be tracked.
+Why do you need tracking for direct ad placements (beyond the obvious reasons we have discussed)?
+
+Usually, publishers work with several models: 
+
+ 	Flat fee. It’s a set fee you pay for your ads being displayed. You pay once and then analyze the results of this placement for your business and if it's worth future investments. 
+ 	You pay for clicks or impressions. For some weird reason, many publishers use CRMs or simple spreadsheets for reporting. But it’s not real-time data, it can not be verified, and can not be matched with inner system data in case of any discrepancies. Tracking can solve this problem and make payment for clicks/impressions accurate according to real data about conversions. 
+ 	You pay for results (conversion, sale, etc.). Same deal as in the previous point — you gotta understand the real data behind conversions in order to make sure where they are coming from. Tracking gives you access to real-time data about conversions. 
+
+A new type of tracking, but the same old song — tracking link, parameters, and unique click ID still do the job. 
+
+Tracking parameters are very important for direct placements because you can negotiate with your publisher the structure of the parameters in order to find what, when, and how was shown to the user, as well as any other info about the campaign. 
+
+Usage of tracking tools like RedTrack allows you to issue those tracking URLs for direct placements and take this data to the same dashboard where all the rest of the channels’ reports are stored. Parameters can be both: dynamic or hard-coded. 
+Ad Tracking Takeaways 
+We do hope that this article sheds some light on the complex topic of ad tracking. Ad tracking can truly become your source of valuable insights that will affect every marketing channels you utilize.
+The right choice in a tracking system helps not only to gather all the data from your advertising channels but to visualize, automate and optimize it. And most importantly take all these insights into action — daily creation of better marketing.
+
+
+
+If you haven't made up your mind about the ad tracking software you wanna use for you ads, I recommend taking a look at RedTrack.
+
+RedTrack is a trusted source of insights for marketers all over the globe, combining the functionality any specialist needs: core tracking, automation &amp; optimization, affiliate management, etc. In order to learn more about our amazing tool, book a demo!
+

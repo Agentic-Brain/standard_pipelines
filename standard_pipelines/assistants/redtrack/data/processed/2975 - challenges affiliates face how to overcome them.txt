@@ -1,0 +1,96 @@
+# Challenges affiliates face: how to overcome them?
+
+*The proposed content was primarily delivered during the speech at the European Summit — one of the largest affiliate marketing conferences in dating, gambling, gaming, and other online marketing verticals.
+Affiliate Marketing is a dynamic industry. 
+Despite the countless opinion columns claiming affiliate marketing is dead, total affiliate marketing spend is expected to surpass $6.8 billion by 2020. That’s a more than 50% increase over 2016 totals.
+
+But, while affiliate marketing presents plenty of opportunities to make money online, there are also some risks and challenges worth considering. 
+In this post, I’m going to list three common challenges that affiliate marketers face. Keep on reading and know how to overcome them to make your success in this industry more predictive and controlled.
+Challenges that affiliates are facing today: 
+
+
+ 	Ad Fraud boom 
+ 	Browser ad restrictions
+ 	Ad-blocking 
+
+Ad Fraud is a regnant problem
+Ad fraud is one of the most talked about issues, as it affects mostly all the players of the online advertising industry. According to the most recent research, in 2018 about $51 million daily was lost to click fraud or $19 billion throughout the year. Statistically, this is equivalent to a 227% increase over the course of two years! 
+Monetary losses, messy analytics, damage of reputation and relationships between affiliates and advertisers — are the main damages caused by ad fraud. 
+Fighting fraud requires understanding and recognizing various types of fraud. The most common ones are the following: 
+
+
+ 	click spam: this type of fraud happens when a fraudster attributes clicks to users who haven’t made them and absolutely unaware of this fact;
+ 	click injection: type of click spamming, exposed to Android devices;
+ 	device farms: also known as phone or click farms are used to create fraudulent clicks, install and mobile engagement;
+ 	domain spoofing;
+ 	cookie stuffing: consist of attaching multiple cookies to users without their knowledge;
+ 	proxy sales;
+ 	etc.
+
+[caption id="attachment_2988" align="aligncenter" width="900"] Image source: fraudscore.ai[/caption]
+
+&nbsp;
+What should I do to secure yourself from fraud traffic and stop losing money on it?
+Big players that are involved in the online advertising industry have already introduced quite a few regulations that are intended to stop or at least limit the fraudulent traffic growth. 
+On November 2018 — Instagram started banning the users or delete the content that was not-organically boosted with likes and comments thanks to third-party apps. With these measures, they want to remove inauthentic activity that misleads many advertisers. 
+As of 2019, Google has started removing apps from the store that were proved to use ad fraud schemes, i.e. in-app install attribution abuse. Google Play has already banned three malicious SDKs. Besides, they’ve recently announced that they will continue to investigate and improve their capabilities to better detect and protect against malicious and abusive behavior behind the mobile app industry. 
+In May 2018, the World Federation of Advertisers has published a Charter where they claimed zero tolerance to ad fraud as one of their key principles.
+All these preventions definitely work, but they’re out of our control. Then, an apparent question arises — How can I directly detect and prevent fraud? 
+
+There are several warning signs which can indicate anomalies and define bot or fraud activity:
+
+ 	An abnormally huge gap between the number of impressions and conversions;
+ 	Increased bounce rates from your landing page; 
+ 	Uneven traffic distribution — unjustified splashes of traffic increase;
+ 	Traffic that is referred from unknown domains. 
+
+How to retrieve this information? Use tracking tools and leverage traffic logs deep analysis. It provides you with raw data about every click and conversion that your ad receives.
+
+Consequently, with the growth of interest in traffic quality analysis, advertisers and media buyers have started more eagerly address the services that can ensure that click fraud is kept in check. To meet the market requirements, RedTrack has reached out to our Partners, the anti-fraud tool — FraudScore. As a result of our joint work, we’ve released an effective anti-fraud feature inside RedTrack — Fraud Report. Now, you can receive a holistic overview of the traffic you buy in real time and evaluate the quality of each click based on five categories: 
+
+
+ 	Ok
+ 	Attribution 
+ 	Baddevice
+ 	Blacklist
+ 	Datacenter
+ 	Proxy
+
+Learn the details of Fraud Report parameters here.
+With Fraud Report, receive an overall campaign performance overview and stop wasting money on low-quality, i.e. fraud traffic. To activate click quality checker under your RedTrack account, contact our team — support@redtrack.io.
+&nbsp;
+
+Do browser ad restrictions make tracking impossible? 
+The internet is an ad-tracking machine. Every advertising you see online is shown to you based on the information about your web visits that were previously tracked and collected by different services and agencies. Targeted advertising is still the best way to make money online.
+
+Still, the problem of web-based tracking in the affiliate industry is much debated due to some issues, like: 
+
+
+ 	Restrictions on third-party cookies by browsers; 
+ 	Cookie notifications enforced as a response to GDPR;
+ 	Blockers by one of the major traffic sources, like Google.
+
+What are the restrictions by browsers? 
+On summer, Safari has released the Intelligent Tracking Prevention update, that has largely impacted the tracking capabilities of performance and affiliate marketing campaigns. This update starts blocking any tracking with third-party cookies, and therefore claims to protect users’ privacy on the web. Mozilla Firefox became the next browser that has introduced this update. Altogether it is almost 22% of all the population that is using the internet with these browsers, and it definitely can affect your conversions. 
+But let’s address the basics of tracking. When it comes to performance marketing, there are two conversion tracking methods that are used by the players: cookie or pixel tracking and S2S or postback tracking.
+
+What’s the difference between the pixel and S2S tracking?
+Pixel tracking (aka, cookie tracking) relies on the user’s browser to track conversions. Every user’s web visit is stored in a cookie that is called again once a conversion happens and attributes this action to the correct affiliate. Thanks to a simple set-up, this tracking method is loved by many affiliates.
+Postback tracking (aka, S2S tracking), instead, relies on the advertiser’s servers to track sessions generated on clicks to attribute conversions. In other words, this method is independent of the user’s browser and works equally well with Safari, Chrome, Mozilla, etc.
+Read more: What is the difference between Pixel and S2S postback tracking?
+The enhanced tracking prevention updates by Safari and Mozilla challenged the cookies tracking. Still, it hasn’t impacted the more reliable method — postback tracking. Unlike cookie tracking, S2S tracking is mobile friendly and less prone to fraud. 
+The different approach was introduced by Google and Chrome browser.
+
+Why Google stops publishers and advertisers to earn more?
+Since Google is a member of the Coalition for Better Ads, it should take its online advertising controls in accordance with their standards. On February, Google started blocking ads that violate the ad standards (under the guise of the Coalition for Better Ads) on the websites that are accessed through the Chrome browser. 
+After surveying nearly 66,000 web and mobile users, the Coalition identified four categories of desktop ads and eight types of mobile ads that fall below the non-user-friendly formats:
+&nbsp;
+
+
+How does this change influence the players of the affiliate marketing industry? 
+Some ad networks change the formats they work with, others shift focus from intrusive formats, e.g. pop-up to less intrusive — pop-under. 
+Many affiliate networks that rely on affiliates who use pop-up with pin submits and adult offers, have to adapt to some changes as well. 
+Google standards, instead, make Google’s ad units, such as search and display, even more appealing for media buyers and affiliates. Native ads and facebook ads would stand to profit as well. 
+My advice would be to work with trusted ad networks and strengthen the relationships with them, as they're interested in providing reliable and qualitative traffic sources to you.
+
+&nbsp;

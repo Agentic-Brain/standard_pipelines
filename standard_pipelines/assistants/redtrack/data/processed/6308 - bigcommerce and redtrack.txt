@@ -1,0 +1,156 @@
+# BigCommerce and RedTrack
+
+
+
+
+
+
+BigCommerce is a commerce solution provider.
+
+
+
+Integration
+
+
+
+
+
+1. Add&nbsp;custom tracking domain.
+
+
+
+2. Add conversion events:
+
+
+
+Go to Tools → Conversion tracking → Conversion type → use&nbsp;this guide&nbsp;to help you add the needed events. 
+
+
+
+This is the list of events supported by BigCommerce:- ViewContent- AddToCart- InitiateCheckout- Purchase
+
+
+
+3. Add BigCommerce as a Brand in RedTrack:
+
+
+
+3.1 Brands → New from scratch → use&nbsp;this guide&nbsp;to help you with Brand editing.
+
+
+
+The specified title of the shop will correspond to the Brand’s name. The newly created Brand will serve as a placeholder for the tracking parameters.
+
+
+
+3.2 To send the PII data for better attribution go to the added Brand settings →&nbsp;Additional parameters&nbsp;→ add the following parameters with the corresponding roles:
+
+
+
+ParameterMacro / TokenName / Description (what you will see in reports instead of subx)RoleInfo we receive under these parameterseventid{replace}Event IDEvent IDYour order ID or the external ID for the conversionfname{replace}First NameFirst NameCustomer First Name from the orderlname{replace}Last NameLast NameCustomer Last Name from the orderphone{replace}PhonePhoneCustomer phone number from the orderemail{replace}EmailEmailCustomer email from the orderzip{replace}Zip CodeZip CodeCustomer zip code from the ordercontentid{replace}Content IDContent IDsExternal product IDcontent{replace}ContentContentsProduct titlecontenttype{replace}Content CategoryContent CategoryThe type of product
+
+
+
+
+
+
+
+4. Add your Website:
+
+
+
+Websites → New → use&nbsp;this guide&nbsp;to help you add the website (your offer).
+
+
+
+Once you’ve added your Website, the universal tracking script is generated automatically. To get it go to the added Website form → Scripts → scroll down to the field Universal tracking script → copy the script since you’ll need to add to the BigCommerce later:
+
+
+
+5. Create a paid traffic campaign:
+
+
+
+The campaign for the unattributed (organic) traffic is already in place. Now you need to create the one for the paid traffic. To do that act as follows:
+
+
+
+
+Add the&nbsp;Traffic channel. Most of them have a preset template in RedTrack:&nbsp;API-integrated traffic channels/&nbsp;Non-API integrated traffic channels.
+
+
+
+Launch a campaign&nbsp;for the paid Traffic channel. Your website/shop will be the main link added to the traffic channel.
+
+
+
+
+
+
+1. Add&nbsp;click_id&nbsp;parameter to the list of fields in the BigCommerce form
+
+
+
+1.1 In your BigCommerce account go to&nbsp;Settings → scroll down to the section&nbsp;Advanced&nbsp;→ choose the option&nbsp;Account sign up form:
+
+
+
+
+
+
+
+1.2 Address Fields → Create a New Field → choose the option&nbsp;Text Field:
+
+
+
+
+
+
+
+1.3 Type&nbsp;click_id&nbsp;in the&nbsp;Field Name&nbsp;→&nbsp;Save:
+
+
+
+
+
+
+
+2. Find and install your&nbsp;app in BigCommerce
+
+
+
+2.1 In your BigCommerce account go to Apps → Marketplace → press Bigcommerce.com/Apps:
+
+
+
+
+
+
+
+2.2 Navigate to the app's name → click on the Get this app button → Install:
+
+
+
+
+
+
+
+
+
+
+
+2.3 Accept the compliance Terms and Conditions → press&nbsp;Confirm:
+
+
+
+
+
+
+
+2.4 Add RT universal tracking script (Setup in RedTrack → step 4) to the popped up field → Save: 
+
+
+
+
+
+

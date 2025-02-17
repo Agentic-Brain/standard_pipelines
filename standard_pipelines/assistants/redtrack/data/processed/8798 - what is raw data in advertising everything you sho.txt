@@ -1,0 +1,120 @@
+# What is raw data in advertising? Everything you should know
+
+Even though marketing &amp; advertising is considered a creative industry, we all know that there is a lot of numbers, statistics, and calculations in this job.
+In fact, I will take the responsibility to state that the anatomy of the creative advertising job lies in those numbers and data points that can only be revealed with raw data. 
+
+In this article, we are going to review what is raw data for advertising, how it can change the way you do marketing, and why none of the platforms by Facebook or Google will NOT help you in the dissection of your advertising activities.
+What is raw data? 
+Raw data is a set of information that is delivered straight from the source and has not been altered or processed by algorithms or machine learning. 
+If we talk about advertising specifically, raw data is a set of information that helps identify each target action made from advertising efforts. 
+
+To put it simply, it is data as it is. Before it has been altered, interpreted, grouped, or put into any shapes for your further conclusions. 
+
+
+
+If we talk about the RedTrack case, we collect raw data about all the clicks and conversions using first-party data and store it as it is, raw and unseasoned. 
+Why do you need raw data for advertising? 
+I’ll give you more graphs and schemes to understand this topic a bit later, but first I wanted to touch on the philosophical part of why raw data is so important for your advertising or marketing. 
+
+In our daily operations tasks, we always base our decisions on sets of information or data. And depending on the quality of this data — change the outcomes of our decisions. 
+
+Basically, the same happens with advertising. Whether you entrust automation &amp; optimization to make most of your advertising decisions or it’s your personal marketing call, depending on the data you receive about running ads, your decisions will change. 
+Raw, unaltered, and unsampled data ensures that your decision is based on the most accurate information there is. 
+But let’s see how it works and what are other scenarios of data usage in the advertising industry. 
+How raw data works? 
+As raw data is a set of information about the clicks and conversions without aggregation or sampling, we have to understand how it works. 
+
+When a user clicks on the ad, this click is registered by your attribution &amp; analytics tool and once a conversion on a website is made, the click binds with the conversion. Behind every click and conversion, there is more data: click time, conversion time, device type, OS type, browser type, location, and most importantly, content type (aka which ad worked out). 
+
+
+
+In RedTrack’s case, all this info is stored in the same raw way it was recorded, so you can play around with the data and look at your results from different angles. 
+5 Advantages of raw data in advertising 
+
+Let's review the list of benefits that your advertising receives if you choose to spice it up with raw data.
+Attribution based on raw data 
+The first and the most important advantage of using raw data is access to deterministic attribution.
+Deterministic attribution is the process when each click is attributed to the conversion precisely according to the rules you set. 
+On the contrary, sampled &amp; aggregated data can only give you probabilistic attribution where clicks are attributed to conversion with probability, rather than precision. We will dig into the details of data sampling a bit later, for now let’s focus on amazing deterministic attribution. 
+Deterministic attribution: how can you use it for your advertising? 
+When you use deterministic attribution paired up with raw data, you almost become a magician. 
+
+
+
+That means that with the set of information you have you can use different rules and look at the data from different angles. 
+Some of the rules you can use for deterministic attribution:
+
+ 	First-click attribution
+ 	Last-click attribution
+ 	Last paid click attribution
+ 	Attribution window 
+
+Raw data and conversion insights 
+Raw data gives you the precision on which click made it to the conversion. Let’s imagine that you are running ads on multiple advertising channels, on top of that doing influencer marketing and other activities, how do you know what exactly played out better to bring you the conversion? 
+
+Depending on the attribution model of your advertising channel, the conversion will be attributed to a specific ad, even though it can be not necessarily true. 
+
+For example, Facebook Ads manager is using the last-touch attribution model. That means that the last click before the conversion will be considered as the one that brought the conversion, while in fact there could be many other actions on a customer journey before that. 
+Understanding the conversion gap 
+Conversion gap is a period of time between the first interaction of the user with your advertising and the actual conversion time. 
+What can happen during the conversion gap? So many things: users can see multiple ad banners, ads through influencers, they can google you and find your website through the organic source, and in the end, they can just purchase through a promo code they found online. 
+
+With raw data, you get each activity of the user recorded and is available for analysis. While sampled &amp; aggregated data gives a very limited picture of what happened during the conversion gap if giving any at all. 
+Better reporting on your ads 
+Raw data gives an opportunity to build better, more detailed, and in-depth reports for advertising activities. 
+Reports are your insights into what actually happens after you set your ad sets live. Those insights can be used further to make smarter decisions when distributing marketing budgets. 
+
+Also reporting through different angles becomes handy if you need to prove the certain hypotheses and defend your results to the team or management. 
+Better automation &amp; optimization of your ads 
+The last point, but definitely not the least. There are two ways you can use raw data insights: think it over and change the strategy of your marketing or leave the changes to automation &amp; optimization. 
+
+Some of the marketing analytics platforms allow you to set rules to control your performance according to the data received. 
+For example, you may pause ads that receive less than X CR rate or direct the traffic to the ads that receive a bigger CTR. 
+&nbsp;
+
+
+
+&nbsp;
+
+That’s the case with RedTrack, where you can amplify your marketing with the usage of raw data for automation through custom rules.
+
+ If you want to learn how rules can change your marketing decision-making, be sure to talk to specialists from our team. 
+
+
+Why not just use Facebook Attribution or Google Analytics? 
+I oftentimes face the same question. Google Analytics / Google Tag Manager/ Facebook Ads Manager does a good job, why is it not enough? There are two main reasons why you can think of alternatives for data collection. 
+Facebook and Google are self-attribution networks 
+The simple answer is that both Facebook and Google are self-attribution networks. It means that each ecosystem is used for advertising and for attribution of the data. The more you spend money on advertising through them, the better it is for FB and Google. That makes them biased to show that conversions are coming from their advertising networks in order for you to invest more into their channels. 
+Facebook and Google use data aggregation &amp; sampling 
+On the other side of using raw data stand data aggregation, modeling, and sampling. 
+&nbsp;
+
+And that’s how Google Analytics and Facebook Ads Manager treat the data. 
+If raw data is the info about each and every click and conversion. Aggregated &amp; sampled data is a model of that raw information, an average value. 
+
+The graph below should give you more understanding of what is the main difference between raw and sampled data. 
+
+
+
+Not only do those networks give you only an approximate picture of what’s going on with your advertising, but they also lack the flexibility and depth that raw data gives when it comes to attribution, reporting, and fighting the conversion gap. 
+You simply lose a chance to manipulate data on the fly to analyze it from different angles and make decisions.
+&nbsp;
+
+
+
+&nbsp;
+Raw data and ads: outcomes
+It's surely not an easy topic for understanding, especially if you (just like me) enjoy the creative bits of our marketing journeys. However, it is a very important topic for marketing understanding.
+
+Raw data can become a key to insights that change the way you do marketing, distribute budgets and make decisions with your team.
+
+It becomes an even more significant task if you are working with multiple advertising &amp; marketing channels.
+
+With RedTrack, access to raw advertising data is not a question anymore. What do we do?
+
+ 	Integrate with 25+ advertising channels
+ 	Collect raw advertising data through first-party data scripts
+ 	Provide you with reports &amp; insights about your marketing activities
+
+As simple as that, your marketing team is amplified with various data sets for smarter decisions.
+

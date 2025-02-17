@@ -1,0 +1,26 @@
+# Conversion Tracking between RedTrack & Adcash
+
+Even more good news from RedTrack team this week! As our tracking solution is integrated with Adcash — one of the independent leaders of the online advertising industry.
+Adcash is a global digital advertising powerhouse that is centered around a fully self-served DSP. They help digital marketers to create highly-targeted online campaigns across multiple ad formats through one interface. Adcash has over 11+ years’ of industry experience and they have been one of the leading pop-under providers. Besides successful pop ads, they also specialize in other effective ad formats including native ads, native push notifications, interstitials, and banner ads. 
+The range of ad formats really impresses. And what is even more important, they are all adjusted to the market trends and changes, with the shared objective to perform high engagement and bring reliable ROI.
+
+
+
+
+
+Why Adcash? Here are our 4 reasons why:
+• Transparent self-service platform with a user-friendly interface and features such as precision targeting, live reporting, 24/7 online support and advanced bot filtering technology;
+• Advertisers can run, manage and optimize all of their campaigns in one place with one invoice instead of running campaigns on multiple ad networks and platforms;
+• By creating 1 campaign, advertisers get worldwide traffic from over 200+ programmatic partners and access Adcash’s exclusive supply that is only available through their platform;
+• No manual optimization — their advanced prediction algorithms automatically optimize campaigns to deliver the best performance. Their superior CPA target feature helps online advertisers to increase conversions and make their campaigns even more profitable.
+
+
+
+
+
+
+ With Adcash added as a trusted Traffic Source, save your time and make your work more efficient with RedTrack.
+Visit RedTrack Knowledge Base and access our step-by-step guide of setting up conversion tracking between our tracker and Adcash.
+
+
+

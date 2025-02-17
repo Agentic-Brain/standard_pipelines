@@ -1,0 +1,24 @@
+# Renaming Subs / Aliases for additional parameters in templates
+
+
+RedTrack offers you 20 additional parameters to add to your postback URL. By default these parameters are called subs (sub1, sub2, sub3, etc.). You can easily rename these parameters as per your needs (e.g. utm_source, adname, etc.). To update the naming of the parameters go to the added Traffic channel template → Additional parameters section. If your parameter field is greyed and prevents you from renaming it just remove the assigned role to this parameter → move over to the enabled parameter field and rename it as per your needs → assign the role back → save changes to the template:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

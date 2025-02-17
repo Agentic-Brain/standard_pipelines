@@ -1,0 +1,115 @@
+# Reporting: campaigns
+
+What are reports in RedTrack?
+Reports in RedTrack is a rich and functional feature that allows you to analyse your data deep and based on different slices.
+Important!
+
+Data in RT Reports filtered by "Hour of day" is shown based on the time zone set in your RT account, not the data chosen in the Time timezone filter.
+
+To change the set time zone in your account go to burger menu-&gt; Settings-&gt; General tab-&gt; choose the needed time zone from the drop-down:
+
+ 
+Reports can be viewed, filtered, and exported by such segments as Campaigns, Traffic sources, Offers, and Offer sources depending on your needs:
+
+
+Important!
+
+RedTrack also offers clients the possibility of enjoying a Fraud report, which is provided by our partner Fraudscore. It is possible to apply this feature if you have a "fraud check" option enabled on a campaign level. For more details go to the article Fraud check.
+What info is shown in the Reports depending on the segment?
+Campaigns
+[expand title="Expand to learn more about reports by Campaigns"]
+
+It's a general campaign report: all clicks, CTR, revenue, offers, etc., are grouped for one particular campaign. You can "play" with grouping to better understand what is happening with your traffic and what combinations convert best.
+
+You can also filter the reports for one Campaign with multiple Offers if that's the case.
+
+[/expand]
+Traffic sources
+[expand title="Expand to learn more about reports by Traffic sources"]
+
+Reports functionality by the Traffic source segment looks the same as any other Reports, but your traffic source performs as the primary data grouping source.
+If the same traffic source is used in different campaigns, you can check its performance in one place.
+
+[/expand]
+Offers and Offer sources
+[expand title="Expand to learn more about reports by Offers and Offer sources"]
+
+Reports functionality by the Offers and Offer sources segments looks the same as any other Reports, but Offer or Offer Sources perform as the the primary data grouping sources.
+
+As for Offers if one offer is used in different campaigns with different traffic sources, all clicks will be available in this report so you can analyze all your offer traffic in one place.
+
+[/expand]
+How to apply the Reports functionality
+1. First you decide in what segment you need to view your Reports (Campaigns, Traffic sources, Offers, and Offer sources).
+For your information: in our example, we will apply the functionality of Reports on Campaigns. Make sure to use the segment you need, as we've already mentioned, the interface of the Reports for Campaigns, Traffic sources, Offers, and Offer sources is pretty musch the same.
+2. Go to your Campaigns, choose one and press the Report sign. It can be done in either of 2 ways:
+
+ 	via the Report icon next to the chosen Campaign, when you navigate your mouse to it:
+
+
+
+ 	via the Report button which activates when choosing the concrete Campaign:
+
+
+
+3. Once you are in the Report, you can see the overview tab providing you with essential information on the Campaign performance: date, ROAS, impressions, clicks, CTR, LP Views etc.
+
+
+Note!
+
+Mind that it is possible to change these data slices as needed with the help of Columns: change their order, add/remove some of them etc.
+
+[expand title="Expand to see how to work with the Columns"]
+3.1 press on the Columns button at the top of the Report window:
+
+
+
+3.2 in the pop-up window you'll see listed all the columns (presented in the Report) to your right:
+
+ 	to remove a certain column press on the "X" sign next to it:
+
+
+
+ 	to add this column back in the column to your right, press the "-&gt;" sign:
+
+
+
+ 	to change the order of the columns press on the needed name of the column (line) and drag it to the needed place:
+
+
+
+[/expand]
+
+4. You can filter your Report data by Date, Time zone, and 5 more other slices. Once you've chosen the filter, remember to press the Apply / Refresh button to apply these filters:
+Keep in mind that in order to see the costs you need to turn off the Show costs toggle and, consequently, turn it on to filter the data without the costs:
+
+
+
+Hint!
+
+To filter the unattributed (organic) traffic in your Campaign report choose Referrer — Page groupings and check what has been left out.
+5. You can filter the Subs by picking the needed sub in the Choose grouping field or (in case these filters are already taken) by pressing on the Show subs filter button and setting the subs you want to be shown in the report. Once filters are chosen remember to press Apply / Refresh:
+
+
+
+6. If needed you can also export the grouped data to a .csv file. To do that press the Export button:
+
+
+
+7. If you need to view the same data slices in the Report over and over again, you can create a template to access the most frequently used groupings faster.
+
+[expand title="Expand to see how to create the template"]
+
+7.1 to create a template insert info into all the necessary filters, press Template Management, give your template a name and press Save report as template:
+
+
+
+7.2 to apply the template press Template management and choose from the dropdown the template you've created before / the one you need in case you've created several templates for different types of reports:
+
+
+
+Once you've chosen the needed template the filters will be applied automatically and the columns will be placed accordingly:
+
+
+
+[/expand]

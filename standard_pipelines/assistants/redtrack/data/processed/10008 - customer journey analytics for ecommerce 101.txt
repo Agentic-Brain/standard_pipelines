@@ -1,0 +1,107 @@
+# Customer Journey Analytics for E-commerce 101
+
+In the rapidly evolving landscape of e-commerce, understanding and optimizing your customer's journey is vital for success. To navigate this complex terrain, you need a powerful tool to create customer journey reports. What is a simple set of conversion events packed in an excellent report is a complex technology enabled by first-party data and exquisite tracking technologies. 
+
+RedTrack is one of the leading platforms that transforms a vast data set into clear, customizable performance reports that you can easily act on and optimize your campaigns. 
+
+One of the latest additions to RedTrack platform is Customer Journey reporting for e-commerce. 
+
+Before we discuss why this update is so important for all the e-commerce and DTC stores out there, let's talk about the meaning and significance of the customer journey for performance marketers and businesses' success in general. 
+What is customer journey analytics? 
+With the help of a customer journey, you can map a "path" that a particular user took before making a purchase. It's a network of multiple ad clicks, ad channels, and touchpoints unifying the customer journey before the sale. 
+Customer journey is a set of touchpoints your customer had with your product / website / or specifically your advertising. 
+Why is customer journey reporting so important for e-commerce marketers? 
+Well, every business's marketing team would benefit from "walking the way" hand in hand with your customers. It creates a deeper understanding of how your marketing activities are interacted with and what kind of effect they have on your KPIs. 
+E-commerce business is one of the top niches where tracking every single interaction with the ads is important because of the multitouch nature of the marketing campaigns. 
+Usual e-commerce businesses work with various paid ad channels (like Meta, Google, TikTok), influencers, email marketing, content marketing, affiliate marketing for e-com, etc. All these channels require a unique approach when working on analytics of its performance. 
+
+Especially when it comes to emails, companies should also set up DMARC to ensure proper email security, and to provide seamless email experience.
+
+Moreover, the costs of the campaigns (especially if we are talking about paid channels) are permanently rising. 
+
+Increasing campaign budgets mean that achieving increasing ROAS is a must. And only with accurate click and conversion data customer journey reports are possible. 
+Performance &amp; customer journey analytics become a top priority for e-com marketers who want to increase the profitability of their campaigns, decrease CAC, and optimize performance based on accurate data, not just guesses and intuition. 
+4 Use Cases of Customer Journey Analytics boosting revenue for e-com
+Let's look over 4 most common examples of how Customer Journey Analytics can help your e-commerce or DTC business thrive.
+
+
+Full funnel visibility with customer journey reports
+With the help of customer journeys, e-commerce business gets unbeatable clarity in the user's interaction with the store's ads and campaigns. 
+
+You will see every click from various channels and how they all line up in a sequence of events that lead to the purchase. 
+
+The best part is that you can analyze it on the user level.
+
+As an e-com media buyer or business owner, you can analyze every single purchase or build a more advanced report, where you will be able to dig deeper into conversion reasons. 
+You can analyze your customer journey by specific channel (whether it's Fb Ads, TikTok Ads, or Google Ads) and campaign and understand what truly impacts your marketing strategy. 
+Optimization, customization, and personalization
+Knowing the real picture of the conversion journey customers take, you can get into optimization of your campaigns. 
+
+With RedTrack's all-in-one platform for e-commerce, you can optimize your campaigns in a few ways: 
+- Utilize Rules to automate performance-based campaigns 
+You can set up automation flows with Advanced Rules that will stop non-performing ads or campaigns or scale budgets / bids for campaigns that bring you the most revenue. 
+- Strategize your campaigns with full knowledge of the funnel 
+Advertisers often make significant decisions about the campaign's fate or even channel profitability based on mere assumptions and guesses. With RedTrack conversion data and customer journey reports, you can make your decisions data-informed and be confident in your changes for a higher ROAS. 
+Efficient budget allocation in e-commerce
+When analyzing the performance of each channel in various reports (including customer journey reports), you can make conscious decisions about the financial investments and budgets that have to be distributed across all ad campaigns. 
+Attribution Clarity in multichannel e-commerce marketing world 
+Building your ad strategy is only possible with accurate attribution. Relying on Meta Ads Manager or Google Analytics is a sure way to make inaccurate decisions since those networks are considered to be self-attribution platforms. 
+
+Learn more about Facebook attribution model here &gt;&gt;&gt;
+
+In a nutshell, the main problem when working with tools from Meta, Google, or TikTok is using data modelling, and does not give you the real picture behind every single conversion. It's more of an approximation of your performance. 
+
+And let us remind you that attributing those conversions to the ads takes up to 72 hours.
+
+Therefore, it would be a big mistake for any e-commerce media-buyer to trust Google Analytics, even the later Google Analytics 4. 
+
+Ad Tracker VS Google Analytics 4 — read more &gt;&gt;&gt;
+RedTrack opens your e-com business a world of attribution clarity and confidence.
+How RedTrack helps e-commerce advertisers track customer journeys? 
+Before moving on to customer journey reporting, it's important to understand that data quality is the key to any further reports you want to build to track your ad efficiency. 
+
+At RedTrack, we put the data quality at the heart of everything. 
+RedTrack analytics platform in a nutshell 
+Our technology starts with pioneering in server-to-server tracking, which enables RedTrack to receive accurate raw data (without sampling) from your favorite ad channels (Meta, Google, TikTok, Bing, and others). 
+
+RedTrack platform also connects to your e-commerce platform of choice (like Shopify, WooCommerce, Adobe Commerce, etc.) and enables exchanges of sales data. 
+
+This configuration helps us track all ads you run, as well as conversions coming from various campaigns, ad sets, or ads, and attribute all the conversions (sales) to the relevant ads. 
+RedTrack ensures 100% accurate conversion attribution for e-commerce advertisers. You can achieve close to real-time ad spend &amp; revenue sync across all your marketing campaigns in a single interface of the RedTrack platform. 
+
+Want to learn more about conversion tracking for e-commerce? Click here!
+When choosing your conversion attribution &amp; analytics solution, and before jumping into a nice "customer journey" feature, this is something you have to ensure that the accuracy of the data you will see in customer journeys is of top quality. 
+RedTrack is introducing Customer Journey reporting for e-commerce 
+One of the latest additions to RedTrack platform is customer journey reporting. It is here to complete a platform for e-commerce advertisers and make it an all-in-one solution. 
+
+The customer journey reporting feature is available on every e-com subscription, so every e-com advertiser can unlock full-funnel visibility for as low as $149/mo. 
+
+To set up Customer Journeys, you don't need much. As soon as you connect all your ad channels with in-built API integration templates provided by RedTrack, you will be able to see how customers interact with your ads on their way to convert. 
+
+
+
+You can analyze customer journey by a particular channel or multiple channels; you can customize the time period you are looking at. 
+
+
+
+You can see a unique customer ID to follow this user's path from the first ad click to a successful purchase. 
+
+It may sound simple — yet you unlock many possibilities to look at your performance marketing, analyze its efficiency, and allocate budgets accordingly. 
+Beyond customer journey reporting: RedTrack helping scale e-com campaigns. 
+Besides accurate tracking, attribution, and customer journey reporting, RedTrack provides ad automation for e-commerce businesses. 
+
+With RedTrack, you can: 
+
+ 	Pause Ads according to KPIs you set to avoid budget waste on non-performing ads; 
+ 	Change bids and budgets to either scale best campaigns, or decrease the spend for other campaigns; 
+ 	Manually manage your ads from RedTrack UI with Ads Manager feature. 
+
+5 Use cases of Ad Automation by RedTrack &gt;&gt;&gt;
+
+
+
+Ready to try RedTrack? Seize the current Black Friday deal to get a 30% discount on all e-commerce subscriptions through October of 2023. 
+
+&nbsp;
+
+&nbsp;

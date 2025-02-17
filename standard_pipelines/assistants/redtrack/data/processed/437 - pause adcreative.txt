@@ -1,0 +1,36 @@
+# Pause ad/creative
+
+
+What's a pause ad/creative feature?
+
+
+
+Since in RedTrack we have extended API integrations with a set of traffic channels, there is an option to pause different elements on the traffic channel side. Like that you will not spend more money on non-converting creatives, placements or even campaigns. This can be implemented via the&nbsp;Automated rules&nbsp;functionality.
+
+
+
+To find out if your traffic channel is eligible for this type of rule go to this article (Rules → Pause → Channel Ad/Creative).
+
+
+
+How do I set up the Channel Ad/Creative rule?
+
+
+
+1. Go to Automated rules → New → choose the targeted Traffic channel, Campaign(s) and select&nbsp;Channel Ad/Creative&nbsp;from the Rule object drop-down:
+
+
+
+
+
+
+
+2. Set up the&nbsp;Conditions&nbsp;for the rule to be triggered and the&nbsp;Actions&nbsp;to be performed when it happens → fill in the rest of the&nbsp;mandatory fields&nbsp;→ Save and Activate:
+
+
+
+
+
+
+
+Every five minutes the rules analyze the reported data. When the reported data matches criteria set in conditions, this ad creative is paused in your traffic source account.

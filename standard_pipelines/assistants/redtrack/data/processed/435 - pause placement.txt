@@ -1,0 +1,36 @@
+# Pause placement
+
+
+What's a pause placement feature?
+
+
+
+Since RedTrack is integrated with a set of traffic channels via API, we are able to pause different elements on the traffic channel side. That includes the possibility to pause not only the entire campaign but ad placements in your traffic channel account. Like that you will not spend more money on non-converting creatives, placements or even campaigns. This can be implemented via the Automated rules functionality.
+
+
+
+To find out if your traffic channel is eligible for this type of rule go to this article (Rules → Pause → Channel placement).
+
+
+
+How do I set up the channel placement rule?
+
+
+
+1. Go to Automated rules → New → choose the targeted Traffic channel, Campaign(s) and select Channel placement from the Rule object drop-down:
+
+
+
+
+
+
+
+2. Set up the Conditions for the rule to be triggered and the Actions to be performed when it happens → fill in the rest of the mandatory fields → Save and Activate: 
+
+
+
+
+
+
+
+Every five minutes the rules analyse the reported data. When the reported data matches criteria set in conditions, this placement is paused in your traffic channel account.

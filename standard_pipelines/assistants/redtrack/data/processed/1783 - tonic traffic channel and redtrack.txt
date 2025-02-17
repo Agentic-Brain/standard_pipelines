@@ -1,0 +1,150 @@
+# Tonic (traffic channel) and RedTrack
+
+
+
+
+
+
+Tonic is the traffic marketplace for advertisers and publishers interested in buying or selling email, domain, pop, or exit traffic. 
+
+
+
+RedTrack has an API integration with Tonic, which gives you the following benefits:
+
+
+
+
+Pause campaign, placement
+
+
+
+Create automated rules
+
+
+
+
+In the integration workflow below Tonic performs as a traffic channel.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types you're planning to work with
+
+
+
+
+
+
+1. Add Tonic template to RedTrack and integrate 2 platforms
+
+
+
+1.1 Go to your RedTrack account → Traffic channels → New from template → find Tonic → Add → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+1.2 To integrate Tonic and RedTrack in the saved Tonic template go to the Tonic API integration section → fill in the Email and Password fields → Save changes to the template:
+
+
+
+
+
+
+
+Active button means the integration is on:
+
+
+
+2. Set up a campaign in RedTrack with Tonic as a traffic source.
+
+
+
+Campaigns → Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create your campaign with Tonic as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL:
+
+
+
+
+
+
+
+RedTrack recommends to use the redirect tracking url with Tonic. Refer to these articles for details on other tracking methods:– Universal script– No-redirect– Impressions
+
+
+
+3. Set up the tracking on the Tonic side.
+
+
+
+Open either the POP or the Zero-Click tab (depending on which type of Campaign you want to create) → &nbsp;Click the New Campaign button → Submit the necessary information regarding your traffic and targeting options → proceed to the Next Step.&nbsp;
+
+
+
+Paste the Campaign URL you have copied within step 2 into the Redirect URL field: 
+
+
+
+
+
+
+
+If you want to track conversions for your Campaign, open the Optional Advanced Settings tab:
+
+
+
+
+
+
+
+Choose the Auto payout option if your Affiliate Network allows dynamic payout tracking. Otherwise, insert the cost manually. Once you are done setting up your Campaign, click the Save and Start Campaign button. 
+
+
+
+4. Set up a postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 2) → scroll down to&nbsp;S2S Postback for Tonic → press&nbsp;Add → check if all the needed values for the&nbsp;parameters are in place or add/replace the needed ones → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+
+
+5. Set up the automated rules. Refer to&nbsp;this article&nbsp;for guidance.
+
+

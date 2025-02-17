@@ -1,0 +1,64 @@
+# Publishers: settings for partners
+
+
+Normally, you do not have to do anything on the panel itself. Just in case your partners have any issues, check out a short overview of the Partner management panel.
+
+
+
+1. Once you are in your partners management panel you'll see 5 main tabs, your balance Referral balance, and your account info:
+
+
+
+
+
+
+
+2. To check out your Profile info, Referral program details, or sign out press on the drop-down sign next to the account settings on your right and choose the needed option:
+
+
+
+
+
+
+
+3. Dashboard is the first tab you see, once you've logged in to your partner panel. You can filter all the needed info here and get the Day, Campaign, and the needed metrics:
+
+
+
+
+
+
+
+4. In the Campaign tab you will see the list of your Campaigns alongside with the details on the right (Type, Rate, Category, etc.). It is possible to filter a particular Campaign by the Title:
+
+
+
+
+
+
+
+5. The Payments tab gives you a brief overview of your balance alongside your payment amount and method, which you can change by pressing the change settings button next to it:
+
+
+
+
+
+
+
+6. Conversion logs tab allows you to filter and view your conversions by their types and see their Campaign, Click ID, Conversion time, etc.:
+
+
+
+
+
+
+
+7. Postback tab is where the Postback URL is to be added.:
+
+
+
+
+
+
+
+Important facts about the Postback in Publisher Panel:- Postback is added for the cases when publishers want to send conversions outside of RedTrack to their backend/internal system, etc.- Postback URL should be provided by the partner/publisher, not the RT client. Thus, the domain in the postback as well as the postback itself is something that belongs to the publisher himself.- In this Postback URL macro for clickid={ref_id}&amp; macro for payout={aff_payout}.- {replace_me} parameter is added for the publisher to see this value in the tracking link and replace it with his real value (macro for the click id used on their side).

@@ -1,0 +1,87 @@
+# Customer story: Mobfolio Performance Marketing Agency
+
+Every day RedTrack team gets a ton of questions from ad agencies about how we can help them improve performance and reach business goals. Despite the large number of advanced ad tracking and optimization features we have, it can be hard to answer this question unmistakably right off the bat. Every ad agency is unique. The seeming similarity of the challenges they face is often only seeming. Our team always dig deeper into business to provide the best-personalized solution. 
+Recently we've talked to one of our clients -  Mobfolio
+Performance Marketing Agency- and asked them to share
+their experience with RedTrack.     
+Read on if you'd like to know more about Mobfolio, how they got over all the challenges they faced helping clients worldwide, and the role of RedTrack in it. It's a must-read for every ad agency that truly cares about its clients and performance. 
+Today with us - Mark,  a co-founder of Mobfolio.
+                                                
+
+
+
+About Mobfolio
+Mobfoilio is a performance-based agency that provides tailored solutions to brands, publishers, and networks all around the globe. Since launching in 2014, Mobfolio has become a real expert in Lead gen and E-commerce verticals and now helps its clients to reach the 'right' customers at the 'right' time and maximize their advertising ROI. The team has already proved its efficiency working with CPI, CPA, CPL models as well as with complex funnels.
+
+
+In Mobfolio, we practice a performance-driven approach. Our  success fully depends on the efficiency of the help we provide to our customers. To keep the bar high, we chose a model when we get paid only after our clients reach the desired. And to be honest, we've never regretted our choice.
+
+&nbsp;
+
+As we see now, such an approach helped us to find our main competitive advantage. We managed to stand out from the competition and create meaningful partnerships with top media sources, publishers, influencers and communities. This advantage is mainly based on deep customer insight approach and the clients service we provide.
+
+&nbsp;
+
+We work closely with all the publishers and advertisers on all the proccesses. They vary from the technical setup of the product to the strategy, specific marketing messages, creatives and further analytics and optimization.
+
+&nbsp;
+
+
+- Mark, Mobfolio agency 
+
+
+Challenge
+Today, more and more advertisers are turning to performance marketing. This, in turn, imposes a great responsibility on ad agencies that are fully responsible for their clients’ performance.
+
+In their day-to-day activities, Mobfolio faces the routine of tracking, monitoring, and optimization of a big amount of ad campaigns. It required them a lot of time, as every time before making optimization decisions, you need to get enough data first.   
+“In today’s world, it’s pretty clear that to achieve high results you definitely need stable, reliable and up-to-date tracking and optimization solutions. Moreover, they have to be done with a deep understanding of the market and the client's needs and keep abreast of even minor industry twists and turns.”
+- Mark, Mobfolio agency 
+
+Some agencies used to hire their own developers and in-house ad-tech experts to develop their own tracking solution. RedTrack users’ survey showed that there are several reasons why they chose not to do it now. Among the most popular reasons are:
+
+•  lack of resources and high side-spends. 
+
+•  the necessity to update tech stack according to industry changes. The affiliate marketing industry is very dynamic. Fraud tactics are becoming more sophisticated, 3rd-party cookies are dying, advertisers require more in-depth reporting from publishers. You need to make sure you keep updating your expertise and stack with these changes, otherwise, it can result in money loss. 
+Learn more: January 14 Google's announcement. What was that?
+&nbsp;
+Solution
+The Mobfolio team moved their advertising tracking and analytics to RedTrack. Using RedTrack's sophisticated tracking and reporting opportunities, Mobfolio was able to launch promo campaigns in bulk measuring and optimizing their performance in real-time. 
+
+
+“I’ve been in performance marketing for over 10 years. During this time I've tried a huge amount of tracking solutions, ad servers &amp; optimizations systems. The problem is that you need a solution that, on the one hand, has a variety of advanced features able to help you with ad management &amp; optimization routine, and, on the other, is cost-effective. Basically, that's why we chose RedTrack. They help us focus on what we know best and get better results with our customers at an affordable price”.
+- Mark, Mobfolio agency 
+
+Among the RedTrack features that perfectly address Mobfolio’s needs are:
+
+1. Event tracking. If you work in e-commerce or mobile advertising, you know how this is important to understand each and every step of the funnel: from the first touchpoint to the 'Add to cart' action. "In RedTrack, each event can be separated and reported to the corresponding traffic source. For example, we can see that we have one more 'add to cart' from Facebook and another 'Sale' from an Email follow-up. This helps us to understand potential buyers and improve drastically our metrics, like CR and ROI”.
+
+2. LP management features. "RedTrack allows us to manage a campaign using one or many landers and connect different offers to the same lander. In simple words, we can create a lander and do an A/B test that will show us the difference between how the two versions of the page performed and combine both of them with one or many offers".
+
+3. Automation features set. It helps spend money more efficiently and optimize media buying while not focusing on repetitive tasks. "The most obvious benefit we see is that we can now automatically a/b test different landers and offers, and distribute traffic between them to get higher profit." This feature-set includes an automatic pause of campaigns/creatives, an auto-blacklist of placements, and an auto-update cost. Currently, 20 Traffic Sources are API integrated and synched with RedTrack. 
+
+Among other features, agencies value in RedTrack are:
+
+ 	Multi-access, that gives the access rights of different levels to your team members;
+ 	Cookieless tracking, a must-have feature for everyone who works with Google or Facebook;
+ 	Consolidated reports with 30+ data points for traffic monitoring and analysis;
+ 	Fraud detection;
+ 	Impression tracking and impression forwarding;
+ 	Multi-step funnel tracking, used to set pre-landers, landers, offers and mix and match and set weight;
+ 	Publisher and Advertiser Panels to effectively manage all your publishers, etc.
+
+&nbsp;
+Request FREE demo with RedTrack specialist
+
+&nbsp;
+Case study by Mobfolio: "A/B testing with RedTrack"
+In Mobifolio we usually start our promo campaigns with two versions of the same page. So, the traffic weight percentage is usually 50:50. Once we have enough data, we make the page with better performance than the leading one and leave the rest in rotation, giving them about 10% - 20% of the traffic. 
+
+During a campaign for one of our clients — the mobile e-commerce publisher, we noticed that the number of "Add to Cart '' events on mobile was much lower than on desktop. Our main hypothesis was that the information was poorly presented and simply disturbed the user. After testing a few LP versions, we were able to find a perfect decision by adding a floating footer with a "Buy" button to one of the pages. It allowed users to make a purchase easier (it's a hot place for promotion as well).
+
+
+
+With the help of A/B tests with RedTrack, the Mobfolio ad agency was able to find the best landing page structure that helped users to come to a decision faster and make purchases easier. The users were able to make purchases easier. This small change increased the performance of the page by 18% and the significant part was that we could test it with a simple function in the system.
+“In our practice, we could have a great number of ’Add to cart’ events with a much lower amount of 'Sales' ones. Users obviously liked the product but something made them quit it before the end of the sale. In the end, We just changed the checkout on an A/B test flow to compare it to the old page and the results improved in a matter of hours!”
+- Mark, Mobfolio agency 
+
+&nbsp;

@@ -1,0 +1,80 @@
+# Google Ads: Campaign Manager 360
+
+
+What's a Campaign Manager 360?
+
+
+
+Campaign Manager 360 is a web-based ad management system for advertisers and agencies. It helps you manage your digital campaigns across websites and mobile. This includes a robust set of features for ad serving, targeting, verification, and reporting.
+
+
+
+With RedTrack, you can send Google conversions to Campaign Manager 360. This feature is available for such subscription types as:
+
+
+
+
+Affiliate: Enterprise
+
+
+
+Advertiser: Agency
+
+
+
+Advertiser: Prevail
+
+
+
+
+To enable this feature, email to support@redtrack.io.
+
+
+
+How do I apply this feature?
+
+
+
+Without integrating Google Ads with RedTrack first, your Campaign Manager 360 part of the setup won't work. Follow the steps below for the proper setup. 
+
+
+
+1. Integrate RedTrack with Google Ads as per this guide.
+
+
+
+2. Go to your Campaign Manager 360 account and copy the values for your Profile ID and Floodlight activity ID:
+
+
+
+
+
+Main menu → Admin → User profiles → Profile ID:
+
+
+
+
+
+
+
+
+
+Campaign → Main menu → Floodlight → Activities → Floodlight Activity ID:
+
+
+
+
+
+
+
+
+
+3. Get back to your RedTrack account → Google Ads traffic channel → Campaign Manager 360 → select from the dropdown the needed Conversion Type (s) → add Profile ID and Floodlight activity ID (copied within the previous step) → Save changes to the template:
+
+
+
+
+
+
+
+

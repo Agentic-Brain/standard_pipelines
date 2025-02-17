@@ -1,0 +1,139 @@
+# What’s Marketing Attribution? A guide boost your Ad performance
+
+The media-buying world has changed, they say. And that’s true. The old concept of using industry best practices doesn’t seem to be so effective today. It has evolved into endless experiments with traffic sources, offers, creatives, and ad placements. As ways of reaching and converting users became more complicated, the problem of marketing attribution model choice and usage became more and more relevant. Why?
+
+Marketing attribution helps make media-buying world simpler and easier to digest. It allows to see the real picture of what’s going on with your media-buying campaigns and analyze the results to make better investment decisions. Sounds a little bit complicated, doesn't it? No worries, in this blog post, we’ll explain everything in detail. Continue reading if you want to learn:
+
+ 	What’s marketing attribution;
+ 	What types of marketing attribution exist on the market;
+ 	How to use it to boost your ad performance.
+
+Ready? Then, let's go in the order.
+What is marketing attribution?
+This mysterious term is basically the practice of evaluating the the steps your users make on their path to conversion for ROAS calculation. The main goal of attribution is to determine which factor, event or step in your sales funnel had the greatest impact on users conversion. 
+
+&nbsp;
+
+
+
+&nbsp;
+
+The main problem here is that conversions are treated differently by different tracking services. Some may attribute the conversion to the channel which the user interacted first. Others, on the contrary, will attribute it to the last step the users made before conversion happened or evenly distribute the credit across all the touchpoint inside conversion path .
+
+Currently, there are 6 most popular attribution models available on the market.
+
+Let’s consider them all in detail.
+What types of attribution models exist on the market?
+First, you should know that there's no perfect attribution model type in this world. Each model has its own pros and cons and all we have to do is  just deal with it. The two most popular ones are the first and last-click attribution models. Let's take a closer look at them.
+
+
+
+ 	
+First Interaction (first-click) model;
+
+
+In the First Interaction attribution model, the conversion is attributed to the first touchpoint your user pass through when started interacting with your funnel. It can be anything from your Facebook Ads banner, the link in directories or just a direct search in Google. No matter how difficult or long the user’s path was further, this first touchpoint would receive 100% of the credit for the conversion/sale.
+
+ 	
+Last Interaction (last-click) model;
+
+
+Last Interaction attribution model is pretty similar to the first one. The only difference is that in this case the conversion credit will receive the last channel the user interacted with before conversion happened.
+
+For example, a user finds your blog post via Google search. Three days later he clicks on your Facebook Retargeting Ads. A day later he visits your landing page directly as now he’s ready to make a purchase. With the last-click attribution model, the direct traffic touchpoint will be considered as the one that lead to a conversion.
+
+
+
+As you see, both of these models have their own pros and cons. At the same time, both of them can be a good fit for you if you have a short buying cycle or focus on the top-of-the-funnel customers. Using them together will help you understand:
+
+ 	which of your channels is the strongest when it comes to attracting qualified lead;
+ 	what channel is the most effective when it comes to converting your user into lead or a customer.
+
+Is there a way to combine both of this models for better understanding of your ad performance?
+ Absolutely. That’s what we do in RedTrack. By default, the conversions are recorded according to the last click attribution model. Respectively, all your metrics in the Reporting Portal section are calculated in accordance to this. But you can easily switch to the first click attribution models in your Profile section.
+
+Note: This feature is available for Pro customers and above.
+
+
+
+Besides, in your Logs-&gt; Conversions section you’ll have First Click and the Conversion time columns which basically stay for the first-and-the last clicks attribution models. This information will help you understand the performance of your campaign on a deeper level and make better decisions.
+
+
+
+Want to know more how to use data in order to imporve your ad campaigns performance?
+
+
+Read: -&gt; How to Skyrocket your business with RedTrack Data Reports
+What are the other attribution models?
+There are only four left to make out:
+
+ 	
+Last Non-Direct Click;
+
+
+As the name suggests, in this case, all direct traffic is ignored, and 100% of the conversion credit is given to the last non-direct channel the customer interacted with before he made he made the target action. If the last click was ‘direct’, the system will look back at the user's journey to attribute the conversion to any prior ‘non-direct clicks’. 
+
+Let's look at an example:
+
+A user leaves contact in the form on the website and you start an email campaign. The user finds your offer interesting, clicks on CTA, spend some time on your landing page, but still doesn't buy anything. In two days he makes a direct search of your website and buys a product.
+
+In this case the conversion will be attributed to your Email campaign.
+
+ 	
+Linear;`
+
+
+Within this attribution model, all the touchpoint along your sales funnel will share equal credit for the conversion. In our case of 4 touchpoint, each of them will recieve 25% credit.
+
+Easy!
+
+&nbsp;
+
+
+
+ 	
+Time-Decay;
+
+
+This model gives the most credit to the touchpoint the user came across at the closest time to the conversion. In many ways this model is similar to the last-click one. The only difference is that it focuses on time not on the action itself.
+
+ 	
+Position-Based.
+
+
+In this case, 40% of conversion credit goes to the first and last events, and 20% of credit that is remained is distributed evenly to the middle events. 
+
+&nbsp;
+
+
+
+
+
+As you see, Linear, Time decay, and Position-based models break up the conversion event across all the touchpoint you created. Here's an example that demonstrated the difference between different attribution models working mechanisms. Let's assume your user should come across Facebook, Google Organic, Email, and Direct channels:
+
+&nbsp;
+
+
+How can attribution modeling help you boost your Ad performance?
+According to iProspect, 
+ Attribution implementation can result into 15 – 35 percent gain in media- buying efficiency and ROI boost.
+What are the reasons? There're 4 of them:
+
+ 	Accurate Revenue Attribution. Your ROAS, Costs and other metrics will differ depending on your attribution model choice. That's why its important to try several use different attribution models to understand which touchpoints and hypothesis have the better ROI in each case.
+
+
+ 	Understand your user better: Marketing attribution shows you which of your campaigns/touchpoints have the greatest response from your users and helps you create effective buyer personas and set up audience targeting.&nbsp;
+
+Statistically, more than 90% of website visitors are not converted to customers when they first visit website. More than a half leaves it within first 15 seconds. They use more and more third party information sources before making a purchase. Marketing attribution will help you understand in which touchpoint you should invest more to get a better ROI.
+ 
+ 	Understand The Value of The Customer: Marketing attribution model will help you understand how your customers LTV influence each of your sales funnel touchpoint and help determine campaign spend across your acquisition/retention programs.
+
+Conclusion
+Marketing attribution is the only way to get a clear look at your multi-channel marketing campaigns and complicated sales funnels efficiency. It provides you insights on how your users make decisions, who's your audience and what are the most efficient touchpoint that you work on. As there're no perfect attribution model in the world today, we implemented two types of attribution models in RedTrack (the first-and-the last click ones) so you can get better understanding of how good your hypothesis are and make better decisions. Want to learn more about how to use attribution modeling to improve your ad performance? Let's talk
+
+
+ hbspt.cta.load(7519541, 'ef490f48-8ab0-4913-8668-57716f5d0600', {}); 
+
+&nbsp;
+
+&nbsp;

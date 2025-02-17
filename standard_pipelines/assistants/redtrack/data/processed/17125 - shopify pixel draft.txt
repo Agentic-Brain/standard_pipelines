@@ -1,0 +1,44 @@
+# Shopify pixel draft
+
+
+Мб лучше смержить шаги, чтобы для всех скриптов было:Шаг 1. Где взять скриптШаг 2-4. Куда вставить скриптДля афилиатов, которым скрипты или пиксель не генерятся автоматом в самом начале секции сделать ноут с темплейтами  откуда брать скрипты кастомно:
+
+
+
+To find the pixel go to Websites → Scripts → choose Shopify in the E-com integrations drop-down → copy the pixel.
+
+
+
+To add the pixel in Shopify:
+
+
+
+1. Settings → Customer events → Add custom pixel → give it a name → Add pixel:
+
+
+
+
+
+
+
+
+
+
+
+2. In the Permission window mark Analytics → in the Data sale window mark Data collected qualifies as data sale:
+
+
+
+
+
+
+
+3. Paste the pixel copied from your Website form into the Code section → change the tracking.domain and store.domain parts with your actual domains → Connect: 
+
+
+
+
+
+
+
+

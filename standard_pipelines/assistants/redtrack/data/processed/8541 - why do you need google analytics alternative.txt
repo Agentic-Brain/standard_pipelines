@@ -1,0 +1,237 @@
+# Why do you need Google Analytics Alternative?
+
+Google Analytics (GA) is a staple for any marketer. When you dig into analytics, GA will come as a first tool to help you out. But is Google Analytics enough if we want to receive proper performance analysis for our website/ads, and other marketing activities or you need a Google Analytics alternative? 
+
+In this article, we are going to explore why GA may be not the best idea and why do you need a Google Analytics alternative. 
+So what is it, that Google Analytics lacks? Let’s dive into everything you didn’t know about GA! 
+
+&nbsp;
+Why Google Analytics is a go-to marketing analytics tool
+1. Google Analytics is a source of information on your website interaction
+On the screenshot below you can see that Google Analytics provides you with insights about each page you have on your website. The info comes down to pageviews, time users spend on a page, entrances, bounce rates, etc. 
+
+This feature is great to analyze the performance of each page to understand which part of your website needs more investment of resources. 
+
+
+2. GA helps define sources that drive traffic to your website.
+Google Analytics measures and separates online traffic into channels that define their primary source: whether it’s organic traffic, paid ads, social, email traffic, or others.  
+
+
+3. With GA you can set goals for your performance 
+Google Analytics unlocks the opportunity to track the most important goals and conversions of your website to improve it and track the results of any campaign. With the use of GA, you can track user actions on your website.
+
+4. GA gives data reports with customization. 
+Meaning that with GA you can customize your reports, dashboard, alerts to see any data you might possibly need. 
+
+Plenty of pre-made reports help choose a reporting template that suits your needs. You can export your reports to excel or google sheet or other tools. 
+5. GA allows issuing tracking links for different purposes. 
+Google Analytics along with Google Tag Manager (GTM) gives you an opportunity to create tracking URLs that you can use for ad tracking, for example. With the usage of a few UTM parameters, you can get all the valuable information about the conversion events driven by those links. 
+
+&nbsp;
+5 Reasons why Google Analytics is NOT the best solution 
+But when we advance as marketers, we start realizing that analytics, eventually, is the key part of your marketing activities. Analytics provides you with data that help you make the decision not relying on guesses, but on actual facts.
+
+Here, you may start noticing that GA is failing to serve its mission. 
+1. Analyzing the performance of your media-buying campaigns 
+If you do a lot of media buying through different advertising platforms, Google Analytics is not as good as specialized ad tracking software.
+GA tends to overreport or sample data without precise accuracy (more on this topic in the following section). 
+Moreover, GA doesn’t provide you with as many details about the performance of your campaigns, as you can get from ad tracking software.
+2. Automating the performance of your campaigns
+
+Another missing feature that you as a marketer would definitely find a place in your marketing routine is automation and optimization.
+GA collects data but has no ability to automate your performance according to this data. 
+Ad tracking software gives you the opportunity to set rules in order to optimize traffic. For example, the worst-performing offers will automatically be paused and better-performing offers will receive more traffic. 
+3. Running affiliates/referrals/influencers campaigns 
+One of the ways to step up your marketing is to create an affiliate program (or use referrals/ influencers) to promote your website or your traffic.
+Even though GA gives you an opportunity to create tracking links, analyzing the performance of different affiliates can turn into a nightmare without a unified dashboard. 
+You need not only issue links, but compare the performance of your advertising partners and share results with them in order to solve any disputes.  
+4. Coupon-based attribution (promo code attribution)
+When working with affiliates/referrals or influencers, you may want to issue special promo codes to advertise your product. Google Analytics is not able to perform attribution with those coupons (promo codes) that will lead you to incorrect conclusions about the performance of your referrals. 
+5. Offline conversion tracking
+And lastly, Google Analytics is not able to record offline conversions that happen on your backed. Like trial periods, demos, or other actions that happen in your CRM (Hubspot, Salesforce, etc.)
+
+&nbsp;
+What you didn’t know about Google Analytics? 
+When many marketers trust GA everything about their marketing, there are 2 things you might not have known about how it really works. 
+
+ 	
+Google Analytics uses data modeling and aggregation
+
+
+Sounds scary, but it simply means that Google Analytics doesn’t show you a full picture of your conversion performance. It’s a model of your real clicks, conversions, and impressions which is an average value. 
+The average value is great if you wanna see an approximate picture of your performance, but if you want to go real deep into exploring your statistics, you need to understand the backstory for each and every click that comes to your website and product. 
+Third-party trackers do offer you that functionality if they use raw first-party data. 
+
+ 	
+Google Analytics is not so free
+
+
+We are all used to see GA as a free tool for marketers, however, if you go to their website, you can see that there is an Analytics 360 (with a price available only once you talk to sales). 
+Paid GA includes integration with Salesforce, advanced reporting, advanced funnels, advanced attribution modeling &amp; more. 
+
+Basically, paid Google Analytics provides all the features that offer third-party tracking tools. And rumor has it, that most companies wouldn’t be able to afford Analytics 360, but you can talk to sales and see it for yourself.
+Moreover, with all the setup required for a proper work of GA (advanced funnels, attribution, etc.), you might miss the hidden costs for developers' services.
+When do you need an alternative to Google Analytics?
+We have just seen some of the reasons why Google Analytics is a great tool, as well as some issues with GA. 
+
+So GA is great, but not the end to all means solution. Let’s look at the cases where you will need help from other tools, so-called third-party ad tracking software.  
+
+ 	
+You run a bunch of marketing channels.
+
+
+PPC, referrals, influencer marketing, direct ad placements, etc. And you want to have accurate and precise data about each channel in a single dashboard. With the ability to see dropdown details on conversion data. 
+
+ 	
+You run an affiliate program, referral program, or invest in influencer marketing. 
+
+
+For that purpose, it’s wise to use an affiliate management software that helps you do both: issue special tracking links and track the performance of your advertising partners. 
+
+ 	
+You want to see the full picture. 
+
+
+Meaning that for valuable decisions you need raw data about every click and conversion happening on your website. Only tools that support raw first-party data without modeling, sampling, or aggregation can do that. 
+
+ 	
+You want to automate the performance of the campaigns and let go of the controls of advertising adventures.
+
+
+Only third-party tracking software will open to you a wonderful world of automation &amp; optimization functionality. Control your traffic with the use of smart algorithms.
+ 
+
+ 	
+You have offline conversions as a goal.
+
+
+Third-party trackers will be able to record those conversions and perform attribution matching data from online events and offline events. 
+
+ 	
+You need to “stitch the funnel”
+
+
+For example, identify which of the channels / campaigns generate e-mail subscribers with high LTV and what is the actual ROAS of those subscribers.
+
+Well, let me introduce you to one of the tools that can help you if those activities are a part of your marketing routine.
+
+RedTrack is an ad tracking, conversion attribution, and affiliate management software, all-in-one. It relies only on raw first-party data and helps bring all the data to a single dashboard. 
+
+
+
+Comparison of Google Analytics vs RedTrack 
+For a better picture, let’s run a comparison of Google Analytics and RedTrack functionality feature by feature. 
+
+
+
+
+
+GA
+
+
+RedTrack
+
+
+
+UTM data
+Yes
+Yes
+
+
+Ad Spend
+Only Google Ads
+Yes
+
+
+Goals completions
+Yes
+Yes
+
+
+Bounces
+Yes
+No
+
+
+On-site purchases
+Yes
+Yes
+
+
+Off-site purchases
+If Integrated
+Yes
+
+
+Attribution Window
+30 Days
+Flexible
+
+
+Subscription revenue
+No
+Yes
+
+
+Repeat purchases (LTV)
+No
+Yes
+
+
+Refund rate
+No
+Yes
+
+
+Multi-purchase attribution
+No
+Yes
+
+
+Affiliate tracking
+No
+Yes
+
+
+Coupon-based attribution
+No
+Yes
+
+
+Referral tracking
+No
+Yes 
+
+
+MLM
+No
+Yes
+
+
+Fraud detection
+No
+Yes
+
+
+Rule-based automation
+No
+Yes
+
+
+Impression tracking
+No
+Yes, if supported
+
+
+
+&nbsp;
+Conclusion
+Google analytics truly is one of the staple tools for a marketer. We all can not live without it: pageviews, bounce rates, average time on the page probably became your everyday routine. But top-notch marketing results require to step up the marketing analytics approach. Specialized ad tracking &amp; conversion attribution software allows you to broaden your specter of decisions that are based on real data.
+RedTrack is one of the tools that helps you utilize data for results you have never witnessed before. And just a single platform provides you with all the needed insights.
+
+
+
+ 
+
+If you haven't given a try to RedTrack before, you have to know that there is a 14-day free trial (no CC required) to see for yourself what this tool has to offer. Or simply book a call with our tech specialists and they will guide you through.
+

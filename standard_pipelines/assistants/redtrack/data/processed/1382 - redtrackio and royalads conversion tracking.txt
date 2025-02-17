@@ -1,0 +1,23 @@
+# RedTrack.io and RoyalAds: Conversion Tracking
+
+Welcome RedTrack’ new Partner — RoyalAds, popunder Ad Network based in the United Kingdom.
+
+To save your time on setup process we’ve already added RoyalAds to the list of Traffic Source templates inside the tracker. It means that advertisers that use RedTrack don’t have to waste time setting up parameters for RoyalAds postback URL — we did everything for you!
+
+How to create a Campaign with the Traffic Source from template?
+
+1. Log in to your RedTrack.io account and choose the Traffic Sources tab.
+2. Click the New button and choose RoyalAds from the list. All the necessary settings for Postback URL will be automatically pre-filled. Click Save.
+3. Go to Campaigns tab, fill all the relevant data and choose RoyalAds as a Traffic Source. Click Save button and your Campaign URL will be generated automatically.
+4. Go to your RoyalAds account or create one here, submit all the necessary information regarding your desired traffic, specify the budget, and place the Campaign URL (generated in RedTrack) to the Site URL field. And click Save.
+5. Enable conversion tracking in RoyalAds profile settings. Postback URL will be populated automatically in RedTrack Campaign —&gt; Postback section.
+
+Detailed step-by-step guide how to set up RoyalAds campaign conversion tracking with RedTrack is available in our Knowledge Base.
+
+What are the benefits advertising with RoyalAds?
+• More than 10 million impressions per day from diverse and unique sources.
+• Extensive targeting possibilities — countries, languages, OS, device types, mobile operators, browsers, days and hours, IP ranges, etc.
+• In-app tool for monitoring the traffic available for a specific geo.
+• Detailed statistics updated every 20 min.
+• Fast and friendly support, always ready to answer all your questions.
+If you require any assistance with setting up RedTrack — RoyalAds tracking, please contact our team - support@redtrack.io.

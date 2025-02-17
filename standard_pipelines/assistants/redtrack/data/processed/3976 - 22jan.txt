@@ -1,0 +1,8 @@
+# 22-Jan
+
+
+ 	Free SSL certificates using open source Let’s encrypt technology. Service is available for paid clients
+ 	Timezone picker for reports
+ 	Conversion attribution based on Facebook data
+ 	New macro {coupon} was added
+ 	New UI released

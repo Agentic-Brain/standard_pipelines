@@ -1,0 +1,31 @@
+# RedTrack is now connected with TheOptimizer.io
+
+RedTrack is now fully connected with TheOptimizer.io, a service that helps you to optimize and enhance your advertising campaigns with automatic rules, or by creating specific ones. This is a tool that anticipates the future of affiliate marketing where you can improve your ad campaign performance using automatic algorithms. 
+Features
+• Create your own automatic rules with various criteria (ROI, CTR, CVR, CPA, EPC, Conversions, etc) and take control of your campaign's ad spent. 
+
+• After that, Automatic rules protect advertising campaigns 24/7, blocking money-draining campaigns and publishers.  
+
+• Change your bids in real-time, and operate overall budget from a single website. Without a need to login to the traffic source.
+
+• A broad range of integrations with major traffic sources. Native: RevContent, Taboola, Outbrain, Content.ad, Mgid, Adskeeper, Yahoo! Gemini. Pop-up: PropellerAds, Clickadu, PopAds, Popcash, ZeroPark, ExoClick, PlugRush, HilltopAds.
+Connect RedTrack
+Connecting RedTrack to TheOptimizer is performed in few clicks. Start the Account Wizard setup in TheOptimizer and add a traffic source, for example, Mgid.
+
+&nbsp;
+
+
+
+Next step is adding a tracker. Copy API Key from the profile section in RedTrack and insert it in a corresponding field.
+
+
+
+Enter your nickname and Save the Tracker. This is all you need to start managing your campaigns.
+
+
+Promo codes
+If you want to try TheOptimizer.io, we offer a special bonus for RedTrack users with 50% OFF for one month for any pricing plan of TheOptimizer. Promo codes are REDTRACKNATIVE and REDTRACKMOBILE both for Native and Mobile Traffic Sources.
+
+Time is flowing and today we have much more sophisticated tools for affiliate marketers than we ever had before. Advertising is rapidly changing bounded with tech, and in a few years, we won’t recognize this industry. Write us about the tools that you use in Telegram chat.
+
+&nbsp;

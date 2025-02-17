@@ -1,0 +1,114 @@
+# Lemonads and RedTrack
+
+
+
+
+
+
+Lemonads is based on a strong reputation in audience monetization and affiliate marketing.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events you want to track
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Lemonads as an Offer source in RedTrack.
+
+
+
+RedTrack → Offer sources → New from template → add Lemonads template → copy the Postback URL → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up the Postback URL in Lemonads.
+
+
+
+2.1 In your Lemonads account go to Profile → Global postback:
+
+
+
+
+
+
+
+2.2 Add the postback URL from RedTrack (copied in step 1) into the Your postback URL field → save the changes:
+
+
+
+
+
+
+
+3. Get the offer URL from your Lemonads account.
+
+
+
+4. Add Lemonads offer to RedTrack.
+
+
+
+In your RedTrack account go to Offers → Create new offer → add Lemonads offer link in the URL field -> make sure the tracking parameters “clickid={clickid}” are added at the end of the offer URL → Save changes to the template:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create a campaign in RedTrack with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To help you add the campaign refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

@@ -1,0 +1,66 @@
+# Impressions
+
+
+By impressions is meant the number of times your banner ad is viewed. When used with other tracking metrics, impressions give you a vital overview of your ad campaign performance: where you have more impressions and fewer click-throughs, or vice versa.
+
+
+
+To use impression tracking, your traffic channel should support this option. Clarify it with your account manager.
+
+
+
+Working with Impression URLs
+
+
+
+1. Once you've created and saved the Campaign in RedTrack a Click URL (campaign link) and Impression URL are generated automatically. Copy both links and paste them to your traffic channel:
+
+
+
+
+
+
+
+
+
+
+
+2. You will see the counted Impressions in a separate column of your Campaign report:
+
+
+
+
+
+
+
+
+
+With RedTrack, in addition to impression tracking, you can now track visible impressions. While an ‘impression’ is&nbsp;counted every time a user&nbsp;loads a page with an impression pixel on it, a ‘Visible impression’ is counted even when a user had at least 50% of the ads on his screen for at least 1 second. It means now you have even more precise reports on how many ad impressions bring you clicks and conversions in the end.
+
+
+
+Not all traffic channels support impression tracking, so check it first before activating impression tracking. RedTrack has integrated ad serving capabilities to ensure that visible impressions are actually visible. Please reach out to support@redtrack.io for details.
+
+
+
+Visible impressions&nbsp; have a separate tracking URL and a separate column in reports:
+
+
+
+
+
+
+
+
+
+
+
+
+
+This pixel can be placed on the page to track page impressions (page loads):
+
+
+
+
+
+

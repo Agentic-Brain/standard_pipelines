@@ -1,0 +1,45 @@
+# Tracking Multiple Conversions Per One ClickID
+
+At the core of affiliate and performance marketing, the desired result of any ad campaign is a completed action, or in other words — conversion. Whether the conversion action is app download or purchasing, this event defines how you would optimize your ad campaign further. It sounds pretty straightforward. But what happens if you have multiple events that define conversion? 
+
+Here are just a few funnels when it makes sense to track multiple conversion events. 
+— CPI offers, i.e. when an advertiser pays not for an app download, but for a particular action inside the app.
+E.g:  primary conversion — app download,
+the secondary conversion step — 3rd level completeness.
+— Ecommerce, i.e. when you’re interested in tracking multiple website purchases, in other words, several “add to cart” actions.
+— CPL offers, i.e. when an advertiser pays you for a lead (where lead is any contact information left by a buyer).
+E.g:  primary conversion — signing up for smth on the website,
+the 2nd conversion step — lead, i.e. subscription and leaving contact information for some further promo offers.
+It follows that tracking multiple conversion events is not just an option to get extra data point, but also a must-have for many affiliates who work with offers with complex purchase funnels.   
+
+With this in mind, we’ve introduced transaction tracking option to RedTrack users.
+
+&nbsp;
+What is transaction tracking and how to use it in RedTrack?
+As it follows from the above, the transaction tracking function in RedTrack is used when you wish to record a secondary conversion step per visitor after they perform the primary conversion action.
+
+The transaction tracking in RedTrack is done with the additional &amp;type=transaction parameter. And can be performed within:
+
+S2S postback URL  tracking: 
+
+
+Or, pixel-based tracking: 
+
+
+Find the template of transaction tracking Postback URL / Pixel in the Tools tab —&gt; Tools —&gt; Conversion tracking of your RedTrack account interface. 
+
+To track second conversion (= transaction) pass the transaction tracking postback URL (from the above) into the Network you use in addition to your regular tracking URL.
+
+Important: In order to track multiple target actions on one offer, you should make sure that the Network supports multiple postbacks. 
+
+&nbsp;
+
+When transaction tracking yet comes into play? 
+
+There are quite a lot of cases when webmasters and online marketers, who use RedTrack have contact forms or surveys on their websites. If they want to track the steps of form filling, they can do it by means of Pixel tracking. Then, use Conversion Pixel postback for the first step of form filling, and the Transaction Pixel postback — for the second step. 
+
+Transactions will be recorded and displayed in all reports separately from conversions. It allows the users to have a deeper insight into the traffic performance and to get more data for further optimization decisions. 
+
+
+
+Have questions regarding transaction tracking? Just contact our team emailing to support@redtrack.io, or join RedTrack Community on Telegram and chat with our experts about your tracking experience. 

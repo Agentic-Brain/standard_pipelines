@@ -1,0 +1,96 @@
+# Case study: Financer.com scaling with RedTrack
+
+Case study: Financer.com &amp; RedTrack.io
+This customer story shows us how a leading personal finance website used ad tracking software to improved workflow for marketing and development teams. Follow along to know more of the tips &amp; insights from George (from Financer.com) about running campaigns, optimizing relationships with affiliate partners, and consecutive growing. 
+
+
+
+Financer.com is a leading personal finance site that offers localized financial product comparisons, reviews, reports, and guides across 26 countries. Financer.com primarily works for Europe's and North &amp; South America's markets, gathering around 1.5 million active users monthly.
+
+Financer's platform allows you to make wise financial decisions, based on data and comparisons from unbiased sources.
+We go above and beyond to provide the most reliable fi
+
+nancial resources to our visitors. We have a team of local finance experts in each of our operating markets that work tirelessly to present the most valuable financial information. To maintain this level of service Warrants that we only partner with the best companies in their industries, and that includes Redtrack.
+George, Global Marketing Manager
+
+Challenges for Financer.com 
+When planning the scale of their product at Financer, the team wants to shift away from intuition-based decisions, but trust a reliable data source that can help make better choices.
+
+The biggest share of Financer’s revenue comes from affiliate deals. That means that actual purchases (or conversion events) are happening outside of the website. This creates a need to get data from the side of affiliate advertising partners. 
+
+The data from partners is crucial to understand the user journey, optimize marketing &amp; advertising campaigns and create a better product day-by-day.
+Challenges that Financer faced before the use of RedTrack.io:
+
+ 	No understanding about UI &amp; UX effectiveness 
+ 	No understanding about offers CTR
+ 	Absence of ability to measure conversions rates &amp; profitability
+ 	Lack of information to optimize PPC campaigns
+ 	Absence of ability to confirm data accuracy with Affiliate Partners
+ 	Absence of ability to Identify issues in the conversion funnels
+
+
+George: We just were tired of relying on our intuition to make marketing decisions, we needed to become more data driven if we wanted to optimize our inner processes, scale and raise profits.
+
+Goals that Financer.com set before choosing ad tracker: 
+Summing up all the challenges Financer was facing before going out to the market in search of ad tracking solutions, their team set the following goals. Establish proper management of the relationship between affiliate advertising partners since affiliate deals generate the most income. As well as find a solution to help understand the user journey to be able to shift to the data-informed decisions instead of blind tests. 
+Ad tracking market research &amp; comparison
+Financer's team decided to tackle this task strategically. Before even setting trials with any platforms, they conducted a thorough market research, gathering detailed information about around 20 ad trackers on the market.
+
+In the end, Financer ended up trying solutions from Voluum, TrackingDesk, Post Affiliate Pro and Thrive. Every platform had disadvantages here and there: unreliable data, poor customer support, lack of features, etc.
+
+George: On the contrary, RedTrack was that one solution that had everything we are looking for combined. We got access to reliable and granular data in reports seeing clicks and conversion events from multiple angles as a “bird-eye view”. 
+
+Choosing RedTrack as a solution
+Once Financer started testing RedTrack, they discovered that it offers a wide range of features that go beyond simple tracker abilities. The features were matching with the goals that Financer set.
+
+
+Features that the Financer's team apply in the work process
+The first thing that George implemented was a universal tracking script. This feature enabled the tracking of the traffic across all funnels that the marketing team created. They are tracking all types of campaigns, like paid ads with different sources, affiliate deals as well as organic reach.
+With all the data that was tracked, it was crucial to look at it from different angles to be able to make viable conclusions. Multi-touch reporting was a top feature to be able to play with tracked data, get a "granular" look from all campaigns and offers. Financer was able to create a fully custom report with all the events they needed to analyze in one dashboard. 
+
+As one of the goals was the optimization of relationships between partners, Reporting Portal played a key role to establish a transparent relationship between all affiliates. With the ability to verify conversion, clicks, and other targeted actions with all affiliates they gained an understanding of the most profitable deals. Independent platform helped George at time of discrepancy to solve any disputes. 
+
+With all the data gained from Financer and RedTrack collaboration, it was necessary to make changes, optimize advertising &amp; marketing strategy, fix bugs, and develop new solutions. WIth Multi-access feature, George was able to optimize collaboration between development, marketing, and operations teams inside Financer.com and work on the projects effectively. 
+
+And last, but not least came an Automation feature with very important outcome. Setting rules and alerts helped control performance of campaigns with no need to constantly check the dashboard for insights. With automated campaigns, Financer got to fix issues before they become dents in a budget. 
+
+George: Another interesting outcome that we got from RedTrack — improved UX &amp; UI of our website. All the features mentioned above and access to data gave a chance to quickly understand which design &amp; development decisions do not work for users.
+
+&nbsp;
+
+
+Results of collaboration with RedTrack 
+
+George: Since we started using RedTrack, we learnt all the insights about the user journey. Were able to identify issues in no time to improve conversion funnel, click-rates, and both organic and paid campaigns.
+
+Results of collaboration with RedTrack
+
+ 	Optimized both organic and paid traffic for better conversion rates
+ 	Prioritization of profitable offers as a result of measured and optimized CTR
+ 	Optimized user funnel as a result of measured conversions
+ 	Measured profitability 
+ 	Optimized relationship with affiliate &amp; other advertising partners 
+ 	Compared the accuracy of the data between partners &amp; networks
+ 	Saved time on development &amp; bug fixing as a result of identified issues in a conversion funnel
+ 	Improved UI &amp; UX of the website because of instant improvements 
+
+But here are the bold numbers 
+
+ 	40% ⬆️ CTR (click-through-rate) 
+ 	60% ⬆️ CR (conversion rate)
+ 	50% ⬇️ Development &amp; Split testing time
+
+Insights about ad tracking solutions
+Since George made immense research on the ad tracking market, we came up with a quick checklist of things you should be looking for in your perfect ad tracking solution.
+
+ 	Reliable &amp; Trustworthy Platform
+ 	Excellent &amp; Knowledgeable Support
+ 	Latest tracking features that will match the market trend
+ 	Reasonable &amp; Transparent Pricing with no hidden costs
+
+
+George: You need a solution that will grow with you. One that will offer reliable data, respect your budget, but above all, offer you the best features to improve your marketing &amp; advertising strategy. That is what we have with RedTrack.
+
+If you want to try out tracking &amp; conversion attribution solutions by RedTrack, consider using 14-day trial period. Test it before you settle 😎
+
+&nbsp;

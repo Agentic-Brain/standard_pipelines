@@ -1,0 +1,82 @@
+# 7 ways to automate your advertising performance with RedTrack: Advanced Automation explained
+
+2022 was the year of amazing features here at RedTrack. But ofc, the release of our Advanced Automation has absolutely stolen the show. It's THE solution for automation, scaling and reduction of tedious and manual media-buying job.
+So today, let's go over all the possibilities to scale your revenue in 2023 with use of Automation toolset by RedTrack. In this article, we will talk about:
+
+ 	What are cost updates, and how it can help cut ad waste, as well as scale ROI;
+ 	Pause &amp; Restart Rules: ultimate way to prevent ad waste;
+ 	Scale Rules: how to scale revenue with use of this feature;
+ 	Schedule Rules: which scenarios require this feature;
+ 	Smart Links and Auto-optimization for affiliates;
+ 	Why you should start automating your performance now!
+
+Let's start this year with crazy profits together with RedTrack!
+What is Automation Rules By RedTrack?
+We have implemented a new segment of RedTrack platform — Automation. It is meant to cut your manual work with use of our algorithms and give your opportunity to focus on creating more.
+While RedTrack will be cutting non-performing ads, scaling the best ones, or scheduling ads upon your needs.
+
+There are various types of Rules we are implementing to the platform:
+
+ 	Pause &amp; Restart;
+ 	Scale;
+ 	Schedule.
+
+We will cover each of them further, but before we learn about Rules, it's really important to discuss what is cost updates.
+Campaigns' Cost Updates: Why is it so important for advertising automation?
+Costs are important for several reasons:
+
+ 	It's important to have data about all of the costs of your paid campaigns in one place so you can track how much you spend in general
+ 	It's almost a crucial metric that your ad tracking solution should be calculating to calculate returns: ROI and ROAS
+ 	And finally, the costs of the campaigns is probably the most important variable for the automation of your paid campaigns.
+
+How can you receive cost updates for your campaign?
+For that, your tracker or analytics solution has hot to have API-based updates. For example, RedTrack can receive cost with API integration with these channels (and still counting): Facebook Ads, Google Ads, TikTok Ads, Revcontent, Bing Ads, Exoclick,Outbrain, Richpush, Taboola, Traffic Junky, Zeropark.
+Cost updates as an important metric to keep an eye on
+Whether you are automating your performance with Rules or not, cost updates is still a crucial number. To understand that, we need to make a simple example.
+Let's think of the number you spend on ads a month. Let's say it's $50k of ad spend each month.
+
+That means that every day you spend approx. $1,6k. Some creatives are actually bringing you revenue, and some campaigns eat the budget with no real returns. And using the right software can help you make the most from your ad spend, while also ensuring you don't waste your budget for nothing.
+
+How do you know which campaigns or ads bring your dollars back as ROI? Here the cost update feature comes really handy. Without consistent cost updates, we don't know the actual and timely ROI of every campaign, ad set or ad.
+Let's remember marketing ROI calculation:
+mROI = (Sales revenue – Marketing Cost)/Marketing Cost
+If your ad channels (Facebook, Google, TikTok Ads &amp; others) show the costs of the campaigns more or less instantly in the according ads managers, the actual conversions data takes days to be calculated for your ads.
+That means that in order to get accurate ROI, you need close to rea-time cost and conversion data. RedTrack helps get this data in real-time, in a single interface.
+You can choose different frequency for your cost updates:
+
+ 	30-minutes frequency: it's included in every paid RedTrack plan;
+ 	15-minutes frequency: available as a part of Automation+ package;
+ 	5-minutes frequency: available as a part of Automation++ package.
+
+How to choose frequency for your campaigns' cost updates?
+This is a common question from advertisers: "What's the benefit of 15 or 5-min automation frequency over the standard 30-min option?".
+
+Here we can circle back to the value of your ad spend. The bigger your daily ad spend is, the more money you possibly might lose because your ad is not-performing.
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Here is an overview of what you will open each day of the Advent calendar from RedTrack:
+
+1️⃣Find out about Campaign cost updates💸;
+
+2️⃣Let it go ☃️ and simplify your life by using Stop Rules;
+
+3️⃣Don’t miss the best performing ads with Stop &amp; Go rules;
+
+4️⃣Let your best-performing ads rock with Scale Rules🚀;
+
+5️⃣ Run ads when you need with Schedule Rules;
+
+6️⃣Make the most from every click with Smartlinks &amp; Auto-optimization;
+
+7️⃣Learn what difference makes Rules’ frequency;
+
+8️⃣Take a look at the magic in action &amp; find scenarios and examples of Rules usage!🪄

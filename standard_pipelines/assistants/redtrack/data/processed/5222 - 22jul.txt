@@ -1,0 +1,28 @@
+# 22-Jul
+
+
+ 	Deep link functionality was introduced to the Publisher panel. Go to the article Publisher panel: deep link for more details.
+ 	The Offer upload feature was migrated to the new UI.
+ 	A hint was added to the form when adding a new domain advising users to use a 3rd level domain, not a 2nd level one. Ex: att.trk.agency, and not trk.agency. Go to the article Adding custom tracking domain for more details on the matter.
+ 	Campaign Manager 360 feature was added as a separate section to the Google Ads Traffic source form. It serves for matching the types of conversions for Google.
+ 	Google Ads and Bing auto cost update now checks the geo data as well and distributes the traffic based on 2 criteria (geo+ad, ad group, or campaign). If there is no geo info, the data is distributed among all the clicks equally. It works for Team, Enterprise, Custom, Scale, Prevail, and Agency.
+ 	A hint was added to the ClickBank Offer source template reminding users to add the ClickBank secret key in Tools -&gt; Integrations -&gt; Offer Sources. For more details go to the ClickBank integration guide.
+ 	The Autooptimization Report feature was migrated to the new UI. Click here to check out how it works.
+ 	Publisher balance logic was reviewed and updated as follows:
+
+ 	all the sums are calculated in the currency of the account;
+ 	the sum is shown in the balance and publisher revenue when all the conditional postbacks are passed, and the status of the conversion does not equal declined;
+ 	Pub revenue changes the balance only with direct conversions. The referral program does not count in that case;
+ 	a separate balance is shown for direct conversions and referral conversions;
+ 	when a payment is created, it is first taken from the regular balance and then from the referral balance;
+ 	Pub payout for publisher postback is sent with the traffic source currency;
+ 	the referral balance is displayed with the account currency.
+
+
+
+
+ 	TimeZone bug in Reports was fixed.
+ 	Offer URL field in the Offer source template was migrated to the new UI and placed at the top of the template.
+ 	Bug with empty email dynamic parameters for notification customization in the Publisher panel was fixed.
+ 	Bug with the export of Conversion logs was fixed.
+ 	API reports pagination feature was introduced.

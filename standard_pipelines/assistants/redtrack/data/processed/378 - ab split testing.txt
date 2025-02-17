@@ -1,0 +1,32 @@
+# A/B (split) testing
+
+
+A/B testing (also known as split testing) is showing two variants of the same page to different segments of visitors at the same time and comparing which variant converts better.
+
+
+
+A/B testing works only with redirect tracking, that’s why this functionality won’t be useful for campaigns with such traffic channels as Google Ads, Facebook, and others requiring no-redirect tracking.
+
+
+
+With the help of RedTrack you can perform complex A/B testing based on landing pages and/or offers. It is possible to add as many landing pages and offers to your funnel as you want and also set different weights. Like that, you can "play" with the data and then check extended 5-level reports to find out which of the funnels converts better.
+
+
+
+For example, in this setup, we can check which of the landing page + offer combination will convert better (or probably, sending a visitor directly to the offer works best).
+
+
+
+
+
+
+
+
+
+
+
+Here we rotate 3 landing pages and the offer first (once someone clicks on your tracking link, he will land on either one of the landing pages or on the offer directly). After that, 3 offers are rotated within the first funnel. At the same time, different weights are set as an additional tool to route your traffic. As soon as we start receiving the first conversions, we can use our extended reports to check, what funnel works better:
+
+
+
+

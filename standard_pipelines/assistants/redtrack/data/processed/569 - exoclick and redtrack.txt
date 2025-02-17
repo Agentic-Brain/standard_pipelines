@@ -1,0 +1,200 @@
+# Exoclick and RedTrack
+
+
+
+
+
+
+Exoclick is a self-service platform, super user-friendly, and it has an intuitive interface and detailed reports. Founded in 2006, it now reaches around 5 billion daily impressions.
+
+
+
+RedTrack has an API integration with Exoclick, which gives you the following benefits:
+
+
+
+
+Synchronize costs.
+
+
+
+Pause: campaign, placement, creative.
+
+
+
+Create&nbsp; automated rules.
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types you're planning to work with
+
+
+
+
+
+
+1. Create a goal ID in Exoclick.
+
+
+
+ 1.1 Conversion tracking → New goal:
+
+
+
+
+
+
+
+1.2 Set the name and click the Create a goal button → copy the Goal ID:
+
+
+
+
+
+
+
+2. Add Exoclick template to RedTrack.
+
+
+
+2.1 Go to your RedTrack account → Traffic channels → New from template → find Exoclick → Add:
+
+
+
+
+
+
+
+2.2 Change the "REPLACE" part in the Postback URL with the goal ID&nbsp;from your Exoclick account copied within step 1.2:
+
+
+
+
+
+
+
+3. Integrate Exoclick with your RedTrack account.
+
+
+
+3.1 Go to your Exoclick account → API Tokens → copy the token:
+
+
+
+
+
+
+
+3.2 Get back to RedTrack → go to the template added within step 2.1 → Exoclick API integration → paste the copied token to the API key field → Save changes:
+
+
+
+
+
+
+
+The green Active button means the integration is active:
+
+
+
+4. Set up a campaign in RedTrack with Exoclick as a traffic channel.
+
+
+
+Campaigns→ Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create the campaign with Exoclick as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL:
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+5. Create a campaign in Exoclick.
+
+
+
+5.1 In your Exoclick account go to Campaigns → New campaign: 
+
+
+
+
+
+
+
+5.2 Set the name, category and go to the next section:
+
+
+
+
+
+
+
+5.3 Click the Add variations button → add RedTrack tracking link (Campaign click URL copied within step 4) as the Landing page URL:
+
+
+
+
+
+
+
+5.4 Add your ad variations → adjust other settings → Create the ad campaign and start running traffic.
+
+
+
+6. Set up the Postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 4) → scroll down to&nbsp;S2S Postback for Exoclick → press&nbsp;Add → check if all the needed values for the&nbsp;parameters are in place → Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+
+
+7. Set up the&nbsp;automation.
+
+
+
+
+Use&nbsp;this guide&nbsp;to help set up&nbsp;rules.
+
+
+
+Use&nbsp;this guide&nbsp;for setting up the&nbsp;auto update cost&nbsp;feature.
+
+
+

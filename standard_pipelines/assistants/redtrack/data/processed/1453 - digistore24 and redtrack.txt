@@ -1,0 +1,372 @@
+# Digistore24 and RedTrack
+
+
+
+
+
+
+
+
+
+
+Digistore24 is a platform for transforming the world of online business through automation and conversion optimization.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Digistore24 as an Offer source in RedTrack.
+
+
+
+Offer sources → New from template → find digistore24 template → Add → copy the Postback URL→ Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up RedTrack Postback URL in Digistore24.
+
+
+
+Important insights about Digistore24 conversion tracking!1. Digistore24 allows you to track conversions in 2 ways: by adding to the end of the postback URL dynamic macros supported by Digistore24 or &amp;type=yourconvtypename. You can combine the two ways or use only one of them. But mind that the workflow for setting up conversions tracking via each way is different.2. There is a special workflow for Initiate Checkout event tracking. The details for each case are described below↓
+
+
+
+
+
+1. Study the correlation between Digistore24-supported dynamic macros and the events you should add in RedTrack.
+
+
+
+Digistore24 supports 4 dynamic macros. Each macro corresponds to the events you want to track with its help:
+
+
+
+
+{transaction_type}&nbsp;= payment, refund, chargeback.
+
+
+
+{order_type}&nbsp;= initial_sale, upsell.
+
+
+
+{billing_type}&nbsp;= single_payment, subscription, installment
+
+
+
+{billing_status}&nbsp;= paying, completed, aborted.
+
+
+
+
+Use only the macros corresponding to the conversion types you want to track. You don't need to add all of them if that's not your case.
+
+
+
+So if you want to track such events as "payment, refund and chargeback" you should add them to RedTrack and add {transaction_type} macro to the end of the Postback URL in digistore24. Use this table for a reference:
+
+
+
+Events I want to trackWhat I need to add to RedTrackMacro I should add to the Postback URL in Digistore24paymentrefundchargebackpaymentrefundchargeback{transaction_type}initial_saleupsellinitial_saleupsell{order_type}single_paymentsubscriptioninstallmentsingle_paymentsubscriptioninstallment{billing_type}payingcompletedabortedpayingcompletedaborted{billing_status}
+
+
+
+2. Add the events you want to track with Digistore24 in RedTrack. To do that go to Tools → Conversion tracking → Conversion type. Refer to&nbsp;this guide&nbsp;for details.
+
+
+
+
+
+
+
+Event names in RT should be the same as they are spelled in Digistore24 (small letters, with or no spaces, etc.)
+
+
+
+3. Add the needed macro(s) to the end of your Postback URL in Digistore24.
+
+
+
+
+
+1. In your digistore24 account go to Account → S2S postback → Add s2s postback integration:
+
+
+
+
+
+
+
+2. Add the copied postback URL from RT to the Postback URL field → add the needed macro to the end of the URL string → mark the needed events in the For order event field → Save:
+
+
+
+
+
+
+
+It goes one macro per one postback. To add another macro, you need to add another postback. 
+
+
+
+
+
+This video tutorial will help you set up the postback on the digistore24 side if you have a vendor account (e-com setup)
+
+
+
+
+
+
+
+You can use a custom name for the event you want to track. To do that:
+
+
+
+1. Add the event(s) you want to track with Digistore24 in RedTrack. To do that go to Tools → Conversion tracking → Conversion type. Refer to&nbsp;this guide&nbsp;for details.
+
+
+
+
+
+
+
+2. Add this event to the end of your Postback URL in Digistore24 and mark the proxy type event supported by Digistore24.
+
+
+
+
+
+1. In your digistore24 account go to Account → S2S postback → Add s2s postback integration:
+
+
+
+
+
+
+
+2. Add the copied postback URL from RT to the Postback URL field → add &amp;type=conveventname → mark the needed event in the For order event field → Save:
+
+
+
+
+
+
+
+In the "For order event" field you tick the event that logically matches the custom event type in the postback URL.
+
+
+
+It goes one event per one postback. To add another event, you need to add another postback. 
+
+
+
+
+
+This video tutorial will help you set up the postback on the digistore24 side if you have a vendor account (e-com setup).
+
+
+
+
+
+
+
+In RedTrack
+
+
+
+Go to Tools → Conversion tracking → Conversion type → add Initiate Checkout → Save:
+
+
+
+
+
+
+
+Refer to this guide for details on the conversion type form.
+
+
+
+In Digistore24
+
+
+
+1. In your Digistore24 account access the Tracking tab:
+
+
+
+
+
+Account → Tracking → Set up new tracking:
+
+
+
+
+
+
+
+
+
+Settings → Tracking → Set up new tracking:
+
+
+
+
+
+
+
+
+
+2. Fill in the mandatory fields in the pop-up Order form → Save:
+
+
+
+
+
+
+
+
+
+
+
+Fields explained:
+
+
+
+
+(1) Give your form a name.
+
+
+
+(2) Choose Yes for the tracking code to be activated immediately after saving. 
+
+
+
+(3) Choose Yes to enable the cookie banner&nbsp;field. 
+
+
+
+
+Mind that without the activated cookie banner, the tracking may not work.
+
+
+
+
+(4) Select the products for which you want to activate the tracking.
+
+
+
+(5) Select Initiate Checkout in the Sale types field.
+
+
+
+(6) Select the Order form type from the drop-down. 
+
+
+
+(7) Select Tracking pixel from the drop-down.
+
+
+
+(8) Add this Pixel URL to the filed: https://custom.tracking.domain/postback?format=img&amp;clickid=__cid__&amp;type=InitiateCheckout.
+
+
+
+
+In the added Pixel URL replace custom.tracking.domain part with your actual custom tracking domain.
+
+
+
+
+(9) Save to apply the changes to the form.
+
+
+
+
+Refer to this guide for more details on the Order form template in Digistore24. 
+
+
+
+
+
+The following error may pop up when you click on the “Test” button:It means that there is no real clickid value in the postback link, so there is nothing to test. To fix it add the postback URL into the right field and save it (make sure all parameters are set correctly according to this guide). It will work once there is a real conversion with a real value.
+
+
+
+3. Get the Digistore24 offer URL.
+
+
+
+In your Digistore24 account go to Marketplace→ choose the offer you want to promote and request access→ once approved copy the tracking link:
+
+
+
+
+
+
+
+4. Add Digistore24 Offer to RedTrack
+
+
+
+RedTrack → Offers → New → give the offer a name and choose Digistore24 as the offer source → paste the URL from Digistore24 → make sure ?cid={clickid} parameter is added to the URL → Save:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create the&nbsp;campaign in RedTrack&nbsp;with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To help you add the campaign refer to:
+
+
+
+
+this guide&nbsp;for Advertisers.
+
+
+
+this guide&nbsp;for Affiliates.
+
+
+

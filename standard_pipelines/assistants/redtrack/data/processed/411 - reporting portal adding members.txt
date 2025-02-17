@@ -1,0 +1,20 @@
+# Reporting portal: adding members
+
+
+1. Go to Reporting portal → Members → Create new member → fill in the mandatory fields → Save:
+
+
+
+
+
+
+
+Mandatory fields in the New member template are marked with *, they are as follows:-  Your advertiser email.-  Advertiser's first and last name.-  Enable/disable the Show financial data toggle (gives/revokes access for this member to view the cost data).-  Select the offer sources. Only the offer data from these particular offer sources will be shown to this member. To be chosen from the drop-down the offer source needs to be added first.-  Set the password and provide it to your advertiser (partner).The rest of the fields are optional.
+
+
+
+2. Once the member is added (s)he can log in to the advertiser panel (the whitelabel domain) using the provided credentials and check the offer statistics. Here is how the panel may look like for your advertisers:
+
+
+
+

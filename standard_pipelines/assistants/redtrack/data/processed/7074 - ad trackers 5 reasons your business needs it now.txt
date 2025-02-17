@@ -1,0 +1,97 @@
+# Ad Trackers: 5 reasons your business needs it now
+
+The digital marketing industry becomes more and more complicated each month. Today having a strong team of SEO-gurus or affiliate marketers isn’t enough to get a growing flow of qualified leads. The competition is growing, the rules of the game are constantly changing, and the audience is becoming more and more demanding. The standard promotion methods don't bring the expected results. The expert advice is not so effective in practice. Then, where should media-buying teams look for the growth points, you may ask? Data, of course.
+
+There’s a large number of digital marketing analytics tools available on the market nowadays. Free and paid ones. Reliable and the ones that seem OK for the first time. While some are trying to make the most out of the basic functionality of free tools, others rely on advanced professional tools, striving to get measurable positive results as soon as possible. 
+
+Why the latter achieve the desired results much more often and faster? Well, there are 5 main reasons for that:
+1. Ad trackers help you keep all your marketing activities in one place
+There's a myriad of ways you can promote your product with the help of organic and paid acquisition channels:
+
+ 	Blog posts;
+ 	Social media communities;
+ 	PPC;
+ 	Forums and social media communities;
+ 	SEO;
+ 	Webinars and Videos … here's probably not even a tenth of all.
+
+How can you compare their effectiveness and know what works and what doesn't? How can you decide which channels bring you the most revenue and which ones are worth giving up? Today, all decent services have their in-built analytics solutions. That's why many digital marketers and media-buyers still try to export all these stats from different workarounds in one Excel file and get valuable insights from it. But there are some problems here:
+
+
+ 	Different tools have different attribution models, so the comparison may be imprecise and irrelevant;
+ 	You need to spend a lot of time to transfer all the information in one place;
+ 	Different sources can provide you with different sets of traffic metrics so that you can’t make the comprehensive and quality analysis.
+
+ The advantages of an ad tracker here are:
+
+
+ 	The maximum data accuracy;
+ 	All data is collected in one way and in one place;
+ 	You don’t need to spend a lot of time trying to combine information from various workspaces.
+
+
+
+Feel free to experiment with various Traffic Sources and Affiliate Networks. The ad tracker will take care of the rest. RedTrack has a smooth integration with more than 70 Traffic Sources (including, Google, Facebook, Bing, Tik Tok, Outbrain, Revcontent, MGID, PropellerAds, etc.) and allows you to add your custom ones in seconds. Visit our comprehensive Video Guides to see how it works in practice.
+
+&nbsp;
+2. Save money on unprofitable ad campaigns
+Keeping track of data in different sources takes time. If big budgets are at stake, every minute can be fatal. With an ad tracker, you can get it all in real-time and find problems in your funnel right after the click, conversion, or transaction was made by a user. Besides, there are automation-based technologies that can help you with this task in the most effective way. How?
+
+Here is RedTrack's example. To date, it has API-integrated more than 20 Traffic Sources that allow you to auto-optimize your traffic flow in three different ways. Based on the given conditions - EPC, ROI, CR for a given time - they can pause
+
+ 	Campaigns;
+ 	Placements;
+ 	Creatives, when the conditions are not met.
+
+Ones it's done, the Traffic will be automatically redistributed to your high performing variables and you'll be immediately notified about these changes. Even if the desired Traffic Source isn’t integrated with RedTrack via API, you may take advantage of RedTrack alerts and get notified the moment your performance drops. Want to see how everything works?
+
+
+
+ hbspt.cta.load(7519541, 'ef490f48-8ab0-4913-8668-57716f5d0600', {}); 
+
+&nbsp;
+3. Increase ROI scaling your best practices
+Different businesses require you to focus on different metrics. But let's be honest: the ultimate goal of any of them is to drive conversions. Whether you’re an e-commerce business, a small media publisher, or a media buying team you want your users to click on these banners and buttons, which you tested so diligently. The motivation is simple here.
+
+But when it comes to ROI measurement, it's not as simple as it may seem at first sight. There is always a danger of relying too much on overly oversimplified data. If you start focusing too much on sales numbers, you may overlook the effectiveness of your content or social media marketing strategies, which can't be measured immediately and directly. 
+
+Ad trackers provide you with multiple ways of Return on Investment measurement, so you can get a more accurate picture of what’s happening with your campaigns. In RedTrack you can choose your specific campaigns and analyze it by 30+ metrics over time, sort them out, and create custom reporting dashboards.
+
+
+
+These detailed reports help you minimize the time spent on making ad investment decisions and choose the best scenario. 
+
+&nbsp;
+4. Get rid of bot traffic and save your money
+Approximately 14% of all PPC campaign clicks are related to bot traffic. This in turn has a great impact on campaign metrics and creates wasted spend. Sophisticated human-like bots can easily replicate our actions: scroll pages, ads clicks, apps installs. As a result, sales teams follow up false leads, and retargeting campaigns are directed to a non-existent audience. 
+
+Keep in mind that there are two bot types:
+
+ 	Good ones, which automate tasks and make the online experience better;
+ 	Bad ones, which are typically used by fraudsters to steal financial data, carry out web scraping and DDOS attacks. Basic tracking tools can help you get rid of only a small amount of bot traffic. Advanced solutions are often integrated with specific anti-fraud tools. They are characterized by regular updates and sophisticated technology. To protect users from paying for suspicious clicks and show them the real picture of their performance, RedTrack has integrated FraudScore technologies  - an advanced Fraud Fighting Platform. Now users have separate reports on the quality of traffic they buy and the ratio of the bot and human traffic. 
+
+
+
+
+Moreover, RedTrack can easily track good bots as well. Algorithms will automatically detect and exclude clicks and conversions generated by 16 well-known bots by Google, Facebook, BaiduSpider, Yahoo from your reports.
+
+&nbsp;
+5. Test campaigns to get the best results the easiest way
+What distinguishes a good digital marketer from a bad one? The ability to conduct A/B tests. When you try to reach a new audience or promote a new product, you can barely know what will work at the very beginning. By testing your ideas, you can see which one attracts more interaction and conversions from your customers.
+
+Ad trackers usually provide you with advanced A/B testing options. In RedTrack it's Multi-offer and Landing Page Rotation, which allow you to:
+
+ 	rotate offers assigned to landing page click URL;
+ 	run multiple offer URLs simultaneously – good for e-com, listicles, and offer walls. With this, thanks to cookie-less tracking technology, you can be sure that all the data is gathered correctly. That's why this option becomes a must-have if you work with a small amount of Traffic, where each user click becomes worth its weight in gold.
+
+Have any questions? Contact us to discuss some tracking and optimization solutions for your business. 
+
+
+
+ hbspt.cta.load(7519541, 'ef490f48-8ab0-4913-8668-57716f5d0600', {}); 
+
+ 
+
+&nbsp;
+
+&nbsp;

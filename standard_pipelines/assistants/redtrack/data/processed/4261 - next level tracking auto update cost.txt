@@ -1,0 +1,20 @@
+# Next level tracking: Auto Update Cost
+
+Tracking with RedTrack is moving to a higher level. A new set of automation features is coming to increase your efficiency and free your time for business and personal development. With a standard ad tracker, you still have a lot of routine and tedious tasks that you have to so manually. Let's look at how you get campaigns costs, for example. Do you still spend your time on it matching traffic sources and tracker's values? 
+Auto Update Cost feature to ease your life
+Auto-update cost is a new switch at the right corner of your Campaign screen that automatically updates your campaign cost. RedTrack receives the latest data directly from traffic sources through API. The latest information immediately appears on your screen and reports regardless of your payment model. 
+
+It gives you an understanding of how much you spent on promotion within a particular campaign. Knowing your campaign cost you can easily get your profit, ROI, and EPC calculated. Currently, far not every tracker can smoothly provide you with this valuable sort of information, while not many have capabilities to get the data directly from traffic sources. In most cases, you have to manually enter the values and constantly switch between two resources. 
+
+With Auto Update Cost feature RedTrack automatically brings your campaign cost up to date at the end of the day. At present, Google, Facebook,  MGID, and Revcontent are integrated by default.
+
+
+
+Read more about automation solutions currently available on the market at RedTrack guide here
+
+What, if I work with other Traffic Sources?
+Nothing changes. To make this feature available fill in the form below or send us your request at support@redtrack.io. Happy and efficient tracking! 
+
+[contact-form-7 id="4071" title="Auto_Cost_Update_ Contact Form Company"]
+
+&nbsp;

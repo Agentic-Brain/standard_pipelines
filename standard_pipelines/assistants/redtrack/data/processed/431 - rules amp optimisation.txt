@@ -1,0 +1,264 @@
+# Rules &amp; Optimisation
+
+
+What are Rules in RedTrack?
+
+
+
+Rules functionality allows you to automate the campaign optimization process. After you set the conditions, RedTrack starts checking your reports and campaign performance by multiple metrics. When the reported data matches the criteria you have set in the conditions, the rule executes an action: pausing a campaign/one of the campaign elements or redistributing the traffic weight within your campaign.
+
+
+
+Rules functionality is available starting from the Pro subscription.
+
+
+
+Algorithm for rule creation:
+
+
+
+1. Add such essential elements as Traffic channel, RT Campaign, and a certain Rule object (Campaign, Adset, Creative, etc.).
+
+
+
+Availability of Rule objects depends on the Traffic channel. Go to this article to see the dependence between traffic channel and rule object.
+
+
+
+2. Set a Condition (or several conditions) and Action&nbsp;which should happen to the Rule object within this rule once this condition (or multiple conditions if that's the case) is met.
+
+
+
+By Action we mean the actual types of rules: Pause, Pause &amp; Restart, Scale, Schedule. The type of Action/rule you can choose depends on the Traffic channel. Go to this article to see which types of Action/rules are available for which Traffic channels.
+
+
+
+3. Add the rest of the elements:
+
+
+
+
+how you want to be notified when a certain action is fulfilled: email or webhook;
+
+
+
+decide if you need to apply Multiple executions toggle;
+
+
+
+set the frequency of Rule check;
+
+
+
+add the Title.
+
+
+
+
+How to create a Rule in RT?
+
+
+
+1. On the main RedTrack menu go to Automated rules → New:
+
+
+
+
+
+
+
+2. Fill in the fields in the pop-up window → press Save and Activate:
+
+
+
+
+
+
+
+
+
+
+(1) Choose the needed traffic channel.
+
+
+
+
+Mind that in order to be chosen this traffic channel needs to be added to your RedTrack account first, otherwise, you may not find the needed option in this drop-down.
+
+
+
+
+(2) Choose the Campaigns where you want to apply this rule. You can work with this field in different ways:
+
+
+
+
+
+
+
+
+Although it’s possible to set the rules for several campaigns using the same traffic channel, possibility of multiple campaigns is unavailable for Legacy subscription plans.
+
+
+
+Options in the drop-down of the RedTrack campaigns field will appear only after you select the Traffic channel. These two fields absolutely depend on each other, as you can only see the campaigns where the selected traffic channel is present. Thus if you leave the Traffic channels field empty, you'll have no options in the drop-down of the RedTrack campaigns field. Selecting one Traffic channel and trying to find in the drop-down of the RedTrack campaigns field campaigns with another Traffic channel is impossible:→ correct example: you choose Facebook in the Traffic channels drop-down → you find all the campaigns with Facebook traffic source in "Redtrack campaigns" drop-down.→ incorrect example: you choose Google Ads in the Traffic channels drop-down → you want to find some campaign with Facebook traffic source in the Redtrack campaigns drop-down → your can't, as you can only see campaigns with the previously chosen Facebook traffic source in the Traffic channels field.
+
+
+
+
+(3) Choose the targeted value for the rule application.
+
+
+
+
+
+(4) Set up the condition according to which this rule will function.
+
+
+
+
+
+(5) Press +Add condition if you want to add more than 1 condition. You can add up to 5 conditions simultaneously.
+
+
+
+
+- All the added conditions will work at the same time. To set up conditions that exclude each other please create a new rule.- Rules with multiple conditions will be triggered only if all conditions are met. If one condition is met and the other is not, the rule will not work.- Multiple conditions are available for Trial, Advanced, Team, Enterprise, Grow, Scale, Prevail, and Custom subscriptions, as well as for all clients with automation + /++/+++ regardless of their subscriptions.
+
+
+
+
+(6) Choose what needs to be done when the rule is applied:
+
+
+
+
+
+
+
+
+The type of the rule (Pause, Pause&amp;Restart etc.) depends on the chosen traffic channel. Please check out this article to see if your traffic channel is eligible for the needed type of rule.
+
+
+
+
+(7)&nbsp;Choose how you want to be notified about the processed rule: by email or via webhook.
+
+
+
+
+You can add multiple webhooks (up to 10). Nevertheless, this possibility is not available for Legacy plans.
+
+
+
+
+(8)&nbsp;Specify the e-mails where the notification should come to.
+
+
+
+
+As a rule, this field allows containing more than 1 email. Nevertheless, possibility of multiple emails is not available for users on the following subscription plans: Trial, Legacy.
+
+
+
+
+(9) You should turn on the Multiple executions toggle in case you want to allow multiple blocking and notifications for each Rule object. It works as follows:
+
+
+
+
+
+
+Once the condition(s) is met and the rule has worked, this same rule will work again once the set condition is met. This will happen as many times as needed up until the client decides to either pause the rule or delete it.
+
+
+
+
+
+Once the condition(s) is met and the rule has worked, this rule will no longer work. Meaning, it's useless even if the set condition is met again and may as well be deleted.
+
+
+
+
+
+Example:It means that when CR is less than 20 for every 100 clicks, Facebook Campaign will be paused and you will be notified about it via email ilonmusk@redtrack.io. Since the “Multiple executions” toggle is switched on, this rule will work as many times as needed before you decide to either pause or delete it. Every 30 minutes the system will check if the condition is met and the rule will work again if it’s met.
+
+
+
+
+(10) Choose from the drop-down the Frequency of the rule check.
+
+
+
+
+
+(11) Give your rule the name to distinguish it from others.
+
+
+
+
+
+(12) Press Save and activate to apply the rule.
+
+
+
+
+Case study.Your rule settings are as follows:What it means:If the ROI for your campaign is less than 100% for every 100$ of your ad spend, RedTrack can pause that campaign or send you an email notification to the address you've set (in the example it's ilona@redtrack.io).
+
+
+
+
+
+3. As a result of the applied rules you will get the following:
+
+
+
+&nbsp; &nbsp;✓ When the data matches the criteria you set, the campaign/placement/creative will be paused in your traffic source account&nbsp;and you will not lose the money for non-converting traffic.&nbsp; &nbsp;✓ Every five minutes the rules will analyze the data.&nbsp; &nbsp;✓ Extended integrations also take your&nbsp;cost data&nbsp;from your traffic source account so you do not need to worry about cost updates as well.
+
+
+
+For non-integrated sources (either a regular template or custom traffic channel) only partial campaign optimization is available. RedTrack will not be able to pause anything on the traffic source side but you can still set the rule and when the rule is met, the system will either fire the mail or webhook notification.
+
+
+
+Working with Rules: edit, pause, logs
+
+
+
+Once the rule is created, you can:
+
+
+
+
+
+To filter rule(s) by certain campaigns go to Automated rules →  choose the campaign from the drop-down → Apply:
+
+
+
+
+
+
+
+
+
+To edit/pause/check out the logs for certain rule navigate with your mouse to the corresponding icon next to the needed rule:
+
+
+
+
+
+
+
+Once the rule is applied and the Campaign has been paused only you can make the Campaign active again by pressing the Start rule icon next to the rule:
+
+
+
+
+
+In the column Action you can also see which type of action (notification, pause, pause&amp;restart, etc.) was applied to each created rule:
+
+
+
+
+
+

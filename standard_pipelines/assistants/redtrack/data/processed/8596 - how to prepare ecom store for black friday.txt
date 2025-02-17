@@ -1,0 +1,142 @@
+# How to prepare eCom store for Black Friday
+
+As marketers we know, starting October and up until January there will be no rest — the holiday season (Black Friday, Cyber Monday, and Christmas sales) is just around the corner. As online sales have become the primary way for consumers to shop, the competition between online stores grows. How to make your eCom store stand out from all of the products that you can find on the internet these days? 
+
+As an eCom store owner, you need to make sure that not only your products are great, but that all of your advertising campaigns are nicely crafted, scheduled, and tracked. The earlier you start your preparations, the bigger profits you will be able to secure. 
+
+Therefore, let’s go over all the little tricks and advice to make sure your eCom store thrives during Black Friday, Cyber Monday, and Christmas sales season!
+Planning your BFCM campaigns for eCommerce 
+One of the first things you have to take care of when getting ready for the Black Friday season is planning. Creating a step-by-step advertising plan for you and your team is crucial if you want to save money on media buying and make sure you do not miss any of the sales in the season.
+
+Let’s start with understanding the endpoint. Black Friday in 2021 is on the 26th of November. Cyber Monday — 29th of November.
+When are you going to have a rest? That I don’t know for sure :) 
+
+via GIPHY
+Ideally, you should have started your preparation like a month ago, but if you are just reading this article, let’s start planning things for both October and November. 
+Preparations for eCommerce Black Friday 
+When it’s 2 months left until Black Friday it’s a perfect time to prepare your advertising campaigns and test them in order to receive insights that you will need when the rush starts. Also if you start early, you also win on getting cheaper CPMs on paid ads channels, cheaper deals with influencers, and just less stress. Less stress is crucial here. 
+
+ 	
+Make sure your website is ready for Black Friday sale
+
+
+Not only your website has to be speedy not to create a distraction for attracted users, but it also needs to have a clear UI. You need to make sure that those leads coming from paid ads channels will end up purchasing your products. Since the competition during the holiday season is high, the attention span for a regular user shrinks at a terrifying speed. 
+Make sure that your UI is simple and actually helping a user to make a purchase, not confusing them even more. 
+
+ 	
+Create a detailed plan for Black Friday advertising campaigns
+
+
+Use a calendar and plan out every campaign you plan to launch through October and November. It’s a good time to craft all the creatives for your campaigns as the design process may take a lot of time from your team. Be sure to have multiple options for all of your campaigns to test them later and find winning combinations
+
+
+
+
+ 	
+Diversify your channels for Black Friday advertisements 
+
+
+Facebook Ads brings a lot of comfort to all eCom store owners, but there’s a world beyond FB, I promise. Not only you can consider other paid ads channels (like Google, Bing, TikTok, YouTube, Instagram, etc.), but you can also invest in partnership marketing. 
+
+By partnerships, I mean methods like affiliate marketing, influencer marketing, any other collaborations you can come up with. We will talk about partnership marketing for eCommerce a bit more below. 
+
+ 	
+Testing time before the Black Friday rush starts 
+
+
+While you start running BF campaigns, you may as well use this time for testing and receiving valuable insights about your campaigns. Which creatives convert? What kind of leads do your campaigns generate? 
+A great idea for PPC advertisement during October would be a gift guide. This way you will be able to get access to the potential audience to whom you can later retarget your actual products. Gift guides may contain all the uncommon gift ideas, including the promotion of some of your products. But don’t focus it just around you, try to create something that would be genuinely interesting to people. 
+
+
+Example from Business Insider
+
+
+ 	
+Implement ad tracking to your marketing routine
+
+
+If you haven’t started proper ad tracking (expanding from Google Analytics and FB BM) yet, it’s the right time. The setup for the whole thing may take some time, so the earlier you start, the better. It will open for you a world of insights about every marketing channel you utilize (more about ad tracking in the following chapters). 
+How to utilize partnerships for eCom during Black Friday 
+As I mentioned above, partnership marketing can become your salvation when it comes to ever-increasing CPMs on paid ads. The amount of ads that any user will see during November is crazy, so you do need to win the attention fight somehow. 
+Scaling eCom with partnership marketing
+
+ 	
+Starting an affiliate program
+
+
+One of the ways to delegate the promotion of your offers is by doing it through affiliates. Affiliate marketers are sort of freelance marketers that can advertise your product for a commission (with any model: fixed, RevShare, CPA, etc.). The best part of it, that you don’t pay until the actual target event happens, so for eCom, it is a purchase. Once the purchase is done and you track it down to a particular marketer, you are doing the payout according to the agreement (e.g. RevShare 5%). Make sure to check our guide on how to start an affiliate program for eCom. 
+
+ 	
+Doing referral marketing (multi-level marketing)
+
+
+Referrals are actually almost synonymous with affiliate marketing. But if you start an affiliate program, you might need to put a lot of work into describing the conditions, negotiating with affiliates, controlling the advertising they are doing, referral links can become a simpler option to get more traction. 
+A Referral link is basically a tracking link that leads a customer to your product, but also defines who exactly brought the conversion. You can hand in referral links to influencers or any other advertising partners you have. Based on the referral link, the referrer will get a commission from the purchase (just like in the affiliate program).
+Pay attention to the fact that you can also start multi-level marketing if using the right software. Some of the tools allow going several levels doing referrals. Meaning that every referrer you are collaborating with can attract other referral partners.
+
+Actually, at RedTrack we make multi-level marketing (MLM) possible by giving you the opportunity to do referrals for as many levels as you wish, establishing payouts accordingly. If you wish to know how it all works, I recommend talking to one of our tech specialists. 
+
+ 	
+Working with influencers
+
+
+Probably the most popular marketing method in the last couple of years, but I know that many eCom owners believe that it’s pricy and not always worth it. Well, what about trying to focus not only on Instagram or YouTube influencers? 
+
+TikTok is a great platform where you can find influencers at a lower price. Not only do you get a great partnership deal, but also you receive all the benefits of TikTok algorithm which works wonders for promoting the content to the right audience. 
+
+The best idea is to use every advertising platform (Instagram, YouTube, and TikTok), depending on the size of your store. The more platforms and influencers you use — the more coverage your products are going to have for various audiences.
+
+When working with influencers it’s crucial to have both: tracking links and promo codes activated. Because you need to evaluate the actual conversions coming from each influencer. Especially if the model that you chose for payment is not a flat price, but payment depending on the amount of brought purchases. 
+
+It’s very important to do a correct attribution for those leads coming from influencer channels: attribute by tracking links or doing the so-called coupon-based attribution (attribution according to the promo codes). 
+
+At RedTrack we offer not only an ad tracking functionality but also a Partnership Portal which simplifies for advertisers affiliate programs, referral marketing, and manual work with influencers. 
+
+
+How to track the performance of your campaigns during Black Friday 
+Many eCom owners and marketers pay a lot of attention to creatives for advertising campaigns, but don’t do a proper job when it comes to tracking.
+Ad tracking is actually the key element that will make all of your effort work because it will equip you with data for better decisions. 
+
+So where do you start tracking? How do you analyze the result? How do you improve campaigns? 
+Ditch Facebook Business Manager 
+As we already mentioned earlier, many eCom owners focus too much on FB marketing. It’s not a bad thing, but there are many other advertising channels for you and your products to be seen. When you start growing the number of channels you advertise on, you will need a proper ad tracking &amp; conversion attribution solution. 
+
+Why? First of all, you need to take all of your advertising channels to one dashboard to compare them and to see all costs and profits in one place. 
+
+Not only you will receive one dashboard combining data for every channel you are using, but you also get the ability to see more dropdown metrics (depending on the software you are using). 
+
+For example, in RedTrack you can choose to see all of the metrics that are so important for any eCom store: clicks, EPC, keywords, ad sets, CR, add-to-carts, abandoned carts, purchases, as well as see the revenue from your campaigns. 
+
+Another important issue that we don’t talk enough about is the way Facebook (or Google) processes data — it samples it. It means that you see only the approximate picture, but not the actual values for each and every click or conversion. Ad tracking software usually allows you to see the reality by logging every event that happens with your advertisements. 
+Shopify — Facebook — Tracking integration
+It’s important to unite your Shopify/Woocommerce (or another eCom platform) with advertising networks (like Facebook, Google, etc.), but also unifying all the data in the ad tracking system. 
+
+You should have already faced issues with non-matching reports on Shopify and Facebook, and that’s a problem for every eCom owner. 
+
+When you integrate both Shopify and FB/Google in your ad tracking software, it allows you to see more accurate data and send everything to the advertising network accordingly.
+By the way, at RedTrack we are currently working on a native Shopify App which will simplify all the hustle around tracking &amp; attribution for Shopify users, making integration with Shopify a one-click process. Stay tuned for updates or just drop your email here to be notified first! 
+Campaign metrics for Black Friday to pay attention
+Pay special attention to the following metrics while running advertising campaigns for eCom (especially in October):
+
+ 	
+Cost per click
+
+ 	
+Click-through-rate
+
+ 	
+Cost per unique add to cart 
+
+ 	
+Cost per checkout 
+
+
+Final words for your eCom advertising activities for Black Friday 
+Well, I know it’s a very overwhelming season. But now you have a chance to get a very high reward for all the efforts that you do and reach new financial milestones for your business. 
+Before stressing out, I recommend doing a few breaths and following the plan that we presented for you above. 
+
+Remember that careful planning, backed up by marketing analytics solutions will bring you the fruits you were looking for. Don’t forget to implement ad tracking &amp; conversion attribution with specialized software that will be able to become a trusted marketing partner. 
+Start your subscription from a 14-day free trial (no CC required) to test the full potential of the platform.
+ 
+
+&nbsp;

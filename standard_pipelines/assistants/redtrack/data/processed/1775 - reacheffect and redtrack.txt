@@ -1,0 +1,166 @@
+# ReachEffect and RedTrack
+
+
+
+
+
+
+ReachEffect is a world-leading web and mobile advertising platform, which provides a distribution channel to advertisers and a monetization solution for publishers.
+
+
+
+RedTrack has an API integration with&nbsp;ReachEffect, which gives you the following benefits:
+
+
+
+
+Pause: campaign, placement
+
+
+
+Create automated rules
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types you're planning to work with
+
+
+
+
+
+
+1. Add&nbsp;ReachEffect&nbsp;as a Traffic channel in RedTrack.
+
+
+
+Your RedTrack account →&nbsp;Traffic channels&nbsp;→&nbsp;New from template&nbsp;→ find&nbsp;ReachEffect&nbsp;→&nbsp;Add&nbsp;→&nbsp;Save&nbsp;the template:
+
+
+
+
+
+
+
+
+
+
+
+2. Integrate ReachEffect with RedTrack.
+
+
+
+In the added ReachEffect template go to the&nbsp;ReachEffect API integration&nbsp;section → add the&nbsp;ReachEffect&nbsp;API key&nbsp;→&nbsp;Save changes&nbsp;to the template:
+
+
+
+
+
+
+
+The “Active” button means the integration is on:
+
+
+
+3. Create a campaign in RedTrack with&nbsp;ReachEffect&nbsp;as your traffic channel.
+
+
+
+Campaigns&nbsp;→&nbsp;Create new campaign&nbsp;→ use&nbsp;this guide&nbsp;(for Affiliates) /&nbsp;this guide&nbsp;(for Advertisers) to help you add the campaign with ReachEffect as your traffic channel → once the campaign is added, your tracking link is automatically created, copy&nbsp;Click URL&nbsp;(your tracking link):
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+4. Set up the tracking on the ReachEffect side.
+
+
+
+4.1 In your ReachEffect account go to Campaigns → Add New Campaign:
+
+
+
+
+
+
+
+4.2 Add your RedTrack campaign Click URL (copied in step 3) to the Destination field inside your ReachEffect campaign settings:
+
+
+
+
+
+
+
+5. Set up the Postback URL in RedTrack.
+
+
+
+5.1 In Campaign settings (created in step 3) scroll down to&nbsp;S2S Postback for ReachEffect&nbsp;→ Add:&nbsp;
+
+
+
+
+
+
+
+5.2 Make the following changes to the postback:
+
+
+
+
+pid=REPLACE: instead of REPLACE add your user ID from ReachEffect (i.e. pid=12345abcde).
+
+
+
+conv_type=b: put the needed letter instead of "b". It can go from A to Z so you can have multiple events. Each letter corresponds to the particular event name in the ReachEffect platform.
+
+
+
+
+
+
+
+
+If you changed the Postback URL in the added ReachEffect traffic channel template (added/removed some parameters), remember to manually update the link in campaign settings as well, as it won’t be automatically generated correctly.
+
+
+
+6. Set up the&nbsp;automation.
+
+
+
+
+Use&nbsp;this guide&nbsp;to help set up&nbsp;rules.
+
+
+
+Use&nbsp;this guide&nbsp;for setting up the&nbsp;auto update cost&nbsp;feature.
+
+
+

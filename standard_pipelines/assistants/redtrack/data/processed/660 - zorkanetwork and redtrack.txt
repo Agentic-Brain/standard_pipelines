@@ -1,0 +1,44 @@
+# Zorka.Network and RedTrack
+
+
+
+Zorka.Network is an affiliate network by global creative mobile performance agency Zorka.Mobi. The network specializes in direct CPI offers worldwide: games, shopping, gambling, software &amp; services, utilities, travel, social, education, entertainment, etc.
+
+To integrate Zorka.Network with RedTrack act as follows:
+
+1. Add Zorka.Network template to RedTrack.
+
+Go to the Offer Sources -&gt; press the New button -&gt; find Zorka.Network​ -&gt; Add:
+
+
+
+2. The data will be automatically filled in, just copy the Postback URL and Save the changes:
+
+
+
+3. Obtain the offer from Zorka.Network.
+
+Go to the Offers tab -&gt; choose the offer you wish to promote -&gt; submit an application. If all conditions are met, you will be approved after a short review. Your approved offers can be found in the Available Offers tab.
+
+4. Once approved, open your offer and navigate the Tracking link section. Enable conversion tracking by adding {clickid} tracking macro into the Ref id field. Your Offer link will be updated automatically. Copy it to clipboard.
+
+
+
+5. Set the postback URL in Zorka.Network.
+
+You have two options: either set up Global Postback that will be applied to all of your offers or add your postback URL separately for each offer.
+
+Global Postbacks can be managed in your Profile settings. Individual postbacks can be set right on the offer page. In both cases, the setup process looks the same:
+
+ 	Press Add postback  button
+ 	Insert the postback link from RedTrack
+ 	Save
+
+
+
+If you want to use multiple Postbacks for different target actions (for example, registration and deposit), you can add postbacks for different conversion types.
+
+6. Add Zorka.Network offer URL to RedTrack.
+
+Go to Offers -&gt; New -&gt;  put the link in the URL field -&gt;  Save:
+

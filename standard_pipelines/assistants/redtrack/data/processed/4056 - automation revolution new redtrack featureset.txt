@@ -1,0 +1,71 @@
+# Automation revolution: new RedTrack feature-set
+
+Have you ever dreamed about a tool that assumes all time-consuming but important tracking and optimization tasks for you? The one that can effectively allocate your budget, so you don't have to spend long hours in front of the computer? Good news - RedTrack already took care of it. You can get it all with new automation and optimization features.
+An Introduction to Automation
+In digital advertising, automation is a certain technology by which a specific advertising process is performed with minimal human assistance. It's a workflow of rules composed of triggers, followed by specific actions.
+
+RedTrack automation package includes a customizable set of 6 rules applied to traffic sources. It optimizes your campaigns, streams, landing pages, and offers with your minimal assistance. By taking all the calculating and redistributive activities on themselves, "rules" act as data-based automated ads managers, saving your time and money.
+What are RedTrack auto-rules?
+The release of RedTrack auto-rules feature is a step towards our key mission - to automate as many tasks of the work of affiliate marketer as possible. The first step was the launch of auto-update cost. And now it's time to scale.
+
+
+
+A standard ad tracker can’t provide a user with full control over the traffic. But let’s see what RedTrack offers. Based on the rules you set, RedTrack algorithms can now automatically stop, pause or redirect the traffic flow once it reaches the target value or falls short of it. 
+
+RedTrack automation features can work on the levels of campaign, stream, landing page, and offer equally well. Just set desired KPIs (EPC, CR, or ROI), choose a lower or upper limit and time period. RedTrack will automatically notify and perform a certain action once the KPIs are met or not. 
+
+How does it work? RedTrack set the integration with a tiar of Advertising Networks via API. It ensures the following flow: you set the KPIs for your ad campaign performance, and once the parameters are met, the algorithms would automatically stop the traffic in both RedTrack and the Ad Network platforms. 
+
+The following traffic sources are already integrated with RedTrack with auto-optimization functionality: Google, Bing, PropellerAds, ExoClick, Revcontent, and MGID. We keep expanding this list now. 
+
+You can try how the auto-optimization feature works by clicking on "Rules".
+
+&nbsp;
+Campaign-level optimization feature
+Automatically pause your campaign if it doesn't show the desired results
+
+Set rules for your ad campaign, and If it doesn't meet set KPIs - RedTrack will automatically pause it. The best thing is that you don't need to constantly switch screens and watch the dynamics. If you have a clear strategy, simply assign all routine executive functions to RedTrack. Later you may edit, restart or simply remove them. Besides, receive an alert every time benchmark KPI is not met. 
+
+The parameters that are now available as indicators of campaign performance and can be auto-optimized are EPC, ROI, and CR. 
+
+
+
+&nbsp;
+Stream-level optimization features
+ 1. Landing pages optimization:
+
+If you use several landing pages within one campaign, traffic is redirected to the one with better metrics in a given relation. Now you could not only A/B test your landers, but control the traffic distribution while working with large volumes by setting weights. 
+
+
+
+&nbsp;
+
+2. Offers optimization:
+
+
+
+With several offers in rotation, traffic is redirected to the offer with better metrics in a given relation. Like in the landers case, after setting KPIs and weights to chosen offers, you can be sure that the traffic is distributed in the most effective way. In RedTrack you may experiment with a great number of offers in search of the most effective. Start promoting your offers right now with our video guide.
+
+&nbsp;
+
+4. Stream optimization
+
+With several streams on board, traffic is redirected to the stream with higher EPC, ROI, or CR in a given relation. Works the same as with landing pages and offers. 
+
+Follow the step-by-step guide on how to set auto-rules for your campaign --&gt; here.
+
+&nbsp;
+Auto-Optimization features
+Stream auto-optimization 
+ If you're not sure how to work with offer weights within one stream effectively or don't have a clear strategy, you may assign traffic distribution to the auto-optimization feature. RedTrack will regularly check the CRs and automatically redistribute the traffic in favor of the offer which shows the best performance. Choose the frequency of auto-optimization and write it down in the field provided. And don't forget to include several offers in your stream, otherwise, it won't work. 
+
+
+Follow the step-by-step guide on how to set auto-optimization within a stream --&gt; here.
+In other trackers, this feature can be called as a SmartLink or a new AI-based technology, when, in fact, it can be easily replaced with several complex code lines.
+
+Benefit from Rules &amp; Alerts
+RedTrack automation features work 24/7 and take full control of your tracking and traffic optimization process. While you sleep, do your hobby, have fun or think about the conquest of new vertical, your ad campaigns are under RedTrack care. Even if your marketing hypothesis turning out wrong, you won’t lose your money - your campaigns will be automatically stopped. To stay up to date just check your inbox.
+
+Automation features are already included in Pro and Business subscription plans. Optimize effectively, get higher ROI and save your time for more important things. You can read more about automation and get to know the solutions currently available on the market here
+Automate your ads now
+Currently, RedTrack supports a limited number of traffic sources and looks for your feedback as to list expansion. To start using automation features for a particular Traffic Sources, just send us your request at info@redtrack.io. 

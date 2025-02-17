@@ -1,0 +1,24 @@
+# 21-Jul
+
+
+ 	Clickbank conversion type mapping
+ 	Bugfix: Rules based on the cost for API updated traffic sources
+ 	Send event ID for CAPI in a postback
+ 	Rule names improvements: remove the limit of symbols
+ 	Bugfix: missing conversion event columns for the whitelabel reporting portal
+ 	Save the grouping dates within the same session
+ 	Costs and CPA display in the reporting portal
+ 	ClickBank: track Initiate checkout, abandoned cart and upsell
+ 	 Macro for a custom payout
+ 	Publisher panel: payment request
+ 	Postback Integration: add conditional postback switch
+ 	Send additional parameters to Facebook via the CAPI:
+    Facebook Event ID
+    Facebook First Name
+    Facebook Last Name
+    Facebook Phone
+    Facebook Gender
+    Facebook Email
+
+
+ 	Offer Source sub structure change

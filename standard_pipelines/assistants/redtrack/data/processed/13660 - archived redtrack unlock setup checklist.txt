@@ -1,0 +1,115 @@
+# (Archived) RedTrack Unlock: setup checklist
+
+What's RedTrack Unlock?
+RedTrack Unlock subscription plan allows you to unlock the full potential of your e-commerce and DTC brand using RedTrack’s free digital marketing analytics tool, designed specifically for Shopify and WooCommerce users running paid ads on Google, Facebook, and TikTok.
+To learn more about RedTrack Unlock potential click here.
+
+Checklist for RedTrack Unlock users
+[expand title="✅1. Add custom tracking domain"]
+
+RedTrack strongly recommends using a custom tracking domain as it is more secure, moreover, it prevents your Campaigns from being blocked, since such giants as Google, Facebook, or Bing do not accept free tracking domains.
+
+Follow this video explanation and RT KB guide to help you add a custom tracking domain.
+
+[/expand]
+
+[expand title="✅2. Add conversion events"]
+
+By Event we mean any conversion (desired action) type with any name you need to track (besides a standard conversion or transaction) – signup, deposit, registration, sale, upsell, install, lead, purchase, view content, add to cart, initiate checkout etc. There can be various events in your funnels depending on your needs and you can track all of them with RedTrack.
+
+Follow this video explanation and RT KB guide to help you set the needed conversion events.
+
+[/expand]
+
+[expand title="✅3. Add your Brand"]
+
+Brand is the essential element in the Campaign creation flow. To add your Brand to RedTrack:
+
+3.1 Use this video explanation on how to add your Brand to RT.
+
+3.2 Follow this video explanation on how to add purchase meta-data parameters.
+
+3.3 Check out our RT KB guide on how to add Brands to RT.
+
+[/expand]
+
+[expand title="✅ 4. Add your Website"]
+
+Website entity in RedTrack is the website / e-com store you will track.
+Important notes:
+
+ 	adding correct URL is essential for proper script generation. If you add the URL, we will auto-edit multiple places it is used at.
+ 	if you plan to use redirect link - add ?rtkcid={clickid}&amp;clickid={clickid}&amp;cmpid={campaignid} to web-site URL to remove conflicts between redirect and no-redirect tracking
+
+
+Check out our video tutorial on how to add your Website to RT or RT KB guide for more details.
+
+[/expand]
+
+[expand title="✅5. Connect e-com back-end with RT"]
+
+Shopify and WooCommerce back-end setups are very different, so please address individual guides:
+
+5.1 Follow the Shopify↔RT integration guide for the setup details-&gt; since you've already covered RT setup from step 1 to step 4 in this checklist, you can start with step 5 of the Shopify guide. In addition to the guide, you can follow 2 video tutorials on:
+
+ 	how to connect RT private app and Shopify App
+ 	how to add RT tracking script to Shopify
+
+how to
+
+5.2 Follow the WooCommerce↔RT integration guide for the setup details-&gt; since you've already covered RT setup from step 1 to step 4 in this checklist, you can start with step 5 of the WooCom guide. In addition to the guide, you can follow our video tutorial on how to add tracking scripts to WooCom.
+
+[/expand]
+
+[expand title="✅6. Add Traffic channel (Ad Network)"]
+
+Now you need to pick one or more ad networks to add. When you do so, remember to add conversions API.
+
+Use the following RT integration guides for the needed channels:
+
+ 	Google Ads. Check out this video on the Google Ads account integration details.
+ 	Facebook. Check out this video on the Facebook account integration details.
+ 	TikTok. Check out this video on the TikTok account integration details.
+
+[/expand]
+
+[expand title="✅7. Create a tracking Campaign"]
+
+Use this video explanation on how to create a Campaign in RedTrack.
+
+[/expand]
+
+[expand title="✅8. Add RT Campaign tracking link to your Ad"]
+
+RedTrack already tracks your ads based on UTMs, but you want to leverage smart attribution and add tracking parameters from Campaigns to your ad networks.
+
+Once you've created the Campaign, add tracking links from this Campaign to your Ad network account:
+
+[wptabs id="7039"]
+Note!
+
+If there are already some UTM parameters in the URL parameters field, you do not have to delete them, just append the parameters taken from your campaign in RedTrack to the already existing parameters with the help of the ampersand symbol: “&amp;”. Check out this video for a more detailed explanation.
+[/expand]
+
+[expand title="✅9. Add the Ad spend data"]
+
+Unlock plan currently doesn't include API-based cost updates. However, it has an easy-to-use interface to update ad spend data manually.
+
+Check out our video tutorial "How to add ad spend data manually" for more details.
+
+[/expand]
+
+[expand title="✅10. Unlock the power of your data with RedTrack Reports"]
+
+RedTrack Unlock provides access to several reports and dashboards:
+
+ 	Acquisition dashboard is sort of a cross-breed between FB ads manager and Google Analytics.
+ 	Conversion path report is an insight discovery tool for the multi-touch customer journey.
+ 	Campaign list gives you a high-level view of your ad networks performance.
+ 	Campaign report provides you with an exploratory view of your ad networks performance.
+ 	Website “list” &amp; Website report is a high-level view of your website performance. Unlock is designed for one website, so there is just one item on the list. We will combine it with a running website report, as this video adds to the concepts you already know.
+
+[/expand]
+Important!
+
+Such core automation features as Auto cost update and Rules are not available for RedTrack Unlock users, which you should take into account when following the above-mentioned guides. Meaning, you can set a rule or switch on an auto cost toggle, but these features won't work out for you. To optimize your experience with RedTrack you should switch to the paid plan.

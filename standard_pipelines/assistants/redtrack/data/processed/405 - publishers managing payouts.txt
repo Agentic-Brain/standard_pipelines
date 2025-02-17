@@ -1,0 +1,98 @@
+# Publishers: managing payouts
+
+Setting the payout model
+Once you have created a Campaign for your partners/publishers, you can manage how to send the payout information. To do that:
+
+1. Go to the created Campaign and press the Edit icon next to it:
+
+
+
+2. Once you are in the Campaign settings go to the tab Custom payouts:
+
+
+
+3. There are several options on the payouts -&gt; choose the appropriate tab -&gt; add your payouts:
+Important!
+What you put in the Custom payouts tabs depends on the Campaign Cost (cost model) set in your Campaign. Be especially attentive with the CPA and Revshare cost models:
+
+ 	for CPA cost model custom payout sums should be represented by the fixed payout value.
+ 	for Revshare cost model custom payout sums should be represented by the percentage.
+
+The only exception is the Hybrid  tab where:
+
+ 	if the cost model is CPA, the custom payout sum should be represented by the percentage.
+ 	if the cost model is Revshare the custom payout sum should be represented by the fixed payout value.
+
+
+3.1 GEO– set different payout based on Geo value:
+
+
+
+3.2 GEO/OS – add OS (without versions), Geo and payout amount separated by comma:
+
+
+
+3.3 PUBLISHER/ALIAS – set different payouts for different partners/publishers:
+
+
+
+3.4 PUBLISHER/ALIAS SUBID – add your partner name, the target sub id, the value of this sub id, and the payout for this value of this sub id:
+
+
+
+3.5 HYBRID – define conversion type to force change them to CPA (this could be helpful if you work with RevShare but want a CPA model for some conversion type):
+
+
+
+3.6 CONVERSION SUBS – add sub name, sub value, and payout amount:
+
+
+
+3.7 TYPE/GEO/CONVSUB – add conversion type, geo, sub id, sub value, and payout amount:
+
+
+
+3.8 TYPE/CONVSUB – set different payouts for different conversion types if the cost model differs from the main Campaign:
+
+4. Once you are done adding to the payout options, remember to:
+
+4.1 press the ADD button to save the added custom payouts:
+
+
+
+4.2 press the Save changes button to apply the changes to your Campaign:
+
+
+Managing payouts in the partner account
+RedTrack functionality allows you to show how much you have already paid to your partners/publishers:
+
+1. Go to the section Publishers -&gt; Payouts:
+
+
+
+2. Press New to add payout information -&gt; choose the target Publisher ID from the list -&gt; set the Amount, Status, add the Note if needed -&gt; press Save:
+
+
+
+3. Once you've pressed Save, you will see the payout information next to the added partners/publishers:
+
+
+
+4. To edit the saved info mark the needed partner/publisher and press Edit:
+
+
+
+5. To generate an invoice for your publisher navigate your mouse to the target partner/publisher and press on the pop-up Download Invoice icon next to them:
+
+
+How does the payout section work?
+
+The amount you add to your admin account is the amount you pay to your publisher, so since you add it in the admin panel, it is then recalculated in your publisher account in a pub panel.
+
+
+
+You have added $100 to some publisher payout information.
+
+In the pub panel, the publisher will see that his balance has decreased to 100.
+
+That will mean he has received the payout to his credit card, paypal, etc. (where you have made this payment).

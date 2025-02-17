@@ -1,0 +1,118 @@
+# BillyMob and RedTrack
+
+
+
+
+
+
+Billy Mobile is the leading affiliate platform, successfully shrinking the divide between advertisers and publishers. Media buyers from across the globe can benefit from Billy's self-service platform, boasting a premium inventory of 6,000+ CPA, CPL and CPI campaigns. 
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events you want to track
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add BillyMob as an Offer source in RedTrack.
+
+
+
+RedTrack → Offer sources → New from template → Add BillyMob template → copy the Postback URL → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up the copied Postback URL from RedTrack in BillyMob.
+
+
+
+Go to your BillyMob account → click on your account name in the upper right corner → Account Settings → Global Postback → paste the copied Postback URL from RedTrack → Save: 
+
+
+
+
+
+
+
+3. Get the BillyMob offer.
+
+
+
+In your BillyMob account go to Marketplace → select your desired offer → click the blue GET TRACKING LINK button in the upper right corner → submit information regarding your traffic source → click Get tracking link.
+
+
+
+The link needs to be edited in order to track the offer with RedTrack. Click the pencil edit button next to the link and add the tracking parameter to the corresponding field. For RedTrack it’s {clickid}. The link will be updated automatically. Click Save and copy your unique tracking link to the clipboard:
+
+
+
+
+
+
+
+4. Add BillyMob offer to RedTrack.
+
+
+
+In your RedTrack account go to Offers → Create new offer → add BillyMob offer link in the URL field -> add the tracking parameters “sub={clickid}” at the end of the offer URL → Save changes to the template:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create the campaign in RedTrack with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+Refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

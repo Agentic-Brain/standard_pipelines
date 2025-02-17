@@ -1,0 +1,200 @@
+# Clickfunnels Not working? Here are the alternatives
+
+The world of digital marketing is moving towards automation at high speed. Today you can create effective landing pages and automatic sales funnels in several clicks with just one tool. The question is how not to make a mistake with the choice?
+Clickfunnel's problem: 
+Our internal research showed that Clickfunnels is the most popular solution among RedTrack.io users when it comes to landing pages and funnels building. They use it to create LPs, quiz pages, and pop-ups to warm up, and convert leads. At the same time, Clickfunnels’ fans admit frequent problems related to Clickfunnels' work. The problems often include data duplication and omission. 
+
+
+❓ For reference: Automated Sales Funnel is a multi-stage process by which a digital manager guides a user from potential customer status to paying and repeat one.
+
+There can be a huge number of steps in the funnel. It may contain  a free offer, an upsell offer,  email campaign, and ad retargeting campaign to motivate the lead to make a purchase/leave contacts/subscribe to content👇
+
+
+
+RedTrack solution: 
+The most secure way to avoid all sorts of problems regarding the work with data is to set up RedTrack Multi-Landing feature. If done correctly, RedTrack will track the performance of all the pages in your funnel, provide you with accurate stats, and save from unforeseen expenses.
+
+-&gt; Read more about how to set up multi-landing or multi-funnel here.
+
+There are two ways you can track your sales funnel's performance: you can use  LP Click Tracking URL to track clicks or LP views script to track impressions. But there are some rules to remember:
+
+ 	LP Click Tracking URL is the easiest and most secure way to track your Landing Pages sophisticated sales funnels’ performance, regardless of its complexity.
+ 	LP views script works perfectly when placed on the same page with LP click Tracking URL. Make sure you really obey this rule.
+ 	Don’t use LP views script if you work with organic traffic and rely on direct traffic script. 
+
+That's it! As you see, the set-up process is super-easy. More is here.
+
+
+
+Are there any alternatives to Clickfunnels?
+Now, let's move to the main question of this article. Are there any alternatives to Clickfunnels? Going back to our research, other popular tools. RedTrack customers prefer to use are Converti, Builderall, Ontraport, Unbounce, and Leadpages.
+
+To find the one that suits you best you must answer 3 basic questions.
+
+First of all, you need to understand why you actually need a funnel builder. Basically, there are 6 main reasons for it:
+
+
+ 	save time on creating landing pages with the help of ready-made templates;
+ 	adopt high-converting practices to get higher ROI;
+ 	conduct effective A/B testing;
+ 	use advanced targeting and trigger options to build funnels;
+ 	get the detailed analytics of the performance;
+ 	benefit from integrations.
+
+Second,  define which features and functionality can satisfy your needs.
+The last step is to determine how many financial resources you are ready to allocate for it.
+Done? Let's pick up something for you.
+
+&nbsp;
+Making the right choice
+Clickfunnels
+Clickfunnels became the first landing page builder service with a broad set of advanced features that is mainly specialized in building sophisticated sales funnels. In fact, it combines several services — email marketing automation, landing page &amp; sales funnels, affiliate marketing, and partners program builders — all in one place.
+
+&nbsp;
+
+
+Distinctive features. Why users like Clickfunnels
+
+ 	It allows creating full-fledged affiliate centers and membership sites;
+ 	Has its own suite of email autoresponders, email follow-ups, and email-marketing automated tools;
+ 	Gives ample opportunities to recruit, manage, and pay affiliates;
+ 	Provide an advanced analytics system that helps to deploy sales funnels in several minutes.
+
+So, if you really need this complex solution and not a fan of the DIY approach, then Clickfunnles can be the right choice for you. If you're a novice or just really need to create several pretty landers for your campaign, we'd advise you to look for something else ( Unbounce or Leadpages, for example).
+
+Clickfunnels' cons:
+
+ 	Limited templates available;
+ 	You need to pay for popups and sticky bars;
+ 	UX can be better;
+ 	Poor customer service (according to our customers' reviews);
+
+Total Cost: starting from $97 per month
+Convertri
+Converti has begun one of the biggest Clickfunnels competitors. Customers say it's the easiest and the fastest sales funnels builder. Converti's team tries to provide the best customer experience and created a special Convertri’s Accelerated Page Technology which deals with huge pages load in less than 3 seconds. 
+
+
+
+&nbsp;
+Distinctive features. Why users choose Converti:
+
+ 	High level of customization and the ease of use;
+ 	High loading speed;
+ 	Intuitive UX;
+ 	Advanced LP building features like Background videos and Shared Headers and Footers, Dynamic Text Replacement;
+ 	600 ready-made templates;
+ 	Fast and friendly support.Converti cons:
+ 	Only 10 custom domains available;
+ 	Only 10. team members can have access to your account;
+ 	Without the possibility of creating affiliate programs;
+ 	No social media integrations.
+
+Total Cost: starting from $75 per month.
+
+Builderall
+Builderall is nothing more and nothing much than a quality sales funnel builder and analytics system for those who start their online business. Started in 2017, their team managed to create a reputation of a stable soft and catch up with competitors in functionality. 
+
+&nbsp;
+
+
+
+&nbsp;
+Distinctive features. Why users choose Builderall:
+
+ 	Categorized customizable templates;
+ 	Pricing is affordable for newbies;
+ 	Training for beginners;
+ 	No additional fees required to purchase external themes, plug-ins, and other features;
+ 	Built-in SSL Support for every website;
+ 	Advanced built-in CRM-system.
+
+Builderall cons:
+
+ 	The web page builder is not responsive;
+ 	The Drag and Drop doesn't work smooth;
+ 	The software still has many bugs in comparison to other sales funnels builders
+ 	Limited number of domains.
+
+Total Cost: starting from $75 per month.
+Ontraport
+Unlike Clickfunnels that makes a great job in creating sales funnels, Ontraport does literally everything. Ontraport's main advantage is that it can keep the data from all your marketing channels in one place. So, you don't have a need for spreadsheets and calculations. Thanks to a high level of automation, it helps find out which channels s are the most profitable and which one should you scale.
+
+
+Distinctive features. Why users choose Ontraport:
+
+ 	High-level sales funnel building process automation;
+ 	A big set of business and marketing analytics features;
+ 	Real-time reporting and robust tracking;
+ 	Two free personalized onboarding calls;
+ 	Excellent E-mail delivery rate sue to their own dedicated Internet Protocol; 
+ 	High level of LP builders editor control;
+ 	Ecommerce and SalesForce features.
+
+Converti cons:
+
+ 	Heavy automation features may be frustrating for newcomers;
+ 	Having all sorts of marketing apps integrated into one place, individual sales funnel features are least popular among users;
+ 	UX can be better;
+ 	Can be slow sometimes.
+
+Total Cost: starting from $79$/month.
+Unbounce
+
+
+
+Unbounce was one of the first landing page builders the digital marketing world has seen. Unlike Clickfunnels, this tool is more focused on creating quality landers and pre-landers than funnels themselves. It means that you can't create your affiliate programs here, but have wide opportunities for creativity and expression, instead. Unbounce helps marketers to create and optimize landing pages for conversions and communicate with your potential customers in a more efficient way.
+Distinctive features. Why users choose Unbounce:
+
+ 	Advanced and, as our customers say, the most convenient Drag&amp;Drop editor. It allows dragging literally all individual elements, including text, images, spacers, buttons.
+ 	Smooth integration with popular email-services providers and automation tools;
+ 	You don't have to shop for Opt-ins, Pop-ups, and sticky bars;
+ 	A/B testing is free + you can apply weights to your landers;
+ 	Allows you to add parallax and dynamic content;
+ 	The only social media platform you’ll find on the list is Facebook.
+
+The cons:
+ 	Some functionality is missing, so you have to deal with workarounds; 
+ 	Template options are limited;
+ 	Some users find it a little frustrative to set it up and make their first landing page.
+ 	Not suitable for creating multi-pages websites
+ 	A/B testing isn't included in the Basic plan.
+ 	The price mainly depends on the volume of conversions.
+ 	Has an integration with just one social media services: Facebook
+
+Total Cost: starting from 72$ per month 
+
+Conclusion: A little expensive, but all basic functionality. Perfect for creating one-page websites/landing pages with a personalized design.
+Leadpages
+
+
+As to the value provided to customers, Leadpages is basically the same as Unbounce. The only difference is their target audience. While Unbounce prefers to work with experienced digital marketers, agencies, and big enterprises, try to help small businesses to build websites, landing pages, pop-ups, alert bars, and other things in order to connect with their audience, collect leads, and close sales.
+Distinctive features. Why users choose Leadpages:
+
+ 	A set of free advanced features like a countdown timer and automatic SMS text messaging;
+ 	Allows smoothness data migration from one connected app to another;
+ 	Gated content feature;
+ 	Integrated with all the needed social media, including Facebook, Twitter, Google+, and LinkedIn;
+ 	Advanced pop-ups &amp; alert bars;
+ 	Attractive pricing policy: low price which doesn't depend on the advancement of the features.
+
+The Cons:
+
+ 	A/B testing isn't included in the Basic plan
+ 	Some users find such editing functions as spacing, sizing, alignment, and layout a little frustrating.
+ 	Provide a relatively little control over the layout of the page, so users may experience a lack of columns and rows.
+ 	Difficult to incorporate custom fonts.
+
+Total Price: starting from 25$ per month 
+Conclusion
+In this blog post, we examined the Pros and Cons of most popular landing page builders among RedTrack users and answered the question of What if not Clickfunnels? As you there's no right answer here. Every tool has its own features, advantages, and disadvantages. So, your choice should largely depend on needs and financial resources. 
+Alternatives
+Clickfunnels is best for Pro affiliate managers and marketers that wor with difficult sales funnels;
+Converti is perfect for beginners and digital marketers that value speed simplicity and stability;
+BuilderAll has all the necessary features for those who start their online business;
+Ontraport is all in one solution for experienced digital marketers that unites analytical systems, CRM, special Ecommerce and Sales force features, etc.
+Unbounce is a great choice for one-landing page websites and medium difficulty funnels for those who care about originality and beauty of their landing pages
+Leadpages is a great choice when you need basic stable functionality for a reasonable price.
+
+Do you use any other funnel builder? Share it with us -&gt; support@redtrack.io
+
+And remember that having an appealing landing page is only half a battle. The strategy is the king.

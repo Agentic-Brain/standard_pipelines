@@ -1,0 +1,192 @@
+# Native advertising mistakes to avoid [+expert opinion]
+
+The native ads industry growth came in 2016 and 2017. Nevertheless, the interest to this ad format has only increased over the years, as it has proved its effectiveness for both B2B and B2C market segments. Experts predict that in 2020 almost all additional native spending will go to mobile placements, which already account for about 85% of the US native display ad market. Interestingly, by the end of 2020, advertisers will allocate almost two-thirds of display budgets to native ads.
+
+What are Native advertising about?
+Native advertising is a form of paid advertising that matches the visual design and the function of the media in which it appears. It looks and feels like natural content due to its full consistency with the native user experience. 
+
+The most popular types include
+
+ 	
+
+ 	promoted search results;
+ 	sponsored content, including social media posts;
+ 	in-feed sponsored units;
+ 	promoted product listings;
+ 	recommended content on the web pages of online publications.
+
+
+
+
+
+
+
+&nbsp;
+
+
+
+
+
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+Earlier on in our blog, we've talked about native ads' advantages over the rest. Among them is the ability to effectively capture consumer attention, drive greater purchase intent, and strong viral potential. Native ad formats are often compared to display ads and content marketing. Novice affiliates and advertisers may easily confuse them with each other. To resolve any misunderstandings, let's have a look at their key attributes:
+
+
+
+
+ Native ads
+
+ Display Ads
+
+Content marketing
+
+
+
+
+an ad that fully matches the surrounding context
+
+a paid banner ad
+valuable, relevant and attractive without a direct hint  on advertising
+
+
+
+soft sell
+
+hard sell
+
+lead generation
+
+
+
+
+high CTR (in the range from 0.2 - 5%)
+
+low CTR (in the range from 0.2 - 5%0.05 - 3%)
+
+long-term “hard to measure” goals
+
+
+
+
+works best for driving traffic to the website
+
+works best for retargeting campaigns
+
+mainly used for lead generation and potential clients warm-up
+
+
+
+
+
+Having appeared in response to banner blindness, native ads have become the real engine for online business growth. With the spread of new ad-blocking technologies and restrictions on the use of aggressive promo techniques, it's seen as creative salvation for brands. Recently, native ads have been ranked as the top priority for B2B marketers when asked where they will focus their mobile ad buys over the next six months.
+
+&nbsp;
+Native advertising mistakes to avoid
+It’s important to understand that native ads themselves cannot guarantee you success. We contacted our partners and one of the world's largest native Ad Networks — Revcontent. Read our interview with Katherine, Marketing Director at Revcontent, where she shared her observations on the native ad industry and commented on its specifics.  
+
+- Katherine, please, tell us more about Revcontent. What is your core audience and what value do you provide to them?
+Revcontent is a leading content discovery platform helping advertisers drive a highly engaged audience through technology and partnerships with some of the world’s largest news &amp; media brands. Revcontent's discovery platform allows the world’s leading publishers to monetize their audience by providing users with a way to discover news, media and useful products that are interesting and relevant to their everyday lives. We work with brands, media publishers, affiliates, and more. 
+- Revcontent is known as the world’s fastest-growing native advertising network. Could you tell us more where this native traffic come from?
+Revcontent recommendation units contain Native, Video &amp; Display demand and can appear in a variety of placements around the world’s leading media websites; primarily in-feed or below article. We aim to maximize user experience and engagement with higher revenue, publisher control, and audience engagement tools that provide an additional revenue stream to publishers. 
+
+&nbsp;
+
+
+
+&nbsp;
+
+We work exclusively with premium publishers such as History.com, Sports Illustrated, Nasdaq, Heavy.com, Boston.com and more. 
+
+&nbsp;
+
+As a self-funded company in control of our own destiny, we’re putting ourselves in our publishers’ shoes and exploring how to do more (higher ECPMs, higher revenue, higher user engagement, more ad quality controls, etc.) with less (fewer widgets on the page, fewer ads in the widgets, fewer contract contingencies, etc.)
+
+&nbsp;
+
+Leveraging a new machine-learned quality scoring algorithm, Revcontent rewards the highest quality publisher traffic with the highest yields and revenue. By aggressively taking a quality-first approach on the supply and demand sides of the business, Revcontent’s tier 1 publishers have seen a 117% increase (and still growing) in ECPM since Q1 2018.  
+- Investments in native advertising are increasing. At the same time, B2B companies are turning into native much slower than B2C ones. To your mind, what challenges businesses face adopting native advertising strategies?  
+Many businesses overall can be slow to adopt new technologies. Some companies shy away from native ads because Native can be incredibly effective when done the right way — with user engagement in the forefront, powerful technology, and understanding how consumers interact with content online. 
+
+&nbsp;
+
+Brand protection and quality control is always a concern for publishers and advertisers — content recommendation sometimes doesn’t have the best reputation and is known for clickbait ads.
+
+
+
+What is clickbait? Simply put, clickbait is a piece of content that intentionally over-promises in order to catch people's attention and make them click and visit a particular website. Clickbait usually captures users with a snappy headline, such as "you never believe this". One of the most common reasons novice affiliates make is the use of bad clickbait titles, such as
+
+
+
+No doubt, clickbait is one of the best ways to catch people's attention. Various studies show that the most effective headlines are polarized. The point is that clickbait frequent use may ruin the brand's reputation and establish steady harmful associations with it. These are pretty obvious facts, which for some reason are often forgotten. 
+
+
+
+- Except for clickbaits, what are 3 unobvious mistakes Revcontent clients make with native ads? Share some tips on how to avoid them?
+
+First, creatives can always be an issue. It’s worth spending the money to test what image/headline combinations your audience likes. 
+
+&nbsp;
+
+Second, being overly reliant on a single revenue or user acquisition source is a major mistake.  
+
+&nbsp;
+
+Third comes down to user experience. A lot of publishers are stuck with only offering a single user experience. Consumers are wanting a personalized experience, so publishers and advertisers should be aware of the user experience depending on where they are coming from - if they are new, coming from social, search, paid campaign, etc.
+- Are there any threats to native advertising ad format growth? 
+Luckily, the goal of content recommendation is truly to add value to the user and help publishers keep the lights on. As new regulations and interest groups come into existence, we continue focusing on maximizing user experience and engagement with higher revenue, publisher control, and audience engagement tools that provide an additional revenue stream to publishers. 
+Thank you for your answers, Katherine! 
+For RedTrack users, Revcontent team is welcoming every new affiliate with a $50 Welcome Bonus when you make your first deposit starting from $50. 
+Please send the promocode RedTrackNov to Revcontent manager at promo@revontent.com to get your Welcome bonus.
+
+Native advertising compliance issues
+The most influential body that regulates native advertising is the Federal Trade Commission. According to its special native advertising guide for business, “Everyone who participates directly or indirectly in creating or presenting native ads should make sure that ads don’t mislead consumers about their commercial nature."
+
+
+
+We won’t list all the rules, but would like to recall 4 ‘basic principles of advertising law’, which should be applied to all ad formats:
+
+ 	
+
+ 	
+
+ 	Advertising must be truthful and not misleading;
+ 	The advertiser must substantiate any express or implied claims;
+ 	Advertising cannot be unfair or deceptive;
+ 	Any disclosures necessary to make an ad accurate must be clear and conspicuous. 
+
+
+
+
+
+To avoid the disclosure problem, pay attention to the location of the disclosure and its proximity to the claim, whether the consumer can avoid seeing the disclosure. whether there any distractions on the page that might overshadow disclosure, and others, whether its language is understandable to the intended audience. 
+Key takeaways for native advertising
+1. Pay attention to performance metrics. Impressions shouldn't be your key metric for native ads efficiency estimates. Wide media coverage may easily result in a low engagement rate, which is a serious threat to the whole sales funnel. Don't forget that social media algorithms treat engagement. The more engagement your ad gets, the more chances that it will be naturally promoted by the algorithms. The convertible content is the one that resonates at the individual level, provokes conversation and encourages them to learn more about the product.
+
+2. Adopt an ad strategy. Keep in mind that buying ad placement in any online media you should make your brand stand out not only among your direct and indirect competitors but the whole editorial and sponsored content of this particular media as well.
+
+3. Make strong CTA. According to Hubspot report,  targeted calls-to-action perform 202% better than generic ones. Keep in mind different levels of involvement require different CTAs. Don't try to sell the product before telling your audience its competitive advantages and the real value it will bring to customers. Native advertising works best when scaling top-funnel content, while mid-and bottom-funnel content is better broadcasted with display and PPC ads. 
+
+4. B2B and B2C require different native creative strategies. B2B native ads strategy isn't about entertaining but creating meaningful connections with the target audience. You need to demonstrate your expertise, skills, and show how business can benefit from spending their time and money on your brand. As to particular traffic sources, Twitter, Linkedin, and Facebook are still considered to be the best platforms for B2B lead generation with Linkedin showing the best results.
+Ready to start your RevContent campaign?
+Simply choose Revcontent from the list of your Traffic Sources and follow this guide to set up your ad campaign fast and smooth.
+
+Don't forget to send the special promocode RedTrackNov to promo@revontent.com and use your $50 Welcome bonus.
+
+If you have any questions, we're always at your service. Just send your question to support@redtrack.io
+
+Happy tracking:)

@@ -1,0 +1,526 @@
+# Shopify and RedTrack
+
+
+
+
+
+
+
+
+
+
+Shopify is the leading cloud-based, multi-channel commerce platform. Merchants can use the software to design, set up, and manage their stores across multiple sales channels, including web, mobile, social media, marketplaces, brick-and-mortar locations, and pop-up shops. The Shopify platform was engineered for reliability and scale, making enterprise-level technology available to businesses of all sizes. 
+
+
+
+RedTrack allows you to have an API integration with Shopify. That means:
+
+
+
+
+All your conversion events are tracked on the backend automatically
+
+
+
+The highest level of accuracy for conversion and revenue delivery 
+
+
+
+
+Integration
+
+
+
+
+
+The custom tracking domain should be connected to your RedTrack account before proceeding with the connection steps below.
+
+
+
+
+
+1. Create custom conversion events.
+
+
+
+Tools → Conversion tracking → Conversion types → add the events for Shopify (use this guide to help): 
+
+
+
+
+ViewContent
+
+
+
+AddToCart
+
+
+
+InitiateCheckout
+
+
+
+Purchase
+
+
+
+UpsellTo track this event properly, add it in RT + set up a Webhook in Shopify (Webhook setup is described in the Connection steps section of this guide → step 3).
+
+
+
+PartialRefundThis event is counted with a minus payout. To track this event properly, add it in RT + set up a Webhook in Shopify (Webhook setup is described in the Connection steps section of this guide → step 3).
+
+
+
+RefundThis event is counted with a minus payout. To track this event properly, add it in RT + set up a Webhook in Shopify (Webhook setup is described in the Connection steps section of this guide → step 3).
+
+
+
+BuyNowThis event should be applied if your page has a button "Buy Now".
+
+
+
+ShippingThis event type presupposes the cost of shipping minus the cost of purchase and the Payout value for this event type is counted with a minus.
+
+
+
+
+If you don’t add Shipping as an event, conversions that are supposed to be counted as Shipping and have a negative revenue will be counted as default conversions but marked with a minus. That being said, Total Revenue will count all the conversions, including the minus ones.
+
+
+
+
+SubscriptionTo set up this event type for Recharge subscribers refer to this article.
+
+
+
+RecurringTo set up this event type for Recharge subscribers refer to this article.
+
+
+
+CancelledThis event type presupposes manually and automatically cancelled orders from Shopify. To track this event properly, add it in RT + set up a Webhook in Shopify (Webhook setup is described in the Connection steps section of this guide → step 3).
+
+
+
+
+2. Create a custom Brand.
+
+
+
+Brands → New from scratch → use&nbsp;this guide&nbsp;to help you add your Brand
+
+
+
+3. To send the PII data for better attribution go to the added Brand settings → Additional parameters → add the following parameters with the corresponding roles: 
+
+
+
+ParameterMacro / TokenName / Description (what you will see in reports instead of subx)RoleInfo we receive under these parameterseventid{replace}Event IDEvent IDYour order ID or the external ID for the conversionfname{replace}First NameFirst NameCustomer First Name from the orderlname{replace}Last NameLast NameCustomer Last Name from the orderphone{replace}PhonePhoneCustomer phone number from the orderemail{replace}EmailEmailCustomer email from the orderzip{replace}Zip CodeZip CodeCustomer zip code from the ordercontentid{replace}Content IDContent IDsExternal product IDcontent{replace}ContentContentsProduct titlecontenttype{replace}Content CategoryContent CategoryThe type of product
+
+
+
+
+
+
+
+4. Add your&nbsp;Website.
+
+
+
+Websites → New → use this guide to help you add your website.
+
+
+
+Once you've added your Website, you already have all the essential scripts, pixel and webhooks generated automatically in the Scripts tab:You will need them later to connect to Shopify.
+
+
+
+5. Create a paid traffic campaign. 
+
+
+
+The campaign for the unattributed (organic) traffic is already in place. Now you need to create the one for the paid traffic. Follow these simple steps:
+
+
+
+
+Add the Traffic channel. Most of them have a preset template in RedTrack. 
+
+
+
+Launch a campaign for the paid Traffic channel. Your website/shop will be the main link added to the traffic channel.
+
+
+
+
+
+
+1. Create a custom app.
+
+
+
+
+Log in to your Shopify → Apps → Apps and sales channel settings → Develop apps for your store:
+
+
+
+
+
+
+
+
+
+
+
+
+
+Create an app → add the name in the App name field → choose the developer from the App developer drop-down list → Create app:
+
+
+
+
+
+
+
+
+
+
+
+
+2. Configure API scopes.
+
+
+
+2.1 Overview → Configure API scopes: 
+
+
+
+
+
+
+
+2.2 Admin API access scopes → All → Order editing, Orders, Script tags → tick the following boxes next to them:
+
+
+
+
+Order editing: write, read
+
+
+
+Orders: write, read
+
+
+
+Script tags: write, read
+
+
+
+
+
+
+
+
+
+
+
+
+2.3 In the Selected tab you can re-check if everything was added. Save the changes and install the app:
+
+
+
+
+
+
+
+
+
+
+
+3. Reveal the token.
+
+
+
+3.1 A warning message will pop up informing you that the access token can only be viewed once and will be revealed to you once you press Install: 
+
+
+
+
+
+
+
+3.2 Reveal token once → save it: 
+
+
+
+
+
+
+
+
+
+1. Connect your RedTrack account to the Shopify Private App.
+
+
+
+Tools → Integrations → Shopify → Add Shopify store → add your shop id and token:
+
+
+
+
+Shop id: copy it from the URL, it is yourshopname.myshopify.com.
+
+
+
+Token: Shopify token you got during the private app creation.
+
+
+
+
+
+
+
+
+2. Add the needed scripts from RedTrack to Shopify:
+
+
+
+
+
+1. Copy the scripts from the added Website form.
+
+
+
+ Websites → choose the needed one → Scripts → choose Shopify → copy the scripts:
+
+
+
+
+
+
+
+
+
+If you have the Offer form and no automatically generated scripts, then you need to:
+
+
+
+
+Create and copy the universal tracking script. Use this article → I'm affiliate section.
+
+
+
+Copy this Web events tracking Events.js script:
+
+
+
+
+&lt;script src="https://yourtrackingdomain.com/events.js"&gt;&lt;/script&gt;
+
+
+
+
+
+2. Add the copied scripts to your Shopify account.
+
+
+
+2.1 Sales channels → Online Store → Themes → three dots → Edit code:
+
+
+
+
+
+
+
+2.2 Layout → theme.liquid → add the copied scripts to the end of the&nbsp;&lt;head&gt;&nbsp;tag:
+
+
+
+
+
+
+
+If you change the theme, remember to add the scripts to the new theme again.
+
+
+
+
+
+1. Copy the pixel from the Website form.
+
+
+
+ Websites → choose the needed one → Scripts → choose Shopify → copy the Pixel for order status page and post-purchase page:
+
+
+
+
+
+
+
+Legacy scripts for Order status page and Post purchase page can be still found in your Website form in the Legacy scripts for Order status page and Post-Purchase page drop-down:
+
+
+
+
+
+If you have the Offer form and no automatically generated pixel, copy it from here:
+
+
+
+analytics.subscribe('checkout_completed', (event) =&gt; {
+  const checkout = event.data.checkout;
+  const orderId = checkout.order.id;
+  var s = document.createElement( 'script' );
+  s.setAttribute('src', 'https://tracking.domain/order_completed.js?shop=storedomain.myshopify.com&amp;orderid=' + orderId);
+  document.body.appendChild(s);
+});
+
+
+
+
+
+2. Add the copied pixel to your Shopify account.
+
+
+
+2.1 Settings → Customer events → Add custom pixel → give it a name → Add pixel:
+
+
+
+
+
+
+
+
+
+
+
+2.2 In the Permission window mark Analytics → in the Data sale window mark Data collected qualifies as data sale:
+
+
+
+
+
+
+
+2.3 Paste the pixel (copied in step 1) into the Code section → change the tracking.domain and store.domain parts with your actual domains → Connect:
+
+
+
+
+
+
+
+
+
+3. Create Webhooks.
+
+
+
+Settings → Notifications → Webhooks → Create webhook:
+
+
+
+Webhook API version is always the latest. It is crucially important for you to choose the latest version of Webhook API from the dropdown. Usually, the latest Webhook API version is marked with the current year and the word (Latest) at the end.
+
+
+
+
+
+
+Event:&nbsp;Checkout creation
+
+
+
+Format:&nbsp;JSON
+
+
+
+URL: https://ecomappspf.redtrack.io/custom_webhooks
+
+
+
+
+
+
+
+
+
+
+
+Event:&nbsp;Order creation
+
+
+
+Format:&nbsp;JSON
+
+
+
+URL: https://ecomappspf.redtrack.io/custom_webhooks
+
+
+
+
+
+
+
+
+
+
+Order edit webhook should be added only for Upsell event tracking.
+
+
+
+
+Event:&nbsp;Order edit
+
+
+
+Format:&nbsp;JSON
+
+
+
+URL:&nbsp;https://ecomappspf.redtrack.io/custom_webhooks
+
+
+
+
+
+
+
+Event:&nbsp;Refund create
+
+
+
+Format:&nbsp;JSON
+
+
+
+URL:&nbsp;https://ecomappspf.redtrack.io/custom_webhooks
+
+
+
+
+
+
+
+Event: Cancelled
+
+
+
+Trigger: order cancellation
+
+
+
+Webhook: https://ecomappspf.redtrack.io/custom_webhooks
+
+
+
+
+
+
+
+
+Important!▸ If you want to track manually added orders in Shopify with RedTrack, refer to this article for additional setup steps.▸ If your Shopify store domain or/and custom tracking domain were changed you must update these domains in RedTrack and/or Shopify for correct tracking. Refer to this article for additional setup steps.▸ If you use a landing page before the shop, plus the landing page and Shopify shop domains are different, refer to this article for setup.

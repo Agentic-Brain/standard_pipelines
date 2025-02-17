@@ -1,0 +1,16 @@
+# July-September 2024
+
+
+➲&nbsp;Ads manager: added a new feature for Facebook that allows clients to change the daily budget at the campaign or ad group level. 
+
+
+
+➲ Added the new RSOC feature, which is a new method to attribute conversions without RedTrack clickid.
+
+
+
+➲ Updated the auto cost update integration for Google Ads. 
+
+
+
+➲ Campaign settings: added another redirect type "Double meta refresh with hidden referrer". 

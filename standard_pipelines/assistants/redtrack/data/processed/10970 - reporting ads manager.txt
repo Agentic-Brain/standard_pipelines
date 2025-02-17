@@ -1,0 +1,106 @@
+# Reporting: ads manager
+
+
+What's Ads Manager?
+
+
+
+The Ads Manager tab in RedTrack provides information about where your traffic originates based on RT_roles that you can set up for all your tracking links. The idea behind the report is to present all the data across all campaigns in a familiar layout for those who are used to working with Facebook / Google Analytics reports.
+
+
+
+RT_roles should be configured in the traffic channel template (in most templates the roles are already in place):
+
+
+
+Parameter Name/DescriptionRoleCampaign IDCidAdgroup IDGidAd IDAidPlacement IDPid
+
+
+
+
+
+
+
+Ads Manager is available for all traffic channels, but only several of them are eligible for automation at the moment:- Meta (Facebook): manage objects with ID (campaign, adset, ad) and manage daily budget.- TikTok: manage objects with ID (campaign, adset, ad).
+
+
+
+If Ads Manager or certain features within it are not visible/available in your account please contact sales@redtrack.io.
+
+
+
+How to work with Ads Manager
+
+
+
+1. On the main RedTrack menu go to Ads Manager → press cogwheel to manage (add/delete) the data slices (RT_toles):
+
+
+
+
+
+
+
+2. Within the chosen data slice you can:
+
+
+
+
+
+To analyse the report within a chosen data slice, filter it by Date → needed Offer/ Brand or Traffic channel or simply Search by ID object/ID → press Apply/Refresh: 
+
+
+
+
+
+
+
+
+
+You can decide yourself which columns you want to see in the report. To customize your columns click on this icon: 
+
+
+
+
+
+
+
+Refer to the Columns guide for details about this functionality.
+
+
+
+
+
+This feature is currently available only for Facebook and TikTok.
+
+
+
+If you update the budget on the FB side, in RedTrack the actual data (status) will be updated every 30 minutes.
+
+
+
+Without going to your Facebook/TikTok account you can enable or disable objects with ID (API integration works by Campaign ID, Adgroup and Ad ID) in RedTrack via Ads manager. To do that you need to enable/disable the ON/OFF toggle next to the needed object:
+
+
+
+
+
+
+
+
+
+This feature is currently available only for Facebook. 
+
+
+
+If you update the budget on the FB side, in RedTrack the actual data (daily budget) will be updated every 30 minutes.
+
+
+
+In the Daily budget column you can change the budget amount at the Campaign or Adgroup level depending on the settings. To do that click on the pencil icon → add the budget amount in the modal window → click Save to apply the changes:
+
+
+
+
+
+

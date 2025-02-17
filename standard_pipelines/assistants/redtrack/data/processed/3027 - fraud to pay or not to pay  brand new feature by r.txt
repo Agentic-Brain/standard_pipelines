@@ -1,0 +1,81 @@
+# Fraud: to pay or not to pay? - Brand new feature by RedTrack
+
+Pay for fraud? There are no such questions. You just do not want to do it. But you might be doing it every day without knowing. According to the most recent research, in 2018 about $51 million daily was lost to click fraud or $19 billion throughout the year.
+Do you want to know exactly how much YOU are spending on non-human traffic? Then keep on reading.
+
+Fraud Report by RedTrack
+After a few months of test work, we’re glad to announce the release of Fraud Report in RedTrack. Now, get a complete overview of the traffic you buy and whether the money you’ve spent is being served to bots and non-human traffic. 
+Fraud Report is not just a solution that evaluates your traffic and marks it “fraud”  or “non-fraud”. It inspects the quality of every ad click based on 13 metrics and provides the ratio of human clicks and fraud ones with the reason of fraud behavior. Whether it’s an action caused by cookie stuffing or a proxy-connected user, etc, RedTrack detects it and notify you of suspicious activity.
+
+How and why are you buying non-human traffic?
+Below is the screenshot of the RedTrack Fraud Report test by one of our early adopters.
+
+Have a look at the blacklist column. Honestly, the numbers are very alerting. Fraud clicks for some publishers comprise more than half of the overall volume. And yes — in this campaign, our user paid for quite a few bots. 
+
+Why waste money on low-quality traffic? 
+That was your starting point. You run your fraud report in RedTrack.io and you knew you paid for bots. That’s the fact you cannot ignore, right? So what’s next? Does it mean that you cannot trust a traffic source? We would say — still too early to draw such conclusions. 
+Instead, RedTrack provides our customers with the possibility of in-depth analysis with the option to create custom reports based on 20+ filters. Drill down the fraud report to subid / IPs etc to identify the culprit who wants to make easy money with you and your traffic source. Block these IPs on the traffic source’s side to protect yourself from non-human traffic or provide fraudulent publishers with the undeniable evidence and ask for charge-back. 
+If you cannot filter by IP on your traffic source side, you can exclude this traffic in RedTrack panel. Use bot blacklist functionality in RedTrack and exclude bot traffic from being added to your statistics. Besides, such traffic will not be counted towards events included in your RedTrack plan.
+
+
+I’m using Fraud Report by RedTrack for checking my push traffic now. Like everything on RedTrack, it’s simple, efficient and affordable. 
+While testing fraud check with my ad campaigns I came to several big and bad surprises: 
+
+
+ 	If I breakdown the report by push providers, I had a percentage of 20% to 40% of bad clicks.
+ 	The worst of all, apparently, is that if I breakdown by “source id” (from each specific traffic provider), results aren’t so different. I mean, there is a high percentage of bad traffic in analyzed sources. 
+
+Since now I have all this data in my RedTrack panel — I see where I have fraudulent clicks. With this information, I’m going to talk to all providers about that and see what they will say to me.
+
+Henrique,
+
+
+Enabling Fraud Monitoring at RedTrack
+A brand new feature — Fraud Report empowers you with a holistic overview of the traffic quality you buy in real-time all in one place in RedTrack panel. 
+Click quality monitoring is available for Professional accounts and above. It goes at the price of $0,10 CPM or just 10 cents for 1,000 click checks. In order to get Fraud Report activated for your account, contact our support team — support@redtrack.io. 
+In order to check your clicks, you need to activate the "Fraud report" on the campaign level. As soon as RedTrack checks the first click — you can access click quality report by picking up a campaign in the list and clicking the "Fraud Report" button.
+RedTrack provides a real-time reporting about every click on the ad and if it is subject to fraud — what’s the reason. The whole list of fraud reasons detected and reported in RedTrack are:
+
+
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-m0a0{font-family:Arial, Helvetica, sans-serif !important;;background-color:#ecf4ff;color:#000000;border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-ja26{font-family:Arial, Helvetica, sans-serif !important;;background-color:#efefef;color:#454545;border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-870y{font-family:Arial, Helvetica, sans-serif !important;;color:#454545;border-color:inherit;text-align:left;vertical-align:top}
+
+
+  
+    Category
+    Details
+  
+  
+    OK
+    Congratulations! RedTrack.io fraud monitoring system reports no issues.
+  
+  
+    attribution
+    clickspamming - App installs previously attributed to clicked ads were discovered to be user-generated app installs randomly claimed by ad networks by spamming the fingerprinting algorithms.cookie stuffing - the process by which a client is provided with cookies from other domains as if the user had visited those other domains. taking ad tags from a publisher’s site and putting them on to another site without the publisher knowledge.click injection (Android only) - Android uniquely vulnerable to click injection fraud, in which an ad network takes credit for organic app installs.
+  
+  
+    baddevice
+    user’s device (browser, phone, app, device-emulator or other system) has been modified to call html or make ad requests that is not under the control of a user and made without the user's consent.hijacked device where a user is present and additional HTML or ad calls are made independently of the content being requested by the user.ads and redirections are inserted into the user experience by the program running on the device.webcrawlers.
+  
+  
+    blacklist
+    IPs with excessive FraudScore in the near past.IPs that are associated with known Botnets and Adware.
+  
+  
+    datacenter
+    traffic originating from servers in data-centers or known cloud platform providers, rather than residential or corporate networks, where the ad is not rendered in a user's device (there is no real human user).
+  
+  
+    proxy
+    “proxied” connections - Socks proxy, VPN, Tor etc.traffic routed through an intermediary proxy device or network where the ad is rendered in a user's device where there is a real human user.users actively hiding their identity or making conversions from an unwanted location
+  
+
+
+Do not want to pay for fraudulent clicks? Let`s have a talk. Go to RedTrack.io, sign up for a free trial and ask for an in-depth demo of Fraud Report.
+
+
+&nbsp;

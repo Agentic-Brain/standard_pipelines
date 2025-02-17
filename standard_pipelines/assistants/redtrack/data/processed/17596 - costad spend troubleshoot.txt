@@ -1,0 +1,104 @@
+# Cost/Ad spend: troubleshoot
+
+
+Depending on what is the initial problem: no costs at all or the data is coming but it is incorrect, the troubleshoot checklist may differ.
+
+
+
+
+
+Here is what you need to check on your side:
+
+
+
+1. The traffic channel should be connected from the template. No error is shown for API integrations. If it is not connected or you are not sure, re-connect it.
+
+
+
+2. The correct account is connected. It should be the one you run your traffic from (the admin account if you are an invited user).
+
+
+
+3. Issue with dynamic parameters.
+
+
+
+
+For API integrations: the dynamic parameters such as campaign id, adset id and ad id are received by RedTrack (Logs → Clicks → check sub values; Report → campaign id, adset id or ad id grouping). If there are no parameters in click logs, we are not receiving them from your traffic channel. Either these are your test clicks, or you need to check the traffic channel campaign settings to have the parameters string in place.
+
+
+
+For non-API integrations: make sure your traffic channel supports the dynamic parameter for costs and it is added to the tracking link.
+
+
+
+
+4. For API-integrations: the correct roles are assigned to the dynamic parameters. For the cost update to work properly, the following roles should be assigned to the ids in your traffic channel settings:
+
+
+
+
+
+
+
+5. Check the cost model you use in the campaign settings (should be CPC) and if the Auto-update cost toggle (for API integrations) is on inside the campaign settings.
+
+
+
+If, after checking/doing all the suggested actions, you still experience the problem with the costs not coming, email to support@redtrack.io for assistance.
+
+
+
+
+
+Some of the points below can be applied to API integrations only, but the logic is similar for any cost inconsistency troubleshooting.
+
+
+
+What you can check to understand why the cost data is incomplete (higher or lower than the one you have on the traffic channel):
+
+
+
+1. The first thing you need to compare is the IDs. RedTrack takes the cost data per ID (campaign, ad set, or ad, depending on your subscription level), so if some ID is missing, its cost data will not be included in your RedTrack report.
+
+
+
+Check if all IDs are received in RedTrack (campaign report → group by (target ID used for the cost update) → check the list). If not, check this campaign, adset or ad in your traffic channel and ensure the dynamic parameters are added to pass the ID.
+
+
+
+2. Check if the correct roles are assigned to the traffic channel IDs in RedTrack. This can be checked in your traffic channel settings:
+
+
+
+
+
+
+
+Make sure to have only one parameter per these roles assigned. There cannot be 2 Aids per traffic channel.
+
+
+
+3. Check if the time zones match in your RedTrack account setting and the traffic channel.
+
+
+
+The timezone of the cost data received via the API can be checked in your cost logs. If the timezones of your traffic channel and RedTrack don't match or the timezones within your ad accounts in the traffic channel do not match (for example, when you run traffic from different ad accounts to one RedTrack campaign), cost data matching is impossible.
+
+
+
+
+
+
+
+4. Check the cost logs in RedTrack: if costs stopped coming for some time and caused this discrepancy, you might need to reconnect the traffic channel.
+
+
+
+5. Make sure the currency matches in both systems.
+
+
+
+6. Check if the click numbers match in both systems.
+
+

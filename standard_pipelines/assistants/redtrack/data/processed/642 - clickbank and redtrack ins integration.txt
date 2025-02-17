@@ -1,0 +1,296 @@
+# ClickBank and RedTrack (INS integration)
+
+
+
+
+
+
+
+
+
+
+ClickBank is an e-commerce platform and affiliate marketplace. It's the intermediary between the end customer, the product owner, and the affiliate marketer helping connect every party and providing the infrastructure for a smooth transaction online.
+
+
+
+This guide describes Clickbank ↔ RedTrack integration process using the INS (instant notification service) feature. You should use this method if you want to track such events as:Sale – the sale of a standard product or the initial sale of a recurring product.Rebill – a rebill for a recurring product.Refund – a refund for a standard or recurring product.Chargeback – a chargeback for a standard or recurring product.Upsell - a sales technique aimed at persuading customers to purchase a more expensive, upgraded, or premium version of the chosen item or other add-ons.CancelRebill – the canceling of a recurring product.UncancelRebill – the reversal of a recurring product cancellation by a ClickBank customer service representative.SubscriptionChange – a product change in an existing subscription.CartAbandonment – a customer abandoning a cart, if you have the Cart Abandonment feature enabled. (available in versions 6.0 and later).TestTransactions – test transactions for the types listed above, or a test of the instant notification feature that you initiate.Any other ClickBank events can be tracked via the ClickBank Postback/Pixel feature. For details follow our Clickbank ↔ RedTrack (S2S Postback) integration guide.
+
+
+
+Integration
+
+
+
+
+
+
+
+Make sure you've already added:
+
+
+
+1. Custom tracking domain.
+
+
+
+2. Traffic channel.
+
+
+
+
+
+Make sure you have the Instant Notification feature enabled in ClickBank.
+
+
+
+1. ClickBank account → Accounts → choose the target one → Vendor Settings →&nbsp;My Site:
+
+
+
+
+
+
+
+
+
+
+
+2. Advanced Tools&nbsp;→ Edit →&nbsp;Request Access:
+
+
+
+
+
+
+
+
+
+
+
+3. Fill out the form, thoroughly review the terms of use and acknowledge that you have read and agreed to them. Once you are done, click the&nbsp;Save Changes &amp; Request API Access&nbsp;button.
+
+
+
+Click here to check out more about the ClickBank Instant Notification URL.
+
+
+
+
+
+
+
+1. Add the Clickbank template to RedTrack.
+
+
+
+Offer sources  → New from template → find ClickBank → Add → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+2. If you use Facebook, set up the parameters and roles for them. In the added ClickBank template go to Additional parameters → set it up as follows:
+
+
+
+ParameterMacro / TokenRoleeventid{r}Event IDproduct {r}Content Nameemail{r}Emailzip{r}Zip Code
+
+
+
+
+
+
+
+3. Copy the postback URL and save it for later:
+
+
+
+
+
+
+
+The API key is inserted into the Postback URL of the Clickbank template automatically. If you experience any issues with the current API key, you can generate a new one. 
+
+
+
+4. Add the conversion events and map them in RedTrack to get conversions from ClickBank.
+
+
+
+
+
+In your RT account go to Tools → Conversion tracking → Conversion type → and add the events. Use this guide to help you with details. 
+
+
+
+The list of other ClickBank events available for mapping: Sale – the sale of a standard product or the initial sale of a recurring product.Rebill – a rebill for a recurring product.Refund – a refund for a standard or recurring product.Chargeback – a chargeback for a standard or recurring product.Upsell - a sales technique aimed at persuading customers to purchase a more expensive, upgraded, or premium version of the chosen item or other add-ons.CancelRebill – the canceling of a recurring product.UncancelRebill – the reversal of a recurring product cancellation by a ClickBank customer service representative.SubscriptionChange – a product change in an existing subscription.CartAbandonment – a customer abandoning a cart, if you have the Cart Abandonment feature enabled. (available in versions 6.0 and later).TestTransactions – test transactions for the types listed above, or a test of the instant notification feature that you initiate.Refer to this article for more details on ClickBank.
+
+
+
+
+
+In your RT account go to Tools → Integrations → Offer sources → ClickBank event matching → set up the mapping for the recently added events.
+
+
+
+
+
+
+
+The events from the dropdown are the events you have added to RedTrack. The event name in the small print is the one from Clickbank.
+
+
+
+Leave the Initiate Checkout field empty!To do that, choose "None" from the dropdown.   
+
+
+
+
+
+5. Copy/generate the ClickBank Secret Key and add it to RedTrack.
+
+
+
+
+In Clickbank go to My Site → Advanced Tools → Edit → add a passphrase that will be referred to as your Secret Key → Save changes:
+
+
+
+
+
+
+
+
+
+In RedTrack go to Tools → Integrations → Offer sources → add the script from Clickbank and save the changes:
+
+
+
+
+
+
+
+
+6. Add the RedTrack postback URL to Clickbank.
+
+
+
+Vendor Settings → My Site&nbsp;→&nbsp;Advanced Tool → Edit → paste the Postback URL from step 3 to the Instant Notification URL field → select version 7.0 → TEST IPN → save the changes once it is verified
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+If you added any Additional parameters within step 2 (eventid, product, etc.) REMOVE them from the Postback URL before adding them to the Instant Notification URL, otherwise, the link may not be verified. Your Postback URL should end with a secret key, not some additional parameter.
+
+
+
+7. Set up the tracking for the Initiate Checkout.
+
+
+
+7.1 Vendor settings → My site → Integrated sales reporting → Add tracking code:
+
+
+
+
+
+
+
+
+
+
+
+7.2 Tracking Code Creator → Tracking pixel → Add:
+
+
+
+
+
+
+
+7.3 Choose if you are a Seller&nbsp;or&nbsp;Affiliate → add the postback URL to the Tracking Pixel URL
+
+
+
+
+
+
+
+Values explained:☛ It should be in the following format: https://your.tracking.domain/postback?type=InitiateCheckout, where you should replace the “your.tracking.domain” part with the tracking domain you use for this particular Offer in RedTrack☛ Affiliate vs Seller:- Choose Affiliate if you are promoting ClickBank products from the specific sales account you are working in. If you select Affiliate, you will receive information relevant to the affiliate process.- Choose Seller if you are creating products for promotion in the account. If you select Seller, you will receive information relevant to the vendor process.
+
+
+
+7.4 Check the Order Form box to indicate that the pixel will fire on the order form:
+
+
+
+
+
+
+
+7.5 Add clickid to the AFFILATE_TRACKING_CODE&nbsp;field:
+
+
+
+
+
+
+
+8. Add the ClickBank offer (hoplink) to RedTrack.
+
+
+
+Assuming you already have the link from Clickbank, in your RT account go to Offers → Create new offer → choose ClickBank as your offer source and add the target URL → add tid={clickid} parameter to the end of the offer URL → Save:
+
+
+
+
+
+
+
+Click here to learn how to fill in the rest of the tabs in the Offer form.
+
+
+
+9. Add the traffic channel you work with.
+
+
+
+Check out if we have the extended integration with your traffic channel. 
+
+
+
+10. Launch a campaign to start receiving the data.
+
+
+
+To create your campaign refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

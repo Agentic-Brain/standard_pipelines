@@ -1,0 +1,40 @@
+# 22-Dec
+
+
+ 	Unique clicks are now recorded at the Campaign level.
+ 	Conversion path:
+
+
+→ added sub1-sub20 to the granularity;
+→ the report shows all conversions if the client uses the "Show conversions by conversion time" or "Show conversions by click time" features.
+
+
+ 	Acquisition report: the top 100 lines of data are now shown in the report.
+ 	Bugfix: domains, offers, and sources are now successfully loaded to the selectors with these entities when creating and saving a Campaign.
+ 	Publisher panel:
+
+→ CPL cost model was added as an option to the Campaign type drop-down when creating a Campaign for Publishers
+→ added possibility for the client to pause Publisher, which means that the traffic and revenue from the publisher will not be accepted, publisher is disabled from accessing the pub panel and cannot log in with their previous access credentials.
+
+
+ 	Instead of selecting among unlimited data from the drop-down, the fields have been made searchable in multiple RT elements: Traffic channel, Domain, Funnels in the Campaign form; such filters as Campaign, Traffic channel, Offer source / Brand, Offer / Website in the Logs by Clicks; Dashboard, S2S Postbacks logs, Publishers and many others.
+ 	Bugfix: totals are now displayed in the CPA (default), AOV (default), and Conversion CR columns in the reports.
+ 	From now on you can see the frequency of cost updates right in the Traffic channel forms integrated via API.
+ 	Added possibility to right-click and open in dedicated tabs essential elements (report, edit, rules etc.) within such RT entities as Campaigns, Traffic channels, Offer, Offer sources.
+ 	A new Date picker has been introduced.
+ 	Bugfix: logic of the autorefresh feature has been corrected.
+ 	Bugfix: values are now displayed after clearing the Tags filter selector on such pages as Offers, Campaigns, and Lander.
+ 	Cost parameter was added to the Campaign URL for Impressions.
+ 	The {domain} macro was added.
+ 	Improved the Campaign form validation: if when creating a new Campaign you forgot to add any essential elements, the system won't allow you to save this Campaign and the popping-up window will tell you what needs to be added/filled in.
+ 	Bugfix: pagination in the list of landings is now up and running.
+ 	Bugfix: date picker for mobile devices now works correctly.
+ 	Added possibility to send all the conversions which came to the Offer to the Facebook pixel provided there is at least one valid identifier (fbclid, fbp, email, phone, country etc.).
+ 	Bugfix: settings in the Dashboard are now saved when pages are refreshed or when you navigate between pages.
+ 	New Offer form for the Affiliates and Website form for the Advertisers were introduced to RT UI.
+ 	Added the possibility to edit universal tracking scripts. Except for cases when these scripts are added automatically via a new Offer/Website form, in which case only certain fields can be edited.
+ 	Rules:
+
+→ the following new parameters were added to the conditions: clicks, cost, CPC, ROAS, ROAS,%, Total CPA, CPA (default),CPA conversion type 1-20;
+→ new action “Daily Budget” for Facebook Traffic channel;
+→ new action "Pause and Restart" for Campaign / adset / ad (Facebook) = "Stop and go".

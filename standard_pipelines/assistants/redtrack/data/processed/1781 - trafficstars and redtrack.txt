@@ -1,0 +1,166 @@
+# TrafficStars and RedTrack
+
+
+
+
+
+
+TrafficStars&nbsp;is a platform for buying and selling worldwide premium traffic in just a few clicks. It is easy to use for both beginners and expert media buyers. TrafficStars is a powerful, self-serve Ad Network and Ad Exchange.
+
+
+
+RedTrack has an API integration with TrafficStars, which gives you the following benefits:
+
+
+
+
+ Pause: campaign,&nbsp;creative
+
+
+
+ Create automated rules
+
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types&nbsp;you’re planning to work with
+
+
+
+
+
+
+1. Add TrafficStars template to RedTrack.
+
+
+
+Traffic channels →&nbsp;New from template → find&nbsp;TrafficStars&nbsp;template and press&nbsp;Add → add the&nbsp;{{cpc}}&nbsp;parameter to the&nbsp;Click Cost ID&nbsp;field → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+2. Integrate TrafficStars with Redtrack.
+
+
+
+2.1 Go to your TrafficStars account to copy Client ID and Client secret:
+
+
+
+
+
+
+
+2.2 Get back to RedTrack → go to the added TrafficStars traffic&nbsp;channel settings → scroll down to the section&nbsp;TrafficStars API integration → fill in the necessary fields (values copied in step 2.1) → Save changes to the template:
+
+
+
+
+
+
+
+
+
+
+
+Active button means API integration is on:
+
+
+
+3. Create Campaign in RedTrack with the TrafficStars traffic channel.
+
+
+
+Campaigns → Create new campaign → use&nbsp;this guide&nbsp;for Affiliates /&nbsp;this guide&nbsp;for Advertisers to help you add the campaign with TrafficStars as your traffic channel → once your campaign is saved, copy the automatically generated&nbsp;click URL&nbsp;(your tracking link):
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+4. Set up the tracking in TrafficStars.
+
+
+
+4.1 On the TrafficStars menu press&nbsp;Create a campaign:
+
+
+
+
+
+
+
+4.2 Fill in all the mandatory info in the fields:
+
+
+
+
+
+
+
+Press here for a detailed video on how to create a Campaign in TrafficSources.
+
+
+
+4.3 Copy the Click URL from your RT Campaign settings (step 3.2) and paste it to the&nbsp;Creatives&nbsp;section of the Campaign settings in your TrafficStars account:
+
+
+
+
+
+
+
+Press Creatives to learn more.
+
+
+
+5. Set up the Postback URL in RedTrack
+
+
+
+In Campaign settings (created in step 3) scroll down to S2S Postback for TrafficStars → press Add → replace&nbsp;lead_code&nbsp;and key values with the correct ones → Save changes to your campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ Ask your Account Manager to help you with replacing lead_code and replace values with the correct ones.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.
+
+
+
+6. Set up the automated rules. Refer to&nbsp;this article&nbsp;for guidance.
+
+

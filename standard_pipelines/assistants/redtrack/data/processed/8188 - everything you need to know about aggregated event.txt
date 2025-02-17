@@ -1,0 +1,74 @@
+# Everything You Need to Know about Aggregated Events Measurement
+
+When Apple released the iOS 14 update, Facebook had to play the game under different conditions. FB released a bunch of updates (let’s say that it didn’t make the life of FB marketers easier). One of them was a mysterious Aggregated Events Measurement (AEM) that works as an alias of Facebook Conversion API.
+
+We can agree that AEM has a terribly scary name that doesn’t give us any clue what to do with it and how to use it for the benefit of your Facebook Ads campaigns. Therefore, as one of the pioneers of FB CAPI integration, we will take the bullet for you and break down this complicated term. 
+Follow along! 
+How did Aggregated Events Measurement appear
+Web safety has been a concern for both users (and hopefully advertisers) for a long time now. One by one, big tech companies are stepping on a cookieless path. Though Apple has been one of the fierce warriors in regards to the security on the web (or they want to appear that way). Safari was one of the first browsers to block third-party cookies. But 2021 was a year when the company went wild releasing the ATT prompt meaning that users starting iOS 14 could opt out of tracking. Well, we know you are a pro advertiser, and you know what it means for the industry.
+
+Apple’s App Tracking Transparency update impacted all apps on the App Store, Facebook included. Facebook Ads are strongly dependent on the user data tracked, so the company had to implement measures to maintain the performance that advertisers would enjoy. Of course, Facebook marketers still were and are pissed off by the changes — let’s face that it’s not as easy as before.
+
+
+One of the main ways to combat changes was the introduction of Aggregated Events Measurement (AEM). It works alongside Facebook Conversion API to help us, advertisers, harvest goodness from our Facebook Ads. 
+
+If you want to learn more about the work of Facebook CAPI, check out our YouTube video!
+
+
+What is Aggregated Events Measurement
+Aggregated Events Measurement (AEM) is a special protocol by Facebook that allows measuring web events after the iOS14 Update influence. That is a kind of a safe way for Facebook to track and optimize your ads’ performance.
+Aggregated Events Measurement replaces Facebook Pixel? 
+We receive a lot of questions from our audience about the death of Facebook Pixel. Don’t worry, Facebook Pixel is live and healthy. Just a little bit deprived 😅 Facebook Pixel still serves as a source of data for events and is a big part of the AEM ecosystem. FB Pixel feeds data to AEM that is further used for optimization.
+
+You can use one or multiple pixels for your campaigns, depending on your needs for  Facebook advertising. 
+
+
+Still, AEM comes with several discomforts:
+
+ 	You can upload now only 8 events for configuration (aka optimization)
+ 	You have to choose a priority for those 8 events you uploaded 🥲
+ 	8 events work for all the pixels associated with this account/domain
+ 	You can not upload just any event to AEM (the secret to be revealed later in the article)
+
+
+The secret to using Aggregated Events Measurement
+One of the troubles we encountered with our team at RedTrack was inability to add any event to Aggregated Events Measurement. Apparently (but don’t tell anyone we told you), there’s a hidden metric to evaluate if Facebook thinks the event “deserves” to be a part of your AEM. 
+
+Facebook wants to see some friction around the event that you want to optimize for, so it requires some clicks &amp; conversions to be generated first. 
+From our experience, the required number of conversions needed to “warm-up” the event is around 20-30 during  48 hours. It is not a set number, every event acts differently like wild species.  
+This could be a problem for those who want to optimize ads as fast as possible after creating the event for the campaign. However, there is a solution for that which is called "warm-up" of the event. You can do it by uploading "fake" conversions and sending them to Facebook to notice the friction. You can't really do it on a Facebook side, but toold like RedTrack help you do that. Let's discover how to generate fake conversions in the next chapter. 
+How to generate fake conversions to upload events to Aggregated Events Measurement
+Fake conversions can help you fast-forward the optimization for particular events in your FB Business Manage. RedTrack is a tool that can help you do that in few simple steps. 
+All you have to do is use existent click IDs and upload them as conversions through RedTrack's platform. Then our tool will automatically send those conversions to Facebook. For a detailed step-by-step on your account warm-up, please follow the guide. 
+We don’t suggest generating fake conversions simultaneously in bulk as Facebook may not accept them. Upload few conversion every few hours. 
+To-do list for success with Aggregated Events Measurement 
+There are a lot of little details you have to take into account if you want your FB campaigns to be successful. We put it all in a nice checklist for you not to mess up the whole story.
+ 1) Verify your domain
+At RedTrack, we talk about it all the time. This is by far the most important step to run FB Ads in 2021. Facebook has to identify the source of conversions as trustworthy and compliant with all the updates. Operation of CAPI and Aggregated Events Measurement is not possible without domain verification. 
+If you are an affiliate and you don’t have access to the advertiser’s offer page (where conversion happens) , keep in mind that we have a solution for you. Be sure to check out our article to find out how domain verification works or simply book a demo to gain access to the feature. 
+2) Integrate Facebook Conversion API
+Aggregated Events Measurement won’t work unless you implement Facebook CAPI, so be sure to learn how to do it first. 
+3) Generate fake conversions to upload events to Aggregated Events Measurement
+If you don’t wanna wait until real conversions start generating, consider doing a fake conversion method. It’s harmless unless you remember to do few conversions per day, don’t just upload them all at once. It's an absolutely optional step, but a nice one if you are in a rush. 
+
+Alternatively, you may just run a test campaign and wait for conversions to be generated naturally. 
+4) Choose 8 events for Aggregated Events Measurement
+If you had complex funnels before, you will have to rearrange things and choose the most important events for your campaigns. Remember that 8 events work for all the pixels that you use across this domain. 
+5) Choose priority for events in Aggregated Events Measurement 
+Define which events deserve more priority than others. Remember that first event gets the biggest priority and the last gets the least priority. 
+6) Optimize your campaign for the event of your choice
+After the event has successfully made it to AEM, it's time to go back to your FB Ads Manager and optimize the campaign for the needed events. Harvest the fruits!
+
+&nbsp;
+
+By the way, if you still didn’t figure out how to integrate CAPI, start conversion tracking &amp; optimize for the events of your choice, check out the guide our team prepared!
+
+
+
+ 
+Conclusion
+We know that Facebook confused us all, marketers, with CAPI and AEM. We hope this article made it clearer that AEM is not your enemy, but rather the only friend at this dark FB Ads times. Remember, that maintenance of the FB performance is not as easy now, but still possible with all the tricks and tips that we try to educate you with on a regular basis.
+
+Continue your self-education with our Simplified MarTech series on Youtube!
+
+&nbsp;

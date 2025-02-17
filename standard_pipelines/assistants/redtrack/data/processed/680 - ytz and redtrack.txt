@@ -1,0 +1,142 @@
+# YTZ and RedTrack
+
+
+
+
+
+
+YTZ is a Canadian performance agency that specializes in monetizing mobile and web traffic. They partner with affiliates and networks from all over the world to monetize international traffic using our highly optimized rotator links and exclusive campaigns.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events you want to track
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add YTZ as an Offer source in RedTrack.
+
+
+
+RedTrack → Offer sources → New from template → add YTZ template → copy the Postback URL → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+To add additional macros in the template, go to the section Additional parameters.Here's the list of YTZ-supported​ macros: {SUB1} {SUB2} {SUB3} {SUB4} {SUB5} {REVENUE}.​
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set the postback URL in YTZ:
+
+
+
+2.1 In your YTZ account go to Postbacks → Add Postback:
+
+
+
+
+
+
+
+2.2 Paste the RT Postback URL (copied in step 1) and click Add Postback:
+
+
+
+
+
+
+
+3. Get the YTZ offer URL.
+
+
+
+3.1 In your YTZ account go to Campaigns → search for offers you wish to run and click on View Details:
+
+
+
+
+
+
+
+3.2 Scroll down and approve Terms and Conditions. Offer link (called Tracking link in YTZ) will appear automatically:
+
+
+
+
+
+
+
+3.3 Add our {clickid} macro in the S1 field → copy the appeared URL from the Get Tracking Link section: 
+
+
+
+
+
+
+
+4. Add YTZ offer to RedTrack.
+
+
+
+In your RedTrack account go to Offers → Create new offer → fill in the mandatory fields → add YTZ offer link in the URL field → add the tracking parameters “s1={clickid}” to the end of the offer URL → Save:
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create a campaign in RedTrack with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To help you add the campaign refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

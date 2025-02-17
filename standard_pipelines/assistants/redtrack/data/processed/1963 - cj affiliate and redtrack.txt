@@ -1,0 +1,112 @@
+# CJ Affiliate and RedTrack
+
+
+
+
+
+
+CJ Affiliate is one of the world’s largest and oldest affiliate networks which specializes in pay-for-performance programs and is part of a Fortune 500 company called Alliance Data Systems.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events you want to track
+
+
+
+
+Conversions data from CJ Affiliate is taken once a day (not realtime) and is then added to your account according to the click ids we have sent to CJ in the Offer URL.
+
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add CJ Affiliate template to RedTrack.
+
+
+
+Offer sources → New from template → add CJ Affiliate template → add your offer URL to Offer URL template → Save: 
+
+
+
+
+
+
+
+
+
+
+
+2. Add offer template for CJ Affiliate to RedTrack. 
+
+
+
+Offers →  Create new offer → give it name → choose CJ Affiliate from the Offer source drop-down → make sure the offer URL with the sid={clickid} parameter is in place → Save the template:
+
+
+
+
+
+
+
+Here is more info about Offers in RedTrack.
+
+
+
+3. Integrate CJ Affiliate with RedTrack.
+
+
+
+Since CJ Affiliate does not support S2S postback tracking, the only option is to integrate it through API. RedTrack is already integrated with CJ, so the only thing you will need to do is add your Account ID (aka Client ID) and Token (aka Secret Key) to RedTrack.
+
+
+
+3.1 Get your Account ID and Token from your CJ Affiliate account ( consult your Account Manager if you're not sure).
+
+
+
+3.2 Get back to your RedTrack account → Tools → Integrations → Offer sources → scroll down to the section CJ Affiliate → insert the copied Account ID and Token&nbsp;to the corresponding fields → Save: 
+
+
+
+
+
+
+
+4. Create a campaign in RT.
+
+
+
+Refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide&nbsp;for Affiliates.
+
+
+

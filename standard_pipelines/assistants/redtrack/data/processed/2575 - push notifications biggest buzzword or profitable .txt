@@ -1,0 +1,51 @@
+# Push notifications: biggest buzzword or profitable trend?
+
+Just like native ads a couple of years ago, push notifications are rapidly growing in popularity among affiliate marketers. They now compete for a position of the “top traffic source of 2019”. This fact is proved by the adoption of this ad format by many ad networks.
+Check our e-book “Trending Advertising Formats 2018-2019” and know why PropellerAds, MGID, ExoClick, Adcash, and other networks name push notifications as one of the top-promising traffic types for 2019. 
+In this blog post, we’re going to brief: 
+— what is push notification;
+— what are the reasons for their popularity;
+— how to make money on push notifications.
+We also got in touch with the guys from MegaPu.sh — one of the leading Ad Networks of push notification traffic and asked them to share their expertise with our readers. Ready to go deep into the push notification world? Let’s start!
+
+What is a push notification? 
+Push notifications appear as an alert message with an image (or icon) in the user’s browser or mobile device. The click/tap on the notification opens the landing page/app window with an advertising offer. 
+
+On the web (aka, desktop), push notification is made up of a title, description, image, and a shortened URL. 
+On mobile (wearables, as well), push notifications look the same as a regular system notification and include text and small image/icon, as well. 
+To start receiving push notification ads, the user first needs to opt-in to receive them. The fact that they can opt-out at any time ensures a reach of a highly engaged audience. 
+
+What makes push notifications such a popular ad format?
+With the growing recognition and adoption of push notifications, the benefits of this ad format become more and more evident. 
+High ad visibility. Push notifications keep affiliates in direct contact with the users, as they appear right on their devices or browsers. This, in turn, results in maximum view-ability and very high CTR. 
+High-quality traffic. With push notifications, you’re sending your promotion to a user who has already agreed to receive the messages — hence, they’re already interested in the product/service you advertise.
+Bot-free traffic. Since users have to agree to start receiving the notifications, this scheme excludes bot traffic, meaning that ads are only seen by real users. It might be one of the most bot-free ad formats so far now. 
+A good option for new affiliates. Push notification traffic is quite cheap, though the volumes are pretty solid. Besides, these traffic sources make it really easy to set up an affiliate campaign. 
+
+How to make money on push notifications?
+Once we’ve highlighted the key advantages of this ad format, let’s proceed with some practical knowledge. Ani, Marketing Manager from Megapu.sh helped us to highlight the most important tips when working with push ads. They are the following: 
+Mobile orientation.
+Push ads are the advertising messages that work both on mobile devices and desktops. 
+Ani: As a common rule, people spend more time on mobile devices rather than desktops. Hence, push notifications sent to the mobile will receive a higher number of clicks. 
+Vertical and GEO preferences.
+Push ads perform well on a huge variety of verticals. A piece of advice from the RedTrack Team is to always check top verticals and geos and be in touch with the support team of the network you are planning to buy traffic from.
+Ani: The verticals that perform the best in Megapu.sh now are dating, sweeps, products, casinos, crypto-currency. 
+
+From MegaPu.sh interface
+Ani: When creating a campaign on MegaPush, the system usually shows what the average CPC is. Its value depends on GEO and the highest bid the system has at the time of creating the campaign. 
+A/B testing.  
+Push notifications are easy to a/b test. Besides, the creative creation process is not difficult and it’s better to create more push notifications and test them by setting a bid right and limiting the daily budget/number of conversions. Find more about setting up limits and caps on visits with RedTrack here. 
+A well-timed message can deliver far more value. You can leverage the granular campaign settings of the Megapu.sh platform, and set the start and stop time of your push notification running. 
+Ani: Some users often ask if it’s better to point users directly to the affiliate offer, or to a lander first. The best way to find out if the offer works with or without Landing page is to test it. As it very much depends on GEO and the type of offer you’re promoting. 
+Creatives rotation. 
+Once you start running push notification campaign you have the best results, they go down slowly with time. The solution might be to refresh your creatives frequently.
+Tip 1: push notifications with emojis result in CTR 70% increase. 
+Tip 2: time-sensitive offers (e.g.: Hurry up! The sale ends in 2 hours) result in the highest open rates. 
+Budget. 
+The budget for push notifications really depends on what you’re going to run. For example, dating and sweepstakes offers have a quicker conversion funnel in comparison with Nutra, thus you would see the results much quicker with them, aka with less budget required. 
+And what about start budget? Are push notifications newbie-friendly? 
+Ani: The start budget can vary from $100 to 1,000. It depends on such factors, as vertical, offer, GEO you target, because the bigger the country — the bigger the database of users is, hence the created campaign will go to a bigger audience. The best way to handle it will be to set a budget limit of $1—5, so you'll not run out of money fast. 
+
+To wrap everything up:
+If push notification is a buzzword or a trend? We would definitely say — the latter one. Push notifications offer a number of advantages over more “traditional” ad formats. They beat the “ad blindness”, offer pretty cheap traffic with big volumes and high CTR.
+The best way to form your opinion on this ad format is to test it out. Don’t be shy to share your "Push" experience with others in our Telegram Community! 

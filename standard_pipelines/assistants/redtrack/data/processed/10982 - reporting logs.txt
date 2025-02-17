@@ -1,0 +1,136 @@
+# Reporting: logs
+
+
+What are Logs in RedTrack?
+
+
+
+Logs in RedTrack include all your data about the clicks, conversions, postbacks, and cost updates. Logs contain all the information received from your source of traffic,&nbsp; affiliate network, raw click data provided by RedTrack (more than 30 data slices).
+
+
+
+Section Logs is displayed on the main RedTrack menu and consists of 5 main log slices:
+
+
+
+
+Clicks
+
+
+
+Conversions
+
+
+
+S2S Postbacks
+
+
+
+API Postbacks
+
+
+
+Cost updates
+
+
+
+
+
+
+
+
+Useful to know about Logs:- You can export you log data, but only the filtered data can be exported. The data can be filtered based on date, click id, campaign, traffic source, offer source, and offer:- You can export all the data in a separate file to provide it where needed (for example in case of a click discrepancy you can grab this file and give it to your account manager for checking).- Columns include both RedTrack data and the data we receive from the traffic channel.- Columns are customizable. Here is how.
+
+
+
+Working with log slices
+
+
+
+
+
+The Clicks section is basically a list of all your campaigns and offer clicks. There are 2 types of clicks:
+
+
+
+
+the Click itself, when a visitor clicks on your campaign tracking link or arrives on your landing page if you use the direct traffic script.
+
+
+
+LP click, when the visitor clicks on the CTA button on your landing page.
+
+
+
+
+
+
+
+
+
+
+The Conversions section is the list of conversions received from your partner: direct advertiser, affiliate network, your own "Thank you" page.
+
+
+
+Log by Conversions has the following advantages:
+
+
+
+1. In addition to the standard columns, it contains info about Pre-landings, Landings, Conversion Statuses, ISP, Postback IPs, Payout, etc.:
+
+
+
+
+
+
+
+2. Here you can update and upload your conversion data. Here is how.
+
+
+
+
+
+The S2S Postback section in Logs contains the information about conversions we have sent back to your source of traffic. It contains only the basic information about the conversion + the postback URL we call on our side (it's the URL you have set in your campaign postback settings). 
+
+
+
+
+
+
+
+Postback logs can be exported and used the way you need. For example, provide it to your traffic source account manager in case of any questions with the postbacks (not received, not all of them are received, etc.).
+
+
+
+
+
+The API Postbacks section has the info on all the postbacks sent to Google, Facebook, Bing or any other sources via custom conversion API integrations. This section has the following columns:
+
+
+
+
+
+
+
+Logs by API Postbacks and Cost updates are kept in RedTrack in the course of 7 days only.
+
+
+
+
+
+The Cost updates section includes the log of automatic API-based cost updates done by RedTrack.io for your campaigns. 
+
+
+
+
+
+
+
+When the auto update cost option is on, costs are updated with the frequency from 15 up to 60 minutes on the Campaign, Adset, and Ad levels. Update of frequency and level depends on your subscription plan. The auto update cost feature is available for API integrated traffic channels only. 
+
+
+
+Logs by API Postbacks and Cost updates are kept in RedTrack within 7 days only.
+
+

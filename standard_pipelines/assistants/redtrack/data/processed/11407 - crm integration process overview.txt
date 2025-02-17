@@ -1,0 +1,116 @@
+# CRM integration: process overview
+
+
+This scheme shows how the RedTrack CRM integration solution works:
+
+
+
+
+
+
+
+Scheme explained:
+
+
+
+
+
+Example of tracking parameters added to click (for FB):
+
+
+
+cmpid=61dacf58ed62ea0001836b28&amp;sub1={{ad.id}}&amp;sub2={{adset.id}}&amp;sub3={{campaign.id}}&amp;ad_name={{ad.name}}&amp;adset_name={{adset.name}}&amp;sub6={{campaign.name}}&amp;placement={{placement}}&amp;utm_placement={{site_source_name}}&amp;utm_source=Facebook
+
+
+
+
+
+
+
+
+
+
+
+Example of the RT script that captures clickid:
+
+
+
+&lt;script src=”https://att.trk.agency/uniclick.js?defaultcampaignid=5e6c7d17c6565a0002738aa9&amp;attribution=lastpaid&amp;regviewonce=false&amp;cookiedomain=redtrack.io&amp;cookieduration=30″&gt;&lt;/script&gt;
+
+
+
+
+
+
+
+
+
+
+
+✔ The hidden field default value should be set to {clickid}✔ Script that pushes value to the hidden field should work with a little delay (in GTM you can set Trigger as “All clicks”). Meaning this script should be triggered only after the universal script has already been successfully executed, otherwise, there will be no clickid value in the cookie to be pushed to the hidden field.
+
+
+
+Example of the script:
+
+
+
+&lt;script&gt;
+function setFormClickIdValue(clickid) {
+console.log(clickid)
+document.querySelectorAll('input').forEach(function(el) {
+console.log(el.value)
+if (el.value.indexOf("{clickid}")&gt;-1) {
+el.value = el.value.replace(/{clickid}/, clickid)
+}
+});
+}
+function getCookie(name) {
+var value = "; " + document.cookie;
+var parts = value.split("; " + name + "=");
+if (parts.length == 2) return parts.pop().split(";").shift();
+}
+if (getCookie('rtkclickid-store') !== null &amp;&amp; getCookie('rtkclickid-store') !== undefined &amp;&amp; getCookie('rtkclickid-store') !== 'undefined') {
+setTimeout(function(){
+setFormClickIdValue(getCookie('rtkclickid-store'))
+}, 3000)
+}
+&lt;/script&gt;
+
+
+
+
+
+
+
+
+
+
+
+Example of webhook from CRM to RedTrack.io: https://att.trk.agency/postback?clickid={replace_me}&amp;type=Lead
+
+
+
+In “type=Lead” Type defines the conversion event type. RedTrack.io supports 20 custom conversion events.
+
+
+
+This guide will tell you everything you need to know about conversion types/events in RedTrack.
+
+
+
+Example of the link with some of the parameters:https://custom.tracking.domain/postback?clickid={replace}&amp;sum={replace}&amp;type={replace}&amp;eventid={replace}&amp;email={replace}&amp;phone={replace}&amp;lname={replace}&amp;fname={replace}&amp;zip={replace}
+
+
+
+In this link pay attention to the list of WebHooks / Postback meta-data parameters which mean the following:✎ clickid={replace} – clickid that you have captured.✎ sum={replace} – purchase amount (if available). If not applicable – do not send.✎ type={replace} – conversion type – ex InitiateCheckout or Purchase. Spaces and Capital letters are important as we interpret events exactly as they are.✎ currency={replace} – add if the currency is different from the one setup on the Brand level.✎ coupon={replace} – for attribution and data, provide coupon value used with purchase.✎ eventid={replace} – with event id, can also be our clickid if logic is maintained. The role should be set up in RedTrack.io UI on the Brand level.✎ email={replace} – if hashed – use SHA256 as advised by Facebook.The role should be set up in RedTrack.io UI on the Brand/Offer source level: ✎ phone={replace} – if hashed – use SHA256 as advised by Facebook . The role should be set up in RedTrack.io UI on the Brand/Offer source level.✎ lname={replace} – if hashed – use SHA256 as advised by Facebook .The role should be set up in RedTrack.io UI on the Brand/Offer source level.✎ fname={replace} – if hashed – use SHA256 as advised by Facebook The role should be set up in RedTrack.io UI on the Brand/Offer source level.✎ zip={replace} – if hashed – use SHA256 as advised by Facebook. The role should be set up in RedTrack.io UI on the Brand/Offer source level.Check out this article explaining the significance of Roles in RT.
+
+
+
+
+
+
+
+
+
+The processed clicks data is reflected in the multi-touch/cross-campaign attribution dashboard (Conversion Path report)

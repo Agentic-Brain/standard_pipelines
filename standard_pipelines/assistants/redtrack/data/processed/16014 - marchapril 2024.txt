@@ -1,0 +1,38 @@
+# March-April 2024
+
+
+➲ Introduced the solution for HighLevel users to add RT Webhook URL and clickid via the&nbsp;Workflows&nbsp;tab.
+
+
+
+➲ Snapchat CAPI update: introduced the possibility to configure CAPI on the Offer/Website level.
+
+
+
+➲ Implemented IPv6 support beside dual stack integrations. A new format of IP addresses can be found in the click logs.
+
+
+
+➲ Updates in RedTrack Reports:
+
+
+
+
+"Coupon" grouping in the Offer report.
+
+
+
+"Entry page without UTM" grouping in the Traffic channel report.
+
+
+
+
+➲ Updated UI: Campaigns, Traffic channels, Offer sources, Offers, Brands, Websites. Major action buttons were moved to the top right corner.
+
+
+
+➲ Introduced the possibility to connect the Google MCC Account to send conversions to it instead of the Google Ads Account (if needed).
+
+
+
+➲ Added the possibility to export Conversion path report data.

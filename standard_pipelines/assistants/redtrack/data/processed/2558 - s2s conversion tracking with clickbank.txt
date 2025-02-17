@@ -1,0 +1,62 @@
+# S2S Conversion Tracking with ClickBank
+
+ClickBank is a well-known and one of the oldest affiliate networks on the internet that started long ago in 1998, somewhere in the startup-garage of San Diego. ClickBank offers a bunch of verticals for affiliates to run as well as provides an ability to place your offers as an advertiser. Moreover, ClickBank provides a marketplace for online-purchases. But did you know that you can do S2S conversion tracking with ClickBank? 
+
+Today there are millions of entrepreneurs that work with ClickBank in 190 countries around the world. In this article we are going to dive deep into conversion tracking on ClickBank. It’s going to be beneficial for both advertisers and affiliates running ClickBank offers. 
+What is S2S Tracking for ClickBank? 
+If you ever tried running offers from an affiliate marketplace (like ClickBank) or you placed your own offers there, you faced a challenge of conversion tracking. Both affiliates and advertisers need a tool which will be performing ad tracking of the campaigns. 
+
+Affiliates are in need for an ad tracker to do the following: 
+
+ 	Track performance in order to make better advertising decisions
+ 	Automate campaigns to be able to let go of the controls 
+ 	Report conversion to advertisers in order to receive payouts
+
+Advertisers who use ad tracking technologies gain ability to: 
+
+ 	Control the performance of affiliate marketers who advertise their offers 
+ 	Compare the conversion data with what affiliates report to advertisers
+ 	Manage relationships with all affiliate marketers that are running their offers 
+
+The “outdated way” for conversion tracking was the usage of pixel. They are easy to set up, however they have a bunch of disadvantages, like: 
+
+ 	Provide inaccurate conversion data 
+ 	Easily getting blocked by Ad Blockers 
+
+The best way to perform conversion tracking for ClickBank offers is via using S2S Postback URL tracking. It is a server side tracking in comparison to browser-side tracking from Pixel. 
+
+This solution is the most accurate when it comes to conversion data tracking. As well it is fully compliant with all the Privacy Updates by Google, Facebook, Apple, etc., and their cookieless updates. 
+What are the benefits of using S2S Postback with ClickBank?
+If you choose to run ClickBank offers, these are the benefits that you get when choosing S2S technology as your conversion tracking option. 
+
+– Accurate measurement of conversions for offers from ClickBank
+
+– There are less opportunities for fraud, as tracking happens on a server side
+
+– You don't lose a conversion data for users who gave Ad Blockers installed
+
+– You receive in-depth data not only about the conversion event, but about the whole funnel
+
+See a detailed comparison of S2S Postback Tracking and Tracking Pixel in one of our recent publications.
+
+However, ClickBank does not have a native S2S Conversion Tracking solution. Therefore you need a dedicated solution which will be able to provide the the technology described above. 
+RedTrack’s solution for ClickBank conversion tracking  
+Trying to find the best solution for affiliate marketers chasing higher payouts on ClickBank and advertisers who want to receive accurate conversion data, we started developing S2S integration for ClickBank accounts ourselves. 
+
+RedTrack’s team developed a solution that can help you set up S2S tracking with no-tech skills and get to a new level of advertising ClickBank offers. 
+
+Starting conversion tracking with RedTrack is super easy. All you need to do is to connect your ClickBank account inside the RedTrack interface. After this step, you will find a chance to embed S2S URLs for your tracking. 
+
+Read our step-by-step instructions on how to integrate ClickBank and RedTrack in our Knowledge Base.
+Why do you need an ad tracker when working with ClickBank? 
+If we move away from the ability to use S2S conversion tracking for ClickBank offers, you get many other benefits when choosing RedTrack as your tracking solution: 
+
+ 	Consolidated multi-touch reporting for all your advertising channels 
+ 	Automation &amp; Smart Rules with 20+ traffic sources 
+ 	Multi-access if you are working within a team 
+ 	Native Facebook CAPI Integration if you run Facebook Ads 
+ 	Conversion attribution for in-depth user funnel analysis 
+
+
+
+&nbsp;

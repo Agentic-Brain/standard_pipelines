@@ -1,0 +1,101 @@
+# How to track customer journey: Conversion Path Report by RedTrack
+
+One of the biggest troubles we see in marketing is the inability to understand which tactics or channels actually drive conversions.
+Marketing attribution is an attempt to solve this complex and multilayer issue of trying to understand which investments turn to be revenue streams.
+Here at RedTrack, we tried to "grab the tail" of this problem and create a better attribution report that will help map the whole customer journey from the first to the last touchpoint with your brand.
+Now let's discover how this solution works and what kind of benefits you can get for your business.
+What is marketing attribution? 
+Marketing attribution is more like a science. So many approaches, so many solutions, but with a single goal. To help you as a business or as a marketer to find the winning combinations in marketing that drive measurable revenue results.
+
+The more channels you use for marketing purposes, the bigger uncertainty you create when trying to understand what actually works and how your business revenue is made. Every paid channel (like Facebook, Google, TikTok) will tend to report conversions as their "achievement". Moreover, there are plenty of channels that are really hard to measure (like random links, email mentions, promo codes, and influencer marketing).
+What if there was a giant mastermind that could map all of the interactions that users had with a brand before the conversion and show it in a timeline? That's where marketing attribution takes the glory.
+
+Marketing attribution is a process of identifying the touchpoints (aka channels or campaigns) which contribute to the revenue results while assigning different values to the touchpoints in the funnel. 
+💡Additional reading on marketing attribution 
+
+How to track customer journey in marketing?
+One of the most complicated tasks for marketers is to actually build a customer journey report. It required a multitude of data sets that have to be gathered in one place to present sort of a map.
+
+But with ,the right marketing analytics solutions this task can be simplified.
+One of the latest features RedTrack released is a Conversion Path Report. 
+
+
+
+This report is very similar to Google Analytics attribution reporting — it shows the full journey of the user before the conversion. However, RedTrack's conversion path is based on raw and unsampled data which gives you better accuracy and precision when it comes to your funnel tracking.
+Why Google Analytics is not the best solution to track your customer journey
+Google Analytics is a go-to solution for marketers when it comes to introduction to marketing analytics. It's free, not so hard to set up and use. A true staple of your "marketing shelf". But what are Google Analytics limitations that prevent you from having the most results from your analytics software?
+
+
+
+ 	
+Google Analytics uses sampled data
+
+
+Unlike RedTrack using raw first-party data, Google Analytics uses sampled data. Raw data is the type of the data that hasn't been processed or altered — it is data as it is. When sampled data is actually a model of the raw information which gives you an understanding about the average value — not the complete marketing picture.
+
+
+
+If you have a larger scale marketing operation this can cause quite big discrepancies which might affect your decisions in a negative way.
+
+ 	
+GA is not an unbiased data source
+
+
+Since Google Analytics is a part of Google corporation it will work as a self-attribution network. Meaning it can attribute sales to Google platforms even when it could be that it's not Google who is responsible for that. It's better to use unbiased marketing analytics solutions like RedTrack with native API integration with all major channels to collect data from them independently.
+
+ 	
+Google Analytics attribution report doesn't include influencer marketing &amp; promo code tracking
+
+
+Google Analytics hasn't made it easy yet to track the performance of affiliates / referrals or influencers, whether you wanna do it with links or you wanna use promo codes. Since partner marketing is a big part of modern marketing strategy, it's super important to measure the results it brings you.
+
+On the other hand, RedTrack has a complex solution for those who invest in affiliate or influencer marketing — Partnership Portal.
+With the use of Partnership Portal, you will be able to instantly issue tracking links or promo codes for all of your partners and track their performance. This same data will go to your Conversion Path report as one of the touchpoints users can possibly have on their way to the conversion.
+Customer journey tracking: does your type of business need it?
+You might think that customer journey tracking is too advanced and it's not for your business. The truth is: the more you invest in marketing — the more clarity you need to find in your investments to make the best of it. The customer journey become more &amp; more twisted and complicated every year, since the number of touchpoints doubles before the user actually converts.
+And your funnel is probably getting more &amp; more complicated day by day. And in order to track your funnel properly, you need a solution that will be able to map all of those touchpoints.
+
+
+
+You need to track your funnel if you are:
+
+
+ 	
+E-commerce business that invests not only in Facebook Ads (and you should)
+
+
+We already talked quite a bit on our blog and MarTech Youtube channel
+
+about investing in various marketing channels, especially if you are e-commerce, you should think of diversifying your marketing strategy.
+
+One of the amazing marketing channels for e-commerce is TikTok Ads and TikTok influencer marketing. That being said, if you have more than one marketing channel, you will need a Conversion Path report to identify trends in customer behaviour that support purchases.
+
+ 	
+SaaS due to the longer cycles
+
+
+SaaS is "famous" for pretty long conversion cycles. Your customers probably find your thorugh paid channels, but oftentimes the actual conversion happens from direct search. In order to understand the real value of your marketing investments, Conversion Path report will shed some light on this twisted journey.
+
+ 	
+Marketing &amp; advertising agency
+
+
+In order to build better reports for your marketing clients, Conversion Path report will offer a different picture on how investment into marketing turnes into revenue. Oftentimes it can get hard to explain why this or that channel takes so much of our budget. RedTrack's customer journey report will give a new perspective on conversion trends to explain the real impact.
+Benefits of Conversion Path report by RedTrack for funnel tracking
+With RedTrack you can perform accurate tracking of your campaigns from all the marketing channels. We use only raw and 1st party data to comply with all the privacy regulations but still provide you with real-time data and accurate reports.
+The Conversion Path report will open an opportunity for you to analyze the results of your marketing on different levels: channels, campaigns, ad groups, ads.
+
+We added the following filters that will allow you to track conversions based on the campaign, event, and date.
+
+Using this data you will have a couple of benefits that your company can turn into increased revenue.
+Optimize conversion rate based on accurate &amp; multichannel data 
+To see more critical data insights into your performance you can break down the data by channel, campaign, ad group, and multiple other dimensions.
+
+Collected data will show you which channels or ads perform better, and you can use these insight to optimize your performance. Moreover, with RedTrack you can also gain control over your CRs (conversion rate) and automate performance accordingly. Simply set rules to stop ad waste to scale winning combinations.
+Allocate budgets knowing the complete performance 
+Analyze investments in your marketing not from Facebook Ads Manager point of view or through reports by Google. Customer oftentimes make purchase decision hectically and through direct search if they already know your company. But if that happens, it doesn't matter that there was no influence of paid marketing channels. 
+Conversion Path Report by RedTrack allows you to see the trends and the sequence of channels that cause users to buy. When using this approach, you can allocate marketing budgets knowing the exact value of each channel of campaign. 
+Scale ROAS, not the number of campaigns 
+Oftentimes, it's not about the number of campaigns or ads you run, it's about the actual profitability and revenue that these campaigns or ads attract. Analyzing performance &amp; trends help you find the winning channels, campaigns, as well as winning combinations (like combination of winning channels).
+Conversion Path Report by RedTrack helps you find those winners, scale them and get a better ROAS (return on investment). 
+

@@ -1,0 +1,92 @@
+# How to Convert Zero Click Traffic?
+
+The truth is that testing new traffic types is part of the DNA of every affiliate. The reason is a never-ending game for better conversions and higher ROI.
+
+Today we wanna talk about the traffic type that has received a reputation of being highly-targeted and well-converting. RedTrack Team together with our friends and Traffic Source Partner — ActiveRevenue, decided to compile a comprehensive guide to zero-click traffic!
+
+Read the guide to know:
+• What zero-click traffic is.
+• Factors that influence the success of ad campaigns.
+• Tips on how to convert zero-click traffic.
+Spoiler: at the end of this blog post you would find a special bonus from our Partner, Active Revenue DSP.
+What is zero-click traffic?
+Alternative names: Domain Redirect, PPR (pay per redirect) traffic.
+
+Zero-click is a traffic type that comes from visitors who wrongly type a domain in their browser and get redirected to a landing page with an affiliate’s offer on it. The redirect doesn’t require users to click anywhere — that’s where the idea of the name comes from.
+
+Around the affiliate community, zero-click traffic is known as, 
+• highly-targeted;
+• newbie-friendly;
+• easy for testing and optimization;
+• highly converting;
+It all sounds like a sweet deal. Let’s find out whether this is the case.
+
+Domain Redirect traffic is warm traffic, meaning the offer is displayed to the users who are already actively searching for a product. A lot of zero-click traffic comes from such “mistakes” as typing domain.com instead of domain.org, or such typos as travlworld.com instead of travelworld.com.
+
+Unlike such ad formats as pops or banners, domain redirects usually don’t disrupt the buyer experience. Since it targets the people who are searching for a product that is relevant to the offer you advertise, zero traffic results in high conversion rates and low churn rates. As it follows, you don’t need massive amounts of visits to make money. What you do need is the right targeting, namely the right keywords, and a/b testing.
+
+
+
+Ready to test zero-click traffic? We asked Alon Hollander, Network Director at ActiveRevenue, to share some pieces of advice on how to convert zero-click traffic effectively. Keep on reading to find the tips shared with you by the expert.
+
+
+
+— First of all, tell us more about your DSP ActiveRevenue. How did it all begin? What specific advantages do you bring to the market?   
+
+ActiveRevenue was founded in 2014 as a part of a huge media group. ActiveRevenue is a Self-serve advertising platform that owns high volumes of traffic from multiple ad formats, and it is a one-stop-shop for all the advertising needs of our clients.
+
+Besides, we provide a dedicated account manager with 24/7 support, user-friendly UI, micro-targeting options, and an automatic optimization tool.
+
+— What ad formats do you focus on now? What are the volumes for each of them?
+
+POP — 300M impressions per day.
+Display — 150M impressions per day.
+Native — 80M impressions per day.
+PPR (zero-click) — 12M impressions per day.
+Push — 3.7M clicks per day.
+
+— Zero-click traffic has been around for a while, and many affiliates name it a “newbie-friendly” format. Do you agree with this statement?
+
+I agree with the statement. However, even some veterans in advertising use this traffic type as the only type of traffic they buy for their campaigns, and that means a lot. The main advantage of this format is the ability to target accurate keywords, which in turn allows you to target the exact audience for your campaign.
+
+— What budget size is enough for testing a new campaign?
+
+The testing budget for this traffic ranges from $100 to $500 and depends on the goal of the campaign.
+
+— What future do you predict for zero-click?
+
+I would say, it is an evergreen traffic type, as it targets people who are actively searching for a product relevant to your offer. It results in high conversion potential as the visitors have a genuine intent to convert.
+
+— Since you see data in your network, can you tell us what are the most popular verticals promoted on zero-click traffic?
+
+It can be a good fit for any format because it is keyword-based traffic. We see great results with loans, dating, sweepstakes, and gambling.
+
+— What are the top 5 factors that influence the success of PPR-based ad campaign?
+
+I would say they are the following:
+— choosing a wide pull of keywords that are still relevant for your campaign;
+— keyword optimization;
+— adding negative keywords to the campaign;
+— isolating geos (if the campaign is for multiple geos);
+— adjusting bids for each keyword based on the performance.
+— The success of PPR-based campaigns quite often depends on the lander. Some pieces of advice you want to share when creating a landing page?
+
+Generally, landing page should be created based on the goal of the campaign and the message that you want to pass to the user. Images or videos that provoke emotions will keep the user interested in the offer. For example, a couple walking on a beach while holding their hands will raise the feeling of love for the user.
+
+— Any tips on targeting PPR traffic?
+
+Zero click traffic works amazingly on small niche verticals because you can target specific users. For example, mortgage loans. It might be difficult to allocate users that are looking for a mortgage loan but with well-targeted keywords, you can do it easily.
+
+— Let’s think of a practical scenario: let’s say I’m a newbie affiliate and I want to start with zero-click traffic. Which vertical should I choose? Should I start with a low or high bid? Any tips on how should I choose the keywords? How much time should I spend on a/b testing?
+
+Any vertical will work here but we recommend running offers with high payouts like CPS offers because PPR traffic leads to sales at higher rates compared to other formats. With ActiveRevenue, you will get full support from us to have the best keywords inventory right from the beginning.
+
+The bids vary on how "narrow" you are on the keyword targeting, and, of course, the competition affects the price greatly too.
+
+The a/b testing depends rather on how much traffic you buy than the time you need to spend on it. A decent budget for a campaign should be a few hundred of dollars.
+
+Great! Thanks for the answers, Alon!
+
+For your easy start with zero-click traffic, or other traffic types available at ActiveRevenue DSP, Alon has shared a special bonus available just for RedTrack users.
+Sign up with this link, and get +10% bonus on your first deposit!
+Should you have any questions, feel free to contact us at info@redtrack.io. Or let’s exchange the thoughts about zero-click traffic in our Telegram Community.

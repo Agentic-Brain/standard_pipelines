@@ -1,0 +1,16 @@
+# 22-Apr
+
+
+ 	RedTrack toolbar sections Tools and Logs were reorganized and updated: Conversion API was renamed into API Postbacks
+ 	New Google app API integration released
+ 	When adding the filters button Apply\Refresh is applied once your press Enter on the keyboard
+ 	Bug with Custom payout functionality is fixed: the inserted data is saved and shown in the window
+ 	Save changes button was added to the top of the pop-up page
+ 	Publisher panel: Payout section is now available for editing
+ 	Сustom payout option was customized. 2 combos were added: Type/Geo/ Convsub and Type/Convsub
+ 	Introduced the feature which allows to test various complex funnels. See more at Landing page click parameters tracking
+ 	New stat columns were added to the Publisher panel: Serial number, Payment date, Status
+ 	Added the tooltip for cached data switch
+ 	Fixed the bug with O (zero) value in Payout column during the Conversion Logs Export
+ 	Fixed a bug with the toggle Show conversions by click time 
+ 	Stats no longer show clicks on the ads from Corporate FaceBook Traffic (Detect Moderators)

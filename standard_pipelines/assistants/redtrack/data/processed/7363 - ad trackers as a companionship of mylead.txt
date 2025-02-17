@@ -1,0 +1,87 @@
+# Ad Trackers as a companionship of MyLead
+
+This article was submitted by MyLead, a global affiliate network with over 100 thousand publishers from all over the world. MyLead offers over 2000 campaigns from over a dozen different categories. To see MyLead’s campaigns click here.
+
+The role of ad tracking should be quite clear and known to all of you. It helps you to track effectiveness and maximize your performance when it comes to marketing. Especially, affiliate marketing. 
+Who needs an ad tracker?
+Ad trackers, like RedTrack, are a great solution for novice publishers. Later, however, the beginner publisher changes into a more advanced one. They will run several websites, send mailings, and work with the help of social media networks. Their activities will become more and more complicated and require professional tools, like ad trackers.
+
+Ad tracking is therefore a tool for both advanced and starting MyLead publishers that will synchronize conversion reports with external analytical systems. The data provided by RedTrack is used to analyze user’s behavior and may have a significant impact on the effectiveness of your marketing activities. It’s a tool that is sometimes overlooked when talking about individual marketing strategies, but extremely popular within bigger online businesses. 
+
+
+Focus on your goals and reach them
+If you aspire to be a successful publisher, you probably want to achieve at least 4 of these things that are offered by ad tracking platforms:
+
+ 	learning all about the performance of your work,
+ 	managing all campaigns in one place,
+ 	using automation to avoid time-consuming and unnecessary extra work,
+ 	targeting your ads to make them more effective,
+ 	testing campaigns for best results,
+ 	receiving full support,
+ 	gaining access to your campaigns, also on mobile devices.
+
+Ad Trackers for publishers
+As a MyLead publisher, you can promote your chosen products or services in all sorts of ways. Let’s say you own a blog, where you recommend a given product. The most frequently chosen method is CPS - cost per sale, which is a commission received for each completed transaction, that is made thanks to your personalized, affiliate link. 
+
+To see MyLead’s CPS campaigns, click here:
+
+
+
+In this case, an ad tracking platform will be suitable for you if you:
+
+ 	want to understand your users better,
+ 	are an advanced publisher, who is always looking forward to improving your performance,
+ 	promote MyLead’s affiliate programs in many channels (Youtube, Twitter, Blog, Facebook Ads, Google AdWords, PPC advertising),
+ 	want to collect statistics in your own analytical system.
+
+
+Why is it important to track your ads when you’re a publisher?
+
+
+The publisher’s success in affiliation goes hand in hand with the ability to analyze the results of marketing activities. If you have ambitions and want to become a professional marketer, you need to master the data in which your money is invested.
+
+In this case, ad trackers are game-changers.
+What useful information will ad tracking provide?
+
+ 	IP from which conversions were generated, 
+ 	the exact address of the page from which the user came to the advertiser's website, 
+ 	the user came to the advertiser's website,
+ 	value of the purchase made by the user,
+ 	commission value,
+ 	the time elapsed from clicking on the affiliate link to converting,
+ 	conversion status
+
+And other information thanks to which you will learn more about the behavior of your users that allow you to increase your profits from affiliate marketing.
+
+Another very important option is the ability to add your own parameters for conversion. This is essential for advanced MyLead publishers. These parameters can act as channels and serve to distinguish between predetermined sources. The most important difference, however, is that the parameters can be dynamically assigned by a foreign system.
+
+Another feature of any professional affiliate system is the MyLead publisher’s tracking code. The publisher’s tracking code enables the integration of the affiliate system with the publisher's system. The publisher can add postbacks or pixels from their system. As a result, information about conversions will be transferred to his own system in real-time. The transmitted data may contain all information about the conversion. Depending on the publisher’s needs, it may be, for example:
+
+ 	the name of the campaign, 
+ 	channel, 
+ 	user’s IP.
+
+It would help you in targeting your potential audience, etc.
+Ad Tracking - opportunities that are often overlooked
+Integration testing is one of the natural activities for both publishers, advertisers, and Mylead as an affiliate network itself. Tracking testing is carried out, among others when starting a new affiliate program via the network, or when a new publisher joins. It is a necessary activity for all parties involved, but also sometimes problematic. If the tests are not successful, the options to analyze the logs of a given event turn out to be irreplaceable. With such capabilities, the network is able to quickly locate the place where the problem occurs and have errors fixed.
+
+
+Attribute all conversion events
+Improve conversion rates by having full transparency into when a conversion happens for each and every customer. Optimize different conversion points and funnel stages to drive the highest return on ad spend.
+Collaborate &amp; share your improved results
+Connect your team within one platform, and save hours with shared views and reports for peers, partners, and customers. Set access right to different sections of the account and show only the data you want to share.
+Analyze &amp; optimize real-time
+Get accurate data for each impression, click, and conversion in real-time. Save hours of manual work and turn insights into actions with campaign automation rules and alerts.
+
+RedTrack provides an ad tracking and conversions attribution platform for publishers from MyLead. An all-in-one ad tracker like this will help you improve the performance of your affiliate campaigns and find insights to improve your ROI.
+Why do ad trackers work so well with affiliate marketing?
+The tracking system, like RedTrack, is created for affiliate marketers to give them the opportunity to promote MyLead’s campaigns in full. Not only they allow you to create affiliate links and calculate commission, but also offer much more advanced options. This is important for both the MyLead publishers and advertisers.
+
+
+
+Try out combining your affiliate marketing skills from MyLead, with ad tracking to make sure your performance is as good as possible and your earnings are as high as possible.
+
+In order for an affiliate network like MyLead, to function, it must be able to determine where a given conversion is coming from (clicks, leads, sales, etc.) On this basis, it determines the effectiveness of a given publisher and conducts settlements with them. Such methods of identifying actions and conversions have evolved along with the entire affiliate market and now provide a whole spectrum of information not only about the publisher, but also the user and the medium and device on which the action was performed.
+Conclusion
+Ad Tracker is a tool that can become necessary when it comes to the best functioning and earning as an affiliate network publisher. By using it, you will keep all data and information in one easily accessible place. It will help you achieve the best results possible since you’ll own all of the information needed to improve the functioning of your website. Join MyLead for free and become the best publisher there.
+

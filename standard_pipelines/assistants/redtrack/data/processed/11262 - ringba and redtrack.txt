@@ -1,0 +1,411 @@
+# Ringba and RedTrack
+
+
+
+
+
+
+Ringba&nbsp;is&nbsp;the industry-leading inbound call tracking and analytics platform for businesses, call centers, and professional pay-per-call marketers.
+
+
+
+Integration
+
+
+
+
+
+
+
+1. Add&nbsp;your&nbsp;custom tracking domain
+
+
+
+2. Add the tracking&nbsp;events
+
+
+
+You need to create 3 custom conversions to track our Pay Per Call campaigns properly:
+
+
+
+
+RAWCall
+
+
+
+AnsweredCall
+
+
+
+ConvertedCall
+
+
+
+
+To add the events in RedTrack go to Tools → Conversion tracking → Conversion type → add the needed types (use&nbsp;this guide&nbsp;to help you in case of questions):
+
+
+
+
+
+
+
+3. Add&nbsp;the Offer source and the required tracking parameters
+
+
+
+To track the Ringba Pay Per Call campaign with&nbsp;Redtrack, you should add&nbsp;Ringba&nbsp;as the offer source in RT. To do that go to Offer sources → New from scratch → name it Ringba → Additional parameters section → add parameters for tracking, like Phone, Zip, callid etc. → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for more info about Offer sources in RedTrack.
+
+
+
+4. Add your Offer to RedTrack
+
+
+
+Offer URL is the website URL with your number on it.
+
+
+
+Offers → New → give your offer a name → select the added Ringba offer source from the drop-down → paste your Offer URL → Save → use&nbsp;this guide&nbsp;to help you with the rest of the Offer template settings:
+
+
+
+
+
+
+
+5. Add the&nbsp;Traffic channel&nbsp;you work with.
+
+
+
+6. Add the&nbsp;Landing page&nbsp;if you’re using one.
+
+
+
+By landing page is meant the page before the website page with a phone number on it. Again, you add landing page only if you’re using one in your setup.
+
+
+
+7. Generate a&nbsp;universal tracking script.
+
+
+
+8. Create&nbsp;a tracking&nbsp;Campaign.
+
+
+
+Campaigns → New → use&nbsp;this guide&nbsp;to help you fill in all the mandatory fields:
+
+
+
+
+
+
+
+Values in the screenshot explained:(1) Give your campaign a name(2) Select the Traffic channel you created within step 5(3) Select the custom tracking domain you added within step 1(4) Select the Offer you added within step 4
+
+
+
+
+
+1. Add&nbsp;a&nbsp;custom tracking domain
+
+
+
+2. Add the tracking&nbsp;events
+
+
+
+You need to create 3 custom conversions to track our Pay Per Call campaigns properly:
+
+
+
+
+RAWCall
+
+
+
+AnsweredCall
+
+
+
+ConvertedCall
+
+
+
+
+To add the events in RedTrack go to Tools → Conversion tracking → Conversion type → add the needed types (use&nbsp;this guide&nbsp;to help you in case of questions):
+
+
+
+
+
+
+
+3. Add&nbsp;Brand and Website.
+
+
+
+4. Add the&nbsp;Traffic channel&nbsp;you work with.
+
+
+
+5. Create a tracking&nbsp;Campaign.
+
+
+
+
+
+
+
+Be precise in following the guide, and do not change/customize anything from the steps described below. 
+
+
+
+1. Install Ringba number pools.
+
+
+
+You must have at least one Number Pool in Ringba to select it when creating the Tag.
+
+
+
+Numbers → Manage Pools → Create number pool → fill in the needed info and press Save to apply the changes: 
+
+
+
+ 
+
+
+
+Refer to this article for more details on Number Pools in Ringba.
+
+
+
+2. Create a campaign and a call tracking tag in Ringba.
+
+
+
+✔ The Call Tracking Tag must be associated with the Publisher’s number.✔ Capture User Data toggle must be enabled:
+
+
+
+3. Install Ringba call tracking tag.
+
+
+
+Campaign → Call Tracking Tags → &nbsp;Install Tag&nbsp;→ copy the code snippet:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4. Paste the code snippet into your web page header after the RedTrack Universal tracking script:
+
+
+
+
+
+
+
+5. Create a URL Parameter for clickid and other data.
+
+
+
+
+Integrations&nbsp;→&nbsp;URL Parameters&nbsp;→&nbsp;Create URL Parameter&nbsp;→ fill in the mandatory fields → Create:
+
+
+
+
+
+
+
+
+Values to be put into the fields:URL Parameter = clickid Reporting Menu Name  = UserReport Name = clickidDo not change the naming of the inserted values, otherwise, the integration will not work!
+
+
+
+
+Campaigns → choose the Campaign →&nbsp;URL parameters&nbsp;→&nbsp;Add URL parameter&nbsp;→ add the parameter you’ve just created
+
+
+
+
+
+
+
+
+
+
+
+
+- You can add multiple custom parameters to your RedTrack Offer URL, and all of them will be captured by Ringba in Tags. Here’s an example of an Offer URL with additional parameters and RedTrack dynamic tokens: https://test.offer.com?clickid={clickid}&amp;country={country}- Creating a new URL Parameter will automatically create a relevant dynamic token, [tag:User:clickid], which can be used later for RedTrack S2S postback.- Additionally, you can use this data for routing logic in the Ringba platform by applying Tag Routing Filters.
+
+
+
+With the Call Tracking Tag installed, Ringba will automatically catch the clickid and other data included in the URL Parameters.  It can be found by the path Reporting → pick a date → filter the needed parameter → scroll down to the section Call Details → Tags:
+
+
+
+6. Set up RedTrack clickid transfer for no-redirect tracking.
+
+
+
+Copy the script below and paste it into the web page body:
+
+
+
+&lt;script&gt;
+(window._rgba_tags = (window._rgba_tags || &#91;])).push({ type: "User", track_attempted: "yes" });
+  var intervalId = setInterval(() =&gt; {
+  if (window.rtkClickID != undefined) {
+   (window._rgba_tags = (window._rgba_tags || &#91;])).push({ type: "User", clickid: window.rtkClickID });
+   console.log("Just ran the rtkClickID script to add Ringba tags: ", window.rtkClickID);
+   clearInterval(intervalId);
+  } else {
+   console.log("rtkcid not defined yet");
+  }
+}, 500);
+&lt;/script&gt;
+
+
+
+
+
+
+
+If the clickid wasn't recorded, perhaps the scripts are running at different speeds. To fix this, move the Call Tracking Tag script on the web page from the head to the body:
+
+
+
+7. Create Ringba Pixels for RedTrack S2S postback events.
+
+
+
+Integrations&nbsp;→&nbsp;Pixels&nbsp;→&nbsp;Create Pixel → fill in the mandatory fields → save the added pixel → add it to your Campaign:
+
+
+
+
+
+
+
+
+
+
+
+Example of the correct RedTrack postback URL syntax: https://test.offer.com/postback?clickid=[tag:User:clickid]&amp;sum=[Call:ConversionPayout]&amp;type=LeadFor the correct RedTrack-Ringba tracking, it is essential to add the clickid token. That being said, RedTrack also supports many other dynamic parameters such as sum for conversion payout, type for conversions type you would like to record in Redtrack, etc. See the full list here.
+
+
+
+Ringba supports many additional dynamic tokens as well. Here is the list of tokens available on Ringba.
+
+
+
+Postback will send conversion data to Redtrack only if the following criteria are met:✔ RedTrack's clickid is recorded ✔ Ringba Pixel contains clickid=[tag:User:clickid]✔ Ringba Pixel contains RedTrack conversion type=nameYou can check if the postback was fired in Reports → Call Details → Events → Pixel Fire:
+
+
+
+8. (optional) Pass the conversion payout or use custom conversion events with tag filters.
+
+
+
+Ringba Pixel can also be adjusted for passing conversion payout or using custom conversion events with tag filters. Follow the corresponding tab for details:
+
+
+
+
+
+In Ringba, two tokens can be used for the conversion payout:
+
+
+
+
+[Call:ConversionPayout] - the payout a Publisher is credited for each conversion.
+
+
+
+[Call:ConversionAmount] - the actual revenue of the conversion.
+
+
+
+
+The sum parameter can also be matched with the hardcoded value of the conversion, for example, sum=10. Then, each postback-reported conversion will be recorded in RedTrack with 10 revenue.
+
+
+
+If you need to fire the S2S postback with the conversion revenue (Conversion Amount token), switch the Fire Pixel On field to Converted. Once the conversion event from the Routing Plan is reached, S2S postback will be fired, reporting the Conversion revenue to RedTrack.
+
+
+
+In other scenarios, the S2S postback will still be fired, but the [Call:ConversionAmount] token won’t be replaced with the actual conversion revenue (in such case, you can enter the required value manually with the sum parameter).
+
+
+
+Check out this Ringba guide for setting up your pixel via Call Flows to pass the conversion payout.
+
+
+
+
+
+Using Ringba's Advanced Options for your pixels gives you the ability to use custom conversion events by Tag Filters in your request.
+
+
+
+When configuring a Ringba Pixel:
+
+
+
+1. Advanced Options →  GET for the HTTP Method:
+
+
+
+
+
+
+
+2. Under Tag Filters, you can specify how and when the pixels should be fired. 
+
+
+
+For example, you could set a Tag Filter for the pixel only to fire when the Call Length is greater than 45 seconds:
+
+
+
+
+
+
+
+
+
+
+
+With all the elements set up correctly, when a visitor clicks through your RedTrack campaign funnel, Ringba’s Tracking Tag will capture the RedTrack clickid value from the Offer URL and save it in Ringba's Reporting. Once the call converts (or other action that triggers S2S postback happens), RedTrack S2S postback will be fired, sending the conversion details to RedTrack.
+
+
+
+

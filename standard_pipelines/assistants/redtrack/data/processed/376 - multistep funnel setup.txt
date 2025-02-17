@@ -1,0 +1,62 @@
+# Multi-step funnel setup
+
+
+Multi-step funnel presupposes using several landing pages one after another. It goes like this: Prelanding page→ Landing page→ Offer page→ "Thank you" page.
+
+
+
+To set it up act as follows:
+
+
+
+1. Add your prelander and lander to your account. Both prelander and lander are added the same way, just remember to choose the correct landing page type. The only difference will be in the LP click URLs and scripts.
+
+
+
+
+
+Link from LP 1 to LP 2 (for the prelander): https://your.tracking.domain/preclick
+
+
+
+
+
+
+
+
+
+Link LP 2 to the Offer (for the lander): https://your.tracking.domain/click
+
+
+
+
+
+
+
+The scripts for prelanders&nbsp;have different structures.
+
+
+
+
+No redirect campaign script:&lt;script type="text/javascript" src="https://your.domain.com/pretrack.js?rtkcmpid=your campaign id"&gt;&lt;/script&gt;
+
+
+
+
+
+LP Views tracking script (for campaigns with LP and redirect tracking):&lt;script type="text/javascript" src="//your.domain.com/pretrack.js"&gt;&lt;/script&gt;
+
+
+
+
+
+
+2. Choose Pre-landing - Landing - Offer option in your campaign funnel → add your pre-landing and landing pages:
+
+
+
+
+
+
+
+3. Proceed further with the campaign creation as usual.

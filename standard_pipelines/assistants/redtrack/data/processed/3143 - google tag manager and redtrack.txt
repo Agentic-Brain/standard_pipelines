@@ -1,0 +1,126 @@
+# Google Tag Manager and RedTrack
+
+
+Our tech team has prepared a step-by-step guide on how to integrate Google Tag Manager (GTM) with RedTrack, you can find it below. Since it is an advanced tutorial, it is not covered by the RedTrack Support. Knowledge of web design languages such as HTML, CSS, JavaScript may be required. We suggest hiring an expert if you are not comfortable proceeding with this guide on your own.
+
+
+
+
+
+
+
+The guide below is meant for those who already have a GTM account and the connected domain. In case you don't have one, click here to check out what to do first.
+
+
+
+1. Create a variable to get clickid from the cookie. Variables→ New→ 1st Party Cookie: 
+
+
+
+Values to be added:Variable Name: rtkclickid-storeVariable Type: 1st Party CookieCookie Name: rtkclickid-store
+
+
+
+
+
+
+
+This is a container for the clickid you have stored in a cookie (for the script to take this value on some page where it will be needed). Do not change the naming.
+
+
+
+2. Create a Tag:
+
+
+
+2.1 Go to Tags→ New:
+
+
+
+
+
+
+
+2.2 Add the essential elements:
+
+
+
+Name: any convenient name (use the one that is easy to identify)Type: Custom HTMLHTML: Place the Universal tracking script you are going to useTrigger: choose where you want the script to fire (in our example, it is All Pages)
+
+
+
+
+
+
+
+
+
+Add the GTM code to your website (landing page). To do that:
+
+
+
+1. Press the Tag id here:
+
+
+
+
+
+
+
+2. Add the GTM codes to the page header and body as is stated in the window:
+
+
+
+
+
+
+
+This is the only thing you will need to add to your page code. All other scripts and triggering conditions are set on the GTM side.
+
+
+
+
+
+It will depend on your flow and can be either a simple no-redirect flow with a landing page and affiliate offer or a complex website with various triggers.
+
+
+
+Both GTM and RedTrack functionality allow you to play with the settings, but here are the basic things you will need to set up in RedTrack:
+
+
+
+1. Add the Campaign, which is the fundamental element in RedTrack. The whole tracking is linked to the campaign. You will most likely be using a custom way of tracking conversion and sending a postback so you can skip the postback setup.
+
+
+
+2. Add a custom tracking domain. This is a must nowadays as all service domains are more likely to be treated as malware.
+
+
+
+3. Adjust the postback trigger. This trigger can be used to fire the postback URL:
+
+
+
+Create GTM Tag that sends S2S URL with clickid attached&nbsp;with the following options:
+
+
+
+Tag Name: RedTrack Payment CompleteTag Type: Custom ImageImage Url: your actual S2S url with parameter clickid={{rtkclickid-store}} addedTriggering: the page where you want the postback to be fired, or the click on the button
+
+
+
+
+
+
+
+Your RedTrack S2S postback URL template can be found under Tools→Conversion tracking:
+
+
+
+
+
+
+
+☛ You may want to play with triggers to create a correct subsequence (for example, when the clicked fails to be recorded quickly).☛ There can also be different event-triggering settings - it all depends on your current flow (the elements are created the same way we have described above).☛ GTM allows you to play with your settings in different ways. Having GTM integrated with RedTrack, you are ready to explore more. Here is more information on the functionality.
+
+

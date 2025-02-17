@@ -1,0 +1,62 @@
+# RedTrack enables extra revenue stream for the leading Belarusian media TUT.BY
+
+Taking into account the importance many companies place on online advertising, why is it still such a large rate of digital media spend – 40-60% – tracked ineffectively? After an organization decides to switch to a new strategy or business model, it’s always a tipping point to structure efficiency tracking and reporting. TUT.BY knew that from the very beginning, and that is where their CPA tracking journey with RedTrack starts.
+
+About TUT.BY
+TUT.BY is an independent media and service internet portal, one of the 5 most popular websites in Belarus. Besides, it’s the leading and most popular news web portal in the country. TUT.BY headquarters in Minsk with over 250 employees. In 2020, the website is read by 69% of Belarusian internet users with over 24 mln unique monthly visitors.
+Historically, TUT.BY monetized its traffic, offering advertisers direct placements for fixed price only. However, they noticed that the overall advertising market start substantially moving towards the CPA monetization model. It turns out to be more efficient, and at the same time – more technologically advanced. 
+
+Opportunity:
+Switch from traditional advertising to CPA model
+&nbsp;
+
+“There were two big reasons, why we decided to restructure our business model in order to find additional revenue streams:
+1. there was a lot of residual traffic, which would be best to monetize using the CPA model*.
+2. an increasing number of advertisers requested placement at the CPA model and refused to work with TUT.BY under the traditional direct placement model (editor: fixed price 
+
+for ad unit)”.
+
+
+&nbsp;
+Ilya Krasnogir 
+Digital Marketer, TUT.BY
+&nbsp;
+CPA, Cost-per-Action, is an online advertising payment model where the advertiser pays only for a specified action. A customer agrees with an advertiser for himself what actions to pay for.
+
+The CPA model has several advantages for every party involved.
+
+
+ 	The customer doesn’t pay for each impression, i.e. every time their banner or link was shown to a web visitor, even if they don’t click on it. Thus a customer is more confident in receiving returns from the budget invested in the advertising.
+ 	The website owner is interested in attracting more quality traffic. The more targeted actions will be committed on his site, the more money he will earn. Besides, with the CPA model, you open the doors to a bigger market of advertisers, as most of them prefer this payment model nowadays.
+
+TUT.BY team understood that they want to realize the full potential for their traffic monetization. So, in addition to the fixed payment model, they decided to offer the advertisers an opportunity of working with a CPA model. The next stage for the company was to find needed tools and expertise to develop internal capabilities.
+
+
+Challenge:
+Why TUT.BY started looking for an ad tracker?
+TUT.BY tried working with affiliate networks under the CPA model using their internal tracking systems. This partially improved monetization of residual traffic. However, work with local clients under the CPA model still represented significant revenue potential.   
+TUT.BY understood that to take full advantage of the opportunity, they need to find a 3rd party tracking tool that will help them to consolidate all the data in one place and provide impartial analytics to both TUT.BY team and the advertisers. After the research of available ad tracking solutions on the market, they reached several companies including RedTrack.
+
+
+“RedTrack offered a more comprehensive system that could do everything we were looking for but without overwhelming. Besides RedTrack’s value for money proposition was definitely a win. But in addition to this, RedTrack also won the deal with its stellar customer support, helping TUT.BY to onboard the new system smoothly and save a lot of time with setting things up”.
+Ilya Krasnogir 
+Digital Marketer, TUT.BY
+
+TUT.BY favorite RedTrack features:
+
+
+ 	precise tracking without 3rd party cookies. RedTrack offers 1st party cookies technology, which is important to have everything tracked correctly and gives confidence that the operations will not collapse when 3rd party cookies technology will be abandoned by all browsers.
+ 	multi-dimensional reports. With real-time reporting, a user gets a comprehensive picture of every ad campaign's efficiency outcomes. Besides, it saves time on data consolidation from multiple advertisers’ campaigns.
+ 	ease of tracking links set-up.
+ 	shared reports with advertisers. RedTrack helps their customers and advertisers to enjoy full transparency of their budget allocation and outcomes.
+
+Now, after 7 months of working with RedTrack TYT.BY emphasizes speed, convenience, and transparency of the service:
+
+
+“What I really like about RedTrack is how quick and easy it is to create new campaigns. We tell the client to add GTM to the site and give us access, then the RedTrack team helps us to finish the setup. This saves a lot of time and helps to launch campaigns quickly. But most importantly, I always confident that everything works as it is supposed to.”
+Ilya Krasnogir 
+Digital Marketer, TUT.BY
+
+Results
+As a result, RedTrack helped TUT.BY to generate additional advertising revenues by improving the monetization of residual traffic and attracting new clients who wish to work under the CPA model.
+Now TUT.BY can work with their clients directly without intermediaries – partner networks. RedTrack allows TUT.BY to design and operationally execute unique campaign set-ups satisfying all possible client demand. Finally, RedTrack creates confidence that all the traffic will be tracked and no revenues will be lost.

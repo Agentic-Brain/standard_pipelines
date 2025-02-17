@@ -1,0 +1,118 @@
+# Gasmobi and RedTrack
+
+
+
+
+
+
+Gasmobi's mission is to provide the best connection between high-quality traffic and top offers. The best environment possible is created for Publishers to reach top EPCs and skyrocket their earnings, and for Advertisers to get quality leads.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events you want to track
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add Gasmobi as an Offer source in RedTrack.
+
+
+
+RedTrack → Offer sources → New from template → add Gasmobi template → copy the Postback URL → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set the postback URL in Gasmobi. To do that, send the link you have copied within step 1 to your account manager. Ask to add it as a global postback inside your account. 
+
+
+
+3. Obtain the Gasmobi offer.
+
+
+
+3.1 In your Gasmobi account go to the Market Place → Apply:
+
+
+
+
+
+
+
+3.2 Once approved, you can copy the URL:
+
+
+
+
+
+
+
+
+
+
+
+4. Add Gasmobi's offer to RedTrack. 
+
+
+
+In your RedTrack account go to Offers → Create new offer → fill in the mandatory fields → add Gasmobi's offer link in the URL field → add the tracking parameters “externalid={clickid}” at the end of the URL → Save: 
+
+
+
+
+
+
+
+Refer to this guide for details on how to fill in the rest of the fields in the Offer form.
+
+
+
+5. Create a campaign in RedTrack with the traffic channel you buy the traffic from and the offer you have just added.
+
+
+
+To help you add the campaign refer to:
+
+
+
+
+this guide for Advertisers.
+
+
+
+this guide for Affiliates.
+
+
+

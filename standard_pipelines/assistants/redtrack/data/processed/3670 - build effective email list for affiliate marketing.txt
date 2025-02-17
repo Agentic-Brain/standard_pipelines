@@ -1,0 +1,122 @@
+# Build effective email list for affiliate marketing in 5 steps
+
+Some have buried email marketing hundreds of times so far. But was it justified? Well, in Hubspot 2018 survey, 59% of respondents said marketing emails influence their purchase decisions. While Digital Marketing Agency calculations state that emails generate $32 for every $1 spent and have 3,800% ROI.
+
+
+Marketing professionals, in turn, consider email marketing to be the second most effective channel in their digital marketing plan.
+
+
+Building your email list
+There are 5 basic steps in the process of building and converting your email list for affiliate marketing. Let's have a look at each of them
+1st Step: Create landing pages or pre-landers
+2nd Step: Create compelling lead magnets
+There are tons of easy offers that can be successfully promoted without any landing pages. But if you work with a complex product or service and it usually takes some time for people to take a decision for buying it, direct-linking won't bring you enormous conversions. In this instance, warming-up series of emails can help people make a decision in your favor. So, first, decide which case is yours:
+
+Offers with opt-in / double-in payment model
+If you use opt-in methods, you may stop your marketing activities after completing the two aforementioned steps. All you need is to make a strong squeeze pre-lander with an enticing sign-up form and an effective acquisition strategy. Sweepstakes vertical can boast of the largest number of examples of this kind, cause it primarily works through an opt-in flow.
+Sweepstakes are prize giveaways where the winners are chosen by luck. Prizes can differ from stickers and branded cups to millions and private houses.
+
+
+
+In this case, conversions happen at the moments users press the button to send their contacts to you. No more efforts from your side. You've already earned your money.
+Pay per sale payment model
+You see, you have to sell something. If it can be related to impulsive purchases, you shouldn't spend your time creating and testing various landing pages. You can find lots of less time and effort-consuming but efficient promotional strategies. But what if not?
+
+Then, you can’t just kindly ask your audience to share their contacts. Of course, you may use some unethical or tricky methods to get them. But in the end, you'll have thousands of emails with very few chances that even 10% of them will buy your weight-loss or gaming product under the pressure of marketing. The more effective way to generate high-quality leads is to use lead magnets, challenges, and other valuable free content.
+Lead magnet is an incentive that you give your landing or pre-lander visitors in exchange for their email address, or other contact information.
+The most common formats of lead magnets are :
+
+ 	Checklists and cheat sheets
+ 	Fillable or printable workbooks
+ 	Ebooks
+ 	Spreadsheet and document templates
+ 	Samples of courses
+ 	Webinars / videos
+ 	Beta version
+
+&nbsp;
+
+
+
+&nbsp;
+
+
+
+&nbsp;
+
+
+
+&nbsp;
+Emails as an additional channel of lead generation
+You can systematically achieve high traffic volume but struggle with the conversion rate. To improve it, make several pre-landers (if it’s not prohibited by the advertiser, of course). They are smaller than landing pages and don’t require such broad and detailed information as landing pages do. It should be clear, concise, and appealing enough to engage users in your offer. 
+
+They help you not only to increase your conversions and reason impulsive users but generate leads as well. You can implement a simple email marketing funnel, send promo emails periodically, or ones with bonus and discount offers. For this reason, additional opt-in forms in a footer on your website, at the end of your blog posts, sidebars, or email signatures may be a good alternative for pre-landers.
+Creating email strategy that works
+Now, with ready landing pages, sign-in forms, and lead magnets you should think about the method of collecting emails:
+3rd Step: Collect emails:
+
+ 	Single-opt in option
+Allows you to add users’ contacts to the mailing list with no confirmation
+ 	Double-opt in option
+Allows you to add users' contacts to the list only after they confirm their e-mail with an activation link
+
+
+
+There’s no unanimous opinion on what kind of option is better. On the one hand, a single-opt-in option statistically brings you more subscribers, as there's a great number of people who are unwilling to perform additional actions in their mailbox. On the other hand, the double-opt-in method will provide you with real people who are truly interested in the product you're offering. It'll definitely lead you to a higher conversion rate. Plus, your emails won’t go to the Junk folder in any case.
+4th Step: Segment your list
+ Segmented campaigns get 14.64% more opens and 59.99% more clicks. So, why not lose them?
+
+Segmentation and personalization are the core elements of any successful email campaign. You don’t want to send emails with a special discount on women's sports suites to a teenage footballer. There is no perfect guide on how to segment lists. But there's a number of basic factors that you should consider as the basic ones :
+
+ 	Demographic factors (sex, age, gender, location).
+ 	Audience interests (the best way is to research manually or send a questionnaire).
+ 	Audience preferences ( use any open data about your leads that may help you to understand their general interests and preferences)
+ 	Subscribers’ activity (inactive leads need reactivation emails with bright titles and special offers inside, while active users don’t need any extra efforts).
+Implementing email marketing funnel that brings you conversions
+
+
+Let’s take a look at a simple marketing funnel. The main function of emails here is lead nurturing. Nurtured leads make 47% larger purchases than non-nurtured leads.
+
+
+
+&nbsp;
+
+
+
+&nbsp;
+
+Lead nurturing is the process of establishing and developing relationships with leads at every stage of the marketing funnel.
+
+As you see, nurturing isn't about aggressive promotion. It consists of 3 main stages: providing value, building authority and call to action.
+5th Step: Launch your campaign
+
+ 	
+Create value
+
+
+Productive relationships start with trust. So, before launching any campaign, make sure you really understand your potential customer's pain and problems. Show them that you are aware of their true needs and provide useful content that is tailored to solving their pain points and your product. Don't be promotional at this stage, be helpful.
+
+ 	
+ Establish authority
+
+
+Now it's time to show how exactly your product may solve your audience’s problems.
+At this stage, you may provide guides, success stories, testimonials. Don't push, speak to them in a friendly manner. Create conversation emails with a nice design. Polished fancy ones usually show weaker results. 
+
+
+ 	
+Convince
+
+Sales emails turn came. In this kind of email talk about the benefits of your product/service, show it off a little bit. Use cogent call to action buttons with discounts and special offers with the urgency made of:
+
+- expiring deals
+- a limited number of offers
+- deadline-based offers
+
+
+
+&nbsp;
+
+If you're making the first steps into the world of media-buying and affiliate marketing, we advise you to check some basic tools that can help you test hypotheses with zero or minimum budget. For example, with Rebrandly you can brand, track and share short URLs using a custom domain, so people will not be afraid to click on the link inside the emails. It's a perfect tool for you in case you only want to know the total number of clicks to see how well your ad performs or make sure you'll get value for money. However, if you work with multiple traffic sources and need to get advanced analytics, you should take a more prudent approach to link shortening as some advanced tracking parameters can be crushed in some cases. Just test everything first.
+Conclusion
+Building a high-quality email list for affiliate marketing can take you some time, but it's still one of the most powerful ways of selling "difficult" products. It helps you to reach your audience directly, get a high engagement rate, and successfully upsell them. The core elements of any successful email campaign are valuable content, offers that your leads can't refuse,  and effective call to action buttons. To make sure you do your best, A/B test different headlines, images, copy, and subject lines. And always test your campaign on a small group of subscribers before sending it.

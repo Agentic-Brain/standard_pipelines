@@ -1,0 +1,61 @@
+# iOS 17: everything you need to know as an advertiser
+
+Step-by-step the world of advertising is turning into a privacy-compliant industry. At RedTrack, we have seen all of the life-changing events for advertisers and marketers, like:
+- Block of third-party cookies by major browsers;
+- Introduction of iOS 14 and its ATT prompt;
+- Slow death of Universal Google Analytics. 
+I want to believe that if you have followed our content in previous years, you are not so scared of iOS 17 and its privacy changes. But if you still are confused about what iOS 17 means for advertisers, let’s figure it out together. 
+iOS 17 — another step of Apple to limit advertisers’ access to users’ data
+What is important in iOS 17 for advertisers and marketers is its focus on privacy in Safari Private mode. But what it really means?
+In a nutshell, it means that Apple is aiming to make Private mode as private as possible and block even the most advanced tracking technologies used by marketers to track users' activity. Besides, tracking limitations will also influence links in iMessage and Mail.
+
+The list of privacy changes coming with iOS 17 includes: 
+
+ 	Blocking fingerprinting and known trackers;
+ 	Blocking trackers that map subdomains and various IP-addresses;
+ 	Blocking tracking parameters included in links used by marketers to identify personal data. When it comes to directional data (like campaign, ad set, ad), it’s not going to be affected as it is not considered to be personal information;  
+ 	Blocking trackers that use CNAME cloaking; 
+ 	Blocking availability to track FB (Meta Ads) and Google Ads by removing so-called gclid and fbclid which are considered to be unique personal identifiers (meaning not allowed by this privacy regulation). 
+
+And instead introducing Private Click Measurement support to help marketers out in their job.
+
+Before panicking, I would really encourage you to check how much of your traffic takes Safari and specifically Safari Private mode. 
+
+According to statistics, 62% of users use Google Chrome, and only 20% use Safari (even less - Private mode). 
+
+Therefore, only a small amount of advertising traffic is going to be affected by this update. 
+Can you still track your performance with Google Analytics after iOS 17? 
+Tracking with iOS 17 is going to be quite hard using Google Analytics since Google’s unique click ID (gclid) is going to be automatically removed.
+
+It is a way safer alternative to work with a designated tracking &amp; attribution solution that will use more exquisite tracking technologies to attribute your sales correctly. 
+What stays unaffected after iOS 17?
+Despite all the disputes, Apple did not announce any of those measures for regular browsing mode in Safari. 
+
+Also, even with iOS 17, you can still use custom tracking parameters like we do at RedTrack. It would be quite complicated for Apple to block the usage of custom tracking parameters, but we are going to observe what happens and react accordingly. 
+
+In general, even if Apple starts blocking RedTrack’s IP addresses and subdomains, there is left an option to integrate Private Click Measurement and stay compliant. 
+A different question is — will Apple introduce the same measures with time for Safari in general? 
+Probably yes, but we can not know for sure right now if it’s going to happen and how soon it’s going to happen. 
+What we know with certainty from the experience of privacy updates from Facebook, Apple, Google, and the rest — is that it TAKES TIME to implement such severe limitations. 
+
+We should never forget something we repeat in our content at RedTrack. All of those companies, like Google, Facebook, Apple, depend on the revenue that marketers generate, so whenever new updates are introduced, some alternatives and solutions are also offered. 
+
+The greatest example here is Google and it’s the removal of Universal Google Analytics, which literally took almost 3 years to actually implement. We, as always, recommend to stay calm and get back to the tracking solution you trust for help and advice.
+Is RedTrack threatened by iOS 17? 
+It is a very clear no. 
+We expect these changes to go smoothly. And we have a plan A, B, and C, considering even the worst-case scenario. 
+
+In the past 5 years, we have shown how flexible and agile we are as a company, introducing the following features as pioneers:
+- Using only first-party data for tracking; 
+- Facebook tracking after the introduction of iOS 14; 
+
+- Have developed everything you need to substitute Universal Google Analytics (most of our clients never had to worry about GA’s sunset). 
+
+
+We have smooth integration with Facebook (Meta), Google, TikTok, and other ad channels and networks. Now we devote our dev team’s time to developing a centralized center for your ads when it comes to tracking, accurate attribution, and analytics. 
+
+Expect even more cool features that will put your performance on auto-pilot without ever having to worry about privacy concerns and do not worry about iOS 17.
+
+
+
+&nbsp;

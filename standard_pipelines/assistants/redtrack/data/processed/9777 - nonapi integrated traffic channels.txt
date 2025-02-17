@@ -1,0 +1,8 @@
+# Non-API integrated traffic channels
+
+
+What does it mean? You can still track your clicks and send the conversion data back to the traffic channel you work with, but with the help of dynamic parameters and S2S postbacks.
+
+
+
+Find the list of all the non-API integrated traffic channels below.

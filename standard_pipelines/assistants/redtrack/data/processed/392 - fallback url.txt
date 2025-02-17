@@ -1,0 +1,28 @@
+# Fallback URL
+
+
+Fallback URL&nbsp;is the backup URL, that is used when the traffic cannot reach the main page for some reason (filter, cap). Instead of showing the visitor the ugly “forbidden” screen, you can send those clicks to a backup offer or even a Google page.
+
+
+
+To set it up:
+
+
+
+1. Go to&nbsp;Tools→&nbsp;Fallback URL:
+
+
+
+
+
+
+
+2.&nbsp;You can place any link you want to redirect the traffic from your Campaign as a Fallback URL. Also, you can use Sub ID parameters to send some important data if necessary. These parameters are to be used the same way as it is done on a campaign level:
+
+
+
+
+
+
+
+We suggest you use some additional offer and add its link as a default fallback URL, it will help you not to lose your traffic.

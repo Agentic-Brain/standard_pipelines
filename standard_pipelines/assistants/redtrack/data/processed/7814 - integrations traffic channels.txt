@@ -1,0 +1,7 @@
+# Integrations: Traffic channels
+
+Within RedTrack Unlock you can work with the following traffic channels:
+
+ 	Facebook
+ 	Google Ads
+ 	TikTok

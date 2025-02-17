@@ -1,0 +1,16 @@
+# Native Ad Campaigns Tracking with MGID
+
+With native advertising gaining so much popularity, now is the time to get set up with one of the industry’s best.
+Good news here, as RedTrack is now integrated with MGID — one of the first Native Performance Advertising Networks worldwide.
+Working with the MGID network, the affiliates enjoy:
+• worldwide high-quality traffic
+• traffic suitable for mobile advertising, as about 70% of its traffic is smartphone-generated
+• CPC payment model, i.e., you’re charged only if users click on your ads
+• impressive number of available verticals ranging from Health and Beauty, Weight Loss, and Dating to Online Games, Lifestyle, Entertainment, Finance, and politics
+• selective bidding
+• most targeting options in the industry, including OS, browser (+versions) and language (browser locale)
+• full support service that includes creative services and the assistance of a personal account manager
+Using RedTrack to track the conversions and analyze the performance of your native ad campaigns is easy. And you’ll save time on the setup process, as we’ve already added MGID to the list of trusted traffic sources with all their tokens/tags.
+
+Exclusive bonus for RedTrack users: sign up for extra $100 bonus for your first $500 deposit!
+Please refer to the RedTrack Knowledge Base to learn the steps of setting up conversion tracking between our tracker and MGID.

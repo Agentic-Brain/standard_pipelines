@@ -1,0 +1,62 @@
+# After IOS 14 update: how to save our ads
+
+Breath in. Breath out.
+Yes, the long-awaited IOS 14 update begins the influence. Privacy updates by all major companies have been in the public eye for quite a while. It's time to properly greet them if we want to successfully run the marketing game and continue ad tracking for results. Apple was the leader of the whole movement, and we have to admit: when Apple attempts to change the game — the game changes. So shall we forget about cross-site tracking, digital fingerprints, and Facebook pixels?
+
+
+UPD: Btw, while we all were trying to deal with the consequences of iOS 14, a new player came around — the iOS 15 Update. Check out what RedTrack's CEO Vlad has to say about it. 
+
+
+In a nutshell, what happens after IOS 14 Privacy Update?
+Every IOS 14 user will get an ATT (App Tracking Transparency) prompt when downloading an app. This feature enables user protection against cross-site tracking and actually damages the personalization of your ads.
+
+
+
+We don't know how many users will choose not to be tracked, but we can guess. Early estimations say that around 80% of users will opt-out of ad tracking. Does it hurt? A lot. There is a straightforward truth to that: there is no going back. We have to accept the new rules of the ad game. But firstly, we have to be well-equipped for this sudden landing.
+So who exactly is under the influence of the Privacy update?
+Well, almost everyone. Everyone who is involved in the industry of delivering / arbitraging / receiving ads through IOS devices. First of all, it affected key players on the market: Facebook, Tiktok, and Snapchat and their ability to track users and perform effective campaigns.
+Facebook Ad Management — that is probably the biggest pain of this day (thanks to the IOS 14 update). Starting 19th of January, Facebook updated us with information about only eight conversion events per domain. As well as default switch to a 7-day click and 1-day view attribution setting. If for advertisers, it might not be that much of a problem, for affiliate marketers out there, it definitely is. Facebook's response in the usage of Facebook Conversion API and Aggregated Events Measurement. One of the requirements on the Facebook side was domain verification.
+Check out the video explainer we created about Facebook Conversion API and be prepared to all the changes with Facebook after iOS 14.5 Update rolled out!
+
+
+What is the impact on us?
+Let's see what will never be the same:
+
+ 	audience-building
+ 	targeting
+ 	re-marketing
+ 	in-app attribution tracking
+
+These features will not disappear, but advertisers will experience a decrease in the quality and quantity of those actions for users of IOS 14. However, the Apple update is definitely not the end of the world.
+What happens next in 2021
+ATT (App Tracking Transparency) is like an intro to the world of ad tracking block, which gives us a fair chance to prepare. Later in 2021, Google shall introduce its Privacy Sandbox. Let's try to do simple math.
+
+If IOS 14 users are only a small part of all internet users, Google Chrome users are a much bigger share of the internet traffic. That means the "old way" of cross-site tracking, digital fingerprinting, and inserting pixels on your pages will not allow you to correctly build a marketing campaign across all devices and the most prominent part of internet traffic. There is nothing we can do about it, but ad tracking and conversion attribution have to change.
+How IOS 14 impacts RedTrack platform
+We started preparing for this day (third-party cookies dying day) a few years ago. RedTrack.io is dedicated to bringing you solutions that solely depend on first-party data. Using S2S Postback URLs, we allow our customers to forget about pixels, digital fingerprints, and any other cross-site tracking technology. In a nutshell, Apple or Google updates do not matter to us, as we track and attribute across all web using the future-proof technology.
+
+If you are interested in embedding S2S Postback URLs to track, optimize and manage your campaigns, you are welcome to book a demo with our team.
+
+
+
+How do I save my place in the marketing game?
+Apple started blocking third-party cookies in 2017. Slowly but thoroughly, those measures start affecting niche by niche. Everyone who followed the market's signal began developing strategies to tackle the tracking block. And that is what we have to do now. Follow the call, adapt and implement new technologies. And there is no single recipe to save your business. It depends on what exactly you do.
+Download a checklist
+We have gathered quick information in checklists allowing you to best prepare for all the consequences of ad tracking changes. Quickly fill in the form to get access to insights relevant to your business. ⚡
+
+
+
+ hbspt.cta.load(7519541, 'fd6ef759-cbd4-471d-ac63-edbce0d69fb5', {}); 
+
+
+
+ hbspt.cta.load(7519541, '3b1b92b0-00c3-4bae-96a8-16633c4a52da', {}); 
+
+
+
+ hbspt.cta.load(7519541, 'c09a8105-1714-490d-9b46-cd2fbdec4fbc', {}); 
+Adapt to the new marketing
+Let's not forget that it's not the first and not the last change. A basic evolution rule is that survives the one who adapts faster and better. We all have to learn how to deliver memorable ads in a new world. Follow the market's signal: praise first-party data and deliver the best to your customers.
+
+iOS 14 had a massive impact on Facebook Ads, therefore we decided to create a dedicated private community about Facebook conversion tracking &amp; attribution. Don't hesitate to join to learn more about CAPI, conversion tracking, attribution improvements &amp; other tips from experts. 
+

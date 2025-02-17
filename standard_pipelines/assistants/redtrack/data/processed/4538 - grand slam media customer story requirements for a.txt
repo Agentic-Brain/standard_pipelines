@@ -1,0 +1,62 @@
+# Grand Slam Media Customer Story: requirements for an ad tracker for agencies
+
+Grand Slam Media| Global Ad Agency| full-service
+About the company
+Grand Slam Media is a global agency that specializes in Adult and Members’ Area (dating) traffic utilizing proprietary Real-Time Bidding platform - Adnium. Its strategic goal is to improve the communication threshold between buyers and sellers of online advertising. 
+
+Aside from the dating vertical, Grand Slam Media also has outstanding expertise in such niches as gambling, cams, and nutra. Thanks to their exclusive partnerships with leading and strategically dominant publishers and advertisers, Grand Slam Media has built a well-known name in the advertising market. They not only sell traffic but help clients to implement different strategies for various geos to make sure they reach their desired revenue outcome. Currently, Grand Slam Media has a keen focus on the English-speaking and DACH (Deutschland, Austria &amp; Switzerland) markets. 
+
+
+The problem
+Ad agencies, advertisers, affiliate marketers, media buyers - all of them have different needs, focuses, and performance indicators. However, as Grand Slam Media admits, there’s one pivotal thing that unites them: a desire for a reliable tool that will make the advertising process as effective, simple, and unburdensome as possible. Grand Slam Media team was looking for an advanced solution that will provide them with accurate data, on the one hand, and will not require too much of their attention for the set-up and maintenance, on the other. 
+The Solution
+
+A major reason why we needed the ad tracker solution was for compiling and sending reports on performance traffic to our strategic partners and to further our effective monetization of remnant traffic
+
+- Grand Slam Media
+The functionality of any good tracker has gone far beyond tracking itself. The basic task for any ad tracker is to effectively track different media-buying processes and provide users with quick statistics and clear reporting. But is that enough in today’s busy and competitive advertising space? Simply put, it’s not. Today, ad tracker is a full-fledged assistant, optimizer, and manager. It helps you with all the routine tasks and manages ad processes when your workplace is short-handed, and leads you to higher ROI. 
+
+
+
+In RedTrack all of this is implemented along with:
+
+ 	Fraud Report that prevents you from wasting money on bot traffic.
+ 	Automation rules that will redistribute or stop your traffic if your set KPIs are not met.
+ 	Granular reporting with 30+ real-time data points for traffic monitoring and analysis to help you get the full picture, without sampling.
+ 	Partnership Portal for those who expand media buying into working directly with publishers or other affiliates.
+ 	Multi-user access and shared reports to organize work within a team.
+
+&nbsp;
+Why RedTrack
+
+We have chosen this tracker for several reasons:
+▪︎ cost effectiveness;
+▪︎ advanced reports;
+▪︎ insights that help to optimize and rotate offers;
+▪︎ it enables you to make more intelligent decisions when considering creatives, traffic sources and offers great customer service and support ease of use;
+▪︎ the ability to split test creatives, landing pages and offers to maximize profitability.
+- Grand Slam Media
+&nbsp;
+RedTrack users have full access to their statistics that reflects performance in real-time and can get extensive reports with 30+ data points
+
+
+&nbsp;
+Want to learn more how reports can help you boost your business performance? 
+→ How to Skyrocket your business with RedTrack Data Reports ←
+
+
+The Result
+In addition to the stated requirements, Grand Slam Media could find much more RedTrack advantages than it expected. As the result, RedTrack could help Grand Slam Media in 6 main ways:
+
+ 	Monetization of remnant or under-monetized traffic;
+ 	Quality ad- tracking;
+ 	Producing clear and extensive reports for clients;
+ 	Saving budget;
+ 	Saving operating expenses on additional employees by offering automated features;
+ 	Management of multiple agency members accounts.
+
+Want to learn more about how RedTrack can help you? Let's find it together!
+
+&nbsp;
+
+Read more about automation solutions for ad agencies currently available on the market in RedTrack mini guide  

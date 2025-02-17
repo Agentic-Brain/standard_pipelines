@@ -1,0 +1,21 @@
+# 21-Jan
+
+
+ 	51 degrees database integration for the data processing
+ 	Publisher panel currency
+ 	Referral commission set to 15%
+ 	Offers upload with an automatic campaign creation
+ 	Campaign/offer expiration timer
+ 	Add new macros for useragent, device brand, device model
+ 	Postback to Bing and Facebook
+ 	Cost update frequency changed
+ 	Conversion upload by types
+ 	Rules and alerts:
+New triggers -  LP CTR, % - lp_ctr / Fraud check OK,% - fraud_check Conversions - conversions
+New criteria - money spend
+ 	Publisher Panel:
+Pub-alias in reports
+Additional reports by publishers
+Hybrid conversion campaigns
+Custom payouts
+ 	Currency in a postback (&amp;currency=usd)

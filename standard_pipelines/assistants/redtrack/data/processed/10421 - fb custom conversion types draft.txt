@@ -1,0 +1,96 @@
+# fb: custom conversion types draft
+
+
+Before you add custom conversions on Facebook, make sure you have already:► Set up Meta Pixel on your website.► Created standard events or custom events on your website.
+
+
+
+To create custom conversions on Facebook act as follows:
+
+
+
+1. Go to Events Manager-&gt; Custom conversions-&gt; Create custom conversion:
+
+
+
+
+
+
+
+
+
+
+
+2. Fill in the mandatory fields in the pop-up window:
+
+
+
+
+
+
+
+Fields explained:
+
+
+
+(1) Give your custom conversion a Name
+
+
+
+(2) {optional} Add a Description to distinguish your custom conversion from others in the list
+
+
+
+(3) Select the needed Data source
+
+
+
+(4) Select the Action source where your custom conversions are attributed to
+
+
+
+(5), (6) Select the needed Event 
+
+
+
+If you select All URL traffic or a custom event, you’ll see the option to Choose a standard event for optimization. Facebook recommends that you keep the category they chose for you. If you want to choose a different category, select the one that best describes the conversion event you’re optimizing. Learn more about standard event categories in oFacebook best practices.
+
+
+
+(7) Set up a Rule using a URL or Event parameters. You can select parameters that you currently send with the event you selected. If you don’t see the parameter you want to choose, update your pixel or Conversions API setup to send the parameter with your event.
+
+
+
+☝Parameters follow the OR condition. For example, if you create a custom conversion using a purchase event and type in Product A, Product B and Product C in the content_id parameter value, the custom conversion measures when someone purchases product A, B or C.☝Rules follow the AND condition. For example, if you create 3 separate rules for content_id equals A, content_id equals B and content_id equals C, the custom conversion measures when all 3 events occur.☝Click + if you’d like to add more rules.Check out this Facebook article to learn more about Rules within this setup.
+
+
+
+(8) {optional} Click to check the box next to Enter a conversion value, then enter your value. Only use this field if the events in your custom conversion don't already have a conversion value. Use whole numbers and don't include any additional characters.
+
+
+
+(9) Press Save to apply the changes to the custom conversion template.
+
+
+
+Facebook guides on custom conversions that can also be useful:☛ Filtering events in Meta Events Manager☛ Best practices for custom conversion setup in Meta Events Manager☛ How to edit custom conversions in Meta Events Manager☛ How to delete custom conversions in Meta Events Manager
+
+
+
+3. Once you've created your custom conversion in order to activate it navigate to the page of your website it's referencing to trigger it. Then get back to Events Manager-&gt; Custom conversions tab and see if the added conversion changed its status to Active:
+
+
+
+&nbsp;
+
+
+
+
+
+
+
+Please mind that RedTrack can only assist you in managing certain aspects of your Facebook settings. However, please be aware that any changes in Facebook's interface, policies, or settings are beyond our control. Thus, if you experience any issues with the setup on the Facebook side, please turn to Facebook Knowledge Base or support team.
+
+
+
+&nbsp;

@@ -1,0 +1,268 @@
+# konnektive and checkout champ (draft)
+
+
+Konnektive CRM&nbsp;is a campaign and customer management platform that helps marketers automate and streamline complex sales procedures. It is a great web application for managing your products from a logistical and customer-driven standpoint.
+
+
+
+CheckoutChamp is&nbsp;a standalone single-step checkout and one-click upsell tool&nbsp;that works with every e-commerce platform, designed to increase sales conversion, and average order value quickly and easily.
+
+
+
+Konnektive and CheckoutChamp are essentially the same CRMs with minor differences in name and UI. Both platforms are integrated with RedTrack in the same way. To connect either of the platform with RT follow the integration steps below.
+
+
+
+Integration
+
+
+
+Почти все. Осталось:2. в конекктиве\чемпе скриншот от Вал\Сони про product total вместо order total 3. лого checkoutchamp в чистовик4. таги в чистовик
+
+
+
+
+
+1. Add&nbsp;custom tracking domain.
+
+
+
+2. Set up&nbsp;conversion tracking.
+
+
+
+3. Add Konnektive/Checkout Champ Offer source (if you're and an Affiliate)/ Brand (if you're and Advertiser) to RedTrack:
+
+
+
+
+
+1. Offer sources → New from template → find Konnektive/Checkout Champ template and ADD it:
+
+
+
+
+
+
+
+2. In this template you must:
+
+
+
+
+Add the affId parameter in the Offer URL template: copy the value for your affid parameter from Konnektive/CheckoutCamp → put it instead of REPLACE in the Offer URL field
+
+
+
+Add the following additional parameters:[orderId]&nbsp;– represents the orderId (often TRANSACTION_ID)[emailAddress]&nbsp;– represents the customer’s email address [phoneNumber]&nbsp;- represents the customer’s phone number
+
+
+
+
+
+
+
+
+Here you can find the full list of the tokens available in CheckoutChamp.
+
+
+
+3. Once you've saved the template, copy the Postback URL to add it later in your Konnektive/CheckoutChamp pixel settings: 
+
+
+
+
+
+
+
+В setup in Konnektive/Champ добавить шаг куда всунуть копид постбек. В основной статье это шаг Settings on the RedTrack side → шаг 8-9
+
+
+
+
+
+1. Brands → New from scratch → in the template you must:
+
+
+
+
+Give your brand a name.
+
+
+
+Add [c2] and [orderTotal] values to the Postback parameters fields.
+
+
+
+Add https://checkout.offer.com/robot?affId=REPLACE&amp;c1=[c1]&amp;c2={clickid} into the Website URL template field and put the real value next to the affId parameter in the template. To do that copy the value for your affid parameter from Konnektive/CheckoutCamp → put it instead of REPLACE in the Website URL template.
+
+
+
+In the Additional parameters field add the following tokens: [orderId]&nbsp;– represents the orderId (often TRANSACTION_ID)[emailAddress]&nbsp;– represents the customer’s email address [phoneNumber]&nbsp;- represents the customer’s phone number
+
+
+
+
+
+
+
+
+Here you can find the full list of the tokens available in CheckoutChamp.
+
+
+
+2. Once you've saved the template, copy the Postback URL to add it later in your Konnektive/CheckoutChamp pixel settings:
+
+
+
+
+
+
+
+
+
+4. Add your Offer (if you're and an Affiliate)/ Website (if you're and Advertiser):
+
+
+
+
+
+Offers → Create new offer → use this guide to help you with the offer setup.
+
+
+
+Your Offer URL should be of the following format https://yourofferurl.com?affId=12ABCC34&amp;c1=[c1]&amp;c2={clickid}&amp;clickid={clickid}, where:- yourofferurl.com is the actual offer url.- affId=12ABCC34 is the replaced Add Id value from Konnektive/CheckoutChamp.
+
+
+
+
+
+Websites → Create new website → use this guide to help you with the offer setup.
+
+
+
+Your Website URL should be of the following format https://yourofferurl.com?affId=12ABCC34&amp;c1=[c1]&amp;c2={clickid}&amp;clickid={clickid}, where:- yourofferurl.com is the actual website (offer) url.- affId=12ABCC34 is the replaced Add Id value from Konnektive/CheckoutChamp.
+
+
+
+
+
+5. Create a paid traffic campaign
+
+
+
+– For Advertisers, the campaign for the unattributed (organic) traffic is already in place once you add your Website.– Affiliates should add the campaign for the unattributed (organic) traffic as per this guide.
+
+
+
+To create a campaign for the paid traffic follow these simple steps:
+
+
+
+
+Add the&nbsp;Traffic channel. Most of them have a preset template in RedTrack.
+
+
+
+Launch a campaign&nbsp;for the paid Traffic channel. Your website/shop will be the main link added to the traffic channel. Be guided by&nbsp;this article&nbsp;for Advertisers /&nbsp;this one&nbsp;for Affiliates.
+
+
+
+
+
+
+1.&nbsp;Log in&nbsp;to your Konnektive account:
+
+
+
+
+
+
+
+2.&nbsp;Go to&nbsp;CRM&nbsp;→&nbsp;Affiliates → press “+” to add the Affiliate profile: 
+
+
+
+
+
+
+
+3.&nbsp;In the pop-up window&nbsp;Edit Affiliate&nbsp;fill in the&nbsp;Title&nbsp;field:
+
+
+
+Aff Id value is generated automatically, so do not edit/add anything in this field
+
+
+
+
+
+
+
+4.&nbsp;Pay special attention to the&nbsp;Passed Values&nbsp;window:
+
+
+
+4.1&nbsp;press “+” to add a new value:
+
+
+
+
+
+
+
+4.2&nbsp;make sure that values are ticked as follows:
+
+
+
+
+c1 = Publisher ID
+
+
+
+
+
+
+
+
+
+c2 = Sub Affiliate (this is clickid passed to RedTrack)
+
+
+
+
+
+
+
+
+4.3&nbsp;in case it’s needed to change the values, press&nbsp;Edit:
+
+
+
+
+
+
+
+5.&nbsp;Press&nbsp;Update&nbsp;to save the changes:
+
+
+
+
+
+
+
+6.&nbsp;Create a&nbsp;Campaign in Konnektive
+
+
+
+Setting the Campaign in Konnektive requires some particular steps which you can find in the article Konnektive Campaign creation.
+
+
+
+The Campaigns you’ve added can be viewed in the&nbsp;Campaign&nbsp;tab of your profile added to&nbsp;Affiliates:
+
+
+
+Once you create a new Campaign remember to go back inside the affiliate settings and attach the newly created Campaign.
+
+

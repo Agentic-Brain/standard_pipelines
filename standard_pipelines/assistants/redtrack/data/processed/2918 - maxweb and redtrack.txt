@@ -1,0 +1,126 @@
+# MaxWeb and RedTrack
+
+
+
+
+
+
+MaxWeb is a self-service performance marketing affiliate network that specializes in maximizing results for both affiliates and advertisers.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Conversion events
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add MaxWeb as an Offer source in RedTrack
+
+
+
+1.1 Offer sources→ New from template→ find MaxWeb template→ Add:
+
+
+
+
+
+
+
+1.2 Copy the Postback URL→ Save the template:
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+2. Set up RedTrack Postback URL in MaxBounty
+
+
+
+Go to your MaxWeb account→ &nbsp;Settings→&nbsp;My Profile→ the&nbsp;Postback Pixel&nbsp;tab→ click&nbsp;Add→ paste the postback URL (copied in step 1.2) in the&nbsp;URL&nbsp;text field and press&nbsp;Save:
+
+
+
+
+
+
+
+
+
+
+
+3. Get the MaxWeb offer URL
+
+
+
+In MaxWeb go to the&nbsp;Campaigns&nbsp;view→ choose an offer you want to promote→&nbsp;Dashboard&nbsp;view→ copy the offer URL to the clipboard:
+
+
+
+
+
+
+
+
+
+
+
+4. Add MaxWeb Offer to RedTrack
+
+
+
+RedTrack→ Offers→ New→ give the offer a name and choose MaxWeb as the offer source→ paste the URL from MaxWeb (copied within step 3.2) → add subid2={clickid} to the URL→ Save:
+
+
+
+
+
+
+
+Refer to this guide for details on filling in the rest of the fields in the Offer form.
+
+
+
+5. Create the&nbsp;Campaign&nbsp;with the traffic channel you buy the traffic from and the offer you have just added. 
+
+
+
+To create a campaign refer to:
+
+
+
+
+this guide&nbsp;for Advertisers.
+
+
+
+this guide&nbsp;for Affiliates.
+
+
+

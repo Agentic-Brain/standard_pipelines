@@ -1,0 +1,96 @@
+# Google Privacy Sandbox: Approaching Cookieless Future [Updated 2022]
+
+Privacy matters &amp; cookies' death
+We all have been surprised with approaching Google Privacy Sandbox in 2021. However, Google moved the dates to 2022 and 2023 in order to develop the technologies needed for advertisers to keep their performance. 
+2022: But 2022 started with a new hassle: now Google wants to implement new privacy restrictions for Android users as well. There were a few more changes in the technologies that are in development. The FLoC idea changes for the so-called Topics API to introduce the same interest-based advertising. Let's see how Google is handling the cookieless future in this blog post. 
+&nbsp;
+
+Why is it important?? From the statistics below, we can clearly see that the most used browser is Google Chrome. If we believe this data, we can assume that things will change for 63% of internet users. And that's a considerable number.
+
+
+Cookies Background
+Before we dig into big and scary Sandbox, let's go through the phenomenon of cookies.
+Cookies are the little pieces of code stuck to your browsing history and saving information about your activity on the web. In the same way that it's hard to stay away from cookies in real life, it is hard to get away from them on the web.
+But! All cookies are different. Like there is a difference between sugary-buttery cookies and wholegrain Wholefoods cookies, there are different web cookies. You have to know the difference between these two:
+
+ 	First-party cookies. These cookies store your information when you log in to different resources, so you don't have to fill in your password each time. Or they help you find a page you have been visiting recently — it takes the browsing experience to another level.
+ 	Third-party cookies. On the contrary, these guys are full of S-spying. Basically, they get stuck to your browsing history, transmit your data, and then you get a feeling that targeted ads are all around you, showing you things you recently googled. And sometimes, it can show things that you did not necessarily want to share with the world!
+
+Users' Privacy is important
+Most likely, if you are reading this, you work for the advertising industry, and all changes of 2021 are not playing in your favor. iOS 14 has been messing things up; Facebook has been such a pain, the Google Privacy Sandbox is approaching (and yes, it is real). Probably you feel like you want everything to go back to its place (smells like a rewind of 2020 😂).
+
+However, we recommend you pull yourself together, do your research, and adapt as soon as you can. Because 2021 is gonna be challenging, but if you make the right moves now, you will win on a long race against your competitors. Users' privacy matters are essential, and it was a long due issue. The Internet has to be a safer place to store our personal information. No matter whether we work in the industry, we are users ourselves. And we doubt you want it to be an unhealthy space.
+What is Google Privacy Sandbox?
+Google Privacy Sandbox is an initiative that takes users' privacy in the first place. As Google says, Sandbox's mission is to "Create a thriving web ecosystem that is respectful of users and private by default." Sounds great, but what exactly happens in this mysterious Box?
+
+Briefly, Sandbox is a complex of actions that will bury third-party cookies, tracking as we know it. Instead, create five APIs to replace the functionality that advertisers require (like conversion measurements, attribution modeling, etc.).
+
+[caption id="attachment_7614" align="aligncenter" width="735"] Google Privacy Sandbox from the inside[/caption]
+
+
+Let's break down each initiative to understand better what is awaiting.
+Elimination of third-party cookies, cross-site tracking &amp; digital fingerprinting
+Google is committed to reach an end-game for third-party cookies, ensure that there no more hidden techniques to transmit users' data and track their activity on the web. We have to say that it took a long time for Google to take proper actions. To compare, Safari (Apple) introduced similar measures in 2017, Firefox in 2019.
+
+Why? Google is one of the key players in the ad market, so we assume they took their time to prepare substitutes for their advertising partners. Google is developing new technologies that will allow creating marketing and targeting for audiences in a "safe way". More about it in the next point.
+
+We have to make it clear that it's not a horror story that has no relation to reality. It is a new reality we are going to face in 2021 — advertising, remarketing, targeting without third-party cookies.
+Introduction of Interest-based Advertising
+Interest-based advertising consists of two parts:
+
+ 	Introduction of FLoC (Federal Learning of Cohorts)
+Instead of cookie-based targeting to individuals browsing on the web, FLoC will create targeting for groups of people. In other words, Google calls it "interested-based advertising". According to their interests, Internet users will be associated with a particular group, and ads will be focused on specific groups corresponding to its' marketing needs.
+
+[caption id="attachment_7613" align="aligncenter" width="739"] Cookie-based targeting VS Interest-based targeting[/caption]
+
+
+So Google does create "healthy alternatives" to ancient targeting. However, there are a few question marks here and there. FLoC is still under the experiment, so it is hard to predict how good it will be in action. It will most likely take some time for developers at Google to adjust the new algorithm for it to work the way we advertisers want it to work.
+
+Will FLoC be as effective for us as advertisers as targeting? Nobody can answer that too, at this point. There is a chance that interest-based advertising will not work as groups do not show as much accuracy as individual targeting. However, it might have a different effect. Only time will show ;)
+
+&nbsp;
+ 	 Introduction of TURTLEDOVE
+This API recreates an "auction" like environment for remarketing. The API is taking into consideration ads that are only relevant to your previous interest. The "auction algorithm" decides which ad has to be shown at this moment to this user. At the same time, ensuring not to link data interest individually and keep their information safe.
+
+In a nutshell, API makes sure that ads in pulled out on the users' screen according to contextual data and previous interest, however not giving ad network private information about a user, his/her browsing activity, or his/her choice.
+Ad Fraud Prevention
+To tackle Ad Fraud, Google is working on Trust Token API, which will enable verifying the authentic traffic by giving "trust token". This API is encouraging users to prove their authenticity without revealing identity. Basically, Trust Token is not personalized and can not be used to track user's activity. At the same time, they are dedicated to ensuring that this user is not a bot but a real human or service.
+
+We can not but think of Black Mirror 😄 Google is giving us tokens to make sure we are credible and trustworthy enough. Well, jokes aside, this is to the benefit not only for users but advertisers as well. Internet as a safe place where you are not afraid to be scammed is definitely a place to be.
+
+Trust Tokens API has been in test since July and open for use. And starting March, Google is planning to start a full-on trial of the new API. Let's see where it brings us.
+Conversion Measurement
+Measuring advertisement/campaign results and performance is a crucial part of the ad industry. And Google (as a key player) could not simply go away from it. To ensure that performance tracking is still allowed, Google is introducing Conversion Measurement API.
+
+This initiative's main task is to track conversion events and perform attribution while taking care of users' privacy. The information about impressions and conversions has to stay inside the browser. Two decisions will power it:
+
+ 	Click-through conversion measurement level: understanding which clicks turn into conversions.
+ 	Aggregated reporting: taking reports from multiple websites and users to keep individual's private information.
+
+Industry's concerns with Google Privacy Sandbox
+All things that Google is doing may appear noble to a novice internet user. But remember how long it took Google to start making these implementations in comparison to others?
+
+Eventually, the CMA started an investigation in order to check if updates from Google Sandbox will not cause even further focus of the ad industry on Google Ecosystem and cause monopoly at the expense of other players. We have to understand that while we as advertisers, business owners, or simple internet users get restricted from getting info (or being "protected" as Google says), Google still receives and stores all the information about us. It may cause an increase in the cost of advertisement and an increase in Google's stock evaluation. Should we trust Google? Those multiple lawsuits are endangering Privacy Sandbox, but we think that the chance to eliminate it is pretty low. So we'll see by the cost of ads and stock markets if the monopoly has been officially formed 😉
+Consequences for the ad industry &amp; and what can you do now?
+Let's see what will never be the same:
+
+ 	audience-building
+ 	targeting
+ 	remarketing
+ 	tracking of users activity on the web
+
+Even though Google is working on multiple decisions now to substitute the loss, we still don't know how effective those decisions are going to be and how soon these decisions will be sufficient. At this moment, we, as ad experts, have to make sure we are ready to operate without third-party data, cross-site tracking, and digital fingerprinting. Gathering and functioning only with first-party data is essential. So if you are not into it now, you should by the end of this article.
+
+An easy solution would be to use a future-proof tracker that uses first-party data to track conversion events and perform attribution modeling. Our team at RedTrack has dedicated the last several years to make sure that we are prepared for the times without cookies. But we always wanted to keep it tasty. 😄
+
+The most straightforward strategy to go now is to use S2S Postback URLs (Server-to-Server) to keep the performance of your campaigns under control and gather data about your ads from multiple resources in one place and optimize your ad performance.
+
+
+
+Leave cookies on the shelves
+A lot of uncertainty awaits, but we have to stay on top. Doing your research at times like this is crucial to make sure you do the best for your business, and you use all the proper tools. A quick piece of advice would be to stop using third-party data now and get used to the reality where cookies are only on the stores' shelves, not stuck to users' browsers. A new (maybe healthy) Internet is coming, and we have to adjust our advertising to it.
+If you need more juicy details about Google Privacy Sandbox, check out a dedicated video on our Youtube channel (and don't forget to subscribe 🙃).
+
+&nbsp;
+
+&nbsp;

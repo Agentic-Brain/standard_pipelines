@@ -1,0 +1,112 @@
+# BuyGoods and RedTrack
+
+
+
+
+
+
+BuyGoods is a sales platform for tracking, analytics, reporting, and advertiser management.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add the conversion types to RedTrack.
+
+
+
+On the s2s postback level, BuyGoods supports only Purchase events such as frontend and upsell and InitiateCheckout (added via script). To track these events, first you need to add them as conversion types in RedTrack:
+
+
+
+Add these events if you want to differentiate sale, frontend and upsell in RedTracksalefrontendupsellAdd a unified name for all the conversions if you prefer this optionFor For Facebook, the best option will be Purchase:Add the Initiate Checkout event if you want to track it
+
+
+
+2. Add BuyGoods as an Offer source in RedTrack. 
+
+
+
+Offer Sources → New from template → add BuyGoods template → add the additional parameters and assign corresponding roles to them → save the template
+
+
+
+Parameter eventid - Macro {ORDERID} - Role Event IDParameter email - Macro {EMAILHASH} - Role Email
+
+
+
+
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+3. Adjust and copy the postback URL.
+
+
+
+
+
+
+
+If you work with:salefrontendupsellThe postback example is:https://tracking.domain/postback?eventid={ORDERID}&amp;email={EMAILHASH}&amp;clickid={SUBID}&amp;sum={COMMISSION_AMOUNT}&amp;type={CONV_TYPE}Replace the tracking domain with your actual tracking domain.If you work with a unified parameterThe postback example:https://tracking.domain/postback?eventid={ORDERID}&amp;email={EMAILHASH}&amp;clickid={SUBID}&amp;sum={COMMISSION_AMOUNT}&amp;type=PurchaseReplace Purchase in &amp;type=Purchase with your event name if it differs.Replace the tracking domain with your actual tracking domain.If you want to track InitiateCheckout eventsAdd this script to BuyGoods (to the InitiateCheckout script). Remember to replace the track.example.com with your custom tracking domain:&lt;script&gt; document.addEventListener("DOMContentLoaded", function() { var postbackUrl = "https://track.example.com/postback?clickid={SUBID}&amp;type=InitiateCheckout"; var img = new Image(); img.src = postbackUrl; }); &lt;/script&gt;
+
+
+
+4. Add the postback to BuyGoods
+
+
+
+BuyGoods account → Postback Pixels → add new → paste the postback URL you have generated before → save the changes
+
+
+
+
+
+
+
+5. Grab the offer link from BuyGoods and add it to RedTrack
+
+
+
+Offers →&nbsp;New → BuyGoods&nbsp;as your&nbsp;offer source (the&nbsp;URL&nbsp;field is automatically filled in with the template for your offer) → paste in there your actual&nbsp;offer URL&nbsp;→ add&nbsp;&amp;subid={clickid} to the end of your offer URL:
+
+
+
+Template for the Offer URL: your.offer.url?aff_id=XXXX&amp;subid={clickid}, where you should replace your.offer.url part with your actual offer link.
+
+
+
+
+
+
+
+Follow this guide to help you fill in the rest of the fields and tabs in the template.
+
+
+
+6. Create a paid traffic Campaign in RedTrack. Refer to this guide for details.
+
+

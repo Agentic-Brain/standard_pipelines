@@ -1,0 +1,36 @@
+# 21-Mar
+
+
+ 	Logs for cost updates (via API)
+ 	Custom domains with SSL only
+ 	Facebook connect button for the traffic source edit page
+ 	Block duplicate сonversion by a separate type
+ 	Facebook cost updates up to 5 mins
+ 	Auto optimization - visualize the path
+ 	Rules for publisher panel campaigns
+ 	Custom postback types restrictions for shared accounts
+ 	Facebook multi pixels
+ 	Publisher access by traffic source and campaign
+ 	Show publisher details (ID / Alias)
+ 	Calculate EPC (campaigns: total revenue/clicks, reports: default revenue/clicks)
+ 	Limits on the API requests
+ 	Filter by unique visits (unique path)
+ 	New macros:
+{prelanderid}
+{prelandername}
+{landerid}
+{landername}
+{offerid}
+{offername}
+{browserversion}
+{osversion}
+{countryname} full Country name
+{connectiontype}
+{referrerdomain}
+{clicktime}
+{campaignname}
+{trafficsourcename}
+
+
+ 	New drag logic for columns
+ 	Currency displayed in Publisher Panel

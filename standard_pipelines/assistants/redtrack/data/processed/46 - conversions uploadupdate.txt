@@ -1,0 +1,108 @@
+# Conversions: upload/update
+
+
+If for some reason your conversions were not uploaded, RedTrack functionality allows you to upload them manually or update them as per your needs.
+
+
+
+
+
+Before adding conversions know that:1. Once uploaded, conversions cannot be removed from your RedTrack statistics.2. Conversions in RedTrack can be uploaded via 2 options (see the steps below for details).
+
+
+
+To upload conversions act as follows:
+
+
+
+1. On the main RedTrack menu go to Logs → Conversions:
+
+
+
+
+
+
+
+2. Decide on the option for the conversions upload and act on it:
+
+
+
+
+
+Add conversions → in the pop-up window add the click ids for the missing conversions and the payouts → Save:
+
+
+
+
+
+
+
+
+
+1. Upload → Download Template:
+
+
+
+
+
+
+
+2. Open the downloaded .csv file → add the needed conversion click ids and the payout values for them:
+
+
+
+
+
+
+
+3. Logs → Conversions → Upload → Upload Conversions → choose from your computer the .csv file with conversions you've created in step 2
+
+
+
+
+
+
+
+Once the changes are saved, your conversion will appear in your conversion logs and reports.
+
+
+
+Mind that when downloaded, the CSV file is automatically uploaded in the user's timezone, as conversions logs are always displayed in the user's timezone.Example: user’s account (GMT-4) - New York. We want to upload conversions and see their time in the logs 14:00:00. We put them in the file as 18:00:00. If the account is GMT+4, we want to see 14:00:00 in the logs, we put 10:00:00 in the file.
+
+
+
+Make sure there are no duplicated clickids for the cases where you don't need to see duplicates in your reports. Use the most suitable option in the Duplicate postback mode section of your Offer source/Brand (Offer sources/Brands → choose the needed one among the added → scroll down to the Default duplicate postback mode section):For more info &amp; explanation on the postback modes go to this guide (How to set up conversion statuses→How to process duplicates). 
+
+
+
+
+
+
+
+Payout
+
+
+
+If you need to update the conversion data, it can be done the same way as a regular upload described above. The only thing you should keep in mind is that you will have to change the Duplicate postback mode in your offer source for RedTrack to update the data. To do that go to Offer sources → choose the needed one → scroll down to the Default duplicate postback mode section → select the needed mode:
+
+
+
+
+
+
+
+Do not use Create a new conversion in this case, as it  will create a new conversion without editing the initial one.Here you can find more info on the duplicate postback modes. 
+
+
+
+Status
+
+
+
+To update the conversion status go to Logs → Conversions → Update status → add the click id of the conversion you need to update and choose the target status → Save:
+
+
+
+
+
+

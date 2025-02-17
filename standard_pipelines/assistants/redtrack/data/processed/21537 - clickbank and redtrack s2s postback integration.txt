@@ -1,0 +1,158 @@
+# ClickBank and RedTrack (S2S postback integration)
+
+
+
+
+
+
+
+
+
+
+ClickBank&nbsp;is an e-commerce platform and affiliate marketplace. It’s the intermediary between the end customer, the product owner, and the affiliate marketer helping connect every party and providing the infrastructure for a smooth transaction online.
+
+
+
+This guide describes Clickbank ↔ RedTrack integration process using the ClickBank Postback/Pixel feature. You should use this method if you want to track such events as:- Order Form Impression- Initial Purchase- Upsell PurchaseAny other ClickBank events can be tracked via the Instant Notification Service (INS). For details follow our Clickbank ↔ RedTrack (INS tracking) integration guide.
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration make sure you’ve already added the following in RT:
+
+
+
+
+Custom tracking domain
+
+
+
+Traffic channel
+
+
+
+
+
+
+1. Add to RedTrack the event types you want to track.
+
+
+
+Remember that using ClickBank Postback/Pixel feature you can track/add only the following types of events:- Order Form Impression- Initial Purchase- Upsell Purchase
+
+
+
+In your RT account go to Tools → Conversion tracking → Conversion type → add the events you want to track → Save:
+
+
+
+
+
+
+
+Follow this guide for details about conversion tracking in RT.
+
+
+
+2. Add the Clickbank template to RedTrack.
+
+
+
+2.1 Offer sources&nbsp; → New from template → find Clickbank (S2S postback) → Add: 
+
+
+
+
+
+
+
+2.2 In the Additional parameters section add the following parameters and assign the corresponding roles to them. Once its done, copy the Postback URL: 
+
+
+
+Parameter Macro / TokenName / DescriptionRoleeventid{event_id}Event IDEvent IDzip{postal_code}ZIPZip Code{order_id}Order ID
+
+
+
+
+
+
+
+For Vendors only!In the template go to Postback parameters and edit the following values for them:- CLICKID: {vtid}- SUM: {vendor_earnings}
+
+
+
+Refer to this article for details on Offer sources in RedTrack.
+
+
+
+3. Set up Postback URL in ClickBank and customize it as per the needed event type.
+
+
+
+3.1 In your ClickBank account go to Integrations → Postback/Pixels → Add Integrations → Custom Postback/Pixel:
+
+
+
+
+
+
+
+
+
+
+
+3.2 In the Event Types drop-down select the ones you want to track (these are the ones you added in step 1 in RT) → enable the Cutomize URL per event type toggle → add RT Postback URL (copied in step 2) and add &amp;type=eventname to each Postback URL with the event name you want to track → Save:
+
+
+
+
+
+
+
+Here is more info on the ClickBank Postback setup. 
+
+
+
+4. Add ClickBank offer to RedTrack.
+
+
+
+In your RedTrack account go to Offers&nbsp;→ Create new offer → add ClickBank offer link in the URL field -&gt; add the tracking parameters “tid={clickid}”&nbsp;at the end of the offer URL → Save changes to the template:
+
+
+
+
+
+
+
+For Vendors only!Instead of tid={clickid} Vendors should add vtid={clickid} to the Offer URL:
+
+
+
+Refer to this guide for details on filling in the rest of the fields in the Offer form.
+
+
+
+5. Launch a campaign in RT to start receiving the data.
+
+
+
+To create your campaign refer to:
+
+
+
+
+this guide&nbsp;for Advertisers.
+
+
+
+this guide&nbsp;for Affiliates.
+
+
+

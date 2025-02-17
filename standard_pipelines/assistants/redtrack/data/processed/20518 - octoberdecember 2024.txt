@@ -1,0 +1,4 @@
+# October-December 2024
+
+
+{"changelog":[{"version":"1","date":"7 October 2024","changes":[{"category":"New Feature","change":"Added search by the title to the section with Scripts."},{"category":"Improvement","change":"Internal optimizations were performed in the API postback logs."}]},{"version":"2","date":"15 October 2024","changes":[{"category":"New Feature","change":"Added pagination to the sections with Scripts and Domains."}]},{"version":"3","date":"23 October 2024","changes":[{"category":"New Feature","change":"Added 2 new formats for filters: Contains/not Contains."}]},{"version":"4","date":"28 October 2024","changes":[{"category":"New Feature","change":"Added the field \Region\" to the Logs by Clicks and Conversions.""}]}

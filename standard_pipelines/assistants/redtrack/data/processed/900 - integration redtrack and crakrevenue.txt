@@ -1,0 +1,22 @@
+# Integration: RedTrack and CrakRevenue
+
+RedTrack is now integrated with CrakRevenue - Canadian based CPA network and award-winning affiliate program. With more than 10 years of expertise in web and affiliate marketing, this network has firmly confirmed to be an innovative and trusted brand. 
+CrakRevenue at a glance: 
+
+• 1000+ top converting offers 
+• Verticals covered: Adult (Dating, Cam, VOD, Gaming), Gaming, Gambling, Entertainment, Nutrition, Apps, Crypto, and more
+• 10+ dedicated affiliate managers 
+• High payouts (Revshare, PPL (SOI &amp; DOI) &amp; PPS) 
+• Payments terms: Weekly, Bi-monthly &amp; monthly 
+• Extra earning opportunities (Back offers, popunders, etc.) 
+• Its own line of Smartlinks, Survey Generator and Native Ads Generator
+RedTrack team has already added CrakRevenue to the predefined list of Affiliate Networks with the pre-formatted postback URL. That means you can start promoting your CrakRevenue offers in a matter of a minute and get precise reporting straight into your RedTrack account. 
+
+How do you use the pre-defined affiliate network? 
+The entire process comprises 4 easy steps: 
+
+ 
+
+
+Finally, simple step-by-step integration guide can be found in our Knowledge Base. Have any further questions, drop us a line to support@redtrack.io, and our team will be happy to assist you.
+Start your RedTrack free trial.

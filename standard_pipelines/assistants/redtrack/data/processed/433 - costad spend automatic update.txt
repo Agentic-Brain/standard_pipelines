@@ -1,0 +1,80 @@
+# Cost/Ad spend: automatic update
+
+
+What's an "Auto update cost" feature?
+
+
+
+Auto update costs feature allows you to receive your cost data directly from the traffic channel via the API. It means there is no need to use any macros or update costs manually each time. Enabling this feature can help you with the following:
+
+
+
+
+Costs are updated not in real-time but several times a day with a frequency from 5 up to 60 minutes on the Campaign,&nbsp;Adset, and&nbsp;Ad levels. Update of frequency and level depends on your subscription plan.
+
+
+
+Auto update costs feature presupposes smart automation, so if you have multiple campaigns in your Google or Facebook account,&nbsp; you don't have to create the same amount of campaigns in RedTrack as our smart automation can attach your traffic channel campaigns costs to 1 RedTrack campaign.
+
+
+
+No additional settings are required. All you need to do is integrate your traffic channel → choose the needed cost update depth and frequency → enable the auto update costs toggle in the campaign with your traffic channel. Once it's done RT will take your campaign IDs from the traffic channel and attach the cost data accordingly.
+
+
+
+
+ In order to avoid data discrepancy every day at UTC+14:00 RedTrack renews (recirculates) costs data for the previous day for such channels as Google, Facebook, Bing, and Outbrain.
+
+
+
+Since the auto update cost feature it API bound, make sure you channel is integrated with RedTrack via API and is eligible for it. Go to this article → part API-based Cost updates. If your traffic channel is not in the list it means that this feature is not available for you, please contact support@redtrack.io for further guidance.
+
+
+
+How to enable the "Auto update cost" feature
+
+
+
+In order to set up the auto update cost feature act as follows: 
+
+
+
+1. In the added traffic channel template choose the needed levels of Cost update depth and Cost update frequency → Save changes to the template:
+
+
+
+
+
+
+
+
+
+If your traffic channel is eligible for all 3 levels: Campaign, Adset, and Ad, but there is a lock next to it, it means that this level of cost update depth is not included in your subscription plan:To get this level, please contact support@redtrack.io.
+
+
+
+
+
+
+
+
+
+The default value for Cost update frequency is 30 minutes. In order to change it to 15 or 5 minutes please contact support@redtrack.io. 
+
+
+
+
+
+2. Once you've created a campaign with this traffic channel in the campaign settings turn on the toggle Auto update costs → Save changes to the campaign:
+
+
+
+
+
+
+
+Click here for the guidance on campaign creation in RT. 
+
+
+
+Auto update costs feature works well for Campaigns with CPM or CPC cost models. Using this feature with CPA or RevShare cost models will cause data discrepancies.

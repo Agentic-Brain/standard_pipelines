@@ -1,0 +1,64 @@
+# Unique clicks
+
+
+RedTrack can help you filter your clicks by their uniqueness and define the number of unique clicks.
+
+
+
+
+
+Uniqueness of the click (Unique or Non-Unique) is defined by the following criteria:
+
+
+
+
+Unique click = there IS an rt clickid in the cookie. 
+
+
+
+Non-unique click = there is NO rt clickid in the cookie. 
+
+
+
+
+Сlickid is kept in the cookie only for 24 hours.
+
+
+
+To filter your clicks by uniqueness go to Logs → Clicks → add the Uniqueness columns: 
+
+
+
+
+
+
+
+Once the data on clicks uniqueness comes, it'll be depicted under the Uniqueness column of the clicks report: 
+
+
+
+
+
+
+
+
+
+Unique clicks are the number of unique visitors for one particular campaign. You can check unique clicks for each Campaign.
+
+
+
+To filter the number of unique clicks per campaign go to Campaigns → add the Unique Clicks column → choose the campaign(s) where you want to see the data from: 
+
+
+
+
+
+
+
+Once the data on unique clicks comes, it'll be depicted in the Unique clicks column of the campaign report:
+
+
+
+
+
+

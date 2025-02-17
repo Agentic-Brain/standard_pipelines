@@ -1,0 +1,58 @@
+# How Venture Beyond scaled Facebook ad spend over 4M with RedTrack: Agency Case Study
+
+Venture Beyond is an e-commerce growth agency helping DTC brands scale with media-buying. 
+The agency's goal is to be a full-service growth partner for DTC Brands looking to scale up.
+They help grow the revenue of e-commerce brands, primarily through Facebook Ads media-buying. Besides that, Venture Beyond does all of the creatives, including production, post-production, sourcing UGC, working with content creators, delivering content, CRO (conversion rate optimization), and also the growth strategy. 
+Watch the full interview with Cem Verghese, COO, and co-founder at Venture Beyond.
+
+
+Why did Venture Beyond need an analytics &amp; automation solution like RedTrack?
+Venture Beyond was looking for a solution that would offer server-side tracking and accurate reports that would help them increase ad spend and revenue.
+Also, just like everybody on the market, Venture Beyond was affected by iOS 14 update which caused disruptions in Facebook attribution: 
+
+ 	Facebook was showing delayed and modeled conversions;
+ 	There was no more reliability to make ad-level decisions;
+
+RedTrack technology helped overcome iOS 14 limitations with real-time reports and hyper-accurate tracking.
+
+Venture Beyond found in RedTrack all the necessary functionality: it was easy to use, and they could implement the solution for a reasonable price with no overage charge or % of the ad spend charge, like in other trackers. 
+Which solutions did RedTrack offer? 
+RedTrack offers a special type of account for advertising agencies that helps manage media-buying for multiple clients and control their performance from just one account. Learn more about RedTrack for ad agencies here.
+
+ 	Server-side tracking (Postback URL tracking)— RedTrack's technology ensures that every click and conversion is captured with no 3rd party cookies involved. We rely only on 1st party data that helps capture your performance with accuracy and precision. 
+ 	Reports — reporting with RedTrack helps you monitor the most valuable money-metrics for your business (CPA, CAC, revenue, ROI, ROAS), as well as understand the performance down to ad level and identify winners that make revenue for your business. RedTrack offers a variety of reports that you can customize to your needs and preferences, including Acquisition Dashboard (helping you analyze performance on campaign, ad group, and ad levels) and Conversion Path Report that helps seeing customer journey to conversion. 
+ 	Real-time data — unlike Facebook and Google's attribution modeling, which can take up to 7 days, with RedTrack, you can get real-time data and instantly understand what works and cut unnecessary ad waste. This gives you the ability to make decisions faster and scale your revenue.  
+ 	Conversion log — easily access all the data about your conversions to find discrepancies and analyze your performance more deeply.
+ 	Export data via API — if you want to visualize your data with extra solutions (like Tableau, Data Studio, and others), you can always export it via API with RedTrack.
+
+
+Results after implementing a solution for ad agencies from RedTrack
+Venture Beyond was able to:
+
+ 	Increase ad spent from $300k to $1.5mln on Facebook
+ 	Be able to identify winning creatives in real-time and scale instantaneously
+ 	Set up accounts for multiple clients to manage it as an agency
+ 	Add landing pages, offers, and traffic sources
+ 	Track all valuable metrics for the success of Venture Beyond clients
+ 	Monitor the engagement of the pre-sales
+
+
+Why would Venture Beyond recommend RedTrack?
+So why RedTrack is THE solution for advertising agencies?
+1. Data accuracy with RedTrack 
+RedTrack is an unbiased source of truth for your advertising. 
+
+Unlike in Google Analytics, where the default attribution setting is last-click, with RedTrack, you can configure it on the first-click and expand your conversion window to 56 days.
+
+2. Ability to choose your attribution setting with RedTrack
+As Venture Beyond mainly uses Facebook for media-buying, it was of ultimate importance to use a first-click attribution setting (since Facebook Ads are usually the very first touchpoint on the way to conversion). 
+
+After configuring their attribution setting to first-click, Venture Beyond were able to identify winning ad combinations in real-time without the bias of Facebook attribution modeling. 
+3. RedTrack.io customer support excellence 
+Besides the product itself, Venture Beyond noted the importance of the customer support team. RedTrack's support responds fast and is available on Skype for a call to configure everything and help set up a solution. 
+"There is support from the team, including from Vlad Zhovtenko, the CEO of RedTrack, who will help you with technical issues and set everything up on a call with you. The trackers may be similar in their functionality but the accessible support is the most important because you might need help with the technical implementation on bespoke eCommerce platforms".
+
+&nbsp;
+
+
+&nbsp;

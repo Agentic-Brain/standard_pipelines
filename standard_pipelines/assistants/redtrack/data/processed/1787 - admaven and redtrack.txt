@@ -1,0 +1,156 @@
+# AdMaven and RedTrack
+
+
+
+
+
+
+AdMaven is an innovative ad network, developing an advanced online advertising platform and online monetization tools.
+
+
+
+RedTrack has an API integration with AdMaven, which gives you the following benefits:
+
+
+
+
+Pause: campaign, placement, creative
+
+
+
+Create automated rules
+
+
+
+Synchronize costs.
+
+
+
+
+Integration
+
+
+
+
+
+Before you proceed with the integration, make sure to have the already added:
+
+
+
+
+Custom tracking domain
+
+
+
+Offer source and Offer&nbsp;(if you’re an Affiliate)/&nbsp;Brand and Website&nbsp;(if you’re an Advertiser)
+
+
+
+Conversion types&nbsp;you’re planning to work with
+
+
+
+
+
+
+1. Add AdMaven template to RedTrack.
+
+
+
+Traffic channels → New from template → find AdMaven → Add → Save the template:
+
+
+
+
+
+
+
+
+
+
+
+2. Integrate AdMaven with RedTrack.
+
+
+
+Go to the added AdMaven traffic channel settings → Admaven API integration → fill in the necessary details → save the changes to the template:
+
+
+
+
+
+
+
+Active button means the integration is on:
+
+
+
+3. Set up a campaign in RedTrack with AdMaven as a traffic channel.
+
+
+
+Campaigns→ Create new campaign → use&nbsp;this guide&nbsp;(for Affiliates)/&nbsp;this guide&nbsp;(for Advertisers)&nbsp;to help you create the campaign with AdMaven as your traffic channel → once the Campaign is added, your tracking link is automatically created, copy&nbsp;Click URL:
+
+
+
+
+
+
+
+Refer to these articles for details on the preferred method of tracking:– Universal script– No-redirect– Impressions
+
+
+
+4. Set up the tracking on the TS side.
+
+
+
+4.1 Go to Campaigns → Create Campaign:
+
+
+
+
+
+
+
+4.2 Place your RedTrack campaign Click URL (copied in step 3) here:
+
+
+
+
+
+
+
+5. Set up the postback URL in RedTrack.
+
+
+
+Go to Campaign settings (created within step 3) → scroll down to&nbsp;S2S Postback for AdMaven → press&nbsp;Add →&nbsp;make sure it contains all the needed values for parameters&nbsp;→ Save changes to the campaign:
+
+
+
+
+
+
+
+
+
+
+
+Important!▸ If you changed the Postback URL in the Traffic channel (added/removed some parameters to it), remember to manually update the link in Campaign settings as well, as it won’t be generated correctly automatically.▸ Some Traffic channels require you to edit the Postback with specific parameters for each Campaign (e.g., the goal for Exoclick or ap_key for Go2Mobi). If the field remains blank or something like “REPLACE” is stated, that means you need to define the Postback conditions manually.
+
+
+
+6. Set up the&nbsp;automation.
+
+
+
+
+Use&nbsp;this guide&nbsp;to help set up&nbsp;rules.
+
+
+
+Use&nbsp;this guide&nbsp;for setting up the&nbsp;auto update cost&nbsp;feature.
+
+
+

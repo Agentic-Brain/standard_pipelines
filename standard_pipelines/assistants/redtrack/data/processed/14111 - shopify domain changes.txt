@@ -1,0 +1,86 @@
+# Shopify: domain changes
+
+
+If after you've finished the Shopify ↔&nbsp;RedTrack integration your Shopify store domain or/and custom tracking domain were changed you must update these domains in RedTrack and/or Shopify for correct tracking. Act depending on the case:
+
+
+
+
+
+In Shopify:
+
+
+
+1. Replace the outdated custom tracking domain with a new one in the&nbsp;universal tracking script&nbsp;and&nbsp;Events.js script&nbsp;added to theme liquid:
+
+
+
+
+
+
+
+2. Replace the outdated custom tracking domain for upsell tracking. Do this via pixel or legacy scripts depending on your flow: 
+
+
+
+
+
+Re-add the pixel per the Shopify integration guide (Connection steps → step 2 "Pixel for tracking upsells").
+
+
+
+
+
+Replace current domain with a new one in the additional scripts for the Order status page and Post-purchase page:
+
+
+
+
+
+
+
+
+
+
+
+If your Shopify domain was somehow changed, you need to update it accordingly in both systems RedTrack and Shopify:
+
+
+
+
+
+1. Replace the old website URL with the new one (Websites → edit → Main → Website URL):
+
+
+
+
+
+
+
+2. If you work with Facebook, then you should also replace the old&nbsp;Default event URL&nbsp;with a new one (Websites&nbsp;→&nbsp;edit&nbsp;→&nbsp;Capi) and make sure it’s verified on the FB side:
+
+
+
+
+
+
+
+
+
+1. Manually replace the old&nbsp;cookie domain&nbsp;with the new one in the&nbsp;universal tracking script&nbsp;added to theme liquid:
+
+
+
+
+
+
+
+2. (if you use legacy scripts for upsell tracking) Manually replace the old cookie domain with the new one in the universal tracking script added to the Post-purchase page:
+
+
+
+
+
+
+
+
