@@ -37,9 +37,30 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
         return OpenAIAPIManager(openai_config)
     
     @cached_property
-    def google_api_manager(self) -> GmailAPIManager:
+    def gmail_api_manager(self) -> GmailAPIManager:
         credentials = GoogleCredentials.query.filter_by(client_id=self.client_id).first()
         google_config = {
             "api_key": credentials.google_api_key
         }
-        return GoogleAPIManager(google_config)
+        return GmailAPIManager(google_config)
+    
+    def extract(self, context: t.Optional[dict] = None) -> dict:
+        meeting_id = context["meeting_id"]
+        transcript, emails, names, organizer_email = self.fireflies_api_manager.transcript(meeting_id)
+        fireflies_attendees = [
+            {"name": name, "email": email}
+            for name, email in zip(names, emails)
+        ]
+
+        # Only attendees that are not from our client's email domain should be
+        # contacts in HubSpot.
+        contactable_attendees = []
+        for attendee in fireflies_attendees:
+            if not attendee["email"].endswith(self.configuration.email_domain):
+                contactable_attendees.append(attendee)
+
+        return {
+            "fireflies_transcript": transcript,
+            "contactable_attendees": contactable_attendees,
+            "organizer_email": organizer_email,
+        }
