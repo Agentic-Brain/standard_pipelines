@@ -2,7 +2,7 @@ import asyncio
 from typing import Callable
 from telegram import Update
 import telegram
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, ChatMemberHandler, MessageHandler, filters
+from telegram.ext import Application, ApplicationBuilder, CommandHandler, ContextTypes, ChatMemberHandler, MessageHandler, filters
 import threading
 
 class TelegramBot:
@@ -10,14 +10,18 @@ class TelegramBot:
         self.greeting_handler: Callable[[str], str] = greeting_handler if greeting_handler else self.default_greeting_handler
         self.convo_start_handler: Callable[[str, str], None] = convo_start_handler if convo_start_handler else self.default_convo_start_handler
         self.message_handler: Callable[[str, str, str], str] = message_handler if message_handler else self.default_message_handler
-        self.app = ApplicationBuilder().token(token).build()
+        self.app : Application = ApplicationBuilder().token(token).build()
         self.app.add_handler(MessageHandler(filters.TEXT, self.handle_event))
         self.app.add_handler(ChatMemberHandler(self.handle_member))
         # asyncio.run(self.__start_async())
         # self.app.run_polling(drop_pending_updates=True, close_loop=False, )
         # self.__start_bot()
+
+    def start(self):
         self.app.run_polling(drop_pending_updates=True, close_loop=False)
     
+
+
     async def __start_async(self):
         # Start the bot in the background
         bot_task = asyncio.create_task(self.__start_bot())
