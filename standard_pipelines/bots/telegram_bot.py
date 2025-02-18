@@ -13,11 +13,6 @@ class TelegramBot:
         self.app : Application = ApplicationBuilder().token(token).build()
         self.app.add_handler(MessageHandler(filters.TEXT, self.handle_event))
         self.app.add_handler(ChatMemberHandler(self.handle_member))
-        # asyncio.run(self.__start_async())
-        # self.app.run_polling(drop_pending_updates=True, close_loop=False, )
-        # self.__start_bot()
-
-    def start(self):
         self.app.run_polling(drop_pending_updates=True, close_loop=False)
     
 
