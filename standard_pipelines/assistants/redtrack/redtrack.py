@@ -1,11 +1,41 @@
+import multiprocessing
+import threading
+import click
 from openai import OpenAI
 import os
 import math
 from flask import Blueprint, request, jsonify
-import standard_pipelines.bots.TelegramBot as TelegramBot
-import standard_pipelines.assistants.redtrack.config as config
+from standard_pipelines.bots.telegram_bot import TelegramBot
+from standard_pipelines.bots.skype_bot import SkypeBot
+import standard_pipelines.assistants.redtrack.config.config as config
 import time
+from openai.types.beta import Assistant
+
 redtrack_bp = Blueprint('redtrack', __name__, url_prefix='/redtrack')
+
+telegram_bot : TelegramBot = None
+skype_bot : SkypeBot = None
+def start_bots():
+    print("starting RedTrack bots")
+    # def start_telegram_bot():
+    global telegram_bot
+    telegram_bot = TelegramBot(config.TELEGRAM_TOKEN, greeting_handler, convo_start_handler, message_handler)
+
+    # def start_skype_bot():
+    #     global skype_bot
+    #     skype_bot = SkypeBot(config.SKYPE_USERNAME, config.SKYPE_PASSWORD, greeting_handler, convo_start_handler, message_handler)
+
+    # polling_thread = threading.Thread(target=start_telegram_bot)
+    # polling_thread.start()
+    # telegram_process = multiprocessing.Process(target=start_telegram_bot)
+    # skype_process = multiprocessing.Process(target=start_skype_bot)
+
+    # telegram_process.start()
+    # skype_process.start()
+
+    # start_telegram_bot()
+
+    print("RedTrack bots started")
 
 @redtrack_bp.route('/start', methods=['POST'])
 def redtrack_start():
@@ -36,8 +66,8 @@ def redtrack_start():
     #     }), 400
 
 
-    # if platform == "telegram":
-    #     telegram_bot.new_conversation(username)
+    if platform == "skype":
+        skype_bot.start_chat(username)
 
 
     # Process the data as needed
@@ -48,17 +78,27 @@ def redtrack_start():
 thread_map : dict[str, str] = {}
 openai_client = OpenAI(api_key=config.OPENAI_API_KEY)
 
-def convo_start_handler(self, convo_id: str, username: str, message_text: str) -> str:
-    print("convo_start_handler", username, message_text)
+def greeting_handler(username: str):
+    print("greeting_handler",config.GREETING)
+    return config.GREETING.format(username=username, link=config.LINK)
+
+def convo_start_handler(convo_id: str, message_text: str) -> None:
+    print("convo_start_handler", message_text)
 
     thread = openai_client.beta.threads.create_and_run_poll(assistant_id=config.ASSISTANT["id"])
+    openai_client.beta.threads._get_api_list
     thread_id = thread.thread_id;
     thread_map[convo_id] = thread_id
+
+    openai_client.beta.threads.messages.create(
+        thread_id=thread_id,
+        role="assistant",
+        content=message_text
+    )
+
     print("created thread:", thread_id)
 
-    return "Hello "+username+", I'm the RedTrack booking agent bot. How can I help you today?"
-
-def message_handler(self, convo_id: str, username: str, message_text: str) -> str:
+def message_handler(convo_id: str, username: str, message_text: str) -> str:
     print("message_handler", username, message_text)
 
     
@@ -98,7 +138,7 @@ def message_handler(self, convo_id: str, username: str, message_text: str) -> st
                 })
                 # cancel the run because we don't want the bot to speak naturally
                 openai_client.beta.threads.runs.cancel(run.id, thread_id=thread_id)
-                return "Click here to schedule a call with a human: https://calendly.com/redtrack-booking-agent/30min"
+                return config.SCHEDULE_CALL_MESSAGE.format(link=config.LINK)
         
         # Submit all tool outputs at once after collecting them in a list
         if tool_outputs:
@@ -119,48 +159,37 @@ def message_handler(self, convo_id: str, username: str, message_text: str) -> st
 
     return messages.data[0].content[0].text.value
 
-telegram_bot = None
-def start_bots():
-    print("starting RedTrack bots")
-    telegram_token = config.TELEGRAM_TOKEN
-    telegram_bot = TelegramBot(telegram_token, convo_start_handler, message_handler)
+@click.command('redtrack')
+@click.argument('operation', type=click.Choice(['push']))
+@click.argument('parameter', type=click.Choice(['bot', 'data']))
+def handle_command(operation, parameter):
+    print(operation, '|', parameter)
 
-if __name__ == "__main__":
-    client = OpenAI(api_key=config.OPENAI_API_KEY)
+    if operation == 'push':
+        if parameter == 'bot':
+            push_bot()
+        elif parameter == 'data':
+            push_data()
 
-    if config.VECTOR_STORE["id"] is None:
-        vector_store = client.beta.vector_stores.create(
-            name=config.VECTOR_STORE["name"]
-        )
-        config.VECTOR_STORE["id"] = vector_store.id
-        print("created vector store", vector_store.id)
-    else:
-        vector_store = client.beta.vector_stores.retrieve(config.VECTOR_STORE["id"])
-        print("retrieved vector store", vector_store.id)
+def push_bot():
+    print("pushing bot...")
 
-        client.beta.vector_stores.update(
-            vector_store_id=config.VECTOR_STORE["id"],
-            name=config.VECTOR_STORE["name"]
-        )
-        print("updated vector store", vector_store.id)
-
-
-    assistant = None
+    assistant : Assistant = None
     if config.ASSISTANT["id"] is None:
-        assistant = client.beta.assistants.create(
+        assistant = openai_client.beta.assistants.create(
             name=config.ASSISTANT["name"],
             model=config.ASSISTANT["model"],
             instructions=config.ASSISTANT["system_prompt"],
             tools=config.ASSISTANT["tools"],
-            tool_resources=config.ASSISTANT["   tool_resources"]
+            tool_resources=config.ASSISTANT["tool_resources"]
         )
-        config.ASSISTANT["idconfig.ASS "] = assistant.id
+        config.ASSISTANT["id"] = assistant.id
         print("created assistant", assistant.id)
     else:
-        assistant = client.beta.assistants.retrieve(config.ASSISTANT["id"])
+        assistant = openai_client.beta.assistants.retrieve(config.ASSISTANT["id"])
         print("retrieved assistant", assistant.id)
 
-        client.beta.assistants.update(
+        openai_client.beta.assistants.update(
             assistant_id=config.ASSISTANT["id"],
             name=config.ASSISTANT["name"],
             model=config.ASSISTANT["model"],
@@ -171,13 +200,27 @@ if __name__ == "__main__":
         print("updated assistant", assistant.id)
 
     assistant_id = assistant.id
-    print("assistant_id", assistant_id)
+    print("assistant_id:", assistant_id)
+    print("bot push complete")
 
-    print(assistant.tool_resources.file_search.to_json())
+def push_data():
+    print("pushing data...")
 
-    # Assuming the "os" module is already imported elsewhere in the project
+    if config.VECTOR_STORE["id"] is None:
+        vector_store = openai_client.beta.vector_stores.create(
+            name=config.VECTOR_STORE["name"]
+        )
+        config.VECTOR_STORE["id"] = vector_store.id
+        print("created vector store", vector_store.id)
+    else:
+        vector_store = openai_client.beta.vector_stores.retrieve(config.VECTOR_STORE["id"])
+        print("retrieved vector store", vector_store.id)
 
-    # Attempt to retrieve the vector store from the assistant's tool resources
+        openai_client.beta.vector_stores.update(
+            vector_store_id=config.VECTOR_STORE["id"],
+            name=config.VECTOR_STORE["name"]
+        )
+        print("updated vector store", vector_store.id)
 
     MAX_BATCH_SIZE = 500
 
@@ -221,7 +264,7 @@ if __name__ == "__main__":
                         print(f"Uploading batch {batch_index + 1}/{num_batches} with {len(file_streams)} files.")
                         
                         # Upload the batch
-                        file_batch = client.beta.vector_stores.file_batches.upload_and_poll(
+                        file_batch = openai_client.beta.vector_stores.file_batches.upload_and_poll(
                             vector_store_id=vector_store.id,
                             files=file_streams
                         )
@@ -235,6 +278,3 @@ if __name__ == "__main__":
                             f.close()
 
         print("File batch upload complete.")
-
-
-    print("assistant push complete")

@@ -1,3 +1,6 @@
+import inspect
+import sys
+import click
 from flask import Flask
 import os
 from standard_pipelines.version import APP_VERSION, FLASK_BASE_VERSION
@@ -14,6 +17,8 @@ from standard_pipelines.data_flow.utils import BaseDataFlow
 from standard_pipelines.data_flow.ff2hs_on_transcript.services import FF2HSOnTranscript
 
 def create_app():
+    print("Creating app")
+
     load_dotenv()
     load_dotenv('.flaskenv')
     init_sentry()
@@ -79,9 +84,9 @@ def create_app():
     
     # Redtrack
     from .assistants.redtrack import redtrack_bp
-    from .assistants.redtrack import start_bots as rt_start_bots
+    from .assistants.redtrack import init_app as redtrack_init_app
     app.register_blueprint(redtrack_bp)
-    rt_start_bots()
+    redtrack_init_app(app)
 
     from .celery import init_app as celery_init_app
     celery_init_app(app)
@@ -98,8 +103,25 @@ def create_app():
         return dict(app_version=str(APP_VERSION), flask_base_version=str(FLASK_BASE_VERSION))
 
 
+    from .assistants.redtrack import start_bots as rt_start_bots
+    rt_start_bots()
+    
     return app
 
+@click.group()
+def cli():
+    pass
+
+def is_click_command(obj):
+    return isinstance(obj, click.core.Command)
+
+def bind_click_commands(app: Flask) -> None:
+    print("Binding click commands")
+    for module_name, module in sys.modules.items():
+        if module_name.startswith('standard_pipelines'):
+            for name, cmd in inspect.getmembers(module, is_click_command):
+                print("Command:", name, cmd)
+                cli.add_command(cmd)
 def init_logging(app: Flask) -> None:
     # Clear ALL handlers (including Flask's default handlers)
     app.logger.handlers.clear()

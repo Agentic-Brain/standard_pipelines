@@ -3,11 +3,17 @@ from pathlib import Path
 import code
 
 SYSTEM_PROMPT = Path(__file__).parent.joinpath("system_prompt.txt").read_text(encoding="utf-8")
+GREETING = Path(__file__).parent.joinpath("greeting.txt").read_text(encoding="utf-8")
+SCHEDULE_CALL_MESSAGE = Path(__file__).parent.joinpath("schedule_call.txt").read_text(encoding="utf-8")
 FUNCTIONS : list[dict] = json.loads(Path(__file__).parent.joinpath("functions.json").read_text(encoding="utf-8"))
 FUNCTIONS = [{"type": "function", "function": func} for func in FUNCTIONS]
+LINK = "https://redtrack.io/request-demo/"
 
 OPENAI_API_KEY = "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"
 TELEGRAM_TOKEN = "7844583271:AAHwhb8x0b_5gpLfPvR3pJf6gZvuwBb4BwI"
+
+SKYPE_USERNAME = "devbot-2077@hotmail.com"
+SKYPE_PASSWORD = "ZdQgj41k3cZHZv"
 
 VECTOR_STORE = {
     "id" : "vs_67ad4870761881918ee49d874b3c03e0",

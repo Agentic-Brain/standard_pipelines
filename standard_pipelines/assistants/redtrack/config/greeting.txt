@@ -1,0 +1,1 @@
+Hey {username}, it's Rita from RedTrack.io. I saw you've recently joined our platform and I wanted to see if you had any questions. Many of our users say that having a demo helped them to determine much quicker if RedTrack is a good solution for them. As part of the free trial, you're welcome to schedule a demo with us at your convenience: {link}

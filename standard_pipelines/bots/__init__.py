@@ -1,3 +1,3 @@
-from .TelegramBot import TelegramBot
-# from .skype_bot import SkypeBot
+from .telegram_bot import TelegramBot
+from .skype_bot import SkypeBot
 # from .whatsapp_bot import WhatsAppBot
