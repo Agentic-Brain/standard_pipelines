@@ -86,7 +86,6 @@ def convo_start_handler(convo_id: str, message_text: str) -> None:
     print("convo_start_handler", message_text)
 
     thread = openai_client.beta.threads.create_and_run_poll(assistant_id=config.ASSISTANT["id"])
-    openai_client.beta.threads._get_api_list
     thread_id = thread.thread_id;
     thread_map[convo_id] = thread_id
 
