@@ -1,6 +1,7 @@
+from abc import ABC
 import pytest
 from standard_pipelines.extensions import db
-from standard_pipelines.database.models import BaseMixin
+from standard_pipelines.database.models import BaseMixin, ScheduledMixin
 import uuid
 from datetime import datetime
 from sqlalchemy import String

@@ -10,6 +10,8 @@ from standard_pipelines import create_app
 from standard_pipelines.extensions import db
 from testcontainers.postgres import PostgresContainer
 from testcontainers.redis import RedisContainer
+from freezegun import freeze_time
+from datetime import datetime, timedelta
 
 
 
@@ -90,3 +92,18 @@ def cleanup(app):
 def celery_app(app):
     """Create a Celery app instance for testing."""
     return app.extensions['celery']
+
+@pytest.fixture
+def frozen_datetime():
+    """Fixture to manage frozen time in tests."""
+    with freeze_time("2025-01-01 12:00:00") as frozen:
+        yield frozen
+
+# @pytest.fixture(scope='session')
+# def setup_database(app):
+#     with app.app_context():
+#         db.create_all()
+#     yield db.session
+#     with app.app_context():
+#         db.drop_all()
+
