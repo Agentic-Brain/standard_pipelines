@@ -1,6 +1,6 @@
 import time
 from typing import Callable
-from skpy import Skype, SkypeUtils
+from skpy import Skype, SkypeUtils, SkypeUser
 import threading
 
 class SkypeBot:
@@ -19,10 +19,11 @@ class SkypeBot:
         # https://search.skype.com/v2.0/search?searchString=devbot-2077@hotmail.com&requestId=Query5&locale=en-US&sessionId=e5e35812-1dc3-4278-a9cf-e362b45b8890
         users = self.skype.contacts.search(username)
         if len(users) > 0:
-            user = users[0]
+            user : SkypeUser = users[0]
             print(user)
-            greeting = self.greeting_handler(self, user.name)
+            greeting = self.greeting_handler(user.name.first)
             print(greeting)
+            print("inviting", user.name)
             user.invite(greeting)
 
             # chat = self.skype.chats.chat(user.id)

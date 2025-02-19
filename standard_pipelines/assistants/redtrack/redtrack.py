@@ -11,19 +11,26 @@ import standard_pipelines.assistants.redtrack.config.config as config
 import time
 from openai.types.beta import Assistant
 
+from standard_pipelines.bots.whatsapp_bot import WhatsappBot
+
 redtrack_bp = Blueprint('redtrack', __name__, url_prefix='/redtrack')
 
 telegram_bot : TelegramBot = None
 skype_bot : SkypeBot = None
+whatsapp_bot : WhatsappBot = None
+
 def start_bots():
     print("starting RedTrack bots")
     # def start_telegram_bot():
-    global telegram_bot
-    telegram_bot = TelegramBot(config.TELEGRAM_TOKEN, greeting_handler, convo_start_handler, message_handler)
+    # global telegram_bot
+    # telegram_bot = TelegramBot(config.TELEGRAM_TOKEN, greeting_handler, convo_start_handler, message_handler)
 
     # def start_skype_bot():
-    #     global skype_bot
-    #     skype_bot = SkypeBot(config.SKYPE_USERNAME, config.SKYPE_PASSWORD, greeting_handler, convo_start_handler, message_handler)
+    # global skype_bot
+    # skype_bot = SkypeBot(config.SKYPE_USERNAME, config.SKYPE_PASSWORD, greeting_handler, convo_start_handler, message_handler)
+
+    global whatsapp_bot
+    whatsapp_bot = WhatsappBot(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN, config.TWILIO_PHONE_NUMBER, greeting_handler, convo_start_handler, message_handler)
 
     # polling_thread = threading.Thread(target=start_telegram_bot)
     # polling_thread.start()
@@ -68,6 +75,8 @@ def redtrack_start():
 
     if platform == "skype":
         skype_bot.start_chat(username)
+    elif platform == "whatsapp":
+        whatsapp_bot.start_chat(first_name, username)
 
 
     # Process the data as needed

@@ -1,6 +1,5 @@
 import json
 from pathlib import Path
-import code
 
 SYSTEM_PROMPT = Path(__file__).parent.joinpath("system_prompt.txt").read_text(encoding="utf-8")
 GREETING = Path(__file__).parent.joinpath("greeting.txt").read_text(encoding="utf-8")
@@ -14,6 +13,11 @@ TELEGRAM_TOKEN = "7844583271:AAHwhb8x0b_5gpLfPvR3pJf6gZvuwBb4BwI"
 
 SKYPE_USERNAME = "devbot-2077@hotmail.com"
 SKYPE_PASSWORD = "ZdQgj41k3cZHZv"
+
+TWILIO_ACCOUNT_SID = "ACa01bb06bb020eaacdfb886ee3252c69b"
+TWILIO_AUTH_TOKEN = "1e0f035291b23520796cf6906720c5dc"
+TWILIO_PHONE_NUMBER = "+14155238886"
+# TWILIO_PHONE_NUMBER = "+18882802486"
 
 VECTOR_STORE = {
     "id" : "vs_67ad4870761881918ee49d874b3c03e0",

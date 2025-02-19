@@ -1,0 +1,128 @@
+import asyncio
+from collections import deque
+from datetime import datetime, UTC
+import threading
+import time
+from typing import Callable, List
+from twilio.rest import Client
+from twilio.rest.api.v2010.account.message import MessageInstance
+
+class WhatsappBot:
+    """
+    A simple wrapper around the Twilio Python client to send SMS and WhatsApp messages.
+    """
+
+    def __init__(self, account_sid: str, auth_token: str, twilio_phone_number: str, greeting_handler: Callable[[str], str], convo_start_handler: Callable[[str, str], None] = None, message_handler: Callable[[str, str, str], str] = None):
+        """
+        :param account_sid: Your Twilio Account SID
+        :param auth_token: Your Twilio Auth Token
+        :param twilio_phone_number: The Twilio phone number (in E.164 format) you want to send messages from.
+                                   Example: '+12345678900'
+        """
+
+        self.greeting_handler: Callable[[str], str] = greeting_handler
+        self.convo_start_handler: Callable[[str, str], None] = convo_start_handler
+        self.message_handler: Callable[[str, str, str], str] = message_handler
+
+        self.client : Client = Client(account_sid, auth_token)
+        self.twilio_phone_number = twilio_phone_number
+        # self.send_whatsapp("+15175151699", "Hello from Twilio WhatsApp!")
+        self.start_polling()
+
+    def start_polling(self):
+        # This deque will store the last 100 processed message SIDs.
+        processed_message_sids = deque(maxlen=100)
+
+        async def polling_loop():
+            last_poll: datetime = datetime.now(UTC)
+            while True:
+                poll_time: datetime = datetime.now(UTC)
+                sms_events: List[MessageInstance] = [event for event in self.client.messages.list(
+                    to=self.twilio_phone_number,
+                    date_sent_after=last_poll
+                ) if event.sid not in processed_message_sids]
+
+                whatsapp_events: List[MessageInstance] = [event for event in self.client.messages.list(
+                    to=f"whatsapp:{self.twilio_phone_number}",
+                    date_sent_after=last_poll
+                ) if event.sid not in processed_message_sids]
+
+                new_events = sms_events + whatsapp_events
+                
+                last_poll = poll_time
+                if new_events:
+                    print(f"new_events: {len(new_events)} since {last_poll}")
+                    for event in new_events:
+                        try:
+                            await self.handle_event(event)
+                        except Exception as e:
+                            print(f"Error handling event {event.sid}: {e}")
+                            import traceback
+                            print(traceback.format_exc())
+                        # Add the SID to our deque.
+                        processed_message_sids.append(event.sid)
+                time.sleep(1)
+
+        async def run_polling_thread():
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            await polling_loop()
+
+        polling_thread = threading.Thread(target=lambda: asyncio.run(run_polling_thread()), daemon=True)
+        polling_thread.start()
+
+    async def handle_event(self, event : MessageInstance):
+        print(event.sid)        
+
+        phone_number: str = event.from_
+        username: str = self.name_map[phone_number] if phone_number in self.name_map else phone_number
+        message_text: str = event.body
+        conversation_id: str = event.from_
+
+        print(event.from_, event.date_sent.strftime("%H:%M:%S"), f"<{username}> {message_text}")
+
+        # if event and event.channel_post and event.channel_post.text:
+        #     username = event.channel_post.sender_chat.username
+        #     message_text = event.channel_post.text
+        #     conversation_id = event.channel_post.sender_chat.id
+        # elif event and event.message and event.message.text:
+        #     print("from_user:", event.message.from_user)
+        #     username = event.message.from_user.full_name
+        #     message_text = event.message.text
+        #     conversation_id = event.message.from_user.id
+
+        if conversation_id:
+            if message_text.startswith("/start"):
+                username = message_text.replace("/start ", "")
+                # await self.send_typing_signal(conversation_id)
+                greeting = self.greeting_handler(username)
+                self.convo_start_handler(conversation_id, greeting)
+                response = greeting
+            else:
+                # await self.send_typing_signal(conversation_id)
+                response = self.message_handler(conversation_id, username, message_text)
+            self.send_message(conversation_id, response)
+        else:
+            print("[WARNING] no conversation id found")
+            print(event)
+
+    name_map : dict[str, str] = {}
+    def start_chat(self, first_name: str, phone_number: str):
+        self.name_map[phone_number] = first_name
+
+        greeting = self.greeting_handler(first_name)
+        self.convo_start_handler(first_name, greeting)
+        whatsapp_response : MessageInstance = self.send_whatsapp(phone_number, greeting)
+
+    def send_message(self, to: str, message: str):
+        from_ = self.twilio_phone_number
+        if to.startswith("whatsapp:") and not from_.startswith("whatsapp:"):
+            from_ = "whatsapp:" + from_
+
+
+        print(f"send_message(self, {to}, {message})")
+        response = self.client.messages.create(
+            body=message,
+            from_ = from_,  # Twilio WhatsApp sender
+            to=to
+        )
