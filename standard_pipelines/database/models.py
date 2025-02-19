@@ -3,8 +3,11 @@ from datetime import datetime, timedelta
 from sqlalchemy.dialects.postgresql import UUID as pgUUID
 from sqlalchemy import func, DateTime, Integer, String, Boolean, event, inspect, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from standard_pipelines.database.exceptions import ScheduledJobError
+from flask import current_app
 from uuid import UUID
 from standard_pipelines.extensions import db
+from celery import shared_task
 from time import time
 from cryptography.fernet import Fernet
 from bitwarden_sdk import BitwardenClient
@@ -55,13 +58,34 @@ class ScheduledMixin(BaseMixin):
     active_days: Mapped[Optional[List[int]]] = mapped_column(JSON, default=list(range(7)))
     is_recurring: Mapped[bool] = mapped_column(Boolean, default=False)
     recurrence_interval: Mapped[Optional[int]] = mapped_column(Integer)
-    run_count: Mapped[int] = mapped_column(Integer, default=0)
+    run_count: Mapped[int] = mapped_column(Integer, server_default='0')
     max_runs: Mapped[Optional[int]] = mapped_column(Integer)
 
     @abstractmethod
-    def trigger_job(self) -> None:
+    def run_job(self) -> bool:
         """Abstract method that must be implemented to trigger the actual job."""
         pass
+
+    @abstractmethod
+    def poll(self) -> None:
+        """Abstract method that must be implemented to poll for the job."""
+        pass
+    
+    @shared_task
+    def trigger_job(self) -> None:
+        """Trigger the actual job."""
+        success = self.run_job()
+        if self.is_recurring:
+            self.delay_scheduled_time(timedelta(minutes=self.recurrence_interval))
+        else:
+            self.scheduled_time = None
+        if success:
+            self.increment_run_count()         
+            if self.max_runs is not None and self.run_count >= self.max_runs:
+                self.scheduled_time = None
+                self.is_recurring = False
+        else:
+            raise ScheduledJobError(f"Job failed for {self.__class__.__name__} {self.id}")
 
     def set_scheduled_time_to_now(self) -> None:
         self.scheduled_time = datetime.utcnow()
