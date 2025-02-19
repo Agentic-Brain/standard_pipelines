@@ -15,8 +15,9 @@ class DialpadAPIManager(BaseAPIManager):
         return ["api_key"]
 
     #============ API Functions =============#
-    def get_transcript(self, call_id: str):
+    def get_transcript(self, call_info: dict):
         try:
+            call_id = str(call_info.get("call_id"))
             if not call_id or not isinstance(call_id, str):
                 current_app.logger.error("Invalid call_id provided.")
                 return {"error": "Invalid call_id provided."}
@@ -29,7 +30,8 @@ class DialpadAPIManager(BaseAPIManager):
 
             only_transcripts = [entry for entry in lines if entry['type'].lower() == 'transcript']
             formatted_transcript = self._format_transcript(only_transcripts)
-            return {"transcript": formatted_transcript}
+            participants = self._get_call_participants(call_info)
+            return {"transcript": formatted_transcript, "participants": participants}
 
         except requests.exceptions.RequestException as e:
             current_app.logger.error(f"An error occurred during API request: {e}")
@@ -133,3 +135,31 @@ class DialpadAPIManager(BaseAPIManager):
             formatted_lines.append(formatted_line)
 
         return "\n".join(formatted_lines)
+    
+    def _get_call_participants(self, call_info: dict) -> dict:
+        try:
+            guest = {}
+            host = {}
+            
+            contact = call_info.get("contact", {})
+            if contact:
+                guest = {
+                    "name": contact.get("name", "Unknown Caller"),
+                    "email": contact.get("email", ""),
+                    "phonenumber": contact.get("phone", "")
+                }
+
+            host = call_info.get("target", {})
+            if host:
+                host = {
+                    "name": host.get("name", "Unknown Host"),
+                    "email": host.get("email", ""),
+                    "phonenumber": host.get("phone", "")
+                }
+
+            return {"guest": guest, "host": host}
+        
+        except Exception as e:
+            current_app.logger.error(f"Error getting call participants: {e}")
+            return {"guest": {}, "host": {}}
+            
