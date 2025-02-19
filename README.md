@@ -13,6 +13,7 @@ This is our monolithic repo that handles all applications for clients. It was na
   - `curl -LsSf https://astral.sh/uv/install.sh | sh`
   - restart your shell
 - `uv sync`
+- `uv run flask db upgrade`
 - `uv run flask init-flows`
 - `uv flask create-default-admin`
 - `uv run flask run`
