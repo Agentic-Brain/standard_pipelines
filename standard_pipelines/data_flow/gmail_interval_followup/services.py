@@ -6,8 +6,14 @@ from standard_pipelines.api.openai.models import OpenAICredentials
 from standard_pipelines.api.hubspot.services import HubSpotAPIManager
 from standard_pipelines.api.google.gmail_services import GmailAPIManager
 from standard_pipelines.api.openai.services import OpenAIAPIManager
+from standard_pipelines.api.fireflies.services import FirefliesAPIManager
+from standard_pipelines.api.fireflies.models import FirefliesCredentials
 from functools import cached_property
 from typing import Optional
+import typing as t
+import requests
+from datetime import datetime, timedelta
+from standard_pipelines.extensions import db
 
 class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
     
@@ -37,6 +43,14 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
         return OpenAIAPIManager(openai_config)
     
     @cached_property
+    def fireflies_api_manager(self) -> FirefliesAPIManager:
+        credentials = FirefliesCredentials.query.filter_by(client_id=self.client_id).first()
+        fireflies_config = {
+            "api_key": credentials.fireflies_api_key
+        }
+        return FirefliesAPIManager(fireflies_config)
+    
+    @cached_property
     def gmail_api_manager(self) -> GmailAPIManager:
         credentials = GoogleCredentials.query.filter_by(client_id=self.client_id).first()
         google_config = {
@@ -45,8 +59,35 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
         return GmailAPIManager(google_config)
     
     def extract(self, context: t.Optional[dict] = None) -> dict:
+        if context is None or "meeting_id" not in context:
+            raise ValueError("meeting_id is required in context")
+            
         meeting_id = context["meeting_id"]
-        transcript, emails, names, organizer_email = self.fireflies_api_manager.transcript(meeting_id)
+        transcript, emails, names, organizer_email = self.fireflies_api_manager.transcript(meeting_id) # type: ignore
+        
+        yesterday = datetime.utcnow() - timedelta(days=1)
+        json_data = {
+            "query": self.fireflies_api_manager.identify_transcripts()['query'],
+            "variables": {"fromDate": yesterday.isoformat() + "Z"}
+        }
+        
+        response = requests.post(
+            url="https://api.fireflies.ai/graphql",
+            headers={"Authorization": f"Bearer {self.fireflies_api_manager.api_key}"},
+            json=json_data
+        )
+        
+        response_data = response.json()
+        matching_transcript = None
+        for transcript in response_data.get("data", {}).get("transcripts", []):
+            if transcript.get("id") == meeting_id:
+                matching_transcript = transcript
+                break
+                
+        if matching_transcript is None:
+            raise ValueError(f"No transcript found for meeting_id: {meeting_id}")
+            
+        # Extract attendee information from the matching transcript
         fireflies_attendees = [
             {"name": name, "email": email}
             for name, email in zip(names, emails)
@@ -59,8 +100,17 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
             if not attendee["email"].endswith(self.configuration.email_domain):
                 contactable_attendees.append(attendee)
 
+        google_credentials = db.session.query(GoogleCredentials).filter(GoogleCredentials.user_email == organizer_email).first()
+        
+        if google_credentials is None:
+            raise ValueError(f"No Google credentials found for organizer_email: {organizer_email}")
+
         return {
             "fireflies_transcript": transcript,
             "contactable_attendees": contactable_attendees,
             "organizer_email": organizer_email,
+            "google_credentials": google_credentials
         }
+        
+    def transform(self, input_data: dict | None = None, context: dict | None = None) -> dict:
+        return super().transform(input_data, context)
