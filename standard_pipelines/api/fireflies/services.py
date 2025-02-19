@@ -91,16 +91,30 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
 
     def _emails_from_transcript_object(self, transcript: dict) -> list[str]:
         transcript_data: dict = transcript.get("data", {}).get("transcript", {})
-        meeting_attendees = transcript_data.get("meeting_attendees")
-        return meeting_attendees if meeting_attendees else []
+        meeting_attendees: list[dict] = transcript_data.get("meeting_attendees", [])
+        if not meeting_attendees:
+            warning_msg = (
+                "No meeting attendees found in transcript object. Emails will "
+                "not be extracted."
+            )
+            current_app.logger.warning(warning_msg)
+            return []
+        
+        return [attendee.get("email", "") for attendee in meeting_attendees]
 
     def _names_from_transcript_object(self, transcript: dict) -> list[str]:
         transcript_data: dict = transcript.get("data", {}).get("transcript", {})
-        try:
-            return [speaker.get("name", "") for speaker in transcript_data.get("speakers", [])]
-        except Exception as e:
-            current_app.logger.error(f"Error getting names from transcript object: {e}")
-            return ["Unknown Speaker"]
+        meeting_attendees: list[dict] = transcript_data.get("meeting_attendees", [])
+        if not meeting_attendees:
+            warning_msg = (
+                "No meeting attendees found in transcript object. Names will "
+                "not be extracted."
+            )
+            current_app.logger.warning(warning_msg)
+            return []
+
+        return [attendee.get("displayName", attendee.get("name", "")) for attendee in meeting_attendees]
+
 
     def _organizer_email_from_transcript_object(self, transcript: dict) -> str:
         transcript_data: dict = transcript.get("data", {}).get("transcript", {})

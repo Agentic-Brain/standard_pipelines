@@ -93,13 +93,16 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
         else:
             return f"{names[0]} et al."
 
-    def hubspot_contact(self, contact_dict: dict) -> CreatableContactHubSpotObject:
+    def hubspot_contact(self, attendee_dict: dict[str, str]) -> CreatableContactHubSpotObject:
         """Docs: https://developers.hubspot.com/docs/guides/api/crm/objects/contacts"""
-        contact_dict = {
+
+        first_name, last_name = attendee_dict.get("name", "").split(" ", maxsplit=1)
+
+        attendee_dict = {
             "properties": {
-                "email": contact_dict["properties"].get("email"),
-                "firstname": contact_dict["properties"].get("firstname"),
-                "lastname": contact_dict["properties"].get("lastname"),
+                "email": attendee_dict.get("email"),
+                "firstname": first_name,
+                "lastname": last_name,
                 # "phone": "",
                 # "company": "",
                 # "website": "",
@@ -108,7 +111,7 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
         }
 
         return CreatableContactHubSpotObject(
-            contact_dict,
+            attendee_dict,
             self.hubspot_api_manager,
         )
 
@@ -119,7 +122,7 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
                 # "closedate": "",
                 "dealname": f"Deal for {contact_names}",
                 "pipeline": "default",
-                "dealstage": self.configuration.intial_deal_stage_id,
+                "dealstage": self.configuration.initial_deal_stage_id,
             }
         }
 
@@ -134,6 +137,11 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
         """
         now = datetime.datetime.now()
         meeting_name = f"Meeting with {contact_names}"
+
+        if len(transcript) > 65535:
+            current_app.logger.warning(f"Transcript too long. Truncating to 65535 characters.")
+            current_app.logger.debug(f"Transcript too long. Truncating to 65535 characters. Transcript: {transcript}")
+            transcript = transcript[:65535]
 
         meeting_dict = {
             "properties": {
@@ -155,11 +163,16 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
 
     def hubspot_note(self, transcript: str) -> CreatableNoteHubSpotObject:
         now = datetime.datetime.now()
-
+        meeting_summary = self.meeting_summary(transcript)[:65535]
+        if len(meeting_summary) > 65535: # TODO: upload as file attachment if too long
+            current_app.logger.warning(f"Meeting summary too long. Truncating to 65535 characters.")
+            current_app.logger.debug(f"Meeting summary too long. Truncating to 65535 characters. Meeting summary: {meeting_summary}")
+            meeting_summary = meeting_summary[:65535]
+        
         note_dict = {
             "properties": {
                 "hs_timestamp": now.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
-                "hs_note_body": self.meeting_summary(transcript),
+                "hs_note_body": meeting_summary,
                 # "hs_attachment_ids": ""
             }
         }
@@ -201,22 +214,28 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
         for contactable_attendee in contactable_attendees:
             try:
                 resp = self.hubspot_api_manager.contact_by_name_or_email(**contactable_attendee)
-                contacts.append(ExtantContactHubSpotObject(resp))
-            except Exception:
+                extant_contact = ExtantContactHubSpotObject(resp, self.hubspot_api_manager)
+                contacts.append(extant_contact)
+            except APIError:
                 contacts.append(self.hubspot_contact(contactable_attendee))
         for contact in contacts:
             if isinstance(contact, ExtantContactHubSpotObject):
                 try:
-                    resp = self.hubspot_api_manager.deal_by_contact_id(contact.id)
-                    id = resp["id"]
-                    resp = self.hubspot_api_manager.deal_by_deal_id(id, properties=["hubspot_owner_id"])
-                    deals.append(ExtantDealHubSpotObject(resp))
-                except Exception:
+                    contact_id = contact.hubspot_object_dict["id"]
+                    resp = self.hubspot_api_manager.deal_by_contact_id(contact_id)
+                    deal_id = resp["id"]
+                    resp = self.hubspot_api_manager.deal_by_deal_id(deal_id, properties=["hubspot_owner_id"])
+                    deals.append (ExtantDealHubSpotObject(resp, self.hubspot_api_manager))
+                except APIError:
                     pass
 
         formatted_names = self.formatted_names(contacts)
 
+        if len(deals) > 1: # TODO: deduplicate the same deal found from different contacts
+            warning_msg = f"Too many deals found for {formatted_names}."
+            current_app.logger.warning(warning_msg)
         deal = deals[0] if len(deals) > 0 else self.hubspot_deal(formatted_names)
+
         if isinstance(deal, CreatableDealHubSpotObject):
             user = self.hubspot_api_manager.user_by_email(organizer_email)
             deal.add_owner_from_user(ExtantUserHubSpotObject(user, self.hubspot_api_manager))

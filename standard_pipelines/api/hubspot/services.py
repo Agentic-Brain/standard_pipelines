@@ -10,6 +10,7 @@ from hubspot.crm.contacts import SimplePublicObject as ContactObject, SimplePubl
 from hubspot.crm.deals import SimplePublicObject as DealObject, SimplePublicObjectWithAssociations as DealObjectWithAssociations
 from hubspot.crm.objects.meetings import SimplePublicObject as MeetingObject
 from hubspot.crm.objects.notes import SimplePublicObject as NoteObject
+from hubspot.crm.associations.v4 import AssociationSpec
 from hubspot.files import ApiException
 
 import typing as t
@@ -184,13 +185,12 @@ class ExtantHubSpotObject(HubSpotObject, metaclass=ABCMeta):
 
     def add_association(self, to_object: ExtantHubSpotObject) -> None:
         association_id = self.association_type_id(self.hubspot_type, to_object.hubspot_type)
-        self.api_manager._api_client.crm.associations.batch_api.create( # TODO: fix access of private _api_client
-            from_object_type=self.hubspot_type,
+        self.api_manager._api_client.crm.associations.v4.basic_api.create(
+            object_type=self.hubspot_type,
+            object_id=self.hubspot_object_dict["id"],
             to_object_type=to_object.hubspot_type,
-            batch_input_public_object_id=BatchInputPublicObjectId([{"id": self.hubspot_object_dict["id"]}]),
-            association_type_id=association_id,
-            association_type_name=f"{self.hubspot_type}_to_{to_object.hubspot_type}",
-            association_type_category="HUBSPOT_DEFINED",
+            to_object_id=to_object.hubspot_object_dict["id"],
+            association_spec=[AssociationSpec(association_category="HUBSPOT_DEFINED", association_type_id=association_id)],
         )
 
     def evaluate(self) -> t.Self:
