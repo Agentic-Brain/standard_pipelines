@@ -50,13 +50,13 @@ class VersionedMixin(BaseMixin):
 class ScheduledMixin(BaseMixin):
     __abstract__ = True
 
-    scheduled_time: Mapped[Optional[DateTime]] = mapped_column(DateTime, nullable=True, index=True)
-    active_hours: Mapped[Optional[List[int]]] = mapped_column(JSON, nullable=True, default=list(range(24)))
-    active_days: Mapped[Optional[List[int]]] = mapped_column(JSON, nullable=True, default=list(range(7)))
-    is_recurring: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
-    recurrence_interval: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
-    run_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
-    max_runs: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    scheduled_time: Mapped[Optional[DateTime]] = mapped_column(DateTime, index=True)
+    active_hours: Mapped[Optional[List[int]]] = mapped_column(JSON, default=list(range(24)))
+    active_days: Mapped[Optional[List[int]]] = mapped_column(JSON, default=list(range(7)))
+    is_recurring: Mapped[bool] = mapped_column(Boolean, default=False)
+    recurrence_interval: Mapped[Optional[int]] = mapped_column(Integer)
+    run_count: Mapped[int] = mapped_column(Integer, default=0)
+    max_runs: Mapped[Optional[int]] = mapped_column(Integer)
 
     @abstractmethod
     def trigger_job(self) -> None:
