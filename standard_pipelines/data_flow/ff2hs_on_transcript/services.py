@@ -1,4 +1,5 @@
 import datetime
+import itertools
 import os
 import typing as t
 from typing import Optional
@@ -11,7 +12,16 @@ from ...api.fireflies.models import FirefliesCredentials
 from ...api.hubspot.models import HubSpotCredentials
 
 from ...api.fireflies.services import FirefliesAPIManager
-from ...api.hubspot.services import HubSpotAPIManager
+from ...api.hubspot.services import (
+    HubSpotAPIManager,
+    ExtantContactHubSpotObject,
+    ExtantDealHubSpotObject,
+    ExtantUserHubSpotObject,
+    CreatableContactHubSpotObject,
+    CreatableDealHubSpotObject,
+    CreatableMeetingHubSpotObject,
+    CreatableNoteHubSpotObject,
+)
 from standard_pipelines.data_flow.exceptions import APIError
 
 from sqlalchemy import UUID
@@ -22,13 +32,6 @@ from ..exceptions import InvalidWebhookError
 from .models import FF2HSOnTranscriptConfiguration
 
 class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
-
-    # Magic hubspot numbers to associate various object types
-    # Don't change these unless you know what you're doing
-    # Docs: https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4#association-type-id-values
-    MEETING_TO_CONTACT_ASSOCIATION_ID = 200
-    MEETING_TO_DEAL_ASSOCIATION_ID = 212
-    NOTE_TO_DEAL_ASSOCIATION_ID = 214
 
     OPENAI_SUMMARY_MODEL = "gpt-4o"
 
@@ -76,131 +79,193 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
             "meeting_id": meeting_id
         }
 
-    # TODO: Want to change this, creating contacts in extract isn't really the right place
-    def extract(self, context: t.Optional[dict] = None) -> dict:
-        meeting_id = context["meeting_id"]
-        transcript, emails, names = self.fireflies_api_manager.transcript(meeting_id)
-        contacts = []
-
-        # Contacts from emails
-        for email in emails:
-            try:
-                resp = self.hubspot_api_manager.contact_by_name_or_email(email=email)
-            except Exception:
-            # <--    CHANGED: create contact if not found
-                resp = self.hubspot_api_manager.create_contact(email=email)
-            contacts.append(resp)
-
-        # Contacts from names
-        for name in names:
-            try:
-                resp = self.hubspot_api_manager.contact_by_name_or_email(name=name)
-            except Exception:
-                # Split name into first and last if it contains a space
-                name_parts = name.split(maxsplit=1)
-                if len(name_parts) > 1:
-                    resp = self.hubspot_api_manager.create_contact(
-                        first_name=name_parts[0],
-                        last_name=name_parts[1]
-                    )
-                else:
-                    resp = self.hubspot_api_manager.create_contact(first_name=name)
-            contacts.append(resp)
-
-        # TODO: Fix this deal shit
-        deals = []
-        for contact in contacts:
-            try:
-                resp = self.hubspot_api_manager.deal_by_contact_id(contact["id"])
-            except Exception:
-                # <-- CHANGED: create deal if not found
-                # We'll build a simple deal name from the contact's email or first name
-                contact_props = contact.get("properties", {})
-                fallback_name = contact_props.get("email") or contact_props.get("firstname") or "Unnamed Contact"
-                deal_name = f"Deal for {fallback_name}"
-                # "appointmentscheduled" can be changed to your actual stage ID
-                resp = self.hubspot_api_manager.create_deal(
-                    deal_name=deal_name,
-                    stage_id=self.configuration.intial_deal_stage_id,
-                    contact_id=contact["id"]
-                )
-            id = resp["id"]
-            resp = self.hubspot_api_manager.deal_by_deal_id(id, properties=["hubspot_owner_id"])
-            deals.append(resp)
-
-        return {
-            "transcript": transcript,
-            "contacts": contacts,
-            "deals": deals
-        }
-
     def meeting_summary(self, transcript: str) -> str:
         prompt = self.configuration.prompt.format(transcript=transcript)
         return self.openai_api_manager.chat(prompt, model=self.OPENAI_SUMMARY_MODEL).choices[0].message.content
 
-    def hubspot_association_object(self, to_id: str, type_category: str, type_id: str) -> dict:
-        return {
-            "to": {
-                "id": to_id
-            },
-            "types": [
-                {
-                    "associationCategory": type_category,
-                    "associationTypeId": type_id
-                }
-            ]
+    def formatted_names(self, contacts: t.Iterable[CreatableContactHubSpotObject | ExtantContactHubSpotObject]) -> str:
+        names = [f"{contact.hubspot_object_dict['properties']['firstname']} {contact.hubspot_object_dict['properties']['lastname']}" for contact in contacts]
+        if len(names) == 0:
+            return "Unnamed Contact"
+        if len(names) <= 3:
+            return ", ".join(name for name in names)
+        else:
+            return f"{names[0]} et al."
+
+    def hubspot_contact(self, attendee_dict: dict[str, str]) -> CreatableContactHubSpotObject:
+        """Docs: https://developers.hubspot.com/docs/guides/api/crm/objects/contacts"""
+
+        first_name, last_name = attendee_dict.get("name", "").split(" ", maxsplit=1)
+
+        attendee_dict = {
+            "properties": {
+                "email": attendee_dict.get("email"),
+                "firstname": first_name,
+                "lastname": last_name,
+                # "phone": "",
+                # "company": "",
+                # "website": "",
+                # "lifecyclestage": ""
+            }
         }
 
-    def hubspot_meeting_object(self, transcript: str, contacts: list[dict], deal: dict) -> dict:
+        return CreatableContactHubSpotObject(
+            attendee_dict,
+            self.hubspot_api_manager,
+        )
+
+    def hubspot_deal(self, contact_names: str) -> CreatableDealHubSpotObject:
+        deal_dict = {
+            "properties": {
+                # "amount": "",
+                # "closedate": "",
+                "dealname": f"Deal for {contact_names}",
+                "pipeline": "default",
+                "dealstage": self.configuration.initial_deal_stage_id,
+            }
+        }
+
+        return CreatableDealHubSpotObject(
+            deal_dict,
+            self.hubspot_api_manager,
+        )
+
+    def hubspot_meeting(self, transcript: str, contact_names: str) -> dict:
+        """
+        Docs: https://developers.hubspot.com/docs/guides/api/crm/engagements/meetings
+        """
         now = datetime.datetime.now()
-        contact_names = [contact["properties"]["firstname"] + " " + contact["properties"]["lastname"] for contact in contacts]
-        contact_names_str = ", ".join(contact_names)
-        
-        return {
+        meeting_name = f"Meeting with {contact_names}"
+
+        if len(transcript) > 65535:
+            current_app.logger.warning(f"Transcript too long. Truncating to 65535 characters.")
+            current_app.logger.debug(f"Transcript too long. Truncating to 65535 characters. Transcript: {transcript}")
+            transcript = transcript[:65535]
+
+        meeting_dict = {
             "properties": {
                 "hs_timestamp": now.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
-                "hubspot_owner_id": deal["properties"]["hubspot_owner_id"],
-                "hs_meeting_title": "Meeting with " + contact_names_str,
-                "hs_meeting_body": "Meeting with " + contact_names_str,
+                "hs_meeting_title": meeting_name,
+                "hs_meeting_body": meeting_name,
                 "hs_internal_meeting_notes": transcript,
                 "hs_meeting_location": "Remote",
                 "hs_meeting_start_time": now.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                 # "hs_meeting_end_time": "",
                 "hs_meeting_outcome": "COMPLETED"
-            },
-            "associations": [
-                *[self.hubspot_association_object(contact["id"], "HUBSPOT_DEFINED", self.MEETING_TO_CONTACT_ASSOCIATION_ID) for contact in contacts],
-                self.hubspot_association_object(deal["id"], "HUBSPOT_DEFINED", self.MEETING_TO_DEAL_ASSOCIATION_ID)
-            ]
+            }
         }
 
-    def hubspot_note_object(self, transcript: str, contacts: list[dict], deal: dict) -> dict:
-        now = datetime.datetime.now()
+        return CreatableMeetingHubSpotObject(
+            meeting_dict,
+            self.hubspot_api_manager,
+        )
 
-        return {
+    def hubspot_note(self, transcript: str) -> CreatableNoteHubSpotObject:
+        now = datetime.datetime.now()
+        meeting_summary = self.meeting_summary(transcript)[:65535]
+        if len(meeting_summary) > 65535: # TODO: upload as file attachment if too long
+            current_app.logger.warning(f"Meeting summary too long. Truncating to 65535 characters.")
+            current_app.logger.debug(f"Meeting summary too long. Truncating to 65535 characters. Meeting summary: {meeting_summary}")
+            meeting_summary = meeting_summary[:65535]
+        
+        note_dict = {
             "properties": {
                 "hs_timestamp": now.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
-                "hs_note_body": self.meeting_summary(transcript),
-                "hubspot_owner_id": deal["properties"]["hubspot_owner_id"],
+                "hs_note_body": meeting_summary,
                 # "hs_attachment_ids": ""
-            },
-            "associations": [
-                self.hubspot_association_object(deal["id"], "HUBSPOT_DEFINED", self.NOTE_TO_DEAL_ASSOCIATION_ID)
-            ]
+            }
         }
 
-    # TODO: Fix this deal shit
-    def transform(self, data: dict, context: t.Optional[dict] = None):
-        # if len(data["deals"]) > 1:
-        #     raise ValueError("More than one deal found")
-        deal = data["deals"][0]
-        meeting = self.hubspot_meeting_object(data["transcript"], data["contacts"], deal)
-        note = self.hubspot_note_object(data["transcript"], data["contacts"], deal)
+        return CreatableNoteHubSpotObject(
+            note_dict,
+            self.hubspot_api_manager
+        )
+
+    def extract(self, context: t.Optional[dict] = None) -> dict:
+        meeting_id = context["meeting_id"]
+        transcript, emails, names, organizer_email = self.fireflies_api_manager.transcript(meeting_id)
+        fireflies_attendees = [
+            {"name": name, "email": email}
+            for name, email in zip(names, emails)
+        ]
+
+        # Only attendees that are not from our client's email domain should be
+        # contacts in HubSpot.
+        contactable_attendees = []
+        for attendee in fireflies_attendees:
+            if not attendee["email"].endswith(self.configuration.email_domain):
+                contactable_attendees.append(attendee)
+
         return {
+            "fireflies_transcript": transcript,
+            "contactable_attendees": contactable_attendees,
+            "organizer_email": organizer_email,
+        }
+
+    def transform(self, data: dict, context: t.Optional[dict] = None):
+
+        fireflies_transcript = data["fireflies_transcript"]
+        contactable_attendees = data["contactable_attendees"]
+        organizer_email = data["organizer_email"]
+        contacts = []
+        deals = []
+
+        for contactable_attendee in contactable_attendees:
+            try:
+                resp = self.hubspot_api_manager.contact_by_name_or_email(**contactable_attendee)
+                extant_contact = ExtantContactHubSpotObject(resp, self.hubspot_api_manager)
+                contacts.append(extant_contact)
+            except APIError:
+                contacts.append(self.hubspot_contact(contactable_attendee))
+        for contact in contacts:
+            if isinstance(contact, ExtantContactHubSpotObject):
+                try:
+                    contact_id = contact.hubspot_object_dict["id"]
+                    resp = self.hubspot_api_manager.deal_by_contact_id(contact_id)
+                    deal_id = resp["id"]
+                    resp = self.hubspot_api_manager.deal_by_deal_id(deal_id, properties=["hubspot_owner_id"])
+                    deals.append (ExtantDealHubSpotObject(resp, self.hubspot_api_manager))
+                except APIError:
+                    pass
+
+        formatted_names = self.formatted_names(contacts)
+
+        if len(deals) > 1: # TODO: deduplicate the same deal found from different contacts
+            warning_msg = f"Too many deals found for {formatted_names}."
+            current_app.logger.warning(warning_msg)
+        deal = deals[0] if len(deals) > 0 else self.hubspot_deal(formatted_names)
+
+        if isinstance(deal, CreatableDealHubSpotObject):
+            user = self.hubspot_api_manager.user_by_email(organizer_email)
+            deal.add_owner_from_user(ExtantUserHubSpotObject(user, self.hubspot_api_manager))
+
+        meeting = self.hubspot_meeting(fireflies_transcript, formatted_names)
+        note = self.hubspot_note(fireflies_transcript)
+
+        return {
+            "contacts": contacts,
+            "deal": deal,
             "meeting": meeting,
             "note": note,
         }
 
     def load(self, data: dict, context: t.Optional[dict] = None):
-        self.hubspot_api_manager.create_meeting(data["meeting"])
-        self.hubspot_api_manager.create_note(data["note"])
+        contacts: list[ExtantContactHubSpotObject | CreatableContactHubSpotObject] = data["contacts"]
+        deal: ExtantDealHubSpotObject | CreatableDealHubSpotObject = data["deal"]
+        meeting: CreatableMeetingHubSpotObject = data["meeting"]
+        note: CreatableNoteHubSpotObject = data["note"]
+
+        evaluated_contacts = [contact.evaluate() for contact in contacts]
+        for contact in evaluated_contacts:
+            deal.add_association(contact)
+            meeting.add_association(contact)
+
+        evaluated_deal = deal.evaluate()
+
+        meeting.add_association(evaluated_deal)
+        meeting.add_owner_from_deal(evaluated_deal)
+        meeting.evaluate()
+
+        note.add_association(evaluated_deal)
+        note.add_owner_from_deal(evaluated_deal)
+        note.evaluate()

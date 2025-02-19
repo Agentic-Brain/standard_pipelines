@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "standard_pipelines"
 version = "0.0.5"
 description = "Standard Pipelines Flask Application"
-requires-python = ">=3.12"
+requires-python = "==3.12.*"
 dependencies = [
     "alembic==1.14.0",
     "amqp==5.2.0",
