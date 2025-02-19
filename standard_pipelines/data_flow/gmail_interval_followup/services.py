@@ -14,6 +14,7 @@ import typing as t
 import requests
 from datetime import datetime, timedelta
 from standard_pipelines.extensions import db
+from .models import GmailIntervalFollowupSchedule
 
 class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
     
@@ -49,14 +50,6 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
             "api_key": credentials.fireflies_api_key
         }
         return FirefliesAPIManager(fireflies_config)
-    
-    @cached_property
-    def gmail_api_manager(self) -> GmailAPIManager:
-        credentials = GoogleCredentials.query.filter_by(client_id=self.client_id).first()
-        google_config = {
-            "api_key": credentials.google_api_key
-        }
-        return GmailAPIManager(google_config)
     
     def extract(self, context: t.Optional[dict] = None) -> dict:
         if context is None or "meeting_id" not in context:
@@ -97,7 +90,7 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
         # contacts in HubSpot.
         contactable_attendees = []
         for attendee in fireflies_attendees:
-            if not attendee["email"].endswith(self.configuration.email_domain):
+            if not attendee["email"].endswith(self.configuration.internal_domain):
                 contactable_attendees.append(attendee)
 
         google_credentials = db.session.query(GoogleCredentials).filter(GoogleCredentials.user_email == organizer_email).first()
@@ -112,5 +105,33 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
             "google_credentials": google_credentials
         }
         
-    def transform(self, input_data: dict | None = None, context: dict | None = None) -> dict:
-        return super().transform(input_data, context)
+    def transform(self, input_data: dict | None = None, context: dict | None = None):
+        if input_data is None:
+            raise ValueError("input_data is required")
+        email_prompt = self.configuration.email_body_prompt.format(transcript=input_data["fireflies_transcript"])
+        email_body = self.openai_api_manager.chat(email_prompt, model="gpt-4o")
+        gmail_client = GmailAPIManager(input_data["google_credentials"].refresh_token)
+        draft_return = gmail_client.create_draft(input_data["contactable_attendees"], self.configuration.subject_line_template, email_body)
+        return {
+            'thread_id': draft_return['thread_id'],
+            'original_transcript': input_data["fireflies_transcript"]
+        }
+    
+    def load(self, input_data: dict | None = None, context: dict | None = None):
+        if input_data is None:
+            raise ValueError("input_data is required")
+        
+        next_scheduled_time = datetime.utcnow() + timedelta(days=self.configuration.email_interval_days)
+        
+        schedule = GmailIntervalFollowupSchedule(
+            configuration_id=self.configuration.id, # type: ignore
+            thread_id=input_data["thread_id"], # type: ignore
+            gmail_credentials_id=input_data["google_credentials"].id, # type: ignore
+            scheduled_time=next_scheduled_time, # type: ignore
+            is_recurring=True, # type: ignore
+            recurrence_interval=self.configuration.email_interval_days, # type: ignore
+            max_runs=self.configuration.email_retries, # type: ignore
+            original_transcript=input_data["original_transcript"] # type: ignore
+        )
+
+        db.save(schedule)

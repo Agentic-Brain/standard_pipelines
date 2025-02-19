@@ -74,12 +74,66 @@ class GmailAPIManager(BaseAPIManager):
             current_app.logger.exception(f'An unexpected error occurred while sending email: {e}')
             return {'error': 'An unexpected error occurred while sending email'}
 
+    def create_draft(self, to_address, subject, body):
+        """
+        Creates a draft email in Gmail.
+        
+        Args:
+            to_address (str or list): Recipient's email address(es)
+            subject (str): Email subject
+            body (str): Email body content
+            
+        Returns:
+            dict: Contains draft ID, thread ID, and status message on success, or error message on failure
+        """
+        try:
+            current_app.logger.info(f'Creating draft email for {to_address}')
+            email_data = self._structure_email_data(to_address, subject, body)
+            if 'error' in email_data:
+                return email_data
+
+            # Create the draft using Gmail API
+            draft = self.gmail_service.users().drafts().create(
+                userId="me",
+                body={'message': email_data}
+            ).execute()
+
+            # Get the thread ID from the draft message
+            thread_id = draft['message']['threadId']
+
+            current_app.logger.info(f'Draft created successfully with id: {draft["id"]} in thread: {thread_id}')
+            return {
+                'message': 'Draft created successfully',
+                'draft_id': draft['id'],
+                'thread_id': thread_id
+            }
+
+        except HttpError as e:
+            status_code = e.resp.status
+            error_reason = e.reason
+            current_app.logger.error(f"HTTP error {status_code}: {error_reason}")
+            return {'error': f'{error_reason}'}
+            
+        except RefreshError as e:
+            current_app.logger.error(f'Refresh error occurred: {str(e)}')
+            return {'error': 'Refresh error occurred'}
+    
+        except Exception as e:
+            current_app.logger.exception(f'An unexpected error occurred while creating draft: {e}')
+            return {'error': 'An unexpected error occurred while creating draft'}
+
     #====== Helper functions ======#
     def _structure_email_data(self, to_address, subject, body):
         try:            
             # Construct MIME message using EmailMessage class
             message = EmailMessage()
-            message["To"] = to_address
+            
+            # Handle either single email or list of emails
+            if isinstance(to_address, (list, tuple)):
+                message["To"] = ", ".join(to_address)
+            else:
+                message["To"] = to_address
+                
             message["Subject"] = subject
             message.set_content(body)
 
