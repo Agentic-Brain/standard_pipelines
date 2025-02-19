@@ -8,6 +8,7 @@ from standard_pipelines.api.google.gmail_services import GmailAPIManager
 from standard_pipelines.api.openai.services import OpenAIAPIManager
 from standard_pipelines.api.fireflies.services import FirefliesAPIManager
 from standard_pipelines.api.fireflies.models import FirefliesCredentials
+from standard_pipelines.data_flow.exceptions import InvalidWebhookError
 from functools import cached_property
 from typing import Optional
 import typing as t
@@ -51,6 +52,18 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
         }
         return FirefliesAPIManager(fireflies_config)
     
+    def context_from_webhook_data(self, webhook_data: t.Any) -> t.Optional[dict]:
+        if not isinstance(webhook_data, dict):
+            raise InvalidWebhookError('Invalid webhook data')
+        if webhook_data.get("eventType") != "Transcription completed":
+            raise InvalidWebhookError('Webhook does not represent a completed transcription')
+        meeting_id = webhook_data.get("meetingId")
+        if not isinstance(meeting_id, str):
+            raise InvalidWebhookError("Invalid meeting ID")
+        return {
+            "meeting_id": meeting_id
+        }
+    
     def extract(self, context: t.Optional[dict] = None) -> dict:
         if context is None or "meeting_id" not in context:
             raise ValueError("meeting_id is required in context")
@@ -58,27 +71,6 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
         meeting_id = context["meeting_id"]
         transcript, emails, names, organizer_email = self.fireflies_api_manager.transcript(meeting_id) # type: ignore
         
-        yesterday = datetime.utcnow() - timedelta(days=1)
-        json_data = {
-            "query": self.fireflies_api_manager.identify_transcripts()['query'],
-            "variables": {"fromDate": yesterday.isoformat() + "Z"}
-        }
-        
-        response = requests.post(
-            url="https://api.fireflies.ai/graphql",
-            headers={"Authorization": f"Bearer {self.fireflies_api_manager.api_key}"},
-            json=json_data
-        )
-        
-        response_data = response.json()
-        matching_transcript = None
-        for transcript in response_data.get("data", {}).get("transcripts", []):
-            if transcript.get("id") == meeting_id:
-                matching_transcript = transcript
-                break
-                
-        if matching_transcript is None:
-            raise ValueError(f"No transcript found for meeting_id: {meeting_id}")
             
         # Extract attendee information from the matching transcript
         fireflies_attendees = [
@@ -109,12 +101,20 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
         if input_data is None:
             raise ValueError("input_data is required")
         email_prompt = self.configuration.email_body_prompt.format(transcript=input_data["fireflies_transcript"])
-        email_body = self.openai_api_manager.chat(email_prompt, model="gpt-4o")
-        gmail_client = GmailAPIManager(input_data["google_credentials"].refresh_token)
+        
+        # TODO: Wrap this openapi call in try
+        chat_completion = self.openai_api_manager.chat(email_prompt, model="gpt-4")
+        email_body = chat_completion.choices[0].message.content  # Extract the actual text
+        
+        google_api_config = { 
+            "refresh_token": input_data["google_credentials"].refresh_token
+        }
+        gmail_client = GmailAPIManager(google_api_config)
         draft_return = gmail_client.create_draft(input_data["contactable_attendees"], self.configuration.subject_line_template, email_body)
         return {
             'thread_id': draft_return['thread_id'],
-            'original_transcript': input_data["fireflies_transcript"]
+            'original_transcript': input_data["fireflies_transcript"],
+            'google_credentials': input_data["google_credentials"]
         }
     
     def load(self, input_data: dict | None = None, context: dict | None = None):
@@ -134,4 +134,4 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
             original_transcript=input_data["original_transcript"] # type: ignore
         )
 
-        db.save(schedule)
+        schedule.save()

@@ -1,6 +1,5 @@
 from celery import shared_task
 from datetime import datetime, timedelta
-from sqlalchemy import inspect
 from sqlalchemy.exc import SQLAlchemyError
 from standard_pipelines.database.models import ScheduledMixin
 from standard_pipelines.extensions import db

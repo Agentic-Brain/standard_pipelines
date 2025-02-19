@@ -128,10 +128,17 @@ class GmailAPIManager(BaseAPIManager):
             # Construct MIME message using EmailMessage class
             message = EmailMessage()
             
-            # Handle either single email or list of emails
+            # Handle single string, list of strings, or list of dicts
             if isinstance(to_address, (list, tuple)):
-                message["To"] = ", ".join(to_address)
+                # Check if we have a list of dictionaries
+                if to_address and isinstance(to_address[0], dict):
+                    emails = [addr['email'] for addr in to_address if 'email' in addr]
+                    message["To"] = ", ".join(emails)
+                else:
+                    # List of email strings
+                    message["To"] = ", ".join(to_address)
             else:
+                # Single email string
                 message["To"] = to_address
                 
             message["Subject"] = subject
