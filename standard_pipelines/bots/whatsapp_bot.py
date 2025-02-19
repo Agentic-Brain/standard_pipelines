@@ -6,6 +6,11 @@ import time
 from typing import Callable, List
 from twilio.rest import Client
 from twilio.rest.api.v2010.account.message import MessageInstance
+from twilio.rest.content.v1.content import ContentInstance, ContentList, ApprovalFetchList
+from twilio.rest.content.v1.content.approval_fetch import ApprovalFetchContext, ApprovalFetchInstance
+from twilio.rest.content.v1.content.approval_create import ApprovalCreateInstance, ApprovalCreateList
+
+from standard_pipelines.assistants.redtrack.config import config
 
 class WhatsappBot:
     """
@@ -68,6 +73,8 @@ class WhatsappBot:
             asyncio.set_event_loop(loop)
             await polling_loop()
 
+        # asyncio.run(run_polling_thread())
+
         polling_thread = threading.Thread(target=lambda: asyncio.run(run_polling_thread()), daemon=True)
         polling_thread.start()
 
@@ -112,7 +119,11 @@ class WhatsappBot:
 
         greeting = self.greeting_handler(first_name)
         self.convo_start_handler(first_name, greeting)
-        whatsapp_response : MessageInstance = self.send_whatsapp(phone_number, greeting)
+        whatsapp_response : MessageInstance = self.send_message(phone_number, greeting)
+
+        if whatsapp_response.error_code:
+            print("error:",whatsapp_response.error_code, whatsapp_response.error_message)
+        # whatsapp_response : MessageInstance = self.send_templated_message(phone_number, config.WHATSAPP_GREETING_TEMPLATE, [first_name, config.LINK])
 
     def send_message(self, to: str, message: str):
         from_ = self.twilio_phone_number
@@ -121,8 +132,94 @@ class WhatsappBot:
 
 
         print(f"send_message(self, {to}, {message})")
-        response = self.client.messages.create(
+        response : MessageInstance = self.client.messages.create(
             body=message,
             from_ = from_,  # Twilio WhatsApp sender
             to=to
         )
+
+    def send_templated_message(self, to: str, name: str, variables: list[str]):
+        template = self.find_template(name)
+        if template is None:
+            raise Exception(f"Template {name} not found")
+        
+        from_ = self.twilio_phone_number
+        if to.startswith("whatsapp:") and not from_.startswith("whatsapp:"):
+            from_ = "whatsapp:" + from_
+
+        self.client.messages.create({
+            "content_sid": template.sid,
+            "content_variables": variables,
+            "from": from_,
+            "to": to
+        })
+
+    def find_templates(self, name: str):
+        templates : List[ContentInstance] = self.client.content.contents.list()
+        return [template for template in templates if template.friendly_name == name]
+
+    def find_template(self, name: str):
+        templates = self.find_templates(name)
+        if len(templates) == 0:
+            print(f"No templates found for {name}")
+            return None
+        elif len(templates) > 1:
+            print(f"Multiple templates found for {name}, using the first one")
+
+        return templates[0]
+
+    def create_variable_dict(self, variables: list[str]):
+        return {str(i+1): var for i, var in enumerate(variables)}
+
+    def create_template(self, name: str, body: str, variables: list[str]):
+        existing_templates : List[ContentInstance] = self.find_templates(name)
+        for template in existing_templates:
+            print(f"Deleting template: {template.sid}")
+            template.delete()
+
+        var_dict = self.create_variable_dict(variables)
+        final_body = body
+        for i, var in enumerate(variables):
+            final_body = final_body.replace(f"{{{var}}}", f"{{{{{i+1}}}}}")
+
+        payload = ContentInstance.ContentCreateRequest(payload=
+            {
+                "friendly_name": name,
+                "language": "en",
+                "variables": var_dict,
+                "types": ContentList.Types(payload={
+                    "twilio_text": ContentList.TwilioText(payload={
+                        "body": final_body
+                    })
+                })
+            }
+        )
+
+        template = self.client.content.contents.create(payload)
+        approval_create : ApprovalCreateInstance = template.approval_create.create(ApprovalCreateList.ContentApprovalRequest({
+            "name": name,
+            "category": "UTILITY"
+        }))
+        
+        pending_approval = True
+        while pending_approval:
+            approval_fetch : ApprovalFetchInstance = template.approval_fetch().fetch()
+            response = approval_fetch.whatsapp;
+
+            print(response)
+            status : str = response.get('status')
+
+            if status == "unsubmitted":
+                pending_approval = False
+                print("Template unsubmitted")
+            elif status == 'rejected':
+                pending_approval = False
+                rejection_reason : str = response.get('rejection_reason')
+                print("Template rejected:", rejection_reason)
+            else:
+                print("Unknown status:", status)
+            
+            if (pending_approval):
+                time.sleep(10)
+
+        return template.sid

@@ -7,11 +7,12 @@ import math
 from flask import Blueprint, request, jsonify
 from standard_pipelines.bots.telegram_bot import TelegramBot
 from standard_pipelines.bots.skype_bot import SkypeBot
+from standard_pipelines.bots.whatsapp_bot import WhatsappBot
 import standard_pipelines.assistants.redtrack.config.config as config
 import time
 from openai.types.beta import Assistant
 
-from standard_pipelines.bots.whatsapp_bot import WhatsappBot
+
 
 redtrack_bp = Blueprint('redtrack', __name__, url_prefix='/redtrack')
 
@@ -64,6 +65,8 @@ def redtrack_start():
     platform = data['platform']
     username = data['username']
 
+    print (f"starting chat for {first_name} on {platform} with username {username}")
+
     # (Optional) Validate platform if necessary
     # allowed_platforms = ['skype', 'whatsapp', 'telegram']
     # if platform.lower() not in allowed_platforms:
@@ -73,15 +76,14 @@ def redtrack_start():
     #     }), 400
 
 
-    if platform == "skype":
+    if platform == "skype" and skype_bot is not None:
         skype_bot.start_chat(username)
-    elif platform == "whatsapp":
-        whatsapp_bot.start_chat(first_name, username)
+    elif platform == "whatsapp" and whatsapp_bot is not None:
+        whatsapp_bot.start_chat(first_name, f"whatsapp:{username}")
+    else:
+        print(f"no bot for platform '{platform}'")
 
-
-    # Process the data as needed
-    # For now, we'll just return the received data as confirmation.
-    return 200
+    return jsonify({'status': 'success'}), 200
 
 
 thread_map : dict[str, str] = {}
@@ -169,7 +171,7 @@ def message_handler(convo_id: str, username: str, message_text: str) -> str:
 
 @click.command('redtrack')
 @click.argument('operation', type=click.Choice(['push']))
-@click.argument('parameter', type=click.Choice(['bot', 'data']))
+@click.argument('parameter', type=click.Choice(['bot', 'data', 'whatsapp']))
 def handle_command(operation, parameter):
     print(operation, '|', parameter)
 
@@ -178,6 +180,8 @@ def handle_command(operation, parameter):
             push_bot()
         elif parameter == 'data':
             push_data()
+        elif parameter == 'whatsapp':
+            push_whatsapp()
 
 def push_bot():
     print("pushing bot...")
@@ -286,3 +290,13 @@ def push_data():
                             f.close()
 
         print("File batch upload complete.")
+
+def push_whatsapp():
+    print("pushing whatsapp...")
+
+    whatsapp_bot = WhatsappBot(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN, config.TWILIO_PHONE_NUMBER, greeting_handler, convo_start_handler, message_handler)
+    
+    whatsapp_bot.create_template(config.WHATSAPP_GREETING_TEMPLATE, config.GREETING, ['username', 'link'])
+
+    print("whatsapp push complete")
+
