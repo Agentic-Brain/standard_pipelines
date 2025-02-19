@@ -21,6 +21,7 @@ def run_scheduled_tasks():
     Check all models that inherit from ScheduledMixin and, if their scheduled time is due
     and the current day/hour is active, run their trigger_job() method.
     """
+    current_app.logger.debug('Checking for scheduled tasks')
     now = datetime.utcnow()
 
     # Loop over every concrete subclass of ScheduledMixin
