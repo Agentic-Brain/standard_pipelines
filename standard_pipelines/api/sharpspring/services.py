@@ -15,18 +15,23 @@ class SharpSpringAPIManager(BaseAPIManager):
             "accountID": self.api_config["account_id"],
             "secretKey": self.api_config["secret_key"]
         }
-        self.first_deal_stage_id = self._get_first_deal_stage_id()
+        self.first_deal_stage_id = None
+        self.owner_id = None
 
     @property
     def required_config(self) -> list[str]:
         return ['account_id', 'secret_key']
-    
+
     #====== API functions ======#
-    def create_opportunity(self, owner_email: str, client_name: str):
+    def create_opportunity(self, owner_email: str, client_name: str, client_id: str):
         try:
             owner_id_response = self._get_account_owner_id(owner_email)
             if "error" in owner_id_response:
                 return owner_id_response
+            
+            first_stage_id_response = self._get_first_deal_stage_id()
+            if "error" in first_stage_id_response:
+                return first_stage_id_response
             
             opportunity_name = f"Sale for {client_name}"
             
@@ -35,8 +40,9 @@ class SharpSpringAPIManager(BaseAPIManager):
             opportunity = {
                 "ownerID": owner_id_response["owner_id"],
                 "opportunityName": opportunity_name,
-                "dealStageID": self.first_deal_stage_id,
-                "closeDate": close_date
+                "dealStageID": first_stage_id_response["stage_id"],
+                "closeDate": close_date,
+                "primaryLeadID": client_id
             }
 
             params = {'objects': [opportunity]}
@@ -59,7 +65,13 @@ class SharpSpringAPIManager(BaseAPIManager):
             if "error" in checked_result:
                 return checked_result
             
-            return {"success": "Opportunity created successfully"}
+            creates_list = data.get("result", {}).get("creates", []) 
+            if not creates_list:
+                return {"error": "No opportunity created"}
+            
+            created_id = creates_list[0].get("id")
+            
+            return {"opportunity_id": created_id}
         
         except HTTPError as e:
             current_app.logger.error(f"HTTP error occurred while creating an opportunity: {e}")
@@ -96,6 +108,42 @@ class SharpSpringAPIManager(BaseAPIManager):
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting contact: {e}")
             return {'error': 'An unexpected error occurred while getting contact'}
+    
+    def create_contact(self, full_name: str, email: str, phone_number: str, owner_id: str) -> dict:
+        try:
+            first_name, last_name = full_name.split(" ", 1) if " " in full_name else (full_name, "")
+            lead_data = {
+                "firstName": first_name,
+                "lastName": last_name,
+                "emailAddress": email,  # Required field
+                "phoneNumber": phone_number,
+                "ownerID": owner_id
+            }
+
+            params = {'objects': [lead_data]}
+            data = {"method": "createLeads", "params": params, "id": str(uuid.uuid4()),}
+            
+            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
+            response.raise_for_status()
+
+            result = response.json()
+            checked_result = self._check_for_errors(result)
+            if "error" in checked_result:
+                return checked_result
+
+            creates_list = data.get("result", {}).get("creates", []) 
+            if not creates_list:
+                return {"error": "No contact created"}
+            
+            created_id = creates_list[0].get("id")
+            return {"contact_id": created_id}
+        
+        except HTTPError as e:
+            current_app.logger.error(f"HTTP error occurred while creating contact: {e}")
+            return {'error': f'HTTP error occurred while creating contact: {e}'}
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while creating contact: {e}")
+            return {'error': 'An unexpected error occurred while creating contact'}
         
     #====== Helper functions ======#
     def _check_for_errors(self, result: dict) -> dict:
@@ -126,9 +174,12 @@ class SharpSpringAPIManager(BaseAPIManager):
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while checking for errors: {e}")
             return {'error': f'An unexpected error occurred while checking for errors: {e}'}
-
+    
     def _get_account_owner_id(self, email: str) -> dict:
         try:
+            if self.owner_id is not None:
+                return {"owner_id": self.owner_id}
+            
             params = {
                 "where": {"isActive":1, "emailAddress": email},  
                 "limit": 1
@@ -153,6 +204,7 @@ class SharpSpringAPIManager(BaseAPIManager):
                 current_app.logger.error(f"No owner id found for the given email: {email}")
                 return {"error": f"No owner id found for the given email: {email}"}
             
+            self.owner_id = owner_id
             return {"owner_id": owner_id}
 
         except HTTPError as e:
@@ -164,6 +216,9 @@ class SharpSpringAPIManager(BaseAPIManager):
 
     def _get_first_deal_stage_id(self) -> str:
         try:
+            if self.first_deal_stage_id is not None:
+                return {"stage_id": self.first_deal_stage_id}
+            
             params = {"where": {}, "limit": 100}
             data = {"method": "getDealStages", "params": params, "id": str(uuid.uuid4()),}
             
@@ -173,20 +228,23 @@ class SharpSpringAPIManager(BaseAPIManager):
             result = response.json()
             checked_result = self._check_for_errors(result)
             if "error" in checked_result:
-                raise Exception(checked_result["error"])
+                current_app.logger.error(checked_result["error"])
+                return checked_result
             
             deal_stages = result.get("result", {}).get("dealStage", [])
             first_stage = min(deal_stages, key=lambda stage: int(stage.get("weight", float('inf'))))
 
             first_stage_id = first_stage.get("id")
             if not first_stage_id:
-                raise Exception("No first deal stage id found")
+                current_app.logger.error("No first deal stage id found")
+                return {'error': "No first deal stage id found"}
 
-            return first_stage_id
+            self.first_deal_stage_id = first_stage_id
+            return {"stage_id": first_stage_id}
 
         except HTTPError as e:
             current_app.logger.error(f"HTTP error occurred while retrieving deal stages: {e}")
-            raise HTTPError(f'HTTP error occurred while retrieving deal stages: {e}')
+            return {'error': f'HTTP error occurred while retrieving deal stages: {e}'}
         except Exception as e:
             current_app.logger.exception(f"Unexpected error retrieving deal stages: {e}")
-            raise Exception(f'Unexpected error retrieving deal stages: {e}')
+            return {'error': f'Unexpected error retrieving deal stages: {e}'}
