@@ -85,9 +85,7 @@ def upgrade():
     # This is gonna cause problems with future data flow migrations
     # Other data flows inherit from this and will have the same unique indexing
     # This will cause a conflict, will have to remove this from alembic migrations
-    with op.batch_alter_table('ff2hs_on_transcript_configuration', schema=None) as batch_op:
-        batch_op.create_index('ix_unique_client_id_config', ['registry_id', 'client_id'], unique=True, postgresql_where=sa.text('client_id IS NULL'))
-        batch_op.create_index('ix_unique_default_config', ['registry_id', 'is_default'], unique=True, postgresql_where=sa.text('is_default = true'))
+   
 
     op.create_table('fireflies_credential',
     sa.Column('fireflies_api_key', sa.String(length=255), nullable=False),
@@ -153,9 +151,6 @@ def downgrade():
     op.drop_table('user')
     op.drop_table('hubspot_credential')
     op.drop_table('fireflies_credential')
-    with op.batch_alter_table('ff2hs_on_transcript_configuration', schema=None) as batch_op:
-        batch_op.drop_index('ix_unique_default_config', postgresql_where=sa.text('is_default = true'))
-        batch_op.drop_index('ix_unique_client_id_config', postgresql_where=sa.text('client_id IS NULL'))
 
     op.drop_table('ff2hs_on_transcript_configuration')
     op.drop_table('client_data_flow_join')
