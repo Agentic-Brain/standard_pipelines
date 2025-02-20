@@ -71,7 +71,6 @@ class ScheduledMixin(BaseMixin):
         """Abstract method that must be implemented to poll for the job."""
         pass
     
-    @shared_task
     def trigger_job(self) -> None:
         """Trigger the actual job."""
         success = self.run_job()
@@ -86,6 +85,7 @@ class ScheduledMixin(BaseMixin):
                 self.is_recurring = False
         else:
             raise ScheduledJobError(f"Job failed for {self.__class__.__name__} {self.id}")
+        db.session.commit()
 
     def set_scheduled_time_to_now(self) -> None:
         self.scheduled_time = datetime.utcnow()
