@@ -67,6 +67,35 @@ class SharpSpringAPIManager(BaseAPIManager):
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while creating an opportunity: {e}")
             return {'error': 'An unexpected error occurred while creating an opportunity'}
+    
+    def get_contact_by_email(self, client_email: str) -> dict:
+        try:
+            params = {
+                "where": {"emailAddress": client_email},
+                "limit": 1,
+                "fields": ["id", "firstName", "lastName", "emailAddress", "phoneNumber", "mobilePhoneNumber", "companyName"]
+            }
+            data = {"method": "getLeads", "params": params, "id": str(uuid.uuid4()),}
+            
+            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
+            response.raise_for_status()
+
+            result = response.json()
+            checked_result = self._check_for_errors(result)
+            if "error" in checked_result:
+                return checked_result
+            
+            contact_list = result.get("result", {}).get("lead", [])
+            contact = contact_list[0] if contact_list else {}
+    
+            return {"contact": contact}
+        
+        except HTTPError as e:
+            current_app.logger.error(f"HTTP error occurred while getting contact: {e}")
+            return {'error': f'HTTP error occurred while getting contact: {e}'}
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while getting contact: {e}")
+            return {'error': 'An unexpected error occurred while getting contact'}
         
     #====== Helper functions ======#
     def _check_for_errors(self, result: dict) -> dict:
@@ -102,7 +131,7 @@ class SharpSpringAPIManager(BaseAPIManager):
         try:
             params = {
                 "where": {"isActive":1, "emailAddress": email},  
-                "limit": 100
+                "limit": 1
             }
             data = {"method": "getUserProfiles", "params": params, "id": str(uuid.uuid4()),}
             
