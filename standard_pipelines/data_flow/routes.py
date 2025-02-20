@@ -56,8 +56,9 @@ def webhook_split():
             results = []
             for webhook_id in validated_ids:
                 response = requests.post(
-                    f'http://localhost:5000/webhook/{webhook_id}', 
-                    json=webhook_data  # requests will handle JSON serialization
+                    f'http://localhost:5000/webhook/{webhook_id}',
+                    json=webhook_data,  # requests will handle JSON serialization
+                    timeout=30,
                 )
                 results.append({
                     'webhook_id': webhook_id,

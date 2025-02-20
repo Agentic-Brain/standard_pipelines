@@ -103,8 +103,12 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
         email_prompt = self.configuration.email_body_prompt.format(original_transcript=input_data["fireflies_transcript"])
         
         # TODO: Wrap this openapi call in try
-        chat_completion = self.openai_api_manager.chat(email_prompt, model="gpt-4")
-        email_body = chat_completion.choices[0].message.content  # Extract the actual text
+        try:
+            chat_completion = self.openai_api_manager.chat(email_prompt, model="gpt-4")
+            email_body = chat_completion.choices[0].message.content  # Extract the actual text
+        except Exception as e:
+            # Log the error and raise a more specific exception
+            raise ValueError(f"Failed to generate email content: {str(e)}")
         
         google_api_config = { 
             "refresh_token": input_data["google_credentials"].refresh_token

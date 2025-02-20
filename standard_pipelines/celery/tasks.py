@@ -84,7 +84,10 @@ def execute_task_method(model_class_name: str, task_id: str, method_name: str):
         return
 
     try:
-        # The method_name should be either "trigger_job" or "execute_poll".
+        ALLOWED_METHODS = ['trigger_job', 'execute_poll']
+        if method_name not in ALLOWED_METHODS:
+            current_app.logger.error(f"Invalid method name {method_name}")
+            return
         method = getattr(task_instance, method_name, None)
         if callable(method):
             current_app.logger.debug(f"Executing {method_name} for {task_instance}")
