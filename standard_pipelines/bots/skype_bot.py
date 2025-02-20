@@ -1,6 +1,9 @@
+import asyncio
+import atexit
+import os
 import time
 from typing import Callable
-from skpy import Skype, SkypeUtils, SkypeUser
+from skpy import Skype, SkypeUtils, SkypeUser, SkypeConnection, SkypeEvent, SkypeMessageEvent, SkypeChatUpdateEvent, SkypeNewMessageEvent
 import threading
 
 class SkypeBot:
@@ -11,54 +14,84 @@ class SkypeBot:
         self.greeting_handler : Callable[[str], str] = greeting_handler if greeting_handler else self.default_greeting_handler;
         self.convo_start_handler : Callable[[str, str], None] = convo_start_handler if convo_start_handler else self.default_convo_start_handler
         self.message_handler : Callable[[str, str, str], str] = message_handler if message_handler else self.default_message_handler
+        print("initializing skype")
         self.skype = Skype(username, password)
         self.skype.setPresence(SkypeUtils.Status.Online)
+        
+        # Create a stop event and a placeholder for the polling thread.
+        self._stop_event = threading.Event()
+        self.polling_thread = None
+        
+        # Start polling if in the reloader's main process.
         self.start_polling()
+        
+        # Ensure the polling thread is stopped on exit.
+        atexit.register(self.stop_polling)
         
     def start_chat(self, username: str):
         # https://search.skype.com/v2.0/search?searchString=devbot-2077@hotmail.com&requestId=Query5&locale=en-US&sessionId=e5e35812-1dc3-4278-a9cf-e362b45b8890
         users = self.skype.contacts.search(username)
         if len(users) > 0:
             user : SkypeUser = users[0]
+            print()
             print(user)
+            print()
             greeting = self.greeting_handler(user.name.first)
             print(greeting)
             print("inviting", user.name)
-            user.invite(greeting)
+            print("inviting", user.id)
+            response : SkypeConnection = user.invite(greeting)
+            print(response)
+
+            if not response.text:
+                print("invite successful")
+            else:
+                print("invite failed")
+                print(response.text)
 
             # chat = self.skype.chats.chat(user.id)
             # self.convo_start_handler(self, )
             # chat.sendMsg("Hello, this is a test message from the Skype API!")
 
     async def handle_event(self, event):
-        print(event.to_json())
-
         username: str = None
         message_text: str = None
         conversation_id: str = None
 
-        if event and event.channel_post and event.channel_post.text:
-            username = event.channel_post.sender_chat.username
-            message_text = event.channel_post.text
-            conversation_id = event.channel_post.sender_chat.id
-        elif event and event.message and event.message.text:
-            print("from_user:", event.message.from_user)
-            username = event.message.from_user.full_name
-            message_text = event.message.text
-            conversation_id = event.message.from_user.id
+        # if isinstance(event, SkypeMessageEvent):
+        #     username = event.msgFrom
+        #     message_text = event.msgContent
+        #     # conversation_id = event.chatId
+        #     print(event.msg)
+        #     print(f"{conversation_id} {username} {message_text}")
+        if isinstance(event, SkypeNewMessageEvent):
+            username = event.msgFrom
+            message_text = event.msgContent
+            conversation_id = event.resource['threadtopic']
+            print(event.msg)
+        elif isinstance(event, SkypeChatUpdateEvent):
+            # scue : SkypeChatUpdateEvent = event
+            # print("SkypeChatUpdateEvent:", scue.raw)
+            username = event.resource['imdisplayname']
+            message_text = event.resource['content']
+            conversation_id = event.resource['id']
+        else:
+            print("unknown event type:", type(event))
+            return
+
+        print(f"incoming message: [{conversation_id}] <{username}> {message_text}")
 
         if conversation_id:
             if message_text.startswith("/start"):
                 unique_param = message_text.replace("/start ", "")
                 # await self.send_typing_signal(conversation_id)
-                response = self.convo_start_handler(self, conversation_id, username, unique_param)
+                response = self.convo_start_handler(conversation_id, username, unique_param)
             else:
                 # await self.send_typing_signal(conversation_id)
-                response = self.message_handler(self, conversation_id, username, message_text)
+                response = self.message_handler(conversation_id, username, message_text)
             await self.send_message(conversation_id, response)
         else:
             print("[WARNING] no conversation id found")
-            print(event.to_json())
     
     def send_message(self, conversation_id: str, message: str):
         """
@@ -78,12 +111,30 @@ class SkypeBot:
             print(f"Failed to send message: {e}")
 
     def start_polling(self):
+        # Only start polling in the reloader's main process.
+        if os.environ.get("WERKZEUG_RUN_MAIN") != "true":
+            print("Not starting polling because WERKZEUG_RUN_MAIN is not true")
+            return
+        
+        self._stop_event.clear()
+        
         def polling_loop():
-            while True:
+            while not self._stop_event.is_set():
                 new_events = self.skype.getEvents()
+                print(f"new_events: {len(new_events)}")
                 for event in new_events:
                     print(event)
-                    self.handle_event(event)
-                time.sleep(1)
-        polling_thread = threading.Thread(target=polling_loop, daemon=True)
-        polling_thread.start()
+                    # Run the async handle_event in a new event loop.
+                    asyncio.run(self.handle_event(event))
+        
+        self.polling_thread = threading.Thread(target=polling_loop, daemon=True)
+        self.polling_thread.start()
+        print("Polling thread started.")
+
+    def stop_polling(self):
+        if self.polling_thread is not None:
+            print("Stopping polling thread...")
+            self._stop_event.set()
+            self.polling_thread.join(timeout=5)
+            self.polling_thread = None
+            print("Polling thread stopped.")

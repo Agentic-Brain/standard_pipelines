@@ -1,5 +1,6 @@
 import multiprocessing
 import threading
+import uuid
 import click
 from openai import OpenAI
 import os
@@ -11,6 +12,8 @@ from standard_pipelines.bots.whatsapp_bot import WhatsappBot
 import standard_pipelines.assistants.redtrack.config.config as config
 import time
 from openai.types.beta import Assistant
+
+from skpy import Skype
 
 
 
@@ -27,11 +30,11 @@ def start_bots():
     # telegram_bot = TelegramBot(config.TELEGRAM_TOKEN, greeting_handler, convo_start_handler, message_handler)
 
     # def start_skype_bot():
-    # global skype_bot
-    # skype_bot = SkypeBot(config.SKYPE_USERNAME, config.SKYPE_PASSWORD, greeting_handler, convo_start_handler, message_handler)
+    global skype_bot
+    skype_bot = SkypeBot(config.SKYPE_USERNAME, config.SKYPE_PASSWORD, greeting_handler, convo_start_handler, message_handler)
 
     global whatsapp_bot
-    whatsapp_bot = WhatsappBot(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN, config.TWILIO_PHONE_NUMBER, greeting_handler, convo_start_handler, message_handler)
+    # whatsapp_bot = WhatsappBot(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN, config.TWILIO_PHONE_NUMBER, greeting_handler, convo_start_handler, message_handler)
 
     # polling_thread = threading.Thread(target=start_telegram_bot)
     # polling_thread.start()
@@ -84,6 +87,38 @@ def redtrack_start():
         print(f"no bot for platform '{platform}'")
 
     return jsonify({'status': 'success'}), 200
+
+search_guid : str = None
+@redtrack_bp.route('/ratelimittest', methods=['GET'])
+def ratelimittest():
+    global search_guid
+    # if search_guid is None:
+    search_guid = str(uuid.uuid4())
+    
+    print("search_guid:", search_guid)
+
+    from standard_pipelines.assistants.redtrack import redtrack_config
+    skype = Skype(redtrack_config.SKYPE_USERNAME, redtrack_config.SKYPE_PASSWORD)
+    requests = 0
+    while True:
+        try:
+            users = skype.contacts.search("quincy120@gmail.com", search_guid)
+            if len(users) > 0:
+                user = users[0]
+                print()
+                print(user)
+                print()
+
+            requests += 1
+            print(f"requests: {requests}")
+            time.sleep(1)
+        except Exception as e:
+            import traceback
+            print(f"Error: {e}")
+            traceback.print_exc()
+            break
+
+    return jsonify({'requests': requests}), 200
 
 
 thread_map : dict[str, str] = {}

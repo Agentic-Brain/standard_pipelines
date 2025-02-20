@@ -73,8 +73,6 @@ class WhatsappBot:
             asyncio.set_event_loop(loop)
             await polling_loop()
 
-        # asyncio.run(run_polling_thread())
-
         polling_thread = threading.Thread(target=lambda: asyncio.run(run_polling_thread()), daemon=True)
         polling_thread.start()
 
