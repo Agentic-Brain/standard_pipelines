@@ -16,7 +16,6 @@ from openai.types.beta import Assistant
 from skpy import Skype
 
 
-
 redtrack_bp = Blueprint('redtrack', __name__, url_prefix='/redtrack')
 
 telegram_bot : TelegramBot = None
@@ -141,7 +140,7 @@ def convo_start_handler(convo_id: str, message_text: str) -> None:
         content=message_text
     )
 
-    print("created thread:", thread_id)
+    print("created thread:", convo_id, "/", thread_id)
 
 def message_handler(convo_id: str, username: str, message_text: str) -> str:
     print("message_handler", username, message_text)
