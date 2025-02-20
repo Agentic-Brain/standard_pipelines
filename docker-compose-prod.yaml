@@ -19,6 +19,8 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_bitwarden_access_token
     - standard_pipelines_production_hubspot_client_id
     - standard_pipelines_production_hubspot_client_secret
+    - standard_pipelines_production_google_client_id
+    - standard_pipelines_production_google_client_secret
 
 x-base-service: &base-service
   image: ghcr.io/agentic-brain/standard_pipelines:v0.0.4h3
@@ -32,6 +34,8 @@ x-base-service: &base-service
     - PRODUCTION_DEFAULT_CLIENT_BITWARDEN_KEY_ID=b5e69235-8670-4b89-9135-b26b017f5906
     - PRODUCTION_MAILGUN_SEND_USER=noreply@agenticbrain.com
     - PRODUCTION_REDIS_HOST=standard_pipelines_production_redis
+    - PRODUCTION_GOOGLE_REDIRECT_URI=https://agents.agentic-internal.com/api/google/oauth/authorize
+    - PRODUCTION_GOOGLE_SCOPES=https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile
   <<: *production-secrets
 
 services:
@@ -43,6 +47,21 @@ services:
       - postgres
       - adminer
       - migrations
+      - redis
+
+  celery_worker:
+    <<: *base-service
+    command: celery -A standard_pipelines.celery.worker worker --loglevel=info --pool=solo
+    depends_on:
+      - postgres
+      - redis
+
+  celery_beat:
+    <<: *base-service
+    command: celery -A standard_pipelines.celery.worker beat --loglevel=info
+    depends_on:
+      - postgres
+      - redis
 
   migrations:
     <<: *base-service
@@ -68,9 +87,15 @@ services:
     ports:
       - 8050:8080
 
+  redis:
+    image: redis:latest
+    container_name: standard_pipelines_redis_production
+    volumes:
+      - standard_pipelines_redis_data_production:/data
+
 volumes:
   standard_pipelines_postgres_data_production:
-
+  standard_pipelines_redis_data_production:
 secrets:
   standard_pipelines_production_db_name:
     external: true
@@ -107,4 +132,8 @@ secrets:
   standard_pipelines_production_hubspot_client_id:
     external: true
   standard_pipelines_production_hubspot_client_secret:
+    external: true
+  standard_pipelines_production_google_client_id:
+    external: true
+  standard_pipelines_production_google_client_secret:
     external: true

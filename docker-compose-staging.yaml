@@ -15,10 +15,13 @@ x-staging-secrets: &staging-secrets
     - standard_pipelines_staging_sentry_dsn
     - standard_pipelines_staging_openai_api_key
     - standard_pipelines_staging_internal_api_key
-    - standard_pipelines_staging_bitwarden_api_key
-    - standard_pipelines_staging_bitwarden_state_file_path
+    - standard_pipelines_staging_bitwarden_access_token
     - standard_pipelines_staging_bitwarden_organization_id
     - standard_pipelines_staging_bitwarden_default_client_bitwarden_key_id
+    - standard_pipelines_staging_hubspot_client_id
+    - standard_pipelines_staging_hubspot_client_secret
+    - standard_pipelines_staging_google_client_id
+    - standard_pipelines_staging_google_client_secret
 x-base-service: &base-service
   image: ghcr.io/agentic-brain/standard_pipelines:v0.0.0
   secrets:
@@ -27,6 +30,11 @@ x-base-service: &base-service
     - FLASK_ENV=staging
     - STAGING_DB_HOST=standard_pipelines_staging_postgres
     - STAGING_DB_PORT=5432
+    - STAGING_REDIS_HOST=standard_pipelines_staging_redis
+    - STAGING_BITWARDEN_STATE_FILE_PATH=/bitwarden-state
+    - STAGING_DEFAULT_CLIENT_BITWARDEN_KEY_ID=b5e69235-8670-4b89-9135-b26b017f5906
+    - STAGING_MAILGUN_SEND_USER=noreply@agenticbrain.com
+    - STAGING_GOOGLE_REDIRECT_URI=https://staging.agenticbrain.com/api/auth/google/callback
   <<: *staging-secrets
 
 services:
@@ -44,6 +52,20 @@ services:
     command: /bin/sh -c "flask db upgrade && flask create-admin && flask init-flows"
     depends_on:
       - postgres
+  
+  celery_worker:
+    <<: *base-service
+    command: celery -A standard_pipelines.celery.worker worker --loglevel=info --pool=solo
+    depends_on:
+      - postgres
+      - redis
+
+  celery_beat:
+    <<: *base-service
+    command: celery -A standard_pipelines.celery.worker beat --loglevel=info
+    depends_on:
+      - postgres
+      - redis
 
   postgres:
     image: postgres
@@ -63,9 +85,15 @@ services:
     image: adminer
     ports:
       - 8080:8080
+  redis:
+    image: redis:latest
+    container_name: standard_pipelines_redis_staging
+    volumes:
+      - standard_pipelines_redis_data_staging:/data
 
 volumes:
   standard_pipelines_postgres_data_staging:
+  standard_pipelines_redis_data_staging:
 
 secrets:
   standard_pipelines_staging_db_name:
@@ -93,4 +121,22 @@ secrets:
   standard_pipelines_staging_sentry_dsn:
     external: true
   standard_pipelines_staging_openai_api_key:
+    external: true
+  standard_pipelines_staging_internal_api_key:
+    external: true
+  standard_pipelines_staging_bitwarden_access_token:
+    external: true
+  standard_pipelines_staging_bitwarden_state_file_path:
+    external: true
+  standard_pipelines_staging_bitwarden_organization_id:
+    external: true
+  standard_pipelines_staging_bitwarden_default_client_bitwarden_key_id:
+    external: true
+  standard_pipelines_staging_hubspot_client_id:
+    external: true
+  standard_pipelines_staging_hubspot_client_secret:
+    external: true
+  standard_pipelines_staging_google_client_id:
+    external: true
+  standard_pipelines_staging_google_client_secret:
     external: true
