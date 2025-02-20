@@ -1,12 +1,7 @@
-# from .config import celery_init_app
-from flask import Flask
-from standard_pipelines.config import DevelopmentConfig
-from standard_pipelines.extensions import db
-from standard_pipelines.celery.tasks import run_scheduled_tasks
+from standard_pipelines.celery.tasks import run_generic_tasks
 from celery import Celery, Task
 import redis
 from celery.schedules import crontab
-
 
 def init_app(app): 
     class FlaskTask(Task):
@@ -22,8 +17,14 @@ def init_app(app):
     app.config['CELERY_CONFIG'].update(
         beat_schedule={
             'run-scheduled-tasks-every-minute': {
-                'task': 'standard_pipelines.celery.tasks.run_scheduled_tasks',
+                'task': 'standard_pipelines.celery.tasks.run_generic_tasks',
                 'schedule': crontab(minute='*'),  # Run every minute
+                'args': ('trigger_job',)
+            },         
+            'run-polling-tasks-every-minute': {
+                'task': 'standard_pipelines.celery.tasks.run_generic_tasks',
+                'schedule': crontab(minute='*'),  # Run every minute
+                'args': ('poll',)
             },
         }
     )

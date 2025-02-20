@@ -128,10 +128,11 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
             thread_id=input_data["thread_id"], # type: ignore
             gmail_credentials_id=input_data["google_credentials"].id, # type: ignore
             scheduled_time=next_scheduled_time, # type: ignore
-            is_recurring=True, # type: ignore
             recurrence_interval=self.configuration.email_interval_days, # type: ignore
             max_runs=self.configuration.email_retries, # type: ignore
-            original_transcript=input_data["original_transcript"] # type: ignore
+            original_transcript=input_data["original_transcript"], # type: ignore
+            poll_interval=30, # type: ignore
+            next_poll_time=datetime.utcnow() + timedelta(minutes=30) # type: ignore
         )
 
         schedule.save()

@@ -182,6 +182,37 @@ class GmailAPIManager(BaseAPIManager):
         
         return list(addresses)
 
+    def has_recipient_responded(self, thread_id: str, sender_email: str) -> bool:
+        """
+        Checks whether any message in the thread indicates that the recipient has responded.
+        
+        Args:
+            thread_id (str): The Gmail thread ID.
+            recipient_email (str): The recipient's email address.
+            sender_email (str): Your email address (i.e., the sender).
+            
+        Returns:
+            bool: True if a response from the recipient is detected, False otherwise.
+        """
+        # Retrieve the thread details using your existing method.
+        thread = self.get_thread(thread_id)
+        if not thread or 'error' in thread:
+            current_app.logger.error(f"Unable to retrieve thread {thread_id}")
+            return False
+        
+        # Iterate over all messages in the thread.
+        for message in thread.get('messages', []):
+            # The headers are usually in the payload.
+            headers = message.get('payload', {}).get('headers', [])
+            for header in headers:
+                if header.get('name', '').lower() == 'from':
+                    from_value = header.get('value', '')
+                    # If the "From" header includes the recipient's email, we assume they've replied.
+                    if sender_email.lower() not in from_value.lower():
+                        current_app.logger.info(f"Response detected from in thread {thread_id}")
+                        return True
+        return False
+
     #====== Helper functions ======#
     def _structure_email_data(self, to_address, subject, body):
         try:            
