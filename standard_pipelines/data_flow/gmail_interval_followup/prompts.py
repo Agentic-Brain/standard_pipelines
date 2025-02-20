@@ -88,7 +88,7 @@ Next steps:
 
 [Concise bullet points with information pulled from the transcript that is as long as necessary depending on how many next steps were mentioned in the call.]
 
-[End with a friendly closing remark that encourages further engagement. Emphasize that we think this is a great fit for {Client or Client's Company} and that we can’t wait to move forward with them]
+[End with a friendly closing remark that encourages further engagement. Emphasize that we think this is a great fit for (Client or Client's Company) and that we can’t wait to move forward with them]
 
 Talk soon!
 

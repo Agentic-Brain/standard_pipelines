@@ -14,8 +14,8 @@ from .prompts import FOLLOWUP_PROMPT, EMAIL_BODY_PROMPT
 class GmailIntervalFollowupConfiguration(DataFlowConfiguration):
     __tablename__ = 'gmail_interval_followup_configuration'
 
-    email_interval_days: Mapped[int] = mapped_column(Integer, default=7)
-    email_retries: Mapped[int] = mapped_column(Integer, default=3)
+    email_interval_days: Mapped[int] = mapped_column(Integer, server_default="10080")
+    email_retries: Mapped[int] = mapped_column(Integer, server_default="5")
     email_body_prompt: Mapped[str] = mapped_column(Text, default=EMAIL_BODY_PROMPT)
     followup_body_prompt: Mapped[str] = mapped_column(Text, default=FOLLOWUP_PROMPT)
     subject_line_template: Mapped[str] = mapped_column(Text, default="Follow up and next steps")
@@ -60,8 +60,8 @@ class GmailIntervalFollowupSchedule(ScheduledMixin):
             raise ValueError("Configuration not found")
         
         openai_api_manager, gmail_client = self._get_api_managers()  
-        followup_prompt = self.configuration.followup_body_prompt.format(transcript=self.original_transcript)
-        followup_body = openai_api_manager.chat(followup_prompt, model="gpt-4")
+        followup_prompt = self.configuration.followup_body_prompt.format(original_transcript=self.original_transcript)
+        followup_body = openai_api_manager.chat(followup_prompt, model="gpt-4").choices[0].message.content
         to_addresses = gmail_client.get_to_addresses_from_thread(self.thread_id)
         current_app.logger.debug(f"Creating draft for thread {self.thread_id}")
         gmail_client.create_draft(to_addresses, config.subject_line_template, followup_body, self.thread_id)

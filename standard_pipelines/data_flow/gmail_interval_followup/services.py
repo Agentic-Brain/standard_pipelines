@@ -100,7 +100,7 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
     def transform(self, input_data: dict | None = None, context: dict | None = None):
         if input_data is None:
             raise ValueError("input_data is required")
-        email_prompt = self.configuration.email_body_prompt.format(transcript=input_data["fireflies_transcript"])
+        email_prompt = self.configuration.email_body_prompt.format(original_transcript=input_data["fireflies_transcript"])
         
         # TODO: Wrap this openapi call in try
         chat_completion = self.openai_api_manager.chat(email_prompt, model="gpt-4")
