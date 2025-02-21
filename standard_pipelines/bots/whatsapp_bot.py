@@ -155,7 +155,7 @@ class WhatsappBot:
         self.name_map[phone_number] = first_name
 
         greeting = self.greeting_handler(first_name)
-        self.convo_start_handler(first_name, greeting)
+        self.convo_start_handler(phone_number, greeting)
         whatsapp_response = self.send_message(phone_number, greeting)
 
         #if whatsapp_response.error_code:
