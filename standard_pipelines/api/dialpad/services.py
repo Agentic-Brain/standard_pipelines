@@ -15,9 +15,9 @@ class DialpadAPIManager(BaseAPIManager):
         return ["api_key"]
 
     #============ API Functions =============#
-    def get_transcript(self, call_info: dict):
+    def get_transcript(self, call_data: dict):
         try:
-            call_id = str(call_info.get("call_id"))
+            call_id = str(call_data.get("call_id"))
             if not call_id or not isinstance(call_id, str):
                 current_app.logger.error("Invalid call_id provided.")
                 return {"error": "Invalid call_id provided."}
@@ -27,10 +27,10 @@ class DialpadAPIManager(BaseAPIManager):
             if not lines:
                 current_app.logger.error(f"No transcript found for call_id: {call_id}")
                 return {"error": "No transcript found"}
-
+            
             only_transcripts = [entry for entry in lines if entry['type'].lower() == 'transcript']
-            formatted_transcript = self._format_transcript(only_transcripts)
-            participants = self._get_call_participants(call_info)
+            participants = self._get_call_participants(call_data)
+            formatted_transcript = self._format_transcript(only_transcripts, call_data)
             return {"transcript": formatted_transcript, "participants": participants}
 
         except requests.exceptions.RequestException as e:
@@ -118,8 +118,19 @@ class DialpadAPIManager(BaseAPIManager):
             return {"error": f"An unexpected error occurred while getting webhook id: {e}"}
         
     #============ Helper Functions =============#
-    def _format_transcript(self, transcript_entries: list[dict]) -> str:
+    def _format_transcript(self, transcript_entries: list[dict], call_data: dict) -> str:
         formatted_lines = []
+
+        organizer_email = call_data.get('target', {}).get('email', 'Unknown Email')
+        attendee_email = call_data.get('contact', {}).get('email', 'Unknown Attendee')
+        date_started = datetime.fromtimestamp(call_data.get('date_started') / 1000) if call_data.get('date_started') else 'Unknown Date'
+        call_id = call_data.get('call_id', 'Unknown Call ID')
+
+        formatted_lines.append(f"Organizer: {organizer_email}")
+        formatted_lines.append(f"Attendee: {attendee_email}")
+        formatted_lines.append(f"Call Date: {date_started.strftime('%Y-%m-%d %H:%M:%S')}")
+        formatted_lines.append(f"Call ID: {call_id}")
+
         for entry in transcript_entries:
             time_str = entry.get('time', '')
             try:
@@ -136,12 +147,12 @@ class DialpadAPIManager(BaseAPIManager):
 
         return "\n".join(formatted_lines)
     
-    def _get_call_participants(self, call_info: dict) -> dict:
+    def _get_call_participants(self, call_data: dict) -> dict:
         try:
             guest = {}
             host = {}
             
-            contact = call_info.get("contact", {})
+            contact = call_data.get("contact", {})
             if contact:
                 guest = {
                     "name": contact.get("name", "Unknown Caller"),
@@ -149,7 +160,7 @@ class DialpadAPIManager(BaseAPIManager):
                     "phonenumber": contact.get("phone", "")
                 }
 
-            host = call_info.get("target", {})
+            host = call_data.get("target", {})
             if host:
                 host = {
                     "name": host.get("name", "Unknown Host"),
