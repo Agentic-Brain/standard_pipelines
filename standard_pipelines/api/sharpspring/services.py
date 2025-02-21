@@ -15,8 +15,7 @@ class SharpSpringAPIManager(BaseAPIManager):
             "accountID": self.api_config["account_id"],
             "secretKey": self.api_config["secret_key"]
         }
-        self.first_deal_stage_id = None
-        self.owner_id = None
+        self.gathered_data = {}
 
     @property
     def required_config(self) -> list[str]:
@@ -235,8 +234,9 @@ class SharpSpringAPIManager(BaseAPIManager):
     
     def _get_account_owner_id(self, email: str) -> dict:
         try:
-            if self.owner_id is not None:
-                return {"owner_id": self.owner_id}
+            existing_data = self.gathered_data.get("owner_id")
+            if existing_data:
+                return {"owner_id": existing_data}
             
             params = {
                 "where": {"isActive":1, "emailAddress": email},  
@@ -256,7 +256,7 @@ class SharpSpringAPIManager(BaseAPIManager):
                 current_app.logger.error(f"No owner id found for the given email: {email}")
                 return {"error": f"No owner id found for the given email: {email}"}
             
-            self.owner_id = owner_id
+            self.gathered_data["owner_id"] = owner_id
             return {"owner_id": owner_id}
 
         except Exception as e:
@@ -265,8 +265,9 @@ class SharpSpringAPIManager(BaseAPIManager):
 
     def _get_first_deal_stage_id(self) -> dict:
         try:
-            if self.first_deal_stage_id is not None:
-                return {"stage_id": self.first_deal_stage_id}
+            existing_data = self.gathered_data.get("first_deal_stage_id")
+            if existing_data:
+                return {"stage_id": existing_data}
             
             params = {"where": {}, "limit": 100}
             result = self._make_api_call("getDealStages", params)
@@ -285,7 +286,7 @@ class SharpSpringAPIManager(BaseAPIManager):
                 current_app.logger.error("No first deal stage id found")
                 return {'error': "No first deal stage id found"}
 
-            self.first_deal_stage_id = first_stage_id
+            self.gathered_data["first_deal_stage_id"] = first_stage_id
             return {"stage_id": first_stage_id}
 
         except Exception as e:
@@ -294,6 +295,10 @@ class SharpSpringAPIManager(BaseAPIManager):
         
     def _get_opportunity_id_from_contact_id(self, contact_id: str) -> dict:
         try:
+            existing_data = self.gathered_data.get("opportunity_id")
+            if existing_data:
+                return {"opportunity_id": existing_data}
+            
             params = {"where": {"leadID": contact_id},  "limit": 3}
             result = self._make_api_call("getOpportunityLeads", params)
             if "error" in result:
@@ -303,6 +308,8 @@ class SharpSpringAPIManager(BaseAPIManager):
             opportunities = opportunities[0] if opportunities else {}
 
             opportunity_id = opportunities.get("id")
+            if opportunity_id:
+                self.gathered_data["opportunity_id"] = opportunity_id
             
             return {"opportunity_id": opportunity_id}
         
