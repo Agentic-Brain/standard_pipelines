@@ -1,6 +1,6 @@
 from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
-from requests.exceptions import HTTPError
+from requests.exceptions import HTTPError, RequestException, JSONDecodeError 
 import requests
 import uuid
 from datetime import datetime
@@ -46,24 +46,10 @@ class SharpSpringAPIManager(BaseAPIManager):
             }
 
             params = {'objects': [opportunity]}
-            data = {
-                'method': 'createOpportunities',
-                'params': params,
-                'id': str(uuid.uuid4()), #Used to track the requests, not necessary outside of async requests
-            }
-
-            response = requests.post(
-                self.api_endpoint,
-                json=data,
-                params=self.query_params,
-                headers={"Content-Type": "application/json"}
-            )
-            response.raise_for_status()
-
-            result = response.json()
-            checked_result = self._check_for_errors(result)
-            if "error" in checked_result:
-                return checked_result
+            
+            result = self._make_api_call("createOpportunities", params)
+            if "error" in result:
+                return result
             
             creates_list = result.get("result", {}).get("creates", []) 
             if not creates_list:
@@ -73,25 +59,16 @@ class SharpSpringAPIManager(BaseAPIManager):
             
             return {"opportunity_id": created_id}
         
-        except HTTPError as e:
-            current_app.logger.error(f"HTTP error occurred while creating an opportunity: {e}")
-            return {'error': f'HTTP error occurred while creating an opportunity: {e}'}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while creating an opportunity: {e}")
             return {'error': 'An unexpected error occurred while creating an opportunity'}
     
     def get_opportunity(self, id: str) -> dict:
         try:
-            params = {"id": id}
-            data = {"method": "getOpportunity", "params": params, "id": str(uuid.uuid4()),}
-            
-            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
-            response.raise_for_status()
-
-            result = response.json()
-            checked_result = self._check_for_errors(result)
-            if "error" in checked_result:
-                return checked_result
+            params = {"id": id}                
+            result = self._make_api_call("getOpportunity", params)
+            if "error" in result:
+                return result
             
             opportunity = result.get("result", {}).get("opportunity", [])
             opportunity = opportunity[0] if opportunity else {}
@@ -100,9 +77,6 @@ class SharpSpringAPIManager(BaseAPIManager):
             
             return {"opportunity_id": opportunity_id}
         
-        except HTTPError as e:
-            current_app.logger.error(f"HTTP error occurred while getting opportunity: {e}")
-            return {'error': f'HTTP error occurred while getting opportunity: {e}'}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting opportunity: {e}")
             return {'error': 'An unexpected error occurred while getting opportunity'}
@@ -114,24 +88,15 @@ class SharpSpringAPIManager(BaseAPIManager):
                 "limit": 1,
                 "fields": ["id", "firstName", "lastName", "emailAddress", "phoneNumber", "mobilePhoneNumber", "companyName"]
             }
-            data = {"method": "getLeads", "params": params, "id": str(uuid.uuid4()),}
-            
-            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
-            response.raise_for_status()
-
-            result = response.json()
-            checked_result = self._check_for_errors(result)
-            if "error" in checked_result:
-                return checked_result
+            result = self._make_api_call("getLeads", params)
+            if "error" in result:
+                return result
             
             contact_list = result.get("result", {}).get("lead", [])
             contact = contact_list[0] if contact_list else {}
     
             return {"contact": contact}
         
-        except HTTPError as e:
-            current_app.logger.error(f"HTTP error occurred while getting contact: {e}")
-            return {'error': f'HTTP error occurred while getting contact: {e}'}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting contact: {e}")
             return {'error': 'An unexpected error occurred while getting contact'}
@@ -148,15 +113,9 @@ class SharpSpringAPIManager(BaseAPIManager):
             }
 
             params = {'objects': [lead_data]}
-            data = {"method": "createLeads", "params": params, "id": str(uuid.uuid4()),}
-            
-            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
-            response.raise_for_status()
-
-            result = response.json()
-            checked_result = self._check_for_errors(result)
-            if "error" in checked_result:
-                return checked_result
+            result = self._make_api_call("createLeads", params)
+            if "error" in result:
+                return result
 
             creates_list = result.get("result", {}).get("creates", []) 
             if not creates_list:
@@ -165,27 +124,16 @@ class SharpSpringAPIManager(BaseAPIManager):
             created_id = creates_list[0].get("id")
             return {"contact_id": created_id}
         
-        except HTTPError as e:
-            current_app.logger.error(f"HTTP error occurred while creating contact: {e}")
-            return {'error': f'HTTP error occurred while creating contact: {e}'}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while creating contact: {e}")
             return {'error': 'An unexpected error occurred while creating contact'}
     
     def get_transcript_field(self) -> dict:
         try:
-            params = {
-                "where": {"label": "Opportunity Transcript"}
-            }
-            data = {"method": "getFields", "params": params, "id": str(uuid.uuid4()),}
-            
-            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
-            response.raise_for_status()
-
-            result = response.json()
-            checked_result = self._check_for_errors(result)
-            if "error" in checked_result:
-                return checked_result
+            params = {"where": {"label": "Opportunity Transcript"}}
+            result = self._make_api_call("getFields", params)
+            if "error" in result:
+                return result
             
             field_list = result.get("result", {}).get("field", [])
             field = field_list[0] if field_list else {}
@@ -195,9 +143,6 @@ class SharpSpringAPIManager(BaseAPIManager):
             
             return {"field_id": field_id, "field_label": field_label}
         
-        except HTTPError as e:
-            current_app.logger.error(f"HTTP error occurred while getting contact: {e}")
-            return {'error': f'HTTP error occurred while getting contact: {e}'}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting contact: {e}")
             return {'error': 'An unexpected error occurred while getting contact'}
@@ -218,15 +163,9 @@ class SharpSpringAPIManager(BaseAPIManager):
             }
 
             params = {'objects': [field_data]}
-            data = {"method": "createFields", "params": params, "id": str(uuid.uuid4()),}
-            
-            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
-            response.raise_for_status()
-
-            result = response.json()
-            checked_result = self._check_for_errors(result)
-            if "error" in checked_result:
-                return checked_result
+            result = self._make_api_call("createFields", params)
+            if "error" in result:
+                return result
 
             creates_list = result.get("result", {}).get("creates", []) 
             if not creates_list:
@@ -235,39 +174,61 @@ class SharpSpringAPIManager(BaseAPIManager):
             created_id = creates_list[0].get("id")
             return {"field_id": created_id}
         
-        except HTTPError as e:
-            current_app.logger.error(f"HTTP error occurred while creating transcript field: {e}")
-            return {'error': f'HTTP error occurred while creating transcript field: {e}'}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while creating transcript field: {e}")
             return {'error': 'An unexpected error occurred while creating transcript field'}
 
     #====== Helper functions ======#
+    def _make_api_call(self, method: str, params: dict) -> dict:
+        try:
+            data = {"method": method, "params": params, "id": str(uuid.uuid4())}
+            response = requests.post(
+                self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"}
+            )
+            response.raise_for_status()
+
+            try:
+                result = response.json()
+            except JSONDecodeError as e:
+                current_app.logger.error(f"JSON decode error in {method}: {e}")
+                return {'error': f'JSON decode error in {method}: {e}'}
+
+            return self._check_for_errors(result)
+
+        except HTTPError as e:
+            current_app.logger.error(f"HTTP error in {method}: {e}")
+            return {'error': f'HTTP error in {method}: {e}'}
+        except RequestException as e:
+            current_app.logger.error(f"Request error in {method}: {e}")
+            return {'error': 'Network error while communicating with API'}
+        except Exception as e:
+            current_app.logger.exception(f"Unexpected error in {method}: {e}")
+            return {'error': f'Unexpected error in {method}'}
+
     def _check_for_errors(self, result: dict) -> dict:
         try:
+            # Ensure "result" exists before proceeding
+            if "result" not in result:
+                current_app.logger.error(f"Malformed API response: {result}")
+                return {"error": "Unexpected API response format. 'result' field is missing."}
+            
             #Check for API-level errors
             if result.get("error"):
                 current_app.logger.error(f"API-level error: Code: {result['error'].get('code', 'Unknown')}, Message: {result['error'].get('message', 'Unknown')}")
                 return {'error': f"{result['error'].get('message', 'Unknown')}"}
-
-            # Check for object-level errors 
-            if result.get("result") and "creates" in result["result"]:
-                if not result["result"]["creates"]:
-                    raise ValueError("API returned a failure but did not provide an error message.")
-                for create in result["result"]["creates"]:
-                    if create.get("success") == "false":
-                        error_object = create.get("error")
-                        if error_object:
-                            current_app.logger.error(f"Object-level error: Code: {error_object.get('code', 'Unknown')}, Message: {error_object.get('message', 'Unknown')}")
-                            return {'error': f"{error_object.get('message', 'Unknown')}"}
-                        else:
-                            raise ValueError("API returned a failure but did not provide an error message.")
-                        
-            return {"result": result}
         
-        except ValueError as e:
-            current_app.logger.error(f"An error occurred while checking for errors: {e}")
-            return {'error': str(e)}
+            # Check for object-level errors 
+            created_objects = result["result"].get("creates")
+            if created_objects is not None:
+                for object in created_objects:
+                    if object.get("success") == "false":
+                        error_object = object.get("error", {})
+                        unknown_error = "API returned a failure but did not provide an error message."
+                        current_app.logger.error(f"Object-level error: Code: {error_object.get('code', 'Unknown')}, Message: {error_object.get('message', unknown_error)}")
+                        return {'error': f"{error_object.get('message', unknown_error)}"}
+
+            return {"result": result["result"]}
+        
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while checking for errors: {e}")
             return {'error': f'An unexpected error occurred while checking for errors: {e}'}
@@ -281,15 +242,9 @@ class SharpSpringAPIManager(BaseAPIManager):
                 "where": {"isActive":1, "emailAddress": email},  
                 "limit": 1
             }
-            data = {"method": "getUserProfiles", "params": params, "id": str(uuid.uuid4()),}
-            
-            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
-            response.raise_for_status()
-
-            result = response.json()
-            checked_result = self._check_for_errors(result)
-            if "error" in checked_result:
-                return checked_result
+            result = self._make_api_call("getUserProfiles", params)
+            if "error" in result:
+                return result
             
             profile = result.get("result", {}).get("userProfile", [])
             if not profile:
@@ -304,9 +259,6 @@ class SharpSpringAPIManager(BaseAPIManager):
             self.owner_id = owner_id
             return {"owner_id": owner_id}
 
-        except HTTPError as e:
-            current_app.logger.error(f"HTTP error occurred while retrieving owners: {e}")
-            return {'error': f'HTTP error occurred while retrieving owners: {e}'}
         except Exception as e:
             current_app.logger.exception(f"Unexpected error retrieving owners: {e}")
             return {'error': f'Unexpected error retrieving owners: {e}'}
@@ -317,16 +269,9 @@ class SharpSpringAPIManager(BaseAPIManager):
                 return {"stage_id": self.first_deal_stage_id}
             
             params = {"where": {}, "limit": 100}
-            data = {"method": "getDealStages", "params": params, "id": str(uuid.uuid4()),}
-            
-            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
-            response.raise_for_status()
-
-            result = response.json()
-            checked_result = self._check_for_errors(result)
-            if "error" in checked_result:
-                current_app.logger.error(checked_result["error"])
-                return checked_result
+            result = self._make_api_call("getDealStages", params)
+            if "error" in result:
+                return result
             
             deal_stages = result.get("result", {}).get("dealStage", [])
             first_stage = min(deal_stages, key=lambda stage: int(stage.get("weight", float('inf'))))
@@ -339,9 +284,6 @@ class SharpSpringAPIManager(BaseAPIManager):
             self.first_deal_stage_id = first_stage_id
             return {"stage_id": first_stage_id}
 
-        except HTTPError as e:
-            current_app.logger.error(f"HTTP error occurred while retrieving deal stages: {e}")
-            return {'error': f'HTTP error occurred while retrieving deal stages: {e}'}
         except Exception as e:
             current_app.logger.exception(f"Unexpected error retrieving deal stages: {e}")
             return {'error': f'Unexpected error retrieving deal stages: {e}'}
@@ -349,15 +291,9 @@ class SharpSpringAPIManager(BaseAPIManager):
     def _get_opportunity_id_from_contact_id(self, contact_id: str) -> dict:
         try:
             params = {"where": {"leadID": contact_id},  "limit": 3}
-            data = {"method": "getOpportunityLeads", "params": params, "id": str(uuid.uuid4()),}
-            
-            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
-            response.raise_for_status()
-
-            result = response.json()
-            checked_result = self._check_for_errors(result)
-            if "error" in checked_result:
-                return checked_result
+            result = self._make_api_call("getOpportunityLeads", params)
+            if "error" in result:
+                return result
             
             opportunities = result.get("result", {}).get("getWhereopportunityLeads", [])
             opportunities = opportunities[0] if opportunities else {}
@@ -366,9 +302,6 @@ class SharpSpringAPIManager(BaseAPIManager):
             
             return {"opportunity_id": opportunity_id}
         
-        except HTTPError as e:
-            current_app.logger.error(f"HTTP error occurred while getting opportunity id: {e}")
-            return {'error': f'HTTP error occurred while getting opportunity id: {e}'}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting opportunity id: {e}")
             return {'error': 'An unexpected error occurred while getting opportunity id'}
