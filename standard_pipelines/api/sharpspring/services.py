@@ -23,7 +23,7 @@ class SharpSpringAPIManager(BaseAPIManager):
         return ['account_id', 'secret_key']
 
     #====== API functions ======#
-    def create_opportunity(self, owner_email: str, client_name: str, client_id: str):
+    def create_opportunity(self, owner_email: str, client_name: str, contact_id: str):
         try:
             owner_id_response = self._get_account_owner_id(owner_email)
             if "error" in owner_id_response:
@@ -42,7 +42,7 @@ class SharpSpringAPIManager(BaseAPIManager):
                 "opportunityName": opportunity_name,
                 "dealStageID": first_stage_id_response["stage_id"],
                 "closeDate": close_date,
-                "primaryLeadID": client_id
+                "primaryLeadID": contact_id
             }
 
             params = {'objects': [opportunity]}
@@ -65,7 +65,7 @@ class SharpSpringAPIManager(BaseAPIManager):
             if "error" in checked_result:
                 return checked_result
             
-            creates_list = data.get("result", {}).get("creates", []) 
+            creates_list = result.get("result", {}).get("creates", []) 
             if not creates_list:
                 return {"error": "No opportunity created"}
             
@@ -106,7 +106,7 @@ class SharpSpringAPIManager(BaseAPIManager):
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting opportunity: {e}")
             return {'error': 'An unexpected error occurred while getting opportunity'}
-
+        
     def get_contact_by_email(self, client_email: str) -> dict:
         try:
             params = {
@@ -158,7 +158,7 @@ class SharpSpringAPIManager(BaseAPIManager):
             if "error" in checked_result:
                 return checked_result
 
-            creates_list = data.get("result", {}).get("creates", []) 
+            creates_list = result.get("result", {}).get("creates", []) 
             if not creates_list:
                 return {"error": "No contact created"}
             
@@ -171,7 +171,77 @@ class SharpSpringAPIManager(BaseAPIManager):
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while creating contact: {e}")
             return {'error': 'An unexpected error occurred while creating contact'}
+    
+    def get_transcript_field(self) -> dict:
+        try:
+            params = {
+                "where": {"label": "Opportunity Transcript"}
+            }
+            data = {"method": "getFields", "params": params, "id": str(uuid.uuid4()),}
+            
+            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
+            response.raise_for_status()
+
+            result = response.json()
+            checked_result = self._check_for_errors(result)
+            if "error" in checked_result:
+                return checked_result
+            
+            field_list = result.get("result", {}).get("field", [])
+            field = field_list[0] if field_list else {}
+            
+            field_id = field.get("id")
+            field_label = field.get("label")
+            
+            return {"field_id": field_id, "field_label": field_label}
         
+        except HTTPError as e:
+            current_app.logger.error(f"HTTP error occurred while getting contact: {e}")
+            return {'error': f'HTTP error occurred while getting contact: {e}'}
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while getting contact: {e}")
+            return {'error': 'An unexpected error occurred while getting contact'}
+        
+    def create_transcript_field(self) -> dict:
+        try:
+            field_data = {
+                "relationship": "opportunity",
+                "label": "Opportunity Transcript",
+                "dataType": "textarea", 
+                "dataLength": 20000,    
+                "isRequired": 0,          
+                "isCustom": 1,            
+                "isActive": 1,            
+                "isAvailableInContactManager": 1,  
+                "isEditableInContactManager": 1,  
+                "isAvailableInForms": 0,  
+            }
+
+            params = {'objects': [field_data]}
+            data = {"method": "createFields", "params": params, "id": str(uuid.uuid4()),}
+            
+            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
+            response.raise_for_status()
+
+            result = response.json()
+            checked_result = self._check_for_errors(result)
+            if "error" in checked_result:
+                return checked_result
+
+            creates_list = result.get("result", {}).get("creates", []) 
+            if not creates_list:
+                return {"error": "No transcript field created"}
+            
+            created_id = creates_list[0].get("id")
+            return {"field_id": created_id}
+        
+        except HTTPError as e:
+            current_app.logger.error(f"HTTP error occurred while creating transcript field: {e}")
+            return {'error': f'HTTP error occurred while creating transcript field: {e}'}
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while creating transcript field: {e}")
+            return {'error': 'An unexpected error occurred while creating transcript field'}
+
     #====== Helper functions ======#
     def _check_for_errors(self, result: dict) -> dict:
         try:
