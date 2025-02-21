@@ -28,17 +28,17 @@ class SkypeBot:
         print("initializing skype")
         self.skype : Skype = Skype(self.username, self.password)
         self.skype.setPresence(SkypeUtils.Status.Online)
-        
+
         # Create a stop event and a placeholder for the polling thread.
         self._stop_event = threading.Event()
         self.polling_thread = None
-        
+
         # Start polling if in the reloader's main process.
         self.start_polling()
-        
+
         # Ensure the polling thread is stopped on exit.
         atexit.register(self.stop_polling)
-        
+
     def start_chat(self, email: str):
         # https://search.skype.com/v2.0/search?searchString=devbot-2077@hotmail.com&requestId=Query5&locale=en-US&sessionId=e5e35812-1dc3-4278-a9cf-e362b45b8890
         user : SkypeUser = None
@@ -63,10 +63,10 @@ class SkypeBot:
 
         convo_id : str = user.chat.id
 
-        
+
 
         # conn : SkypeConnection = self.skype.conn
-        
+
         print()
         print(user)
         print()
@@ -74,12 +74,12 @@ class SkypeBot:
         self.convo_start_handler(convo_id, greeting)
         print(greeting)
         print("inviting", user.id)
-        
+
         print("contactIds=", self.skype.contacts.contactIds)
         # if user.id not in self.skype.contacts.contactIds:
         #     print("user not in contacts")
         #     response : requests.Response = user.invite(greeting)
-        
+
         #     print(response.text)
 
         #     if response.status_code == 200:
@@ -110,7 +110,7 @@ class SkypeBot:
         if match:
             return match.group(1)
         return None
-    
+
     def extract_user_id(self, from_link : str):
         """
         Extracts and returns the conversation ID from the given conversation link URL.
@@ -135,7 +135,7 @@ class SkypeBot:
             # Fallback: if no colon is found, return the full tag.
             return full_tag
         return None
-    
+
     async def handle_event(self, event : SkypeEvent):
 
         if isinstance(event, SkypeTypingEvent):
@@ -195,7 +195,7 @@ class SkypeBot:
             self.send_message(conversation_id, response)
         else:
             print("[WARNING] no conversation id found")
-        
+
     def extract_conversation_id(self, conversation_link):
         """
         Extracts and returns the conversation ID from the given conversation link URL.
@@ -217,7 +217,7 @@ class SkypeBot:
     def send_message(self, conversation_id: str, message: str):
         """
         Send a message to a given conversation (channel or one-on-one chat).
-        
+
         :param conversation_id: The ID for the Skype conversation. 
                                For one-on-one, this is usually "live:<skype_username>".
                                For group chats, it is often a longer string like 
@@ -240,9 +240,9 @@ class SkypeBot:
         if os.environ.get("WERKZEUG_RUN_MAIN") != "true":
             print("Not starting polling because WERKZEUG_RUN_MAIN is not true")
             return
-        
+
         self._stop_event.clear()
-        
+
         def polling_loop():
             while not self._stop_event.is_set():
                 try:
@@ -252,11 +252,11 @@ class SkypeBot:
                         # print(event)
                         # Run the async handle_event in a new event loop.
                         asyncio.run(self.handle_event(event))
-                
+
                 except Exception as e:
                     print("error:", e)
                     print(traceback.format_exc())
-        
+
         self.polling_thread = threading.Thread(target=polling_loop, daemon=True)
         self.polling_thread.start()
         print("Polling thread started.")
