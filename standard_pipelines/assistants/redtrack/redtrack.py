@@ -139,19 +139,24 @@ def redtrack_start():
 
 #     return jsonify({'requests': requests}), 200
 
-
+convo_map: dict[str, Conversation] = {}
 def create_new_conversation(thread_id: str, openai_thread_id: str, chat_service: str):
-    db.session.add(Conversation(
-        thread_id=thread_id,
-        openai_thread_id=openai_thread_id,
-        chat_service=chat_service
-    ))
-    db.session.commit()
+    global convo_map
+
+    convo_map[thread_id] = Conversation(thread_id=thread_id, openai_thread_id=openai_thread_id, chat_service=chat_service)
+    #db.session.add(Conversation(
+    #    thread_id=thread_id,
+    #    openai_thread_id=openai_thread_id,
+    #    chat_service=chat_service
+    #))
+    #db.session.commit()
 
 
 def get_conversation(thread_id: str, chat_service: str) -> Optional[Conversation]:
-    query = db.session.query(Conversation).filter(and_(Conversation.thread_id == thread_id, Conversation.chat_service == chat_service))
-    return query.first()
+    global convo_map
+    return convo_map.get(thread_id)
+    #query = db.session.query(Conversation).filter(and_(Conversation.thread_id == thread_id, Conversation.chat_service == chat_service))
+    #return query.first()
 
 
 def greeting_handler(username: str):
