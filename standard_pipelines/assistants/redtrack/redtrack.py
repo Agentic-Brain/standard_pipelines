@@ -7,7 +7,6 @@ from openai import OpenAI
 from flask import Blueprint, request, jsonify
 from openai.types.beta import Assistant
 from sqlalchemy import and_
-from skpy import Skype
 
 import standard_pipelines.assistants.redtrack.config.config as config
 from standard_pipelines.bots.telegram_bot import TelegramBot
