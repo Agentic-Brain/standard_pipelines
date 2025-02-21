@@ -73,7 +73,8 @@ class WhatsappBot:
                 try:
                     poll_time: datetime = datetime.now(UTC)
 
-                    print(f"[{self.random_id}] processed_message_ids:", processed_message_sids)
+                    if processed_message_sids:
+                        print(f"[{self.random_id}] processed_message_ids:", processed_message_sids)
 
                     sms_events: List[MessageInstance] = [event for event in self.client.messages.list(
                         to=self.twilio_phone_number,
