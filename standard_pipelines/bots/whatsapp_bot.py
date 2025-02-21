@@ -166,11 +166,10 @@ class WhatsappBot:
         if to.startswith("whatsapp:") and not from_.startswith("whatsapp:"):
             from_ = "whatsapp:" + from_
 
-
         print(f"send_message(self, {to}, {message})")
         return self.client.messages.create(
             body=message,
-            from_ = from_,  # Twilio WhatsApp sender
+            from_=from_,  # Twilio WhatsApp sender
             to=to
         )
 
