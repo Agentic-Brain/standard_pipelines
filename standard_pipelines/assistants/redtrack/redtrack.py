@@ -1,26 +1,32 @@
-import multiprocessing
-import threading
-import uuid
-import click
-from openai import OpenAI
 import os
 import math
+from typing import Optional
+
+import click
+from openai import OpenAI
 from flask import Blueprint, request, jsonify
+from openai.types.beta import Assistant
+from sqlalchemy import and_
+from skpy import Skype
+
+import standard_pipelines.assistants.redtrack.config.config as config
 from standard_pipelines.bots.telegram_bot import TelegramBot
 from standard_pipelines.bots.skype_bot import SkypeBot
 from standard_pipelines.bots.whatsapp_bot import WhatsappBot
-import standard_pipelines.assistants.redtrack.config.config as config
-import time
-from openai.types.beta import Assistant
+from standard_pipelines.extensions import db
 
-from skpy import Skype
+from .models import Conversation
 
 
 redtrack_bp = Blueprint('redtrack', __name__, url_prefix='/redtrack')
 
-telegram_bot : TelegramBot = None
-skype_bot : SkypeBot = None
-whatsapp_bot : WhatsappBot = None
+
+openai_client = OpenAI(api_key=config.OPENAI_API_KEY)
+
+telegram_bot: TelegramBot = None
+skype_bot: SkypeBot = None
+whatsapp_bot: WhatsappBot = None
+
 
 def start_bots():
     # Only start polling in the reloader's main process.
@@ -28,19 +34,22 @@ def start_bots():
         print("Not starting bots because WERKZEUG_RUN_MAIN is not true")
         return
 
+    global skype_bot, whatsapp_bot
     print("starting RedTrack bots")
     # def start_telegram_bot():
     # global telegram_bot
     # telegram_bot = TelegramBot(config.TELEGRAM_TOKEN, greeting_handler, convo_start_handler, message_handler)
 
-    # def start_skype_bot():
-    # global skype_bot
-    # if skype_bot is None:
-    #     skype_bot = SkypeBot(config.SKYPE_USERNAME, config.SKYPE_PASSWORD, greeting_handler, convo_start_handler, message_handler)
+    if skype_bot is None:
+        skype_bot = SkypeBot(config.SKYPE_USERNAME, config.SKYPE_PASSWORD, greeting_handler, convo_start_handler, message_handler)
 
-    global whatsapp_bot
     if whatsapp_bot is None:
-        whatsapp_bot = WhatsappBot(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN, config.TWILIO_PHONE_NUMBER, greeting_handler, convo_start_handler, message_handler)
+        whatsapp_bot = WhatsappBot(config.TWILIO_ACCOUNT_SID,
+                                   config.TWILIO_AUTH_TOKEN,
+                                   config.TWILIO_PHONE_NUMBER,
+                                   greeting_handler,
+                                   lambda *args: convo_start_handler("whatsapp", *args),
+                                   lambda *args: message_handler("whatsapp", *args))
 
     # polling_thread = threading.Thread(target=start_telegram_bot)
     # polling_thread.start()
@@ -54,13 +63,14 @@ def start_bots():
 
     print("RedTrack bots started")
 
+
 @redtrack_bp.route('/start', methods=['POST'])
 def redtrack_start():
     data = request.get_json()
-    
+
     # Define required fields
     required_fields = ['first_name', 'last_name', 'platform', 'username']
-    
+
     # Check for missing fields
     missing = [field for field in required_fields if field not in data]
     if missing:
@@ -100,7 +110,7 @@ def redtrack_start():
 #     global search_guid
 #     # if search_guid is None:
 #     search_guid = str(uuid.uuid4())
-    
+
 #     print("search_guid:", search_guid)
 
 #     from standard_pipelines.assistants.redtrack import redtrack_config
@@ -127,16 +137,29 @@ def redtrack_start():
 #     return jsonify({'requests': requests}), 200
 
 
-thread_map : dict[str, str] = {}
-openai_client = OpenAI(api_key=config.OPENAI_API_KEY)
+def create_new_conversation(thread_id: str, openai_thread_id: str, chat_service: str):
+    db.session.add(Conversation(
+        thread_id=thread_id,
+        openai_thread_id=openai_thread_id,
+        chat_service=chat_service
+    ))
+    db.session.commit()
+
+
+def get_conversation(thread_id: str, chat_service: str) -> Optional[Conversation]:
+    query = db.session.query(Conversation).filter(and_(Conversation.thread_id == thread_id, Conversation.chat_service == chat_service))
+    return query.first()
+
 
 def greeting_handler(username: str):
     return config.GREETING.format(username=username, link=config.LINK)
 
-def convo_start_handler(convo_id: str, message_text: str) -> None:
+
+def convo_start_handler(service: str, convo_id: str, message_text: str) -> None:
     thread = openai_client.beta.threads.create_and_run_poll(assistant_id=config.ASSISTANT["id"])
     thread_id = thread.thread_id;
-    thread_map[convo_id] = thread_id
+
+    create_new_conversation(convo_id, thread_id, service)
 
     openai_client.beta.threads.messages.create(
         thread_id=thread_id,
@@ -144,17 +167,18 @@ def convo_start_handler(convo_id: str, message_text: str) -> None:
         content=message_text
     )
 
-    print("created thread:", convo_id, "/", thread_id)
+    print(f"created thread: {convo_id}/{thread_id}")
 
-def message_handler(convo_id: str, username: str, message_text: str) -> str:
+
+def message_handler(service: str, convo_id: str, username: str, message_text: str) -> str:
     print("message_handler", username, message_text)
 
-
-    if convo_id not in thread_map:
-        print("no thread for convo_id:", convo_id)
+    convo = get_conversation(convo_id, service)
+    if not convo:
+        print(f"No conversation found for convo_id: {convo_id} using {service}")
         return
 
-    thread_id = thread_map[convo_id]
+    thread_id = convo.openai_thread_id
 
     openai_client.beta.threads.messages.create(
         thread_id=thread_id,
@@ -166,7 +190,7 @@ def message_handler(convo_id: str, username: str, message_text: str) -> str:
         thread_id=thread_id,
         assistant_id=config.ASSISTANT["id"]
     )
- 
+
     if run.status == 'completed':
         messages = openai_client.beta.threads.messages.list(
             thread_id=thread_id
@@ -178,7 +202,7 @@ def message_handler(convo_id: str, username: str, message_text: str) -> str:
     if run.required_action:
         # Define the list to store tool outputs
         tool_outputs = []
- 
+
         # Loop through each tool in the required action section
         for tool in run.required_action.submit_tool_outputs.tool_calls:
             print(tool)
@@ -191,7 +215,7 @@ def message_handler(convo_id: str, username: str, message_text: str) -> str:
                 # cancel the run because we don't want the bot to speak naturally
                 openai_client.beta.threads.runs.cancel(run.id, thread_id=thread_id)
                 return config.SCHEDULE_CALL_MESSAGE.format(link=config.LINK)
-        
+
         # Submit all tool outputs at once after collecting them in a list
         if tool_outputs:
             try:
@@ -211,6 +235,7 @@ def message_handler(convo_id: str, username: str, message_text: str) -> str:
 
     return messages.data[0].content[0].text.value
 
+
 @click.command('redtrack')
 @click.argument('operation', type=click.Choice(['push']))
 @click.argument('parameter', type=click.Choice(['bot', 'data', 'whatsapp']))
@@ -224,6 +249,7 @@ def handle_command(operation, parameter):
             push_data()
         elif parameter == 'whatsapp':
             push_whatsapp()
+
 
 def push_bot():
     print("pushing bot...")
@@ -257,6 +283,7 @@ def push_bot():
     print("assistant_id:", assistant_id)
     print("bot push complete")
 
+
 def push_data():
     print("pushing data...")
 
@@ -286,13 +313,13 @@ def push_data():
             print(f"Data folder '{data_folder}' does not exist.")
         else:
             print("Syncing vector store with folder:", data_folder)
-            
+
             # Collect all file paths in the folder (and subfolders, if any)
             file_paths = []
             for root, _, files in os.walk(data_folder):
                 for file_name in files:
                     file_paths.append(os.path.join(root, file_name))
-            
+
             # If there are no files, just exit
             if not file_paths:
                 print("No files found in data folder to upload.")
@@ -301,31 +328,31 @@ def push_data():
                 total_files = len(file_paths)
                 num_batches = math.ceil(total_files / MAX_BATCH_SIZE)
                 print(f"Total files: {total_files}. Uploading in {num_batches} batches of up to {MAX_BATCH_SIZE} files each.")
-                
+
                 start_index = 0
                 for batch_index in range(num_batches):
                     # Slice the current batch of file paths
                     batch_file_paths = file_paths[start_index : start_index + MAX_BATCH_SIZE]
                     start_index += MAX_BATCH_SIZE
-                    
+
                     # Open each file in this batch
                     file_streams = []
                     try:
                         for file_path in batch_file_paths:
                             f = open(file_path, "rb")
                             file_streams.append(f)
-                        
+
                         print(f"Uploading batch {batch_index + 1}/{num_batches} with {len(file_streams)} files.")
-                        
+
                         # Upload the batch
                         file_batch = openai_client.beta.vector_stores.file_batches.upload_and_poll(
                             vector_store_id=vector_store.id,
                             files=file_streams
                         )
-                        
+
                         print("File batch status:", file_batch.status)
                         print("File batch file counts:", file_batch.file_counts)
-                    
+
                     finally:
                         # Close file streams for this batch
                         for f in file_streams:
@@ -333,12 +360,12 @@ def push_data():
 
         print("File batch upload complete.")
 
+
 def push_whatsapp():
     print("pushing whatsapp...")
 
     whatsapp_bot = WhatsappBot(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN, config.TWILIO_PHONE_NUMBER, greeting_handler, convo_start_handler, message_handler)
-    
+
     whatsapp_bot.create_template(config.WHATSAPP_GREETING_TEMPLATE, config.GREETING, ['username', 'link'])
 
     print("whatsapp push complete")
-
