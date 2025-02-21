@@ -71,7 +71,6 @@ def start_bots():
 def redtrack_start():
     data = request.get_json()
 
-    # Define required fields
     required_fields = ['first_name', 'last_name', 'platform', 'username']
 
     # Check for missing fields
@@ -89,21 +88,18 @@ def redtrack_start():
 
     print (f"starting chat for {first_name} on {platform} with username {username}")
 
-    # (Optional) Validate platform if necessary
-    # allowed_platforms = ['skype', 'whatsapp', 'telegram']
-    # if platform.lower() not in allowed_platforms:
-    #     return jsonify({
-    #         'error': 'Invalid platform',
-    #         'allowed_platforms': allowed_platforms
-    #     }), 400
-
+    # Validate the platform
+    allowed_platforms = ['skype', 'whatsapp', 'telegram']
+    if platform.lower() not in allowed_platforms:
+        return jsonify({
+            'error': 'Invalid platform',
+            'allowed_platforms': allowed_platforms
+        }), 400
 
     if platform == "skype" and skype_bot is not None:
         skype_bot.start_chat(username)
     elif platform == "whatsapp" and whatsapp_bot is not None:
         whatsapp_bot.start_chat(first_name, f"whatsapp:{username}")
-    else:
-        print(f"no bot for platform '{platform}'")
 
     return jsonify({'status': 'success'}), 200
 
