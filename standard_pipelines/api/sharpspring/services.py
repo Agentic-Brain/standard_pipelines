@@ -80,6 +80,33 @@ class SharpSpringAPIManager(BaseAPIManager):
             current_app.logger.exception(f"An unexpected error occurred while creating an opportunity: {e}")
             return {'error': 'An unexpected error occurred while creating an opportunity'}
     
+    def get_opportunity(self, id: str) -> dict:
+        try:
+            params = {"id": id}
+            data = {"method": "getOpportunity", "params": params, "id": str(uuid.uuid4()),}
+            
+            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
+            response.raise_for_status()
+
+            result = response.json()
+            checked_result = self._check_for_errors(result)
+            if "error" in checked_result:
+                return checked_result
+            
+            opportunity = result.get("result", {}).get("opportunity", [])
+            opportunity = opportunity[0] if opportunity else {}
+
+            opportunity_id = opportunity.get("id")
+            
+            return {"opportunity_id": opportunity_id}
+        
+        except HTTPError as e:
+            current_app.logger.error(f"HTTP error occurred while getting opportunity: {e}")
+            return {'error': f'HTTP error occurred while getting opportunity: {e}'}
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while getting opportunity: {e}")
+            return {'error': 'An unexpected error occurred while getting opportunity'}
+
     def get_contact_by_email(self, client_email: str) -> dict:
         try:
             params = {
@@ -248,3 +275,30 @@ class SharpSpringAPIManager(BaseAPIManager):
         except Exception as e:
             current_app.logger.exception(f"Unexpected error retrieving deal stages: {e}")
             return {'error': f'Unexpected error retrieving deal stages: {e}'}
+        
+    def _get_opportunity_id_from_contact_id(self, contact_id: str) -> dict:
+        try:
+            params = {"where": {"leadID": contact_id},  "limit": 3}
+            data = {"method": "getOpportunityLeads", "params": params, "id": str(uuid.uuid4()),}
+            
+            response = requests.post(self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"})
+            response.raise_for_status()
+
+            result = response.json()
+            checked_result = self._check_for_errors(result)
+            if "error" in checked_result:
+                return checked_result
+            
+            opportunities = result.get("result", {}).get("getWhereopportunityLeads", [])
+            opportunities = opportunities[0] if opportunities else {}
+
+            opportunity_id = opportunities.get("id")
+            
+            return {"opportunity_id": opportunity_id}
+        
+        except HTTPError as e:
+            current_app.logger.error(f"HTTP error occurred while getting opportunity id: {e}")
+            return {'error': f'HTTP error occurred while getting opportunity id: {e}'}
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while getting opportunity id: {e}")
+            return {'error': 'An unexpected error occurred while getting opportunity id'}
