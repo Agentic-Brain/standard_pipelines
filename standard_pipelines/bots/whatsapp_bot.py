@@ -155,10 +155,10 @@ class WhatsappBot:
 
         greeting = self.greeting_handler(first_name)
         self.convo_start_handler(first_name, greeting)
-        whatsapp_response : MessageInstance = self.send_message(phone_number, greeting)
+        whatsapp_response = self.send_message(phone_number, greeting)
 
-        if whatsapp_response.error_code:
-            print("error:",whatsapp_response.error_code, whatsapp_response.error_message)
+        #if whatsapp_response.error_code:
+        #    print("error:",whatsapp_response.error_code, whatsapp_response.error_message)
         # whatsapp_response : MessageInstance = self.send_templated_message(phone_number, config.WHATSAPP_GREETING_TEMPLATE, [first_name, config.LINK])
 
     def send_message(self, to: str, message: str) -> MessageInstance:
