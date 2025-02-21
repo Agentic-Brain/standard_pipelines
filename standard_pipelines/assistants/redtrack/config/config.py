@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 
 SYSTEM_PROMPT = Path(__file__).parent.joinpath("system_prompt.txt").read_text(encoding="utf-8")
@@ -8,7 +9,8 @@ FUNCTIONS : list[dict] = json.loads(Path(__file__).parent.joinpath("functions.js
 FUNCTIONS = [{"type": "function", "function": func} for func in FUNCTIONS]
 LINK = "https://redtrack.io/request-demo/"
 
-SECRETS = json.loads(Path(__file__).parent.joinpath("secrets.production.json").read_text(encoding="utf-8"))
+FLASK_ENV = os.environ.get('FLASK_ENV')
+SECRETS = json.loads(Path(__file__).parent.joinpath(f"secrets.{FLASK_ENV.lower()}.json").read_text(encoding="utf-8"))
 
 OPENAI_API_KEY = SECRETS['OPENAI_API_KEY']
 TELEGRAM_TOKEN = SECRETS['TELEGRAM_TOKEN']
