@@ -21,7 +21,6 @@ class WhatsappBot:
     """
 
     def __init__(self, account_sid: str, auth_token: str, twilio_phone_number: str, greeting_handler: Callable[[str], str], convo_start_handler: Callable[[str, str], None] = None, message_handler: Callable[[str, str, str], str] = None):
-        
         """
         :param account_sid: Your Twilio Account SID
         :param auth_token: Your Twilio Auth Token
@@ -39,7 +38,7 @@ class WhatsappBot:
 
         self.client : Client = Client(account_sid, auth_token)
         self.twilio_phone_number = twilio_phone_number
-        
+
         self._stop_event = threading.Event()
         self.polling_thread = None
 
@@ -62,7 +61,7 @@ class WhatsappBot:
         if os.environ.get("WERKZEUG_RUN_MAIN") != "true":
             print("Not starting polling because WERKZEUG_RUN_MAIN is not true")
             return
-        
+
         self._stop_event.clear()
 
         # This deque will store the last 100 processed message SIDs.
@@ -87,7 +86,7 @@ class WhatsappBot:
                     ) if event.sid not in processed_message_sids]
 
                     new_events = sms_events + whatsapp_events
-                    
+
                     last_poll = poll_time
                     if new_events:
                         print(f"[{self.random_id}] new_events: {len(new_events)} since {last_poll}")
@@ -100,7 +99,7 @@ class WhatsappBot:
                                     print(f"Error handling event {event.sid}: {e}")
                                     import traceback
                                     print(traceback.format_exc())
-                            
+
                     time.sleep(1)
 
                 except Exception as e:
@@ -162,14 +161,14 @@ class WhatsappBot:
             print("error:",whatsapp_response.error_code, whatsapp_response.error_message)
         # whatsapp_response : MessageInstance = self.send_templated_message(phone_number, config.WHATSAPP_GREETING_TEMPLATE, [first_name, config.LINK])
 
-    def send_message(self, to: str, message: str):
+    def send_message(self, to: str, message: str) -> MessageInstance:
         from_ = self.twilio_phone_number
         if to.startswith("whatsapp:") and not from_.startswith("whatsapp:"):
             from_ = "whatsapp:" + from_
 
 
         print(f"send_message(self, {to}, {message})")
-        response : MessageInstance = self.client.messages.create(
+        return self.client.messages.create(
             body=message,
             from_ = from_,  # Twilio WhatsApp sender
             to=to
@@ -179,7 +178,7 @@ class WhatsappBot:
         template = self.find_template(name)
         if template is None:
             raise Exception(f"Template {name} not found")
-        
+
         from_ = self.twilio_phone_number
         if to.startswith("whatsapp:") and not from_.startswith("whatsapp:"):
             from_ = "whatsapp:" + from_
@@ -237,7 +236,7 @@ class WhatsappBot:
             "name": name,
             "category": "UTILITY"
         }))
-        
+
         pending_approval = True
         while pending_approval:
             approval_fetch : ApprovalFetchInstance = template.approval_fetch().fetch()
@@ -255,7 +254,7 @@ class WhatsappBot:
                 print("Template rejected:", rejection_reason)
             else:
                 print("Unknown status:", status)
-            
+
             if (pending_approval):
                 time.sleep(10)
 
