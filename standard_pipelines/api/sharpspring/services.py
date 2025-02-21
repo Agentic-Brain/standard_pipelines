@@ -263,7 +263,7 @@ class SharpSpringAPIManager(BaseAPIManager):
             current_app.logger.exception(f"Unexpected error retrieving owners: {e}")
             return {'error': f'Unexpected error retrieving owners: {e}'}
 
-    def _get_first_deal_stage_id(self) -> str:
+    def _get_first_deal_stage_id(self) -> dict:
         try:
             if self.first_deal_stage_id is not None:
                 return {"stage_id": self.first_deal_stage_id}
@@ -274,6 +274,10 @@ class SharpSpringAPIManager(BaseAPIManager):
                 return result
             
             deal_stages = result.get("result", {}).get("dealStage", [])
+            if not deal_stages:
+                current_app.logger.error("No deal stages found")
+                return {'error': "No deal stages found"}
+
             first_stage = min(deal_stages, key=lambda stage: int(stage.get("weight", float('inf'))))
 
             first_stage_id = first_stage.get("id")
