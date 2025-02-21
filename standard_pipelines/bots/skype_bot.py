@@ -17,11 +17,16 @@ class SkypeBot:
         """
         Initialize the Skype client with your Skype username and password.
         """
+        self.username : str = username
+        self.password : str = password
         self.greeting_handler : Callable[[str], str] = greeting_handler if greeting_handler else self.default_greeting_handler;
         self.convo_start_handler : Callable[[str, str], None] = convo_start_handler if convo_start_handler else self.default_convo_start_handler
         self.message_handler : Callable[[str, str, str], str] = message_handler if message_handler else self.default_message_handler
+        self.initialize()
+
+    def initialize(self):
         print("initializing skype")
-        self.skype : Skype = Skype(username, password)
+        self.skype : Skype = Skype(self.username, self.password)
         self.skype.setPresence(SkypeUtils.Status.Online)
         
         # Create a stop event and a placeholder for the polling thread.
@@ -178,7 +183,14 @@ class SkypeBot:
 
         print(f"incoming message: [{conversation_id}] <{username}> {message_text}")
 
+        if (message_text.startswith("!restart")):
+            print("restarting skype bot")
+            self.restart()
+            return
+
         if conversation_id:
+            chat : SkypeSingleChat = self.skype.chats.chat(conversation_id)
+            chat.setTyping(True)
             response = self.message_handler(conversation_id, username, message_text)
             self.send_message(conversation_id, response)
         else:
@@ -219,6 +231,10 @@ class SkypeBot:
         except Exception as e:
             print(f"Failed to send message: {e.with_traceback()}")
 
+    def restart(self):
+        self.stop_polling()
+        self.initialize()
+
     def start_polling(self):
         # Only start polling in the reloader's main process.
         if os.environ.get("WERKZEUG_RUN_MAIN") != "true":
@@ -229,16 +245,17 @@ class SkypeBot:
         
         def polling_loop():
             while not self._stop_event.is_set():
-                new_events = self.skype.getEvents()
-                print(f"new_events: {len(new_events)}")
-                for event in new_events:
-                    # print(event)
-                    # Run the async handle_event in a new event loop.
-                    try:
+                try:
+                    new_events = self.skype.getEvents()
+                    print(f"new_events: {len(new_events)}")
+                    for event in new_events:
+                        # print(event)
+                        # Run the async handle_event in a new event loop.
                         asyncio.run(self.handle_event(event))
-                    except Exception as e:
-                        print("error:", e)
-                        print(traceback.format_exc())
+                
+                except Exception as e:
+                    print("error:", e)
+                    print(traceback.format_exc())
         
         self.polling_thread = threading.Thread(target=polling_loop, daemon=True)
         self.polling_thread.start()

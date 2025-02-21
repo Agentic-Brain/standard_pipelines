@@ -101,6 +101,14 @@ def create_app():
     @app.context_processor
     def inject_semver():
         return dict(app_version=str(APP_VERSION), flask_base_version=str(FLASK_BASE_VERSION))
+    
+    # Alternatively, you can also use Flask's teardown to perform cleanup:
+    @app.teardown_appcontext
+    def shutdown_session(exception=None):
+        print("Cleaning up threads...")
+        stop_event.set()       # Signal threads to stop
+        for thread in threads:
+            thread.join()      # Wait for them to finish
 
 
     from .assistants.redtrack import start_bots as rt_start_bots
@@ -192,3 +200,4 @@ def init_sentry() -> None:
             "continuous_profiling_auto_start": True,
         }
     )
+

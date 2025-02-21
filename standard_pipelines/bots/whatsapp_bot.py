@@ -1,6 +1,9 @@
 import asyncio
+import atexit
 from collections import deque
 from datetime import datetime, UTC
+import os
+import random
 import threading
 import time
 from typing import Callable, List
@@ -18,6 +21,7 @@ class WhatsappBot:
     """
 
     def __init__(self, account_sid: str, auth_token: str, twilio_phone_number: str, greeting_handler: Callable[[str], str], convo_start_handler: Callable[[str, str], None] = None, message_handler: Callable[[str, str, str], str] = None):
+        
         """
         :param account_sid: Your Twilio Account SID
         :param auth_token: Your Twilio Auth Token
@@ -25,59 +29,94 @@ class WhatsappBot:
                                    Example: '+12345678900'
         """
 
+        self.random_id = random.randint(1, 100000000)
+
+        print("starting Whatsapp bot:", self.random_id)
+
         self.greeting_handler: Callable[[str], str] = greeting_handler
         self.convo_start_handler: Callable[[str, str], None] = convo_start_handler
         self.message_handler: Callable[[str, str, str], str] = message_handler
 
         self.client : Client = Client(account_sid, auth_token)
         self.twilio_phone_number = twilio_phone_number
-        # self.send_whatsapp("+15175151699", "Hello from Twilio WhatsApp!")
+        
+        self._stop_event = threading.Event()
+        self.polling_thread = None
+
         self.start_polling()
 
+        print("registering whatsapp with atexit")
+        # Ensure the polling thread is stopped on exit.
+        atexit.register(self.stop_polling)
+
+    def stop_polling(self):
+        if self.polling_thread is not None:
+            print("Stopping polling thread...")
+            self._stop_event.set()
+            self.polling_thread.join(timeout=5)
+            self.polling_thread = None
+            print("Polling thread stopped.")
+
     def start_polling(self):
+        # Only start polling in the reloader's main process.
+        if os.environ.get("WERKZEUG_RUN_MAIN") != "true":
+            print("Not starting polling because WERKZEUG_RUN_MAIN is not true")
+            return
+        
+        self._stop_event.clear()
+
         # This deque will store the last 100 processed message SIDs.
         processed_message_sids = deque(maxlen=100)
-
         async def polling_loop():
+            print(f"polling loop started")
             last_poll: datetime = datetime.now(UTC)
-            while True:
-                poll_time: datetime = datetime.now(UTC)
-                sms_events: List[MessageInstance] = [event for event in self.client.messages.list(
-                    to=self.twilio_phone_number,
-                    date_sent_after=last_poll
-                ) if event.sid not in processed_message_sids]
+            while not self._stop_event.is_set():
+                try:
+                    poll_time: datetime = datetime.now(UTC)
 
-                whatsapp_events: List[MessageInstance] = [event for event in self.client.messages.list(
-                    to=f"whatsapp:{self.twilio_phone_number}",
-                    date_sent_after=last_poll
-                ) if event.sid not in processed_message_sids]
+                    print(f"[{self.random_id}] processed_message_ids:", processed_message_sids)
 
-                new_events = sms_events + whatsapp_events
-                
-                last_poll = poll_time
-                if new_events:
-                    print(f"new_events: {len(new_events)} since {last_poll}")
-                    for event in new_events:
-                        try:
-                            await self.handle_event(event)
-                        except Exception as e:
-                            print(f"Error handling event {event.sid}: {e}")
-                            import traceback
-                            print(traceback.format_exc())
-                        # Add the SID to our deque.
-                        processed_message_sids.append(event.sid)
-                time.sleep(1)
+                    sms_events: List[MessageInstance] = [event for event in self.client.messages.list(
+                        to=self.twilio_phone_number,
+                        date_sent_after=last_poll
+                    ) if event.sid not in processed_message_sids]
+
+                    whatsapp_events: List[MessageInstance] = [event for event in self.client.messages.list(
+                        to=f"whatsapp:{self.twilio_phone_number}",
+                        date_sent_after=last_poll
+                    ) if event.sid not in processed_message_sids]
+
+                    new_events = sms_events + whatsapp_events
+                    
+                    last_poll = poll_time
+                    if new_events:
+                        print(f"[{self.random_id}] new_events: {len(new_events)} since {last_poll}")
+                        for event in new_events:
+                            if event.sid not in processed_message_sids:
+                                processed_message_sids.append(event.sid)
+                                try:
+                                    await self.handle_event(event)
+                                except Exception as e:
+                                    print(f"Error handling event {event.sid}: {e}")
+                                    import traceback
+                                    print(traceback.format_exc())
+                            
+                    time.sleep(1)
+
+                except Exception as e:
+                    print("error:", e)
+                    print(traceback.format_exc())
 
         async def run_polling_thread():
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
             await polling_loop()
 
-        polling_thread = threading.Thread(target=lambda: asyncio.run(run_polling_thread()), daemon=True)
-        polling_thread.start()
+        self.polling_thread = threading.Thread(target=lambda: asyncio.run(run_polling_thread()), daemon=True)
+        self.polling_thread.start()
 
     async def handle_event(self, event : MessageInstance):
-        print(event.sid)        
+        print(f"[{self.random_id}]", event.sid)        
 
         phone_number: str = event.from_
         username: str = self.name_map[phone_number] if phone_number in self.name_map else phone_number
@@ -100,7 +139,7 @@ class WhatsappBot:
             if message_text.startswith("/start"):
                 username = message_text.replace("/start ", "")
                 # await self.send_typing_signal(conversation_id)
-                greeting = self.greeting_handler(username)
+                greeting = self.greeting_handler(f"{username}/{self.random_id}")
                 self.convo_start_handler(conversation_id, greeting)
                 response = greeting
             else:

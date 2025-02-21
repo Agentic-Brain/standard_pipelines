@@ -3,7 +3,6 @@ from typing import Callable
 from telegram import Update
 import telegram
 from telegram.ext import Application, ApplicationBuilder, CommandHandler, ContextTypes, ChatMemberHandler, MessageHandler, filters
-import threading
 
 class TelegramBot:
     def __init__(self, token: str, greeting_handler: Callable[[str], str], convo_start_handler: Callable[[str, str], None] = None, message_handler: Callable[[str, str, str], str] = None) -> None:
@@ -14,37 +13,6 @@ class TelegramBot:
         self.app.add_handler(MessageHandler(filters.TEXT, self.handle_event))
         self.app.add_handler(ChatMemberHandler(self.handle_member))
         self.app.run_polling(drop_pending_updates=True, close_loop=False)
-    
-
-
-    async def __start_async(self):
-        # Start the bot in the background
-        bot_task = asyncio.create_task(self.__start_bot())
-        # Do other async work concurrently
-        await asyncio.sleep(1)
-        print("Main async code continues working!")
-        # When you're ready to shut down, cancel the bot or call app.stop()
-
-    def __start_bot(self):
-        # self.app.run_polling(drop_pending_updates=True)
-
-        def run_polling_thread():
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-            self.app.run_polling(drop_pending_updates=True, close_loop=False)
-        polling_thread = threading.Thread(target=run_polling_thread)
-        polling_thread.start()
-
-        # polling_thread = threading.Thread(target=self.app.run_polling, kwargs={'drop_pending_updates': True})
-        # polling_thread.start()
-
-        # await self.app.initialize()
-        # if self.app.post_init:
-        #     await self.app.post_init(self.app)
-        # # Start polling (this is the coroutine that run_polling awaits)
-        # await self.app.updater.start_polling()
-        # await self.app.start()
-        # # The bot is now running without blocking your main async code
         
     async def send_typing_signal(self, chat_id: str):
         await self.app.bot.send_chat_action(chat_id=chat_id, action=telegram.constants.ChatAction.TYPING)

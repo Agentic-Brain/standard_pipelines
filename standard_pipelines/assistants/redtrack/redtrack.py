@@ -23,17 +23,24 @@ skype_bot : SkypeBot = None
 whatsapp_bot : WhatsappBot = None
 
 def start_bots():
+    # Only start polling in the reloader's main process.
+    if os.environ.get("WERKZEUG_RUN_MAIN") != "true":
+        print("Not starting bots because WERKZEUG_RUN_MAIN is not true")
+        return
+
     print("starting RedTrack bots")
     # def start_telegram_bot():
     # global telegram_bot
     # telegram_bot = TelegramBot(config.TELEGRAM_TOKEN, greeting_handler, convo_start_handler, message_handler)
 
     # def start_skype_bot():
-    global skype_bot
-    skype_bot = SkypeBot(config.SKYPE_USERNAME, config.SKYPE_PASSWORD, greeting_handler, convo_start_handler, message_handler)
+    # global skype_bot
+    # if skype_bot is None:
+    #     skype_bot = SkypeBot(config.SKYPE_USERNAME, config.SKYPE_PASSWORD, greeting_handler, convo_start_handler, message_handler)
 
     global whatsapp_bot
-    # whatsapp_bot = WhatsappBot(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN, config.TWILIO_PHONE_NUMBER, greeting_handler, convo_start_handler, message_handler)
+    if whatsapp_bot is None:
+        whatsapp_bot = WhatsappBot(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN, config.TWILIO_PHONE_NUMBER, greeting_handler, convo_start_handler, message_handler)
 
     # polling_thread = threading.Thread(target=start_telegram_bot)
     # polling_thread.start()
@@ -87,49 +94,46 @@ def redtrack_start():
 
     return jsonify({'status': 'success'}), 200
 
-search_guid : str = None
-@redtrack_bp.route('/ratelimittest', methods=['GET'])
-def ratelimittest():
-    global search_guid
-    # if search_guid is None:
-    search_guid = str(uuid.uuid4())
+# search_guid : str = None
+# @redtrack_bp.route('/ratelimittest', methods=['GET'])
+# def ratelimittest():
+#     global search_guid
+#     # if search_guid is None:
+#     search_guid = str(uuid.uuid4())
     
-    print("search_guid:", search_guid)
+#     print("search_guid:", search_guid)
 
-    from standard_pipelines.assistants.redtrack import redtrack_config
-    skype = Skype(redtrack_config.SKYPE_USERNAME, redtrack_config.SKYPE_PASSWORD)
-    requests = 0
-    while True:
-        try:
-            users = skype.contacts.search("quincy120@gmail.com", search_guid)
-            if len(users) > 0:
-                user = users[0]
-                print()
-                print(user)
-                print()
+#     from standard_pipelines.assistants.redtrack import redtrack_config
+#     skype = Skype(redtrack_config.SKYPE_USERNAME, redtrack_config.SKYPE_PASSWORD)
+#     requests = 0
+#     while True:
+#         try:
+#             users = skype.contacts.search("quincy120@gmail.com", search_guid)
+#             if len(users) > 0:
+#                 user = users[0]
+#                 print()
+#                 print(user)
+#                 print()
 
-            requests += 1
-            print(f"requests: {requests}")
-            time.sleep(1)
-        except Exception as e:
-            import traceback
-            print(f"Error: {e}")
-            traceback.print_exc()
-            break
+#             requests += 1
+#             print(f"requests: {requests}")
+#             time.sleep(1)
+#         except Exception as e:
+#             import traceback
+#             print(f"Error: {e}")
+#             traceback.print_exc()
+#             break
 
-    return jsonify({'requests': requests}), 200
+#     return jsonify({'requests': requests}), 200
 
 
 thread_map : dict[str, str] = {}
 openai_client = OpenAI(api_key=config.OPENAI_API_KEY)
 
 def greeting_handler(username: str):
-    print("greeting_handler",config.GREETING)
     return config.GREETING.format(username=username, link=config.LINK)
 
 def convo_start_handler(convo_id: str, message_text: str) -> None:
-    print("convo_start_handler", message_text)
-
     thread = openai_client.beta.threads.create_and_run_poll(assistant_id=config.ASSISTANT["id"])
     thread_id = thread.thread_id;
     thread_map[convo_id] = thread_id
@@ -145,7 +149,11 @@ def convo_start_handler(convo_id: str, message_text: str) -> None:
 def message_handler(convo_id: str, username: str, message_text: str) -> str:
     print("message_handler", username, message_text)
 
-    
+
+    if convo_id not in thread_map:
+        print("no thread for convo_id:", convo_id)
+        return
+
     thread_id = thread_map[convo_id]
 
     openai_client.beta.threads.messages.create(
