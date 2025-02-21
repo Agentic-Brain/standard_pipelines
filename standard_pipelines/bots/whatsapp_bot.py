@@ -139,7 +139,7 @@ class WhatsappBot:
             if message_text.startswith("/start"):
                 username = message_text.replace("/start ", "")
                 # await self.send_typing_signal(conversation_id)
-                greeting = self.greeting_handler(f"{username}/{self.random_id}")
+                greeting = self.greeting_handler(username)
                 self.convo_start_handler(conversation_id, greeting)
                 response = greeting
             else:

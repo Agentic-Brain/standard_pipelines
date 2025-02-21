@@ -8,7 +8,7 @@ FUNCTIONS : list[dict] = json.loads(Path(__file__).parent.joinpath("functions.js
 FUNCTIONS = [{"type": "function", "function": func} for func in FUNCTIONS]
 LINK = "https://redtrack.io/request-demo/"
 
-SECRETS = json.loads(Path(__file__).parent.joinpath("secrets.json").read_text(encoding="utf-8"))
+SECRETS = json.loads(Path(__file__).parent.joinpath("secrets.production.json").read_text(encoding="utf-8"))
 
 OPENAI_API_KEY = SECRETS['OPENAI_API_KEY']
 TELEGRAM_TOKEN = SECRETS['TELEGRAM_TOKEN']
@@ -23,12 +23,12 @@ TWILIO_PHONE_NUMBER = SECRETS['TWILIO_PHONE_NUMBER']
 WHATSAPP_GREETING_TEMPLATE = "redtrack_greeting_dynamic"
 
 VECTOR_STORE = {
-    "id" : "vs_67ad4870761881918ee49d874b3c03e0",
+    "id" : None if 'VECTOR_STORE_ID' not in SECRETS else SECRETS['VECTOR_STORE_ID'],
     "name" : "RedTrack Knowledge Base"
 }
 
 ASSISTANT = {
-    "id" : "asst_TT69GyMnGA8Oy9YfnuXfiUW7",
+    "id" : None if 'ASSISTANT_ID' not in SECRETS else SECRETS['ASSISTANT_ID'],
     "name" : "Redtrack Inbound Lead Outreach Tool",
     "model" : "gpt-4o-mini",
     "system_prompt" : SYSTEM_PROMPT,

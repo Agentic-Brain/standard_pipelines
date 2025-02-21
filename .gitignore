@@ -7,3 +7,9 @@ logs
 __pycache__
 .pytest_cache
 .idea
+
+# Ignore any secrets*.json file in any directory
+**/secrets*.json
+
+# But do not ignore the example file
+!**/secrets.example.json
