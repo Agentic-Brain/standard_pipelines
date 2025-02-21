@@ -40,7 +40,7 @@ def test_run_count_tracking() -> None:
     assert model.increment_run_count() is False
     assert model.run_count == 3
     assert model.scheduled_time is None
-    assert model.is_recurring is False
+
 
 def test_active_hours_validation():
     model = TestScheduledModel(name="test") # type: ignore
@@ -78,7 +78,6 @@ def test_recurring_schedule(frozen_datetime) -> None:
     model.set_recurring(interval_minutes=60)
     model.save()
     
-    assert model.is_recurring is True
     assert model.recurrence_interval == 60
     
     # Advance time and check next schedule
@@ -90,7 +89,6 @@ def test_recurring_schedule(frozen_datetime) -> None:
     assert model.scheduled_time == expected_next_run
     
     model.disable_recurring()
-    assert model.is_recurring is False
     assert model.recurrence_interval is None
 
 # TODO: Fix this test

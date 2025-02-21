@@ -17,5 +17,14 @@ services:
     ports:
       - 8080:8080
 
+  redis: 
+    image: redis:latest
+    container_name: standard-pipelines_redis
+    ports:
+      - 6379:6379
+    volumes:
+      - standard-pipelines_redis_data:/data
+
 volumes:
   standard-pipelines_postgres_data:
+  standard-pipelines_redis_data:

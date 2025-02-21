@@ -3,8 +3,11 @@ from datetime import datetime, timedelta
 from sqlalchemy.dialects.postgresql import UUID as pgUUID
 from sqlalchemy import func, DateTime, Integer, String, Boolean, event, inspect, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from standard_pipelines.database.exceptions import ScheduledJobError
+from flask import current_app
 from uuid import UUID
 from standard_pipelines.extensions import db
+from celery import shared_task
 from time import time
 from cryptography.fernet import Fernet
 from bitwarden_sdk import BitwardenClient
@@ -50,18 +53,63 @@ class VersionedMixin(BaseMixin):
 class ScheduledMixin(BaseMixin):
     __abstract__ = True
 
-    scheduled_time: Mapped[Optional[DateTime]] = mapped_column(DateTime, nullable=True, index=True)
-    active_hours: Mapped[Optional[List[int]]] = mapped_column(JSON, nullable=True, default=list(range(24)))
-    active_days: Mapped[Optional[List[int]]] = mapped_column(JSON, nullable=True, default=list(range(7)))
-    is_recurring: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
-    recurrence_interval: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
-    run_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
-    max_runs: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    scheduled_time: Mapped[Optional[DateTime]] = mapped_column(DateTime, index=True)
+    active_hours: Mapped[Optional[List[int]]] = mapped_column(JSON, default=list(range(24)))
+    active_days: Mapped[Optional[List[int]]] = mapped_column(JSON, default=list(range(7)))
+    recurrence_interval: Mapped[Optional[int]] = mapped_column(Integer)
+    poll_interval: Mapped[Optional[int]] = mapped_column(Integer)
+    next_poll_time: Mapped[Optional[DateTime]] = mapped_column(DateTime, index=True)
+    run_count: Mapped[int] = mapped_column(Integer, server_default='0')
+    max_runs: Mapped[Optional[int]] = mapped_column(Integer)
 
     @abstractmethod
-    def trigger_job(self) -> None:
+    def run_job(self) -> bool:
         """Abstract method that must be implemented to trigger the actual job."""
         pass
+
+    @abstractmethod
+    def poll(self) -> bool:
+        """Abstract method that must be implemented to poll for the job."""
+        pass
+    
+    def _execute_task(self, task_callable, next_run_attr: str, interval_attr: str, update_run_count: bool = False) -> None:
+        """
+        Generic executor that:
+          1. Calls task_callable (which should return a bool indicating success).
+          2. Updates the scheduling attribute (next_run_attr) based on the interval in interval_attr.
+          3. Optionally increments run count and handles max run logic.
+          4. Commits the changes.
+        """
+        success = task_callable()
+        now = datetime.utcnow()
+        if success:
+            # Update the "next run" field if an interval is set; otherwise, clear it.
+            interval = getattr(self, interval_attr)
+            if interval is not None:
+                setattr(self, next_run_attr, now + timedelta(minutes=interval))
+            else:
+                setattr(self, next_run_attr, None)
+
+            # For trigger jobs, update run count and check for max runs.
+            if update_run_count:
+                self.increment_run_count()
+                if self.max_runs is not None and self.run_count >= self.max_runs:
+                    setattr(self, next_run_attr, None)
+                    # If this is a job, also disable recurring.
+                    if next_run_attr == "scheduled_time":
+                        self.recurrence_interval = None
+        else:
+            raise ScheduledJobError(f"Task failed for {self.__class__.__name__} {self.id}")
+
+        db.session.commit()
+
+    def trigger_job(self) -> None:
+        """Wrapper that executes the job and updates scheduled_time based on recurrence_interval."""
+        self._execute_task(self.run_job, "scheduled_time", "recurrence_interval", update_run_count=True)
+
+    def execute_poll(self) -> None:
+        """Wrapper that executes the poll and updates next_poll_time based on poll_interval."""
+        self._execute_task(self.poll, "next_poll_time", "poll_interval", update_run_count=False)
 
     def set_scheduled_time_to_now(self) -> None:
         self.scheduled_time = datetime.utcnow()
@@ -97,11 +145,15 @@ class ScheduledMixin(BaseMixin):
     def set_recurring(self, interval_minutes: int) -> None:
         if interval_minutes < 1:
             raise ValueError("Recurrence interval must be at least 1 minute")
-        self.is_recurring = True
         self.recurrence_interval = interval_minutes
 
+    def stop_schedule(self) -> None:
+        self.scheduled_time = None
+        self.recurrence_interval = None
+        self.poll_interval = None
+        self.next_poll_time = None
+
     def disable_recurring(self) -> None:
-        self.is_recurring = False
         self.recurrence_interval = None
 
     def is_active_time(self, check_time: Optional[datetime] = None) -> bool:
@@ -115,7 +167,7 @@ class ScheduledMixin(BaseMixin):
         self.run_count += 1
         if self.max_runs is not None and self.run_count >= self.max_runs:
             self.scheduled_time = None
-            self.is_recurring = False
+            self.recurrence_interval = None
             return False
         return True
 
@@ -194,7 +246,7 @@ class SecureMixin(BaseMixin):
 @event.listens_for(SecureMixin, 'before_insert', propagate=True)
 @event.listens_for(SecureMixin, 'before_update', propagate=True)
 def encrypt_before_save(mapper, connection, target):
-    skip_columns = {'id', 'created_at', 'modified_at', 'client_id'}
+    skip_columns = {'id', 'created_at', 'modified_at', 'client_id', 'user_email', 'user_name'}
     
     for column in mapper.columns.keys():
         if not column.startswith('_') and column not in skip_columns:
@@ -205,7 +257,7 @@ def encrypt_before_save(mapper, connection, target):
 # Decrypt after loading from database
 @event.listens_for(SecureMixin, 'load', propagate=True)
 def decrypt_after_load(target, context):
-    skip_columns = {'id', 'created_at', 'modified_at', 'client_id'}
+    skip_columns = {'id', 'created_at', 'modified_at', 'client_id', 'user_email', 'user_name'}
     
     for column in inspect(target).mapper.columns.keys():
         if not column.startswith('_') and column not in skip_columns:

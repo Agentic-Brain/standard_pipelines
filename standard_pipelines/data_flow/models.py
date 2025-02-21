@@ -96,7 +96,7 @@ class DataFlowConfiguration(BaseMixin):
         return (
             # There may only be a single row where is_default is true
             Index(
-                'ix_unique_default_config',
+                f'ix_unique_default_{cls.__tablename__}',
                 'registry_id',
                 'is_default',
                 unique=True,
@@ -104,7 +104,7 @@ class DataFlowConfiguration(BaseMixin):
             ),
             # There may only be a single row where client_id is null
             Index(
-                'ix_unique_client_id_config',
+                f'ix_unique_client_id_{cls.__tablename__}',
                 'registry_id',
                 'client_id',
                 unique=True,
