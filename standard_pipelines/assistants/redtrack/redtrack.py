@@ -41,7 +41,11 @@ def start_bots():
     # telegram_bot = TelegramBot(config.TELEGRAM_TOKEN, greeting_handler, convo_start_handler, message_handler)
 
     if skype_bot is None:
-        skype_bot = SkypeBot(config.SKYPE_USERNAME, config.SKYPE_PASSWORD, greeting_handler, convo_start_handler, message_handler)
+        skype_bot = SkypeBot(config.SKYPE_USERNAME,
+                             config.SKYPE_PASSWORD,
+                             greeting_handler,
+                             lambda *args: convo_start_handler("skype", *args),
+                             lambda *args: message_handler("skype", *args))
 
     if whatsapp_bot is None:
         whatsapp_bot = WhatsappBot(config.TWILIO_ACCOUNT_SID,
