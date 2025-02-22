@@ -1,7 +1,7 @@
 from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
 from dialpad import DialpadClient
-from datetime import datetime
+from datetime import datetime, timedelta
 import requests
 from typing import Optional
 
@@ -28,7 +28,7 @@ class DialpadAPIManager(BaseAPIManager):
             if not lines:
                 current_app.logger.error(f"No transcript found for call_id: {call_id}")
                 return {"error": "No transcript found"}
-            
+
             only_transcripts = [entry for entry in lines if entry.get('type', '').lower() == 'transcript']
             participants = self._get_call_participants(call_data)
             formatted_transcript = self._format_transcript(only_transcripts, call_data, participants)
@@ -122,23 +122,29 @@ class DialpadAPIManager(BaseAPIManager):
     def _format_transcript(self, transcript_entries: list[dict], call_data: dict, participants: dict) -> str:
         formatted_lines = []
 
-        date_started = call_data.get('date_started')
-        if date_started:
-            date_started = datetime.fromtimestamp(date_started / 1000).strftime('%Y-%m-%d %H:%M:%S')
-        else:
-            date_started = 'Unknown Date'
-
+        date_started = datetime.fromtimestamp(call_data.get('date_started') / 1000) if call_data.get('date_started') else None
         call_id = call_data.get('call_id', 'Unknown Call ID')
+
+        # Calculate timezone offset using the first transcript entry
+        timezone_offset = timedelta(0)
+        if transcript_entries and date_started:
+            first_entry_time_str = transcript_entries[0].get('time', '')
+            try:
+                first_entry_time_utc = datetime.fromisoformat(first_entry_time_str)
+                timezone_offset = date_started - first_entry_time_utc
+                timezone_offset = timedelta(hours=round(timezone_offset.total_seconds() / 3600))
+            except ValueError:
+                timezone_offset = timedelta(0)
 
         formatted_lines.append(f"Organizer: {participants['host']['email']}")
         formatted_lines.append(f"Attendee: {participants['guest']['email']}")
-        formatted_lines.append(f"Call Date: {date_started}")
+        formatted_lines.append(f"Call Date: {date_started.strftime('%Y-%m-%d %H:%M:%S') if date_started else 'Unknown'}")
         formatted_lines.append(f"Call ID: {call_id}")
 
         for entry in transcript_entries:
             time_str = entry.get('time', '')
             try:
-                time_obj = datetime.fromisoformat(time_str)
+                time_obj = datetime.fromisoformat(time_str) + timezone_offset
                 timestamp = time_obj.strftime("[%H:%M:%S]")
             except ValueError:
                 timestamp = "[Unknown Time]"
