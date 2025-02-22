@@ -3,6 +3,7 @@ from standard_pipelines.api.services import BaseAPIManager
 from dialpad import DialpadClient
 from datetime import datetime, timedelta
 import requests
+from requests.exceptions import RequestException, HTTPError
 from typing import Optional
 
 class DialpadAPIManager(BaseAPIManager):
@@ -34,9 +35,12 @@ class DialpadAPIManager(BaseAPIManager):
             formatted_transcript = self._format_transcript(only_transcripts, call_data, participants)
             return {"transcript": formatted_transcript, "participants": participants}
 
-        except requests.exceptions.RequestException as e:
-            current_app.logger.error(f"An error occurred during API request: {e}")
-            return {"error": f"An error occurred during API request: {e}"}
+        except HTTPError as e:
+            current_app.logger.error(f"An HTTP error occurred while getting transcript: {e}")
+            return {"error": f"An HTTP error occurred while getting transcript: {e}"}
+        except RequestException as e:
+            current_app.logger.error(f"An API request error occurred while getting transcript: {e}")
+            return {"error": f"An API request error occurred while getting transcript: {e}"}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting transcript: {e}")
             return {"error": f"An unexpected error occurred while getting transcript: {e}"}
@@ -66,9 +70,12 @@ class DialpadAPIManager(BaseAPIManager):
             current_app.logger.info(f"Subscribed to webhook: {webhook_info.get('webhook_id')}")
             return {"success": True}
         
-        except requests.exceptions.RequestException as e:
-            current_app.logger.error(f"An error occurred during API request: {e}")
-            return {"error": f"An error occurred during API request: {e}"}
+        except HTTPError as e:
+            current_app.logger.error(f"An HTTP error occurred while subscribing to webhook: {e}")
+            return {"error": f"An HTTP error occurred while subscribing to webhook: {e}"}
+        except RequestException as e:
+            current_app.logger.error(f"An API request error occurred while subscribing to webhook: {e}")
+            return {"error": f"An API request error occurred while subscribing to webhook: {e}"}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while subscribing to webhook: {e}")
             return {"error": f"An unexpected error occurred while subscribing to webhook: {e}"}
@@ -90,9 +97,12 @@ class DialpadAPIManager(BaseAPIManager):
             current_app.logger.error(f"Webhook created but id not found: {webhook}")
             return {"error": "Webhook id not found"}
         
-        except requests.exceptions.RequestException as e:
-            current_app.logger.error(f"An error occurred during API request: {e}")
-            return {"error": f"An error occurred during API request: {e}"}
+        except HTTPError as e:
+            current_app.logger.error(f"An HTTP error occurred while creating webhook: {e}")
+            return {"error": f"An HTTP error occurred while creating webhook: {e}"}
+        except RequestException as e:
+            current_app.logger.error(f"An API request error occurred while creating webhook: {e}")
+            return {"error": f"An API request error occurred while creating webhook: {e}"}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while creating webhook: {e}")
             return {"error": f"An unexpected error occurred while creating webhook: {e}"}
@@ -111,9 +121,12 @@ class DialpadAPIManager(BaseAPIManager):
             current_app.logger.error(f"Webhook not found: {hook_url}")
             return {"error": "Webhook not found"}
         
-        except requests.exceptions.RequestException as e:
-            current_app.logger.error(f"An error occurred during API request: {e}")
-            return {"error": f"An error occurred during API request: {e}"}
+        except HTTPError as e:
+            current_app.logger.error(f"An HTTP error occurred while getting webhook id: {e}")
+            return {"error": f"An HTTP error occurred while getting webhook id: {e}"}
+        except RequestException as e:
+            current_app.logger.error(f"An API request error occurred while getting webhook id: {e}")
+            return {"error": f"An API request error occurred while getting webhook id: {e}"}
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting webhook id: {e}")
             return {"error": f"An unexpected error occurred while getting webhook id: {e}"}
