@@ -43,6 +43,9 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
     def all_contacts(self) -> list[dict]:
         return [contact.to_dict() for contact in self._api_client.crm.contacts.get_all()]
     
+    def all_owners(self) -> list[dict]:
+        return self._api_client.settings.users.users_api.get_page(limit=100).to_dict()["results"] #type: ignore
+    
     def all_users(self) -> list[dict]:
         return [user.to_dict() for user in self._api_client.crm.objects.get_all(object_type="user")]
 
@@ -55,10 +58,12 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
         return deal.to_dict()
 
     def user_by_email(self, email: str) -> dict:
-        all_users = self.all_users()
+        all_users = self.all_owners()
         matching_users = []
         for user in all_users:
-            if user["properties"]["email"] == email:
+            if user.get("email") == None:
+                current_app.logger.warning(f"Hubspot user {user['properties']['hs_object_id']} has no email.")
+            elif user["email"] == email:
                 matching_users.append(user)
         if len(matching_users) > 1:
             error_msg = f"Multiple users found for email {email}."
