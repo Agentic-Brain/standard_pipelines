@@ -72,3 +72,4 @@ from .fireflies import routes as fireflies_routes
 from .hubspot import routes as hubspot_routes
 from .google import routes as google_routes
 from .dialpad import routes as dialpad_routes
+from .sharpspring import routes as sharpspring_routes
