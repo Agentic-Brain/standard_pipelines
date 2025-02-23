@@ -3,11 +3,13 @@ from standard_pipelines.api.services import BaseAPIManager
 from requests.exceptions import HTTPError, RequestException, JSONDecodeError 
 import requests
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from dateutil.relativedelta import relativedelta
 
 
 class SharpSpringAPIManager(BaseAPIManager):
+    MAX_QUERIES = 500
+
     def __init__(self, api_config: dict) -> None:
         super().__init__(api_config)
         self.api_endpoint = 'https://api.sharpspring.com/pubapi/v1/'
@@ -82,26 +84,73 @@ class SharpSpringAPIManager(BaseAPIManager):
             return {'error': 'An unexpected error occurred while getting opportunity'}
 
     #====== Contact functions ======#   
-    def get_contact_by_email(self, email: str) -> dict:
-        try:
-            params = {
-                "where": {"emailAddress": email},
-                "limit": 1,
-                "fields": ["id", "firstName", "lastName", "emailAddress", "phoneNumber", "mobilePhoneNumber", "companyName"]
-            }
-            result = self._make_api_call("getLeads", params)
-            if "error" in result:
-                return result
-            
-            contact_list = result.get("result", {}).get("lead", [])
-            contact = contact_list[0] if contact_list else {}
-    
-            return {"contact": contact}
+    def get_contact_by_phone_number(self, phone_number: str, max_batches: int = 3, days: int = 30) -> dict:
+        """
+        Retrieves a contact by phone number, looking up recent contacts created or updated within a given time range.
         
+        Args:
+            phone_number (str): The phone number to search for.
+            max_batches (int): The maximum number of batches(500 contacts each) to retrieve (default 3).
+            days (int): The number of days back to search for contacts (default 30).
+            
+        Returns:
+            dict: A dictionary containing the contact ID and transcript or an error message if not found.
+        """
+        try:
+            transcript_field_name = self.get_transcript_field()
+            if "error" in transcript_field_name:
+                return transcript_field_name
+        
+            formatted_phone_number = self._format_phone_number(phone_number)
+            if not formatted_phone_number["valid"]:
+                return {"error": "Invalid phone number"}
+
+            start_date = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d %H:%M:%S")
+            end_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            offset = 0
+
+            for _ in range(max_batches):
+                params = {
+                    "startDate": start_date,
+                    "endDate": end_date,
+                    "timestamp": "create",  # Can be update to find contacts updated in the last x days
+                    "limit": self.MAX_QUERIES,
+                    "offset": offset,
+                    "fields": ["id", "firstName", "lastName", "phoneNumber", "mobilePhoneNumber", transcript_field_name["system_name"]]
+                }
+                result = self._make_api_call("getLeadsDateRange", params)
+                if "error" in result:
+                    return result
+                
+                contacts = result.get("result", {}).get("lead", [])
+
+                for contact in reversed(contacts): #Reversed to get the newest contacts first
+                    # Get phone number
+                    contact_number = contact.get("phoneNumber") or contact.get("mobilePhoneNumber")
+                    if not contact_number:
+                        continue
+                    
+                    # Format phone number
+                    contact_number = self._format_phone_number(contact_number)
+                    if not contact_number["valid"]:
+                        continue
+                    
+                    # Match phone numbers
+                    if contact_number["phone_number"] == formatted_phone_number["phone_number"]:
+                        contact_id = contact.get("id")
+                        transcript = contact.get(transcript_field_name["system_name"])                
+                        return {"contact_id": contact_id, "transcript": transcript}
+                
+                offset += self.MAX_QUERIES  
+                if not contacts or len(contacts) < self.MAX_QUERIES:
+                    break  # No more data left to fetch
+            
+            return {"error": "No contact found"}
+
         except Exception as e:
-            current_app.logger.exception(f"An unexpected error occurred while getting contact: {e}")
-            return {'error': 'An unexpected error occurred while getting contact'}
-    
+            current_app.logger.exception(f"An unexpected error occurred while getting recent contacts: {e}")
+            return {'error': 'An unexpected error occurred while getting recent contacts'}
+        
     def create_contact(self, full_name: str, email: str, phone_number: str, owner_id: str) -> dict:
         try:
             first_name, last_name = full_name.split(" ", 1) if " " in full_name else (full_name, "")
@@ -349,3 +398,16 @@ class SharpSpringAPIManager(BaseAPIManager):
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting opportunity id: {e}")
             return {'error': 'An unexpected error occurred while getting opportunity id'}
+
+    def _format_phone_number(self, phone_number: str) -> dict:
+        if not phone_number or not isinstance(phone_number, str):
+            return {"phone_number": phone_number, "valid": False}
+        
+        formatted_phone_number = phone_number.replace(" ", "").replace("-", "").replace("(", "").replace(")", "").replace("+", "")
+        if len(formatted_phone_number) < 10:
+            return {"phone_number": phone_number, "valid": False}
+        
+        if len(formatted_phone_number) > 10:
+            formatted_phone_number = formatted_phone_number[-10:]
+        return {"phone_number": formatted_phone_number, "valid": True}
+
