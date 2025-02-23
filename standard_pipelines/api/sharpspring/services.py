@@ -16,7 +16,6 @@ class SharpSpringAPIManager(BaseAPIManager):
             "secretKey": self.api_config["secret_key"]
         }
         self.gathered_data = {}
-        self.field_system_name = "call_transcripts"
 
     @property
     def required_config(self) -> list[str]:
@@ -83,12 +82,12 @@ class SharpSpringAPIManager(BaseAPIManager):
             return {'error': 'An unexpected error occurred while getting opportunity'}
 
     #====== Contact functions ======#   
-    def get_contact_by_email(self, client_email: str) -> dict:
+    def get_contact_by_email(self, email: str) -> dict:
         try:
             params = {
-                "where": {"emailAddress": client_email},
+                "where": {"emailAddress": email},
                 "limit": 1,
-                "fields": ["id", "firstName", "lastName", "emailAddress", "phoneNumber", "mobilePhoneNumber", "companyName", self.transcript_field_name]
+                "fields": ["id", "firstName", "lastName", "emailAddress", "phoneNumber", "mobilePhoneNumber", "companyName"]
             }
             result = self._make_api_call("getLeads", params)
             if "error" in result:
@@ -132,7 +131,11 @@ class SharpSpringAPIManager(BaseAPIManager):
         
     def update_contact_transcript(self, contact_id: str, transcript: str) -> dict:
         try:
-            lead_data = {"id": contact_id, self.field_system_name: transcript}
+            transcript_field_name = self.get_transcript_field()
+            if "error" in transcript_field_name:
+                return transcript_field_name
+
+            lead_data = {"id": contact_id, transcript_field_name["system_name"]: transcript}
             params = {'objects': [lead_data]}
             result = self._make_api_call("updateLeads", params)
             if "error" in result:
@@ -154,6 +157,10 @@ class SharpSpringAPIManager(BaseAPIManager):
     #====== Field functions ======#
     def get_transcript_field(self) -> dict:
         try:
+            existing_data = self.gathered_data.get("system_name")
+            if existing_data:
+                return {"system_name": existing_data}
+            
             params = {"where": {"label": "Call Transcripts"}}
             result = self._make_api_call("getFields", params)
             if "error" in result:
@@ -163,8 +170,10 @@ class SharpSpringAPIManager(BaseAPIManager):
             field = field_list[0] if field_list else {}
             
             field_id = field.get("id")
-            
-            return {"field_id": field_id}
+            system_name = field.get("systemName")
+
+            self.gathered_data["system_name"] = system_name
+            return {"field_id": field_id, "system_name": system_name}
         
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting contact: {e}")
@@ -175,7 +184,6 @@ class SharpSpringAPIManager(BaseAPIManager):
             field_data = {
                 "relationship": "lead",
                 "label": "Call Transcripts",
-                "systemName": self.field_system_name,
                 "dataType": "textarea", 
                 "dataLength": 10000,    
                 "isRequired": 0,          
