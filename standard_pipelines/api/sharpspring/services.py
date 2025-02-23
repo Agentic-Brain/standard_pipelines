@@ -294,18 +294,23 @@ class SharpSpringAPIManager(BaseAPIManager):
                 return {"error": "Unexpected API response format. 'result' field is missing."}
             
             #Check for API-level errors
-            if result.get("error"):
+            if result.get("error") and isinstance(result["error"], dict):
                 current_app.logger.error(f"API-level error: Code: {result['error'].get('code', 'Unknown')}, Message: {result['error'].get('message', 'Unknown')}")
                 return {'error': f"{result['error'].get('message', 'Unknown')}"}
-        
+            
             # Check for object-level errors 
-            created_objects = result["result"].get("creates")
-            if created_objects is not None:
-                for object in created_objects:
+            method_type = "create"
+            objects = result["result"].get("creates", [])
+            if not objects:
+                objects = result["result"].get("updates", [])
+                method_type = "update"
+
+            if objects:
+                for object in objects:
                     if object.get("success") == "false":
                         error_object = object.get("error", {})
                         unknown_error = "API returned a failure but did not provide an error message."
-                        current_app.logger.error(f"Object-level error: Code: {error_object.get('code', 'Unknown')}, Message: {error_object.get('message', unknown_error)}")
+                        current_app.logger.error(f"Object-level error ({method_type}): Code: {error_object.get('code', 'Unknown')}, Message: {error_object.get('message', unknown_error)}")
                         return {'error': f"{error_object.get('message', unknown_error)}"}
 
             return {"result": result["result"]}
