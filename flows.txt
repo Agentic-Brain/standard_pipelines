@@ -1,3 +1,4 @@
 # list of flows to be created on application startup if they don't already exist
 ff2hs_on_transcript
 gmail_interval_followup
+dp2ss_on_transcript
