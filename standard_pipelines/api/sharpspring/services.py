@@ -5,7 +5,7 @@ import requests
 import uuid
 from datetime import datetime, timedelta, timezone
 from dateutil.relativedelta import relativedelta
-
+import re
 
 class SharpSpringAPIManager(BaseAPIManager):
     MAX_QUERIES = 500
@@ -408,11 +408,10 @@ class SharpSpringAPIManager(BaseAPIManager):
         if not phone_number or not isinstance(phone_number, str):
             return {"phone_number": phone_number, "valid": False}
         
-        formatted_phone_number = phone_number.replace(" ", "").replace("-", "").replace("(", "").replace(")", "").replace("+", "")
-        if len(formatted_phone_number) < 10:
-            return {"phone_number": phone_number, "valid": False}
+        formatted_phone_number = re.sub(r"\D", "", phone_number) 
         
-        if len(formatted_phone_number) > 10:
-            formatted_phone_number = formatted_phone_number[-10:]
+        if len(formatted_phone_number) < 7 or len(formatted_phone_number) > 15:
+            return {"phone_number": phone_number, "valid": False}
+
         return {"phone_number": formatted_phone_number, "valid": True}
 
