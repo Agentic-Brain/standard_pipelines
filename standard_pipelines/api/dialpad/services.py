@@ -1,7 +1,7 @@
 from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
 from dialpad import DialpadClient
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import requests
 from requests.exceptions import RequestException, HTTPError
 from typing import Optional
@@ -132,22 +132,19 @@ class DialpadAPIManager(BaseAPIManager):
             return {"error": f"An unexpected error occurred while getting webhook id: {e}"}
         
     #============ Helper Functions =============#
-    def _format_transcript(self, transcript_entries: list[dict], call_data: dict, participants: dict) -> str:
+    def _format_transcript(self, transcript_entries: list[dict], call_data: dict, participants: dict, border: bool = True) -> str:
         formatted_lines = []
 
         date_started = datetime.fromtimestamp(call_data.get('date_started') / 1000) if call_data.get('date_started') else None
         call_id = call_data.get('call_id', 'Unknown Call ID')
 
-        # Calculate timezone offset using the first transcript entry
         timezone_offset = timedelta(0)
         if transcript_entries and date_started:
-            first_entry_time_str = transcript_entries[0].get('time', '')
-            try:
-                first_entry_time_utc = datetime.fromisoformat(first_entry_time_str)
-                timezone_offset = date_started - first_entry_time_utc
-                timezone_offset = timedelta(hours=round(timezone_offset.total_seconds() / 3600))
-            except ValueError:
-                timezone_offset = timedelta(0)
+            local_offset = datetime.now(timezone.utc).astimezone().utcoffset()
+            timezone_offset = local_offset
+
+        if border:
+            formatted_lines.append("\n#=====================#\n")
 
         formatted_lines.append(f"Organizer: {participants['host']['email']}")
         formatted_lines.append(f"Attendee: {participants['guest']['email']}")
@@ -167,6 +164,9 @@ class DialpadAPIManager(BaseAPIManager):
 
             formatted_line = f"{timestamp} {speaker}: {content}"
             formatted_lines.append(formatted_line)
+        
+        if border:
+            formatted_lines.append("\n#=====================#\n")
 
         return "\n".join(formatted_lines)
     
