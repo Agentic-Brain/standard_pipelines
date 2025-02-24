@@ -1,6 +1,6 @@
 from flask import current_app
 from standard_pipelines.api import api
-from standard_pipelines.api.dialpad.model import DialpadCredentials
+from standard_pipelines.api.dialpad.models import DialpadCredentials
 from standard_pipelines.data_flow.models import Client
 from standard_pipelines.extensions import db
 from flask import jsonify, request
