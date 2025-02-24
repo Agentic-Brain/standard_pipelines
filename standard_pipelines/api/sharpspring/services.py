@@ -27,11 +27,11 @@ class SharpSpringAPIManager(BaseAPIManager):
     #====== Opportunity functions ======#
     def create_opportunity(self, owner_email: str, client_name: str, contact_id: str):
         try:
-            owner_id_response = self._get_account_owner_id(owner_email)
+            owner_id_response = self.get_account_owner_id(owner_email)
             if "error" in owner_id_response:
                 return owner_id_response
             
-            first_stage_id_response = self._get_first_deal_stage_id()
+            first_stage_id_response = self.get_first_deal_stage_id()
             if "error" in first_stage_id_response:
                 return first_stage_id_response
             
@@ -83,7 +83,62 @@ class SharpSpringAPIManager(BaseAPIManager):
             current_app.logger.exception(f"An unexpected error occurred while getting opportunity: {e}")
             return {'error': 'An unexpected error occurred while getting opportunity'}
 
-    #====== Contact functions ======#   
+    def get_opportunity_id_from_contact_id(self, contact_id: str) -> dict:
+        try:
+            existing_data = self.gathered_data.get("opportunity_id")
+            if existing_data:
+                return {"opportunity_id": existing_data}
+            
+            params = {"where": {"leadID": contact_id},  "limit": 3}
+            result = self._make_api_call("getOpportunityLeads", params)
+            if "error" in result:
+                return result
+            
+            opportunities = result.get("result", {}).get("getWhereopportunityLeads", [])
+            opportunities = opportunities[0] if opportunities else {}
+
+            opportunity_id = opportunities.get("id")
+            if opportunity_id:
+                self.gathered_data["opportunity_id"] = opportunity_id
+            
+            return {"opportunity_id": opportunity_id}
+        
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while getting opportunity id: {e}")
+            return {'error': 'An unexpected error occurred while getting opportunity id'}
+        
+    #====== Contact functions ======# 
+    def get_account_owner_id(self, email: str) -> dict:
+        try:
+            existing_data = self.gathered_data.get("owner_id")
+            if existing_data:
+                return {"owner_id": existing_data}
+            
+            params = {
+                "where": {"isActive":1, "emailAddress": email},  
+                "limit": 1
+            }
+            result = self._make_api_call("getUserProfiles", params)
+            if "error" in result:
+                return result
+            
+            profile = result.get("result", {}).get("userProfile", [])
+            if not profile:
+                current_app.logger.error(f"No profile in SharpSpring for the given email found: {email}")
+                return {"error": f"No profile for the given email found: {email}"}
+            
+            owner_id = profile[0].get("id")
+            if not owner_id:
+                current_app.logger.error(f"No owner id found for the given email: {email}")
+                return {"error": f"No owner id found for the given email: {email}"}
+            
+            self.gathered_data["owner_id"] = owner_id
+            return {"owner_id": owner_id}
+
+        except Exception as e:
+            current_app.logger.exception(f"Unexpected error retrieving owners: {e}")
+            return {'error': f'Unexpected error retrieving owners: {e}'}
+          
     def get_contact_by_phone_number(self, phone_number: str, max_batches: int = 3, days: int = 30) -> dict:
         """
         Retrieves a contact by phone number, looking up recent contacts created or updated within a given time range.
@@ -258,6 +313,37 @@ class SharpSpringAPIManager(BaseAPIManager):
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while creating transcript field: {e}")
             return {'error': 'An unexpected error occurred while creating transcript field'}
+        
+    #====== Deal functions ======#
+    def get_first_deal_stage_id(self) -> dict:
+        try:
+            existing_data = self.gathered_data.get("first_deal_stage_id")
+            if existing_data:
+                return {"stage_id": existing_data}
+            
+            params = {"where": {}, "limit": 100}
+            result = self._make_api_call("getDealStages", params)
+            if "error" in result:
+                return result
+            
+            deal_stages = result.get("result", {}).get("dealStage", [])
+            if not deal_stages:
+                current_app.logger.error("No deal stages found")
+                return {'error': "No deal stages found"}
+
+            first_stage = min(deal_stages, key=lambda stage: int(stage.get("weight", float('inf'))))
+
+            first_stage_id = first_stage.get("id")
+            if not first_stage_id:
+                current_app.logger.error("No first deal stage id found")
+                return {'error': "No first deal stage id found"}
+
+            self.gathered_data["first_deal_stage_id"] = first_stage_id
+            return {"stage_id": first_stage_id}
+
+        except Exception as e:
+            current_app.logger.exception(f"Unexpected error retrieving deal stages: {e}")
+            return {'error': f'Unexpected error retrieving deal stages: {e}'}
 
     #================================= Helper functions ========================================#
     def _make_api_call(self, method: str, params: dict) -> dict:
@@ -318,91 +404,6 @@ class SharpSpringAPIManager(BaseAPIManager):
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while checking for errors: {e}")
             return {'error': f'An unexpected error occurred while checking for errors: {e}'}
-    
-    def _get_account_owner_id(self, email: str) -> dict:
-        try:
-            existing_data = self.gathered_data.get("owner_id")
-            if existing_data:
-                return {"owner_id": existing_data}
-            
-            params = {
-                "where": {"isActive":1, "emailAddress": email},  
-                "limit": 1
-            }
-            result = self._make_api_call("getUserProfiles", params)
-            if "error" in result:
-                return result
-            
-            profile = result.get("result", {}).get("userProfile", [])
-            if not profile:
-                current_app.logger.error(f"No profile in SharpSpring for the given email found: {email}")
-                return {"error": f"No profile for the given email found: {email}"}
-            
-            owner_id = profile[0].get("id")
-            if not owner_id:
-                current_app.logger.error(f"No owner id found for the given email: {email}")
-                return {"error": f"No owner id found for the given email: {email}"}
-            
-            self.gathered_data["owner_id"] = owner_id
-            return {"owner_id": owner_id}
-
-        except Exception as e:
-            current_app.logger.exception(f"Unexpected error retrieving owners: {e}")
-            return {'error': f'Unexpected error retrieving owners: {e}'}
-
-    def _get_first_deal_stage_id(self) -> dict:
-        try:
-            existing_data = self.gathered_data.get("first_deal_stage_id")
-            if existing_data:
-                return {"stage_id": existing_data}
-            
-            params = {"where": {}, "limit": 100}
-            result = self._make_api_call("getDealStages", params)
-            if "error" in result:
-                return result
-            
-            deal_stages = result.get("result", {}).get("dealStage", [])
-            if not deal_stages:
-                current_app.logger.error("No deal stages found")
-                return {'error': "No deal stages found"}
-
-            first_stage = min(deal_stages, key=lambda stage: int(stage.get("weight", float('inf'))))
-
-            first_stage_id = first_stage.get("id")
-            if not first_stage_id:
-                current_app.logger.error("No first deal stage id found")
-                return {'error': "No first deal stage id found"}
-
-            self.gathered_data["first_deal_stage_id"] = first_stage_id
-            return {"stage_id": first_stage_id}
-
-        except Exception as e:
-            current_app.logger.exception(f"Unexpected error retrieving deal stages: {e}")
-            return {'error': f'Unexpected error retrieving deal stages: {e}'}
-        
-    def _get_opportunity_id_from_contact_id(self, contact_id: str) -> dict:
-        try:
-            existing_data = self.gathered_data.get("opportunity_id")
-            if existing_data:
-                return {"opportunity_id": existing_data}
-            
-            params = {"where": {"leadID": contact_id},  "limit": 3}
-            result = self._make_api_call("getOpportunityLeads", params)
-            if "error" in result:
-                return result
-            
-            opportunities = result.get("result", {}).get("getWhereopportunityLeads", [])
-            opportunities = opportunities[0] if opportunities else {}
-
-            opportunity_id = opportunities.get("id")
-            if opportunity_id:
-                self.gathered_data["opportunity_id"] = opportunity_id
-            
-            return {"opportunity_id": opportunity_id}
-        
-        except Exception as e:
-            current_app.logger.exception(f"An unexpected error occurred while getting opportunity id: {e}")
-            return {'error': 'An unexpected error occurred while getting opportunity id'}
 
     def _format_phone_number(self, phone_number: str) -> dict:
         if not phone_number or not isinstance(phone_number, str):
