@@ -49,3 +49,4 @@ def init_flows():
     current_app.logger.info('Finished creating flows')
 
 from .ff2hs_on_transcript.models import FF2HSOnTranscriptConfiguration
+from .dp2ss_on_transcript.models import DP2SSOnTranscriptConfiguration
