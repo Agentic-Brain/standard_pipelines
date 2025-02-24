@@ -200,7 +200,7 @@ class SharpSpringAPIManager(BaseAPIManager):
                 if not contacts or len(contacts) < self.MAX_QUERIES:
                     break  # No more data left to fetch
             
-            return {"error": "No contact found"}
+            return {"contact_id": None, "transcript": None}
 
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting recent contacts: {e}")
