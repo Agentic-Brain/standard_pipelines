@@ -23,7 +23,7 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_google_client_secret
 
 x-base-service: &base-service
-  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.4h3
+  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.5h10
   secrets:
     - github-token
   environment:
@@ -51,21 +51,21 @@ services:
 
   celery_worker:
     <<: *base-service
-    command: celery -A standard_pipelines.celery.worker worker --loglevel=info --pool=solo
+    command: uv run celery -A standard_pipelines.make_celery worker --loglevel=info --pool=solo
     depends_on:
       - postgres
       - redis
 
   celery_beat:
     <<: *base-service
-    command: celery -A standard_pipelines.celery.worker beat --loglevel=info
+    command: uv run celery -A standard_pipelines.make_celery beat --loglevel=info
     depends_on:
       - postgres
       - redis
 
   migrations:
     <<: *base-service
-    command: /bin/sh -c "flask db upgrade && flask create-default-admin && flask init-flows"
+    command: /bin/sh -c "uv run flask db upgrade && uv run flask create-default-admin && uv run flask init-flows"
     depends_on:
       - postgres
 
