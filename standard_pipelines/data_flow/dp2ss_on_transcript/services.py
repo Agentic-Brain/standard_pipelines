@@ -127,7 +127,7 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
 
         #If the transcript already exists, we append it to the new summary
         if data["existing_transcript"]:
-            summary = f"{summary}\n\n{data['existing_transcript']}"
+            summary = f"{summary}\n\n#=====================#\n\n{data['existing_transcript']}"
 
         data["summary"] = summary
 
