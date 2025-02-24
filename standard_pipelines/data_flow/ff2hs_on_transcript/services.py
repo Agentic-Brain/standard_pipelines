@@ -93,10 +93,16 @@ class FF2HSOnTranscript(BaseDataFlow[FF2HSOnTranscriptConfiguration]):
         else:
             return f"{names[0]} et al."
 
-    def hubspot_contact(self, attendee_dict: dict[str, str]) -> CreatableContactHubSpotObject:
+    def hubspot_contact(self, attendee_dict: dict[str, dict]) -> CreatableContactHubSpotObject:
         """Docs: https://developers.hubspot.com/docs/guides/api/crm/objects/contacts"""
+        if attendee_dict.get("email") is None:
+            raise ValueError("Email is required for a contact")
 
-        first_name, last_name = attendee_dict.get("name", "").split(" ", maxsplit=1)
+        if attendee_dict.get("name") is None:
+            first_name = attendee_dict.get("email", "").split('@')[0]
+            last_name = ""
+        else:
+            first_name, last_name = attendee_dict.get("name", "").split(" ", maxsplit=1)
 
         attendee_dict = {
             "properties": {
