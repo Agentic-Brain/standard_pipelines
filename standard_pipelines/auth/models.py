@@ -67,12 +67,16 @@ class BaseCredentials(SecureMixin):
 
     __abstract__ = True
     
-    # Link to client for encryption key lookup
+    # Link to client for encryption key lookup, unique constraint moved to __table_args__
     client_id: Mapped[UUID] = mapped_column(
         UUID, 
-        ForeignKey('client.id', ondelete='CASCADE'),
-        unique=True
+        ForeignKey('client.id', ondelete='CASCADE')
     )
+
+    # Default to unique constraint, can be overridden by child classes
+    @declared_attr
+    def __table_args__(cls):
+        return (UniqueConstraint('client_id'),)
     
     @declared_attr
     def client(self) -> Mapped['Client']:
