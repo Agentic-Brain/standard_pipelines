@@ -262,6 +262,7 @@ class DevelopmentConfig(Config):
         self.RESULT_BACKEND = "redis://localhost:6379/0"
         self.TASK_IGNORE_RESULT = True
         self.BITWARDEN_STATE_FILE_PATH: str = 'bitwarden-state'
+        self.PREFERRED_URL_SCHEME = 'http'
         # Flask
         self.SECRET_KEY: str = 'secret'
         self.FLASK_DEBUG: bool = True
@@ -331,8 +332,8 @@ class ProductionConfig(Config):
         self.FLASK_ENV = 'production'
         # Has to be set after initial creation
         super().__init__('PRODUCTION')
+        self.PREFERRED_URL_SCHEME = 'https'
         self.verify_attributes()
-
 
     def set_additional_config(self) -> None:
         additional_keys = [
