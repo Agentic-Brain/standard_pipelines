@@ -112,6 +112,7 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
 
         data ={
             "transcript": transcript["transcript"],
+            "existing_transcript": contact_id_response["transcript"],
             "contact_id": contact_id_response["contact_id"],
             "owner_id": owner_id_response["owner_id"],
             "field_id": field_response["field_id"],
@@ -123,6 +124,11 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
     #Takes in extracted data and applies client-specific transformations
     def transform(self, data: dict, context: t.Optional[dict] = None) -> dict:
         summary = self.meeting_summary(data["transcript"])
+
+        #If the transcript already exists, we append it to the new summary
+        if data["existing_transcript"]:
+            summary = f"{summary}\n\n{data['existing_transcript']}"
+
         data["summary"] = summary
 
         return data
@@ -139,7 +145,7 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
 
         #Creates the opportunity if it doesn't exist
         data["opportunity_id"] = self.ensure_opportunity_id(data, context)
-            
+
         #Update contact transcript field with new summary
         contact_response = self.sharpspring_api_manager.update_contact_transcript(
             data["contact_id"], 
