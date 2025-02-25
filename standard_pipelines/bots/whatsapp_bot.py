@@ -2,6 +2,7 @@ import asyncio
 import atexit
 from collections import deque
 from datetime import datetime, UTC
+import json
 import os
 import random
 import threading
@@ -72,9 +73,6 @@ class WhatsappBot:
             while not self._stop_event.is_set():
                 try:
                     poll_time: datetime = datetime.now(UTC)
-
-                    if processed_message_sids:
-                        print(f"[{self.random_id}] processed_message_ids:", processed_message_sids)
 
                     sms_events: List[MessageInstance] = [event for event in self.client.messages.list(
                         to=self.twilio_phone_number,
@@ -156,7 +154,8 @@ class WhatsappBot:
 
         greeting = self.greeting_handler(first_name)
         self.convo_start_handler(phone_number, greeting)
-        whatsapp_response = self.send_message(phone_number, greeting)
+        self.send_templated_message(phone_number, config.WHATSAPP_GREETING_TEMPLATE, [first_name, config.LINK])
+        # whatsapp_response = self.send_message(phone_number, greeting)
 
         #if whatsapp_response.error_code:
         #    print("error:",whatsapp_response.error_code, whatsapp_response.error_message)
@@ -174,23 +173,27 @@ class WhatsappBot:
             to=to
         )
 
-    def send_templated_message(self, to: str, name: str, variables: list[str]):
-        template = self.find_template(name)
+    def send_templated_message(self, to: str, template_name: str, variables: list[str]):
+        template = self.find_template(template_name)
         if template is None:
-            raise Exception(f"Template {name} not found")
+            raise Exception(f"Template {template_name} not found")
 
         from_ = self.twilio_phone_number
         if to.startswith("whatsapp:") and not from_.startswith("whatsapp:"):
             from_ = "whatsapp:" + from_
 
-        self.client.messages.create({
-            "content_sid": template.sid,
-            "content_variables": variables,
-            "from": from_,
-            "to": to
-        })
+        variables_dict : dict[str, str] = dict()
+        for i, var in enumerate(variables):
+            variables_dict[str(i+1)] = var
 
-    def find_templates(self, name: str):
+        self.client.messages.create(
+            to=to,
+            from_=from_,
+            content_sid=template.sid,
+            content_variables=json.dumps(variables_dict)
+        )
+
+    def find_templates(self, name: str) -> List[ContentInstance]:
         templates : List[ContentInstance] = self.client.content.contents.list()
         return [template for template in templates if template.friendly_name == name]
 
@@ -252,6 +255,9 @@ class WhatsappBot:
                 pending_approval = False
                 rejection_reason : str = response.get('rejection_reason')
                 print("Template rejected:", rejection_reason)
+            elif status == 'accepted':
+                pending_approval = False
+                print ("Template accepted")
             else:
                 print("Unknown status:", status)
 
