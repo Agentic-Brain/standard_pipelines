@@ -1,7 +1,7 @@
 from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
 from dialpad import DialpadClient
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
 import pytz
 from requests.exceptions import RequestException, HTTPError
 from typing import Optional
