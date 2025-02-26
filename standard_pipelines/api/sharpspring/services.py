@@ -25,8 +25,11 @@ class SharpSpringAPIManager(BaseAPIManager):
 
     #=============================== API functions ========================================#
     #====== Opportunity functions ======#
-    def create_opportunity(self, owner_email: str, client_name: str, contact_id: str):
+    def create_opportunity(self, owner_email: str, client_name: str, contact_id: str) -> dict:
         try:
+            if not all(isinstance(var, str) and var.strip() for var in [owner_email, client_name, contact_id]):
+                return {"error": "Missing or invalid parameters"}
+            
             owner_id_response = self.get_account_owner_id(owner_email)
             if "error" in owner_id_response:
                 return owner_id_response
@@ -67,6 +70,9 @@ class SharpSpringAPIManager(BaseAPIManager):
     
     def get_opportunity(self, id: str) -> dict:
         try:
+            if not all(isinstance(var, str) and var.strip() for var in [id]):
+                return {"error": "Missing or invalid parameters"}
+            
             params = {"id": id}                
             result = self._make_api_call("getOpportunity", params)
             if "error" in result:
@@ -85,6 +91,9 @@ class SharpSpringAPIManager(BaseAPIManager):
 
     def get_opportunity_id_from_contact_id(self, contact_id: str) -> dict:
         try:
+            if not all(isinstance(var, str) and var.strip() for var in [contact_id]):
+                return {"error": "Missing or invalid parameters"}
+            
             existing_data = self.gathered_data.get("opportunity_id")
             if existing_data:
                 return {"opportunity_id": existing_data}
@@ -110,6 +119,9 @@ class SharpSpringAPIManager(BaseAPIManager):
     #====== Contact functions ======# 
     def get_account_owner_id(self, email: str) -> dict:
         try:
+            if not all(isinstance(var, str) and var.strip() for var in [email]):
+                return {"error": "Missing or invalid parameters"}
+            
             existing_data = self.gathered_data.get("owner_id")
             if existing_data:
                 return {"owner_id": existing_data}
@@ -140,18 +152,12 @@ class SharpSpringAPIManager(BaseAPIManager):
             return {'error': f'Unexpected error retrieving owners: {e}'}
           
     def get_contact_by_phone_number(self, phone_number: str, max_batches: int = 3, days: int = 30) -> dict:
-        """
-        Retrieves a contact by phone number, looking up recent contacts created or updated within a given time range.
-        
-        Args:
-            phone_number (str): The phone number to search for.
-            max_batches (int): The maximum number of batches(500 contacts each) to retrieve (default 3).
-            days (int): The number of days back to search for contacts (default 30).
-            
-        Returns:
-            dict: A dictionary containing the contact ID and transcript or an error message if not found.
-        """
         try:
+            if not all(isinstance(var, str) and var.strip() for var in [phone_number]):
+                return {"error": "Missing or invalid parameters"}
+            if not all(isinstance(var, int) and var > 0 for var in [max_batches, days]):
+                return {"error": "Missing or invalid parameters"}
+            
             transcript_field_name = self.get_transcript_field()
             if "error" in transcript_field_name:
                 return transcript_field_name
@@ -160,47 +166,11 @@ class SharpSpringAPIManager(BaseAPIManager):
             if not formatted_phone_number["valid"]:
                 return {"error": "Invalid phone number"}
 
-            start_date = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d %H:%M:%S")
-            end_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
-            offset = 0
-
-            for _ in range(max_batches):
-                params = {
-                    "startDate": start_date,
-                    "endDate": end_date,
-                    "timestamp": "create",  # Can be update to find contacts updated in the last x days
-                    "limit": self.MAX_QUERIES,
-                    "offset": offset,
-                    "fields": ["id", "firstName", "lastName", "phoneNumber", "mobilePhoneNumber", transcript_field_name["system_name"]]
-                }
-                result = self._make_api_call("getLeadsDateRange", params)
-                if "error" in result:
-                    return result
-                
-                contacts = result.get("result", {}).get("lead", [])
-
-                for contact in reversed(contacts): #Reversed to get the newest contacts first
-                    # Get phone number
-                    contact_number = contact.get("phoneNumber") or contact.get("mobilePhoneNumber")
-                    if not contact_number:
-                        continue
-                    
-                    # Format phone number
-                    contact_number = self._format_phone_number(contact_number)
-                    if not contact_number["valid"]:
-                        continue
-                    
-                    # Match phone numbers
-                    if contact_number["phone_number"] == formatted_phone_number["phone_number"]:
-                        contact_id = contact.get("id")
-                        transcript = contact.get(transcript_field_name["system_name"])                
-                        return {"contact_id": contact_id, "transcript": transcript}
-                
-                offset += self.MAX_QUERIES  
-                if not contacts or len(contacts) < self.MAX_QUERIES:
-                    break  # No more data left to fetch
+            contact_data = self._find_matching_contact(formatted_phone_number["phone_number"], max_batches, days, transcript_field_name["system_name"])
+            if "error" in contact_data:
+                return contact_data
             
-            return {"error": "No contact found"}
+            return contact_data
 
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while getting recent contacts: {e}")
@@ -208,6 +178,9 @@ class SharpSpringAPIManager(BaseAPIManager):
         
     def create_contact(self, full_name: str, email: str, phone_number: str, owner_id: str) -> dict:
         try:
+            if not all(isinstance(var, str) and var.strip() for var in [full_name, email, phone_number, owner_id]):
+                return {"error": "Missing or invalid parameters"}
+            
             first_name, last_name = full_name.split(" ", 1) if " " in full_name else (full_name, "")
             lead_data = {
                 "firstName": first_name,
@@ -235,6 +208,9 @@ class SharpSpringAPIManager(BaseAPIManager):
         
     def update_contact_transcript(self, contact_id: str, transcript: str) -> dict:
         try:
+            if not all(isinstance(var, str) and var.strip() for var in [contact_id, transcript]):
+                return {"error": "Missing or invalid parameters"}
+            
             transcript_field_name = self.get_transcript_field()
             if "error" in transcript_field_name:
                 return transcript_field_name
@@ -331,7 +307,11 @@ class SharpSpringAPIManager(BaseAPIManager):
                 current_app.logger.error("No deal stages found")
                 return {'error': "No deal stages found"}
 
-            first_stage = min(deal_stages, key=lambda stage: int(stage.get("weight", float('inf'))))
+            #Get the first stage with the lowest weight, meaning it's the first stage in the pipeline
+            first_stage = min(
+                deal_stages, 
+                key=lambda stage: float('inf') if stage.get("weight") is None else int(stage["weight"])
+            )
 
             first_stage_id = first_stage.get("id")
             if not first_stage_id:
@@ -348,9 +328,19 @@ class SharpSpringAPIManager(BaseAPIManager):
     #================================= Helper functions ========================================#
     def _make_api_call(self, method: str, params: dict) -> dict:
         try:
+            if not all(isinstance(var, str) and var.strip() for var in [method]):
+                return {"error": "Missing or invalid parameters"}
+            if not all(isinstance(var, dict) for var in [params]):
+                return {"error": "Missing or invalid parameters"}
+            
+            
             data = {"method": method, "params": params, "id": str(uuid.uuid4())}
             response = requests.post(
-                self.api_endpoint, json=data, params=self.query_params, headers={"Content-Type": "application/json"}
+                self.api_endpoint, 
+                json=data, 
+                params=self.query_params, 
+                headers={"Content-Type": "application/json"},
+                timeout=30
             )
             response.raise_for_status()
 
@@ -374,6 +364,9 @@ class SharpSpringAPIManager(BaseAPIManager):
 
     def _check_for_errors(self, result: dict) -> dict:
         try:
+            if not all(isinstance(var, dict) for var in [result]):
+                return {"error": "Missing or invalid parameters"}
+            
             # Ensure "result" exists before proceeding
             if "result" not in result:
                 current_app.logger.error(f"Malformed API response: {result}")
@@ -393,7 +386,7 @@ class SharpSpringAPIManager(BaseAPIManager):
 
             if objects:
                 for object in objects:
-                    if object.get("success") == "false":
+                    if object.get("success") == False:
                         error_object = object.get("error", {})
                         unknown_error = "API returned a failure but did not provide an error message."
                         current_app.logger.error(f"Object-level error ({method_type}): Code: {error_object.get('code', 'Unknown')}, Message: {error_object.get('message', unknown_error)}")
@@ -415,4 +408,70 @@ class SharpSpringAPIManager(BaseAPIManager):
             return {"phone_number": phone_number, "valid": False}
 
         return {"phone_number": formatted_phone_number, "valid": True}
+    
+
+    def _find_matching_contact(self, phone_number: str, max_batches: int = 3, days: int = 30, field_name: str = None) -> dict:
+        """
+        Retrieves a contact by phone number, looking up recent contacts created or updated within a given time range.
+        
+        Args:
+            phone_number (str): The phone number to search for.
+            max_batches (int): The maximum number of batches(500 contacts each) to retrieve (default 3).
+            days (int): The number of days back to search for contacts (default 30).
+            field_name (str): The name of the field to search for the transcript (default None).
+            
+        Returns:
+            dict: A dictionary containing the contact ID and transcript or an error message if not found.
+        """
+        try:
+            if not all(isinstance(var, str) and var.strip() for var in [phone_number, field_name]):
+                return {"error": "Missing or invalid parameters"}
+            if not all(isinstance(var, int) and var > 0 for var in [max_batches, days]):
+                return {"error": "Missing or invalid parameters"}
+            
+            start_date = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d %H:%M:%S")
+            end_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+            offset = 0
+
+            for _ in range(max_batches):
+                params = {
+                    "startDate": start_date,
+                    "endDate": end_date,
+                    "timestamp": "create",  # Can be update to find contacts updated in the last x days
+                    "limit": self.MAX_QUERIES,
+                    "offset": offset,
+                    "fields": ["id", "firstName", "lastName", "phoneNumber", "mobilePhoneNumber", field_name]
+                }
+                result = self._make_api_call("getLeadsDateRange", params)
+                if "error" in result:
+                    return result
+                
+                contacts = result.get("result", {}).get("lead", [])
+
+                for contact in reversed(contacts): #Reversed to get the newest contacts first
+                    # Get phone number
+                    contact_number = contact.get("phoneNumber") or contact.get("mobilePhoneNumber")
+                    if not contact_number:
+                        continue
+                    
+                    # Format phone number
+                    contact_number = self._format_phone_number(contact_number)
+                    if not contact_number["valid"]:
+                        continue
+                    
+                    # Match phone numbers
+                    if contact_number["phone_number"] == phone_number:
+                        contact_id = contact.get("id")
+                        transcript = contact.get(field_name)                        
+                        return {"contact_id": contact_id, "transcript": transcript}
+                
+                offset += self.MAX_QUERIES  
+                if not contacts or len(contacts) < self.MAX_QUERIES:
+                    break  # No more data left to fetch
+            
+            return {"error": "No contact found"}
+
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while finding matching contact: {e}")
+            return {'error': f'An unexpected error occurred while finding matching contact: {e}'}
 
