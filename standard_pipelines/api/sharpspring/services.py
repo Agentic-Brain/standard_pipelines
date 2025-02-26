@@ -27,8 +27,10 @@ class SharpSpringAPIManager(BaseAPIManager):
     #====== Opportunity functions ======#
     def create_opportunity(self, owner_email: str, client_name: str, contact_id: str) -> dict:
         try:
-            if not all(isinstance(var, str) and var.strip() for var in [owner_email, client_name, contact_id]):
-                return {"error": "Missing or invalid parameters"}
+            param_check_response = self._check_for_required_params([("owner_email", owner_email, str), ("client_name", client_name, str), ("contact_id", contact_id, str)])
+            if "error" in param_check_response:
+                current_app.logger.error(f"Invalid parameters for create_opportunity: {param_check_response['error']}")
+                return param_check_response
             
             owner_id_response = self.get_account_owner_id(owner_email)
             if "error" in owner_id_response:
@@ -70,8 +72,10 @@ class SharpSpringAPIManager(BaseAPIManager):
     
     def get_opportunity(self, id: str) -> dict:
         try:
-            if not all(isinstance(var, str) and var.strip() for var in [id]):
-                return {"error": "Missing or invalid parameters"}
+            param_check_response = self._check_for_required_params([("id", id, str)])
+            if "error" in param_check_response:
+                current_app.logger.error(f"Invalid parameters for get_opportunity: {param_check_response['error']}")
+                return param_check_response
             
             params = {"id": id}                
             result = self._make_api_call("getOpportunity", params)
@@ -91,8 +95,10 @@ class SharpSpringAPIManager(BaseAPIManager):
 
     def get_opportunity_id_from_contact_id(self, contact_id: str) -> dict:
         try:
-            if not all(isinstance(var, str) and var.strip() for var in [contact_id]):
-                return {"error": "Missing or invalid parameters"}
+            param_check_response = self._check_for_required_params([("contact_id", contact_id, str)])
+            if "error" in param_check_response:
+                current_app.logger.error(f"Invalid parameters for get_opportunity_id_from_contact_id: {param_check_response['error']}")
+                return param_check_response
             
             existing_data = self.gathered_data.get("opportunity_id")
             if existing_data:
@@ -119,8 +125,10 @@ class SharpSpringAPIManager(BaseAPIManager):
     #====== Contact functions ======# 
     def get_account_owner_id(self, email: str) -> dict:
         try:
-            if not all(isinstance(var, str) and var.strip() for var in [email]):
-                return {"error": "Missing or invalid parameters"}
+            param_check_response = self._check_for_required_params([("email", email, str)])
+            if "error" in param_check_response:
+                current_app.logger.error(f"Invalid parameters for get_account_owner_id: {param_check_response['error']}")
+                return param_check_response
             
             existing_data = self.gathered_data.get("owner_id")
             if existing_data:
@@ -153,10 +161,10 @@ class SharpSpringAPIManager(BaseAPIManager):
           
     def get_contact_by_phone_number(self, phone_number: str, max_batches: int = 3, days: int = 30) -> dict:
         try:
-            if not all(isinstance(var, str) and var.strip() for var in [phone_number]):
-                return {"error": "Missing or invalid parameters"}
-            if not all(isinstance(var, int) and var > 0 for var in [max_batches, days]):
-                return {"error": "Missing or invalid parameters"}
+            param_check_response = self._check_for_required_params([("phone_number", phone_number, str), ("max_batches", max_batches, int), ("days", days, int)])
+            if "error" in param_check_response:
+                current_app.logger.error(f"Invalid parameters for get_contact_by_phone_number: {param_check_response['error']}")
+                return param_check_response
             
             transcript_field_name = self.get_transcript_field()
             if "error" in transcript_field_name:
@@ -178,8 +186,10 @@ class SharpSpringAPIManager(BaseAPIManager):
         
     def create_contact(self, full_name: str, email: str, phone_number: str, owner_id: str) -> dict:
         try:
-            if not all(isinstance(var, str) and var.strip() for var in [full_name, email, phone_number, owner_id]):
-                return {"error": "Missing or invalid parameters"}
+            param_check_response = self._check_for_required_params([("full_name", full_name, str), ("email", email, str), ("phone_number", phone_number, str), ("owner_id", owner_id, str)])
+            if "error" in param_check_response:
+                current_app.logger.error(f"Invalid parameters for create_contact: {param_check_response['error']}")
+                return param_check_response
             
             first_name, last_name = full_name.split(" ", 1) if " " in full_name else (full_name, "")
             lead_data = {
@@ -208,8 +218,10 @@ class SharpSpringAPIManager(BaseAPIManager):
         
     def update_contact_transcript(self, contact_id: str, transcript: str) -> dict:
         try:
-            if not all(isinstance(var, str) and var.strip() for var in [contact_id, transcript]):
-                return {"error": "Missing or invalid parameters"}
+            param_check_response = self._check_for_required_params([("contact_id", contact_id, str), ("transcript", transcript, str)])
+            if "error" in param_check_response:
+                current_app.logger.error(f"Invalid parameters for update_contact_transcript: {param_check_response['error']}")
+                return param_check_response
             
             transcript_field_name = self.get_transcript_field()
             if "error" in transcript_field_name:
@@ -328,11 +340,10 @@ class SharpSpringAPIManager(BaseAPIManager):
     #================================= Helper functions ========================================#
     def _make_api_call(self, method: str, params: dict) -> dict:
         try:
-            if not all(isinstance(var, str) and var.strip() for var in [method]):
-                return {"error": "Missing or invalid parameters"}
-            if not all(isinstance(var, dict) for var in [params]):
-                return {"error": "Missing or invalid parameters"}
-            
+            param_check_response = self._check_for_required_params([("method", method, str), ("params", params, dict)])
+            if "error" in param_check_response:
+                current_app.logger.error(f"Invalid parameters for _make_api_call: {param_check_response['error']}")
+                return param_check_response
             
             data = {"method": method, "params": params, "id": str(uuid.uuid4())}
             response = requests.post(
@@ -361,11 +372,37 @@ class SharpSpringAPIManager(BaseAPIManager):
         except Exception as e:
             current_app.logger.exception(f"Unexpected error in {method}: {e}")
             return {'error': f'Unexpected error in {method}'}
+        
+    def _check_for_required_params(self, params: list[tuple[str, any, type]], positive_only: bool = False) -> dict:
+        for param_name, param_value, expected_type in params:
+            # Check if the type matches
+            if not isinstance(param_value, expected_type):
+                return {"error": f"{param_name} must be of type {expected_type.__name__}"}
+
+            # Check for None if required
+            if param_value is None:
+                return {"error": f"{param_name} cannot be None"}
+
+            # Check for empty strings
+            if expected_type is str and not param_value.strip():
+                return {"error": f"{param_name} cannot be empty"}
+
+            # Handle empty lists or dicts
+            if isinstance(param_value, (list, dict)) and not param_value:
+                return {"error": f"{param_name} cannot be empty"}
+
+            # Handle negative values if positive_only is True
+            if positive_only == True and isinstance(param_value, (int, float)) and param_value < 0:
+                return {"error": f"{param_name} cannot be negative"}
+            
+        return {"success": True}
 
     def _check_for_errors(self, result: dict) -> dict:
         try:
-            if not all(isinstance(var, dict) for var in [result]):
-                return {"error": "Missing or invalid parameters"}
+            param_check_response = self._check_for_required_params([("result", result, dict)])
+            if "error" in param_check_response:
+                current_app.logger.error(f"Invalid parameters for _check_for_errors: {param_check_response['error']}")
+                return param_check_response
             
             # Ensure "result" exists before proceeding
             if "result" not in result:
@@ -424,10 +461,10 @@ class SharpSpringAPIManager(BaseAPIManager):
             dict: A dictionary containing the contact ID and transcript or an error message if not found.
         """
         try:
-            if not all(isinstance(var, str) and var.strip() for var in [phone_number, field_name]):
-                return {"error": "Missing or invalid parameters"}
-            if not all(isinstance(var, int) and var > 0 for var in [max_batches, days]):
-                return {"error": "Missing or invalid parameters"}
+            param_check_response = self._check_for_required_params([("phone_number", phone_number, str), ("field_name", field_name, str), ("max_batches", max_batches, int), ("days", days, int)], positive_only=True)
+            if "error" in param_check_response:
+                current_app.logger.error(f"Invalid parameters for _find_matching_contact: {param_check_response['error']}")
+                return param_check_response
             
             start_date = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d %H:%M:%S")
             end_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
