@@ -2,7 +2,7 @@ from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
 from dialpad import DialpadClient
 from datetime import datetime, timedelta, timezone
-import requests
+import pytz
 from requests.exceptions import RequestException, HTTPError
 from typing import Optional
 
@@ -16,7 +16,7 @@ class DialpadAPIManager(BaseAPIManager):
         return ["api_key"]
 
     #============ API Functions =============#
-    def get_transcript(self, call_data: dict):
+    def get_transcript(self, call_data: dict, timezone: str = "UTC"):
         try:
             call_id = call_data.get("call_id")
             if not isinstance(call_id, (str, int)):
@@ -32,7 +32,7 @@ class DialpadAPIManager(BaseAPIManager):
 
             only_transcripts = [entry for entry in lines if entry.get('type', '').lower() == 'transcript']
             participants = self._get_call_participants(call_data)
-            formatted_transcript = self._format_transcript(only_transcripts, call_data, participants)
+            formatted_transcript = self._format_transcript(only_transcripts, call_data, participants, timezone)
             return {"transcript": formatted_transcript, "participants": participants}
 
         except HTTPError as e:
@@ -132,19 +132,19 @@ class DialpadAPIManager(BaseAPIManager):
             return {"error": f"An unexpected error occurred while getting webhook id: {e}"}
         
     #============ Helper Functions =============#
-    def _format_transcript(self, transcript_entries: list[dict], call_data: dict, participants: dict, border: bool = True) -> str:
+    def _format_transcript(self, transcript_entries: list[dict], call_data: dict, participants: dict, timezone: str = "UTC") -> str:
         formatted_lines = []
 
-        date_started = datetime.fromtimestamp(call_data.get('date_started') / 1000) if call_data.get('date_started') else None
+        date_started = datetime.fromtimestamp(call_data.get('date_started') / 1000, tz=pytz.UTC) if call_data.get('date_started') else None
         call_id = call_data.get('call_id', 'Unknown Call ID')
 
-        timezone_offset = timedelta(0)
-        if transcript_entries and date_started:
-            local_offset = datetime.now(timezone.utc).astimezone().utcoffset()
-            timezone_offset = local_offset
+        try:
+            local_timezone = pytz.timezone(timezone)
+        except pytz.UnknownTimeZoneError:
+            local_timezone = pytz.UTC
 
-        if border:
-            formatted_lines.append("\n#=====================#\n")
+        if date_started:
+            date_started = date_started.astimezone(local_timezone)
 
         formatted_lines.append(f"Organizer: {participants['host']['email']}")
         formatted_lines.append(f"Attendee: {participants['guest']['email']}")
@@ -154,7 +154,7 @@ class DialpadAPIManager(BaseAPIManager):
         for entry in transcript_entries:
             time_str = entry.get('time', '')
             try:
-                time_obj = datetime.fromisoformat(time_str) + timezone_offset
+                time_obj = datetime.fromisoformat(time_str).replace(tzinfo=pytz.UTC).astimezone(local_timezone)
                 timestamp = time_obj.strftime("[%H:%M:%S]")
             except ValueError:
                 timestamp = "[Unknown Time]"
@@ -164,9 +164,6 @@ class DialpadAPIManager(BaseAPIManager):
 
             formatted_line = f"{timestamp} {speaker}: {content}"
             formatted_lines.append(formatted_line)
-        
-        if border:
-            formatted_lines.append("\n#=====================#\n")
 
         return "\n".join(formatted_lines)
     
