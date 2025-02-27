@@ -23,7 +23,7 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_google_client_secret
 
 x-base-service: &base-service
-  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.5h10
+  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.6h5
   secrets:
     - github-token
   environment:
