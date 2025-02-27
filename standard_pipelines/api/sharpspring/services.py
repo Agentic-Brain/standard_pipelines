@@ -176,6 +176,7 @@ class SharpSpringAPIManager(BaseAPIManager):
 
             contact_data = self._find_matching_contact(formatted_phone_number["phone_number"], max_batches, days, transcript_field_name["system_name"])
             if "error" in contact_data:
+                current_app.logger.warning(f"Could not find contact with phone number: {phone_number}")
                 return contact_data
             
             return contact_data
