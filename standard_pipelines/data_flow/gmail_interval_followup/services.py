@@ -104,7 +104,7 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
         
         # TODO: Wrap this openapi call in try
         try:
-            chat_completion = self.openai_api_manager.chat(email_prompt, model="gpt-4")
+            chat_completion = self.openai_api_manager.chat(email_prompt, model="gpt-4o")
             email_body = chat_completion.choices[0].message.content  # Extract the actual text
         except Exception as e:
             # Log the error and raise a more specific exception
