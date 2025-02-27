@@ -123,7 +123,8 @@ def init_logging(app: Flask) -> None:
         date_format = '%y-%m-%d %H:%M'
 
     # File handler with environment-specific format
-    file_handler = logging.FileHandler(f'logs/{str(time.ctime(time.time()))}.log')
+    timestamp = time.strftime('%Y-%m-%d_%H-%M-%S')
+    file_handler = logging.FileHandler(f'logs/{timestamp}.log')
     file_formatter = logging.Formatter(log_format, datefmt=date_format)
     file_handler.setFormatter(file_formatter)
     file_handler.setLevel(logging.DEBUG)
