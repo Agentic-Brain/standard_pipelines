@@ -21,7 +21,7 @@ def login_google():
             current_app.logger.error("Google OAuth client not initialized")
             return jsonify({'error': 'Google OAuth client not initialized'}), 500
 
-        redirect_uri = url_for('api.authorize_google', _external=True)
+        redirect_uri = url_for('api.authorize_google', _external=True, _scheme=current_app.config['PREFERRED_URL_SCHEME'])
         current_app.logger.debug(f"Generated redirect URI: {redirect_uri}")
 
         auth_redirect = oauth.google.authorize_redirect(
