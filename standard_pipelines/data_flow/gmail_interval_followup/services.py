@@ -85,10 +85,24 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
             if not attendee["email"].endswith(self.configuration.internal_domain):
                 contactable_attendees.append(attendee)
 
-        google_credentials = db.session.query(GoogleCredentials).filter(GoogleCredentials.user_email == organizer_email).first()
+        # First try to find credentials specific to the organizer
+        google_credentials = db.session.query(GoogleCredentials).filter(
+            GoogleCredentials.user_email == organizer_email,
+            GoogleCredentials.client_id == self.client_id
+        ).first()
         
+        # If no specific credentials found, try to use default credentials for this client
         if google_credentials is None:
-            raise ValueError(f"No Google credentials found for organizer_email: {organizer_email}")
+            google_credentials = db.session.query(GoogleCredentials).filter(
+                GoogleCredentials.client_id == self.client_id,
+                GoogleCredentials.is_default == True
+            ).first()
+            
+            if google_credentials is None:
+                raise ValueError(
+                    f"No Google credentials found for organizer_email: {organizer_email} "
+                    f"and no default credentials set for client ID: {self.client_id}"
+                )
 
         return {
             "fireflies_transcript": transcript,

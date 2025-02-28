@@ -1,9 +1,9 @@
-from flask import url_for, current_app, jsonify, render_template, session
+from flask import url_for, current_app, jsonify, render_template, session, request, flash, redirect
 from flask_login import current_user, login_required
 from sqlalchemy.exc import SQLAlchemyError
 import requests
 from standard_pipelines.extensions import db
-from standard_pipelines.api.google.models import GoogleCredentials, GoogleCredentials
+from standard_pipelines.api.google.models import GoogleCredentials
 from standard_pipelines.data_flow.models import Client
 from standard_pipelines.extensions import oauth
 from authlib.integrations.base_client.errors import OAuthError
@@ -16,12 +16,15 @@ def login_google():
     """Initiates OAuth flow by redirecting to Google's consent screen."""
     try:
         current_app.logger.info("Starting Google OAuth login flow")
-
+        
+        # Check if setting as default
+        set_default = request.args.get('set_default', 'false').lower() == 'true'
+        
         if oauth.google is None:
             current_app.logger.error("Google OAuth client not initialized")
             return jsonify({'error': 'Google OAuth client not initialized'}), 500
 
-        redirect_uri = url_for('api.authorize_google', _external=True, _scheme=current_app.config['PREFERRED_URL_SCHEME'])
+        redirect_uri = url_for('api.authorize_google', _external=True, _scheme=current_app.config['PREFERRED_URL_SCHEME'], set_default=set_default)
         current_app.logger.debug(f"Generated redirect URI: {redirect_uri}")
 
         auth_redirect = oauth.google.authorize_redirect(
@@ -45,6 +48,10 @@ def authorize_google():
     """Handles OAuth callback, exchanges code for tokens."""
     try:
         current_app.logger.info("Handling Google OAuth callback")
+        
+        # Get the set_default parameter
+        set_default = request.args.get('set_default', 'false').lower() == 'true'
+        current_app.logger.debug(f"Set as default credential: {set_default}")
         
         if oauth.google is None:
             current_app.logger.error("Google OAuth client not initialized")
@@ -101,6 +108,7 @@ def authorize_google():
                 current_app.logger.info(f"Found existing credentials for {user_email}, updating...")
                 existing_credentials.refresh_token = token['refresh_token']
                 existing_credentials.user_name = user_name
+                existing_credentials.is_default = set_default
                 existing_credentials.save()
                 current_app.logger.info(f"Successfully updated credentials for email: {user_email}")
             else:
@@ -109,7 +117,8 @@ def authorize_google():
                     client_id=client_id,
                     refresh_token=token['refresh_token'],
                     user_email=user_email,
-                    user_name=user_name
+                    user_name=user_name,
+                    is_default=set_default
                 )
                 google_credentials.client = client
                 google_credentials.save()
@@ -138,3 +147,53 @@ def authorize_google():
     except Exception as e:
         current_app.logger.exception(f"Unexpected error during OAuth callback: {str(e)}")
         return jsonify({'error': f'Unexpected error during OAuth callback: {str(e)}'}), 500
+@api.route('/admin/google/credentials')
+@login_required
+def google_credentials_admin():
+    """Admin page for managing Google credentials."""
+    if not current_user.is_admin:
+        return jsonify({'error': 'Unauthorized'}), 403
+        
+    client_id = current_user.client_id
+    credentials = GoogleCredentials.query.filter_by(client_id=client_id).all()
+    
+    return render_template(
+        'admin/google_credentials.html',
+        credentials=credentials
+    )
+    
+@api.route('/admin/google/set_default', methods=['POST'])
+@login_required
+def set_default_credential():
+    """Sets a Google credential as the default for the client."""
+    if not current_user.is_admin:
+        return jsonify({'error': 'Unauthorized'}), 403
+        
+    credential_id = request.form.get('credential_id')
+    if not credential_id:
+        flash('Credential ID is required', 'error')
+        return redirect(url_for('api.google_credentials_admin'))
+        
+    client_id = current_user.client_id
+    
+    try:
+        # Get the credential to set as default
+        credential = GoogleCredentials.query.filter_by(
+            id=credential_id,
+            client_id=client_id
+        ).first()
+        
+        if credential is None:
+            flash('Credential not found', 'error')
+            return redirect(url_for('api.google_credentials_admin'))
+            
+        # Set this credential as default
+        credential.is_default = True
+        credential.save()
+        
+        flash('Default credential updated successfully', 'success')
+    except SQLAlchemyError:
+        db.session.rollback()
+        flash('Failed to update default credential', 'error')
+        
+    return redirect(url_for('api.google_credentials_admin'))
