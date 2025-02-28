@@ -93,7 +93,8 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
             raise APIError(owner_id_response["error"])
         
         #Get the contact ID
-        contact_id_response = self.sharpspring_api_manager.get_contact_by_phone_number(context["contact"]["phone"])
+        contact = context["contact"]
+        contact_id_response = self.sharpspring_api_manager.get_contact(contact["phone"], contact["name"], contact["email"])
         if "error" in contact_id_response:
             raise APIError(contact_id_response["error"])
         
@@ -143,10 +144,10 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
         # Creates the transcript field if it doesn't exist
         data["field_id"] = self.ensure_transcript_field(data)
 
-        #Creates the opportunity if it doesn't exist
+        # Creates the opportunity if it doesn't exist
         data["opportunity_id"] = self.ensure_opportunity_id(data, context)
 
-        #Update contact transcript field with new summary
+        # Update contact transcript field with new summary
         contact_response = self.sharpspring_api_manager.update_contact_transcript(
             data["contact_id"], 
             data["summary"]
@@ -187,8 +188,7 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
                 context["target"]["email"], 
                 context["contact"]["name"], 
                 data["contact_id"]
-            )
-            
+            ) 
             if "error" in opportunity_response or not opportunity_response.get("opportunity_id"):
                 raise APIError(opportunity_response["error"])
             return opportunity_response["opportunity_id"]

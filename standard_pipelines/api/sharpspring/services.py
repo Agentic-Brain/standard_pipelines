@@ -192,7 +192,7 @@ class SharpSpringAPIManager(BaseAPIManager):
                     available_data["email"] = formatted_email["email"]
 
             if not available_data:
-                return {"error": "Invalid phone number and name provided"}
+                return {"error": "Invalid phone number, name, and email provided"}
             
             contact_data = self._find_matching_contact(available_data, transcript_field_name["system_name"], max_batches, days)
             if "error" in contact_data:
@@ -284,8 +284,9 @@ class SharpSpringAPIManager(BaseAPIManager):
             
             field_id = field.get("id")
             system_name = field.get("systemName")
-
-            self.gathered_data["system_name"] = system_name
+            if system_name:
+                self.gathered_data["system_name"] = system_name
+                
             return {"field_id": field_id, "system_name": system_name}
         
         except Exception as e:
@@ -553,7 +554,7 @@ class SharpSpringAPIManager(BaseAPIManager):
                 if not contacts or len(contacts) < self.MAX_QUERIES:
                     break  # No more data left to fetch
             
-            return {"error": "No contact found"}
+            return {"contact_id": None, "transcript": None}
 
         except Exception as e:
             current_app.logger.exception(f"An unexpected error occurred while finding matching contact: {e}")
