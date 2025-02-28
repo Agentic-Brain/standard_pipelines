@@ -27,7 +27,7 @@ def login_hubspot():
         return jsonify({'error': 'HubSpot OAuth client not initialized'}), 500
 
     # TODO: Change this to use the preffered URL scheme based on production or development
-    redirect_uri = url_for('api.authorize_hubspot', _external=True, _scheme='https')
+    redirect_uri = url_for('api.authorize_hubspot', _external=True, _scheme=current_app.config['PREFERRED_URL_SCHEME'])
     current_app.logger.debug(f"Generated redirect URI: {redirect_uri}")
 
     try:

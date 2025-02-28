@@ -18,11 +18,17 @@ def create_sharpspring_credentials(client_id: str):
 
         data = request.get_json()
         
-        required_fields = ['account_id', 'secret_key']
-        missing_fields = [field for field in required_fields if field not in data]
-        if missing_fields:
-            current_app.logger.error(f"Missing required fields: {missing_fields}")
-            return jsonify({'error': f"Missing required fields: {missing_fields}"}), 400
+        required_fields = {'account_id': str, 'secret_key': str}
+        for field, field_type in required_fields.items():
+            if field not in data:
+                current_app.logger.error(f"Missing required field: {field}")
+                return jsonify({'error': f"Missing required field: {field}"}), 400
+            if not isinstance(data[field], field_type):
+                current_app.logger.error(f"Invalid type for {field}. Expected {field_type.__name__}")
+                return jsonify({'error': f"Invalid type for {field}. Expected {field_type.__name__}"}), 400
+            if not data[field].strip():
+                current_app.logger.error(f"Empty value provided for {field}")
+                return jsonify({'error': f"Empty value provided for {field}"}), 400
 
         credentials = SharpSpringCredentials( 
             client_id=client_uuid, 

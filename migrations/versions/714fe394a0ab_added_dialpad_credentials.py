@@ -1,7 +1,7 @@
 """Added Dialpad credentials
 
 Revision ID: 714fe394a0ab
-Revises: 6cb362c4fd38
+Revises: d2dc21fd386e
 Create Date: 2025-02-21 16:17:28.088228
 
 """
@@ -11,7 +11,7 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision = '714fe394a0ab'
-down_revision = '6cb362c4fd38'
+down_revision = 'd2dc21fd386e'
 branch_labels = None
 depends_on = None
 

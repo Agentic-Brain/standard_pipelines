@@ -5,10 +5,12 @@ from standard_pipelines.data_flow.models import Client
 from standard_pipelines.extensions import db
 from flask import jsonify, request
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+from standard_pipelines.main.decorators import require_api_key
 from uuid import UUID
 
 
 @api.route('/dialpad/credentials/<client_id>', methods=['GET', 'POST'])
+@require_api_key
 def manage_dialpad_credentials(client_id: str):
     """Test endpoint to manage Dialpad credentials for a client."""
     try:
