@@ -286,7 +286,7 @@ class SharpSpringAPIManager(BaseAPIManager):
             system_name = field.get("systemName")
             if system_name:
                 self.gathered_data["system_name"] = system_name
-                
+
             return {"field_id": field_id, "system_name": system_name}
         
         except Exception as e:
@@ -538,18 +538,15 @@ class SharpSpringAPIManager(BaseAPIManager):
                     if not contact_number["valid"] and not contact_name["valid"] and not contact_email["valid"]:
                         continue
                     
-                    is_phone_match = contact_number["phone_number"] == available_data.get("phone_number")
-                    is_name_match = contact_name["name"] == available_data.get("name")
-                    is_email_match = contact_email["email"] == available_data.get("email")
+                    if contact_number["phone_number"] == available_data.get("phone_number"):
+                        return {"contact_id": contact.get("id"), "transcript": contact.get(field_name)}
+                    
+                    if contact_name["name"] == available_data.get("name"):
+                        return {"contact_id": contact.get("id"), "transcript": contact.get(field_name)}
+                    
+                    if contact_email["email"] == available_data.get("email"):
+                        return {"contact_id": contact.get("id"), "transcript": contact.get(field_name)}
 
-                    if is_phone_match or is_name_match or is_email_match:
-                        contact_id = contact.get("id")
-                        transcript = contact.get(field_name)   
-
-                        current_app.logger.info(f"Found contact {contact}")
-
-                        return {"contact_id": contact_id, "transcript": transcript}
-                
                 offset += self.MAX_QUERIES  
                 if not contacts or len(contacts) < self.MAX_QUERIES:
                     break  # No more data left to fetch

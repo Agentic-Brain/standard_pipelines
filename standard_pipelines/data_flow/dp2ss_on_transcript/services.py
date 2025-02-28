@@ -56,16 +56,18 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
     
     #======================== Core Flow ==============================#
     def context_from_webhook_data(self, webhook_data: t.Any) -> t.Optional[dict]:
+        if not webhook_data:
+            raise InvalidWebhookError('No webhook data provided')
         if not isinstance(webhook_data, dict):
             raise InvalidWebhookError('Invalid webhook data')
         if webhook_data.get("state") != "hangup":
             raise InvalidWebhookError('Invalid webhook type')
         
         required_fields = {
-            "date_started": "Date started is required",
-            "call_id": "Call ID is required",
-            "contact": "Contact is required",
-            "target": "Target is required"
+            "date_started": "Date started is required in the webhook data for the dialpad to SharpSpring flow",
+            "call_id": "Call ID is required in the webhook data for the dialpad to SharpSpring flow",
+            "contact": "Contact is required in the webhook data for the dialpad to SharpSpring flow",
+            "target": "Target is required in the webhook data for the dialpad to SharpSpring flow"
         }
 
         for field, error_message in required_fields.items():
@@ -123,34 +125,34 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
         return data
     
     #Takes in extracted data and applies client-specific transformations
-    def transform(self, data: dict, context: t.Optional[dict] = None) -> dict:
-        summary = self.meeting_summary(data["transcript"])
+    def transform(self, input_data: t.Optional[dict] = None, context: t.Optional[dict] = None) -> dict:
+        summary = self.meeting_summary(input_data["transcript"])
 
         #If the transcript already exists, we append it to the new summary
-        if data["existing_transcript"]:
-            summary = f"{summary}\n\n#=====================#\n\n{data['existing_transcript']}"
+        if input_data["existing_transcript"]:
+            summary = f"{summary}\n\n#=====================#\n\n{input_data['existing_transcript']}"
 
-        data["summary"] = summary
+        input_data["summary"] = summary
 
-        return data
+        return input_data
 
     #Loads the transformed data into the target system
-    def load(self, data: dict, context: t.Optional[dict] = None) -> None:
+    def load(self, output_data: t.Optional[dict] = None, context: t.Optional[dict] = None) -> None:
         # Things are created based on if data for them could be extracted in the extract step or not
 
         # Creates the contact if contact doesn't exist
-        data["contact_id"] = self.ensure_contact_id(data)
+        output_data["contact_id"] = self.ensure_contact_id(output_data)
 
         # Creates the transcript field if it doesn't exist
-        data["field_id"] = self.ensure_transcript_field(data)
+        output_data["field_id"] = self.ensure_transcript_field(output_data)
 
         # Creates the opportunity if it doesn't exist
-        data["opportunity_id"] = self.ensure_opportunity_id(data, context)
+        output_data["opportunity_id"] = self.ensure_opportunity_id(output_data, context)
 
         # Update contact transcript field with new summary
         contact_response = self.sharpspring_api_manager.update_contact_transcript(
-            data["contact_id"], 
-            data["summary"]
+            output_data["contact_id"], 
+            output_data["summary"]
         )
         if "error" in contact_response:
             raise APIError(contact_response["error"])
