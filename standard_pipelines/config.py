@@ -46,6 +46,7 @@ class Config:
         'USE_OPENAI': True,
         'USE_MAILGUN': True,
         'USE_HUBSPOT': True,
+        'USE_ZOHO': True,
         # Add more API usage flags as needed
     }
 
