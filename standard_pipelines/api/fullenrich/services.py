@@ -9,6 +9,10 @@ class FullEnrichAPIManager(BaseAPIManager):
     def __init__(self, api_config: dict) -> None:
         super().__init__(api_config)
         self.base_url = "https://app.fullenrich.com/api/v1"
+        self.headers = {
+                "Authorization": f"Bearer {self.api_config['api_key']}",
+                "Content-Type": "application/json"
+            }
         self._api_key_verified = False
 
     @property
@@ -20,7 +24,7 @@ class FullEnrichAPIManager(BaseAPIManager):
 
     def enrich_contact(self, field_data: dict[str, str], webhook_url: t.Optional[str] = None) -> dict:
         try:
-            verify_result = self.ensure_api_key()
+            verify_result = self._ensure_api_key()
             if "error" in verify_result:
                 return verify_result
             
@@ -40,10 +44,6 @@ class FullEnrichAPIManager(BaseAPIManager):
                 return {"error": "domain or company_name are required to enrich contact"}
 
             url = f"{self.base_url}/contact/enrich/bulk"
-            headers = {
-                "Authorization": f"Bearer {self.api_config['api_key']}",
-                "Content-Type": "application/json"
-            }
 
             payload = {
                 "name": f"Enrichment for {valid_data['firstname']} {valid_data['lastname']}",
@@ -53,11 +53,16 @@ class FullEnrichAPIManager(BaseAPIManager):
             if webhook_url and isinstance(webhook_url, str) and webhook_url.strip() and (webhook_url.startswith("http://") or webhook_url.startswith("https://")):
                 payload["webhook_url"] = webhook_url
 
-            response = requests.post(url, json=payload, headers=headers, timeout=30)
+            response = requests.post(url, json=payload, headers=self.headers, timeout=30)
             response.raise_for_status()
             result = response.json()
 
-            return {"enrichment_id": result["enrichment_id"]}
+            enrichment_id = result.get("enrichment_id")
+            if not enrichment_id:
+                current_app.logger.error("No enrichment_id found in FullEnrich response")
+                return {"error": "No enrichment_id found in FullEnrich response"}
+
+            return {"enrichment_id": enrichment_id}
         
         except HTTPError as e:
             current_app.logger.error(f"An HTTP error occurred while enriching contact: {e}")
@@ -69,10 +74,9 @@ class FullEnrichAPIManager(BaseAPIManager):
             current_app.logger.exception(f"An unexpected error occurred while enriching contact: {e}")
             return {"error": f"An unexpected error occurred while enriching contact: {e}"}
         
-
     def get_enrichment_results(self, enrichment_id: str, attempts: int = 5, delay: int = 60) -> dict:
         try:
-            verify_result = self.ensure_api_key()
+            verify_result = self._ensure_api_key()
             if "error" in verify_result:
                 return verify_result
             
@@ -82,12 +86,8 @@ class FullEnrichAPIManager(BaseAPIManager):
                     return {"error": "Invalid enrichment_id provided"}
 
                 url = f"{self.base_url}/contact/enrich/bulk/{enrichment_id}"
-                headers = {
-                    "Authorization": f"Bearer {self.api_config['api_key']}",
-                    "Content-Type": "application/json"
-                }
 
-                response = requests.get(url, headers=headers, timeout=30)
+                response = requests.get(url, headers=self.headers, timeout=30)
                 response.raise_for_status()
                 result = response.json()
                 if 'status' in result:
@@ -119,17 +119,42 @@ class FullEnrichAPIManager(BaseAPIManager):
             current_app.logger.exception(f"An unexpected error occurred while getting enrichment results: {e}")
             return {"error": f"An unexpected error occurred while getting enrichment results: {e}"}
 
+    def get_credit_balance(self) -> dict:
+        try:
+            verify_result = self._ensure_api_key()
+            if "error" in verify_result:
+                return verify_result
+            
+            url = f"{self.base_url}/account/credits"
+
+            response = requests.get(url, headers=self.headers, timeout=30)
+            response.raise_for_status()
+            result = response.json()
+            balance = result.get("balance")
+            if not balance:
+                current_app.logger.error("No balance found in FullEnrich response")
+                return {"error": "No balance found in FullEnrich response"}
+
+            return {"balance": result["balance"]}
+            
+        except HTTPError as e:
+            current_app.logger.error(f"An HTTP error occurred while getting enrichment results: {e}")
+            return {"error": f"An HTTP error occurred while getting enrichment results: {e}"}
+        except RequestException as e:
+            current_app.logger.error(f"An API request error occurred while getting enrichment results: {e}")
+            return {"error": f"An API request error occurred while getting enrichment results: {e}"}
+        except Exception as e:
+            current_app.logger.exception(f"An unexpected error occurred while getting enrichment results: {e}")
+            return {"error": f"An unexpected error occurred while getting enrichment results: {e}"}
+                
+                
     #=======================================================================#
     #========================== Helper functions ===========================#
 
     def _verify_api_key(self) -> dict:
         try:
             url = f"{self.base_url}/account/keys/verify"
-            headers = {
-                "Authorization": f"Bearer {self.api_config['api_key']}",
-                "Content-Type": "application/json"
-            }
-            response = requests.get(url, headers=headers, timeout=30)
+            response = requests.get(url, headers=self.headers, timeout=30)
             response.raise_for_status()
 
             return {"valid": True}
@@ -150,11 +175,10 @@ class FullEnrichAPIManager(BaseAPIManager):
             current_app.logger.exception(f"An unexpected error occurred while verifying API key: {e}")
             return {"error": f"An unexpected error occurred while verifying API key: {e}"}
 
-    def ensure_api_key(self) -> dict:
+    def _ensure_api_key(self) -> dict:
         if not self._api_key_verified:
             result = self._verify_api_key()
             if "error" in result:
                 return result
             self._api_key_verified = True
-            return {"valid": True}
         return {"valid": True}

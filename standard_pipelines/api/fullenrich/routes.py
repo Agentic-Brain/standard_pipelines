@@ -4,6 +4,7 @@ from standard_pipelines.api.fullenrich.models import FullEnrichCredentials
 from standard_pipelines.data_flow.models import Client
 from standard_pipelines.extensions import db
 from flask import jsonify, request
+from werkzeug.exceptions import NotFound
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from standard_pipelines.main.decorators import require_api_key
 from uuid import UUID
@@ -54,6 +55,9 @@ def manage_fullenrich_credentials(client_id: str):
         if isinstance(e, IntegrityError):
             return jsonify({'error': 'A database conflict occurred while saving credentials'}), 500
         return jsonify({'error': 'Error storing credentials'}), 500
+    except NotFound:
+        current_app.logger.error(f"Client not found: {client_id}")
+        return jsonify({'error': 'Client not found'}), 404
     except ValueError:
         current_app.logger.error(f"Invalid client ID format: {client_id}")
         return jsonify({'error': 'Invalid client ID format'}), 400
