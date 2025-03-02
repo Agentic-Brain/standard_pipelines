@@ -53,11 +53,11 @@ def manage_fullenrich_credentials(client_id: str):
         current_app.logger.error(f"Database error occured while handling credentials: {e}")
         if isinstance(e, IntegrityError):
             return jsonify({'error': 'A database conflict occurred while saving credentials'}), 500
-        return jsonify({'error': f'Error storing credentials: {e}'}), 500
+        return jsonify({'error': 'Error storing credentials'}), 500
     except ValueError:
         current_app.logger.error(f"Invalid client ID format: {client_id}")
         return jsonify({'error': 'Invalid client ID format'}), 400
     except Exception as e:
         current_app.logger.exception(f"Unknown error with managing FullEnrich credentials: {e}")
-        return jsonify({'error': f"Unknown error with managing FullEnrich credentials: {e}"}), 500
+        return jsonify({'error': "Unknown error with managing FullEnrich credentials"}), 500
 

@@ -20,8 +20,9 @@ class FullEnrichAPIManager(BaseAPIManager):
 
     def enrich_contact(self, field_data: dict[str, str], webhook_url: t.Optional[str] = None) -> dict:
         try:
-            if not self.ensure_api_key():
-                return {"error": "Invalid API key, cannot proceed with enrichment"}
+            verify_result = self.ensure_api_key()
+            if "error" in verify_result:
+                return verify_result
             
             valid_data = {"enrich_fields": ["contact.emails", "contact.phones"]}
 
@@ -52,7 +53,7 @@ class FullEnrichAPIManager(BaseAPIManager):
             if webhook_url and isinstance(webhook_url, str) and webhook_url.strip() and (webhook_url.startswith("http://") or webhook_url.startswith("https://")):
                 payload["webhook_url"] = webhook_url
 
-            response = requests.post(url, json=payload, headers=headers)
+            response = requests.post(url, json=payload, headers=headers, timeout=30)
             response.raise_for_status()
             result = response.json()
 
@@ -71,6 +72,10 @@ class FullEnrichAPIManager(BaseAPIManager):
 
     def get_enrichment_results(self, enrichment_id: str, attempts: int = 5, delay: int = 60) -> dict:
         try:
+            verify_result = self.ensure_api_key()
+            if "error" in verify_result:
+                return verify_result
+            
             for _ in range(attempts):
                 if not isinstance(enrichment_id, str) or not enrichment_id.strip():
                     current_app.logger.error("Invalid enrichment_id provided")
@@ -82,7 +87,7 @@ class FullEnrichAPIManager(BaseAPIManager):
                     "Content-Type": "application/json"
                 }
 
-                response = requests.get(url, headers=headers)
+                response = requests.get(url, headers=headers, timeout=30)
                 response.raise_for_status()
                 result = response.json()
                 if 'status' in result:
@@ -117,17 +122,17 @@ class FullEnrichAPIManager(BaseAPIManager):
     #=======================================================================#
     #========================== Helper functions ===========================#
 
-    def _verify_api_key(self):
+    def _verify_api_key(self) -> dict:
         try:
             url = f"{self.base_url}/account/keys/verify"
             headers = {
                 "Authorization": f"Bearer {self.api_config['api_key']}",
                 "Content-Type": "application/json"
             }
-            response = requests.get(url, headers=headers, timeout=10)
+            response = requests.get(url, headers=headers, timeout=30)
             response.raise_for_status()
 
-            return {"Valid": True}
+            return {"valid": True}
         
         except HTTPError as e:
             error_message = response.json().get("message", "Unknown error")
@@ -145,11 +150,11 @@ class FullEnrichAPIManager(BaseAPIManager):
             current_app.logger.exception(f"An unexpected error occurred while verifying API key: {e}")
             return {"error": f"An unexpected error occurred while verifying API key: {e}"}
 
-    def ensure_api_key(self):
+    def ensure_api_key(self) -> dict:
         if not self._api_key_verified:
             result = self._verify_api_key()
             if "error" in result:
-                return False
+                return result
             self._api_key_verified = True
-            return True
-        return True
+            return {"valid": True}
+        return {"valid": True}
