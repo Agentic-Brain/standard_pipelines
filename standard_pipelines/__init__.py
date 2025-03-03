@@ -13,6 +13,7 @@ from standard_pipelines.config import DevelopmentConfig, ProductionConfig, Testi
 from standard_pipelines.data_flow.utils import BaseDataFlow
 from standard_pipelines.data_flow.ff2hs_on_transcript.services import FF2HSOnTranscript
 from standard_pipelines.data_flow.gmail_interval_followup.services import GmailIntervalFollowup
+from standard_pipelines.data_flow.dp2ss_on_transcript.services import DP2SSOnTranscript
 
 def create_app():
     load_dotenv()
