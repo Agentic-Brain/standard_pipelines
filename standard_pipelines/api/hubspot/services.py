@@ -135,8 +135,36 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
         }
 
     def create_contact(self, contact_object: CreatableContactHubSpotObject) -> ExtantContactHubSpotObject:
-        contact: ContactObject = self._api_client.crm.contacts.basic_api.create(contact_object.hubspot_object_dict)
-        return ExtantContactHubSpotObject(contact.to_dict(), self)
+        email = contact_object.hubspot_object_dict.get("properties", {}).get("email")
+        
+        # Try to create the contact
+        try:
+            contact: ContactObject = self._api_client.crm.contacts.basic_api.create(contact_object.hubspot_object_dict)
+            return ExtantContactHubSpotObject(contact.to_dict(), self)
+        except ApiException as e:
+            # If we get a conflict (409), the contact already exists
+            if e.status == 409 and email:
+                try:
+                    # Get the existing contact by email
+                    existing_contact = self._api_client.crm.contacts.basic_api.get_by_email(email=email)
+                    
+                    # Update the contact with the new properties
+                    contact_id = existing_contact.id
+                    properties = contact_object.hubspot_object_dict.get("properties", {})
+                    self._api_client.crm.contacts.basic_api.update(
+                        contact_id=contact_id,
+                        simple_public_object_input={"properties": properties}
+                    )
+                    
+                    # Return the updated contact
+                    updated_contact = self._api_client.crm.contacts.basic_api.get_by_id(contact_id)
+                    return ExtantContactHubSpotObject(updated_contact.to_dict(), self)
+                except ApiException as e2:
+                    # If we can't get or update the contact, raise an error
+                    raise APIError(f"Failed to handle existing contact: {str(e2)}")
+            else:
+                # For other errors, raise an APIError
+                raise APIError(f"Failed to create contact: {str(e)}")
 
     def create_deal(self, deal_object: CreatableDealHubSpotObject) -> ExtantDealHubSpotObject:
         deal: DealObject = self._api_client.crm.deals.basic_api.create(deal_object.hubspot_object_dict)
