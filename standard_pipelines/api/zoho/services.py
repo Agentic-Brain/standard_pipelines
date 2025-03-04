@@ -4,14 +4,14 @@ from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
 from standard_pipelines.data_flow.exceptions import APIError
 
-from zoho import Zoho
-from zoho.crm.associations import BatchInputPublicObjectId
-from zoho.crm.contacts import SimplePublicObject as ContactObject, SimplePublicObjectWithAssociations as ContactObjectWithAssociations
-from zoho.crm.deals import SimplePublicObject as DealObject, SimplePublicObjectWithAssociations as DealObjectWithAssociations
-from zoho.crm.objects.meetings import SimplePublicObject as MeetingObject
-from zoho.crm.objects.notes import SimplePublicObject as NoteObject
-from zoho.crm.associations.v4 import AssociationSpec
-from zoho.files import ApiException
+# from zoho import Zoho
+# from zoho.crm.associations import BatchInputPublicObjectId
+# from zoho.crm.contacts import SimplePublicObject as ContactObject, SimplePublicObjectWithAssociations as ContactObjectWithAssociations
+# from zoho.crm.deals import SimplePublicObject as DealObject, SimplePublicObjectWithAssociations as DealObjectWithAssociations
+# from zoho.crm.objects.meetings import SimplePublicObject as MeetingObject
+# from zoho.crm.objects.notes import SimplePublicObject as NoteObject
+# from zoho.crm.associations.v4 import AssociationSpec
+# from zoho.files import ApiException
 
 import typing as t
 from types import MappingProxyType
@@ -24,7 +24,7 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
 
     def __init__(self, api_config: dict) -> None:
         super().__init__(api_config)
-        self._api_client = Zoho()
+        self._api_client = ZCRMRestClient()
         self._api_client.access_token = self.access_token
 
     @property

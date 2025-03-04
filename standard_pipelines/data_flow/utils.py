@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 from functools import cached_property
+import json
 import uuid
 from flask import current_app
 
@@ -36,6 +37,9 @@ class DataFlowRegistryMeta(ABCMeta):
 
     @classmethod
     def data_flow_class(cls, dataflow_name: str) -> type[BaseDataFlow]:
+        for df_name in cls.DATA_FLOW_REGISTRY:
+            current_app.logger.info(f"DATA_FLOW_REGISTRY: {df_name}")
+
         if dataflow_name not in cls.DATA_FLOW_REGISTRY:
             raise ValueError(f"No dataflow class found for {dataflow_name}")
         return cls.DATA_FLOW_REGISTRY[dataflow_name]

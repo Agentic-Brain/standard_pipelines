@@ -12,6 +12,7 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, StagingConfig, get_config
 from standard_pipelines.data_flow.utils import BaseDataFlow
 from standard_pipelines.data_flow.ff2hs_on_transcript.services import FF2HSOnTranscript
+from standard_pipelines.data_flow.fireflies2zoho_on_transcript.services import Fireflies2ZohoOnTranscript
 from standard_pipelines.data_flow.gmail_interval_followup.services import GmailIntervalFollowup
 
 def create_app():
