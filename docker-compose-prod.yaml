@@ -19,6 +19,8 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_bitwarden_access_token
     - standard_pipelines_production_hubspot_client_id
     - standard_pipelines_production_hubspot_client_secret
+    - standard_pipelines_production_zoho_client_id
+    - standard_pipelines_production_zoho_client_secret
     - standard_pipelines_production_google_client_id
     - standard_pipelines_production_google_client_secret
 
@@ -132,6 +134,10 @@ secrets:
   standard_pipelines_production_hubspot_client_id:
     external: true
   standard_pipelines_production_hubspot_client_secret:
+    external: true
+  standard_pipelines_production_zoho_client_id:
+    external: true
+  standard_pipelines_production_zoho_client_secret:
     external: true
   standard_pipelines_production_google_client_id:
     external: true

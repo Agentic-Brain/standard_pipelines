@@ -6,7 +6,6 @@ from typing import Optional
 import uuid
 from flask import current_app
 from functools import cached_property
-from zoho.files import ApiException
 
 from ...api.fireflies.models import FirefliesCredentials
 
@@ -44,7 +43,7 @@ class Fireflies2ZohoOnTranscript(BaseDataFlow[Fireflies2ZohoOnTranscriptConfigur
     def zoho_api_manager(self) -> ZohoAPIManager:
         credentials: Optional[ZohoCredentials] = ZohoCredentials.query.filter_by(client_id=self.client_id).first()
         if credentials is None:
-            raise ValueError("No HubSpot credentials found for client")
+            raise ValueError("No Zoho credentials found for client")
         zoho_config = {
             "client_id": credentials.zoho_client_id,
             "client_secret": credentials.zoho_client_secret,
@@ -197,7 +196,7 @@ class Fireflies2ZohoOnTranscript(BaseDataFlow[Fireflies2ZohoOnTranscriptConfigur
         ]
 
         # Only attendees that are not from our client's email domain should be
-        # contacts in HubSpot.
+        # contacts in Zoho.
         contactable_attendees = []
         for attendee in fireflies_attendees:
             if not attendee["email"].endswith(self.configuration.email_domain):

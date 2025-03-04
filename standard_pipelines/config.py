@@ -75,6 +75,10 @@ class Config:
             'HUBSPOT_CLIENT_ID': None,
             'HUBSPOT_CLIENT_SECRET': None,
         },
+        'ZOHO': {
+            'ZOHO_CLIENT_ID': None,
+            'ZOHO_CLIENT_SECRET': None,
+        },
         'GOOGLE': {
             'GOOGLE_REDIRECT_URI': None,
             'GOOGLE_CLIENT_ID': None,
@@ -92,6 +96,7 @@ class Config:
         'USE_GOOGLE': 'GOOGLE',
         'USE_OPENAI': 'OPENAI',
         'USE_HUBSPOT': 'HUBSPOT',
+        'USE_ZOHO': 'ZOHO',
         # Add more mappings as needed
     }
 

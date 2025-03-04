@@ -121,7 +121,7 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
         deal_id = contact_to_deal_associations[0]["id"]
         return self.deal_by_deal_id(deal_id)
 
-    def zoho_association_object(self, to_id: str, association_id: str, association_category: str = "zoho_DEFINED") -> dict:
+    def zoho_association_object(self, to_id: str, association_id: str, association_category: str = "ZOHO_DEFINED") -> dict:
         return {
             "to": {
                 "id": to_id
@@ -195,7 +195,7 @@ class ExtantZohoObject(ZohoObject, metaclass=ABCMeta):
             object_id=self.zoho_object_dict["id"],
             to_object_type=to_object.zoho_type,
             to_object_id=to_object.zoho_object_dict["id"],
-            association_spec=[AssociationSpec(association_category="zoho_DEFINED", association_type_id=association_id)],
+            association_spec=[AssociationSpec(association_category="ZOHO_DEFINED", association_type_id=association_id)],
         )
 
     def evaluate(self) -> t.Self:

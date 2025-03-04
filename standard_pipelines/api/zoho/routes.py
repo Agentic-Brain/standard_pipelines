@@ -1,4 +1,5 @@
 # 3) Route to redirect the user to the Zoho login/consent page
+import json
 from standard_pipelines.auth import auth
 
 
@@ -31,7 +32,7 @@ def login_zoho():
     current_app.logger.debug(f"Generated redirect URI: {redirect_uri}")
 
     try:
-        auth_redirect = oauth.zoho.authorize_redirect(redirect_uri)
+        auth_redirect = oauth.zoho.authorize_redirect(redirect_uri, access_type='offline')
         current_app.logger.debug(f"Authorization URL generated successfully")
         return auth_redirect
     except ConnectionError as e:
@@ -70,17 +71,17 @@ def authorize_zoho():
 
             if existing_creds:
                 current_app.logger.info(f"Updating existing Zoho credentials for client {client.name}")
-                existing_creds.ZOHO_refresh_token = token['refresh_token']
-                existing_creds.ZOHO_access_token = token['access_token']
-                existing_creds.ZOHO_token_expiry = token.get('expires_at')
+                existing_creds.zoho_refresh_token = token['refresh_token']
+                existing_creds.zoho_access_token = token['access_token']
+                existing_creds.zoho_token_expiry = token.get('expires_at')
                 existing_creds.save()
             else:
                 current_app.logger.info(f"Creating new Zoho credentials for client {client.name}")
                 credentials = ZohoCredentials(
                     client_id=client_id,
-                    ZOHO_client_id=current_app.config['ZOHO_CLIENT_ID'],
-                    ZOHO_client_secret=current_app.config['ZOHO_CLIENT_SECRET'],
-                    ZOHO_refresh_token=token['refresh_token']
+                    zoho_client_id=current_app.config['ZOHO_CLIENT_ID'],
+                    zoho_client_secret=current_app.config['ZOHO_CLIENT_SECRET'],
+                    zoho_refresh_token=token['refresh_token']
                 )
                 credentials.client = client  # Attach the client object
                 credentials.save()
@@ -97,8 +98,8 @@ def authorize_zoho():
             )
 
         except Exception as e:
-            current_app.logger.error(f"Error storing Zoho credentials: {str(e)}")
-            return jsonify({'error': 'Failed to store credentials'}), 500
+            current_app.logger.exception(f"Error storing Zoho credentials: {e}")
+            return jsonify({'error': f'Failed to store credentials: {str(e)}'}), 500
 
     except Exception as e:
         current_app.logger.error(f"Error during Zoho OAuth token exchange: {str(e)}")
