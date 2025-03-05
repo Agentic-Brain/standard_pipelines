@@ -159,6 +159,8 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
             warning_msg = "No transcript data found."
             current_app.logger.warning(warning_msg)
         sentences = transcript_data.get('sentences', [])
+        if sentences is None:
+            sentences = []
         if not sentences:
             warning_msg = "No sentences found."
             current_app.logger.warning(warning_msg)
@@ -168,13 +170,16 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
         formatted_lines.append(f"Attendees: {attendees}")
         formatted_lines.append(f"Date: {date}")
         formatted_lines.append(f"Meeting Name: {meeting_name}")
-        for sentence in sentences:
-            minutes = int(sentence.get("start_time", 0)) // 60
-            seconds = int(sentence.get("start_time", 0)) % 60
-            timestamp = f"[{minutes:02d}:{seconds:02d}]"
-            speaker = sentence.get("speaker_name", "Unknown Speaker")
-            text = sentence.get("raw_text", "")
-            formatted_line = f"{timestamp} {speaker}: {text}"
-            formatted_lines.append(formatted_line)
+        if not sentences:
+            formatted_lines.append("[No transcript content available]")
+        else:
+            for sentence in sentences:
+                minutes = int(sentence.get("start_time", 0)) // 60
+                seconds = int(sentence.get("start_time", 0)) % 60
+                timestamp = f"[{minutes:02d}:{seconds:02d}]"
+                speaker = sentence.get("speaker_name", "Unknown Speaker")
+                text = sentence.get("raw_text", "")
+                formatted_line = f"{timestamp} {speaker}: {text}"
+                formatted_lines.append(formatted_line)
 
         return "\n".join(formatted_lines)
