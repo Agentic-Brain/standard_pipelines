@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import os
 import socket
 from standard_pipelines.version import APP_VERSION, FLASK_BASE_VERSION
@@ -16,6 +16,7 @@ from standard_pipelines.config import DevelopmentConfig, ProductionConfig, Testi
 from standard_pipelines.data_flow.utils import BaseDataFlow
 from standard_pipelines.data_flow.ff2hs_on_transcript.services import FF2HSOnTranscript
 from standard_pipelines.data_flow.gmail_interval_followup.services import GmailIntervalFollowup
+import traceback
 
 
 
@@ -104,6 +105,35 @@ def create_app():
     def inject_semver():
         return dict(app_version=str(APP_VERSION), flask_base_version=str(FLASK_BASE_VERSION))
 
+    @app.errorhandler(Exception)
+    def handle_exception(e):
+        """Global error handler that runs after any other error handling"""
+        # Always rollback any pending database changes
+        db.session.rollback()
+        
+        # Get current environment
+        environment_type = os.getenv('FLASK_ENV', 'development')
+        
+        # Log the error (this won't duplicate logs from other handlers due to different log messages)
+        app.logger.error(f"Global error handler caught: {str(e)}")
+        
+        # Capture in Sentry if not already captured
+        if hasattr(sentry_sdk, 'capture_exception'):
+            sentry_sdk.capture_exception(e)
+        
+        # In development, show more details
+        if environment_type == 'development':
+            response = {
+                'error': str(e),
+                'type': e.__class__.__name__,
+                'traceback': traceback.format_exc()
+            }
+        else:
+            response = {
+                'error': 'An internal server error occurred'
+            }
+        
+        return jsonify(response), 500
 
     return app
 

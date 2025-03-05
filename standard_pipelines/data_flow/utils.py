@@ -118,14 +118,17 @@ class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegis
     def handle_extract_failure(self, exception: Exception):
         current_app.logger.error(f'extract failed: {exception}')
         sentry_sdk.capture_exception(exception)
+        db.session.rollback()
 
     def handle_transform_failure(self, exception: Exception):
         current_app.logger.error(f'transform failed: {exception}')
         sentry_sdk.capture_exception(exception)
+        db.session.rollback()
 
     def handle_load_failure(self, exception: Exception):
         current_app.logger.error(f'load failed: {exception}')
         sentry_sdk.capture_exception(exception)
+        db.session.rollback()
 
     def add_notification(self, notification: dict):
         db.session.add(Notification(**notification))
