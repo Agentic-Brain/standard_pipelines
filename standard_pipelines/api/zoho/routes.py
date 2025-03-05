@@ -1,5 +1,6 @@
 # 3) Route to redirect the user to the Zoho login/consent page
 import json
+from typing import Optional
 from standard_pipelines.auth import auth
 
 
@@ -54,6 +55,7 @@ def authorize_zoho():
         token = oauth.zoho.authorize_access_token()
         current_app.logger.info("Successfully obtained Zoho access token")
         current_app.logger.debug(f"Token expiry: {token.get('expires_at')}")
+        current_app.logger.debug(f"Token: {json.dumps(token, indent=4)}")
 
         # Get current user's client_id
         if not current_user or not current_user.is_authenticated:
@@ -67,24 +69,25 @@ def authorize_zoho():
         # Create or update Zoho credentials
         try:
             # Check if credentials already exist
-            existing_creds = ZohoCredentials.query.filter_by(client_id=client_id).first()
+            existing_creds : Optional[ZohoCredentials] = ZohoCredentials.query.filter_by(client_id=client_id).first()
 
-            if existing_creds:
-                current_app.logger.info(f"Updating existing Zoho credentials for client {client.name}")
-                existing_creds.zoho_refresh_token = token['refresh_token']
-                existing_creds.zoho_access_token = token['access_token']
-                existing_creds.zoho_token_expiry = token.get('expires_at')
-                existing_creds.save()
-            else:
+            credentials : ZohoCredentials = None
+            if not existing_creds:
                 current_app.logger.info(f"Creating new Zoho credentials for client {client.name}")
                 credentials = ZohoCredentials(
                     client_id=client_id,
-                    zoho_client_id=current_app.config['ZOHO_CLIENT_ID'],
-                    zoho_client_secret=current_app.config['ZOHO_CLIENT_SECRET'],
-                    zoho_refresh_token=token['refresh_token']
+                    oauth_client_id=current_app.config['ZOHO_CLIENT_ID'],
+                    oauth_client_secret=current_app.config['ZOHO_CLIENT_SECRET'],
                 )
-                credentials.client = client  # Attach the client object
-                credentials.save()
+            else:
+                current_app.logger.info(f"Updating existing Zoho credentials for client {client.name}")
+                credentials = existing_creds
+
+            credentials.client = client;
+            credentials.oauth_refresh_token = token['refresh_token']
+            credentials.oauth_access_token = token['access_token']
+            credentials.oauth_expires_at = token.get('expires_at')
+            credentials.save()
 
             current_app.logger.info("Successfully stored Zoho credentials in database")
 

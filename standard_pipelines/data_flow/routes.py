@@ -1,3 +1,4 @@
+import json
 from flask import current_app, jsonify, request, url_for, redirect
 import requests
 from standard_pipelines.api.hubspot.models import HubSpotCredentials
@@ -21,6 +22,8 @@ def webhook(client_data_flow_join_id: str):
             webhook_data = request.get_json(silent=True)
             if webhook_data is None:
                 webhook_data = request.get_data(as_text=True)
+            else:
+                current_app.logger.debug(f'Webhook data: {json.dumps(webhook_data, indent=4)}')
 
             process_webhook(client_data_flow_join_id, webhook_data)
             return {'status': 'success', 'message': 'Webhook received'}

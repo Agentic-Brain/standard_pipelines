@@ -35,8 +35,8 @@ def oauth_index():
         'zoho': {
             'enabled': bool(current_app.config.get('USE_ZOHO')),
             'connected': ZohoCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
-            'icon': url_for('static', filename='images/google-icon.png'),
-            'description': 'Connect to Google for email integration'
+            'icon': url_for('static', filename='images/zoho-icon.png'),
+            'description': 'Connect to Zoho to sync contacts and deals'
         }
         # Add other services here as they're implemented
     }

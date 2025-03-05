@@ -1,8 +1,13 @@
 from __future__ import annotations
+import time
 
 from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
 from standard_pipelines.data_flow.exceptions import APIError
+
+from zohocrmsdk.src.com.zoho.crm.api import Initializer, ParameterMap, HeaderMap
+from zohocrmsdk.src.com.zoho.crm.api.dc import USDataCenter
+from zohocrmsdk.src.com.zoho.api.authenticator import OAuthToken
 
 # from zoho import Zoho
 # from zoho.crm.associations import BatchInputPublicObjectId
@@ -19,13 +24,26 @@ from types import MappingProxyType
 
 from abc import ABCMeta, abstractmethod
 
+from .models import ZohoCredentials
+
 
 class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
 
-    def __init__(self, api_config: dict) -> None:
-        super().__init__(api_config)
-        self._api_client = ZCRMRestClient()
-        self._api_client.access_token = self.access_token
+    def __init__(self, creds: ZohoCredentials) -> None:
+        super().__init__(creds)
+
+        environment = USDataCenter.PRODUCTION()
+        self.token : OAuthToken = OAuthToken(
+            client_id=creds.oauth_client_id,
+            client_secret=creds.oauth_client_secret,
+            refresh_token=creds.oauth_refresh_token,
+            access_token=creds.oauth_access_token)
+        
+        # there's an error in zoho, expires_in is actually expires_at
+        self.token.set_expires_in(str(creds.oauth_expires_at))
+
+        # initialize a thread local static instance of the zoho client
+        Initializer.initialize(environment=environment, token=self.token)
 
     @property
     def required_config(self) -> list[str]:
@@ -33,6 +51,14 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
 
     @property
     def access_token(self) -> str:
+        # check if we're past expiry
+        # there's an error in zoho, expires_in is actually expires_at
+        expires_at : int = int(self.token.get_expires_in())
+        cur_time_ms : int = int(time.time() * 1000)
+
+        if cur_time_ms >= expires_at:
+            self.token.refresh_access_token()
+
         return self._api_client.oauth.tokens_api.create(
             grant_type="refresh_token",
             client_id=self.api_config["client_id"],

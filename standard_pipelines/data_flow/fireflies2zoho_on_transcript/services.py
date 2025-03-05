@@ -44,16 +44,16 @@ class Fireflies2ZohoOnTranscript(BaseDataFlow[Fireflies2ZohoOnTranscriptConfigur
         credentials: Optional[ZohoCredentials] = ZohoCredentials.query.filter_by(client_id=self.client_id).first()
         if credentials is None:
             raise ValueError("No Zoho credentials found for client")
-        zoho_config = {
-            "client_id": credentials.zoho_client_id,
-            "client_secret": credentials.zoho_client_secret,
-            "refresh_token": credentials.zoho_refresh_token
-        }
-        return ZohoAPIManager(zoho_config)
+
+        return ZohoAPIManager(credentials)
 
     @cached_property
     def fireflies_api_manager(self) -> FirefliesAPIManager:
         credentials = FirefliesCredentials.query.filter_by(client_id=self.client_id).first()
+
+        if not credentials:
+            raise ValueError(f"No Fireflies credentials found for client {self.client_id}")
+
         fireflies_config = {
             "api_key": credentials.fireflies_api_key
         }
@@ -69,7 +69,7 @@ class Fireflies2ZohoOnTranscript(BaseDataFlow[Fireflies2ZohoOnTranscriptConfigur
 
     def context_from_webhook_data(self, webhook_data: t.Any) -> t.Optional[dict]:
         if not isinstance(webhook_data, dict):
-            raise InvalidWebhookError('Invalid webhook data')
+            raise InvalidWebhookError(f"Expected 'webhook_data' to be a dict, got type {type(webhook_data)}. Value: {webhook_data}")
         if webhook_data.get("eventType") != "Transcription completed":
             raise InvalidWebhookError('Webhook does not represent a completed transcription')
         meeting_id = webhook_data.get("meetingId")
@@ -215,6 +215,10 @@ class Fireflies2ZohoOnTranscript(BaseDataFlow[Fireflies2ZohoOnTranscriptConfigur
         organizer_email = data["organizer_email"]
         contacts = []
         deals = []
+
+        current_app.logger.debug(f"Fireflies transcript: {fireflies_transcript}")
+        current_app.logger.debug(f"Contactable attendees: {contactable_attendees}")
+        current_app.logger.debug(f"Organizer email: {organizer_email}")
 
         for contactable_attendee in contactable_attendees:
             try:

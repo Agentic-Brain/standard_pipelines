@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 from sqlalchemy.dialects.postgresql import UUID as pgUUID
-from sqlalchemy import func, DateTime, Integer, String, Boolean, event, inspect, JSON
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import Column, func, DateTime, Integer, String, Boolean, event, inspect, JSON
+from sqlalchemy.orm import Mapped, mapped_column, relationship, Mapper, MappedColumn
 from standard_pipelines.database.exceptions import ScheduledJobError
 from flask import current_app
 from uuid import UUID
@@ -242,27 +242,49 @@ class SecureMixin(BaseMixin):
         except Exception as e:
             raise ValueError(f"Failed to decrypt value: {e}")
 
+SKIP_ENCRYPTION_KEY : str = 'skip_encryption'
+
+def unencrypted_mapped_column(*args, **kwargs):
+    info = kwargs.pop('info', {})  # get any existing info or create a new dict
+    info[SKIP_ENCRYPTION_KEY] = True
+    kwargs['info'] = info
+    return mapped_column(*args, **kwargs)
+
+def __should_skip_column(column_name : str, column : MappedColumn):
+    explicit_skip_columns = {'id', 'created_at', 'modified_at', 'client_id', 'user_email', 'user_name'}
+
+    if column_name.startswith('_'):
+        return True
+    
+    if column_name in explicit_skip_columns:
+        return True
+    
+    if column.info.get(SKIP_ENCRYPTION_KEY, False) is True:
+        return True
+    
+    return False
+
 # Encrypt before saving to database
 @event.listens_for(SecureMixin, 'before_insert', propagate=True)
 @event.listens_for(SecureMixin, 'before_update', propagate=True)
-def encrypt_before_save(mapper, connection, target):
-    skip_columns = {'id', 'created_at', 'modified_at', 'client_id', 'user_email', 'user_name'}
-    
-    for column in mapper.columns.keys():
-        if not column.startswith('_') and column not in skip_columns:
-            value = getattr(target, column)
+def encrypt_before_save(mapper : Mapper, connection, target):   
+    for column_name in mapper.columns.keys():
+        column : MappedColumn = mapper.columns.get(column_name)
+
+        if not __should_skip_column(column_name, column):
+            value = getattr(target, column_name)
             encrypted_value = target._encrypt_value(value)
-            setattr(target, column, encrypted_value)
+            setattr(target, column_name, encrypted_value)            
 
 # Decrypt after loading from database
 @event.listens_for(SecureMixin, 'load', propagate=True)
 def decrypt_after_load(target, context):
-    skip_columns = {'id', 'created_at', 'modified_at', 'client_id', 'user_email', 'user_name'}
-    
-    for column in inspect(target).mapper.columns.keys():
-        if not column.startswith('_') and column not in skip_columns:
-            value = getattr(target, column)
+    for column_name in inspect(target).mapper.columns.keys():
+        column : Column = inspect(target).mapper.columns.get(column_name)
+
+        if not __should_skip_column(column_name, column):
+            value = getattr(target, column_name)
             decrypted_value = target._decrypt_value(value)
-            setattr(target, column, decrypted_value)
+            setattr(target, column_name, decrypted_value)
 
     
