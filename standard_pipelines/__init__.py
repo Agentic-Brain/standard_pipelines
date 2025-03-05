@@ -1,37 +1,45 @@
 from flask import Flask
 import os
+import socket
 from standard_pipelines.version import APP_VERSION, FLASK_BASE_VERSION
 from dotenv import load_dotenv
 import logging
 import colorlog
 import time
+from logging.handlers import SysLogHandler
 from standard_pipelines.extensions import migrate, db
 from typing import Optional
 import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
+from sentry_sdk.integrations.celery import CeleryIntegration
 from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, StagingConfig, get_config
 from standard_pipelines.data_flow.utils import BaseDataFlow
 from standard_pipelines.data_flow.ff2hs_on_transcript.services import FF2HSOnTranscript
 from standard_pipelines.data_flow.gmail_interval_followup.services import GmailIntervalFollowup
+
+
 
 def create_app():
     load_dotenv()
     load_dotenv('.flaskenv')
     init_sentry()
     app = Flask(__name__)
+    
+    # Initialize basic logging first
+    init_basic_logging(app)
+    
     environment_type: Optional[str] = os.getenv('FLASK_ENV')
     config = None
-    init_logging(app)
+    
     if environment_type is None:
         app.logger.critical('NO ENVIRONMENT TYPE DEFINED, ABORTING')
         quit()
     elif environment_type == 'development':
         config = DevelopmentConfig()
         app.logger.setLevel(logging.DEBUG)
-        # app.logger.debug('Server config initialized', str(config.__dict__))
     elif environment_type == 'production':
         config = ProductionConfig()
-    elif environment_type == 'testing':  # Add this block
+    elif environment_type == 'testing':
         config = TestingConfig()
     elif environment_type == 'staging':
         config = StagingConfig()
@@ -40,6 +48,10 @@ def create_app():
         quit()
 
     app.config.from_object(config)
+    
+    # Initialize Papertrail logging after config is loaded
+    init_papertrail_logging(app)
+    
     migrate.init_app(app, db)
     
 
@@ -95,7 +107,8 @@ def create_app():
 
     return app
 
-def init_logging(app: Flask) -> None:
+def init_basic_logging(app: Flask) -> None:
+    """Initialize basic logging without config-dependent features"""
     # Clear ALL handlers (including Flask's default handlers)
     app.logger.handlers.clear()
     logging.getLogger().handlers.clear()
@@ -108,7 +121,6 @@ def init_logging(app: Flask) -> None:
     if not os.path.exists(logs_dir):
         os.makedirs(logs_dir)
 
-    # TODO: Probably want to set this to use the confiig system at some point
     environment_type = os.getenv('FLASK_ENV', 'development')
     
     # Define format based on environment
@@ -128,7 +140,7 @@ def init_logging(app: Flask) -> None:
     file_handler.setFormatter(file_formatter)
     file_handler.setLevel(logging.DEBUG)
 
-    # Stream handler with color and environment-specific format
+    # Stream handler with color
     stream_handler = logging.StreamHandler()
     stream_formatter = colorlog.ColoredFormatter(
         '%(log_color)s' + log_format + '%(reset)s',
@@ -142,7 +154,7 @@ def init_logging(app: Flask) -> None:
         }
     )
     stream_handler.setFormatter(stream_formatter)
-
+    
     # Add handlers to app.logger
     app.logger.addHandler(file_handler)
     app.logger.addHandler(stream_handler)
@@ -150,15 +162,49 @@ def init_logging(app: Flask) -> None:
     # Prevent propagation to avoid duplicate logs
     app.logger.propagate = False
 
+def init_papertrail_logging(app: Flask) -> None:
+    """Initialize Papertrail logging after config is loaded"""
+    papertrail_host = app.config.get('PAPERTRAIL_HOST')
+    papertrail_port = app.config.get('PAPERTRAIL_PORT')
+    
+    papertrail_system_hostname = app.config.get('PAPERTRAIL_SYSTEM_HOSTNAME')
+    app_name = app.config.get('FLASK_APP')
+    
+    # TODO: Need to set flask app to be read from .flaskenv
+    # current system doesnt work because it isnt prefixed by environment type
+    if all([papertrail_host, papertrail_port, app_name]):
+        try:
+            class ContextFilter(logging.Filter):
+                hostname = socket.gethostname()
+                def filter(self, record):
+                    record.hostname = ContextFilter.hostname
+                    return True
+                
+            papertrail_handler = SysLogHandler(address=(papertrail_host, int(papertrail_port)))
+            papertrail_handler.addFilter(ContextFilter())
+            
+            papertrail_format = f'%(asctime)s {papertrail_system_hostname} {app_name}: %(levelname)s [%(filename)s:%(lineno)d] %(message)s'
+            papertrail_formatter = logging.Formatter(papertrail_format, datefmt='%b %d %H:%M:%S')
+            papertrail_handler.setFormatter(papertrail_formatter)
+            
+            papertrail_handler.setLevel(logging.DEBUG)
+            
+            app.logger.addHandler(papertrail_handler)
+            app.logger.info("Papertrail logging configured")
+        except Exception as e:
+            app.logger.error(f"Failed to initialize Papertrail logging: {str(e)}")
+    else:
+        app.logger.warning("Papertrail logging not configured - missing required settings")
 
 def init_sentry() -> None:
     config = get_config()
     sentry_sdk.init(
         dsn=config.SENTRY_DSN, #type: ignore
-        integrations=[FlaskIntegration()],
+        integrations=[FlaskIntegration(), CeleryIntegration()],
         environment=str(os.getenv('FLASK_ENV')),
         release=APP_VERSION if APP_VERSION else FLASK_BASE_VERSION,
         traces_sample_rate=1.0,
+        send_default_pii=True,
         profiles_sample_rate=1.0,
         _experiments = {
             "continuous_profiling_auto_start": True,

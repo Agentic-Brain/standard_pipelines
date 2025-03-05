@@ -24,7 +24,7 @@ def init_app(app):
             'run-polling-tasks-every-minute': {
                 'task': 'standard_pipelines.celery.tasks.run_generic_tasks',
                 'schedule': crontab(minute='*'),  # Run every minute
-                'args': ('poll',)
+                'args': ('execute_poll',)
             },
         }
     )

@@ -111,7 +111,7 @@ dependencies = [
     "rsa==4.9",
     "scramp==1.4.5",
     "semver==3.0.2",
-    "sentry-sdk==2.19.2",
+    "sentry-sdk[celery]==2.19.2",
     "simpleeval==1.0.3",
     "simplejson==3.19.3",
     "singer-sdk==0.43.1",
