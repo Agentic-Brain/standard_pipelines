@@ -73,10 +73,15 @@ class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegis
     @property
     def configuration(self) -> DataFlowConfigurationType:
         """Return the configuration with the matching client ID and data flow ID."""
-        return self._configuration_class.query.filter(
+        result = self._configuration_class.query.filter(
             self._configuration_class.client_id == self.client_id,
             self._configuration_class.registry_id == self.data_flow_id()
         ).first()
+
+        if result is None:
+            raise ValueError(f"No configuration found for client ID {self.client_id} and data flow {self.data_flow_name()}")
+
+        return result
 
     @abstractmethod
     def context_from_webhook_data(self, webhook_data: t.Any) -> t.Optional[dict]:
