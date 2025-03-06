@@ -8,11 +8,11 @@ import uuid
 from flask import current_app
 from functools import cached_property
 
-from ...api.fireflies.models import FirefliesCredentials
+from ...api.dialpad.models import DialpadCredentials
 
 from ...api.zoho.models import ZohoCredentials
 
-from ...api.fireflies.services import FirefliesAPIManager
+from ...api.dialpad.services import DialpadAPIManager
 from ...api.zoho.services import ZohoAPIManager
 from standard_pipelines.data_flow.exceptions import APIError
 
@@ -21,15 +21,15 @@ from ..services import BaseDataFlow
 from ...api.openai.services import OpenAIAPIManager
 from ...api.openai.models import OpenAICredentials
 from ..exceptions import InvalidWebhookError
-from .models import Fireflies2ZohoOnTranscriptConfiguration
+from .models import Dialpad2ZohoOnTranscriptConfiguration
 
-class Fireflies2ZohoOnTranscript(BaseDataFlow[Fireflies2ZohoOnTranscriptConfiguration]):
+class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguration]):
 
     OPENAI_SUMMARY_MODEL = "gpt-4o"
 
     @classmethod
     def data_flow_name(cls) -> str:
-        return "fireflies2zoho_on_transcript"
+        return "dialpad2zoho_on_transcript"
 
     @cached_property
     def zoho_api_manager(self) -> ZohoAPIManager:
@@ -40,16 +40,13 @@ class Fireflies2ZohoOnTranscript(BaseDataFlow[Fireflies2ZohoOnTranscriptConfigur
         return ZohoAPIManager(credentials)
 
     @cached_property
-    def fireflies_api_manager(self) -> FirefliesAPIManager:
-        credentials = FirefliesCredentials.query.filter_by(client_id=self.client_id).first()
+    def dialpad_api_manager(self) -> DialpadAPIManager:
+        credentials = DialpadCredentials.query.filter_by(client_id=self.client_id).first()
 
         if not credentials:
-            raise ValueError(f"No Fireflies credentials found for client {self.client_id}")
+            raise ValueError(f"No Dialpad credentials found for client {self.client_id}")
 
-        fireflies_config = {
-            "api_key": credentials.fireflies_api_key
-        }
-        return FirefliesAPIManager(fireflies_config)
+        return DialpadAPIManager(credentials)
     
     @cached_property
     def openai_api_manager(self) -> OpenAIAPIManager:
@@ -169,8 +166,8 @@ class Fireflies2ZohoOnTranscript(BaseDataFlow[Fireflies2ZohoOnTranscriptConfigur
 
     def extract(self, context: t.Optional[dict] = None) -> dict:
         meeting_id = context["meeting_id"]
-        transcript, emails, names, organizer_email = self.fireflies_api_manager.transcript(meeting_id)
-        fireflies_attendees = [
+        transcript, emails, names, organizer_email = self.dialpad_api_manager.transcript(meeting_id)
+        attendees = [
             {"name": name, "email": email}
             for name, email in zip(names, emails)
         ]
@@ -178,25 +175,24 @@ class Fireflies2ZohoOnTranscript(BaseDataFlow[Fireflies2ZohoOnTranscriptConfigur
         # Only attendees that are not from our client's email domain should be
         # contacts in Zoho.
         contactable_attendees = []
-        for attendee in fireflies_attendees:
+        for attendee in attendees:
             if not attendee["email"].endswith(self.configuration.email_domain):
                 contactable_attendees.append(attendee)
 
         return {
-            "fireflies_transcript": transcript,
+            "transcript": transcript,
             "contactable_attendees": contactable_attendees,
             "organizer_email": organizer_email,
         }
 
     def transform(self, data: dict, context: t.Optional[dict] = None):
-
-        fireflies_transcript = data["fireflies_transcript"]
+        transcript = data["transcript"]
         contactable_attendees = data["contactable_attendees"]
         organizer_email = data["organizer_email"]
         contacts = []
         deals = []
 
-        current_app.logger.debug(f"Fireflies transcript: {fireflies_transcript}")
+        current_app.logger.debug(f"Transcript: {transcript}")
         current_app.logger.debug(f"Contactable attendees: {contactable_attendees}")
         current_app.logger.debug(f"Organizer email: {organizer_email}")
 
@@ -236,8 +232,8 @@ class Fireflies2ZohoOnTranscript(BaseDataFlow[Fireflies2ZohoOnTranscriptConfigur
         user = self.zoho_api_manager.get_user_by_email(organizer_email)
         deal.add_owner_from_user(user)
 
-        meeting = self.zoho_meeting(fireflies_transcript, formatted_names)
-        note = self.zoho_note(fireflies_transcript)
+        meeting = self.zoho_meeting(transcript, formatted_names)
+        note = self.zoho_note(transcript)
 
         return {
             "contacts": contacts,

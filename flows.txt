@@ -2,3 +2,4 @@
 ff2hs_on_transcript
 gmail_interval_followup
 fireflies2zoho_on_transcript
+dialpad2zoho_on_transcript

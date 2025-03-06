@@ -1,5 +1,7 @@
 from __future__ import annotations
+import json
 import time
+import typing as t
 
 from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
@@ -8,302 +10,247 @@ from standard_pipelines.data_flow.exceptions import APIError
 from zohocrmsdk.src.com.zoho.crm.api import Initializer, ParameterMap, HeaderMap
 from zohocrmsdk.src.com.zoho.crm.api.dc import USDataCenter
 from zohocrmsdk.src.com.zoho.api.authenticator import OAuthToken
+from zohocrmsdk.src.com.zoho.crm.api.util import APIResponse, Choice
+from zohocrmsdk.src.com.zoho.crm.api.record.api_exception import APIException
 
-# from zoho import Zoho
-# from zoho.crm.associations import BatchInputPublicObjectId
-# from zoho.crm.contacts import SimplePublicObject as ContactObject, SimplePublicObjectWithAssociations as ContactObjectWithAssociations
-# from zoho.crm.deals import SimplePublicObject as DealObject, SimplePublicObjectWithAssociations as DealObjectWithAssociations
-# from zoho.crm.objects.meetings import SimplePublicObject as MeetingObject
-# from zoho.crm.objects.notes import SimplePublicObject as NoteObject
-# from zoho.crm.associations.v4 import AssociationSpec
-# from zoho.files import ApiException
+# Zoho Record API imports
+from zohocrmsdk.src.com.zoho.crm.api.record import (
+    RecordOperations,
+    BodyWrapper,
+    Record as ZCRMRecord,
+    GetRecordsParam,
+    SearchRecordsParam,
+    Field
+)
+from zohocrmsdk.src.com.zoho.crm.api.record.action_wrapper import ActionWrapper
 
-import typing as t
-from types import MappingProxyType
-
+from zohocrmsdk.src.com.zoho.crm.api.users import UsersOperations
 
 from abc import ABCMeta, abstractmethod
+from types import MappingProxyType
 
 from .models import ZohoCredentials
-
 
 class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
 
     def __init__(self, creds: ZohoCredentials) -> None:
         super().__init__(creds)
-
         environment = USDataCenter.PRODUCTION()
-        self.token : OAuthToken = OAuthToken(
+        self.token: OAuthToken = OAuthToken(
             client_id=creds.oauth_client_id,
             client_secret=creds.oauth_client_secret,
             refresh_token=creds.oauth_refresh_token,
-            access_token=creds.oauth_access_token)
-        
+            access_token=creds.oauth_access_token
+        )
         # there's an error in zoho, expires_in is actually expires_at
-        self.token.set_expires_in(str(creds.oauth_expires_at))
+        # self.token.set_expires_in(str(creds.oauth_expires_at))
 
-        # initialize a thread local static instance of the zoho client
-        Initializer.initialize(environment=environment, token=self.token)
-
+        # initialize the Zoho CRM SDK (this sets a thread-local client)
+        try:
+            Initializer.initialize(environment=environment, token=self.token)
+        except Exception as e:
+            current_app.logger.exception(f"Error initializing Zoho CRM SDK: {e}")
     @property
     def required_config(self) -> list[str]:
-        return ["client_id", "client_secret", "refresh_token"]
+        return ["client_id", "oauth_client_id", "oauth_client_secret"]
 
     @property
     def access_token(self) -> str:
-        # check if we're past expiry
-        # there's an error in zoho, expires_in is actually expires_at
-        expires_at : int = int(self.token.get_expires_in())
-        cur_time_ms : int = int(time.time() * 1000)
-
+        # Refresh token if expired.
+        expires_at: int = int(self.token.get_expires_in())
+        cur_time_ms: int = int(time.time() * 1000)
         if cur_time_ms >= expires_at:
             self.token.refresh_access_token()
+        return self.token.get_access_token()
 
-        return self._api_client.oauth.tokens_api.create(
-            grant_type="refresh_token",
-            client_id=self.api_config["client_id"],
-            client_secret=self.api_config["client_secret"],
-            refresh_token=self.api_config["refresh_token"],
-        ).access_token #type: ignore
+    def get_all_contacts(self) -> list[dict]:
+        record_ops = RecordOperations("Contacts")
+        params = GetRecordsParam()
+        params.set_page(1)
+        params.set_per_page(200)
+        response = record_ops.get_records("Contacts", params)
+        records = []
+        if response.get_object():
+            data = response.get_object().get_data()
+            for record in data:
+                records.append(record.to_dict())
+        return records
 
-    def all_contacts(self) -> list[dict]:
-        return [contact.to_dict() for contact in self._api_client.crm.contacts.get_all()]
-    
-    def all_owners(self) -> list[dict]:
-        return self._api_client.settings.users.users_api.get_page(limit=100).to_dict()["results"] #type: ignore
-    
-    def all_users(self) -> list[dict]:
-        return [user.to_dict() for user in self._api_client.crm.objects.get_all(object_type="user")]
+    def get_all_owners(self) -> list[dict]:
+        users_ops = UsersOperations()
+        response = users_ops.get_users()
+        owners = []
+        if response.get_object():
+            data = response.get_object().get_users()
+            for user in data:
+                owners.append(user.to_dict())
+        return owners
 
-    def contact_by_contact_id(self, contact_id: str, properties: list[str] = []) -> dict:
-        contact: ContactObjectWithAssociations = self._api_client.crm.contacts.basic_api.get_by_id(contact_id, properties=properties) #type: ignore
-        return contact.to_dict()
+    def get_all_users(self) -> list[dict]:
+        # In Zoho, owners and users are essentially the same.
+        return self.get_all_owners()
 
-    def deal_by_deal_id(self, deal_id: str, properties: list[str] = []) -> dict:
-        deal: DealObjectWithAssociations = self._api_client.crm.deals.basic_api.get_by_id(deal_id, properties=properties) #type: ignore
-        return deal.to_dict()
+    def get_contact_by_contact_id(self, contact_id: str, properties: list[str] = []) -> dict:
+        record_ops = RecordOperations()
+        response = record_ops.get_record(int(contact_id), "Contacts")
+        if response.get_object() and response.get_object().get_data():
+            return response.get_object().get_data()[0].to_dict()
+        else:
+            raise APIError(f"Contact with id {contact_id} not found.")
 
-    def user_by_email(self, email: str) -> dict:
-        all_users = self.all_owners()
+    def get_deal_by_deal_id(self, deal_id: str, properties: list[str] = []) -> dict:
+        record_ops = RecordOperations()
+        response = record_ops.get_record(int(deal_id), "Deals")
+        if response.get_object() and response.get_object().get_data():
+            return response.get_object().get_data()[0].to_dict()
+        else:
+            raise APIError(f"Deal with id {deal_id} not found.")
+
+    def get_user_by_email(self, email: str) -> dict:
+        users = self.get_all_owners()
         matching_users = []
-        for user in all_users:
-            if user.get("email") == None:
-                current_app.logger.warning(f"Hubspot user {user['properties']['hs_object_id']} has no email.")
-            elif user["email"] == email:
+        for user in users:
+            user_email = user.get("email")
+            if not user_email:
+                current_app.logger.warning(f"Zoho user {user.get('id')} has no email.")
+            elif user_email.lower() == email.lower():
                 matching_users.append(user)
         if len(matching_users) > 1:
-            error_msg = f"Multiple users found for email {email}."
-            raise APIError(error_msg)
-        if len(matching_users) == 0:
-            error_msg = f"No user found for email {email}."
-            raise APIError(error_msg)
+            raise APIError(f"Multiple users found for email {email}.")
+        if not matching_users:
+            raise APIError(f"No user found for email {email}.")
         return matching_users[0]
 
-    def contact_by_name_or_email(self, name: t.Optional[str] = None, email: t.Optional[str] = None) -> dict:
-        all_contacts = self.all_contacts()
+    def get_contact_by_name_or_email(self, name: t.Optional[str] = None, email: t.Optional[str] = None) -> dict:
+        contacts = self.get_all_contacts()
         matching_contacts = []
-        for contact in all_contacts:
-            contact_first_name = contact.get("properties", {}).get("firstname", "")
-            contact_last_name = contact.get("properties", {}).get("lastname", "")
-            contact_full_name = f"{contact_first_name} {contact_last_name}".strip()
-            contact_email = contact.get("properties", {}).get("email", "")
-            if (
-                name is not None and contact_full_name == name
-                or email is not None and contact_email == email
-            ):
+        for contact in contacts:
+            first_name = contact.get("First_Name", "")
+            last_name = contact.get("Last_Name", "")
+            full_name = f"{first_name} {last_name}".strip()
+            contact_email = contact.get("Email", "")
+            if (name and full_name.lower() == name.lower()) or (email and contact_email.lower() == email.lower()):
                 matching_contacts.append(contact)
-        if len(matching_contacts) > 1: # TODO: better error handling
-            error_msg = f"Multiple contacts found for {email} or {name}."
-            raise APIError(error_msg)
-        if len(matching_contacts) == 0:
-            error_msg = f"No contact found for {email} or {name}."
-            raise APIError(error_msg)
+        if len(matching_contacts) > 1:
+            raise APIError(f"Multiple contacts found for {email or name}.")
+        if not matching_contacts:
+            raise APIError(f"No contact found for {email or name}.")
         return matching_contacts[0]
+    
+    def get_contact_by_email(self, email: t.Optional[str] = None) -> dict:
+        record_ops = RecordOperations("Contacts")
+        params = ParameterMap()
+        params.add(SearchRecordsParam.email, email)
+        response : APIResponse = record_ops.search_records(params)
 
-    def deal_by_contact_id(self, contact_id: str) -> dict:
-        batch_ids = BatchInputPublicObjectId([{"id": contact_id}])
-        deal_associations = self._api_client.crm.associations.batch_api.read(
-            from_object_type="contacts",
-            to_object_type="deals",
-            batch_input_public_object_id=batch_ids,
-        ).to_dict()["results"] #type: ignore
-        if len(deal_associations) > 1:
-            error_msg = f"Multiple deals found for contact {contact_id}."
-            raise APIError(error_msg)
-        if len(deal_associations) == 0:
-            error_msg = f"No deal found for contact {contact_id}."
-            raise APIError(error_msg)
-        deal_association_to = deal_associations[0]["to"]
-        contact_to_deal_associations = []
-        for deal_association in deal_association_to:
-            if deal_association["type"] == "contact_to_deal":
-                contact_to_deal_associations.append(deal_association)
-        if len(contact_to_deal_associations) > 1:
-            error_msg = f"Multiple deals found for contact {contact_id}."
-            raise APIError(error_msg)
-        if len(contact_to_deal_associations) == 0:
-            error_msg = f"No deal found for contact {contact_id}."
-            raise APIError(error_msg)
-        deal_id = contact_to_deal_associations[0]["id"]
-        return self.deal_by_deal_id(deal_id)
+        current_app.logger.debug(f"get_contact_by_email: {response.get_status_code(), response.get_object()}")
+
+        if response.get_status_code() == 204:
+            return None
+        
+        
+        return response.get_object()
+    
+    def get_deal_by_contact_id(self, contact_id: str) -> dict:
+        # In Zoho, assume the deal has a lookup field "Contact_Name" linking to a contact.
+        record_ops = RecordOperations()
+        params = SearchRecordsParam()
+        # Use criteria to search for deals where the "Contact_Name" field equals the given contact_id.
+        params.set_criteria(f"(Contact_Name:equals:{contact_id})")
+        response = record_ops.search_records("Deals", params)
+        if response.get_object() and response.get_object().get_data():
+            deals = response.get_object().get_data()
+            if len(deals) > 1:
+                raise APIError(f"Multiple deals found for contact {contact_id}.")
+            return deals[0].to_dict()
+        else:
+            raise APIError(f"No deal found for contact {contact_id}.")
 
     def zoho_association_object(self, to_id: str, association_id: str, association_category: str = "ZOHO_DEFINED") -> dict:
+        # This method is retained for compatibility, but note that in Zoho associations
+        # are typically handled via lookup fields rather than a separate API call.
         return {
-            "to": {
-                "id": to_id
-            },
-            "types": [
-                {
-                    "associationCategory": association_category,
-                    "associationTypeId": association_id
-                }
-            ]
+            "to": {"id": to_id},
+            "types": [{
+                "associationCategory": association_category,
+                "associationTypeId": association_id,
+            }]
         }
 
-    def create_contact(self, contact_object: CreatableContactZohoObject) -> ExtantContactZohoObject:
-        contact: ContactObject = self._api_client.crm.contacts.basic_api.create(contact_object.zoho_object_dict)
-        return ExtantContactZohoObject(contact.to_dict(), self)
+    def create_contact(self,  contact : dict):
+        record_ops = RecordOperations("Contacts")
+        request = BodyWrapper()
 
-    def create_deal(self, deal_object: CreatableDealZohoObject) -> ExtantDealZohoObject:
-        deal: DealObject = self._api_client.crm.deals.basic_api.create(deal_object.zoho_object_dict)
-        return ExtantDealZohoObject(deal.to_dict(), self)
+        record = ZCRMRecord()
+        record.add_field_value(Field.Contacts.email(), contact['email'])
+        # record.add_field_value(Field.Contacts.first_name, contact['first_name'])
+        # record.add_field_value(Field.Contacts.last_name, contact['last_name'])
 
-    def create_meeting(self, meeting_object: CreatableMeetingZohoObject) -> ExtantMeetingZohoObject:
-        meeting: MeetingObject = self._api_client.crm.objects.meetings.basic_api.create(meeting_object.zoho_object_dict)
-        return ExtantMeetingZohoObject(meeting.to_dict(), self)
+        request.set_data([record])
 
-    def create_note(self, note_object: CreatableNoteZohoObject) -> ExtantNoteZohoObject:
-        note: NoteObject = self._api_client.crm.objects.notes.basic_api.create(note_object.zoho_object_dict)
-        return ExtantNoteZohoObject(note.to_dict(), self)
+        response : APIResponse = record_ops.create_records(request)
 
-class ZohoObject(metaclass=ABCMeta):
+        current_app.logger.debug(f"create_contact: {response.get_status_code(), response.get_object()}")
 
-    # Magic numbers to associate various types of HubSpot objects
-    # Docs: https://developers.hubspot.com/docs/guides/api/crm/associations/associations-v4#association-type-id-values
-    ASSOCIATION_TYPES = MappingProxyType({
-        ("deal", "contact"): 3,
-        ("meeting", "contact"): 200,
-        ("meeting", "deal"): 212,
-        ("note", "deal"): 214,
-    })
+        if response.get_status_code() == 400:
+            payload : ActionWrapper = response.get_object()
+            data : list[APIException] = payload.get_data()
+            for exception in data:
+                current_app.logger.exception(f"Error creating contact: {exception.get_code()} {exception.get_details()}")
 
-    def __init__(self, zoho_object_dict: dict, api_manager: ZohoAPIManager):
-        self.zoho_object_dict = zoho_object_dict
-        self.api_manager = api_manager
+        return response.get_object()
 
-    def association_type_id(self, from_type: str, to_type: str) -> int:
-        association_type_id = self.ASSOCIATION_TYPES.get((from_type, to_type))
-        if association_type_id is None:
-            raise ValueError(
-                f"No association type ID found from {from_type} to {to_type}."
-            )
-        return association_type_id
+        # Map the provided dictionary to a Zoho record.
+        for key, value in contact_object.items():
+            record.add_key_value(key, value)
+        
+        request.set_data([record])
+        record_ops = RecordOperations()
+        response = record_ops.create_records("Contacts", request)
+        if response.get_object() and response.get_object().get_data():
+            created_record = response.get_object().get_data()[0]
+            return created_record
+        else:
+            raise APIError("Failed to create contact.")
 
-    @abstractmethod
-    def add_association(self, to_object: ExtantZohoObject) -> None:
-        pass
+    def create_deal(self, deal_object):
+        record = ZCRMRecord()
+        for key, value in deal_object.zoho_object_dict.items():
+            record.add_key_value(key, value)
+        request = BodyWrapper()
+        request.set_data([record])
+        record_ops = RecordOperations()
+        response = record_ops.create_records("Deals", request)
+        if response.get_object() and response.get_object().get_data():
+            created_record = response.get_object().get_data()[0]
+            return created_record
+        else:
+            raise APIError("Failed to create deal.")
 
-    @abstractmethod
-    def evaluate(self) -> ExtantZohoObject:
-        pass
+    def create_meeting(self, meeting_object):
+        record = ZCRMRecord()
+        for key, value in meeting_object.zoho_object_dict.items():
+            record.add_key_value(key, value)
+        request = BodyWrapper()
+        request.set_data([record])
+        record_ops = RecordOperations()
+        response = record_ops.create_records("Meetings", request)
+        if response.get_object() and response.get_object().get_data():
+            created_record = response.get_object().get_data()[0]
+            return created_record.to_dict()
+        else:
+            raise APIError("Failed to create meeting.")
 
-    @property
-    @abstractmethod
-    def zoho_type(self) -> str:
-        pass
-
-class ExtantZohoObject(ZohoObject, metaclass=ABCMeta):
-
-    def add_association(self, to_object: ExtantZohoObject) -> None:
-        association_id = self.association_type_id(self.zoho_type, to_object.zoho_type)
-        self.api_manager._api_client.crm.associations.v4.basic_api.create(
-            object_type=self.zoho_type,
-            object_id=self.zoho_object_dict["id"],
-            to_object_type=to_object.zoho_type,
-            to_object_id=to_object.zoho_object_dict["id"],
-            association_spec=[AssociationSpec(association_category="ZOHO_DEFINED", association_type_id=association_id)],
-        )
-
-    def evaluate(self) -> t.Self:
-        return self
-
-ExtantZohoObjectType = t.TypeVar("ExtantZohoObjectType", bound=ExtantZohoObject)
-
-class CreatableZohoObject(t.Generic[ExtantZohoObjectType], ZohoObject, metaclass=ABCMeta):
-
-    @property
-    @abstractmethod
-    def creation_function(self) -> t.Callable[[CreatableZohoObject], ExtantZohoObjectType]:
-        pass
-
-    def add_association(self, to_object: ExtantZohoObject) -> None:
-        association_id = self.association_type_id(self.zoho_type, to_object.zoho_type)
-        association_object = self.api_manager.zoho_association_object(to_object.zoho_object_dict["id"], association_id)
-        if "associations" not in self.zoho_object_dict:
-            self.zoho_object_dict["associations"] = []
-        self.zoho_object_dict["associations"].append(association_object)
-
-    def evaluate(self) -> ExtantZohoObjectType:
-        return self.creation_function(self)
-
-class ExtantContactZohoObject(ExtantZohoObject):
-
-    zoho_type: str = "contact"
-
-class ExtantDealZohoObject(ExtantZohoObject):
-
-    zoho_type: str = "deal"
-
-class ExtantMeetingZohoObject(ExtantZohoObject):
-
-    zoho_type: str = "meeting"
-
-class ExtantNoteZohoObject(ExtantZohoObject):
-
-    zoho_type: str = "note"
-
-class ExtantUserZohoObject(ExtantZohoObject):
-
-    zoho_type: str = "user"
-
-class CreatableContactZohoObject(CreatableZohoObject[ExtantContactZohoObject]):
-
-    zoho_type: str = "contact"
-
-    @property
-    def creation_function(self) -> t.Callable[[CreatableContactZohoObject], ExtantContactZohoObject]:
-        return self.api_manager.create_contact
-
-class CreatableDealZohoObject(CreatableZohoObject[ExtantDealZohoObject]):
-
-    zoho_type: str = "deal"
-
-    def add_owner_from_user(self, user: ExtantUserZohoObject) -> None:
-        self.zoho_object_dict["properties"]["zoho_owner_id"] = user.zoho_object_dict["id"]
-
-    @property
-    def creation_function(self) -> t.Callable[[CreatableDealZohoObject], ExtantDealZohoObject]:
-        return self.api_manager.create_deal
-
-class CreatableMeetingZohoObject(CreatableZohoObject[ExtantMeetingZohoObject]):
-
-    zoho_type: str = "meeting"
-
-    def add_owner_from_deal(self, deal: ExtantDealZohoObject) -> None:
-        self.zoho_object_dict["properties"]["zoho_owner_id"] = deal.zoho_object_dict["properties"]["zoho_owner_id"]
-
-    @property
-    def creation_function(self) -> t.Callable[[CreatableMeetingZohoObject], ExtantMeetingZohoObject]:
-        return self.api_manager.create_meeting
-
-class CreatableNoteZohoObject(CreatableZohoObject[ExtantNoteZohoObject]):
-
-    zoho_type: str = "note"
-
-    def add_owner_from_deal(self, deal: ExtantDealZohoObject) -> None:
-        self.zoho_object_dict["properties"]["zoho_owner_id"] = deal.zoho_object_dict["properties"]["zoho_owner_id"]
-
-    @property
-    def creation_function(self) -> t.Callable[[CreatableNoteZohoObject], ExtantNoteZohoObject]:
-        return self.api_manager.create_note
-
+    def create_note(self, note_object):
+        record = ZCRMRecord()
+        for key, value in note_object.zoho_object_dict.items():
+            record.add_key_value(key, value)
+        request = BodyWrapper()
+        request.set_data([record])
+        record_ops = RecordOperations()
+        response = record_ops.create_records("Notes", request)
+        if response.get_object() and response.get_object().get_data():
+            created_record = response.get_object().get_data()[0]
+            return created_record.to_dict()
+        else:
+            raise APIError("Failed to create note.")

@@ -88,7 +88,7 @@ def zoho_oauth_client_register(app: Flask):
         authorize_url='https://accounts.zoho.com/oauth/v2/auth',
         api_base_url='https://www.zohoapis.com/',  # Updated base URL
         client_kwargs={
-            'scope': 'ZohoCRM.settings.ALL',
+            'scope': 'ZohoCRM.users.ALL ZohoCRM.settings.ALL ZohoCRM.modules.ALL ZohoSearch.securesearch.READ',
             'token_endpoint_auth_method': 'client_secret_post'
         }
     )

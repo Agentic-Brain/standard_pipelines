@@ -1,3 +1,4 @@
+from requests import Response
 from standard_pipelines.api.services import BaseManualAPIManager
 from flask import current_app
 from requests.auth import AuthBase
@@ -82,7 +83,12 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
         AI prompt, a list of emails present in the transcript, a list of
         names present in the transcript, and the organizer's email.
         """
-        transcript_object = self.get_response({"transcript_id": transcript_id}).json()
+        response : Response = self.get_response({"transcript_id": transcript_id})
+        current_app.logger.debug(f"get_transcript: {response.status_code}")
+        
+        transcript_object = response.json()
+
+        current_app.logger.debug(f"Transcript object: {transcript_object}")
         pretty_transcript = self._pretty_transcript_from_transcript_object(transcript_object)
         emails = self._emails_from_transcript_object(transcript_object)
         names = self._names_from_transcript_object(transcript_object)
