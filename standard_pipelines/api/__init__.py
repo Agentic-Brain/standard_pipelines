@@ -8,11 +8,44 @@ def init_app(app: Flask):
     app.logger.debug(f'Initializing blueprint {__name__}')
     hubspot_oauth_client_register(app)
     google_oauth_client_register(app)
-    
+    microsoft_oauth_client_register(app)
 
     # Add any API-specific initialization here
     # For example, registering error handlers, before_request handlers, etc.
-    
+
+
+def microsoft_oauth_client_register(app: Flask):
+    required_config = ['MICROSOFT_TENANT_ID', 'MICROSOFT_CLIENT_ID', 'MICROSOFT_CLIENT_SECRET', 'MICROSOFT_SCOPES']
+    for name in required_config:
+        if not app.config.get(name):
+            app.logger.error(f"Expected Microsoft OAuth config parameters: {", ".join(required_config)} in configuration. Missing: {name}")
+            return
+
+    microsoft_tenant_id = app.config.get('MICROSOFT_TENANT_ID')
+    microsoft_client_id = app.config.get('MICROSOFT_CLIENT_ID')
+    microsoft_client_secret = app.config.get('MICROSOFT_CLIENT_SECRET')
+    microsoft_scopes = app.config.get('MICROSOFT_SCOPES')
+
+    app.logger.info("Registering Microsoft OAuth client")
+    app.logger.debug(f"Using Microsoft client ID: ...{microsoft_client_id[:5]}")
+
+    # For more info see microsoft docs here:
+    # https://learn.microsoft.com/en-us/graph/auth-v2-user?tabs=http
+    oauth.register(
+        name='microsoft',
+        client_id=microsoft_client_id,
+        client_secret=microsoft_client_secret,
+        access_token_url=f'https://login.microsoftonline.com/{microsoft_tenant_id}/oauth2/v2.0/token',
+        authorize_url=f'https://login.microsoftonline.com/{microsoft_tenant_id}/oauth2/v2.0/authorize',
+        client_kwargs={
+            'scope': ['offline_access'] + microsoft_scopes.split(),
+            'response_mode': 'query',
+        }
+    )
+
+    app.logger.info("Microsoft OAuth client registered successfully")
+
+
 def google_oauth_client_register(app: Flask):
     # TODO: Clean this up a little using dict/set checking method
     google_client_id = app.config.get('GOOGLE_CLIENT_ID')
