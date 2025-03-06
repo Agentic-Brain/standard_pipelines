@@ -31,7 +31,7 @@ def login_google():
             )
         current_app.logger.debug(f"Authorization URL generated successfully")
         return auth_redirect
-     
+
     except (OAuthError, ConnectionError) as e:
         current_app.logger.error(f"Error during Google OAuth redirect: {e}")
         return jsonify({'error': 'Failed to initiate OAuth flow'}), 500
@@ -45,16 +45,16 @@ def authorize_google():
     """Handles OAuth callback, exchanges code for tokens."""
     try:
         current_app.logger.info("Handling Google OAuth callback")
-        
+
         if oauth.google is None:
             current_app.logger.error("Google OAuth client not initialized")
             return jsonify({'error': 'Google OAuth client not initialized'}), 500
-        
+
         token = oauth.google.authorize_access_token()
         if not token:
             current_app.logger.error("Failed to obtain access token from Google")
             return jsonify({'error': 'Failed to retrieve access token'}), 400
-        
+
         current_app.logger.info("Successfully obtained Google access token")
         current_app.logger.debug(f"Token expiry: {token.get('expires_at')}")
 
@@ -66,7 +66,7 @@ def authorize_google():
         client_id = current_user.client_id
         client = Client.query.get_or_404(client_id)
         current_app.logger.info(f"Processing authorization for client: {client.name} (ID: {client_id})")
-        
+
         user_email = None
         user_name = None
         try:
