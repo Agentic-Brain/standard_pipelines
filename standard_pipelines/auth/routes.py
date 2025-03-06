@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, current_app, render_template, url_for
+from flask import jsonify, request, current_app, render_template, url_for
 from standard_pipelines.main.decorators import require_api_key
 from standard_pipelines.data_flow.models import Client
 from flask_login import login_required, current_user
@@ -7,6 +7,7 @@ from standard_pipelines.api.hubspot.models import HubSpotCredentials
 from uuid import UUID
 from flask_security.utils import hash_password
 from standard_pipelines.api.google.models import GoogleCredentials
+from standard_pipelines.api.microsoft.models import MicrosoftCredentials
 
 from . import auth
 
@@ -15,7 +16,7 @@ from . import auth
 def oauth_index():
     """Index page showing all available OAuth login options."""
     current_app.logger.debug("Rendering OAuth index page")
-    
+
     oauth_services = {
         'hubspot': {
             'enabled': bool(current_app.config.get('USE_HUBSPOT')),
@@ -28,33 +29,38 @@ def oauth_index():
             'connected': GoogleCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
             'icon': url_for('static', filename='images/google-icon.png'),
             'description': 'Connect to Google for email integration'
+        },
+        'microsoft': {
+            'enabled': bool(current_app.config.get('USE_MICROSOFT')),
+            'connected': MicrosoftCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
+            'icon': url_for('static', filename='images/microsoft-icon.png'),
+            'description': 'Connect to Microsoft for email integration'
         }
-        # Add other services here as they're implemented
     }
-    
+
     return render_template(
         'auth/oauth_index.html',
         oauth_services=oauth_services
     )
 
-# TODO: Remove upon creation of admin dash    
+# TODO: Remove upon creation of admin dash
 @auth.route('/manual/register', methods=['POST'])
 @require_api_key
 def register_user():
     """Protected endpoint to register a new user."""
     current_app.logger.info("Processing user registration request")
-    
+
     try:
         data = request.get_json()
         if not data:
             return jsonify({'error': 'No data provided'}), 400
-            
+
         # Validate required fields
         required_fields = ['email', 'password', 'client_id']
         missing_fields = [field for field in required_fields if field not in data]
         if missing_fields:
             return jsonify({'error': f'Missing required fields: {", ".join(missing_fields)}'}), 400
-            
+
         # Validate and get client
         try:
             client_uuid = UUID(data['client_id'])
@@ -63,11 +69,11 @@ def register_user():
                 return jsonify({'error': 'Invalid client_id'}), 404
         except ValueError:
             return jsonify({'error': 'Invalid client_id format'}), 400
-            
+
         # Check if user already exists
         if current_app.user_datastore.find_user(email=data['email']): #type: ignore
             return jsonify({'error': 'User already exists'}), 409
-            
+
         # Create the user using user_datastore
         try:
             user = current_app.user_datastore.create_user( #type: ignore
@@ -78,9 +84,9 @@ def register_user():
                 confirmed_at=db.func.now()  # Set confirmed_at to now since this is an admin creation
             )
             current_app.user_datastore.commit() #type: ignore
-            
+
             current_app.logger.info(f"Successfully created user: {user.email}")
-            
+
             return jsonify({
                 'message': 'User created successfully',
                 'user': {
@@ -89,12 +95,12 @@ def register_user():
                     'client': client.name
                 }
             }), 201
-            
+
         except Exception as e:
             db.session.rollback()
             current_app.logger.error(f"Error creating user: {str(e)}")
             return jsonify({'error': 'Failed to create user'}), 500
-            
+
     except Exception as e:
         current_app.logger.error(f"Error processing registration request: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
