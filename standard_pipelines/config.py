@@ -26,6 +26,7 @@ class Config:
 
     # Optional settings that enable additional features
     OPTIONAL_SETTINGS: Dict[str, Any] = {
+        'FLASK_APP': None,
         'EMAIL_HTML': True,
         'DEFAULT_ADMIN_ACCOUNT': None,
         'DEFAULT_ADMIN_PASSWORD': None,
@@ -47,6 +48,7 @@ class Config:
         'USE_MAILGUN': True,
         'USE_HUBSPOT': True,
         'USE_ZOHO': True,
+        'USE_PAPERTRAIL': True,
         # Add more API usage flags as needed
     }
 
@@ -85,6 +87,12 @@ class Config:
             'GOOGLE_CLIENT_SECRET': None,
             'GOOGLE_SCOPES': "https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile" 
         },
+        'PAPERTRAIL': {
+            'PAPERTRAIL_HOST': None,
+            'PAPERTRAIL_PORT': None,
+            # This is the hostname of the system that is running the application
+            'PAPERTRAIL_SYSTEM_HOSTNAME': None,
+        },
         # Add more API configurations as needed
     }
 
@@ -96,6 +104,7 @@ class Config:
         'USE_GOOGLE': 'GOOGLE',
         'USE_OPENAI': 'OPENAI',
         'USE_HUBSPOT': 'HUBSPOT',
+        'USE_PAPERTRAIL': 'PAPERTRAIL',
         'USE_ZOHO': 'ZOHO',
         # Add more mappings as needed
     }

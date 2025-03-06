@@ -47,6 +47,7 @@ class DataFlowRegistryMeta(ABCMeta):
 
 DataFlowConfigurationType = t.TypeVar("DataFlowConfigurationType", bound=DataFlowConfiguration)
 
+# TODO: Handle all cases where these values are potentially None
 class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegistryMeta):
 
     def __init__(self, client_id: str) -> None:
@@ -70,8 +71,9 @@ class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegis
         from typing import get_args
         return get_args(self.__class__.__orig_bases__[0])[0]
 
+    # TODO: Handle the case where the configuration is not found
     @property
-    def configuration(self) -> DataFlowConfigurationType:
+    def configuration(self) -> t.Optional[DataFlowConfigurationType]:
         """Return the configuration with the matching client ID and data flow ID."""
         result = self._configuration_class.query.filter(
             self._configuration_class.client_id == self.client_id,
@@ -127,14 +129,17 @@ class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegis
     def handle_extract_failure(self, exception: Exception):
         current_app.logger.exception(f'extract failed: {exception}')
         sentry_sdk.capture_exception(exception)
+        db.session.rollback()
 
     def handle_transform_failure(self, exception: Exception):
         current_app.logger.exception(f'transform failed: {exception}')
         sentry_sdk.capture_exception(exception)
+        db.session.rollback()
 
     def handle_load_failure(self, exception: Exception):
         current_app.logger.exception(f'load failed: {exception}')
         sentry_sdk.capture_exception(exception)
+        db.session.rollback()
 
     def add_notification(self, notification: dict):
         db.session.add(Notification(**notification))

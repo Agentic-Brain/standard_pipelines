@@ -9,8 +9,8 @@ class DialpadCredentials(BaseCredentials):
     __tablename__ = 'dialpad_credential'
 
     # API Key for Dialpad
-    api_key: Mapped[str] = mapped_column(String(255))
+    dialpad_api_key: Mapped[str] = mapped_column(String(255))
 
-    def __init__(self, client_id: UUID, api_key: str):
+    def __init__(self, client_id: UUID, dialpad_api_key: str):
         super().__init__(client_id=client_id)
-        self.api_key = api_key
+        self.dialpad_api_key = dialpad_api_key

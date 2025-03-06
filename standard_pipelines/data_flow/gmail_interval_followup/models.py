@@ -61,7 +61,7 @@ class GmailIntervalFollowupSchedule(ScheduledMixin):
         
         openai_api_manager, gmail_client = self._get_api_managers()  
         followup_prompt = self.configuration.followup_body_prompt.format(original_transcript=self.original_transcript)
-        followup_body = openai_api_manager.chat(followup_prompt, model="gpt-4").choices[0].message.content
+        followup_body = openai_api_manager.chat(followup_prompt, model="gpt-4o").choices[0].message.content
         to_addresses = gmail_client.get_to_addresses_from_thread(self.thread_id)
         current_app.logger.debug(f"Creating draft for thread {self.thread_id}")
         gmail_client.create_draft(to_addresses, config.subject_line_template, followup_body, self.thread_id)

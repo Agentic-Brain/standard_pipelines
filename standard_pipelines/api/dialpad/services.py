@@ -10,7 +10,7 @@ from typing import Optional
 class DialpadAPIManager(BaseAPIManager):
     def __init__(self, creds : DialpadCredentials) -> None:
         super().__init__(creds)
-        self.dialpad_client = DialpadClient(creds.api_key)
+        self.dialpad_client = DialpadClient(creds.dialpad_api_key)
 
     @property
     def required_config(self) -> list[str]:
