@@ -80,7 +80,7 @@ def authorize_microsoft():
         try:
             current_app.logger.debug("Fetching user info from Microsoft graph API")
 
-            api_credentials = AccessTokenCredential(token["access_token"], token.get("expires_at")) # token["refresh_token"]
+            api_credentials = AccessTokenCredential(token["access_token"], token["refresh_token"], token.get("expires_at"))
             # To initialize graph_client, see https://learn.microsoft.com/en-us/graph/sdks/create-client?from=snippets&tabs=python
             graph_client = GraphServiceClient(api_credentials, ["User.Read"])
             async def fn():
