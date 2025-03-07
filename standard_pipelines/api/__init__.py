@@ -100,9 +100,10 @@ def hubspot_oauth_client_register(app: Flask):
         }
     )
     app.logger.info("HubSpot OAuth client registered successfully")
-    
+
 from .fireflies import routes as fireflies_routes
 from .hubspot import routes as hubspot_routes
 from .google import routes as google_routes
+from .microsoft import routes as microsoft_routes
 from .sharpspring import routes as sharpspring_routes
 from .dialpad import routes as dialpad_routes

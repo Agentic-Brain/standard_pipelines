@@ -46,7 +46,7 @@ class Config:
         'USE_OPENAI': True,
         'USE_MAILGUN': True,
         'USE_HUBSPOT': True,
-        # Add more API usage flags as needed
+        'USE_MICROSOFT': True,
     }
 
     # API Configuration values
@@ -80,7 +80,13 @@ class Config:
             'GOOGLE_CLIENT_SECRET': None,
             'GOOGLE_SCOPES': "https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile" 
         },
-        # Add more API configurations as needed
+        'MICROSOFT': {
+            'MICROSOFT_REDIRECT_URI': None,
+            'MICROSOFT_TENANT_ID': None,
+            'MICROSOFT_CLIENT_ID': None,
+            'MICROSOFT_CLIENT_SECRET': None,
+            'MICROSOFT_SCOPES': "Mail.ReadWrite",
+        }
     }
 
     # Mapping of API usage flags to their corresponding API groups
@@ -91,13 +97,13 @@ class Config:
         'USE_GOOGLE': 'GOOGLE',
         'USE_OPENAI': 'OPENAI',
         'USE_HUBSPOT': 'HUBSPOT',
-        # Add more mappings as needed
+        'USE_MICROSOFT': 'MICROSOFT',
     }
 
     # Data flow configuration paths
     DATA_FLOW_CONFIG_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config', 'data_flow')
     TAP_HUBSPOT_CONTACTS_CATALOG_PATH = os.path.join(DATA_FLOW_CONFIG_DIR, 'tap_hubspot_contacts_catalog.json')
- 
+
     def __init__(self, env_prefix: str) -> None:
         # These are all defined just to prevent errors with type checking
         self.DB_USER: str
@@ -107,7 +113,7 @@ class Config:
         self.DB_PORT: str
         self.REDIS_HOST: str
         self.REDIS_PORT: str
-        
+
         load_dotenv()
         versions = get_versions()
         self.FLASK_BASE_VERSION = versions['flask_base']
@@ -153,13 +159,13 @@ class Config:
         """Configure API-specific settings based on which APIs are in use"""
         env = os.getenv('FLASK_ENV', 'development').lower()
         is_dev_or_test = env in ['development', 'testing']
-        
+
         for api_flag, api_group in self.API_REQUIREMENTS.items():
             if getattr(self, api_flag, False):
                 # If this API is in use, configure its settings
                 api_settings = self.API_SETTINGS[api_group]
                 missing_configs = []
-                
+
                 for key, default_value in api_settings.items():
                     env_value = self.get_env(key)
                     if env_value is not None:
@@ -176,7 +182,7 @@ class Config:
                                 f"This must be set via environment variable {self.env_prefix}_{key} "
                                 f"when {api_flag} is enabled."
                             )
-                
+
                 if is_dev_or_test and missing_configs:
                     warnings.warn(
                         f"Warning: {api_group} is enabled but missing configurations: {', '.join(missing_configs)}. "
@@ -188,12 +194,12 @@ class Config:
         """Verify that all required API configurations are set when their corresponding API is in use"""
         env = os.getenv('FLASK_ENV', 'development').lower()
         is_dev_or_test = env in ['development', 'testing']
-        
+
         for api_flag, api_group in self.API_REQUIREMENTS.items():
             if getattr(self, api_flag, False):
                 api_settings = self.API_SETTINGS[api_group]
                 missing_configs = []
-                
+
                 for key in api_settings:
                     if getattr(self, key, None) is None:
                         if is_dev_or_test:
@@ -203,7 +209,7 @@ class Config:
                                 f"Missing required API configuration for {api_group}: {key}. "
                                 f"This must be set when {api_flag} is enabled."
                             )
-                
+
                 if is_dev_or_test and missing_configs:
                     warnings.warn(
                         f"Warning: {api_group} is enabled but missing configurations: {', '.join(missing_configs)}. "
@@ -273,7 +279,7 @@ class DevelopmentConfig(Config):
         self.DEFAULT_CLIENT_NAME = 'agentic-brain'
         self.INTERNAL_API_KEY: str = 'internal_api_key'
         super().__init__('DEVELOPMENT')
-        
+
         # Required to be set manually in each config type
         self.verify_attributes()
 
@@ -337,7 +343,7 @@ class ProductionConfig(Config):
 
     def set_additional_config(self) -> None:
         additional_keys = [
-            
+
         ]
         for key in additional_keys:
             setattr(self, key, self.get_env(key))
