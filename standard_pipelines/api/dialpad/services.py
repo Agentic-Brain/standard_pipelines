@@ -1,4 +1,5 @@
 from flask import current_app
+from .models import DialpadCredentials
 from standard_pipelines.api.services import BaseAPIManager
 from dialpad import DialpadClient
 from datetime import datetime
@@ -7,9 +8,9 @@ from requests.exceptions import RequestException, HTTPError
 from typing import Optional
 
 class DialpadAPIManager(BaseAPIManager):
-    def __init__(self, api_config: dict) -> None:
-        super().__init__(api_config)
-        self.dialpad_client = DialpadClient(api_config["api_key"])
+    def __init__(self, creds : dict) -> None:
+        super().__init__(creds)
+        self.dialpad_client = DialpadClient(creds.api_key)
 
     @property
     def required_config(self) -> list[str]:

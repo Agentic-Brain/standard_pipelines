@@ -16,8 +16,12 @@ class BaseAPIManager(metaclass=ABCMeta):
         self.validate_api_config(api_config)
         self.api_config = api_config
 
-    def validate_api_config(self, api_config: dict) -> None:
-        missing_config = set(self.required_config).difference(set(api_config.keys()))
+    def validate_api_config(self, api_config) -> None:
+        if isinstance(api_config, dict):
+            config_keys = api_config.keys()
+        else:
+            config_keys = vars(api_config).keys()
+        missing_config = set(self.required_config).difference(config_keys)
         if missing_config:
             raise ValueError(f"Missing required keys in api_config: {missing_config}")
 

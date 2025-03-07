@@ -26,6 +26,7 @@ class Config:
 
     # Optional settings that enable additional features
     OPTIONAL_SETTINGS: Dict[str, Any] = {
+        'FLASK_APP': None,
         'EMAIL_HTML': True,
         'DEFAULT_ADMIN_ACCOUNT': None,
         'DEFAULT_ADMIN_PASSWORD': None,
@@ -47,6 +48,8 @@ class Config:
         'USE_MAILGUN': True,
         'USE_HUBSPOT': True,
         'USE_MICROSOFT': True,
+        'USE_ZOHO': True,
+        'USE_PAPERTRAIL': True,
     }
 
     # API Configuration values
@@ -74,6 +77,10 @@ class Config:
             'HUBSPOT_CLIENT_ID': None,
             'HUBSPOT_CLIENT_SECRET': None,
         },
+        'ZOHO': {
+            'ZOHO_CLIENT_ID': None,
+            'ZOHO_CLIENT_SECRET': None,
+        },
         'GOOGLE': {
             'GOOGLE_REDIRECT_URI': None,
             'GOOGLE_CLIENT_ID': None,
@@ -86,7 +93,13 @@ class Config:
             'MICROSOFT_CLIENT_ID': None,
             'MICROSOFT_CLIENT_SECRET': None,
             'MICROSOFT_SCOPES': "Mail.ReadWrite",
-        }
+        },
+        'PAPERTRAIL': {
+            'PAPERTRAIL_HOST': None,
+            'PAPERTRAIL_PORT': None,
+            # This is the hostname of the system that is running the application
+            'PAPERTRAIL_SYSTEM_HOSTNAME': None,
+        },
     }
 
     # Mapping of API usage flags to their corresponding API groups
@@ -98,6 +111,8 @@ class Config:
         'USE_OPENAI': 'OPENAI',
         'USE_HUBSPOT': 'HUBSPOT',
         'USE_MICROSOFT': 'MICROSOFT',
+        'USE_PAPERTRAIL': 'PAPERTRAIL',
+        'USE_ZOHO': 'ZOHO',
     }
 
     # Data flow configuration paths

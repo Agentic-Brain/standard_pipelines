@@ -3,9 +3,12 @@ from standard_pipelines.main.decorators import require_api_key
 from standard_pipelines.data_flow.models import Client
 from flask_login import login_required, current_user
 from standard_pipelines.extensions import db
-from standard_pipelines.api.hubspot.models import HubSpotCredentials
+
 from uuid import UUID
 from flask_security.utils import hash_password
+
+from standard_pipelines.api.hubspot.models import HubSpotCredentials
+from standard_pipelines.api.zoho.models import ZohoCredentials
 from standard_pipelines.api.google.models import GoogleCredentials
 from standard_pipelines.api.microsoft.models import MicrosoftCredentials
 
@@ -35,6 +38,12 @@ def oauth_index():
             'connected': MicrosoftCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
             'icon': url_for('static', filename='images/microsoft-icon.png'),
             'description': 'Connect to Microsoft for email integration'
+        },
+        'zoho': {
+            'enabled': bool(current_app.config.get('USE_ZOHO')),
+            'connected': ZohoCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
+            'icon': url_for('static', filename='images/zoho-icon.png'),
+            'description': 'Connect to Zoho to sync contacts and deals'
         }
     }
 
