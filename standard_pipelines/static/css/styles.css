@@ -1,0 +1,6 @@
+.container {
+    width: 80%;
+    margin: 1rem auto;
+    box-shadow: 0px 2px 10px -5px gray;
+    padding: 2rem;
+}
