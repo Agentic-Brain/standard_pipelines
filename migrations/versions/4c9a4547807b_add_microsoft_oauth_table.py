@@ -1,8 +1,8 @@
 """add microsoft oauth table
 
-Revision ID: 5a51795f2384
-Revises: 714fe394a0ab
-Create Date: 2025-03-07 14:24:37.917698
+Revision ID: 4c9a4547807b
+Revises: 1e0e46312268
+Create Date: 2025-03-07 16:23:00.972625
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5a51795f2384'
-down_revision = '714fe394a0ab'
+revision = '4c9a4547807b'
+down_revision = '1e0e46312268'
 branch_labels = None
 depends_on = None
 
