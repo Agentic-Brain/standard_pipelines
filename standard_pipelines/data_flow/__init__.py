@@ -6,7 +6,6 @@ from .models import DataFlow
 from standard_pipelines.database import db
 
 from .ff2hs_on_transcript.services import FF2HSOnTranscript
-from .fireflies2zoho_on_transcript.services import Fireflies2ZohoOnTranscript
 from .dialpad2zoho_on_transcript.services import Dialpad2ZohoOnTranscript
 from .gmail_interval_followup.services import GmailIntervalFollowup
 

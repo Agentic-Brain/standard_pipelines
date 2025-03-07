@@ -45,12 +45,17 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
 
         if not credentials:
             raise ValueError(f"No Dialpad credentials found for client {self.client_id}")
-
-        return DialpadAPIManager(credentials)
+        dialpad_config = {
+            "api_key": credentials.dialpad_api_key,
+        }
+        return DialpadAPIManager(dialpad_config)
     
     @cached_property
     def openai_api_manager(self) -> OpenAIAPIManager:
         credentials = OpenAICredentials.query.filter_by(client_id=self.client_id).first()
+        if not credentials:
+            raise ValueError(f"No OpenAI credentials found for client {self.client_id}")
+        
         openai_config = {
             "api_key": credentials.openai_api_key
         }
@@ -59,13 +64,13 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
     def context_from_webhook_data(self, webhook_data: t.Any) -> t.Optional[dict]:
         if not isinstance(webhook_data, dict):
             raise InvalidWebhookError(f"Expected 'webhook_data' to be a dict, got type {type(webhook_data)}. Value: {webhook_data}")
-        if webhook_data.get("eventType") != "Transcription completed":
-            raise InvalidWebhookError('Webhook does not represent a completed transcription')
-        meeting_id = webhook_data.get("meetingId")
-        if not isinstance(meeting_id, str):
-            raise InvalidWebhookError("Invalid meeting ID")
+        if webhook_data.get("state") != "hangup":
+            raise InvalidWebhookError('Webhook does not represent a call hangup')
+        call_id = webhook_data.get("call_id")
+        if not isinstance(call_id, int):
+            raise InvalidWebhookError("Invalid call ID")
         return {
-            "meeting_id": meeting_id
+            "call_id": call_id
         }
 
     def meeting_summary(self, transcript: str) -> str:
@@ -165,8 +170,8 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
         return note_dict
 
     def extract(self, context: t.Optional[dict] = None) -> dict:
-        meeting_id = context["meeting_id"]
-        transcript, emails, names, organizer_email = self.dialpad_api_manager.transcript(meeting_id)
+        call_id = context["call_id"]
+        transcript, emails, names, organizer_email = self.dialpad_api_manager.get_transcript(call_id)
         attendees = [
             {"name": name, "email": email}
             for name, email in zip(names, emails)
