@@ -9,6 +9,9 @@ from .models import Client
 from . import data_flow
 from .services import determine_data_flow_service
 import sentry_sdk
+import jwt
+
+# TODO: write function to extract data from request here, gonna need to check for jwt, move this and process_webhook to the services file
 
 def process_webhook(client_data_flow_join_id: str, webhook_data):
     data_flow_service = determine_data_flow_service(client_data_flow_join_id)
@@ -22,6 +25,10 @@ def webhook(client_data_flow_join_id: str):
             webhook_data = request.get_json(silent=True)
             if webhook_data is None:
                 webhook_data = request.get_data(as_text=True)
+                # jwt decode the webhook data
+                # TODO: figure out how to properly manage this, check based on mimetype
+                # remember to handle individual secrets for each client
+                payload = jwt.decode(webhook_data, 'VMwPzqs0rIW8jT', algorithms=['HS256'])
             else:
                 current_app.logger.debug(f'Webhook data: {json.dumps(webhook_data, indent=4)}')
 

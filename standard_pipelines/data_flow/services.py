@@ -9,3 +9,5 @@ def determine_data_flow_service(client_data_flow_join_id: str) -> BaseDataFlow:
     data_flow_name = DataFlow.query.filter_by(id=data_flow_id).first().name
     data_flow_class = DataFlowRegistryMeta.data_flow_class(data_flow_name)
     return data_flow_class(client_id=client_id)
+
+# TODO: check for jwt here
