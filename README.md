@@ -15,5 +15,5 @@ This is our monolithic repo that handles all applications for clients. It was na
 - `uv sync`
 - `uv run flask db upgrade`
 - `uv run flask init-flows`
-- `uv flask create-default-admin`
+- `uv run flask create-default-admin`
 - `uv run flask run`
