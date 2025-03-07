@@ -80,6 +80,7 @@ dependencies = [
     "MarkupSafe==2.1.5",
     "meltano-tap-hubspot==0.6.1",
     "meltanolabs-target-postgres==0.2.0",
+    "msgraph-sdk>=1.22.0",
     "oauthlib==3.2.2",
     "openai==1.60.0",
     "packaging==24.2",
