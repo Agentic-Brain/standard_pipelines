@@ -21,7 +21,7 @@ def upgrade():
     op.create_table('microsoft_credential',
     sa.Column('access_token', sa.String(length=4000), nullable=False),
     sa.Column('refresh_token', sa.String(length=4000), nullable=False),
-    sa.Column('_expires_at', sa.Integer(), nullable=False),
+    sa.Column('expires_at', sa.Integer(), nullable=False),
     sa.Column('user_email', sa.String(length=511), nullable=False),
     sa.Column('user_name', sa.String(length=511), nullable=True),
     sa.Column('client_id', sa.UUID(), nullable=False),

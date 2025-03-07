@@ -5,6 +5,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
 from standard_pipelines.auth.models import BaseCredentials
+from standard_pipelines.database.models import unencrypted_mapped_column
 
 
 class MicrosoftCredentials(BaseCredentials):
@@ -16,7 +17,7 @@ class MicrosoftCredentials(BaseCredentials):
 
     access_token: Mapped[str] = mapped_column(String(4000))
     refresh_token: Mapped[str] = mapped_column(String(4000))
-    _expires_at: Mapped[int] = mapped_column(Integer)
+    expires_at: Mapped[int] = unencrypted_mapped_column(Integer)
     user_email: Mapped[str] = mapped_column(String(511))
     user_name: Mapped[Optional[str]] = mapped_column(String(511))
 
@@ -24,7 +25,7 @@ class MicrosoftCredentials(BaseCredentials):
         super().__init__(client_id=client_id) # type: ignore
         self.access_token = access_token
         self.refresh_token = refresh_token
-        self._expires_at = expires_at
+        self.expires_at = expires_at
         self.user_email = user_email
         self.user_name = user_name
 
