@@ -171,7 +171,7 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
 
     def extract(self, context: t.Optional[dict] = None) -> dict:
         call_id = context["call_id"]
-        transcript, emails, names, organizer_email = self.dialpad_api_manager.get_transcript(call_id)
+        transcript, participants = self.dialpad_api_manager.get_transcript(call_id)
         attendees = [
             {"name": name, "email": email}
             for name, email in zip(names, emails)
