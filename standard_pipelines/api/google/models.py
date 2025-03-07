@@ -9,7 +9,7 @@ from typing import Optional
 class GoogleCredentials(BaseCredentials):
     """Credentials for Google API access."""
     __tablename__ = 'google_credential'
-    
+
     # Override table args to remove unique constraint on client_id
     __table_args__ = ()
 
