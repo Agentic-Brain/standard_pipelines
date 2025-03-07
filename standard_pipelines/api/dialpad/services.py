@@ -1,5 +1,5 @@
 from flask import current_app
-from dialpad.models import DialpadCredentials
+from .models import DialpadCredentials
 from standard_pipelines.api.services import BaseAPIManager
 from dialpad import DialpadClient
 from datetime import datetime

@@ -29,7 +29,7 @@ def login_zoho():
         return jsonify({'error': 'Zoho OAuth client not initialized'}), 500
 
     # TODO: Change this to use the preffered URL scheme based on production or development
-    redirect_uri = url_for('api.authorize_zoho', _external=True)
+    redirect_uri = url_for('api.authorize_zoho', _external=True, _scheme=current_app.config.get('PREFERRED_URL_SCHEME'))
     current_app.logger.debug(f"Generated redirect URI: {redirect_uri}")
 
     try:
