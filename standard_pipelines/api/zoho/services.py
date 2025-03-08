@@ -6,6 +6,7 @@ import typing as t
 from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
 from standard_pipelines.data_flow.exceptions import APIError
+from standard_pipelines.extensions import oauth
 
 from zohocrmsdk.src.com.zoho.crm.api import Initializer, ParameterMap, HeaderMap
 from zohocrmsdk.src.com.zoho.crm.api.dc import USDataCenter
@@ -44,12 +45,15 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
         )
         # there's an error in zoho, expires_in is actually expires_at
         # self.token.set_expires_in(str(creds.oauth_expires_at))
+        current_app.logger.debug(f"Created OAuthToken with client_id: {creds.oauth_client_id}")
 
         # initialize the Zoho CRM SDK (this sets a thread-local client)
         try:
             Initializer.initialize(environment=environment, token=self.token)
+            current_app.logger.info("Successfully initialized Zoho CRM SDK")
         except Exception as e:
-            current_app.logger.exception(f"Error initializing Zoho CRM SDK: {e}")
+            current_app.logger.error(f"Failed to initialize Zoho CRM SDK: {str(e)}", exc_info=True)
+            raise
     @property
     def required_config(self) -> list[str]:
         return ["client_id", "oauth_client_id", "oauth_client_secret"]
@@ -60,21 +64,74 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
         expires_at: int = int(self.token.get_expires_in())
         cur_time_ms: int = int(time.time() * 1000)
         if cur_time_ms >= expires_at:
-            self.token.refresh_access_token()
+            current_app.logger.info("Access token expired, refreshing...")
+            try:
+                oauth.
+                current_app.logger.info("Successfully refreshed access token")
+            except Exception as e:
+                current_app.logger.error(f"Failed to refresh access token: {str(e)}", exc_info=True)
+                raise
         return self.token.get_access_token()
 
+    def get_contact_by_phone(self, phone_number: str) -> t.Optional[dict]:
+        """
+        Retrieves a contact by phone number.
+        
+        Args:
+            phone_number: The phone number to search for
+            
+        Returns:
+            The contact data as a dictionary, or None if no contact is found
+        """
+        current_app.logger.info(f"Searching for contact with phone number: {phone_number}")
+        record_ops = RecordOperations("Contacts")
+        param_instance = ParameterMap()
+        param_instance.add(SearchRecordsParam.phone, phone_number)
+        
+        try:
+            response = record_ops.search_records(param_instance)
+            current_app.logger.debug(f"get_contact_by_phone: {response.get_status_code()}, {response.get_object()}")
+            
+            # Check if response object is an APIException
+            if isinstance(response.get_object(), APIException):
+                error = response.get_object()
+                error_message = error.get_message().get_value() if isinstance(error.get_message(), Choice) else str(error.get_message())
+                raise APIError(f"Zoho API Error: {error_message}")
+            
+            if response.get_status_code() == 204:
+                return None
+            
+            if response.get_object() and hasattr(response.get_object(), 'get_data'):
+                # This will have multiple contacts possibly
+                contacts = response.get_object().get_data()
+                if contacts:
+                    return contacts[0].get_key_values()['Email']
+            return None
+            
+        except Exception as e:
+            current_app.logger.exception(f"Error searching for contact by phone: {e}")
+            raise APIError(f"Error searching for contact by phone: {str(e)}")
+
     def get_all_contacts(self) -> list[dict]:
+        current_app.logger.info("Fetching all contacts")
         record_ops = RecordOperations("Contacts")
         params = GetRecordsParam()
         params.set_page(1)
         params.set_per_page(200)
-        response = record_ops.get_records("Contacts", params)
-        records = []
-        if response.get_object():
-            data = response.get_object().get_data()
-            for record in data:
-                records.append(record.to_dict())
-        return records
+        
+        try:
+            response = record_ops.get_records("Contacts", params)
+            records = []
+            if response.get_object():
+                data = response.get_object().get_data()
+                records = [record.to_dict() for record in data]
+                current_app.logger.info(f"Successfully retrieved {len(records)} contacts")
+            else:
+                current_app.logger.warning("No contacts found in response")
+            return records
+        except Exception as e:
+            current_app.logger.error(f"Error fetching contacts: {str(e)}", exc_info=True)
+            raise APIError(f"Failed to fetch contacts: {str(e)}")
 
     def get_all_owners(self) -> list[dict]:
         users_ops = UsersOperations()

@@ -3,7 +3,7 @@ import itertools
 import json
 import os
 import typing as t
-from typing import Optional
+from typing import Optional, Any
 import uuid
 from flask import current_app
 from functools import cached_property
@@ -169,56 +169,50 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
 
         return note_dict
 
+    # TODO: Verify if this needs to work for multiple attendees in the call
     def extract(self, context: t.Optional[dict] = None) -> dict:
+        if not context:
+            raise ValueError("No call ID provided")
         call_id = context["call_id"]
-        transcript, participants = self.dialpad_api_manager.get_transcript(call_id)
-        attendees = [
-            {"name": name, "email": email}
-            for name, email in zip(names, emails)
-        ]
+        transcript_dict: dict[str, Any] = self.dialpad_api_manager.get_transcript(call_id)
+        transcript = transcript_dict["transcript"]
+        participants = transcript_dict["participants"]
 
-        # Only attendees that are not from our client's email domain should be
-        # contacts in Zoho.
-        contactable_attendees = []
-        for attendee in attendees:
-            if not attendee["email"].endswith(self.configuration.email_domain):
-                contactable_attendees.append(attendee)
-
+        # Assuming first participant is host, second is guest
         return {
             "transcript": transcript,
-            "contactable_attendees": contactable_attendees,
-            "organizer_email": organizer_email,
+            "guest": participants.get("guest"),
+            "host": participants.get("host"),
         }
 
     def transform(self, data: dict, context: t.Optional[dict] = None):
         transcript = data["transcript"]
-        contactable_attendees = data["contactable_attendees"]
-        organizer_email = data["organizer_email"]
+        guest = data["guest"]
+        host = data["host"]
         contacts = []
         deals = []
 
         current_app.logger.debug(f"Transcript: {transcript}")
-        current_app.logger.debug(f"Contactable attendees: {contactable_attendees}")
-        current_app.logger.debug(f"Organizer email: {organizer_email}")
+        current_app.logger.debug(f"Guest: {guest}")
+        current_app.logger.debug(f"Host: {host}")
 
-        for contactable_attendee in contactable_attendees:
-            try:
-                name = contactable_attendee['name']
-                email = contactable_attendee['email']
-                if not email:
-                    current_app.logger.warning(f"Contactable attendee has no email: {json.dumps(contactable_attendee)}")
-                    continue
-
+        try:
+            name = guest['name']
+            email = guest['email']
+            if email:
+                current_app.logger.warning(f"Guest has no email: {json.dumps(guest)}")
                 contact = self.zoho_api_manager.get_contact_by_email(email=email)
-                if not contact:
-                    current_app.logger.warning(f"Contact not found for attendee {email}, creating one")
-                    contact = self.zoho_api_manager.create_contact(contactable_attendee)
+            else:
+                contact = self.zoho_api_manager.get
+            if not contact:
+                current_app.logger.warning(f"Contact not found for attendee {email}, creating one")
+                contact = self.zoho_api_manager.create_contact(guest)
 
-                current_app.logger.debug(f"Contact: {json.dumps(contact, indent=4)}")
+            current_app.logger.debug(f"Contact: {json.dumps(contact, indent=4)}")
 
-                contacts.append(contact)
-            except APIError:
-                contacts.append(self.zoho_contact(contactable_attendee))
+            contacts.append(contact)
+        except APIError:
+            contacts.append(self.zoho_contact(guest))
         for contact in contacts:
             contact_id = contact.zoho_object_dict["id"]
             resp = self.zoho_api_manager.get_deal_by_contact_id(contact_id)
