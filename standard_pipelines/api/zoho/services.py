@@ -33,7 +33,6 @@ from types import MappingProxyType
 from .models import ZohoCredentials
 
 class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
-
     def __init__(self, creds: ZohoCredentials) -> None:
         super().__init__(creds)
         environment = USDataCenter.PRODUCTION()
@@ -44,9 +43,9 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
             access_token=creds.oauth_access_token
         )
         # there's an error in zoho, expires_in is actually expires_at
-        # self.token.set_expires_in(str(creds.oauth_expires_at))
+        if creds.oauth_expires_at:
+            self.token.set_expires_in(str(creds.oauth_expires_at))
         current_app.logger.debug(f"Created OAuthToken with client_id: {creds.oauth_client_id}")
-
         # initialize the Zoho CRM SDK (this sets a thread-local client)
         try:
             Initializer.initialize(environment=environment, token=self.token)
@@ -54,6 +53,7 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
         except Exception as e:
             current_app.logger.error(f"Failed to initialize Zoho CRM SDK: {str(e)}", exc_info=True)
             raise
+
     @property
     def required_config(self) -> list[str]:
         return ["client_id", "oauth_client_id", "oauth_client_secret"]
@@ -66,7 +66,21 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
         if cur_time_ms >= expires_at:
             current_app.logger.info("Access token expired, refreshing...")
             try:
-                oauth.
+                # Import the OAuth client from the zohocrmsdk
+                from zohocrmsdk.src.com.zoho.api.authenticator.oauth_token import OAuthToken
+                from zohocrmsdk.src.com.zoho.crm.api.user_signature import UserSignature
+                
+                # Refresh the token
+                refreshed_token = self.token.refresh()
+                
+                # Update the SDK Initializer with the refreshed token
+                user_signature = UserSignature(None)  # You might want to set an email here if needed
+                Initializer.initialize(
+                    user_signature=user_signature,
+                    environment=USDataCenter.PRODUCTION(),
+                    token=refreshed_token
+                )
+                
                 current_app.logger.info("Successfully refreshed access token")
             except Exception as e:
                 current_app.logger.error(f"Failed to refresh access token: {str(e)}", exc_info=True)
