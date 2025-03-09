@@ -201,7 +201,8 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             email = guest['email']
             if email:
                 current_app.logger.warning(f"Guest has no email: {json.dumps(guest)}")
-                contact = self.zoho_api_manager.get_contact_by_field({'email': email})
+                # TODO: Gonna want to check this by all fields provided by Dialpad, if multiple matching contacts are found, raise warning
+                contact = self.zoho_api_manager.get_record_by_field("Contacts", {'email': email})
             else:
                 contact = None
             if not contact:

@@ -114,45 +114,69 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
         # Handle basic types by converting to string
         return str(zoho_obj)
 
-    def get_contact_by_field(self, search_params: dict, match_all: bool = False) -> t.Optional[dict]:
+    def _format_zoho_field_name(self, field_name: str) -> str:
         """
-        Retrieves a contact by various fields (phone, email, or name).
+        Format field names to match Zoho's capitalization requirements.
+        
+        Zoho API requires proper capitalization of field names (e.g., "email" → "Email", 
+        "last_name" → "Last_Name"). This function handles the conversion.
         
         Args:
-            search_params: Dictionary containing search parameters.
-                Supported keys: 'phone', 'email', 'first_name', 'last_name'
+            field_name: The raw field name
+        
+        Returns:
+            Properly formatted field name for Zoho API
+        """
+        # Split the field name by underscores
+        parts = field_name.split('_')
+        
+        # Capitalize the first letter of each part
+        capitalized_parts = [part.capitalize() for part in parts]
+        
+        # Join the parts back together with underscores
+        return '_'.join(capitalized_parts)
+
+    def get_record_by_field(self, module_name: str, field_criteria: dict, match_all: bool = False) -> t.Optional[dict]:
+        """
+        Retrieves a record by specified field criteria.
+        
+        Args:
+            module_name: The module name in Zoho CRM (e.g., "Contacts", "Deals", "Tasks")
+            field_criteria: Dictionary mapping field names to search values
+                Example: {'email': 'user@example.com', 'phone': '1234567890'}
             match_all: If True, all criteria must match (AND).
                       If False, any criteria can match (OR).
             
         Returns:
-            The contact data as a JSON-serializable dictionary, or None if no contact is found
+            The record data as a JSON-serializable dictionary, or None if no record is found
         """
-        current_app.logger.info(f"Searching for contact with params: {search_params} (match_all={match_all})")
-        record_ops = RecordOperations("Contacts")
-        param_instance = ParameterMap()
-
-        # Build search criteria
-        criteria_parts = []
-        if phone := search_params.get('phone'):
-            criteria_parts.append(f"(Phone:equals:{phone})")
-        if email := search_params.get('email'):
-            criteria_parts.append(f"(Email:equals:{email})")
-        if first_name := search_params.get('first_name'):
-            criteria_parts.append(f"(First_Name:equals:{first_name})")
-        if last_name := search_params.get('last_name'):
-            criteria_parts.append(f"(Last_Name:equals:{last_name})")
-
-        if not criteria_parts:
-            raise ValueError("At least one search parameter must be provided")
-
-        # Combine criteria with either AND or OR operator
-        operator = " and " if match_all else " or "
-        search_criteria = operator.join(criteria_parts)
-        param_instance.add(SearchRecordsParam.criteria, search_criteria)
+        current_app.logger.info(f"Searching for {module_name} with criteria: {field_criteria} (match_all={match_all})")
         
         try:
+            from zohocrmsdk.src.com.zoho.crm.api.record import RecordOperations
+            from zohocrmsdk.src.com.zoho.crm.api.parameter_map import ParameterMap
+            
+            record_ops = RecordOperations(module_name)
+            param_instance = ParameterMap()
+
+            if not field_criteria:
+                raise ValueError("At least one search field must be provided")
+
+            # Build search criteria using list comprehension with proper field name formatting
+            criteria_parts = [
+                f"({self._format_zoho_field_name(field)}:equals:{value})" 
+                for field, value in field_criteria.items()
+            ]
+            
+            # Combine criteria with either AND or OR operator
+            operator = " and " if match_all else " or "
+            search_criteria = operator.join(criteria_parts)
+            
+            current_app.logger.debug(f"Search criteria: {search_criteria}")
+            param_instance.add(SearchRecordsParam.criteria, search_criteria)
+            
             response = record_ops.search_records(param_instance)
-            current_app.logger.debug(f"get_contact_by_field: {response.get_status_code()}, {response.get_object()}")
+            current_app.logger.debug(f"get_record_by_field response: {response.get_status_code()}, {response.get_object()}")
             
             # Check if response object is an APIException
             if isinstance(response.get_object(), APIException):
@@ -164,65 +188,47 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
                 return None
             
             if response.get_object() and hasattr(response.get_object(), 'get_data'):
-                contacts = response.get_object().get_data()
-                if contacts:
-                    return self._serialize_zoho_object(contacts[0])
+                records = response.get_object().get_data()
+                if records:
+                    return self._serialize_zoho_object(records[0])
+            
             return None
             
         except Exception as e:
-            current_app.logger.exception(f"Error searching for contact: {e}")
-            raise APIError(f"Error searching for contact: {str(e)}")
+            current_app.logger.exception(f"Error searching for {module_name}: {e}")
+            raise APIError(f"Error searching for {module_name}: {str(e)}")
 
-    def get_all_contacts(self) -> list[dict]:
-        current_app.logger.info("Fetching all contacts")
-        record_ops = RecordOperations("Contacts")
-        params = GetRecordsParam()
-        params.set_page(1)
-        params.set_per_page(200)
         
-        try:
-            response = record_ops.get_records("Contacts", params)
-            records = []
-            if response.get_object():
-                data = response.get_object().get_data()
-                records = [record.to_dict() for record in data]
-                current_app.logger.info(f"Successfully retrieved {len(records)} contacts")
-            else:
-                current_app.logger.warning("No contacts found in response")
-            return records
-        except Exception as e:
-            current_app.logger.error(f"Error fetching contacts: {str(e)}", exc_info=True)
-            raise APIError(f"Failed to fetch contacts: {str(e)}")
-
     def get_all_owners(self) -> list[dict]:
-        users_ops = UsersOperations()
-        response = users_ops.get_users()
-        owners = []
-        if response.get_object():
-            data = response.get_object().get_users()
-            for user in data:
-                owners.append(user.to_dict())
-        return owners
+        """
+        Retrieves all users/owners from Zoho CRM.
+        
+        Returns:
+            List of user data as JSON-serializable dictionaries
+        """
+        try:
+            from zohocrmsdk.src.com.zoho.crm.api.users import UsersOperations
+            
+            users_ops = UsersOperations()
+            response = users_ops.get_users()
+            
+            owners = []
+            if response.get_object() and hasattr(response.get_object(), 'get_users'):
+                data = response.get_object().get_users()
+                for user in data:
+                    owner_dict = self._serialize_zoho_object(user)
+                    owners.append(owner_dict)
+                
+            current_app.logger.info(f"Retrieved {len(owners)} users from Zoho")
+            return owners
+        
+        except Exception as e:
+            current_app.logger.exception(f"Error retrieving users: {e}")
+            raise APIError(f"Error retrieving users: {str(e)}")
 
     def get_all_users(self) -> list[dict]:
         # In Zoho, owners and users are essentially the same.
         return self.get_all_owners()
-
-    def get_contact_by_contact_id(self, contact_id: str, properties: list[str] = []) -> dict:
-        record_ops = RecordOperations("Contacts")
-        response = record_ops.get_record(int(contact_id), "Contacts")
-        if response.get_object() and response.get_object().get_data():
-            return self._serialize_zoho_object(response.get_object().get_data()[0])
-        else:
-            raise APIError(f"Contact with id {contact_id} not found.")
-
-    def get_deal_by_deal_id(self, deal_id: str, properties: list[str] = []) -> dict:
-        record_ops = RecordOperations("Deals")
-        response = record_ops.get_record(int(deal_id), "Deals")
-        if response.get_object() and response.get_object().get_data():
-            return self._serialize_zoho_object(response.get_object().get_data()[0])
-        else:
-            raise APIError(f"Deal with id {deal_id} not found.")
 
     def get_user_by_email(self, email: str) -> dict:
         users = self.get_all_owners()
@@ -265,15 +271,13 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
             }]
         }
 
-    def create_record(self, module_name: str, record_data: dict, parent_record: dict = None) -> dict:
+    def create_record(self, module_name: str, record_data: dict) -> t.Union[dict, list, str, None]:
         """
         Creates a record in Zoho CRM for any module type.
         
         Args:
             module_name: The module name in Zoho CRM (e.g., "Contacts", "Deals", "Meetings", "Notes")
             record_data: Dictionary containing the record data to be created
-            parent_record: Optional parent record to associate with (required for Notes)
-                           Format: {'id': '123456', 'module': 'Deals'}
             
         Returns:
             The created record data as a JSON-serializable dictionary
@@ -296,30 +300,6 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
         # Add all fields from the record_data dictionary to the record
         for key, value in record_data.items():
             record.add_key_value(key, value)
-        
-        # Handle special case for Notes - they need a parent record
-        if module_name == "Notes" and parent_record:
-            if not parent_record.get('id') or not parent_record.get('module'):
-                raise APIError("Parent record must have 'id' and 'module' fields for Notes")
-            
-            parent_id = parent_record['id']
-            parent_module = parent_record['module']
-            
-            try:
-                # Create a parent record object properly for the Zoho SDK
-                parent_record_obj = Record()
-                parent_record_obj.set_id(parent_id)
-                
-                # Set the parent record directly (this format works with Zoho)
-                record.add_key_value("Parent_Id", parent_record_obj)
-                record.add_key_value("$se_module", parent_module)
-                
-                # These are important for Notes
-                record.add_key_value("Note_Title", record_data.get("Note_Title", "Note"))
-                record.add_key_value("Note_Content", record_data.get("Note_Content", ""))
-            except Exception as e:
-                current_app.logger.error(f"Error setting up parent record: {e}")
-                raise APIError(f"Error setting up parent record: {str(e)}")
         
         # Create the request body wrapper
         request = BodyWrapper()
@@ -429,3 +409,102 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
             if isinstance(e, APIError):
                 raise
             raise APIError(f"Error creating note: {str(e)}")
+
+    def get_record_by_id(self, module_name: str, record_id: str) -> t.Union[dict, list, str, None]:
+        """
+        Retrieves any record from Zoho CRM by its ID and module type.
+        
+        Args:
+            module_name: The module name in Zoho CRM (e.g., "Contacts", "Deals", "Notes")
+            record_id: The ID of the record to retrieve
+            
+        Returns:
+            The record data as a JSON-serializable dictionary
+            
+        Raises:
+            APIError: If the record cannot be found or another error occurs
+        """
+        current_app.logger.info(f"Retrieving {module_name} record with ID: {record_id}")
+        
+        try:
+            # Import necessary classes
+            
+            # Initialize record operations with the module name
+            record_ops = RecordOperations(module_name)
+            
+            # Convert the record ID to int if it's numeric
+            try:
+                record_id_int = int(record_id)
+            except ValueError:
+                raise APIError(f"Record ID {record_id} is not a valid integer.")
+            
+            # Get the record
+            response = record_ops.get_record(record_id_int)
+            
+            # Check for errors
+            if response.get_status_code() >= 400:
+                raise APIError(f"Failed to retrieve {module_name} with ID {record_id}. Status code: {response.get_status_code()}")
+            
+            # Process response
+            if response.get_object() and hasattr(response.get_object(), 'get_data'):
+                records = response.get_object().get_data()
+                if records:
+                    return self._serialize_zoho_object(records[0])
+            
+            raise APIError(f"No {module_name} found with ID {record_id}")
+            
+        except Exception as e:
+            current_app.logger.exception(f"Error retrieving {module_name} record: {e}")
+            if isinstance(e, APIError):
+                raise
+            raise APIError(f"Error retrieving {module_name} record: {str(e)}")
+
+    def search_by_lookup_field(self, module_name: str, lookup_field: str, lookup_id: str) -> list[dict]:
+        """
+        Search for records by a lookup field's ID using direct REST API.
+        """
+        # Ensure module name and lookup field are properly formatted
+        module_name = module_name.capitalize()
+        lookup_field = self._format_zoho_field_name(lookup_field)
+        
+        current_app.logger.info(f"Searching for {module_name} with {lookup_field}.id = {lookup_id}")
+        
+        try:
+            # Use direct REST API call instead of SDK
+            import requests
+            
+            headers = {
+                "Authorization": f"Zoho-oauthtoken {self.access_token}",
+                "Content-Type": "application/json"
+            }
+            
+            # Try both query formats
+            criteria_options = [
+                f"({lookup_field}:(id:equals:{lookup_id}))",
+                f"({lookup_field}.id:equals:{lookup_id})"
+            ]
+            
+            for criteria in criteria_options:
+                url = f"https://www.zohoapis.com/crm/v2/{module_name}/search?criteria={criteria}"
+                current_app.logger.debug(f"Search URL: {url}")
+                
+                response = requests.get(url, headers=headers)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    
+                    results = []
+                    if data.get('data'):
+                        for record in data['data']:
+                            results.append(record)
+                    
+                    return results
+                
+                current_app.logger.warning(f"Search attempt failed with criteria: {criteria}, status: {response.status_code}")
+            
+            # If we get here, none of the criteria formats worked
+            raise APIError(f"Failed to search {module_name} by {lookup_field}.id = {lookup_id}")
+            
+        except Exception as e:
+            current_app.logger.exception(f"Error searching for {module_name} by lookup: {e}")
+            raise APIError(f"Error searching for {module_name} by lookup: {str(e)}")

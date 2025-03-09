@@ -5,49 +5,12 @@ from flask import request, jsonify
 from standard_pipelines.extensions import db
 from flask import current_app
 
-@testing.route("/zoho/contact/", methods=["GET"])
-def get_contact_by_field():
-    try:
-        client_id = request.args.get('client_id')
-        if not client_id:
-            return jsonify({'error': 'Missing required parameter: client_id'}), 400
-
-        # Get all query parameters except client_id
-        search_params = {}
-        valid_fields = {'phone', 'email', 'first_name', 'last_name'}
-        for field in valid_fields:
-            if value := request.args.get(field):
-                search_params[field] = value
-
-        if not search_params:
-            return jsonify({'error': 'At least one search parameter is required (phone, email, first_name, last_name)'}), 400
-
-        # Get match_all parameter (default to False)
-        match_all = request.args.get('match_all', '').lower() == 'true'
-
-        credentials = db.session.query(ZohoCredentials).filter_by(
-            client_id=client_id
-        ).first()
-        
-        if not credentials:
-            return jsonify({'error': 'No Zoho credentials found for this client'}), 404
-
-        zoho_manager = ZohoAPIManager(credentials)
-        result = zoho_manager.get_contact_by_field(search_params, match_all=match_all)
-        
-        if result:
-            return jsonify(result), 200
-        else:
-            return jsonify({'error': 'No contact found'}), 404
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
 
 
 @testing.route("/zoho/contact/<contact_id>", methods=["GET"])
 def get_contact_by_id(contact_id):
     try:
-        client_id = request.args.get('client')
+        client_id = request.args.get('client_id')
         if not client_id:
             return jsonify({'error': 'Missing required parameter: client'}), 400
 
@@ -67,13 +30,10 @@ def get_contact_by_id(contact_id):
         return jsonify({'error': str(e)}), 500
 
 
-
-
-
 @testing.route("/zoho/contacts", methods=["GET"])
 def get_all_contacts():
     try:
-        client_id = request.args.get('client')
+        client_id = request.args.get('client_id')
         if not client_id:
             return jsonify({'error': 'Missing required parameter: client'}), 400
 
@@ -95,7 +55,7 @@ def get_all_contacts():
 @testing.route("/zoho/users", methods=["GET"])
 def get_all_users():
     try:
-        client_id = request.args.get('client')
+        client_id = request.args.get('client_id')
         if not client_id:
             return jsonify({'error': 'Missing required parameter: client'}), 400
 
@@ -126,7 +86,6 @@ def create_record():
         module_name = data['module_name']
         record_data = data['record_data']
         client_id = data['client_id']
-        parent_record = data.get('parent_record')  # Optional parent record
 
         credentials = db.session.query(ZohoCredentials).filter_by(
             client_id=client_id
@@ -136,7 +95,7 @@ def create_record():
             return jsonify({'error': 'No Zoho credentials found for this client'}), 404
 
         zoho_manager = ZohoAPIManager(credentials)
-        result = zoho_manager.create_record(module_name, record_data, parent_record=parent_record)
+        result = zoho_manager.create_record(module_name, record_data)
         
         return jsonify(result), 201
 
@@ -174,4 +133,95 @@ def create_note():
     except Exception as e:
         error_message = str(e)
         current_app.logger.exception(f"Error creating note: {error_message}")
+        return jsonify({'error': error_message}), 500
+
+@testing.route("/zoho/record/<module_name>/<record_id>", methods=["GET"])
+def get_record_by_id(module_name, record_id):
+    try:
+        client_id = request.args.get('client_id')
+        if not client_id:
+            return jsonify({'error': 'Missing required parameter: client_id'}), 400
+
+        credentials = db.session.query(ZohoCredentials).filter_by(
+            client_id=client_id
+        ).first()
+        
+        if not credentials:
+            return jsonify({'error': 'No Zoho credentials found for this client'}), 404
+
+        zoho_manager = ZohoAPIManager(credentials)
+        result = zoho_manager.get_record_by_id(module_name, record_id)
+        
+        return jsonify(result), 200
+
+    except Exception as e:
+        error_message = str(e)
+        current_app.logger.exception(f"Error retrieving record: {error_message}")
+        return jsonify({'error': error_message}), 500
+
+@testing.route("/zoho/record/search/<module_name>", methods=["GET"])
+def search_record_by_field(module_name):
+    try:
+        client_id = request.args.get('client_id')
+        if not client_id:
+            return jsonify({'error': 'Missing required parameter: client_id'}), 400
+
+        # Get match_all parameter (default to False)
+        match_all = request.args.get('match_all', '').lower() == 'true'
+        
+        # Extract all other query parameters as field criteria
+        field_criteria = {}
+        for key, value in request.args.items():
+            # Skip client_id and match_all parameters
+            if key not in ['client_id', 'match_all']:
+                field_criteria[key] = value
+        
+        if not field_criteria:
+            return jsonify({'error': 'At least one field criterion must be provided as a query parameter'}), 400
+
+        credentials = db.session.query(ZohoCredentials).filter_by(
+            client_id=client_id
+        ).first()
+        
+        if not credentials:
+            return jsonify({'error': 'No Zoho credentials found for this client'}), 404
+
+        zoho_manager = ZohoAPIManager(credentials)
+        result = zoho_manager.get_record_by_field(module_name, field_criteria, match_all=match_all)
+        
+        if result:
+            return jsonify(result), 200
+        else:
+            return jsonify({'error': f'No {module_name} found with the provided criteria'}), 404
+
+    except Exception as e:
+        error_message = str(e)
+        current_app.logger.exception(f"Error searching for record: {error_message}")
+        return jsonify({'error': error_message}), 500
+
+@testing.route("/zoho/record/lookup/<module_name>/<lookup_field>/<lookup_id>", methods=["GET"])
+def search_by_lookup_field(module_name, lookup_field, lookup_id):
+    try:
+        client_id = request.args.get('client_id')
+        if not client_id:
+            return jsonify({'error': 'Missing required parameter: client_id'}), 400
+
+        credentials = db.session.query(ZohoCredentials).filter_by(
+            client_id=client_id
+        ).first()
+        
+        if not credentials:
+            return jsonify({'error': 'No Zoho credentials found for this client'}), 404
+
+        zoho_manager = ZohoAPIManager(credentials)
+        results = zoho_manager.search_by_lookup_field(module_name, lookup_field, lookup_id)
+        
+        if results:
+            return jsonify(results), 200
+        else:
+            return jsonify({'error': f'No {module_name} records found with {lookup_field}.id = {lookup_id}'}), 404
+
+    except Exception as e:
+        error_message = str(e)
+        current_app.logger.exception(f"Error searching by lookup field: {error_message}")
         return jsonify({'error': error_message}), 500
