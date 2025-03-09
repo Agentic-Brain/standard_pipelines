@@ -283,11 +283,15 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
         """
         current_app.logger.info(f"Creating {module_name} record with data: {record_data}")
         
+        # Import necessary classes for related records
+        from zohocrmsdk.src.com.zoho.crm.api.record import Record, BodyWrapper
+        from zohocrmsdk.src.com.zoho.crm.api.record import RecordOperations
+        
         # Initialize the record operations with the module name
         record_ops = RecordOperations(module_name)
         
         # Create a new record object
-        record = ZCRMRecord()
+        record = Record()
         
         # Add all fields from the record_data dictionary to the record
         for key, value in record_data.items():
@@ -298,18 +302,24 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
             if not parent_record.get('id') or not parent_record.get('module'):
                 raise APIError("Parent record must have 'id' and 'module' fields for Notes")
             
-            # Add the parent record information to the note
             parent_id = parent_record['id']
             parent_module = parent_record['module']
             
-            # Create a parent Record object instead of using the ID directly
-            parent_record_obj = ZCRMRecord()
-            parent_record_obj.set_id(parent_id)
-            # The Record class doesn't have set_module_api_name, so we'll use a different approach
-            
-            # Set the parent record details
-            record.add_key_value("Parent_Id", parent_record_obj)
-            record.add_key_value("$se_module", parent_module)
+            try:
+                # Create a parent record object properly for the Zoho SDK
+                parent_record_obj = Record()
+                parent_record_obj.set_id(parent_id)
+                
+                # Set the parent record directly (this format works with Zoho)
+                record.add_key_value("Parent_Id", parent_record_obj)
+                record.add_key_value("$se_module", parent_module)
+                
+                # These are important for Notes
+                record.add_key_value("Note_Title", record_data.get("Note_Title", "Note"))
+                record.add_key_value("Note_Content", record_data.get("Note_Content", ""))
+            except Exception as e:
+                current_app.logger.error(f"Error setting up parent record: {e}")
+                raise APIError(f"Error setting up parent record: {str(e)}")
         
         # Create the request body wrapper
         request = BodyWrapper()
@@ -349,3 +359,73 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
             if isinstance(e, APIError):
                 raise
             raise APIError(f"Error creating {module_name} record: {str(e)}")
+
+    def create_note(self, note_data: dict, parent_record_id: str, parent_module: str) -> dict:
+        """
+        Creates a note in Zoho CRM with proper parent record association.
+        
+        Args:
+            note_data: Dictionary containing the note data (Note_Title, Note_Content)
+            parent_record_id: ID of the parent record (e.g., Deal or Contact ID)
+            parent_module: Module of the parent record (e.g., "Deals", "Contacts")
+            
+        Returns:
+            The created note data as a JSON-serializable dictionary
+            
+        Raises:
+            APIError: If the note creation fails
+        """
+        current_app.logger.info(f"Creating note for {parent_module} with ID {parent_record_id}")
+        
+        try:
+            # For Zoho CRM API v2, we'll use the native API instead of trying to use the SDK
+            # which has complicated requirements for parent records
+            
+            # Set up headers and base URL
+            headers = {
+                "Authorization": f"Zoho-oauthtoken {self.access_token}",
+                "Content-Type": "application/json"
+            }
+            
+            # Prepare the data
+            data = {
+                "data": [
+                    {
+                        "Note_Title": note_data.get("Note_Title", "Note"),
+                        "Note_Content": note_data.get("Note_Content", ""),
+                        "Parent_Id": {
+                            "id": str(parent_record_id),
+                            "module": parent_module
+                        },
+                        "$se_module": parent_module
+                    }
+                ]
+            }
+            
+            # Make the direct API call
+            import requests
+            url = "https://www.zohoapis.com/crm/v2/Notes"
+            
+            response = requests.post(url, headers=headers, json=data)
+            
+            # Process the response
+            if response.status_code >= 400:
+                error_data = response.json()
+                error_message = error_data.get('message', 'Unknown error')
+                current_app.logger.error(f"Error creating note: {error_message}")
+                raise APIError(f"Failed to create note: {error_message}")
+            
+            # Return the created note
+            response_data = response.json()
+            if response_data.get('data') and len(response_data['data']) > 0:
+                created_note = response_data['data'][0]
+                current_app.logger.info(f"Successfully created note with ID: {created_note.get('details', {}).get('id')}")
+                return created_note
+            
+            raise APIError("Failed to create note. No data returned.")
+        
+        except Exception as e:
+            current_app.logger.exception(f"Error creating note: {e}")
+            if isinstance(e, APIError):
+                raise
+            raise APIError(f"Error creating note: {str(e)}")

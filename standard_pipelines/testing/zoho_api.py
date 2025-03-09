@@ -66,27 +66,7 @@ def get_contact_by_id(contact_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@testing.route("/zoho/deal/<deal_id>", methods=["GET"])
-def get_deal_by_id(deal_id):
-    try:
-        client_id = request.args.get('client')
-        if not client_id:
-            return jsonify({'error': 'Missing required parameter: client'}), 400
 
-        credentials = db.session.query(ZohoCredentials).filter_by(
-            client_id=client_id
-        ).first()
-        
-        if not credentials:
-            return jsonify({'error': 'No Zoho credentials found for this client'}), 404
-
-        zoho_manager = ZohoAPIManager(credentials)
-        result = zoho_manager.get_deal_by_deal_id(deal_id)
-        
-        return jsonify(result), 200
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
 
 
 
@@ -163,4 +143,35 @@ def create_record():
     except Exception as e:
         error_message = str(e)
         current_app.logger.exception(f"Error creating record: {error_message}")
+        return jsonify({'error': error_message}), 500
+
+@testing.route("/zoho/note", methods=["POST"])
+def create_note():
+    try:
+        data = request.get_json()
+        if not data or not all(k in data for k in ['note_data', 'parent_record_id', 'parent_module', 'client_id']):
+            return jsonify({
+                'error': 'Missing required fields: note_data, parent_record_id, parent_module, client_id'
+            }), 400
+
+        note_data = data['note_data']
+        parent_record_id = data['parent_record_id']
+        parent_module = data['parent_module']
+        client_id = data['client_id']
+
+        credentials = db.session.query(ZohoCredentials).filter_by(
+            client_id=client_id
+        ).first()
+        
+        if not credentials:
+            return jsonify({'error': 'No Zoho credentials found for this client'}), 404
+
+        zoho_manager = ZohoAPIManager(credentials)
+        result = zoho_manager.create_note(note_data, parent_record_id, parent_module)
+        
+        return jsonify(result), 201
+
+    except Exception as e:
+        error_message = str(e)
+        current_app.logger.exception(f"Error creating note: {error_message}")
         return jsonify({'error': error_message}), 500
