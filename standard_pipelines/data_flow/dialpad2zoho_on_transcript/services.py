@@ -201,18 +201,19 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             email = guest['email']
             if email:
                 current_app.logger.warning(f"Guest has no email: {json.dumps(guest)}")
-                contact = self.zoho_api_manager.get_contact_by_email(email=email)
+                contact = self.zoho_api_manager.get_contact_by_field({'email': email})
             else:
-                contact = self.zoho_api_manager.get
+                contact = None
             if not contact:
                 current_app.logger.warning(f"Contact not found for attendee {email}, creating one")
-                contact = self.zoho_api_manager.create_contact(guest)
+                contact = self.zoho_api_manager.create_record("Contacts", guest)
 
             current_app.logger.debug(f"Contact: {json.dumps(contact, indent=4)}")
 
             contacts.append(contact)
         except APIError:
-            contacts.append(self.zoho_contact(guest))
+            contact_data = self.zoho_contact(guest)
+            contacts.append(self.zoho_api_manager.create_record("Contacts", contact_data))
         for contact in contacts:
             contact_id = contact.zoho_object_dict["id"]
             resp = self.zoho_api_manager.get_deal_by_contact_id(contact_id)

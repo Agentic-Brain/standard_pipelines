@@ -87,24 +87,72 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
                 raise
         return self.token.get_access_token()
 
-    def get_contact_by_phone(self, phone_number: str) -> t.Optional[dict]:
+    def _serialize_zoho_object(self, zoho_obj: t.Any) -> t.Union[dict, list, str, None]:
         """
-        Retrieves a contact by phone number.
+        Convert a Zoho object into a JSON-serializable format.
         
         Args:
-            phone_number: The phone number to search for
+            zoho_obj: Any Zoho object that needs to be serialized
             
         Returns:
-            The contact data as a dictionary, or None if no contact is found
+            A JSON-serializable version of the object (dict, list, str, or None)
         """
-        current_app.logger.info(f"Searching for contact with phone number: {phone_number}")
+        if zoho_obj is None:
+            return None
+            
+        # Handle objects with key-value pairs
+        if hasattr(zoho_obj, 'get_key_values'):
+            result = {}
+            for key, value in zoho_obj.get_key_values().items():
+                result[key] = self._serialize_zoho_object(value)
+            return result
+            
+        # Handle lists/tuples
+        if isinstance(zoho_obj, (list, tuple)):
+            return [self._serialize_zoho_object(item) for item in zoho_obj]
+            
+        # Handle basic types by converting to string
+        return str(zoho_obj)
+
+    def get_contact_by_field(self, search_params: dict, match_all: bool = False) -> t.Optional[dict]:
+        """
+        Retrieves a contact by various fields (phone, email, or name).
+        
+        Args:
+            search_params: Dictionary containing search parameters.
+                Supported keys: 'phone', 'email', 'first_name', 'last_name'
+            match_all: If True, all criteria must match (AND).
+                      If False, any criteria can match (OR).
+            
+        Returns:
+            The contact data as a JSON-serializable dictionary, or None if no contact is found
+        """
+        current_app.logger.info(f"Searching for contact with params: {search_params} (match_all={match_all})")
         record_ops = RecordOperations("Contacts")
         param_instance = ParameterMap()
-        param_instance.add(SearchRecordsParam.phone, phone_number)
+
+        # Build search criteria
+        criteria_parts = []
+        if phone := search_params.get('phone'):
+            criteria_parts.append(f"(Phone:equals:{phone})")
+        if email := search_params.get('email'):
+            criteria_parts.append(f"(Email:equals:{email})")
+        if first_name := search_params.get('first_name'):
+            criteria_parts.append(f"(First_Name:equals:{first_name})")
+        if last_name := search_params.get('last_name'):
+            criteria_parts.append(f"(Last_Name:equals:{last_name})")
+
+        if not criteria_parts:
+            raise ValueError("At least one search parameter must be provided")
+
+        # Combine criteria with either AND or OR operator
+        operator = " and " if match_all else " or "
+        search_criteria = operator.join(criteria_parts)
+        param_instance.add(SearchRecordsParam.criteria, search_criteria)
         
         try:
             response = record_ops.search_records(param_instance)
-            current_app.logger.debug(f"get_contact_by_phone: {response.get_status_code()}, {response.get_object()}")
+            current_app.logger.debug(f"get_contact_by_field: {response.get_status_code()}, {response.get_object()}")
             
             # Check if response object is an APIException
             if isinstance(response.get_object(), APIException):
@@ -116,15 +164,14 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
                 return None
             
             if response.get_object() and hasattr(response.get_object(), 'get_data'):
-                # This will have multiple contacts possibly
                 contacts = response.get_object().get_data()
                 if contacts:
-                    return contacts[0].get_key_values()['Email']
+                    return self._serialize_zoho_object(contacts[0])
             return None
             
         except Exception as e:
-            current_app.logger.exception(f"Error searching for contact by phone: {e}")
-            raise APIError(f"Error searching for contact by phone: {str(e)}")
+            current_app.logger.exception(f"Error searching for contact: {e}")
+            raise APIError(f"Error searching for contact: {str(e)}")
 
     def get_all_contacts(self) -> list[dict]:
         current_app.logger.info("Fetching all contacts")
@@ -162,18 +209,18 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
         return self.get_all_owners()
 
     def get_contact_by_contact_id(self, contact_id: str, properties: list[str] = []) -> dict:
-        record_ops = RecordOperations()
+        record_ops = RecordOperations("Contacts")
         response = record_ops.get_record(int(contact_id), "Contacts")
         if response.get_object() and response.get_object().get_data():
-            return response.get_object().get_data()[0].to_dict()
+            return self._serialize_zoho_object(response.get_object().get_data()[0])
         else:
             raise APIError(f"Contact with id {contact_id} not found.")
 
     def get_deal_by_deal_id(self, deal_id: str, properties: list[str] = []) -> dict:
-        record_ops = RecordOperations()
+        record_ops = RecordOperations("Deals")
         response = record_ops.get_record(int(deal_id), "Deals")
         if response.get_object() and response.get_object().get_data():
-            return response.get_object().get_data()[0].to_dict()
+            return self._serialize_zoho_object(response.get_object().get_data()[0])
         else:
             raise APIError(f"Deal with id {deal_id} not found.")
 
@@ -191,36 +238,6 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
         if not matching_users:
             raise APIError(f"No user found for email {email}.")
         return matching_users[0]
-
-    def get_contact_by_name_or_email(self, name: t.Optional[str] = None, email: t.Optional[str] = None) -> dict:
-        contacts = self.get_all_contacts()
-        matching_contacts = []
-        for contact in contacts:
-            first_name = contact.get("First_Name", "")
-            last_name = contact.get("Last_Name", "")
-            full_name = f"{first_name} {last_name}".strip()
-            contact_email = contact.get("Email", "")
-            if (name and full_name.lower() == name.lower()) or (email and contact_email.lower() == email.lower()):
-                matching_contacts.append(contact)
-        if len(matching_contacts) > 1:
-            raise APIError(f"Multiple contacts found for {email or name}.")
-        if not matching_contacts:
-            raise APIError(f"No contact found for {email or name}.")
-        return matching_contacts[0]
-    
-    def get_contact_by_email(self, email: t.Optional[str] = None) -> dict:
-        record_ops = RecordOperations("Contacts")
-        params = ParameterMap()
-        params.add(SearchRecordsParam.email, email)
-        response : APIResponse = record_ops.search_records(params)
-
-        current_app.logger.debug(f"get_contact_by_email: {response.get_status_code(), response.get_object()}")
-
-        if response.get_status_code() == 204:
-            return None
-        
-        
-        return response.get_object()
     
     def get_deal_by_contact_id(self, contact_id: str) -> dict:
         # In Zoho, assume the deal has a lookup field "Contact_Name" linking to a contact.
@@ -248,80 +265,87 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
             }]
         }
 
-    def create_contact(self,  contact : dict):
-        record_ops = RecordOperations("Contacts")
-        request = BodyWrapper()
-
+    def create_record(self, module_name: str, record_data: dict, parent_record: dict = None) -> dict:
+        """
+        Creates a record in Zoho CRM for any module type.
+        
+        Args:
+            module_name: The module name in Zoho CRM (e.g., "Contacts", "Deals", "Meetings", "Notes")
+            record_data: Dictionary containing the record data to be created
+            parent_record: Optional parent record to associate with (required for Notes)
+                           Format: {'id': '123456', 'module': 'Deals'}
+            
+        Returns:
+            The created record data as a JSON-serializable dictionary
+            
+        Raises:
+            APIError: If the record creation fails
+        """
+        current_app.logger.info(f"Creating {module_name} record with data: {record_data}")
+        
+        # Initialize the record operations with the module name
+        record_ops = RecordOperations(module_name)
+        
+        # Create a new record object
         record = ZCRMRecord()
-        record.add_field_value(Field.Contacts.email(), contact['email'])
-        # record.add_field_value(Field.Contacts.first_name, contact['first_name'])
-        # record.add_field_value(Field.Contacts.last_name, contact['last_name'])
-
-        request.set_data([record])
-
-        response : APIResponse = record_ops.create_records(request)
-
-        current_app.logger.debug(f"create_contact: {response.get_status_code(), response.get_object()}")
-
-        if response.get_status_code() == 400:
-            payload : ActionWrapper = response.get_object()
-            data : list[APIException] = payload.get_data()
-            for exception in data:
-                current_app.logger.exception(f"Error creating contact: {exception.get_code()} {exception.get_details()}")
-
-        return response.get_object()
-
-        # Map the provided dictionary to a Zoho record.
-        for key, value in contact_object.items():
+        
+        # Add all fields from the record_data dictionary to the record
+        for key, value in record_data.items():
             record.add_key_value(key, value)
         
-        request.set_data([record])
-        record_ops = RecordOperations()
-        response = record_ops.create_records("Contacts", request)
-        if response.get_object() and response.get_object().get_data():
-            created_record = response.get_object().get_data()[0]
-            return created_record
-        else:
-            raise APIError("Failed to create contact.")
-
-    def create_deal(self, deal_object):
-        record = ZCRMRecord()
-        for key, value in deal_object.zoho_object_dict.items():
-            record.add_key_value(key, value)
+        # Handle special case for Notes - they need a parent record
+        if module_name == "Notes" and parent_record:
+            if not parent_record.get('id') or not parent_record.get('module'):
+                raise APIError("Parent record must have 'id' and 'module' fields for Notes")
+            
+            # Add the parent record information to the note
+            parent_id = parent_record['id']
+            parent_module = parent_record['module']
+            
+            # Create a parent Record object instead of using the ID directly
+            parent_record_obj = ZCRMRecord()
+            parent_record_obj.set_id(parent_id)
+            # The Record class doesn't have set_module_api_name, so we'll use a different approach
+            
+            # Set the parent record details
+            record.add_key_value("Parent_Id", parent_record_obj)
+            record.add_key_value("$se_module", parent_module)
+        
+        # Create the request body wrapper
         request = BodyWrapper()
         request.set_data([record])
-        record_ops = RecordOperations()
-        response = record_ops.create_records("Deals", request)
-        if response.get_object() and response.get_object().get_data():
-            created_record = response.get_object().get_data()[0]
-            return created_record
-        else:
-            raise APIError("Failed to create deal.")
-
-    def create_meeting(self, meeting_object):
-        record = ZCRMRecord()
-        for key, value in meeting_object.zoho_object_dict.items():
-            record.add_key_value(key, value)
-        request = BodyWrapper()
-        request.set_data([record])
-        record_ops = RecordOperations()
-        response = record_ops.create_records("Meetings", request)
-        if response.get_object() and response.get_object().get_data():
-            created_record = response.get_object().get_data()[0]
-            return created_record.to_dict()
-        else:
-            raise APIError("Failed to create meeting.")
-
-    def create_note(self, note_object):
-        record = ZCRMRecord()
-        for key, value in note_object.zoho_object_dict.items():
-            record.add_key_value(key, value)
-        request = BodyWrapper()
-        request.set_data([record])
-        record_ops = RecordOperations()
-        response = record_ops.create_records("Notes", request)
-        if response.get_object() and response.get_object().get_data():
-            created_record = response.get_object().get_data()[0]
-            return created_record.to_dict()
-        else:
-            raise APIError("Failed to create note.")
+        
+        try:
+            # Send the create request
+            response = record_ops.create_records(request)
+            current_app.logger.debug(f"create_record response: {response.get_status_code()}, {response.get_object()}")
+            
+            # Check for errors
+            if response.get_status_code() >= 400:
+                if isinstance(response.get_object(), ActionWrapper):
+                    action_wrapper = response.get_object()
+                    if action_wrapper.get_data():
+                        for action_response in action_wrapper.get_data():
+                            if isinstance(action_response, APIException):
+                                error = action_response
+                                error_message = f"Code: {error.get_code()}, Details: {error.get_details()}"
+                                current_app.logger.error(f"Error creating {module_name} record: {error_message}")
+                                raise APIError(f"Failed to create {module_name}: {error_message}")
+                
+                raise APIError(f"Failed to create {module_name} record. Status code: {response.get_status_code()}")
+            
+            # Process successful response
+            if response.get_object() and hasattr(response.get_object(), 'get_data'):
+                created_records = response.get_object().get_data()
+                if created_records:
+                    created_record = created_records[0]
+                    current_app.logger.info(f"Successfully created {module_name} record with ID: {created_record.get_details().get('id')}")
+                    return self._serialize_zoho_object(created_record)
+            
+            raise APIError(f"Failed to create {module_name} record. No data returned.")
+            
+        except Exception as e:
+            current_app.logger.exception(f"Error creating {module_name} record: {e}")
+            if isinstance(e, APIError):
+                raise
+            raise APIError(f"Error creating {module_name} record: {str(e)}")
