@@ -125,6 +125,9 @@ class GmailIntervalFollowup(BaseDataFlow[GmailIntervalFollowupConfiguration]):
         if input_data is None:
             raise ValueError("input_data is required")
         
+        # TODO: This schedules for 2052????
+        # Example date: 2052-10-08 20:30:21.004707
+        # Something wrong with dateformatting here
         next_scheduled_time = datetime.utcnow() + timedelta(days=self.configuration.email_interval_days)
         
         schedule = GmailIntervalFollowupSchedule(

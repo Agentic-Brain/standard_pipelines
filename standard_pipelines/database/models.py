@@ -14,7 +14,7 @@ from bitwarden_sdk import BitwardenClient
 from typing import Any, Optional, List
 import json
 import os
-
+import sentry_sdk
 class BaseMixin(db.Model):
     __abstract__ = True
     id: Mapped[UUID] = mapped_column(pgUUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid(), nullable=False)
@@ -98,10 +98,13 @@ class ScheduledMixin(BaseMixin):
                     # If this is a job, also disable recurring.
                     if next_run_attr == "scheduled_time":
                         self.recurrence_interval = None
+            db.session.commit()
+            
         else:
+            db.session.rollback()
+            sentry_sdk.capture_exception(e)
             raise ScheduledJobError(f"Task failed for {self.__class__.__name__} {self.id}")
 
-        db.session.commit()
 
     def trigger_job(self) -> None:
         """Wrapper that executes the job and updates scheduled_time based on recurrence_interval."""
