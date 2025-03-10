@@ -20,6 +20,8 @@ def init_app(app):
                     
                     # Send to Sentry (will happen automatically if you have the Celery integration)
                     # But we can add extra context if needed
+                    # TODO: Change this context and use the following line instead
+                    # sentry_sdk.capture_exception(e)
                     sentry_sdk.set_context("task", {
                         "task_id": self.request.id,
                         "task_name": self.name,
@@ -43,12 +45,12 @@ def init_app(app):
                 'task': 'standard_pipelines.celery.tasks.run_generic_tasks',
                 'schedule': crontab(minute='*'),  # Run every minute
                 'args': ('trigger_job',)
-            },         
-            'run-polling-tasks-every-minute': {
-                'task': 'standard_pipelines.celery.tasks.run_generic_tasks',
-                'schedule': crontab(minute='*'),  # Run every minute
-                'args': ('execute_poll',)
-            },
+            }         
+            # 'run-polling-tasks-every-minute': {
+            #     'task': 'standard_pipelines.celery.tasks.run_generic_tasks',
+            #     'schedule': crontab(minute='*'),  # Run every minute
+            #     'args': ('execute_poll',)
+            # },
         }
     )
     

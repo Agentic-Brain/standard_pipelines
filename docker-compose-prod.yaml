@@ -28,9 +28,9 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_papertrail_system_hostname
 
 x-base-service: &base-service
-  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.6h5
-  secrets:
-    - github-token
+  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.9h3
+  # secrets:
+    # - github-token
   environment:
     - FLASK_ENV=production
     - PRODUCTION_DB_HOST=standard_pipelines_production_postgres
@@ -41,6 +41,7 @@ x-base-service: &base-service
     - PRODUCTION_REDIS_HOST=standard_pipelines_production_redis
     - PRODUCTION_GOOGLE_REDIRECT_URI=https://agents.agentic-internal.com/api/google/oauth/authorize
     - PRODUCTION_GOOGLE_SCOPES=https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile
+    - PRODUCTION_FLASK_APP=standard_pipelines
   <<: *production-secrets
 
 services:
@@ -118,8 +119,8 @@ secrets:
     external: true
   standard_pipelines_production_default_admin_password:
     external: true
-  github-token:
-    external: true 
+  # github-token:
+    # external: true 
   standard_pipelines_production_mailgun_api_key:
     external: true
   standard_pipelines_production_mailgun_send_domain:

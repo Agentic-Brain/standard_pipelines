@@ -97,6 +97,10 @@ def execute_task_method(model_class_name: str, task_id: str, method_name: str):
         else:
             current_app.logger.error(f"Method {method_name} is not callable on {task_instance}")
     except Exception as e:
+        # TODO: Add sentry capture here
+        # Also include db.rollback()
+        sentry_sdk.capture_exception(e)
+        db.session.rollback()
         current_app.logger.error(f"Error executing {method_name} on {task_instance}: {str(e)}")
 
 @task_failure.connect

@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask import Flask, jsonify
 import os
 import socket
@@ -102,6 +102,7 @@ def create_app():
     def inject_semver():
         return dict(app_version=str(APP_VERSION), flask_base_version=str(FLASK_BASE_VERSION))
 
+    # Global error handler for unhandled exceptions
     @app.errorhandler(Exception)
     def handle_unhandled_exception(e):
         """Global error handler that only triggers for unhandled exceptions"""
@@ -134,6 +135,28 @@ def create_app():
             }
 
         return jsonify(response), 500
+
+    # Add 404 handler to prevent Sentry noise
+    @app.errorhandler(404)
+    def handle_not_found_error(e):
+        """Custom 404 handler that doesn't report to Sentry"""
+        path = request.path
+        method = request.method
+        app.logger.info(f"404 Not Found: {method} {path}")
+        
+        if app.config.get('FLASK_ENV') == 'development':
+            response = {
+                'error': 'Not Found',
+                'message': f"The requested URL {path} was not found on the server.",
+                'status_code': 404
+            }
+        else:
+            response = {
+                'error': 'Not Found',
+                'message': "The requested resource was not found on the server."
+            }
+            
+        return jsonify(response), 404
 
     return app
 
