@@ -47,6 +47,7 @@ class Config:
         'USE_OPENAI': True,
         'USE_MAILGUN': True,
         'USE_HUBSPOT': True,
+        'USE_ZOHO': True,
         'USE_PAPERTRAIL': True,
         # Add more API usage flags as needed
     }
@@ -76,6 +77,10 @@ class Config:
             'HUBSPOT_CLIENT_ID': None,
             'HUBSPOT_CLIENT_SECRET': None,
         },
+        'ZOHO': {
+            'ZOHO_CLIENT_ID': None,
+            'ZOHO_CLIENT_SECRET': None,
+        },
         'GOOGLE': {
             'GOOGLE_REDIRECT_URI': None,
             'GOOGLE_CLIENT_ID': None,
@@ -100,6 +105,7 @@ class Config:
         'USE_OPENAI': 'OPENAI',
         'USE_HUBSPOT': 'HUBSPOT',
         'USE_PAPERTRAIL': 'PAPERTRAIL',
+        'USE_ZOHO': 'ZOHO',
         # Add more mappings as needed
     }
 

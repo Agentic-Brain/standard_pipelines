@@ -5,10 +5,10 @@ from flask_mail import Mail
 from flask_admin import Admin
 from authlib.integrations.flask_client import OAuth
 
-db = SQLAlchemy()
-security = Security()
-migrate = Migrate()
-mail = Mail()
+db : SQLAlchemy = SQLAlchemy()
+security : Security = Security()
+migrate : Migrate = Migrate()
+mail : Mail = Mail()
 # NAME: Update 'server' to actual app name
-admin = Admin(name='server')
-oauth = OAuth()
+admin : Admin = Admin(name='server')
+oauth : OAuth = OAuth()

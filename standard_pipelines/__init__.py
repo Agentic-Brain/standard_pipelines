@@ -15,24 +15,20 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 from sentry_sdk.integrations.celery import CeleryIntegration
 from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, StagingConfig, get_config
 from standard_pipelines.data_flow.utils import BaseDataFlow
-from standard_pipelines.data_flow.ff2hs_on_transcript.services import FF2HSOnTranscript
-from standard_pipelines.data_flow.gmail_interval_followup.services import GmailIntervalFollowup
 import traceback
-
-
 
 def create_app():
     load_dotenv()
     load_dotenv('.flaskenv')
     init_sentry()
     app = Flask(__name__)
-    
+
     # Initialize basic logging first
     init_basic_logging(app)
-    
+
     environment_type: Optional[str] = os.getenv('FLASK_ENV')
     config = None
-    
+
     if environment_type is None:
         app.logger.critical('NO ENVIRONMENT TYPE DEFINED, ABORTING')
         quit()
@@ -50,10 +46,10 @@ def create_app():
         quit()
 
     app.config.from_object(config)
-    
+
     # Initialize Papertrail logging after config is loaded
     init_papertrail_logging(app)
-    
+
     migrate.init_app(app, db)
     
 
@@ -111,19 +107,19 @@ def create_app():
         """Global error handler that only triggers for unhandled exceptions"""
         # Always rollback any pending database changes
         db.session.rollback()
-        
+
         # Get error details
         error_type = type(e).__name__
         error_details = str(e)
-        
+
         # Log the unhandled error
         app.logger.error(f"Unhandled {error_type}: {error_details}")
         if app.config.get('FLASK_ENV') == 'development':
             app.logger.error(traceback.format_exc())
-        
+
         # Send to Sentry
         sentry_sdk.capture_exception(e)
-        
+
         # Return appropriate response based on environment
         if app.config.get('FLASK_ENV') == 'development':
             response = {
@@ -136,7 +132,7 @@ def create_app():
             response = {
                 'error': 'An internal server error occurred'
             }
-        
+
         return jsonify(response), 500
 
     return app
@@ -170,7 +166,8 @@ def init_basic_logging(app: Flask) -> None:
         date_format = '%y-%m-%d %H:%M'
 
     # File handler with environment-specific format
-    file_handler = logging.FileHandler(f'logs/{str(time.ctime(time.time()))}.log')
+    timestamp = time.strftime('%Y-%m-%d_%H-%M-%S')
+    file_handler = logging.FileHandler(f'logs/{timestamp}.log')
     file_formatter = logging.Formatter(log_format, datefmt=date_format)
     file_handler.setFormatter(file_formatter)
     file_handler.setLevel(logging.DEBUG)
@@ -201,10 +198,10 @@ def init_papertrail_logging(app: Flask) -> None:
     """Initialize Papertrail logging after config is loaded"""
     papertrail_host = app.config.get('PAPERTRAIL_HOST')
     papertrail_port = app.config.get('PAPERTRAIL_PORT')
-    
+
     papertrail_system_hostname = app.config.get('PAPERTRAIL_SYSTEM_HOSTNAME')
     app_name = app.config.get('FLASK_APP')
-    
+
     # TODO: Need to set flask app to be read from .flaskenv
     # current system doesnt work because it isnt prefixed by environment type
     if all([papertrail_host, papertrail_port, app_name]):
@@ -214,16 +211,16 @@ def init_papertrail_logging(app: Flask) -> None:
                 def filter(self, record):
                     record.hostname = ContextFilter.hostname
                     return True
-                
+
             papertrail_handler = SysLogHandler(address=(papertrail_host, int(papertrail_port))) # type: ignore
             papertrail_handler.addFilter(ContextFilter())
-            
+
             papertrail_format = f'%(asctime)s {papertrail_system_hostname} {app_name}: %(levelname)s [%(filename)s:%(lineno)d] %(message)s'
             papertrail_formatter = logging.Formatter(papertrail_format, datefmt='%b %d %H:%M:%S')
             papertrail_handler.setFormatter(papertrail_formatter)
-            
+
             papertrail_handler.setLevel(logging.DEBUG)
-            
+
             app.logger.addHandler(papertrail_handler)
             app.logger.info("Papertrail logging configured")
         except Exception as e:

@@ -6,4 +6,4 @@ def init_app(app: Flask):
     app.logger.debug(f'Initializing blueprint {__name__}')
     # Add any testing-specific initialization here
 
-from . import routes, gmail_api
+from . import routes, gmail_api, zoho_api

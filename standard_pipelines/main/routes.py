@@ -126,41 +126,7 @@ def get_fireflies_credentials(client_id: UUID):
     except Exception as e:
         current_app.logger.error(f'Error retrieving Fireflies credentials: {str(e)}')
         return jsonify({'error': str(e)}), 500
-    
-@main.route('/credentials/openai', methods=['POST'])
-@require_api_key
-def create_openai_credentials():
-    try:
-        data = request.get_json()
         
-        # Validate required fields using set operations
-        required_fields = {'client_id', 'openai_api_key'}
-        missing_fields = required_fields - data.keys()
-        if missing_fields:
-            return jsonify({'error': f'Missing required fields: {", ".join(missing_fields)}'}), 400
-        
-        # Create new credentials
-        credentials = OpenAICredentials(
-            client_id=data['client_id'],
-            openai_api_key=data['openai_api_key']
-        )
-        
-        client = Client.query.get_or_404(data['client_id'])
-        credentials.client = client
-        
-        db.session.add(credentials)
-        db.session.commit()
-        
-        return jsonify({
-            'message': 'OpenAI credentials created successfully',
-            'id': str(credentials.id)
-        }), 201
-        
-    except Exception as e:
-        current_app.logger.error(f'Error creating OpenAI credentials: {str(e)}')
-        db.session.rollback()
-        return jsonify({'error': str(e)}), 500
-    
     
 @main.route('/credentials/anthropic', methods=['POST'])
 @require_api_key
