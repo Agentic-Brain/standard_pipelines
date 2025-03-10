@@ -100,3 +100,4 @@ from .zoho import routes as zoho_routes
 from .google import routes as google_routes
 from .sharpspring import routes as sharpspring_routes
 from .dialpad import routes as dialpad_routes
+from .openai import routes as openai_routes

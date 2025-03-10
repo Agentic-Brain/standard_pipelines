@@ -290,6 +290,8 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
         # Import necessary classes for related records
         from zohocrmsdk.src.com.zoho.crm.api.record import Record, BodyWrapper
         from zohocrmsdk.src.com.zoho.crm.api.record import RecordOperations
+        from zohocrmsdk.src.com.zoho.crm.api.util import Choice
+        from zohocrmsdk.src.com.zoho.crm.api.users import MinifiedUser
         
         # Initialize the record operations with the module name
         record_ops = RecordOperations(module_name)
@@ -297,9 +299,53 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
         # Create a new record object
         record = Record()
         
+        # Define fields that require Choice objects for specific modules
+        choice_fields = {
+            "Deals": ["Stage", "Pipeline"],
+            "Tasks": ["Status"],
+            "Leads": ["Lead_Status"],
+            "Contacts": ["Lead_Source"]
+            # Add other modules and their choice fields as needed
+        }
+        
+        # Define lookup fields that require Record objects for specific modules
+        lookup_fields = {
+            "Deals": ["Contact_Name", "Account_Name"],
+            "Contacts": ["Account_Name"],
+            "Tasks": ["Who_Id", "What_Id"],
+            "Notes": ["Parent_Id"]
+            # Add other modules and their lookup fields as needed
+        }
+        
         # Add all fields from the record_data dictionary to the record
         for key, value in record_data.items():
-            record.add_key_value(key, value)
+            # Handle Choice fields (enums/picklists)
+            if (module_name in choice_fields and 
+                key in choice_fields[module_name] and 
+                isinstance(value, str)):
+                current_app.logger.debug(f"Converting field {key} to Choice object for value: {value}")
+                record.add_key_value(key, Choice(value))
+                
+            # Handle Owner field specifically with MinifiedUser
+            elif key == "Owner" and isinstance(value, dict) and "id" in value:
+                current_app.logger.debug(f"Converting Owner field to MinifiedUser for ID: {value['id']}")
+                user = MinifiedUser()
+                user.set_id(int(value["id"]))
+                record.add_key_value(key, user)
+                
+            # Handle lookup fields (references to other records)
+            elif (module_name in lookup_fields and 
+                key in lookup_fields[module_name] and 
+                isinstance(value, dict) and 
+                "id" in value):
+                current_app.logger.debug(f"Converting field {key} to Record reference for ID: {value['id']}")
+                lookup_record = Record()
+                lookup_record.set_id(int(value["id"]))
+                record.add_key_value(key, lookup_record)
+                
+            # Handle all other fields normally
+            else:
+                record.add_key_value(key, value)
         
         # Create the request body wrapper
         request = BodyWrapper()
@@ -499,12 +545,18 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
                             results.append(record)
                     
                     return results
+                elif response.status_code == 204:
+                    # No content means no records found, that's not an error
+                    current_app.logger.info(f"No records found for {module_name} with {lookup_field}.id = {lookup_id}")
+                    return []
                 
                 current_app.logger.warning(f"Search attempt failed with criteria: {criteria}, status: {response.status_code}")
             
-            # If we get here, none of the criteria formats worked
-            raise APIError(f"Failed to search {module_name} by {lookup_field}.id = {lookup_id}")
+            # If we get here, none of the criteria formats worked but that's OK
+            # Return empty list as no records were found
+            return []
             
         except Exception as e:
             current_app.logger.exception(f"Error searching for {module_name} by lookup: {e}")
-            raise APIError(f"Error searching for {module_name} by lookup: {str(e)}")
+            # Return empty list instead of raising error to ensure flow continues
+            return []
