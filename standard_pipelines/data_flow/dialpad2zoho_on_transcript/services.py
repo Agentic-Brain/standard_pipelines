@@ -103,7 +103,7 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             person_data: Dictionary containing available contact information
             
         Returns:
-            Zoho contact record
+            Zoho contact record with normalized field names
         """
         current_app.logger.info(f"Finding or creating contact for: {person_data}")
         
@@ -148,23 +148,21 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
         if not contact:
             current_app.logger.info(f"Contact not found, creating new contact")
             
-            # Prepare contact data
+            # Prepare contact data using Zoho's expected field names
+            contact_data = {}
+            
+            # Split name into first and last name
             if person_data.get('name'):
                 name_parts = person_data['name'].split(' ', 1)
-                first_name = name_parts[0]
-                last_name = name_parts[1] if len(name_parts) > 1 else ""
+                contact_data["First_Name"] = name_parts[0]
+                contact_data["Last_Name"] = name_parts[1] if len(name_parts) > 1 else ""
             else:
                 # Use email prefix as first name if name not available
                 if person_data.get('email'):
-                    first_name = person_data['email'].split('@')[0]
+                    contact_data["First_Name"] = person_data['email'].split('@')[0]
                 else:
-                    first_name = "Unknown"
-                last_name = ""
-            
-            contact_data = {
-                "First_Name": first_name,
-                "Last_Name": last_name
-            }
+                    contact_data["First_Name"] = "Unknown"
+                contact_data["Last_Name"] = ""
             
             # Add email if available
             if person_data.get('email'):
@@ -177,6 +175,36 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             try:
                 contact = self.zoho_api_manager.create_record("Contacts", contact_data)
                 current_app.logger.info(f"Created new contact: {contact}")
+                
+                # Make sure the contact object has properly normalized field names
+                # so that our deal creation can find them later
+                normalized_contact = {}
+                
+                # Copy the original contact data
+                if isinstance(contact, dict):
+                    normalized_contact = contact.copy()
+                else:
+                    # If contact is not a dict, start with the ID at minimum
+                    normalized_contact = {"id": str(contact)}
+                
+                # Ensure First_Name and Last_Name fields exist
+                if "First_Name" not in normalized_contact and contact_data.get("First_Name"):
+                    normalized_contact["First_Name"] = contact_data["First_Name"]
+                
+                if "Last_Name" not in normalized_contact and contact_data.get("Last_Name"):
+                    normalized_contact["Last_Name"] = contact_data["Last_Name"]
+                
+                # Ensure Email field exists
+                if "Email" not in normalized_contact and contact_data.get("Email"):
+                    normalized_contact["Email"] = contact_data["Email"]
+                
+                # Ensure Phone field exists  
+                if "Phone" not in normalized_contact and contact_data.get("Phone"):
+                    normalized_contact["Phone"] = contact_data["Phone"]
+                
+                current_app.logger.debug(f"Normalized contact data: {normalized_contact}")
+                return normalized_contact
+                
             except APIError as e:
                 current_app.logger.error(f"Failed to create contact: {str(e)}")
                 raise
@@ -192,7 +220,7 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             host_user: Zoho user record for the host
             
         Returns:
-            Zoho deal record
+            Zoho deal record (always as a dictionary with at least an 'id' field)
         """
         current_app.logger.info(f"Finding or creating deal for contact ID: {contact.get('id')}")
         
@@ -238,9 +266,34 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             try:
                 deal = self.zoho_api_manager.create_record("Deals", deal_data)
                 current_app.logger.info(f"Created new deal: {deal}")
+                
+                # Ensure deal is a dictionary with at least an ID
+                if not isinstance(deal, dict):
+                    current_app.logger.warning(f"Deal returned from create_record is not a dictionary: {type(deal)}")
+                    if hasattr(deal, 'get') and callable(getattr(deal, 'get')):
+                        deal_id = deal.get('id')
+                        if deal_id:
+                            deal = {"id": deal_id}
+                    elif isinstance(deal, str):
+                        # Try to parse the deal ID from the string
+                        import re
+                        id_match = re.search(r"id=(\d+)", deal)
+                        if id_match:
+                            deal_id = id_match.group(1)
+                            deal = {"id": deal_id}
+                        else:
+                            # If we can't extract an ID, use the string as the ID (last resort)
+                            current_app.logger.warning(f"Could not extract ID from deal string, using as is: {deal}")
+                            deal = {"id": deal}
+                
             except APIError as e:
                 current_app.logger.error(f"Failed to create deal: {str(e)}")
                 raise
+    
+        # Final sanity check to ensure we return a dictionary
+        if not isinstance(deal, dict):
+            current_app.logger.warning(f"Deal is not a dictionary at the end of find_or_create_deal: {type(deal)}")
+            deal = {"id": str(deal)}
         
         return deal
 
@@ -366,6 +419,17 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             current_app.logger.error(f"Error processing deal: {str(e)}")
             raise
         
+        # Ensure deal has an ID property
+        deal_id = None
+        if isinstance(deal, dict) and 'id' in deal:
+            deal_id = deal['id']
+        elif hasattr(deal, 'get') and callable(getattr(deal, 'get')):
+            deal_id = deal.get('id')
+        else:
+            # Last resort - use the string representation
+            deal_id = str(deal)
+            current_app.logger.warning(f"Using deal string representation as ID: {deal_id}")
+        
         # Enrich transcript with contact information
         enriched_transcript = self.enrich_transcript(transcript, contact)
         
@@ -376,13 +440,13 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
         transcript_note_data = {
             "Note_Title": f"Call Transcript - {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}",
             "Note_Content": enriched_transcript,
-            "Parent_Id": {"id": deal.get('id'), "module": "Deals"}
+            "Parent_Id": {"id": deal_id, "module": "Deals"}
         }
         
         bant_note_data = {
             "Note_Title": f"BANT Analysis - {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}",
             "Note_Content": bant_analysis,
-            "Parent_Id": {"id": deal.get('id'), "module": "Deals"}
+            "Parent_Id": {"id": deal_id, "module": "Deals"}
         }
         
         return {

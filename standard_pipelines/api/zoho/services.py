@@ -271,7 +271,7 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
             }]
         }
 
-    def create_record(self, module_name: str, record_data: dict) -> t.Union[dict, list, str, None]:
+    def create_record(self, module_name: str, record_data: dict) -> dict:
         """
         Creates a record in Zoho CRM for any module type.
         
@@ -280,7 +280,7 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
             record_data: Dictionary containing the record data to be created
             
         Returns:
-            The created record data as a JSON-serializable dictionary
+            The created record data as a dictionary with at least an 'id' field
             
         Raises:
             APIError: If the record creation fails
@@ -375,11 +375,52 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
                 created_records = response.get_object().get_data()
                 if created_records:
                     created_record = created_records[0]
-                    current_app.logger.info(f"Successfully created {module_name} record with ID: {created_record.get_details().get('id')}")
-                    return self._serialize_zoho_object(created_record)
+                    # Try to get the details with proper serialization
+                    try:
+                        # First try to serialize the full record
+                        serialized_record = self._serialize_zoho_object(created_record)
+                        
+                        # Ensure we have a dictionary with at least the ID
+                        if isinstance(serialized_record, dict):
+                            current_app.logger.info(f"Successfully created {module_name} record with ID: {serialized_record.get('id')}")
+                            return serialized_record
+                        else:
+                            # If serialization didn't return a dict, extract details manually
+                            record_id = None
+                            if hasattr(created_record, 'get_details'):
+                                details = created_record.get_details()
+                                if isinstance(details, dict) and 'id' in details:
+                                    record_id = details['id']
+                            
+                            if record_id:
+                                # Return a simple dict with just the ID if that's all we have
+                                current_app.logger.info(f"Successfully created {module_name} record with ID: {record_id}")
+                                return {"id": record_id}
+                            else:
+                                # As a last resort, look for an ID in the string representation
+                                record_str = str(created_record)
+                                current_app.logger.debug(f"Extracting ID from string: {record_str}")
+                                import re
+                                id_match = re.search(r"id=(\d+)", record_str)
+                                if id_match:
+                                    record_id = id_match.group(1)
+                                    current_app.logger.info(f"Extracted {module_name} ID from string: {record_id}")
+                                    return {"id": record_id}
+                    
+                    except Exception as e:
+                        current_app.logger.warning(f"Error serializing record, extracting ID directly: {e}")
+                        
+                        # Fall back to directly extracting the ID from the record
+                        if hasattr(created_record, 'get_details'):
+                            details = created_record.get_details()
+                            if isinstance(details, dict) and 'id' in details:
+                                record_id = details['id']
+                                current_app.logger.info(f"Extracted {module_name} ID directly: {record_id}")
+                                return {"id": record_id}
             
-            raise APIError(f"Failed to create {module_name} record. No data returned.")
-            
+            # If we reach here, we couldn't extract a record ID properly
+            raise APIError(f"Failed to extract ID from created {module_name} record.")
+        
         except Exception as e:
             current_app.logger.exception(f"Error creating {module_name} record: {e}")
             if isinstance(e, APIError):
