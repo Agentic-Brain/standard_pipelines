@@ -98,6 +98,7 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
     def find_or_create_contact(self, person_data: dict) -> dict:
         """
         Find or create a contact in Zoho based on email, phone number, or name.
+        Uses multiple search methods to minimize duplicate creation.
         
         Args:
             person_data: Dictionary containing available contact information
@@ -109,6 +110,8 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
         
         # Try to find contact by available identifiers
         contact = None
+        
+        # STEP 1: Direct search with all available criteria
         search_criteria = {}
         
         # Build search criteria from available data
@@ -116,16 +119,24 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             search_criteria['email'] = person_data['email']
         
         if person_data.get('phonenumber'):
+            # Try different phone formats to increase match chances
             phone = person_data['phonenumber']
-            # Normalize phone number format if needed
+            # Store original for logging
+            original_phone = phone
+            
+            # Normalize: remove any non-digit characters for comparison
+            import re
+            digits_only = re.sub(r'\D', '', phone)
+            
+            # Try different formats - with country code, without, etc.
             if phone.startswith('+'):
-                # Remove the '+' for searching
-                phone = phone[1:]
-            search_criteria['phone'] = phone
+                # Without the '+' for searching
+                search_criteria['phone'] = phone[1:]
+            else:
+                search_criteria['phone'] = phone
         
-        # Use name as a last resort if available
-        if person_data.get('name') and not (search_criteria.get('email') or search_criteria.get('phone')):
-            # Since name can be ambiguous, only use it if no other identifiers are available
+        # Use name as an additional search criterion when available
+        if person_data.get('name'):
             name_parts = person_data['name'].split(' ', 1)
             if len(name_parts) > 1:
                 search_criteria['first_name'] = name_parts[0]
@@ -140,80 +151,189 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
                 # Use match_all=False to perform an OR search across all fields
                 contact = self.zoho_api_manager.get_record_by_field("Contacts", search_criteria, match_all=False)
                 if contact:
-                    current_app.logger.info(f"Found contact: {contact.get('id')}")
+                    current_app.logger.info(f"Found contact by combined criteria: {contact.get('id')}")
+                    return contact
             except Exception as e:
-                current_app.logger.warning(f"Error searching for contact: {e}")
+                current_app.logger.warning(f"Error searching for contact with combined criteria: {e}")
         
-        # Create new contact if not found
+        # STEP 2: If not found, try searching by individual criteria for maximum flexibility
         if not contact:
-            current_app.logger.info(f"Contact not found, creating new contact")
-            
-            # Prepare contact data using Zoho's expected field names
-            contact_data = {}
-            
-            # Split name into first and last name
-            if person_data.get('name'):
-                name_parts = person_data['name'].split(' ', 1)
-                contact_data["First_Name"] = name_parts[0]
-                contact_data["Last_Name"] = name_parts[1] if len(name_parts) > 1 else ""
-            else:
-                # Use email prefix as first name if name not available
-                if person_data.get('email'):
-                    contact_data["First_Name"] = person_data['email'].split('@')[0]
-                else:
-                    contact_data["First_Name"] = "Unknown"
-                contact_data["Last_Name"] = ""
-            
-            # Add email if available
+            # Try by email first (most reliable identifier)
             if person_data.get('email'):
-                contact_data["Email"] = person_data['email']
+                try:
+                    email_result = self.zoho_api_manager.get_record_by_field("Contacts", {'email': person_data['email']})
+                    if email_result:
+                        current_app.logger.info(f"Found contact by email: {email_result.get('id')}")
+                        return email_result
+                except Exception as e:
+                    current_app.logger.warning(f"Error searching by email: {e}")
             
-            # Add phone if available
+            # Try by phone number if email didn't work
             if person_data.get('phonenumber'):
-                contact_data["Phone"] = person_data['phonenumber']
-            
-            try:
-                contact = self.zoho_api_manager.create_record("Contacts", contact_data)
-                current_app.logger.info(f"Created new contact: {contact}")
-                
-                # Make sure the contact object has properly normalized field names
-                # so that our deal creation can find them later
-                normalized_contact = {}
-                
-                # Copy the original contact data
-                if isinstance(contact, dict):
-                    normalized_contact = contact.copy()
-                else:
-                    # If contact is not a dict, start with the ID at minimum
-                    normalized_contact = {"id": str(contact)}
-                
-                # Ensure First_Name and Last_Name fields exist
-                if "First_Name" not in normalized_contact and contact_data.get("First_Name"):
-                    normalized_contact["First_Name"] = contact_data["First_Name"]
-                
-                if "Last_Name" not in normalized_contact and contact_data.get("Last_Name"):
-                    normalized_contact["Last_Name"] = contact_data["Last_Name"]
-                
-                # Ensure Email field exists
-                if "Email" not in normalized_contact and contact_data.get("Email"):
-                    normalized_contact["Email"] = contact_data["Email"]
-                
-                # Ensure Phone field exists  
-                if "Phone" not in normalized_contact and contact_data.get("Phone"):
-                    normalized_contact["Phone"] = contact_data["Phone"]
-                
-                current_app.logger.debug(f"Normalized contact data: {normalized_contact}")
-                return normalized_contact
-                
-            except APIError as e:
-                current_app.logger.error(f"Failed to create contact: {str(e)}")
-                raise
+                try:
+                    # Try with original phone format
+                    phone_result = self.zoho_api_manager.get_record_by_field("Contacts", {'phone': person_data['phonenumber']})
+                    if phone_result:
+                        current_app.logger.info(f"Found contact by phone: {phone_result.get('id')}")
+                        return phone_result
+                    
+                    # If not found, try with modified formats
+                    if person_data['phonenumber'].startswith('+'):
+                        phone_no_plus = person_data['phonenumber'][1:]
+                        phone_result = self.zoho_api_manager.get_record_by_field("Contacts", {'phone': phone_no_plus})
+                        if phone_result:
+                            current_app.logger.info(f"Found contact by phone (no plus): {phone_result.get('id')}")
+                            return phone_result
+                    
+                    # Try with just digits
+                    if 'digits_only' in locals():
+                        phone_result = self.zoho_api_manager.get_record_by_field("Contacts", {'phone': digits_only})
+                        if phone_result:
+                            current_app.logger.info(f"Found contact by phone (digits only): {phone_result.get('id')}")
+                            return phone_result
+                except Exception as e:
+                    current_app.logger.warning(f"Error searching by phone: {e}")
         
-        return contact
+        # STEP 3: Search by name as a last resort
+        if not contact and person_data.get('name'):
+            try:
+                name_parts = person_data['name'].split(' ', 1)
+                if len(name_parts) > 1:
+                    # Try to find by first name and last name
+                    name_result = self.zoho_api_manager.get_record_by_field(
+                        "Contacts", 
+                        {'first_name': name_parts[0], 'last_name': name_parts[1]},
+                        match_all=True
+                    )
+                    if name_result:
+                        current_app.logger.info(f"Found contact by full name: {name_result.get('id')}")
+                        return name_result
+                else:
+                    # Try by first name only
+                    name_result = self.zoho_api_manager.get_record_by_field("Contacts", {'first_name': name_parts[0]})
+                    if name_result:
+                        current_app.logger.info(f"Found contact by first name: {name_result.get('id')}")
+                        return name_result
+            except Exception as e:
+                current_app.logger.warning(f"Error searching by name: {e}")
+        
+        # STEP 4: Get all contacts and do a manual search as a last resort
+        try:
+            current_app.logger.info("Performing manual search across all contacts")
+            # Implement a direct API call to get all contacts (filter by recently created for efficiency)
+            import requests
+            headers = {
+                "Authorization": f"Zoho-oauthtoken {self.zoho_api_manager.access_token}",
+                "Content-Type": "application/json"
+            }
+            
+            # Get recent contacts (last 30 days)
+            from datetime import datetime, timedelta
+            thirty_days_ago = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
+            
+            url = f"https://www.zohoapis.com/crm/v2/Contacts?fields=id,First_Name,Last_Name,Email,Phone&sort_by=Created_Time&sort_order=desc"
+            response = requests.get(url, headers=headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                if data.get('data'):
+                    for record in data['data']:
+                        # Check for email match
+                        if person_data.get('email') and record.get('Email') and record['Email'].lower() == person_data['email'].lower():
+                            current_app.logger.info(f"Found contact by manual email search: {record.get('id')}")
+                            return record
+                        
+                        # Check for phone match (with flexibility)
+                        if person_data.get('phonenumber') and record.get('Phone'):
+                            # Normalize both phone numbers for comparison
+                            record_phone = re.sub(r'\D', '', record['Phone'])
+                            person_phone = re.sub(r'\D', '', person_data['phonenumber'])
+                            
+                            # Compare the last 10 digits (ignore country codes)
+                            if record_phone[-10:] == person_phone[-10:]:
+                                current_app.logger.info(f"Found contact by manual phone search: {record.get('id')}")
+                                return record
+                        
+                        # Check for name match
+                        if person_data.get('name') and record.get('First_Name') and record.get('Last_Name'):
+                            person_name = person_data['name'].lower()
+                            record_name = f"{record['First_Name']} {record['Last_Name']}".lower()
+                            
+                            if person_name == record_name:
+                                current_app.logger.info(f"Found contact by manual name search: {record.get('id')}")
+                                return record
+        except Exception as e:
+            current_app.logger.warning(f"Error during manual contact search: {e}")
+        
+        # STEP 5: Create new contact if not found after all search attempts
+        current_app.logger.info(f"Contact not found after extensive search, creating new contact")
+        
+        # Prepare contact data using Zoho's expected field names
+        contact_data = {}
+        
+        # Split name into first and last name
+        if person_data.get('name'):
+            name_parts = person_data['name'].split(' ', 1)
+            contact_data["First_Name"] = name_parts[0]
+            contact_data["Last_Name"] = name_parts[1] if len(name_parts) > 1 else ""
+        else:
+            # Use email prefix as first name if name not available
+            if person_data.get('email'):
+                contact_data["First_Name"] = person_data['email'].split('@')[0]
+            else:
+                contact_data["First_Name"] = "Unknown"
+            contact_data["Last_Name"] = ""
+        
+        # Add email if available
+        if person_data.get('email'):
+            contact_data["Email"] = person_data['email']
+        
+        # Add phone if available
+        if person_data.get('phonenumber'):
+            contact_data["Phone"] = person_data['phonenumber']
+        
+        try:
+            contact = self.zoho_api_manager.create_record("Contacts", contact_data)
+            current_app.logger.info(f"Created new contact: {contact}")
+            
+            # Make sure the contact object has properly normalized field names
+            # so that our deal creation can find them later
+            normalized_contact = {}
+            
+            # Copy the original contact data
+            if isinstance(contact, dict):
+                normalized_contact = contact.copy()
+            else:
+                # If contact is not a dict, start with the ID at minimum
+                normalized_contact = {"id": str(contact)}
+            
+            # Ensure First_Name and Last_Name fields exist
+            if "First_Name" not in normalized_contact and contact_data.get("First_Name"):
+                normalized_contact["First_Name"] = contact_data["First_Name"]
+            
+            if "Last_Name" not in normalized_contact and contact_data.get("Last_Name"):
+                normalized_contact["Last_Name"] = contact_data["Last_Name"]
+            
+            # Ensure Email field exists
+            if "Email" not in normalized_contact and contact_data.get("Email"):
+                normalized_contact["Email"] = contact_data["Email"]
+            
+            # Ensure Phone field exists  
+            if "Phone" not in normalized_contact and contact_data.get("Phone"):
+                normalized_contact["Phone"] = contact_data["Phone"]
+            
+            current_app.logger.debug(f"Normalized contact data: {normalized_contact}")
+            return normalized_contact
+            
+        except APIError as e:
+            current_app.logger.error(f"Failed to create contact: {str(e)}")
+            raise
 
     def find_or_create_deal(self, contact: dict, host_user: dict = None) -> dict:
         """
         Find or create a deal associated with the contact.
+        Uses multiple search methods to minimize duplicate creation.
         
         Args:
             contact: Zoho contact record
@@ -227,6 +347,11 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
         deal = None
         contact_id = contact.get('id')
         
+        if not contact_id:
+            current_app.logger.warning(f"Contact doesn't have an ID, cannot find or create deal")
+            raise ValueError("Contact ID is required to find or create a deal")
+        
+        # STEP 1: Search for deals by contact lookup field
         if contact_id:
             try:
                 # Try to find existing deals associated with this contact
@@ -234,68 +359,185 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
                 
                 if deals and len(deals) > 0:
                     deal = deals[0]
-                    current_app.logger.info(f"Found existing deal: {deal.get('id')}")
+                    current_app.logger.info(f"Found existing deal by contact ID lookup: {deal.get('id')}")
+                    return deal
+                else:
+                    current_app.logger.debug(f"No deals found via contact lookup field")
             except APIError as e:
-                current_app.logger.warning(f"Error searching for deals: {str(e)}")
+                current_app.logger.warning(f"Error searching for deals by lookup: {str(e)}")
         
-        # Create new deal if not found
-        if not deal:
-            current_app.logger.info("No deal found, creating new deal")
+        # STEP 2: Direct API call to search for deals associated with this contact
+        try:
+            current_app.logger.info(f"Trying direct API search for deals with contact ID: {contact_id}")
+            import requests
             
-            # Get contact's full name for deal name
-            contact_first_name = contact.get('First_Name', '')
-            contact_last_name = contact.get('Last_Name', '')
-            contact_name = f"{contact_first_name} {contact_last_name}".strip()
-            if not contact_name:
-                contact_name = contact.get('Email', 'Unknown Contact')
-            
-            if not self.configuration.initial_deal_stage_id or type(self.configuration.initial_deal_stage_id) != str:
-                raise ValueError("No initial deal stage ID configured")
-            
-            # Prepare deal data
-            deal_data = {
-                "Deal_Name": f"Deal for {contact_name}",
-                "Stage": self.configuration.initial_deal_stage_id,  # Assuming this is configured
-                "Contact_Name": {"id": contact_id}  # Link to contact
+            headers = {
+                "Authorization": f"Zoho-oauthtoken {self.zoho_api_manager.access_token}",
+                "Content-Type": "application/json"
             }
             
-            # Add owner if host user is available
-            if host_user and host_user.get('id'):
-                deal_data["Owner"] = {"id": host_user.get('id')}
+            # Try different query formats for maximum compatibility
+            search_criteria_options = [
+                f"(Contact_Name.id:equals:{contact_id})",
+                f"(Contact_Name:(id:equals:{contact_id}))"
+            ]
             
-            try:
-                deal = self.zoho_api_manager.create_record("Deals", deal_data)
-                current_app.logger.info(f"Created new deal: {deal}")
+            for criteria in search_criteria_options:
+                url = f"https://www.zohoapis.com/crm/v2/Deals/search?criteria={criteria}"
+                current_app.logger.debug(f"Direct API search URL: {url}")
                 
-                # Ensure deal is a dictionary with at least an ID
-                if not isinstance(deal, dict):
-                    current_app.logger.warning(f"Deal returned from create_record is not a dictionary: {type(deal)}")
-                    if hasattr(deal, 'get') and callable(getattr(deal, 'get')):
-                        deal_id = deal.get('id')
-                        if deal_id:
-                            deal = {"id": deal_id}
-                    elif isinstance(deal, str):
-                        # Try to parse the deal ID from the string
-                        import re
-                        id_match = re.search(r"id=(\d+)", deal)
-                        if id_match:
-                            deal_id = id_match.group(1)
-                            deal = {"id": deal_id}
-                        else:
-                            # If we can't extract an ID, use the string as the ID (last resort)
-                            current_app.logger.warning(f"Could not extract ID from deal string, using as is: {deal}")
-                            deal = {"id": deal}
+                response = requests.get(url, headers=headers)
                 
-            except APIError as e:
-                current_app.logger.error(f"Failed to create deal: {str(e)}")
-                raise
-    
+                if response.status_code == 200:
+                    data = response.json()
+                    
+                    if data.get('data') and len(data['data']) > 0:
+                        deal = data['data'][0]
+                        current_app.logger.info(f"Found existing deal by direct API search: {deal.get('id')}")
+                        return deal
+                
+                elif response.status_code != 204:  # 204 just means no content/no matches
+                    current_app.logger.warning(f"Search attempt with criteria {criteria} returned status: {response.status_code}")
+        
+        except Exception as e:
+            current_app.logger.warning(f"Error during direct API search for deals: {str(e)}")
+        
+        # STEP 3: Search all deals with potential name match
+        try:
+            # Get contact's name to search for deals with similar names
+            contact_name = self._extract_contact_name(contact)
+            
+            if contact_name and contact_name != "Unknown Contact":
+                current_app.logger.info(f"Searching for deals with name containing: {contact_name}")
+                
+                # Get all deals and filter manually - this is a fallback approach
+                url = "https://www.zohoapis.com/crm/v2/Deals?fields=id,Deal_Name,Contact_Name"
+                
+                response = requests.get(url, headers=headers)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    
+                    if data.get('data'):
+                        # Try to find deals with the contact name in the deal name
+                        for deal_record in data['data']:
+                            if deal_record.get('Deal_Name') and contact_name in deal_record['Deal_Name']:
+                                current_app.logger.info(f"Found deal by name match: {deal_record.get('id')}")
+                                return deal_record
+        except Exception as e:
+            current_app.logger.warning(f"Error searching all deals: {str(e)}")
+        
+        # STEP 4: Create new deal if not found after all search attempts
+        current_app.logger.info("No deal found after extensive search, creating new deal")
+        
+        # Get contact's name for deal naming
+        contact_name = self._extract_contact_name(contact)
+        
+        if not self.configuration.initial_deal_stage_id or type(self.configuration.initial_deal_stage_id) != str:
+            raise ValueError("No initial deal stage ID configured")
+        
+        # Prepare deal data
+        deal_data = {
+            "Deal_Name": f"Deal for {contact_name}",
+            "Stage": self.configuration.initial_deal_stage_id,
+            "Contact_Name": {"id": contact_id}
+        }
+        
+        # Add owner if host user is available
+        if host_user and host_user.get('id'):
+            deal_data["Owner"] = {"id": host_user.get('id')}
+        
+        try:
+            deal = self.zoho_api_manager.create_record("Deals", deal_data)
+            current_app.logger.info(f"Created new deal: {deal}")
+            
+            # Ensure deal is a dictionary with at least an ID
+            if not isinstance(deal, dict):
+                current_app.logger.warning(f"Deal returned from create_record is not a dictionary: {type(deal)}")
+                if hasattr(deal, 'get') and callable(getattr(deal, 'get')):
+                    deal_id = deal.get('id')
+                    if deal_id:
+                        deal = {"id": deal_id}
+                elif isinstance(deal, str):
+                    # Try to parse the deal ID from the string
+                    import re
+                    id_match = re.search(r"id=(\d+)", deal)
+                    if id_match:
+                        deal_id = id_match.group(1)
+                        deal = {"id": deal_id}
+                    else:
+                        # If we can't extract an ID, use the string as the ID (last resort)
+                        current_app.logger.warning(f"Could not extract ID from deal string, using as is: {deal}")
+                        deal = {"id": deal}
+            
+        except APIError as e:
+            current_app.logger.error(f"Failed to create deal: {str(e)}")
+            raise
+        
         # Final sanity check to ensure we return a dictionary
         if not isinstance(deal, dict):
             current_app.logger.warning(f"Deal is not a dictionary at the end of find_or_create_deal: {type(deal)}")
             deal = {"id": str(deal)}
         
         return deal
+
+    def _extract_contact_name(self, contact: dict) -> str:
+        """
+        Helper method to extract the contact name from a contact object
+        using multiple possible field name formats.
+        
+        Args:
+            contact: Contact dictionary
+            
+        Returns:
+            Extracted contact name or "Unknown Contact" if not found
+        """
+        # Log the entire contact object to debug field name issues
+        current_app.logger.debug(f"Extracting name from contact: {json.dumps(contact, indent=2)}")
+        
+        # Try different field name formats that might exist in the contact object
+        possible_first_name_fields = ['First_Name', 'first_name', 'firstName', 'firstname', 'FirstName']
+        possible_last_name_fields = ['Last_Name', 'last_name', 'lastName', 'lastname', 'LastName']
+        
+        # Extract first name
+        first_name = ''
+        for field in possible_first_name_fields:
+            if field in contact:
+                first_name = contact[field]
+                current_app.logger.debug(f"Found first name in field {field}: {first_name}")
+                break
+                
+        # Extract last name
+        last_name = ''
+        for field in possible_last_name_fields:
+            if field in contact:
+                last_name = contact[field]
+                current_app.logger.debug(f"Found last name in field {field}: {last_name}")
+                break
+        
+        # Build full name if we have components
+        contact_name = "Unknown Contact"
+        if first_name or last_name:
+            contact_name = f"{first_name} {last_name}".strip()
+            current_app.logger.info(f"Using contact name: {contact_name}")
+        
+        # If we still don't have a name, try email or other identifiers
+        if not contact_name or contact_name == "Unknown Contact":
+            for email_field in ['Email', 'email', 'emailAddress', 'email_address']:
+                if email_field in contact and contact[email_field]:
+                    contact_name = contact[email_field]
+                    current_app.logger.info(f"Using email as contact name: {contact_name}")
+                    break
+            
+            # Last resort - check for phone
+            if not contact_name or contact_name == "Unknown Contact":
+                for phone_field in ['Phone', 'phone', 'phoneNumber', 'phone_number']:
+                    if phone_field in contact and contact[phone_field]:
+                        contact_name = contact[phone_field]
+                        current_app.logger.info(f"Using phone as contact name: {contact_name}")
+                        break
+        
+        return contact_name
 
     def enrich_transcript(self, transcript: str, contact: dict) -> str:
         """

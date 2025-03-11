@@ -549,12 +549,15 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
     def search_by_lookup_field(self, module_name: str, lookup_field: str, lookup_id: str) -> list[dict]:
         """
         Search for records by a lookup field's ID using direct REST API.
+        Enhanced to be more reliable and prevent duplicates.
         """
         # Ensure module name and lookup field are properly formatted
         module_name = module_name.capitalize()
         lookup_field = self._format_zoho_field_name(lookup_field)
         
         current_app.logger.info(f"Searching for {module_name} with {lookup_field}.id = {lookup_id}")
+        
+        results = []
         
         try:
             # Use direct REST API call instead of SDK
@@ -565,14 +568,17 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
                 "Content-Type": "application/json"
             }
             
-            # Try both query formats
+            # Try different query formats with better URL encoding
+            import urllib.parse
+            
             criteria_options = [
                 f"({lookup_field}:(id:equals:{lookup_id}))",
                 f"({lookup_field}.id:equals:{lookup_id})"
             ]
             
             for criteria in criteria_options:
-                url = f"https://www.zohoapis.com/crm/v2/{module_name}/search?criteria={criteria}"
+                encoded_criteria = urllib.parse.quote(criteria)
+                url = f"https://www.zohoapis.com/crm/v2/{module_name}/search?criteria={encoded_criteria}"
                 current_app.logger.debug(f"Search URL: {url}")
                 
                 response = requests.get(url, headers=headers)
@@ -580,21 +586,45 @@ class ZohoAPIManager(BaseAPIManager, metaclass=ABCMeta):
                 if response.status_code == 200:
                     data = response.json()
                     
-                    results = []
                     if data.get('data'):
                         for record in data['data']:
                             results.append(record)
+                        
+                        current_app.logger.info(f"Found {len(results)} records with criteria: {criteria}")
+                        return results
                     
-                    return results
                 elif response.status_code == 204:
                     # No content means no records found, that's not an error
-                    current_app.logger.info(f"No records found for {module_name} with {lookup_field}.id = {lookup_id}")
-                    return []
-                
-                current_app.logger.warning(f"Search attempt failed with criteria: {criteria}, status: {response.status_code}")
+                    current_app.logger.info(f"No records found for {module_name} with criteria: {criteria}")
+                else:
+                    current_app.logger.warning(f"Search attempt failed with criteria: {criteria}, status: {response.status_code}")
             
-            # If we get here, none of the criteria formats worked but that's OK
-            # Return empty list as no records were found
+            # If lookup search didn't work, try a more general search where
+            # we manually filter the results
+            if not results:
+                current_app.logger.info(f"Trying fallback search for {module_name} related to ID {lookup_id}")
+                
+                # Get recent records of the module type
+                url = f"https://www.zohoapis.com/crm/v2/{module_name}?fields=id,{lookup_field}"
+                
+                response = requests.get(url, headers=headers)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    
+                    if data.get('data'):
+                        # Manually check if any records have the lookup field with matching ID
+                        for record in data['data']:
+                            # Check if the lookup field exists and has the right ID
+                            if record.get(lookup_field) and isinstance(record[lookup_field], dict):
+                                if record[lookup_field].get('id') == lookup_id:
+                                    results.append(record)
+                                    current_app.logger.info(f"Found matching record via manual filtering: {record.get('id')}")
+                
+                if results:
+                    return results
+            
+            # Return empty list if no results found
             return []
             
         except Exception as e:
