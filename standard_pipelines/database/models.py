@@ -80,30 +80,33 @@ class ScheduledMixin(BaseMixin):
           3. Optionally increments run count and handles max run logic.
           4. Commits the changes.
         """
-        success = task_callable()
-        now = datetime.utcnow()
-        if success:
-            # Update the "next run" field if an interval is set; otherwise, clear it.
-            interval = getattr(self, interval_attr)
-            if interval is not None:
-                setattr(self, next_run_attr, now + timedelta(minutes=interval))
-            else:
-                setattr(self, next_run_attr, None)
-
-            # For trigger jobs, update run count and check for max runs.
-            if update_run_count:
-                self.increment_run_count()
-                if self.max_runs is not None and self.run_count >= self.max_runs:
+        try:
+            success = task_callable()
+            now = datetime.utcnow()
+            if success:
+                # Update the "next run" field if an interval is set; otherwise, clear it.
+                interval = getattr(self, interval_attr)
+                if interval is not None:
+                    setattr(self, next_run_attr, now + timedelta(minutes=interval))
+                else:
                     setattr(self, next_run_attr, None)
-                    # If this is a job, also disable recurring.
-                    if next_run_attr == "scheduled_time":
-                        self.recurrence_interval = None
-            db.session.commit()
-            
-        else:
+
+                # For trigger jobs, update run count and check for max runs.
+                if update_run_count:
+                    self.increment_run_count()
+                    if self.max_runs is not None and self.run_count >= self.max_runs:
+                        setattr(self, next_run_attr, None)
+                        # If this is a job, also disable recurring.
+                        if next_run_attr == "scheduled_time":
+                            self.recurrence_interval = None
+                db.session.commit()
+            else:
+                db.session.rollback()
+                raise ScheduledJobError(f"Task returned failure for {self.__class__.__name__} {self.id}")
+        except Exception as e:
             db.session.rollback()
             sentry_sdk.capture_exception(e)
-            raise ScheduledJobError(f"Task failed for {self.__class__.__name__} {self.id}")
+            raise ScheduledJobError(f"Task failed for {self.__class__.__name__} {self.id}: {str(e)}")
 
 
     def trigger_job(self) -> None:
