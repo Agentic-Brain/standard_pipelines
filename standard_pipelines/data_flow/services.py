@@ -3,8 +3,8 @@ from .models import ClientDataFlowJoin, DataFlow
 from .utils import BaseDataFlow,DataFlowRegistryMeta
 from standard_pipelines.api.dialpad.models import DialpadCredentials
 import jwt
-
-
+import sentry_sdk
+from standard_pipelines.extensions import db
 def determine_data_flow_service(client_data_flow_join_id: str) -> BaseDataFlow:
     client_data_flow = ClientDataFlowJoin.query.filter_by(id=str(client_data_flow_join_id)).first()
     if not client_data_flow:
@@ -20,8 +20,13 @@ def determine_data_flow_service(client_data_flow_join_id: str) -> BaseDataFlow:
     return data_flow_class(client_id=client_id)
 
 def process_webhook(client_data_flow_join_id: str, webhook_data):
-    data_flow_service = determine_data_flow_service(client_data_flow_join_id)
-    data_flow_service.webhook_run(webhook_data)
+    try:
+        data_flow_service = determine_data_flow_service(client_data_flow_join_id)
+        data_flow_service.webhook_run(webhook_data)
+    except Exception as e:
+        current_app.logger.error(f'Error processing webhook: {str(e)}')
+        sentry_sdk.capture_exception(e)
+        db.session.rollback()
 
 def extract_webhook_data(request, client_data_flow_join_id=None):
     if request.mimetype == 'application/json':

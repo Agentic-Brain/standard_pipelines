@@ -37,6 +37,7 @@ class Config:
         'SECURITY_TWO_FACTOR': False,
         'SECURITY_TRACKABLE': True,
         'SENTRY_DSN': None,
+        'ENABLE_PAPERTRAIL_LOGGING': False,
     }
 
     # API Usage flags

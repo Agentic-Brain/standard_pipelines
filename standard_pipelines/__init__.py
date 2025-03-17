@@ -48,7 +48,8 @@ def create_app():
     app.config.from_object(config)
 
     # Initialize Papertrail logging after config is loaded
-    init_papertrail_logging(app)
+    if app.config.get('ENABLE_PAPERTRAIL_LOGGING'):
+        init_papertrail_logging(app)
 
     migrate.init_app(app, db)
     
