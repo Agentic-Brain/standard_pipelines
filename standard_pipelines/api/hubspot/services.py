@@ -149,6 +149,43 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
     def create_note(self, note_object: CreatableNoteHubSpotObject) -> ExtantNoteHubSpotObject:
         note: NoteObject = self._api_client.crm.objects.notes.basic_api.create(note_object.hubspot_object_dict)
         return ExtantNoteHubSpotObject(note.to_dict(), self)
+        
+    def update_field(self, object_type: str, object_id: int, field_name: str, field_value: str) -> dict:
+        """Update a field in a HubSpot object.
+        
+        Args:
+            object_type: The type of object (e.g., "contacts", "deals")
+            object_id: The ID of the object to update
+            field_name: The name of the field to update
+            field_value: The new value for the field
+            
+        Returns:
+            The updated object as a dictionary
+            
+        Raises:
+            APIError: If the object doesn't exist or the field update fails
+        """
+        try:
+            # Create a simple object with just the properties to update
+            properties = {"properties": {field_name: field_value}}
+            
+            # Use the appropriate API based on object type
+            if object_type == "contact":
+                updated_object = self._api_client.crm.contacts.basic_api.update(str(object_id), properties)
+            elif object_type == "deal":
+                updated_object = self._api_client.crm.deals.basic_api.update(str(object_id), properties)
+            elif object_type == "meeting":
+                updated_object = self._api_client.crm.objects.meetings.basic_api.update(str(object_id), properties)
+            elif object_type == "note":
+                updated_object = self._api_client.crm.objects.notes.basic_api.update(str(object_id), properties)
+            else:
+                # Generic object update for other types
+                updated_object = self._api_client.crm.objects.basic_api.update(object_type, str(object_id), properties)
+                
+            return updated_object.to_dict()
+        except Exception as e:
+            current_app.logger.error(f"Error updating {object_type} field {field_name}: {str(e)}")
+            raise APIError(f"Failed to update {field_name} for {object_type} with ID {object_id}: {str(e)}")
 
 class HubSpotObject(metaclass=ABCMeta):
 

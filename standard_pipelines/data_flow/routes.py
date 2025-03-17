@@ -32,6 +32,7 @@ def webhook(client_data_flow_join_id: str):
         except Exception as e:
             current_app.logger.error(f'Error processing webhook: {str(e)}')
             sentry_sdk.capture_exception(e)
+            db.session.rollback()
             return jsonify({'error': 'Internal server error'}), 500
     
     return jsonify({'error': 'Method not allowed'}), 405
