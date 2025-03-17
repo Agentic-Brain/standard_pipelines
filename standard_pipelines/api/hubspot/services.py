@@ -170,13 +170,13 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
             properties = {"properties": {field_name: field_value}}
             
             # Use the appropriate API based on object type
-            if object_type == "contacts":
+            if object_type == "contact":
                 updated_object = self._api_client.crm.contacts.basic_api.update(str(object_id), properties)
-            elif object_type == "deals":
+            elif object_type == "deal":
                 updated_object = self._api_client.crm.deals.basic_api.update(str(object_id), properties)
-            elif object_type.startswith("meetings"):
+            elif object_type == "meeting":
                 updated_object = self._api_client.crm.objects.meetings.basic_api.update(str(object_id), properties)
-            elif object_type.startswith("notes"):
+            elif object_type == "note":
                 updated_object = self._api_client.crm.objects.notes.basic_api.update(str(object_id), properties)
             else:
                 # Generic object update for other types

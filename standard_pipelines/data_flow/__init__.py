@@ -8,6 +8,7 @@ from standard_pipelines.database import db
 from .ff2hs_on_transcript.services import FF2HSOnTranscript
 from .dialpad2zoho_on_transcript.services import Dialpad2ZohoOnTranscript
 from .gmail_interval_followup.services import GmailIntervalFollowup
+from .add_data_to_hubspot_field.services import AddDataToHubspotField
 
 data_flow = Blueprint('data_flow', __name__)
 
