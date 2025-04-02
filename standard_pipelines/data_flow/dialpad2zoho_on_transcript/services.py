@@ -95,34 +95,33 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             "host": participants.get("host"),
         }
 
-    def find_or_create_contact(self, person_data: dict) -> dict:
+    def find_lead_or_contact(self, person_data: dict) -> tuple[dict, str]:
         """
-        Find or create a contact in Zoho based on email, phone number, or name.
+        Find a lead or contact in Zoho based on email, phone number, or name.
         Uses multiple search methods to minimize duplicate creation.
         
         Args:
             person_data: Dictionary containing available contact information
             
         Returns:
-            Zoho contact record with normalized field names
+            Tuple of (record, module_name) where record is the Zoho record with 
+            normalized field names, and module_name is either "Leads" or "Contacts"
         """
-        current_app.logger.info(f"Finding or creating contact for: {person_data}")
+        current_app.logger.info(f"Finding lead or contact for: {person_data}")
         
         # Try to find contact by available identifiers
-        contact = None
+        record = None
+        module_name = None
         
-        # STEP 1: Direct search with all available criteria
+        # STEP 1: Build search criteria from available data
         search_criteria = {}
         
-        # Build search criteria from available data
         if person_data.get('email'):
             search_criteria['email'] = person_data['email']
         
         if person_data.get('phonenumber'):
             # Try different phone formats to increase match chances
             phone = person_data['phonenumber']
-            # Store original for logging
-            original_phone = phone
             
             # Normalize: remove any non-digit characters for comparison
             import re
@@ -144,60 +143,130 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             else:
                 search_criteria['first_name'] = name_parts[0]
         
-        # Try to find the contact with all available criteria at once (OR search)
+        # STEP 2: First search in Leads, then in Contacts
         if search_criteria:
+            # Search in Leads first
+            try:
+                current_app.logger.debug(f"Searching for lead with criteria: {search_criteria}")
+                # Use match_all=False to perform an OR search across all fields
+                lead = self.zoho_api_manager.get_record_by_field("Leads", search_criteria, match_all=False)
+                if lead:
+                    current_app.logger.info(f"Found lead by combined criteria: {lead.get('id')}")
+                    return lead, "Leads"
+            except Exception as e:
+                current_app.logger.warning(f"Error searching for lead with combined criteria: {e}")
+            
+            # If no lead found, search in Contacts
             try:
                 current_app.logger.debug(f"Searching for contact with criteria: {search_criteria}")
                 # Use match_all=False to perform an OR search across all fields
                 contact = self.zoho_api_manager.get_record_by_field("Contacts", search_criteria, match_all=False)
                 if contact:
                     current_app.logger.info(f"Found contact by combined criteria: {contact.get('id')}")
-                    return contact
+                    return contact, "Contacts"
             except Exception as e:
                 current_app.logger.warning(f"Error searching for contact with combined criteria: {e}")
         
-        # STEP 2: If not found, try searching by individual criteria for maximum flexibility
-        if not contact:
-            # Try by email first (most reliable identifier)
-            if person_data.get('email'):
-                try:
-                    email_result = self.zoho_api_manager.get_record_by_field("Contacts", {'email': person_data['email']})
-                    if email_result:
-                        current_app.logger.info(f"Found contact by email: {email_result.get('id')}")
-                        return email_result
-                except Exception as e:
-                    current_app.logger.warning(f"Error searching by email: {e}")
-            
-            # Try by phone number if email didn't work
-            if person_data.get('phonenumber'):
-                try:
-                    # Try with original phone format
-                    phone_result = self.zoho_api_manager.get_record_by_field("Contacts", {'phone': person_data['phonenumber']})
-                    if phone_result:
-                        current_app.logger.info(f"Found contact by phone: {phone_result.get('id')}")
-                        return phone_result
-                    
-                    # If not found, try with modified formats
-                    if person_data['phonenumber'].startswith('+'):
-                        phone_no_plus = person_data['phonenumber'][1:]
-                        phone_result = self.zoho_api_manager.get_record_by_field("Contacts", {'phone': phone_no_plus})
-                        if phone_result:
-                            current_app.logger.info(f"Found contact by phone (no plus): {phone_result.get('id')}")
-                            return phone_result
-                    
-                    # Try with just digits
-                    if 'digits_only' in locals():
-                        phone_result = self.zoho_api_manager.get_record_by_field("Contacts", {'phone': digits_only})
-                        if phone_result:
-                            current_app.logger.info(f"Found contact by phone (digits only): {phone_result.get('id')}")
-                            return phone_result
-                except Exception as e:
-                    current_app.logger.warning(f"Error searching by phone: {e}")
-        
-        # STEP 3: Search by name as a last resort
-        if not contact and person_data.get('name'):
+        # STEP 3: If not found, try searching by individual criteria for maximum flexibility
+        # Try by email first (most reliable identifier)
+        if person_data.get('email'):
+            # Search in Leads
             try:
-                name_parts = person_data['name'].split(' ', 1)
+                email_result = self.zoho_api_manager.get_record_by_field("Leads", {'email': person_data['email']})
+                if email_result:
+                    current_app.logger.info(f"Found lead by email: {email_result.get('id')}")
+                    return email_result, "Leads"
+            except Exception as e:
+                current_app.logger.warning(f"Error searching leads by email: {e}")
+            
+            # Search in Contacts
+            try:
+                email_result = self.zoho_api_manager.get_record_by_field("Contacts", {'email': person_data['email']})
+                if email_result:
+                    current_app.logger.info(f"Found contact by email: {email_result.get('id')}")
+                    return email_result, "Contacts"
+            except Exception as e:
+                current_app.logger.warning(f"Error searching contacts by email: {e}")
+        
+        # Try by phone number if email didn't work
+        if person_data.get('phonenumber'):
+            # Try searching for leads by phone
+            try:
+                # Try with original phone format
+                phone_result = self.zoho_api_manager.get_record_by_field("Leads", {'phone': person_data['phonenumber']})
+                if phone_result:
+                    current_app.logger.info(f"Found lead by phone: {phone_result.get('id')}")
+                    return phone_result, "Leads"
+                
+                # If not found, try with modified formats
+                if person_data['phonenumber'].startswith('+'):
+                    phone_no_plus = person_data['phonenumber'][1:]
+                    phone_result = self.zoho_api_manager.get_record_by_field("Leads", {'phone': phone_no_plus})
+                    if phone_result:
+                        current_app.logger.info(f"Found lead by phone (no plus): {phone_result.get('id')}")
+                        return phone_result, "Leads"
+                
+                # Try with just digits
+                if 'digits_only' in locals():
+                    phone_result = self.zoho_api_manager.get_record_by_field("Leads", {'phone': digits_only})
+                    if phone_result:
+                        current_app.logger.info(f"Found lead by phone (digits only): {phone_result.get('id')}")
+                        return phone_result, "Leads"
+            except Exception as e:
+                current_app.logger.warning(f"Error searching leads by phone: {e}")
+            
+            # Try searching for contacts by phone
+            try:
+                # Try with original phone format
+                phone_result = self.zoho_api_manager.get_record_by_field("Contacts", {'phone': person_data['phonenumber']})
+                if phone_result:
+                    current_app.logger.info(f"Found contact by phone: {phone_result.get('id')}")
+                    return phone_result, "Contacts"
+                
+                # If not found, try with modified formats
+                if person_data['phonenumber'].startswith('+'):
+                    phone_no_plus = person_data['phonenumber'][1:]
+                    phone_result = self.zoho_api_manager.get_record_by_field("Contacts", {'phone': phone_no_plus})
+                    if phone_result:
+                        current_app.logger.info(f"Found contact by phone (no plus): {phone_result.get('id')}")
+                        return phone_result, "Contacts"
+                
+                # Try with just digits
+                if 'digits_only' in locals():
+                    phone_result = self.zoho_api_manager.get_record_by_field("Contacts", {'phone': digits_only})
+                    if phone_result:
+                        current_app.logger.info(f"Found contact by phone (digits only): {phone_result.get('id')}")
+                        return phone_result, "Contacts"
+            except Exception as e:
+                current_app.logger.warning(f"Error searching contacts by phone: {e}")
+        
+        # STEP 4: Search by name as a last resort
+        if person_data.get('name'):
+            name_parts = person_data['name'].split(' ', 1)
+            
+            # Search in Leads by name
+            try:
+                if len(name_parts) > 1:
+                    # Try to find by first name and last name
+                    name_result = self.zoho_api_manager.get_record_by_field(
+                        "Leads", 
+                        {'first_name': name_parts[0], 'last_name': name_parts[1]},
+                        match_all=True
+                    )
+                    if name_result:
+                        current_app.logger.info(f"Found lead by full name: {name_result.get('id')}")
+                        return name_result, "Leads"
+                else:
+                    # Try by first name only
+                    name_result = self.zoho_api_manager.get_record_by_field("Leads", {'first_name': name_parts[0]})
+                    if name_result:
+                        current_app.logger.info(f"Found lead by first name: {name_result.get('id')}")
+                        return name_result, "Leads"
+            except Exception as e:
+                current_app.logger.warning(f"Error searching leads by name: {e}")
+            
+            # Search in Contacts by name
+            try:
                 if len(name_parts) > 1:
                     # Try to find by first name and last name
                     name_result = self.zoho_api_manager.get_record_by_field(
@@ -207,67 +276,18 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
                     )
                     if name_result:
                         current_app.logger.info(f"Found contact by full name: {name_result.get('id')}")
-                        return name_result
+                        return name_result, "Contacts"
                 else:
                     # Try by first name only
                     name_result = self.zoho_api_manager.get_record_by_field("Contacts", {'first_name': name_parts[0]})
                     if name_result:
                         current_app.logger.info(f"Found contact by first name: {name_result.get('id')}")
-                        return name_result
+                        return name_result, "Contacts"
             except Exception as e:
-                current_app.logger.warning(f"Error searching by name: {e}")
+                current_app.logger.warning(f"Error searching contacts by name: {e}")
         
-        # STEP 4: Get all contacts and do a manual search as a last resort
-        try:
-            current_app.logger.info("Performing manual search across all contacts")
-            # Implement a direct API call to get all contacts (filter by recently created for efficiency)
-            import requests
-            headers = {
-                "Authorization": f"Zoho-oauthtoken {self.zoho_api_manager.access_token}",
-                "Content-Type": "application/json"
-            }
-            
-            # Get recent contacts (last 30 days)
-            from datetime import datetime, timedelta
-            thirty_days_ago = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
-            
-            url = f"https://www.zohoapis.com/crm/v2/Contacts?fields=id,First_Name,Last_Name,Email,Phone&sort_by=Created_Time&sort_order=desc"
-            response = requests.get(url, headers=headers)
-            
-            if response.status_code == 200:
-                data = response.json()
-                
-                if data.get('data'):
-                    for record in data['data']:
-                        # Check for email match
-                        if person_data.get('email') and record.get('Email') and record['Email'].lower() == person_data['email'].lower():
-                            current_app.logger.info(f"Found contact by manual email search: {record.get('id')}")
-                            return record
-                        
-                        # Check for phone match (with flexibility)
-                        if person_data.get('phonenumber') and record.get('Phone'):
-                            # Normalize both phone numbers for comparison
-                            record_phone = re.sub(r'\D', '', record['Phone'])
-                            person_phone = re.sub(r'\D', '', person_data['phonenumber'])
-                            
-                            # Compare the last 10 digits (ignore country codes)
-                            if record_phone[-10:] == person_phone[-10:]:
-                                current_app.logger.info(f"Found contact by manual phone search: {record.get('id')}")
-                                return record
-                        
-                        # Check for name match
-                        if person_data.get('name') and record.get('First_Name') and record.get('Last_Name'):
-                            person_name = person_data['name'].lower()
-                            record_name = f"{record['First_Name']} {record['Last_Name']}".lower()
-                            
-                            if person_name == record_name:
-                                current_app.logger.info(f"Found contact by manual name search: {record.get('id')}")
-                                return record
-        except Exception as e:
-            current_app.logger.warning(f"Error during manual contact search: {e}")
-        
-        # STEP 5: Create new contact if not found after all search attempts
-        current_app.logger.info(f"Contact not found after extensive search, creating new contact")
+        # STEP 5: If no existing lead or contact found, create a new contact
+        current_app.logger.info(f"No lead or contact found after extensive search, creating new contact")
         
         # Prepare contact data using Zoho's expected field names
         contact_data = {}
@@ -298,7 +318,6 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             current_app.logger.info(f"Created new contact: {contact}")
             
             # Make sure the contact object has properly normalized field names
-            # so that our deal creation can find them later
             normalized_contact = {}
             
             # Copy the original contact data
@@ -324,162 +343,12 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
                 normalized_contact["Phone"] = contact_data["Phone"]
             
             current_app.logger.debug(f"Normalized contact data: {normalized_contact}")
-            return normalized_contact
+            return normalized_contact, "Contacts"
             
         except APIError as e:
             current_app.logger.error(f"Failed to create contact: {str(e)}")
             raise
 
-    def find_or_create_deal(self, contact: dict, host_user: dict = None) -> dict:
-        """
-        Find or create a deal associated with the contact.
-        Uses multiple search methods to minimize duplicate creation.
-        
-        Args:
-            contact: Zoho contact record
-            host_user: Zoho user record for the host
-            
-        Returns:
-            Zoho deal record (always as a dictionary with at least an 'id' field)
-        """
-        current_app.logger.info(f"Finding or creating deal for contact ID: {contact.get('id')}")
-        
-        deal = None
-        contact_id = contact.get('id')
-        
-        if not contact_id:
-            current_app.logger.warning(f"Contact doesn't have an ID, cannot find or create deal")
-            raise ValueError("Contact ID is required to find or create a deal")
-        
-        # STEP 1: Search for deals by contact lookup field
-        if contact_id:
-            try:
-                # Try to find existing deals associated with this contact
-                deals = self.zoho_api_manager.search_by_lookup_field("Deals", "Contact_Name", contact_id)
-                
-                if deals and len(deals) > 0:
-                    deal = deals[0]
-                    current_app.logger.info(f"Found existing deal by contact ID lookup: {deal.get('id')}")
-                    return deal
-                else:
-                    current_app.logger.debug(f"No deals found via contact lookup field")
-            except APIError as e:
-                current_app.logger.warning(f"Error searching for deals by lookup: {str(e)}")
-        
-        # STEP 2: Direct API call to search for deals associated with this contact
-        try:
-            current_app.logger.info(f"Trying direct API search for deals with contact ID: {contact_id}")
-            import requests
-            
-            headers = {
-                "Authorization": f"Zoho-oauthtoken {self.zoho_api_manager.access_token}",
-                "Content-Type": "application/json"
-            }
-            
-            # Try different query formats for maximum compatibility
-            search_criteria_options = [
-                f"(Contact_Name.id:equals:{contact_id})",
-                f"(Contact_Name:(id:equals:{contact_id}))"
-            ]
-            
-            for criteria in search_criteria_options:
-                url = f"https://www.zohoapis.com/crm/v2/Deals/search?criteria={criteria}"
-                current_app.logger.debug(f"Direct API search URL: {url}")
-                
-                response = requests.get(url, headers=headers)
-                
-                if response.status_code == 200:
-                    data = response.json()
-                    
-                    if data.get('data') and len(data['data']) > 0:
-                        deal = data['data'][0]
-                        current_app.logger.info(f"Found existing deal by direct API search: {deal.get('id')}")
-                        return deal
-                
-                elif response.status_code != 204:  # 204 just means no content/no matches
-                    current_app.logger.warning(f"Search attempt with criteria {criteria} returned status: {response.status_code}")
-        
-        except Exception as e:
-            current_app.logger.warning(f"Error during direct API search for deals: {str(e)}")
-        
-        # STEP 3: Search all deals with potential name match
-        try:
-            # Get contact's name to search for deals with similar names
-            contact_name = self._extract_contact_name(contact)
-            
-            if contact_name and contact_name != "Unknown Contact":
-                current_app.logger.info(f"Searching for deals with name containing: {contact_name}")
-                
-                # Get all deals and filter manually - this is a fallback approach
-                url = "https://www.zohoapis.com/crm/v2/Deals?fields=id,Deal_Name,Contact_Name"
-                
-                response = requests.get(url, headers=headers)
-                
-                if response.status_code == 200:
-                    data = response.json()
-                    
-                    if data.get('data'):
-                        # Try to find deals with the contact name in the deal name
-                        for deal_record in data['data']:
-                            if deal_record.get('Deal_Name') and contact_name in deal_record['Deal_Name']:
-                                current_app.logger.info(f"Found deal by name match: {deal_record.get('id')}")
-                                return deal_record
-        except Exception as e:
-            current_app.logger.warning(f"Error searching all deals: {str(e)}")
-        
-        # STEP 4: Create new deal if not found after all search attempts
-        current_app.logger.info("No deal found after extensive search, creating new deal")
-        
-        # Get contact's name for deal naming
-        contact_name = self._extract_contact_name(contact)
-        
-        if not self.configuration.initial_deal_stage_id or type(self.configuration.initial_deal_stage_id) != str:
-            raise ValueError("No initial deal stage ID configured")
-        
-        # Prepare deal data
-        deal_data = {
-            "Deal_Name": f"Deal for {contact_name}",
-            "Stage": self.configuration.initial_deal_stage_id,
-            "Contact_Name": {"id": contact_id}
-        }
-        
-        # Add owner if host user is available
-        if host_user and host_user.get('id'):
-            deal_data["Owner"] = {"id": host_user.get('id')}
-        
-        try:
-            deal = self.zoho_api_manager.create_record("Deals", deal_data)
-            current_app.logger.info(f"Created new deal: {deal}")
-            
-            # Ensure deal is a dictionary with at least an ID
-            if not isinstance(deal, dict):
-                current_app.logger.warning(f"Deal returned from create_record is not a dictionary: {type(deal)}")
-                if hasattr(deal, 'get') and callable(getattr(deal, 'get')):
-                    deal_id = deal.get('id')
-                    if deal_id:
-                        deal = {"id": deal_id}
-                elif isinstance(deal, str):
-                    # Try to parse the deal ID from the string
-                    import re
-                    id_match = re.search(r"id=(\d+)", deal)
-                    if id_match:
-                        deal_id = id_match.group(1)
-                        deal = {"id": deal_id}
-                    else:
-                        # If we can't extract an ID, use the string as the ID (last resort)
-                        current_app.logger.warning(f"Could not extract ID from deal string, using as is: {deal}")
-                        deal = {"id": deal}
-            
-        except APIError as e:
-            current_app.logger.error(f"Failed to create deal: {str(e)}")
-            raise
-        
-        # Final sanity check to ensure we return a dictionary
-        if not isinstance(deal, dict):
-            current_app.logger.warning(f"Deal is not a dictionary at the end of find_or_create_deal: {type(deal)}")
-            deal = {"id": str(deal)}
-        
-        return deal
 
     def _extract_contact_name(self, contact: dict) -> str:
         """
@@ -645,35 +514,27 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             except APIError as e:
                 current_app.logger.warning(f"Host user not found: {e}")
         
-        # Find or create guest contact in Zoho
+        # Find or create lead/contact in Zoho
         try:
-            contact = self.find_or_create_contact(guest)
-            current_app.logger.info(f"Contact: {json.dumps(contact, indent=4)}")
+            record, module_name = self.find_lead_or_contact(guest)
+            current_app.logger.info(f"Found/created {module_name} record: {json.dumps(record, indent=4)}")
         except Exception as e:
-            current_app.logger.error(f"Error processing contact: {str(e)}")
+            current_app.logger.error(f"Error processing lead/contact: {str(e)}")
             raise
         
-        # Find or create deal
-        try:
-            deal = self.find_or_create_deal(contact, host_user)
-            current_app.logger.info(f"Deal: {json.dumps(deal, indent=4)}")
-        except Exception as e:
-            current_app.logger.error(f"Error processing deal: {str(e)}")
-            raise
-        
-        # Ensure deal has an ID property
-        deal_id = None
-        if isinstance(deal, dict) and 'id' in deal:
-            deal_id = deal['id']
-        elif hasattr(deal, 'get') and callable(getattr(deal, 'get')):
-            deal_id = deal.get('id')
+        # Ensure record has an ID property
+        record_id = None
+        if isinstance(record, dict) and 'id' in record:
+            record_id = record['id']
+        elif hasattr(record, 'get') and callable(getattr(record, 'get')):
+            record_id = record.get('id')
         else:
             # Last resort - use the string representation
-            deal_id = str(deal)
-            current_app.logger.warning(f"Using deal string representation as ID: {deal_id}")
+            record_id = str(record)
+            current_app.logger.warning(f"Using record string representation as ID: {record_id}")
         
-        # Enrich transcript with contact information
-        enriched_transcript = self.enrich_transcript(transcript, contact)
+        # Enrich transcript with record information
+        enriched_transcript = self.enrich_transcript(transcript, record)
         
         # Perform BANT analysis
         bant_analysis = self.perform_bant_analysis(enriched_transcript)
@@ -682,18 +543,18 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
         transcript_note_data = {
             "Note_Title": f"Call Transcript - {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}",
             "Note_Content": enriched_transcript,
-            "Parent_Id": {"id": deal_id, "module": "Deals"}
+            "Parent_Id": {"id": record_id, "module": module_name}
         }
         
         bant_note_data = {
             "Note_Title": f"BANT Analysis - {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}",
             "Note_Content": bant_analysis,
-            "Parent_Id": {"id": deal_id, "module": "Deals"}
+            "Parent_Id": {"id": record_id, "module": module_name}
         }
         
         return {
-            "contact": contact,
-            "deal": deal,
+            "record": record,
+            "module_name": module_name,
             "transcript_note": transcript_note_data,
             "bant_note": bant_note_data
         }
@@ -702,22 +563,22 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
         """
         Load the transformed data into Zoho CRM.
         """
-        contact = data["contact"]
-        deal = data["deal"]
+        record = data["record"]
+        module_name = data["module_name"]
         transcript_note_data = data["transcript_note"]
         bant_note_data = data["bant_note"]
         
         results = {
-            "contact_id": contact.get('id'),
-            "deal_id": deal.get('id')
+            "record_id": record.get('id'),
+            "module_name": module_name
         }
         
         # Create transcript note
         try:
             transcript_note = self.zoho_api_manager.create_note(
                 transcript_note_data, 
-                deal.get('id'), 
-                "Deals"
+                record.get('id'), 
+                module_name
             )
             results["transcript_note_id"] = transcript_note.get('id', '')
             current_app.logger.info(f"Created transcript note with ID: {transcript_note.get('id', '')}")
@@ -729,8 +590,8 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
         try:
             bant_note = self.zoho_api_manager.create_note(
                 bant_note_data, 
-                deal.get('id'), 
-                "Deals"
+                record.get('id'), 
+                module_name
             )
             results["bant_note_id"] = bant_note.get('id', '')
             current_app.logger.info(f"Created BANT analysis note with ID: {bant_note.get('id', '')}")

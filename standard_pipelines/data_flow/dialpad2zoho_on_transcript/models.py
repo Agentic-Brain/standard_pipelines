@@ -7,6 +7,7 @@ class Dialpad2ZohoOnTranscriptConfiguration(DataFlowConfiguration):
     __tablename__ = 'dialpad2zoho_on_transcript_configuration'
 
     prompt: Mapped[str] = mapped_column(Text, nullable=True)
-    initial_deal_stage_id: Mapped[str] = mapped_column(String(255))
+    # Kept for backward compatibility but no longer used
+    initial_deal_stage_id: Mapped[str] = mapped_column(String(255), nullable=True)
     email_domain: Mapped[str] = mapped_column(String(255))
     
