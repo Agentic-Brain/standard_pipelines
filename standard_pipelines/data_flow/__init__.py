@@ -9,6 +9,7 @@ from .ff2hs_on_transcript.services import FF2HSOnTranscript
 from .dialpad2zoho_on_transcript.services import Dialpad2ZohoOnTranscript
 from .gmail_interval_followup.services import GmailIntervalFollowup
 from .add_data_to_hubspot_field.services import AddDataToHubspotField
+from .lead_followup_human_notification.services import LeadFollowupHumanNotification
 
 data_flow = Blueprint('data_flow', __name__)
 
@@ -54,3 +55,4 @@ def init_flows():
     current_app.logger.info('Finished creating flows')
 
 from .ff2hs_on_transcript.models import FF2HSOnTranscriptConfiguration
+from .lead_followup_human_notification.models import LeadFollowupHumanNotificationConfiguration
