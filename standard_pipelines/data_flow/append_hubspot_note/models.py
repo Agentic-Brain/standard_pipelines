@@ -4,7 +4,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..models import DataFlowConfiguration
 
 # REMOVE: UNUSED
-class AddDataToHubspotFieldConfiguration(DataFlowConfiguration):
-    __tablename__ = 'add_data_to_hubspot_field_configuration'
+class AppendHubspotNoteConfiguration(DataFlowConfiguration):
+    __tablename__ = 'append_hubspot_note_configuration'
 
     # No additional configuration needed for this data flow
