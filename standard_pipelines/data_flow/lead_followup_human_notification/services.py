@@ -70,37 +70,45 @@ class LeadFollowupHumanNotification(BaseDataFlow[LeadFollowupHumanNotificationCo
         
         # Find the contact in HubSpot
         try:
-            contact = self.hubspot_api_manager.contact_by_name_or_email(name=name, email=email)
-            current_app.logger.info(f"Found contact in HubSpot: {contact['id']}")
+            # First get contact ID through name or email
+            contact_basic = self.hubspot_api_manager.contact_by_name_or_email(name=name, email=email)
+            current_app.logger.info(f"Found contact in HubSpot: {contact_basic['id']}")
             
-            # Get the deal associated with this contact
-            deal = self.hubspot_api_manager.deal_by_contact_id(contact['id'])
-            current_app.logger.info(f"Found deal in HubSpot: {deal['id']}")
+            # Get the contact with owner property explicitly included
+            contact = self.hubspot_api_manager.contact_by_contact_id(
+                contact_basic['id'], 
+                properties=["hubspot_owner_id", "firstname", "lastname", "email"]
+            )
+            current_app.logger.info(f"Retrieved contact with properties: {contact.get('properties')}")
             
-            # Get the owner of the deal
-            owner_id = deal.get('properties', {}).get('hubspot_owner_id')
+            # Get the owner directly from the contact
+            owner_id = contact.get('properties', {}).get('hubspot_owner_id')
+            current_app.logger.info(f"Contact owner ID: {owner_id}")
+            
             if not owner_id:
-                raise ValueError(f"No owner found for deal {deal['id']}")
-                
-            # Get owner details
-            owner_email = None
-            all_owners = self.hubspot_api_manager.all_owners()
-            for owner in all_owners:
-                if owner.get('id') == owner_id:
-                    owner_email = owner.get('email')
-                    break
-                    
-            if not owner_email:
-                raise ValueError(f"Owner email not found for owner ID {owner_id}")
+                current_app.logger.warning(f"No owner found for contact {contact['id']}")
+                owner_email = "acpohl21@gmail.com"  # Fallback if no owner
+            else:
+                # Get owner details
+                owner_email = None
+                all_owners = self.hubspot_api_manager.all_owners()
+                for owner in all_owners:
+                    if owner.get('id') == owner_id:
+                        owner_email = owner.get('email')
+                        break
+                        
+                if not owner_email:
+                    current_app.logger.warning(f"Owner email not found for owner ID {owner_id}")
+                    owner_email = "acpohl21@gmail.com"  # Fallback if owner has no email
             
             # Get Google credentials for sending email
             google_credentials = GoogleCredentials.query.filter_by(
                 client_id=self.client_id,
-                user_email=self.configuration.sending_email
+                user_email=self.configuration.source_email
             ).first()
             
             if not google_credentials:
-                raise ValueError(f"No Google credentials found for sending email {self.configuration.sending_email}")
+                raise ValueError(f"No Google credentials found for sending email {self.configuration.source_email}")
             
             return {
                 "contact": contact,
@@ -131,7 +139,7 @@ class LeadFollowupHumanNotification(BaseDataFlow[LeadFollowupHumanNotificationCo
         contact_full_name = f"{contact_first_name} {contact_last_name}".strip()
         
         # Create a simple email body with the transcript
-        email_subject = self.configuration.subject_line_template
+        email_subject = "Meeting Transcript"
         email_body = f"""Hello {owner_email},
 
 Here is the transcript from the meeting with {contact_full_name}:
@@ -166,9 +174,14 @@ This email was automatically sent by the SendGmailEmail data flow.
         }
         gmail_client = GmailAPIManager(google_api_config)
         
+        # Get CC addresses if configured
+        cc_addresses = self.configuration.cc_addresses if hasattr(self.configuration, 'cc_addresses') else None
+        if cc_addresses:
+            current_app.logger.info(f"Will CC emails to: {cc_addresses}")
+        
         # Send the email
         current_app.logger.info(f"Sending email to {owner_email}")
-        result = gmail_client.send_email(owner_email, email_subject, email_body)
+        result = gmail_client.send_email(owner_email, email_subject, email_body, cc_addresses=cc_addresses)
         
         if 'error' in result:
             current_app.logger.error(f"Error sending email: {result['error']}")

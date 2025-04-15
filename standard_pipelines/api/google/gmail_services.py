@@ -45,10 +45,10 @@ class GmailAPIManager(BaseAPIManager):
             raise RefreshError(f"Unknown error during token refresh: {str(e)}")
 
     #====== Gmail API functions ======#
-    def send_email(self, to_address, subject, body):
+    def send_email(self, to_address, subject, body, cc_addresses=None):
         try:
-            current_app.logger.info(f'Sending email to {to_address}')
-            email_data = self._structure_email_data(to_address, subject, body)
+            current_app.logger.info(f'Sending email to {to_address}{" with CC: " + str(cc_addresses) if cc_addresses else ""}')
+            email_data = self._structure_email_data(to_address, subject, body, cc_addresses)
             if 'error' in email_data:
                 return email_data  
 
@@ -214,12 +214,12 @@ class GmailAPIManager(BaseAPIManager):
         return False
 
     #====== Helper functions ======#
-    def _structure_email_data(self, to_address, subject, body):
+    def _structure_email_data(self, to_address, subject, body, cc_addresses=None):
         try:            
             # Construct MIME message using EmailMessage class
             message = EmailMessage()
             
-            # Handle single string, list of strings, or list of dicts
+            # Handle single string, list of strings, or list of dicts for TO addresses
             if isinstance(to_address, (list, tuple)):
                 # Check if we have a list of dictionaries
                 if to_address and isinstance(to_address[0], dict):
@@ -231,6 +231,20 @@ class GmailAPIManager(BaseAPIManager):
             else:
                 # Single email string
                 message["To"] = to_address
+            
+            # Handle CC addresses if provided
+            if cc_addresses:
+                if isinstance(cc_addresses, (list, tuple)):
+                    # Check if we have a list of dictionaries
+                    if cc_addresses and isinstance(cc_addresses[0], dict):
+                        cc_emails = [addr['email'] for addr in cc_addresses if 'email' in addr]
+                        message["Cc"] = ", ".join(cc_emails)
+                    else:
+                        # List of email strings
+                        message["Cc"] = ", ".join(cc_addresses)
+                else:
+                    # Single email string
+                    message["Cc"] = cc_addresses
                 
             message["Subject"] = subject
             message.set_content(body)
