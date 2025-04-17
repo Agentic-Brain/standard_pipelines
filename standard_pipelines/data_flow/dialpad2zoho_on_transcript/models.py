@@ -9,4 +9,5 @@ class Dialpad2ZohoOnTranscriptConfiguration(DataFlowConfiguration):
     prompt: Mapped[str] = mapped_column(Text, nullable=True)
     initial_deal_stage_id: Mapped[str] = mapped_column(String(255))
     email_domain: Mapped[str] = mapped_column(String(255))
+    followup_webhook_url: Mapped[str] = mapped_column(String(255), nullable=True)
     

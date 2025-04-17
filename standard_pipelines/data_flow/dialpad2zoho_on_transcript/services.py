@@ -695,17 +695,23 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
             "contact": contact,
             "deal": deal,
             "transcript_note": transcript_note_data,
-            "bant_note": bant_note_data
+            "bant_note": bant_note_data,
+            "transcript": enriched_transcript,
+            "guest": guest,
+            "host": host
         }
 
     def load(self, data: dict, context: t.Optional[dict] = None) -> dict:
         """
-        Load the transformed data into Zoho CRM.
+        Load the transformed data into Zoho CRM and send followup webhook.
         """
         contact = data["contact"]
         deal = data["deal"]
         transcript_note_data = data["transcript_note"]
         bant_note_data = data["bant_note"]
+        enriched_transcript = data["transcript"]
+        guest = data["guest"]
+        host = data["host"]
         
         results = {
             "contact_id": contact.get('id'),
@@ -737,5 +743,31 @@ class Dialpad2ZohoOnTranscript(BaseDataFlow[Dialpad2ZohoOnTranscriptConfiguratio
         except Exception as e:
             current_app.logger.error(f"Error creating BANT analysis note: {str(e)}")
             results["bant_note_error"] = str(e)
+
+        # Send webhook notification if URL is configured
+        if self.configuration.followup_webhook_url:
+            try:
+                import requests
+                import datetime
+
+                webhook_data = {
+                    "transcript": enriched_transcript,
+                    "guest": guest,
+                    "host": host,
+                    "timestamp": datetime.datetime.now().isoformat()
+                }
+
+                response = requests.post(
+                    self.configuration.followup_webhook_url,
+                    json=webhook_data,
+                    headers={"Content-Type": "application/json"}
+                )
+                response.raise_for_status()
+                current_app.logger.info(f"Successfully sent webhook notification to {self.configuration.followup_webhook_url}")
+                results["webhook_status"] = "success"
+            except Exception as e:
+                current_app.logger.error(f"Error sending webhook notification: {str(e)}")
+                results["webhook_error"] = str(e)
+                results["webhook_status"] = "error"
         
         return results

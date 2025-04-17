@@ -28,7 +28,8 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_papertrail_system_hostname
 
 x-base-service: &base-service
-  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.9h3
+# TODO: REMEMBER TO CHANGE MIGRATIONS
+  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.12
   # secrets:
     # - github-token
   environment:
@@ -42,6 +43,7 @@ x-base-service: &base-service
     - PRODUCTION_GOOGLE_REDIRECT_URI=https://agents.agentic-internal.com/api/google/oauth/authorize
     - PRODUCTION_GOOGLE_SCOPES=https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile
     - PRODUCTION_FLASK_APP=standard_pipelines
+    - PRODUCTION_ENABLE_PAPERTRAIL_LOGGING=True
   <<: *production-secrets
 
 services:
@@ -72,6 +74,8 @@ services:
   migrations:
     <<: *base-service
     command: /bin/sh -c "uv run flask db upgrade && uv run flask create-default-admin && uv run flask init-flows"
+    environment:
+      - PRODUCTION_ENABLE_PAPERTRAIL_LOGGING=False
     depends_on:
       - postgres
 
