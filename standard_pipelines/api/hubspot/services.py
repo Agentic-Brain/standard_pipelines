@@ -197,6 +197,7 @@ class HubSpotObject(metaclass=ABCMeta):
         ("meeting", "contact"): 200,
         ("meeting", "deal"): 212,
         ("note", "deal"): 214,
+        ("note", "contact"): 202,  # Added note to contact association
     })
 
     def __init__(self, hubspot_object_dict: dict, api_manager: HubSpotAPIManager):
