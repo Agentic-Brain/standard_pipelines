@@ -75,6 +75,7 @@ class LeadFollowupHumanNotification(BaseDataFlow[LeadFollowupHumanNotificationCo
         # Find the contact in HubSpot
         try:
             # First get contact ID through name or email
+            name = None
             if first_name and last_name:
                 name = ' '.join([first_name, last_name])
             contact_basic = self.hubspot_api_manager.contact_by_name_or_email(name=name, email=email)
