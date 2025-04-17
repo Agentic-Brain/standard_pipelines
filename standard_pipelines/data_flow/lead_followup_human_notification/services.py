@@ -36,7 +36,8 @@ class LeadFollowupHumanNotification(BaseDataFlow[LeadFollowupHumanNotificationCo
         Expected webhook data format:
         {
             "email": "user@example.com",
-            "name": "User Name",
+            "first_name": "First Name",
+            "last_name": "Last Name"
             "transcript": "Meeting transcript content..."
         }
         """
@@ -44,7 +45,8 @@ class LeadFollowupHumanNotification(BaseDataFlow[LeadFollowupHumanNotificationCo
             raise InvalidWebhookError('Invalid webhook data')
         
         email = webhook_data.get("email")
-        name = webhook_data.get("name")
+        first_name = webhook_data.get("first_name")
+        last_name = webhook_data.get('last_name')
         transcript = webhook_data.get("transcript")
         
         if not email or not transcript:
@@ -52,7 +54,8 @@ class LeadFollowupHumanNotification(BaseDataFlow[LeadFollowupHumanNotificationCo
         
         return {
             "email": email,
-            "name": name,
+            "first_name": first_name,
+            "last_name": last_name,
             "transcript": transcript
         }
     
@@ -65,12 +68,15 @@ class LeadFollowupHumanNotification(BaseDataFlow[LeadFollowupHumanNotificationCo
             raise ValueError("Email is required in context")
         
         email = context["email"]
-        name = context.get("name")
+        first_name = context.get("first_name")
+        last_name = context.get("last_name")
         transcript = context["transcript"]
         
         # Find the contact in HubSpot
         try:
             # First get contact ID through name or email
+            if first_name and last_name:
+                name = ' '.join([first_name, last_name])
             contact_basic = self.hubspot_api_manager.contact_by_name_or_email(name=name, email=email)
             current_app.logger.info(f"Found contact in HubSpot: {contact_basic['id']}")
             
@@ -139,14 +145,10 @@ class LeadFollowupHumanNotification(BaseDataFlow[LeadFollowupHumanNotificationCo
         contact_full_name = f"{contact_first_name} {contact_last_name}".strip()
         
         # Create a simple email body with the transcript
-        email_subject = "Meeting Transcript"
+        email_subject = "User has requested human followup"
         email_body = f"""Hello {owner_email},
 
-Here is the transcript from the meeting with {contact_full_name}:
-
-{transcript}
-
-This email was automatically sent by the SendGmailEmail data flow.
+{contact_full_name} has requested to contact a human. Details are below
 """
         
         return {
