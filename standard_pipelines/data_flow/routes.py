@@ -12,6 +12,7 @@ import sentry_sdk
 import jwt
 from standard_pipelines.api.dialpad.models import DialpadCredentials
 from .services import extract_webhook_data, process_webhook
+import time
 
 # TODO: write function to extract data from request here, gonna need to check for jwt, move this and process_webhook to the services file
 
@@ -61,6 +62,8 @@ def webhook_split():
             # Directly call the helper function
             process_webhook(webhook_id, webhook_data)
             results.append({'webhook_id': webhook_id, 'status': 'success'})
+            current_app.logger.info(f'Wait 5 seconds before executing next webhook')
+            time.sleep(5)
         except Exception as e:
             current_app.logger.error(f'Error processing webhook for {webhook_id}: {str(e)}')
             results.append({'webhook_id': webhook_id, 'status': 'error'})
