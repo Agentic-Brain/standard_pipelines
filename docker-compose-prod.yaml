@@ -28,7 +28,6 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_papertrail_system_hostname
 
 x-base-service: &base-service
-# TODO: REMEMBER TO CHANGE MIGRATIONS
   image: ghcr.io/agentic-brain/standard_pipelines:v0.0.12h2
   environment:
     - FLASK_ENV=production
