@@ -49,6 +49,8 @@ class Config:
         'USE_HUBSPOT': True,
         'USE_ZOHO': True,
         'USE_PAPERTRAIL': True,
+        'USE_RAPIDAPI': False,
+        'USE_DEEP_RESEARCH': False,
         # Add more API usage flags as needed
     }
 
@@ -93,6 +95,14 @@ class Config:
             # This is the hostname of the system that is running the application
             'PAPERTRAIL_SYSTEM_HOSTNAME': None,
         },
+        'RAPIDAPI': {
+            'RAPIDAPI_KEY': None,
+            'RAPIDAPI_HOST': None,
+        },
+        'DEEP_RESEARCH': {
+            # Deep Research doesn't have its own credentials, 
+            # it uses RAPIDAPI and client-specific OpenAI credentials
+        },
         # Add more API configurations as needed
     }
 
@@ -106,6 +116,8 @@ class Config:
         'USE_HUBSPOT': 'HUBSPOT',
         'USE_PAPERTRAIL': 'PAPERTRAIL',
         'USE_ZOHO': 'ZOHO',
+        'USE_RAPIDAPI': 'RAPIDAPI',
+        'USE_DEEP_RESEARCH': 'DEEP_RESEARCH',
         # Add more mappings as needed
     }
 

@@ -73,6 +73,7 @@ class HubSpotAPIManager(BaseAPIManager, metaclass=ABCMeta):
             raise APIError(error_msg)
         return matching_users[0]
 
+    # TODO: This seems like it queries the entire hubspot database. May fail on larger inputs?
     def contact_by_name_or_email(self, name: t.Optional[str] = None, email: t.Optional[str] = None) -> dict:
         all_contacts = self.all_contacts()
         matching_contacts = []
@@ -196,6 +197,7 @@ class HubSpotObject(metaclass=ABCMeta):
         ("meeting", "contact"): 200,
         ("meeting", "deal"): 212,
         ("note", "deal"): 214,
+        ("note", "contact"): 202,  # Added note to contact association
     })
 
     def __init__(self, hubspot_object_dict: dict, api_manager: HubSpotAPIManager):
