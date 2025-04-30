@@ -31,10 +31,8 @@ class UserView(RestrictedView):
 
     column_list = ('email',
                                                    'roles',
-                                                   'self_service_subs',
                                                    'is_confirmed',
-                                                   'active',
-                                                   'max_subscriptions')
+                                                   'active')
 
     form_args = dict(
         roles=dict(
@@ -50,20 +48,20 @@ class UserView(RestrictedView):
     column_labels = dict(user_roles='Roles')
     
 
-    # def _roles_formatter(view, context, model, name):
-    #     return ', '.join([role.name for role in model.roles])
+    def _roles_formatter(view, context, model, name):
+        return ', '.join([role.name for role in model.roles])
     
-    # def _is_confirmed_formatter(self, context, model, name):
-    #     return model.confirmed_at is not None
+    def _is_confirmed_formatter(self, context, model, name):
+        return model.confirmed_at is not None
 
-    # column_formatters = {
-    #     'roles': _roles_formatter,
-    #     'is_confirmed': _is_confirmed_formatter
-    # }
+    column_formatters = {
+        'roles': _roles_formatter,
+        'is_confirmed': _is_confirmed_formatter
+    }
     
-    # column_type_formatters = {
-    #     bool: lambda view, value: 'Yes' if value else 'No'
-    # }
+    column_type_formatters = {
+        bool: lambda view, value: 'Yes' if value else 'No'
+    }
 
 class UserRoleView(RestrictedView):
     can_delete = True
