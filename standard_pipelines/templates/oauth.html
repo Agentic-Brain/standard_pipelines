@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic Brain OAuth Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff7a00; /* accent colour (HubSpot orange) */
+      --gray-bg: #f6f7f9; /* fallback colour underneath hero bg */
+      --dark: #111; /* dark navbar background */
+      --border: #e5e7eb; /* light gray border */
+      --connected: #22c55e; /* green */
+      --not-connected: #9ca3af; /* slate */
+      --disabled: #d1d5db; /* light slate */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+    }
+
+    /* ----------  PAGE BACKGROUND  ---------- */
+    body {
+      background: var(--gray-bg) url("/static/img/bg-dots.png") no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    /* ----------  FLOATING NAVBAR  ---------- */
+    .navbar {
+      background: var(--dark);
+      color: #fff;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    }
+
+    .navbar h1 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .navbar .logo {
+      width: 32px;
+      height: 32px;
+    }
+
+    .btn-logout {
+      background: #222;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 6px 18px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .btn-logout:hover {
+      background: #444;
+    }
+
+    /* ----------  FLOATING CONTENT PANEL  ---------- */
+    .panel {
+      max-width: 1400px;
+      margin: 24px auto 48px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(3px);
+      /* give a subtle translucency against hero bg */
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+    }
+
+    /* ----------  CARD GRID  ---------- */
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 240px;
+      padding: 24px 18px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .service-logo {
+      height: 48px;
+      margin: 0 auto 18px;
+    }
+
+    /* ----------  STATUS BADGES  ---------- */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      border-radius: 9999px;
+      padding: 4px 12px;
+      margin-bottom: 12px;
+    }
+    .status-badge::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .status-connected {
+      color: var(--connected);
+      border-color: var(--connected);
+    }
+    .status-connected::before {
+      background: var(--connected);
+    }
+
+    .status-not {
+      color: var(--not-connected);
+      border-color: var(--not-connected);
+    }
+    .status-not::before {
+      background: var(--not-connected);
+    }
+
+    .status-disabled {
+      color: var(--disabled);
+      border-color: var(--disabled);
+    }
+    .status-disabled::before {
+      background: var(--disabled);
+    }
+
+    .card-desc {
+      font-size: 0.8rem;
+      color: #4b5563;
+      min-height: 44px;
+      margin-bottom: 18px;
+    }
+
+    /* ----------  BUTTONS  ---------- */
+    .btn {
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      padding: 10px 12px;
+      transition: background 0.2s, opacity 0.2s;
+    }
+
+    .btn-dark {
+      background: #1f2937;
+      color: #fff;
+    }
+    .btn-dark:hover {
+      background: #111827;
+    }
+
+    .btn-orange {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-orange:hover {
+      opacity: 0.9;
+    }
+
+    .btn-disabled {
+      background: #e5e7eb;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    /* ----------  RESPONSIVE  ---------- */
+    @media (max-width: 640px) {
+      .card-grid {
+        justify-content: center;
+      }
+      .service-card {
+        width: 100%;
+        max-width: 320px;
+      }
+      .navbar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar">
+    <h1>
+      <img src="/static/img/logo-small.png" alt="Agentic Brain" class="logo" />
+      Agentic Brain OAuth Portal
+    </h1>
+    <button class="btn-logout">Logout</button>
+  </nav>
+
+  <!-- MAIN FLOATING PANEL -->
+  <div class="panel">
+    <div class="container">
+
+      <div class="card-grid">
+        <!--  HUBSPOT 1  -->
+        <div class="service-card">
+          <img src="hubspot.svg" alt="HubSpot" class="service-logo" />
+          <span class="status-badge status-connected">Connected</span>
+          <p class="card-desc">Connect to HubSpot to sync contacts and deals.</p>
+          <button class="btn btn-dark">Reconnect to HubSpot</button>
+        </div>
+
+        <!--  HUBSPOT 2  -->
+        <div class="service-card">
+          <img src="hubspot.svg" alt="HubSpot" class="service-logo" />
+          <span class="status-badge status-not">Not Connected</span>
+          <p class="card-desc">Connect to HubSpot to sync contacts and deals.</p>
+          <button class="btn btn-orange">Connect to Service</button>
+        </div>
+
+        <!--  HUBSPOT 3 (highlighted)  -->
+        <div class="service-card" style="border: 2px solid var(--connected)">
+          <img src="hubspot.svg" alt="HubSpot" class="service-logo" />
+          <span class="status-badge status-connected">Connected</span>
+          <p class="card-desc">Connect to HubSpot to sync contacts and deals.</p>
+          <button class="btn btn-dark">Reconnect to HubSpot</button>
+        </div>
+
+        <!--  GOOGLE WORKSPACE  -->
+        <div class="service-card">
+          <img src="google.svg" alt="Google Workspace" class="service-logo" />
+          <span class="status-badge status-disabled">Disabled</span>
+          <p class="card-desc">Connect to Google Workspace.</p>
+          <button class="btn btn-disabled">Service Unavailable</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-from flask import request, jsonify, current_app
+from flask import request, jsonify, current_app, render_template
 from standard_pipelines.api.fireflies.models import FirefliesCredentials
 from standard_pipelines.api.hubspot.models import HubSpotCredentials
 from standard_pipelines.api.openai.models import OpenAICredentials
@@ -161,3 +161,9 @@ def create_anthropic_credentials():
         current_app.logger.error(f'Error creating Anthropic credentials: {str(e)}')
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
+        
+        
+@main.route('/oauth-portal')
+def oauth_portal():
+    """Serve the OAuth portal page"""
+    return render_template('oauth.html')
