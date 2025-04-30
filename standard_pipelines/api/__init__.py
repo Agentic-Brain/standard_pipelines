@@ -1,4 +1,5 @@
 from flask import Blueprint, Flask
+import requests
 
 from standard_pipelines.extensions import oauth
 
@@ -93,6 +94,14 @@ def zoho_oauth_client_register(app: Flask):
         }
     )
     app.logger.info("Zoho OAuth client registered successfully")
+
+def load_oauth():
+    ENDPOINT = 'n8n.agentic-internal.com/api/v1/credentials'
+    json = {
+        'name': 'test',
+        "type": 'goo'
+    }
+    requests.post()
 
 from .fireflies import routes as fireflies_routes
 from .hubspot import routes as hubspot_routes
