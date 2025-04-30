@@ -28,7 +28,7 @@
 
     /* ----------  PAGE BACKGROUND  ---------- */
     body {
-      background: var(--gray-bg) url("/static/img/bg-dots.png") no-repeat center center fixed;
+      background: var(--gray-bg) url("{{ url_for('static', filename='img/bg-dots.png') }}") no-repeat center center fixed;
       background-size: cover;
     }
 
@@ -183,6 +183,8 @@
       cursor: pointer;
       padding: 10px 12px;
       transition: background 0.2s, opacity 0.2s;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .btn-dark {
@@ -228,7 +230,7 @@
   <!-- NAV -->
   <nav class="navbar">
     <h1>
-      <img src="/static/img/logo-small.png" alt="Agentic Brain" class="logo" />
+      <img src="{{ url_for('static', filename='img/logo-small.png') }}" alt="Agentic Brain" class="logo" />
       Agentic Brain OAuth Portal
     </h1>
     <button class="btn-logout">Logout</button>
@@ -237,39 +239,34 @@
   <!-- MAIN FLOATING PANEL -->
   <div class="panel">
     <div class="container">
+      <p style="font-size: 0.9rem; margin-bottom: 24px">Please connect your account to these services:</p>
 
       <div class="card-grid">
-        <!--  HUBSPOT 1  -->
-        <div class="service-card">
-          <img src="hubspot.svg" alt="HubSpot" class="service-logo" />
+        {% for name, service in oauth_services.items() %}
+        <div class="service-card" {% if service.connected %}style="border: 2px solid var(--connected)"{% endif %}>
+          <img src="{{ service.icon }}" alt="{{ name|title }}" class="service-logo" />
+          
+          {% if service.connected %}
           <span class="status-badge status-connected">Connected</span>
-          <p class="card-desc">Connect to HubSpot to sync contacts and deals.</p>
-          <button class="btn btn-dark">Reconnect to HubSpot</button>
-        </div>
-
-        <!--  HUBSPOT 2  -->
-        <div class="service-card">
-          <img src="hubspot.svg" alt="HubSpot" class="service-logo" />
-          <span class="status-badge status-not">Not Connected</span>
-          <p class="card-desc">Connect to HubSpot to sync contacts and deals.</p>
-          <button class="btn btn-orange">Connect to Service</button>
-        </div>
-
-        <!--  HUBSPOT 3 (highlighted)  -->
-        <div class="service-card" style="border: 2px solid var(--connected)">
-          <img src="hubspot.svg" alt="HubSpot" class="service-logo" />
-          <span class="status-badge status-connected">Connected</span>
-          <p class="card-desc">Connect to HubSpot to sync contacts and deals.</p>
-          <button class="btn btn-dark">Reconnect to HubSpot</button>
-        </div>
-
-        <!--  GOOGLE WORKSPACE  -->
-        <div class="service-card">
-          <img src="google.svg" alt="Google Workspace" class="service-logo" />
+          {% elif not service.enabled %}
           <span class="status-badge status-disabled">Disabled</span>
-          <p class="card-desc">Connect to Google Workspace.</p>
-          <button class="btn btn-disabled">Service Unavailable</button>
+          {% else %}
+          <span class="status-badge status-not">Not Connected</span>
+          {% endif %}
+          
+          <p class="card-desc">{{ service.description }}</p>
+          
+          {% if service.enabled %}
+            {% if service.connected %}
+            <a href="{{ url_for('api.login_' + name|lower) }}" class="btn btn-dark">Reconnect to {{ name|title }}</a>
+            {% else %}
+            <a href="{{ url_for('api.login_' + name|lower) }}" class="btn btn-orange">Connect to {{ name|title }}</a>
+            {% endif %}
+          {% else %}
+            <button class="btn btn-disabled">Service Unavailable</button>
+          {% endif %}
         </div>
+        {% endfor %}
       </div>
     </div>
   </div>
