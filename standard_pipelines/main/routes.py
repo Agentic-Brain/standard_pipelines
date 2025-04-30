@@ -161,12 +161,17 @@ def create_anthropic_credentials():
         current_app.logger.error(f'Error creating Anthropic credentials: {str(e)}')
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
-        
+       
+       
+@main.route('/log')
+def log():
+    return render_template('log.html') 
         
 @main.route('/oauth-portal')
 def oauth_portal():
     """Serve the OAuth portal page"""
     # Build the oauth_services dictionary similar to auth/routes.py
+    # TODO: Want to change this thing
     oauth_services = {
         'hubspot': {
             'enabled': bool(current_app.config.get('USE_HUBSPOT')),
