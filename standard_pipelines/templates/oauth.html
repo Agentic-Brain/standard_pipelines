@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
   <style>
     :root {
       --primary: #ff7a00; /* accent colour (HubSpot orange) */
@@ -111,11 +112,14 @@
       flex-direction: column;
       justify-content: space-between;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease;
     }
     .service-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08);
+    }
+    .service-card.connected {
+      border: 2px solid var(--connected);
     }
 
     .service-logo {
@@ -233,17 +237,16 @@
       <img src="{{ url_for('static', filename='img/logo-small.png') }}" alt="Agentic Brain" class="logo" />
       Agentic Brain OAuth Portal
     </h1>
-    <button class="btn-logout">Logout</button>
+    <a href="{{ url_for('security.logout') }}" class="btn-logout">Logout</a>
   </nav>
 
   <!-- MAIN FLOATING PANEL -->
   <div class="panel">
     <div class="container">
-      <p style="font-size: 0.9rem; margin-bottom: 24px">Please connect your account to these services:</p>
 
       <div class="card-grid">
         {% for name, service in oauth_services.items() %}
-        <div class="service-card" {% if service.connected %}style="border: 2px solid var(--connected)"{% endif %}>
+        <div class="service-card {% if service.connected %}connected{% endif %}">
           <img src="{{ service.icon }}" alt="{{ name|title }}" class="service-logo" />
           
           {% if service.connected %}
@@ -270,5 +273,8 @@
       </div>
     </div>
   </div>
+  
+  <!-- Footer -->
+  {% include 'footer.html' %}
 </body>
 </html>

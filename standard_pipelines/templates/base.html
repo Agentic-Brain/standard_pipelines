@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Standard Pipelines{% endblock %}</title>
+    <title>{% block title %}Agentic Brain{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favico.ico')}}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +14,7 @@
     
     <!-- Base CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
     
     <!-- Additional CSS -->
     {% block styles %}{% endblock %}
@@ -48,13 +50,11 @@
         
         <!-- Optional Footer -->
         {% block footer %}
-            {% if show_footer|default(false) %}
             <div class="content-footer">
                 {% block footer_content %}
-                <p class="version-info">{{ app_version if app_version is defined else '' }}</p>
+                {% include 'footer.html' %}
                 {% endblock %}
             </div>
-            {% endif %}
         {% endblock %}
     </div>
     

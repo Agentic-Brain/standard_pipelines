@@ -1,4 +1,4 @@
-from flask import Blueprint, Flask, render_template, Response
+from flask import Blueprint, Flask, render_template, Response, redirect, url_for
 from typing import TYPE_CHECKING
 
 main = Blueprint('main', __name__)
@@ -9,7 +9,7 @@ def init_app(app: Flask):
 
 @main.route('/')
 def index():
-    return render_template('base.html')
+    return redirect(url_for('auth.oauth_index'))
 
 @main.route('/healthcheck')
 def healthcheck():

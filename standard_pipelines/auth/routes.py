@@ -23,26 +23,26 @@ def oauth_index():
         'hubspot': {
             'enabled': bool(current_app.config.get('USE_HUBSPOT')),
             'connected': HubSpotCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
-            'icon': url_for('static', filename='images/hubspot-icon.png'),
+            'icon': url_for('static', filename='img/oauth/hubspot.svg'),
             'description': 'Connect to HubSpot to sync contacts and deals'
         },
         'google': {
             'enabled': bool(current_app.config.get('USE_GOOGLE')),
             'connected': GoogleCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
-            'icon': url_for('static', filename='images/google-icon.png'),
+            'icon': url_for('static', filename='img/oauth/google.svg'),
             'description': 'Connect to Google for email integration'
         },
         'zoho': {
             'enabled': bool(current_app.config.get('USE_ZOHO')),
             'connected': ZohoCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
-            'icon': url_for('static', filename='images/zoho-icon.png'),
+            'icon': url_for('static', filename='img/oauth/zoho.svg'),
             'description': 'Connect to Zoho to sync contacts and deals'
         }
         # Add other services here as they're implemented
     }
     
     return render_template(
-        'auth/oauth_index.html',
+        'oauth.html',
         oauth_services=oauth_services
     )
 

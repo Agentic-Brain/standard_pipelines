@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Agentic Brain{% endblock %}
+
+{% block header_title %}Agentic Brain{% endblock %}
+
+{% block styles %}
+<style>
+  .login-container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .form-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .form-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  
+  .form-header p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+  
+  .login-form .form-field {
+    margin-bottom: 20px;
+  }
+  
+  .login-form .form-field label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .login-form .form-field input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: #f9fafb;
+  }
+  
+  .login-form .form-field input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.1);
+  }
+  
+  .remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .remember-me input[type="checkbox"] {
+    margin-right: 8px;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  
+  .submit-btn:hover {
+    opacity: 0.9;
+  }
+  
+  .alt-actions {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+  
+  .alt-actions a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  
+  .alt-actions a:hover {
+    text-decoration: underline;
+  }
+  
+  .divider {
+    margin: 24px 0;
+    text-align: center;
+    position: relative;
+  }
+  
+  .divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--border);
+    z-index: 1;
+  }
+  
+  .divider span {
+    background-color: white;
+    padding: 0 10px;
+    position: relative;
+    z-index: 2;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+  <div class="form-header">
+    <h1>Login to Your Account</h1>
+    <p>Enter your credentials to access your dashboard</p>
+  </div>
+
+  {% if login_user_form.errors %}
+    <div class="form-errors">
+      {% for field, errors in login_user_form.errors.items() %}
+        {% for error in errors %}
+          <div class="flash-message error">
+            {{ error }}
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <form class="login-form" action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+    {{ login_user_form.hidden_tag() }}
+    
+    <div class="form-field">
+      {{ login_user_form.email.label }}
+      {{ login_user_form.email(placeholder="your@email.com") }}
+    </div>
+    
+    <div class="form-field">
+      {{ login_user_form.password.label }}
+      {{ login_user_form.password(placeholder="••••••••") }}
+    </div>
+    
+    {% if login_user_form.remember %}
+      <div class="remember-me">
+        {{ login_user_form.remember }}
+        {{ login_user_form.remember.label }}
+      </div>
+    {% endif %}
+    
+    <button type="submit" class="submit-btn">Login</button>
+    
+    <div class="alt-actions">
+      {% if security.registerable %}
+        <a href="{{ url_for_security('register') }}">Create Account</a>
+      {% endif %}
+      
+      {% if security.recoverable %}
+        <a href="{{ url_for_security('forgot_password') }}">Forgot Password?</a>
+      {% endif %}
+    </div>
+  </form>
+</div>
+{% endblock %}
