@@ -1,4 +1,4 @@
-from flask import request, jsonify, current_app
+from flask import request, jsonify, current_app, render_template, url_for
 from standard_pipelines.api.fireflies.models import FirefliesCredentials
 from standard_pipelines.api.hubspot.models import HubSpotCredentials
 from standard_pipelines.api.openai.models import OpenAICredentials
@@ -161,3 +161,36 @@ def create_anthropic_credentials():
         current_app.logger.error(f'Error creating Anthropic credentials: {str(e)}')
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
+       
+       
+@main.route('/log')
+def log():
+    return render_template('log.html') 
+        
+@main.route('/oauth-portal')
+def oauth_portal():
+    """Serve the OAuth portal page"""
+    # Build the oauth_services dictionary similar to auth/routes.py
+    # TODO: Want to change this thing
+    oauth_services = {
+        'hubspot': {
+            'enabled': bool(current_app.config.get('USE_HUBSPOT')),
+            'connected': False,  # Would use current_user.client_id if login_required
+            'icon': url_for('static', filename='img/oauth/hubspot.svg'),
+            'description': 'Connect to HubSpot to sync contacts and deals'
+        },
+        'google': {
+            'enabled': bool(current_app.config.get('USE_GOOGLE')),
+            'connected': False,
+            'icon': url_for('static', filename='img/oauth/google.svg'),
+            'description': 'Connect to Google for email integration'
+        },
+        'zoho': {
+            'enabled': bool(current_app.config.get('USE_ZOHO')),
+            'connected': False,
+            'icon': url_for('static', filename='img/oauth/zoho.svg'),
+            'description': 'Connect to Zoho to sync contacts and deals'
+        }
+    }
+    
+    return render_template('oauth.html', oauth_services=oauth_services)
