@@ -50,8 +50,8 @@ class Config:
         'USE_HUBSPOT': True,
         'USE_ZOHO': True,
         'USE_PAPERTRAIL': True,
-        'USE_RAPIDAPI': True,
-        'USE_DEEP_RESEARCH': True,
+        'USE_RAPIDAPI': False,
+        'USE_DEEP_RESEARCH': False,
         # Add more API usage flags as needed
     }
 

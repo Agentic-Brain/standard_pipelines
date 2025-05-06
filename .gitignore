@@ -10,3 +10,4 @@ __pycache__
 *celerybeat-schedule*
 .idea
 resources/
+sdk_tokens.txt
