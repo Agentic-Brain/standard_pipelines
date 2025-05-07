@@ -15,6 +15,9 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 from sentry_sdk.integrations.celery import CeleryIntegration
 from standard_pipelines.config import DevelopmentConfig, ProductionConfig, TestingConfig, StagingConfig, get_config
 from standard_pipelines.data_flow.utils import BaseDataFlow
+from standard_pipelines.data_flow.ff2hs_on_transcript.services import FF2HSOnTranscript
+from standard_pipelines.data_flow.gmail_interval_followup.services import GmailIntervalFollowup
+from standard_pipelines.data_flow.dp2ss_on_transcript.services import DP2SSOnTranscript
 import traceback
 
 def create_app():

@@ -182,7 +182,6 @@ class DialpadAPIManager(BaseAPIManager):
 
             formatted_line = f"{timestamp} {speaker}: {content}"
             formatted_lines.append(formatted_line)
-
         return "\n".join(formatted_lines)
     
     def _get_call_participants(self, call_data: dict) -> dict:

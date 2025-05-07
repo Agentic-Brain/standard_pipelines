@@ -58,3 +58,4 @@ def init_flows():
 from .ff2hs_on_transcript.models import FF2HSOnTranscriptConfiguration
 from .lead_followup_human_notification.models import LeadFollowupHumanNotificationConfiguration
 from .append_hubspot_note.models import AppendHubspotNoteConfiguration
+from .dp2ss_on_transcript.models import DP2SSOnTranscriptConfiguration
