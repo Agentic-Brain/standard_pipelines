@@ -6,3 +6,4 @@ dialpad2zoho_on_transcript
 add_data_to_hubspot_field
 lead_followup_human_notification
 append_hubspot_note
+dp2ss_on_transcript
