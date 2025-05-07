@@ -28,7 +28,7 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_papertrail_system_hostname
 
 x-base-service: &base-service
-  image: ghcr.io/agentic-brain/standard_pipelines:v0.0.12h2
+  image: ghcr.io/agentic-brain/standard_pipelines:v1.0.0
   environment:
     - FLASK_ENV=production
     - PRODUCTION_DB_HOST=standard_pipelines_production_postgres
