@@ -1,4 +1,4 @@
-from flask import request, jsonify, current_app
+from flask import request, jsonify, current_app, render_template, url_for
 from standard_pipelines.api.fireflies.models import FirefliesCredentials
 from standard_pipelines.api.hubspot.models import HubSpotCredentials
 from standard_pipelines.api.openai.models import OpenAICredentials
@@ -126,41 +126,7 @@ def get_fireflies_credentials(client_id: UUID):
     except Exception as e:
         current_app.logger.error(f'Error retrieving Fireflies credentials: {str(e)}')
         return jsonify({'error': str(e)}), 500
-    
-@main.route('/credentials/openai', methods=['POST'])
-@require_api_key
-def create_openai_credentials():
-    try:
-        data = request.get_json()
         
-        # Validate required fields using set operations
-        required_fields = {'client_id', 'openai_api_key'}
-        missing_fields = required_fields - data.keys()
-        if missing_fields:
-            return jsonify({'error': f'Missing required fields: {", ".join(missing_fields)}'}), 400
-        
-        # Create new credentials
-        credentials = OpenAICredentials(
-            client_id=data['client_id'],
-            openai_api_key=data['openai_api_key']
-        )
-        
-        client = Client.query.get_or_404(data['client_id'])
-        credentials.client = client
-        
-        db.session.add(credentials)
-        db.session.commit()
-        
-        return jsonify({
-            'message': 'OpenAI credentials created successfully',
-            'id': str(credentials.id)
-        }), 201
-        
-    except Exception as e:
-        current_app.logger.error(f'Error creating OpenAI credentials: {str(e)}')
-        db.session.rollback()
-        return jsonify({'error': str(e)}), 500
-    
     
 @main.route('/credentials/anthropic', methods=['POST'])
 @require_api_key
@@ -195,3 +161,36 @@ def create_anthropic_credentials():
         current_app.logger.error(f'Error creating Anthropic credentials: {str(e)}')
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
+       
+       
+@main.route('/log')
+def log():
+    return render_template('log.html') 
+        
+@main.route('/oauth-portal')
+def oauth_portal():
+    """Serve the OAuth portal page"""
+    # Build the oauth_services dictionary similar to auth/routes.py
+    # TODO: Want to change this thing
+    oauth_services = {
+        'hubspot': {
+            'enabled': bool(current_app.config.get('USE_HUBSPOT')),
+            'connected': False,  # Would use current_user.client_id if login_required
+            'icon': url_for('static', filename='img/oauth/hubspot.svg'),
+            'description': 'Connect to HubSpot to sync contacts and deals'
+        },
+        'google': {
+            'enabled': bool(current_app.config.get('USE_GOOGLE')),
+            'connected': False,
+            'icon': url_for('static', filename='img/oauth/google.svg'),
+            'description': 'Connect to Google for email integration'
+        },
+        'zoho': {
+            'enabled': bool(current_app.config.get('USE_ZOHO')),
+            'connected': False,
+            'icon': url_for('static', filename='img/oauth/zoho.svg'),
+            'description': 'Connect to Zoho to sync contacts and deals'
+        }
+    }
+    
+    return render_template('oauth.html', oauth_services=oauth_services)

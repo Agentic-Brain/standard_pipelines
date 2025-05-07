@@ -1,0 +1,85 @@
+{% extends 'admin/base.html' %}
+
+{% block inner_title %}{{ admin_view.name }} - List{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>{{ admin_view.name }}</h2>
+            <p class="text-muted">Manage {{ admin_view.name.lower() }} in your system</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">{{ admin_view.name }} List</h5>
+                        {% if admin_view.can_create %}
+                        <a href="{{ url_for('.create_view') }}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus"></i> Add {{ admin_view.name }}
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                    {% for column in list_columns %}
+                                    <th>{{ column_labels[column] if column_labels is defined and column in column_labels else column|capitalize }}</th>
+                                    {% endfor %}
+                                    <th style="width: 140px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in data %}
+                                <tr>
+                                    {% for column in list_columns %}
+                                    <td>{{ get_value(row, column) if get_value is defined else row[column]|string if row is defined and column in row else '' }}</td>
+                                    {% endfor %}
+                                    <td>
+                                        {% if admin_view.can_view_details %}
+                                        <a href="{{ url_for('.details_view', id=get_pk_value(row) if get_pk_value is defined else row.id) }}" class="btn btn-sm btn-outline-secondary" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        {% endif %}
+                                        
+                                        {% if admin_view.can_edit %}
+                                        <a href="{{ url_for('.edit_view', id=get_pk_value(row) if get_pk_value is defined else row.id) }}" class="btn btn-sm btn-outline-primary" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        {% endif %}
+                                        
+                                        {% if admin_view.can_delete %}
+                                        <a href="{{ url_for('.delete_view', id=get_pk_value(row) if get_pk_value is defined else row.id) }}" class="btn btn-sm btn-outline-danger" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="{{ list_columns|length + 1 }}" class="text-center py-5">
+                                        <i class="fas fa-inbox fa-3x mb-3 text-muted"></i>
+                                        <p>No records found.</p>
+                                        {% if admin_view.can_create %}
+                                        <a href="{{ url_for('.create_view') }}" class="btn btn-primary btn-sm mt-2">
+                                            <i class="fas fa-plus"></i> Add {{ admin_view.name }}
+                                        </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

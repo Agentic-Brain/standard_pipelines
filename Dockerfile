@@ -10,7 +10,7 @@ COPY pyproject.toml .
 COPY standard_pipelines/ standard_pipelines/
 COPY migrations/ migrations/
 COPY entrypoint.sh /entrypoint.sh
-COPY flows.txt /flows.txt
+COPY flows.txt flows.txt
 RUN mkdir /app/logs
 
 RUN uv sync

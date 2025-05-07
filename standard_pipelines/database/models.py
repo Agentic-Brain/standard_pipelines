@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 from sqlalchemy.dialects.postgresql import UUID as pgUUID
-from sqlalchemy import func, DateTime, Integer, String, Boolean, event, inspect, JSON
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import Column, func, DateTime, Integer, String, Boolean, event, inspect, JSON
+from sqlalchemy.orm import Mapped, mapped_column, relationship, Mapper, MappedColumn
 from standard_pipelines.database.exceptions import ScheduledJobError
 from flask import current_app
 from uuid import UUID
@@ -14,7 +14,7 @@ from bitwarden_sdk import BitwardenClient
 from typing import Any, Optional, List
 import json
 import os
-
+import sentry_sdk
 class BaseMixin(db.Model):
     __abstract__ = True
     id: Mapped[UUID] = mapped_column(pgUUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid(), nullable=False)
@@ -80,28 +80,34 @@ class ScheduledMixin(BaseMixin):
           3. Optionally increments run count and handles max run logic.
           4. Commits the changes.
         """
-        success = task_callable()
-        now = datetime.utcnow()
-        if success:
-            # Update the "next run" field if an interval is set; otherwise, clear it.
-            interval = getattr(self, interval_attr)
-            if interval is not None:
-                setattr(self, next_run_attr, now + timedelta(minutes=interval))
-            else:
-                setattr(self, next_run_attr, None)
-
-            # For trigger jobs, update run count and check for max runs.
-            if update_run_count:
-                self.increment_run_count()
-                if self.max_runs is not None and self.run_count >= self.max_runs:
+        try:
+            success = task_callable()
+            now = datetime.utcnow()
+            if success:
+                # Update the "next run" field if an interval is set; otherwise, clear it.
+                interval = getattr(self, interval_attr)
+                if interval is not None:
+                    setattr(self, next_run_attr, now + timedelta(minutes=interval))
+                else:
                     setattr(self, next_run_attr, None)
-                    # If this is a job, also disable recurring.
-                    if next_run_attr == "scheduled_time":
-                        self.recurrence_interval = None
-        else:
-            raise ScheduledJobError(f"Task failed for {self.__class__.__name__} {self.id}")
 
-        db.session.commit()
+                # For trigger jobs, update run count and check for max runs.
+                if update_run_count:
+                    self.increment_run_count()
+                    if self.max_runs is not None and self.run_count >= self.max_runs:
+                        setattr(self, next_run_attr, None)
+                        # If this is a job, also disable recurring.
+                        if next_run_attr == "scheduled_time":
+                            self.recurrence_interval = None
+                db.session.commit()
+            else:
+                db.session.rollback()
+                raise ScheduledJobError(f"Task returned failure for {self.__class__.__name__} {self.id}")
+        except Exception as e:
+            db.session.rollback()
+            sentry_sdk.capture_exception(e)
+            raise ScheduledJobError(f"Task failed for {self.__class__.__name__} {self.id}: {str(e)}")
+
 
     def trigger_job(self) -> None:
         """Wrapper that executes the job and updates scheduled_time based on recurrence_interval."""
@@ -242,27 +248,49 @@ class SecureMixin(BaseMixin):
         except Exception as e:
             raise ValueError(f"Failed to decrypt value: {e}")
 
+SKIP_ENCRYPTION_KEY : str = 'skip_encryption'
+
+def unencrypted_mapped_column(*args, **kwargs):
+    info = kwargs.pop('info', {})  # get any existing info or create a new dict
+    info[SKIP_ENCRYPTION_KEY] = True
+    kwargs['info'] = info
+    return mapped_column(*args, **kwargs)
+
+def __should_skip_column(column_name : str, column : MappedColumn):
+    explicit_skip_columns = {'id', 'created_at', 'modified_at', 'client_id', 'user_email', 'user_name'}
+
+    if column_name.startswith('_'):
+        return True
+    
+    if column_name in explicit_skip_columns:
+        return True
+    
+    if column.info.get(SKIP_ENCRYPTION_KEY, False) is True:
+        return True
+    
+    return False
+
 # Encrypt before saving to database
 @event.listens_for(SecureMixin, 'before_insert', propagate=True)
 @event.listens_for(SecureMixin, 'before_update', propagate=True)
-def encrypt_before_save(mapper, connection, target):
-    skip_columns = {'id', 'created_at', 'modified_at', 'client_id', 'user_email', 'user_name'}
-    
-    for column in mapper.columns.keys():
-        if not column.startswith('_') and column not in skip_columns:
-            value = getattr(target, column)
+def encrypt_before_save(mapper : Mapper, connection, target):   
+    for column_name in mapper.columns.keys():
+        column : MappedColumn = mapper.columns.get(column_name)
+
+        if not __should_skip_column(column_name, column):
+            value = getattr(target, column_name)
             encrypted_value = target._encrypt_value(value)
-            setattr(target, column, encrypted_value)
+            setattr(target, column_name, encrypted_value)            
 
 # Decrypt after loading from database
 @event.listens_for(SecureMixin, 'load', propagate=True)
 def decrypt_after_load(target, context):
-    skip_columns = {'id', 'created_at', 'modified_at', 'client_id', 'user_email', 'user_name'}
-    
-    for column in inspect(target).mapper.columns.keys():
-        if not column.startswith('_') and column not in skip_columns:
-            value = getattr(target, column)
+    for column_name in inspect(target).mapper.columns.keys():
+        column : Column = inspect(target).mapper.columns.get(column_name)
+
+        if not __should_skip_column(column_name, column):
+            value = getattr(target, column_name)
             decrypted_value = target._decrypt_value(value)
-            setattr(target, column, decrypted_value)
+            setattr(target, column_name, decrypted_value)
 
     

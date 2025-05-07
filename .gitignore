@@ -8,3 +8,6 @@ __pycache__
 .pytest_cache
 *bitwarden-state*
 *celerybeat-schedule*
+.idea
+resources/
+sdk_tokens.txt

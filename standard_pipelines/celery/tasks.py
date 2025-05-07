@@ -6,6 +6,8 @@ from standard_pipelines.database.models import ScheduledMixin
 from standard_pipelines.data_flow.gmail_interval_followup.models import GmailIntervalFollowupSchedule
 from standard_pipelines.extensions import db
 from flask import current_app
+from celery.signals import task_failure
+import sentry_sdk
 
 def all_subclasses(cls):
     """
@@ -95,4 +97,19 @@ def execute_task_method(model_class_name: str, task_id: str, method_name: str):
         else:
             current_app.logger.error(f"Method {method_name} is not callable on {task_instance}")
     except Exception as e:
+        # TODO: Add sentry capture here
+        # Also include db.rollback()
+        sentry_sdk.capture_exception(e)
+        db.session.rollback()
         current_app.logger.error(f"Error executing {method_name} on {task_instance}: {str(e)}")
+
+@task_failure.connect
+def handle_task_failure(task_id, exception, args, kwargs, traceback, einfo, **kw):
+    # Always rollback any db changes
+    db.session.rollback()
+    
+    # Log the error
+    current_app.logger.error(f"Celery task {task_id} failed: {str(exception)}")
+    
+    # Send to Sentry (Sentry integration should be configured for Celery)
+    sentry_sdk.capture_exception(exception)

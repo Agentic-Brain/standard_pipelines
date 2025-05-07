@@ -33,7 +33,8 @@ def manage_dialpad_credentials(client_id: str):
 
             credentials = DialpadCredentials( 
                 client_id=client_uuid, 
-                dialpad_api_key=data['api_key'] 
+                dialpad_api_key=data['api_key'],
+                dialpad_jwt_secret=data['jwt_secret']
             ) 
             credentials.client = client
             credentials.save()

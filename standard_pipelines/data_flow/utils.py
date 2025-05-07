@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 from functools import cached_property
+import json
 import uuid
 from flask import current_app
 
@@ -36,6 +37,9 @@ class DataFlowRegistryMeta(ABCMeta):
 
     @classmethod
     def data_flow_class(cls, dataflow_name: str) -> type[BaseDataFlow]:
+        for df_name in cls.DATA_FLOW_REGISTRY:
+            current_app.logger.info(f"DATA_FLOW_REGISTRY: {df_name}")
+
         if dataflow_name not in cls.DATA_FLOW_REGISTRY:
             raise ValueError(f"No dataflow class found for {dataflow_name}")
         return cls.DATA_FLOW_REGISTRY[dataflow_name]
@@ -43,6 +47,7 @@ class DataFlowRegistryMeta(ABCMeta):
 
 DataFlowConfigurationType = t.TypeVar("DataFlowConfigurationType", bound=DataFlowConfiguration)
 
+# TODO: Handle all cases where these values are potentially None
 class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegistryMeta):
 
     def __init__(self, client_id: str) -> None:
@@ -66,13 +71,19 @@ class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegis
         from typing import get_args
         return get_args(self.__class__.__orig_bases__[0])[0]
 
+    # TODO: Handle the case where the configuration is not found
     @property
-    def configuration(self) -> DataFlowConfigurationType:
+    def configuration(self) -> t.Optional[DataFlowConfigurationType]:
         """Return the configuration with the matching client ID and data flow ID."""
-        return self._configuration_class.query.filter(
+        result = self._configuration_class.query.filter(
             self._configuration_class.client_id == self.client_id,
             self._configuration_class.registry_id == self.data_flow_id()
         ).first()
+
+        if result is None:
+            raise ValueError(f"No configuration found for client ID {self.client_id} and data flow {self.data_flow_name()}")
+
+        return result
 
     @abstractmethod
     def context_from_webhook_data(self, webhook_data: t.Any) -> t.Optional[dict]:
@@ -116,17 +127,22 @@ class BaseDataFlow(t.Generic[DataFlowConfigurationType], metaclass=DataFlowRegis
         self.notify(context)
 
     def handle_extract_failure(self, exception: Exception):
-        current_app.logger.error(f'extract failed: {exception}')
+        current_app.logger.exception(f'extract failed: {exception}')
         sentry_sdk.capture_exception(exception)
+        db.session.rollback()
+        raise exception
 
     def handle_transform_failure(self, exception: Exception):
-        current_app.logger.error(f'transform failed: {exception}')
+        current_app.logger.exception(f'transform failed: {exception}')
         sentry_sdk.capture_exception(exception)
+        db.session.rollback()
+        raise exception
 
     def handle_load_failure(self, exception: Exception):
-        current_app.logger.error(f'load failed: {exception}')
+        current_app.logger.exception(f'load failed: {exception}')
         sentry_sdk.capture_exception(exception)
-
+        db.session.rollback()
+        raise exception
     def add_notification(self, notification: dict):
         db.session.add(Notification(**notification))
         db.session.commit()

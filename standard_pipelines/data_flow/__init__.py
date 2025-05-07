@@ -5,6 +5,13 @@ from pathlib import Path
 from .models import DataFlow
 from standard_pipelines.database import db
 
+from .ff2hs_on_transcript.services import FF2HSOnTranscript
+from .dialpad2zoho_on_transcript.services import Dialpad2ZohoOnTranscript
+from .gmail_interval_followup.services import GmailIntervalFollowup
+from .add_data_to_hubspot_field.services import AddDataToHubspotField
+from .lead_followup_human_notification.services import LeadFollowupHumanNotification
+from .append_hubspot_note.services import AppendHubspotNote
+
 data_flow = Blueprint('data_flow', __name__)
 
 from . import routes  # Import routes after blueprint creation
@@ -49,4 +56,6 @@ def init_flows():
     current_app.logger.info('Finished creating flows')
 
 from .ff2hs_on_transcript.models import FF2HSOnTranscriptConfiguration
+from .lead_followup_human_notification.models import LeadFollowupHumanNotificationConfiguration
+from .append_hubspot_note.models import AppendHubspotNoteConfiguration
 from .dp2ss_on_transcript.models import DP2SSOnTranscriptConfiguration

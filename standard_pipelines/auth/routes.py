@@ -3,9 +3,12 @@ from standard_pipelines.main.decorators import require_api_key
 from standard_pipelines.data_flow.models import Client
 from flask_login import login_required, current_user
 from standard_pipelines.extensions import db
-from standard_pipelines.api.hubspot.models import HubSpotCredentials
+
 from uuid import UUID
 from flask_security.utils import hash_password
+
+from standard_pipelines.api.hubspot.models import HubSpotCredentials
+from standard_pipelines.api.zoho.models import ZohoCredentials
 from standard_pipelines.api.google.models import GoogleCredentials
 
 from . import auth
@@ -20,20 +23,26 @@ def oauth_index():
         'hubspot': {
             'enabled': bool(current_app.config.get('USE_HUBSPOT')),
             'connected': HubSpotCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
-            'icon': url_for('static', filename='images/hubspot-icon.png'),
+            'icon': url_for('static', filename='img/oauth/hubspot.svg'),
             'description': 'Connect to HubSpot to sync contacts and deals'
         },
         'google': {
             'enabled': bool(current_app.config.get('USE_GOOGLE')),
             'connected': GoogleCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
-            'icon': url_for('static', filename='images/google-icon.png'),
+            'icon': url_for('static', filename='img/oauth/google.svg'),
             'description': 'Connect to Google for email integration'
+        },
+        'zoho': {
+            'enabled': bool(current_app.config.get('USE_ZOHO')),
+            'connected': ZohoCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
+            'icon': url_for('static', filename='img/oauth/zoho.svg'),
+            'description': 'Connect to Zoho to sync contacts and deals'
         }
         # Add other services here as they're implemented
     }
     
     return render_template(
-        'auth/oauth_index.html',
+        'oauth.html',
         oauth_services=oauth_services
     )
 

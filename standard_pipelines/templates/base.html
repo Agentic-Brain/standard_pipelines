@@ -3,34 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Flask Base{% endblock %}</title>
+    <title>{% block title %}Agentic Brain{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favico.ico')}}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    
+    <!-- Base CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    
+    <!-- Additional CSS -->
     {% block styles %}{% endblock %}
 </head>
 <body>
-    <div class="container">
-        <header>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <ul class="flashes">
-                        {% for message in messages %}
-                            <li>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endwith %}
-            {% block header_content %}{% endblock %}
-        </header>
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Content Card -->
+    <div class="content-wrapper">
+        <!-- Header -->
+        {% block header %}
+        <div class="content-header">
+            <img src="{{ url_for('static', filename='img/logo-small.png') }}" alt="Logo" />
+            <h2>{% block header_title %}Standard Pipelines{% endblock %}</h2>
+        </div>
+        {% endblock %}
         
-        <main>
+        <!-- Main Content -->
+        <div class="content-body">
             {% block content %}{% endblock %}
-        </main>
+        </div>
         
-        <footer>
-            {% block footer %}
-            {{ app_version }}
-            {% endblock %}
-        </footer>
+        <!-- Optional Footer -->
+        {% block footer %}
+            <div class="content-footer">
+                {% block footer_content %}
+                {% include 'footer.html' %}
+                {% endblock %}
+            </div>
+        {% endblock %}
     </div>
+    
+    <!-- Scripts -->
+    {% block scripts %}{% endblock %}
 </body>
 </html>

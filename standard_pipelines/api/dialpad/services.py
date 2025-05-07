@@ -1,4 +1,5 @@
 from flask import current_app
+from .models import DialpadCredentials
 from standard_pipelines.api.services import BaseAPIManager
 from dialpad import DialpadClient
 from datetime import datetime
@@ -7,23 +8,29 @@ from requests.exceptions import RequestException, HTTPError
 from typing import Optional
 
 class DialpadAPIManager(BaseAPIManager):
-    def __init__(self, api_config: dict) -> None:
-        super().__init__(api_config)
-        self.dialpad_client = DialpadClient(api_config["api_key"])
+    def __init__(self, creds : dict) -> None:
+        super().__init__(creds)
+        self.dialpad_client = DialpadClient(creds["api_key"])
 
     @property
     def required_config(self) -> list[str]:
         return ["api_key"]
 
     #============ API Functions =============#
-    def get_transcript(self, call_data: dict, timezone: str = "UTC"):
+    def get_transcript(self, call_id: str | int, timezone: str = "UTC"):
         try:
-            call_id = call_data.get("call_id")
             if not isinstance(call_id, (str, int)):
                 current_app.logger.error("Invalid call_id provided.")
                 return {"error": "Invalid call_id provided."}
             call_id = str(call_id)
             
+            # Get call data first
+            call_data = self.dialpad_client.call.get_info(call_id=call_id)
+            if 'error' in call_data:
+                current_app.logger.error(f"Error getting call data: {call_data['error']}")
+                return {"error": f"Error getting call data: {call_data['error']}"}
+            
+            # Get transcript data
             transcript = self.dialpad_client.transcript.get(call_id=call_id)
             lines = transcript.get("lines")
             if not lines:
@@ -135,7 +142,18 @@ class DialpadAPIManager(BaseAPIManager):
     def _format_transcript(self, transcript_entries: list[dict], call_data: dict, participants: dict, timezone: str = "UTC") -> str:
         formatted_lines = []
 
-        date_started = datetime.fromtimestamp(call_data.get('date_started') / 1000, tz=pytz.UTC) if call_data.get('date_started') else None
+        # Convert date_started from string to int if it exists
+        date_started_raw = call_data.get('date_started')
+        date_started = None
+        if date_started_raw:
+            try:
+                # Convert to int if it's a string
+                timestamp = int(date_started_raw) if isinstance(date_started_raw, str) else date_started_raw
+                date_started = datetime.fromtimestamp(timestamp / 1000, tz=pytz.UTC)
+            except (ValueError, TypeError) as e:
+                current_app.logger.warning(f"Could not parse date_started: {date_started_raw}. Error: {e}")
+                date_started = None
+
         call_id = call_data.get('call_id', 'Unknown Call ID')
 
         try:

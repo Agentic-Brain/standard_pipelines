@@ -1,3 +1,4 @@
+from requests import Response
 from standard_pipelines.api.services import BaseManualAPIManager
 from flask import current_app
 from requests.auth import AuthBase
@@ -82,7 +83,12 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
         AI prompt, a list of emails present in the transcript, a list of
         names present in the transcript, and the organizer's email.
         """
-        transcript_object = self.get_response({"transcript_id": transcript_id}).json()
+        response : Response = self.get_response({"transcript_id": transcript_id})
+        current_app.logger.debug(f"get_transcript: {response.status_code}")
+        
+        transcript_object = response.json()
+
+        current_app.logger.debug(f"Transcript object: {transcript_object}")
         pretty_transcript = self._pretty_transcript_from_transcript_object(transcript_object)
         emails = self._emails_from_transcript_object(transcript_object)
         names = self._names_from_transcript_object(transcript_object)
@@ -159,6 +165,8 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
             warning_msg = "No transcript data found."
             current_app.logger.warning(warning_msg)
         sentences = transcript_data.get('sentences', [])
+        if sentences is None:
+            sentences = []
         if not sentences:
             warning_msg = "No sentences found."
             current_app.logger.warning(warning_msg)
@@ -168,13 +176,16 @@ class FirefliesAPIManager(BaseManualAPIManager, metaclass=ABCMeta):
         formatted_lines.append(f"Attendees: {attendees}")
         formatted_lines.append(f"Date: {date}")
         formatted_lines.append(f"Meeting Name: {meeting_name}")
-        for sentence in sentences:
-            minutes = int(sentence.get("start_time", 0)) // 60
-            seconds = int(sentence.get("start_time", 0)) % 60
-            timestamp = f"[{minutes:02d}:{seconds:02d}]"
-            speaker = sentence.get("speaker_name", "Unknown Speaker")
-            text = sentence.get("raw_text", "")
-            formatted_line = f"{timestamp} {speaker}: {text}"
-            formatted_lines.append(formatted_line)
+        if not sentences:
+            formatted_lines.append("[No transcript content available]")
+        else:
+            for sentence in sentences:
+                minutes = int(sentence.get("start_time", 0)) // 60
+                seconds = int(sentence.get("start_time", 0)) % 60
+                timestamp = f"[{minutes:02d}:{seconds:02d}]"
+                speaker = sentence.get("speaker_name", "Unknown Speaker")
+                text = sentence.get("raw_text", "")
+                formatted_line = f"{timestamp} {speaker}: {text}"
+                formatted_lines.append(formatted_line)
 
         return "\n".join(formatted_lines)
