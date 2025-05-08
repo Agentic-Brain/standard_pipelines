@@ -25,6 +25,10 @@ def init_app(app: Flask):
     from .example import register_admin_models
     with app.app_context():
         register_admin_models()
+        
+    # Register client flow blueprint
+    from .client_flow_views import client_flow_blueprint
+    app.register_blueprint(client_flow_blueprint)
 
 def register_view(view):
     """Register a view with the custom admin"""

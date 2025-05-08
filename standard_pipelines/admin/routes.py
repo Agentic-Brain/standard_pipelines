@@ -1,7 +1,8 @@
 from flask import render_template, redirect, url_for, flash, request, abort, current_app
 from flask_login import current_user, login_required
 from standard_pipelines.admin import admin, _registered_views
-from sqlalchemy import func, inspect
+from sqlalchemy import func
+from sqlalchemy.inspection import inspect as sa_inspect
 from standard_pipelines.extensions import db
 from standard_pipelines.data_flow.models import Client, DataFlow, ClientDataFlowJoin
 from functools import wraps
@@ -26,7 +27,7 @@ def _get_safe_attributes(obj):
     # Only include direct attributes, not relationships or methods
     result = {}
     try:
-        mapper = inspect(obj.__class__)
+        mapper = sa_inspect(obj.__class__)
         column_names = [column.key for column in mapper.columns]
         
         for name in column_names:
@@ -103,7 +104,7 @@ def list_model(model_name):
     column_labels = {col: view.get_column_label(col) for col in column_names}
     
     # Get primary key column name
-    mapper = inspect(view.model)
+    mapper = sa_inspect(view.model)
     pk_column = mapper.primary_key[0]
     pk_name = pk_column.key
     
@@ -191,7 +192,7 @@ def edit_model(model_name, id):
         abort(404, f"Model {model_name} not found or cannot be edited")
     
     # Get the primary key column for the model
-    mapper = inspect(view.model)
+    mapper = sa_inspect(view.model)
     pk_column = mapper.primary_key[0]
     
     # Convert ID to proper type if needed
@@ -279,7 +280,7 @@ def delete_model(model_name, id):
         abort(404, f"Model {model_name} not found or cannot be deleted")
     
     # Get the primary key column for the model
-    mapper = inspect(view.model)
+    mapper = sa_inspect(view.model)
     pk_column = mapper.primary_key[0]
     
     # Convert ID to proper type if needed
@@ -343,7 +344,7 @@ def details_model(model_name, id):
         abort(404, f"Model {model_name} not found or cannot view details")
     
     # Get the primary key column for the model
-    mapper = inspect(view.model)
+    mapper = sa_inspect(view.model)
     pk_column = mapper.primary_key[0]
     
     # Convert ID to proper type if needed
@@ -385,7 +386,7 @@ def details_model(model_name, id):
         abort(404, f"{view.name} with ID {id} not found")
     
     # Get all columns (not just the displayed list columns)
-    mapper = inspect(view.model)
+    mapper = sa_inspect(view.model)
     all_columns = [column.key for column in mapper.columns]
     
     # Filter out any columns to be excluded from details view

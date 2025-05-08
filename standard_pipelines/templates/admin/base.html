@@ -177,8 +177,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid mt-4 mb-4">
+<div class="container-fluid mt-4 mb-4 {% if 'details_model' in request.endpoint or 'edit_model' in request.endpoint %}px-4{% endif %}">
     <div class="row">
+        {% if not 'details_model' in request.endpoint and not 'edit_model' in request.endpoint %}
         <div class="col-lg-3 col-md-4 d-none d-lg-block">
             <!-- Sidebar -->
             <div class="sidebar">
@@ -215,11 +216,12 @@
                 </ul>
             </div>
         </div>
+        {% endif %}
         
         <!-- Main Content -->
-        <div class="col-lg-9 col-md-8">
+        <div class="{% if 'details_model' in request.endpoint or 'edit_model' in request.endpoint %}col-12{% else %}col-lg-9 col-md-8{% endif %}">
             <div class="main-content">
-                <div class="px-2"> <!-- Added padding to allow more room -->
+                <div class="{% if 'details_model' in request.endpoint or 'edit_model' in request.endpoint %}px-4{% else %}px-2{% endif %}">
                     {% block body %}{% endblock %}
                 </div>
             </div>

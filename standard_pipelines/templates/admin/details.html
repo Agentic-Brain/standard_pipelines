@@ -69,6 +69,19 @@
             max-width: 95%;
         }
     }
+    
+    /* Details page specific styles */
+    .details-dd {
+        word-break: break-word;
+        font-size: 1rem;
+    }
+    
+    @media (min-width: 992px) {
+        .details-row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
 </style>
 {% endblock %}
 
@@ -76,6 +89,16 @@
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12">
+            {% if 'details_model' in request.endpoint %}
+            <nav aria-label="breadcrumb" class="my-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('admin.index') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('admin.list_model', model_name=model_name) }}">{{ admin_view.name }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Details</li>
+                </ol>
+            </nav>
+            {% endif %}
+            
             <div class="d-flex justify-content-between align-items-center">
                 <h2>{{ admin_view.name }} Details</h2>
                 <div>
@@ -95,17 +118,17 @@
 
     <!-- Wider layout for details page -->
     <div class="row">
-        <!-- Main info card - Full width on mobile, 70% on larger screens -->
-        <div class="col-12 col-lg-8 col-xl-9 mb-4">
+        <!-- Main info card - Full width on mobile, 75% on larger screens -->
+        <div class="col-12 col-lg-9 mb-4">
             <div class="card h-100">
                 <div class="card-header">
                     <h5 class="card-title mb-0">Main Information</h5>
                 </div>
                 <div class="card-body">
-                    <dl class="row">
+                    <dl class="row details-row">
                         {% for column in display_columns %}
-                        <dt class="col-sm-3 col-lg-3 text-truncate">{{ column_labels[column] }}</dt>
-                        <dd class="col-sm-9 col-lg-9">
+                        <dt class="col-sm-3 col-lg-2 text-truncate">{{ column_labels[column] }}</dt>
+                        <dd class="col-sm-9 col-lg-10 details-dd">
                             {% if data[column] is string and ('<div class="text-wrap">' in data[column]) %}
                                 {{ data[column]|safe }}
                             {% else %}
@@ -118,8 +141,8 @@
             </div>
         </div>
 
-        <!-- Relationships card - Full width on mobile, 30% on larger screens -->
-        <div class="col-12 col-lg-4 col-xl-3 mb-4">
+        <!-- Relationships card - Full width on mobile, 25% on larger screens -->
+        <div class="col-12 col-lg-3 mb-4">
             {% if relationships %}
             <div class="card mb-4">
                 <div class="card-header">
@@ -217,6 +240,14 @@
                         <a href="{{ url_for('admin.edit_model', model_name=model_name, id=instance.id) }}" 
                            class="btn btn-primary btn-block mb-2">
                             <i class="fas fa-edit mr-2"></i> Edit this {{ admin_view.name }}
+                        </a>
+                        {% endif %}
+                        
+                        <!-- Special action for Clients: Data Flow Management -->
+                        {% if model_name == 'clients' %}
+                        <a href="{{ url_for('client_flow.client_flows', client_id=instance.id) }}" 
+                           class="btn btn-info btn-block mb-2">
+                            <i class="fas fa-exchange-alt mr-2"></i> Manage Data Flows
                         </a>
                         {% endif %}
                         

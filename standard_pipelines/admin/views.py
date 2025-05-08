@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash, abort
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from sqlalchemy.sql import sqltypes
-from sqlalchemy.inspection import inspect
+from sqlalchemy.inspection import inspect as sa_inspect
 from sqlalchemy.orm import class_mapper, RelationshipProperty
 from standard_pipelines.extensions import db
 from typing import List, Dict, Any, Optional, Type, Set, Callable, Tuple
@@ -115,7 +115,7 @@ class ModelView:
             return self.column_list
         
         # Get all column names from the model
-        mapper = inspect(self.model)
+        mapper = sa_inspect(self.model)
         columns = [column.key for column in mapper.columns]
         
         # Filter out excluded columns
@@ -165,7 +165,7 @@ class ModelView:
             pass
         
         # Get all columns from the model
-        mapper = inspect(self.model)
+        mapper = sa_inspect(self.model)
         columns = []
         
         # First, add regular columns
@@ -339,7 +339,7 @@ class ModelView:
                 
             # Get the column for this field
             try:
-                column = inspect(self.model).columns.get(name)
+                column = sa_inspect(self.model).columns.get(name)
             except:
                 column = None
             
