@@ -18,7 +18,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0">{{ admin_view.name }} List</h5>
                         {% if admin_view.can_create %}
-                        <a href="{{ url_for(admin_view.endpoint + '.create') }}" class="btn btn-primary btn-sm">
+                        <a href="{{ url_for('admin.create_model', model_name=admin_view.endpoint) }}" class="btn btn-primary btn-sm">
                             <i class="fas fa-plus"></i> Add {{ admin_view.name }}
                         </a>
                         {% endif %}
@@ -43,19 +43,19 @@
                                     {% endfor %}
                                     <td>
                                         {% if admin_view.can_view_details %}
-                                        <a href="{{ url_for(admin_view.endpoint + '.details', id=row.id) }}" class="btn btn-sm btn-outline-secondary" title="View Details">
+                                        <a href="{{ url_for('admin.details_model', model_name=admin_view.endpoint, id=row.id) }}" class="btn btn-sm btn-outline-secondary" title="View Details">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         {% endif %}
                                         
                                         {% if admin_view.can_edit %}
-                                        <a href="{{ url_for(admin_view.endpoint + '.edit', id=row.id) }}" class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <a href="{{ url_for('admin.edit_model', model_name=admin_view.endpoint, id=row.id) }}" class="btn btn-sm btn-outline-primary" title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         {% endif %}
                                         
                                         {% if admin_view.can_delete %}
-                                        <form action="{{ url_for(admin_view.endpoint + '.delete', id=row.id) }}" method="POST" class="d-inline">
+                                        <form action="{{ url_for('admin.delete_model', model_name=admin_view.endpoint, id=row.id) }}" method="POST" class="d-inline">
                                             <button class="btn btn-sm btn-outline-danger" type="submit" onclick="return confirm('Are you sure?');" title="Delete">
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -69,7 +69,7 @@
                                         <i class="fas fa-inbox fa-3x mb-3 text-muted"></i>
                                         <p>No records found.</p>
                                         {% if admin_view.can_create %}
-                                        <a href="{{ url_for(admin_view.endpoint + '.create') }}" class="btn btn-primary btn-sm mt-2">
+                                        <a href="{{ url_for('admin.create_model', model_name=admin_view.endpoint) }}" class="btn btn-primary btn-sm mt-2">
                                             <i class="fas fa-plus"></i> Add {{ admin_view.name }}
                                         </a>
                                         {% endif %}
