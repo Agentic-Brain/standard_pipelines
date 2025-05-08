@@ -19,7 +19,7 @@ def register_admin_models():
         db.session,
         name="Users",
         category="User Management",
-        endpoint="custom_users",
+        endpoint="users",
         column_list=['email', 'active', 'confirmed_at', 'roles'],
         column_exclude_list=['password', 'last_login_at', 'last_login_ip',
                            'current_login_at', 'current_login_ip', 'login_count'],
@@ -40,7 +40,7 @@ def register_admin_models():
         db.session,
         name="Roles",
         category="User Management",
-        endpoint="custom_roles"
+        endpoint="roles"
     )
     register_view(role_view)
     
@@ -50,7 +50,7 @@ def register_admin_models():
         db.session,
         name="Clients",
         category="Client Management",
-        endpoint="custom_clients",
+        endpoint="clients",
         column_list=['name', 'description', 'is_active', 'created_at'],
         column_labels={
             'name': 'Client Name',
@@ -72,7 +72,7 @@ def register_admin_models():
         db.session,
         name="Data Flows",
         category="Data Flow Management",
-        endpoint="custom_flows",
+        endpoint="flows",
         column_list=['name', 'description', 'version', 'created_at'],
         column_labels={
             'name': 'Flow Name',
@@ -88,7 +88,7 @@ def register_admin_models():
         db.session,
         name="Client-Flow Mappings",
         category="Data Flow Management",
-        endpoint="custom_mappings",
+        endpoint="mappings",
         column_list=['client_id', 'data_flow_id', 'is_active', 'created_at'],
         column_formatters={
             'client_id': lambda view, model, name: model.client.name if model.client else '',
