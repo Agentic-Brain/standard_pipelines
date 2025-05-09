@@ -1,0 +1,133 @@
+{% extends 'admin/base.html' %}
+
+{% block inner_title %}Missing Data Flow Tables{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style>
+    .migration-info {
+        background-color: #f8f9fa;
+        border-radius: 0.25rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .steps-list {
+        font-size: 0.95rem;
+        margin-left: 1rem;
+        margin-bottom: 0;
+    }
+    
+    .steps-list li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .code-block {
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 0.25rem;
+        padding: 0.75rem;
+        margin: 1rem 0;
+        font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.9rem;
+        overflow-x: auto;
+        white-space: pre;
+    }
+    
+    .missing-table {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+    }
+    
+    .table-name {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <!-- Breadcrumb navigation -->
+    <nav aria-label="breadcrumb" class="my-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.index') }}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.list_model', model_name='clients') }}">Clients</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.details_model', model_name='clients', id=client.id) }}">{{ client.name }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('client_flow.client_flows', client_id=client.id) }}">Data Flows</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Missing Tables</li>
+        </ol>
+    </nav>
+    
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Missing Database Tables</h2>
+                <div>
+                    <a href="{{ url_for('client_flow.client_flows', client_id=client.id) }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Flows
+                    </a>
+                </div>
+            </div>
+            <p class="text-muted">Some database tables need to be created to use all configurations</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Missing Tables</h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <h5><i class="fas fa-exclamation-triangle mr-2"></i> Database Migration Required</h5>
+                        <p>
+                            The following database tables are missing. These tables are needed for the data flow
+                            configurations to work properly.
+                        </p>
+                    </div>
+                    
+                    <div class="missing-tables-list">
+                        {% for table in missing_tables %}
+                        <div class="missing-table">
+                            <div class="table-name">{{ table.name }}</div>
+                            <div class="text-muted">{{ table.flow_name }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">How to Create These Tables</h5>
+                </div>
+                <div class="card-body">
+                    <div class="migration-info">
+                        <p>Follow these steps to create the missing tables:</p>
+                        
+                        <ol class="steps-list">
+                            <li>
+                                <strong>Create a new migration</strong>
+                                <div class="code-block">uv run flask db migrate -m "Adding missing data flow configuration tables"</div>
+                            </li>
+                            <li>
+                                <strong>Apply the migration</strong>
+                                <div class="code-block">uv run flask db upgrade</div>
+                            </li>
+                            <li>
+                                <strong>Restart the application</strong> (if running)
+                            </li>
+                        </ol>
+                        
+                        <p class="mt-3">After completing these steps, return to the data flows page to configure your flows.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

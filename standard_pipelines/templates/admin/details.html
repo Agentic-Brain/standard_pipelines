@@ -1,0 +1,273 @@
+{% extends 'admin/base.html' %}
+
+{% block inner_title %}{{ admin_view.name }} - Details{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style>
+    /* Collapsible related items styling */
+    .card-header button.btn-link {
+        color: #212529;
+        text-decoration: none;
+        position: relative;
+    }
+    
+    .card-header button.btn-link:hover,
+    .card-header button.btn-link:focus {
+        text-decoration: none;
+    }
+    
+    .card-header button.btn-link:after {
+        content: "\f107"; /* FontAwesome chevron down */
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        right: 2.5rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .card-header button.btn-link:not(.collapsed):after {
+        transform: rotate(180deg);
+    }
+    
+    /* Related items attributes styling */
+    .related-item-attr {
+        margin-bottom: 0.2rem;
+    }
+    
+    .related-item-attr .attr-name {
+        font-weight: 500;
+        color: #6c757d;
+    }
+    
+    .related-item-attr .attr-value {
+        color: #212529;
+    }
+    
+    /* Better text wrapping for details page */
+    .text-wrap {
+        word-wrap: break-word;
+        word-break: break-word;
+        white-space: pre-wrap;
+        max-width: 100%;
+    }
+    
+    /* Make definition terms more readable */
+    dt {
+        font-weight: 600;
+        color: #495057;
+    }
+    
+    /* For long text values */
+    dd {
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Wider container for details page */
+    @media (min-width: 1200px) {
+        .container-fluid {
+            max-width: 95%;
+        }
+    }
+    
+    /* Details page specific styles */
+    .details-dd {
+        word-break: break-word;
+        font-size: 1rem;
+    }
+    
+    @media (min-width: 992px) {
+        .details-row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            {% if 'details_model' in request.endpoint %}
+            <nav aria-label="breadcrumb" class="my-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('admin.index') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('admin.list_model', model_name=model_name) }}">{{ admin_view.name }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Details</li>
+                </ol>
+            </nav>
+            {% endif %}
+            
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>{{ admin_view.name }} Details</h2>
+                <div>
+                    <a href="{{ url_for('admin.list_model', model_name=model_name) }}" class="btn btn-outline-secondary mr-2">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                    {% if admin_view.can_edit %}
+                    <a href="{{ url_for('admin.edit_model', model_name=model_name, id=instance.id) }}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <p class="text-muted">Viewing details for {{ admin_view.name.lower() }} #{{ instance.id }}</p>
+        </div>
+    </div>
+
+    <!-- Wider layout for details page -->
+    <div class="row">
+        <!-- Main info card - Full width on mobile, 75% on larger screens -->
+        <div class="col-12 col-lg-9 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Main Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row details-row">
+                        {% for column in display_columns %}
+                        <dt class="col-sm-3 col-lg-2 text-truncate">{{ column_labels[column] }}</dt>
+                        <dd class="col-sm-9 col-lg-10 details-dd">
+                            {% if data[column] is string and ('<div class="text-wrap">' in data[column]) %}
+                                {{ data[column]|safe }}
+                            {% else %}
+                                {{ data[column] }}
+                            {% endif %}
+                        </dd>
+                        {% endfor %}
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <!-- Relationships card - Full width on mobile, 25% on larger screens -->
+        <div class="col-12 col-lg-3 mb-4">
+            {% if relationships %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Related Items</h5>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="relationshipAccordion">
+                    {% for rel_name, rel_data in relationships.items() %}
+                    <div class="card mb-2">
+                        <div class="card-header p-2" id="heading-{{ rel_name }}">
+                            <h6 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed" type="button" 
+                                        data-toggle="collapse" data-target="#collapse-{{ rel_name }}" 
+                                        aria-expanded="false" aria-controls="collapse-{{ rel_name }}">
+                                    {{ rel_name|replace('_', ' ')|title }}
+                                    <span class="badge badge-info float-right">
+                                        {% if rel_data is string %}1{% else %}{{ rel_data|length }}{% endif %}
+                                    </span>
+                                </button>
+                            </h6>
+                        </div>
+                        <div id="collapse-{{ rel_name }}" class="collapse" 
+                             aria-labelledby="heading-{{ rel_name }}" data-parent="#relationshipAccordion">
+                            <div class="card-body p-0">
+                                {% if rel_data is string %}
+                                <!-- Single item relationship -->
+                                <div class="list-group">
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">{{ rel_data }}</h6>
+                                        </div>
+                                        {% if rel_data_objects and rel_data_objects[rel_name] %}
+                                        <div class="mt-2">
+                                            {% if rel_data_objects[rel_name]['attributes'] %}
+                                                {% for attr_name, attr_value in rel_data_objects[rel_name]['attributes'].items() %}
+                                                <div class="d-flex related-item-attr">
+                                                    <small class="attr-name mr-2">{{ attr_name|replace('_', ' ')|title }}:</small>
+                                                    <small class="attr-value">{{ attr_value }}</small>
+                                                </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                            <a href="{{ url_for('admin.details_model', model_name=rel_data_objects[rel_name]['model_name'], id=rel_data_objects[rel_name]['id']) }}" class="btn btn-sm btn-outline-primary mt-2">
+                                                View Full Details
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% else %}
+                                <!-- Collection relationship -->
+                                <div class="list-group">
+                                    {% for item in rel_data %}
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">{{ item }}</h6>
+                                        </div>
+                                        {% if rel_data_objects and rel_data_objects[rel_name] and rel_data_objects[rel_name][loop.index0] %}
+                                        <div class="mt-2">
+                                            {% if rel_data_objects[rel_name][loop.index0]['attributes'] %}
+                                                {% for attr_name, attr_value in rel_data_objects[rel_name][loop.index0]['attributes'].items() %}
+                                                <div class="d-flex related-item-attr">
+                                                    <small class="attr-name mr-2">{{ attr_name|replace('_', ' ')|title }}:</small>
+                                                    <small class="attr-value">{{ attr_value }}</small>
+                                                </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                            <a href="{{ url_for('admin.details_model', model_name=rel_data_objects[rel_name][loop.index0]['model_name'], id=rel_data_objects[rel_name][loop.index0]['id']) }}" class="btn btn-sm btn-outline-primary mt-2">
+                                                View Full Details
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    {% else %}
+                                    <div class="list-group-item text-muted">No items</div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div> <!-- End of accordion -->
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Actions card -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-column">
+                        {% if admin_view.can_edit %}
+                        <a href="{{ url_for('admin.edit_model', model_name=model_name, id=instance.id) }}" 
+                           class="btn btn-primary btn-block mb-2">
+                            <i class="fas fa-edit mr-2"></i> Edit this {{ admin_view.name }}
+                        </a>
+                        {% endif %}
+                        
+                        <!-- Special action for Clients: Data Flow Management -->
+                        {% if model_name == 'clients' %}
+                        <a href="{{ url_for('client_flow.client_flows', client_id=instance.id) }}" 
+                           class="btn btn-info btn-block mb-2">
+                            <i class="fas fa-exchange-alt mr-2"></i> Manage Data Flows
+                        </a>
+                        {% endif %}
+                        
+                        <a href="{{ url_for('admin.list_model', model_name=model_name) }}" 
+                           class="btn btn-outline-secondary btn-block mb-2">
+                            <i class="fas fa-list mr-2"></i> Back to List
+                        </a>
+                        
+                        {% if admin_view.can_delete %}
+                        <form action="{{ url_for('admin.delete_model', model_name=model_name, id=instance.id) }}" method="POST" class="mt-2">
+                            <button type="submit" class="btn btn-danger btn-block" 
+                                    onclick="return confirm('Are you sure you want to delete this item? This cannot be undone.');">
+                                <i class="fas fa-trash mr-2"></i> Delete
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

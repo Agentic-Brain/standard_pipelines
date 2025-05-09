@@ -505,19 +505,6 @@ wheels = [
 ]
 
 [[package]]
-name = "flask-admin"
-version = "1.6.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flask" },
-    { name = "wtforms" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/be/4d/7cad383a93e3e1dd9378f1fcf05ddc532c6d921fb30c19ce8f8583630f24/Flask-Admin-1.6.1.tar.gz", hash = "sha256:24cae2af832b6a611a01d7dc35f42d266c1d6c75a426b869d8cb241b78233369", size = 6651224 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/61/b3/656c78dfef163517dbbc9fd106f0604e37b436ad51f9d9450b60e9407e35/Flask_Admin-1.6.1-py3-none-any.whl", hash = "sha256:fd8190f1ec3355913a22739c46ed3623f1d82b8112cde324c60a6fc9b21c9406", size = 7498141 },
-]
-
-[[package]]
 name = "flask-babel"
 version = "4.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1749,7 +1736,7 @@ wheels = [
 
 [[package]]
 name = "standard-pipelines"
-version = "0.0.5"
+version = "1.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "alembic" },
@@ -1786,7 +1773,6 @@ dependencies = [
     { name = "durationpy" },
     { name = "email-validator" },
     { name = "flask" },
-    { name = "flask-admin" },
     { name = "flask-babel" },
     { name = "flask-login" },
     { name = "flask-mail" },
@@ -1933,7 +1919,6 @@ requires-dist = [
     { name = "durationpy", specifier = "==0.9" },
     { name = "email-validator", specifier = "==2.2.0" },
     { name = "flask", specifier = "==3.0.3" },
-    { name = "flask-admin", specifier = "==1.6.1" },
     { name = "flask-babel", specifier = "==4.0.0" },
     { name = "flask-login", specifier = "==0.6.3" },
     { name = "flask-mail", specifier = "==0.10.0" },

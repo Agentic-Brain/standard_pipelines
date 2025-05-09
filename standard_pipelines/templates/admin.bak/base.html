@@ -177,9 +177,8 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid mt-4 mb-4 {% if 'details_model' in request.endpoint or 'edit_model' in request.endpoint %}px-4{% endif %}">
+<div class="container-fluid mt-4 mb-4">
     <div class="row">
-        {% if not 'details_model' in request.endpoint and not 'edit_model' in request.endpoint %}
         <div class="col-lg-3 col-md-4 d-none d-lg-block">
             <!-- Sidebar -->
             <div class="sidebar">
@@ -190,40 +189,50 @@
                         </a>
                     </li>
                     
-                    {% for category_name, views in admin_categories.items() %}
                     <li class="nav-item mt-3">
-                        <div class="pl-3 mb-2 text-muted small text-uppercase">{{ category_name }}</div>
+                        <div class="pl-3 mb-2 text-muted small text-uppercase">Clients</div>
                     </li>
-                    {% for view in views %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin.list_model', model_name=view.endpoint) }}">
-                            <i class="fas fa-{% if 'client' in view.endpoint %}users{% elif 'flow' in view.endpoint %}project-diagram{% elif 'user' in view.endpoint %}user{% elif 'role' in view.endpoint %}user-tag{% else %}table{% endif %} mr-2"></i>{{ view.name }}
+                        <a class="nav-link" href="{{ url_for('client.index_view') }}">
+                            <i class="fas fa-users mr-2"></i>Manage Clients
                         </a>
                     </li>
-                    {% endfor %}
-                    {% endfor %}
                     
-                    <!-- Views without category -->
-                    {% for view in admin_views %}
-                    {% if not view.category %}
+                    <li class="nav-item mt-3">
+                        <div class="pl-3 mb-2 text-muted small text-uppercase">Data Flows</div>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin.list_model', model_name=view.endpoint) }}">
-                            <i class="fas fa-table mr-2"></i>{{ view.name }}
+                        <a class="nav-link" href="{{ url_for('dataflow.index_view') }}">
+                            <i class="fas fa-project-diagram mr-2"></i>Manage Flows
                         </a>
                     </li>
-                    {% endif %}
-                    {% endfor %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('clientdataflowjoin.index_view') }}">
+                            <i class="fas fa-link mr-2"></i>Client-Flow Mappings
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item mt-3">
+                        <div class="pl-3 mb-2 text-muted small text-uppercase">Users</div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('user.index_view') }}">
+                            <i class="fas fa-user mr-2"></i>Manage Users
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('role.index_view') }}">
+                            <i class="fas fa-user-tag mr-2"></i>User Roles
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
-        {% endif %}
         
         <!-- Main Content -->
-        <div class="{% if 'details_model' in request.endpoint or 'edit_model' in request.endpoint %}col-12{% else %}col-lg-9 col-md-8{% endif %}">
+        <div class="col-lg-9 col-md-8">
             <div class="main-content">
-                <div class="{% if 'details_model' in request.endpoint or 'edit_model' in request.endpoint %}px-4{% else %}px-2{% endif %}">
-                    {% block body %}{% endblock %}
-                </div>
+                {% block body %}{% endblock %}
             </div>
         </div>
     </div>

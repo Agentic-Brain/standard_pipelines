@@ -82,11 +82,12 @@ def create_app():
     from .main import init_app as main_init_app
     app.register_blueprint(main_blueprint)
     main_init_app(app)
-
-    from .admin_dash import admin_dash as admin_dash_blueprint
-    from .admin_dash import init_app as admin_dash_init_app
-    app.register_blueprint(admin_dash_blueprint)
-    admin_dash_init_app(app)
+    
+    # Custom Admin implementation
+    from .admin import admin as admin_blueprint
+    from .admin import init_app as admin_init_app
+    app.register_blueprint(admin_blueprint)
+    admin_init_app(app)
     
     from .celery import init_app as celery_init_app
     celery_init_app(app)
