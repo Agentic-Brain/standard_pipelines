@@ -12,5 +12,5 @@ __pycache__
 resources/
 sdk_tokens.txt
 **/.claude/settings.local.json
-bitwarden-state
+bitwarden_state
 CLAUDE.md
