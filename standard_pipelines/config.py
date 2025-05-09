@@ -41,6 +41,7 @@ class Config:
     }
 
     # API Usage flags
+    # TODO: See below regarding API usages
     API_USE_SETTINGS: Dict[str, bool] = {
         'USE_STRIPE': False,
         'USE_BITWARDEN': True,
@@ -52,6 +53,7 @@ class Config:
         'USE_PAPERTRAIL': True,
         'USE_RAPIDAPI': False,
         'USE_DEEP_RESEARCH': False,
+        'USE_N8N': True
         # Add more API usage flags as needed
     }
 
@@ -100,14 +102,20 @@ class Config:
             'RAPIDAPI_KEY': None,
             'RAPIDAPI_HOST': None,
         },
-        'DEEP_RESEARCH': {
-            # Deep Research doesn't have its own credentials, 
-            # it uses RAPIDAPI and client-specific OpenAI credentials
-        },
+        'N8N': {
+            'N8N_API_KEY': None,
+            'N8N_INSTANCE_ENDPOINT': None
+        }
+        # 'DEEP_RESEARCH': {
+        #     # Deep Research doesn't have its own credentials, 
+        #     # it uses RAPIDAPI and client-specific OpenAI credentials
+        # },
         # Add more API configurations as needed
     }
 
     # Mapping of API usage flags to their corresponding API groups
+    # TODO: This is a mess, we need to consolidate API config setup
+    # TODO: Probably move this to the actual API definitions themselves
     API_REQUIREMENTS: Dict[str, str] = {
         'USE_STRIPE': 'STRIPE',
         'USE_BITWARDEN': 'BITWARDEN',
@@ -119,6 +127,7 @@ class Config:
         'USE_ZOHO': 'ZOHO',
         'USE_RAPIDAPI': 'RAPIDAPI',
         'USE_DEEP_RESEARCH': 'DEEP_RESEARCH',
+        'USE_N8N': 'N8N'
         # Add more mappings as needed
     }
 

@@ -11,7 +11,7 @@ from typing import Optional
 import backoff
 
 class BaseAPIManager(metaclass=ABCMeta):
-
+    has_oauth = False
     def __init__(self, api_config: dict) -> None:
         self.validate_api_config(api_config)
         self.api_config = api_config

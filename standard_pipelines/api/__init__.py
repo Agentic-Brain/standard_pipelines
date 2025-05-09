@@ -1,4 +1,5 @@
-from flask import Blueprint, Flask
+from flask import Blueprint, Flask, current_app
+from flask_login import current_user
 import requests
 
 from standard_pipelines.extensions import oauth
@@ -70,6 +71,9 @@ def hubspot_oauth_client_register(app: Flask):
     )
     app.logger.info("HubSpot OAuth client registered successfully")
 
+# TODO: wrap all of these into some sort of oauth object that automatically registers and manages them
+# TODO: Probably remove a bunch of the app config stuff as well
+# TODO: Likely remove scopes as defined by a config, have that written in source code
 def zoho_oauth_client_register(app: Flask):
     client_id = app.config.get('ZOHO_CLIENT_ID')
     client_secret = app.config.get('ZOHO_CLIENT_SECRET')
@@ -95,13 +99,55 @@ def zoho_oauth_client_register(app: Flask):
     )
     app.logger.info("Zoho OAuth client registered successfully")
 
-def load_oauth():
-    ENDPOINT = 'n8n.agentic-internal.com/api/v1/credentials'
-    json = {
-        'name': 'test',
-        "type": 'goo'
+# TODO: Move this into a single location that handles oauth stuff
+def load_oauth(name: str, type: str, client_id: str, client_secret: str, token_data: dict):
+
+    headers = {
+        "X-N8N-API-KEY": current_app.config.get('N8N_API_KEY'),
+        'Content-Type': 'application/json'
     }
-    requests.post()
+
+    token_data = {}
+    
+    N8N_HOST = current_app.config.get('N8N_INSTANCE_ENDPOINT')
+    if not N8N_HOST:
+        current_app.logger.error('N8N_INSTANCE_ENDPOINT not set, cannot store oauth credentials')
+        return
+    
+    ENDPOINT = f'{N8N_HOST}/api/v1/credentials'
+    body = {
+        'name': "Testing loading from admin dash",
+        "type": type,
+        "data": {
+            "clientId": client_id,
+            "clientSecret": client_secret,
+            "oauthTokenData": token_data,
+        }
+    }
+    response = requests.post(ENDPOINT, json=body, headers=headers)
+    
+    if response.status_code != 200:
+        current_app.logger.warning(f'Oauth crednetial load attempt status {response.status_code}, reason: {response.reason}: {response.text}')
+    
+    current_app.logger.debug(response)
+
+
+# Example OAUTH load via N8N API
+#{
+#   "name": "Google Calendar Prod",
+#   "type": "googleCalendarOAuth2Api",
+#   "data": {
+#     "clientId": "2411297404xxxxxx.googleusercontent.com",
+#     "clientSecret": "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",
+#     "oauthTokenData": {
+#       "access_token": "ya29.a0AZYkNZg1pBqGtgSKxxxsFLPeu3X5hmj7BpZJquzPfEE74WeJPH-akItyObLr4X7IFNfg9FSfErJneXJHb00rrjjprSOo11iLIGHT0",
+#       "expires_in": 3599,
+#       "scope": "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events",
+#       "token_type": "Bearer"
+#     }
+#   }
+# }
+
 
 from .fireflies import routes as fireflies_routes
 from .hubspot import routes as hubspot_routes
