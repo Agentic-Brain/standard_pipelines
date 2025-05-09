@@ -1,0 +1,153 @@
+{% extends 'admin/base.html' %}
+
+{% block inner_title %}Edit {{ admin_view.name }}{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style>
+    /* Make textarea fields span both columns */
+    .form-group.textarea-group {
+        width: 100%;
+    }
+    
+    /* Add some padding between form fields */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Enhanced styles for readonly fields */
+    [readonly], [disabled] {
+        background-color: #f8f9fa;
+        cursor: not-allowed;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            {% if 'edit_model' in request.endpoint %}
+            <nav aria-label="breadcrumb" class="my-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('admin.index') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('admin.list_model', model_name=model_name) }}">{{ admin_view.name }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('admin.details_model', model_name=model_name, id=instance.id) }}">Details</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                </ol>
+            </nav>
+            {% endif %}
+            
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Edit {{ admin_view.name }}</h2>
+                <div>
+                    <a href="{{ url_for('admin.list_model', model_name=model_name) }}" class="btn btn-outline-secondary mr-2">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                    <a href="{{ url_for('admin.details_model', model_name=model_name, id=instance.id) }}" class="btn btn-outline-primary">
+                        <i class="fas fa-eye"></i> View Details
+                    </a>
+                </div>
+            </div>
+            <p class="text-muted">Editing {{ admin_view.name.lower() }} #{{ instance.id }}</p>
+        </div>
+    </div>
+
+    <!-- Wider layout for edit page -->
+    <div class="row">
+        <!-- Main form - 75% width on larger screens -->
+        <div class="col-12 col-lg-9">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">{{ admin_view.name }} Information</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            {% for field_name in admin_view._form_columns %}
+                                {% set field = form[field_name] %}
+                                <div class="{% if field.type == 'TextAreaField' %}col-12{% else %}col-md-6{% endif %}">
+                                    <div class="form-group {% if field.type == 'TextAreaField' %}textarea-group{% endif %}">
+                                        <label for="{{ field.id }}">
+                                            {{ admin_view.get_column_label(field_name) }}
+                                            {% if field_name in admin_view.readonly_columns %}
+                                                <span class="badge badge-secondary">Read-only</span>
+                                            {% endif %}
+                                        </label>
+                                        
+                                        {% if field.type == 'BooleanField' %}
+                                            <div class="form-check">
+                                                {{ field(class='form-check-input') }}
+                                            </div>
+                                        {% elif field.type == 'TextAreaField' %}
+                                            {{ field(class='form-control', rows=6) }}
+                                        {% elif field.type == 'SelectField' or field.type == 'SelectMultipleField' %}
+                                            {{ field(class='form-control custom-select') }}
+                                        {% else %}
+                                            {{ field(class='form-control') }}
+                                        {% endif %}
+                                        
+                                        {% if field.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {% for error in field.errors %}
+                                                    {{ error }}
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                        
+                                        {% if admin_view.get_column_description(field_name) %}
+                                            <small class="form-text text-muted">{{ admin_view.get_column_description(field_name) }}</small>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                            <a href="{{ url_for('admin.list_model', model_name=model_name) }}" class="btn btn-outline-secondary ml-2">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Actions sidebar - 25% width on larger screens -->
+        <div class="col-12 col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-column">
+                        {% if admin_view.can_view_details %}
+                        <a href="{{ url_for('admin.details_model', model_name=model_name, id=instance.id) }}" 
+                           class="btn btn-outline-primary btn-block mb-2">
+                            <i class="fas fa-eye mr-2"></i> View Details
+                        </a>
+                        {% endif %}
+                        
+                        <a href="{{ url_for('admin.list_model', model_name=model_name) }}" 
+                           class="btn btn-outline-secondary btn-block mb-2">
+                            <i class="fas fa-list mr-2"></i> Back to List
+                        </a>
+                        
+                        {% if admin_view.can_delete %}
+                        <form action="{{ url_for('admin.delete_model', model_name=model_name, id=instance.id) }}" method="POST" class="mt-2">
+                            <button type="submit" class="btn btn-danger btn-block" 
+                                    onclick="return confirm('Are you sure you want to delete this item? This cannot be undone.');">
+                                <i class="fas fa-trash mr-2"></i> Delete
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

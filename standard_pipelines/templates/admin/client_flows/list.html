@@ -1,0 +1,298 @@
+{% extends 'admin/base.html' %}
+
+{% block inner_title %}{{ client.name }} - Data Flows{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style>
+    .flow-card {
+        transition: all 0.2s ease;
+    }
+    
+    .flow-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .flow-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .badge-active {
+        background-color: var(--success);
+    }
+    
+    .badge-inactive {
+        background-color: var(--danger);
+    }
+    
+    /* Dropdown styling */
+    .config-dropdown {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    
+    .config-dropdown.show {
+        max-height: 1000px;
+    }
+    
+    .config-toggle {
+        cursor: pointer;
+    }
+    
+    .config-toggle:after {
+        content: "\f107"; /* FontAwesome chevron down */
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        margin-left: 0.5rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .config-toggle[aria-expanded="true"]:after {
+        transform: rotate(180deg);
+    }
+    
+    /* Add flow drawer */
+    .add-flow-drawer {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 400px;
+        background: white;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        z-index: 1050;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        padding: 2rem;
+        overflow-y: auto;
+    }
+    
+    .add-flow-drawer.show {
+        transform: translateX(0);
+    }
+    
+    .drawer-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+    }
+    
+    .drawer-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <!-- Breadcrumb navigation -->
+    <nav aria-label="breadcrumb" class="my-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.index') }}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.list_model', model_name='clients') }}">Clients</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.details_model', model_name='clients', id=client.id) }}">{{ client.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data Flows</li>
+        </ol>
+    </nav>
+    
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>{{ client.name }}: Data Flows</h2>
+                <div>
+                    <a href="{{ url_for('admin.details_model', model_name='clients', id=client.id) }}" class="btn btn-outline-secondary mr-2">
+                        <i class="fas fa-arrow-left"></i> Back to Client
+                    </a>
+                    {% if missing_tables %}
+                    <a href="{{ url_for('client_flow.missing_tables', client_id=client.id) }}" class="btn btn-warning mr-2">
+                        <i class="fas fa-database"></i> Missing Tables ({{ missing_tables|length }})
+                    </a>
+                    {% endif %}
+                    <button id="addFlowBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Data Flow
+                    </button>
+                </div>
+            </div>
+            <p class="text-muted">Manage data flows for {{ client.name }}</p>
+        </div>
+    </div>
+    
+    {% if flows_data %}
+    <div class="row">
+        {% for flow in flows_data %}
+        <div class="col-lg-6 col-xl-4 mb-4">
+            <div class="card flow-card h-100">
+                <div class="card-header flow-header">
+                    <h5 class="mb-0">{{ flow.data_flow.name }}</h5>
+                    <span class="badge {% if flow.is_active %}badge-active{% else %}badge-inactive{% endif %}">
+                        {{ 'Active' if flow.is_active else 'Inactive' }}
+                    </span>
+                </div>
+                <div class="card-body">
+                    <p>{{ flow.data_flow.description or 'No description available' }}</p>
+                    
+                    <div class="mt-3">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="mr-2">Configuration</span>
+                            <span class="badge badge-{{ 'success' if flow.has_config else 'warning' }}">
+                                {{ 'Configured' if flow.has_config else 'Not Configured' }}
+                            </span>
+                        </div>
+                        
+                        {% if flow.has_config %}
+                        <p class="config-toggle" data-toggle="collapse" data-target="#config-{{ flow.mapping_id }}" aria-expanded="false" aria-controls="config-{{ flow.mapping_id }}">
+                            Configuration Details
+                        </p>
+                        <div class="collapse" id="config-{{ flow.mapping_id }}">
+                            <div class="card card-body bg-light">
+                                <dl class="row mb-0">
+                                    {% for key, value in flow.config.__dict__.items() %}
+                                        {% if key not in ['_sa_instance_state', 'id', 'registry_id', 'client_id', 'is_default', 'created_at', 'modified_at'] %}
+                                        <dt class="col-sm-5">{{ key|replace('_', ' ')|title }}</dt>
+                                        <dd class="col-sm-7">
+                                            {% if value is mapping %}
+                                                <pre class="mb-0"><code>{{ value|tojson(indent=2) }}</code></pre>
+                                            {% else %}
+                                                {{ value|truncate(50) }}
+                                            {% endif %}
+                                        </dd>
+                                        {% endif %}
+                                    {% endfor %}
+                                </dl>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <div>
+                        <form method="POST" action="{{ url_for('client_flow.toggle_active', client_id=client.id, mapping_id=flow.mapping_id) }}" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-toggle-{{ 'on' if not flow.is_active else 'off' }}"></i> 
+                                {{ 'Activate' if not flow.is_active else 'Deactivate' }}
+                            </button>
+                        </form>
+                    </div>
+                    <div>
+                        {% if flow.has_config_class %}
+                            {% if flow.table_missing %}
+                            <a href="{{ url_for('client_flow.missing_tables', client_id=client.id) }}" class="btn btn-sm btn-warning ml-1" title="Database table needs to be created">
+                                <i class="fas fa-exclamation-triangle"></i> Missing Table
+                            </a>
+                            {% else %}
+                            <a href="{{ url_for('client_flow.configure_flow', client_id=client.id, flow_id=flow.data_flow.id) }}" class="btn btn-sm btn-outline-secondary ml-1">
+                                <i class="fas fa-cog"></i> {{ 'Edit' if flow.has_config else 'Configure' }}
+                            </a>
+                            {% endif %}
+                        {% else %}
+                        <button class="btn btn-sm btn-outline-secondary ml-1" disabled title="Configuration not available for this flow">
+                            <i class="fas fa-cog"></i> Configure
+                        </button>
+                        {% endif %}
+                        <form method="POST" action="{{ url_for('client_flow.remove_flow', client_id=client.id, mapping_id=flow.mapping_id) }}" class="d-inline ml-1" onsubmit="return confirm('Are you sure you want to remove this data flow? This will also delete any configuration.');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle mr-2"></i> No data flows mapped to this client yet. Click the "Add Data Flow" button to get started.
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Add Flow Drawer -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="add-flow-drawer" id="addFlowDrawer">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">Add Data Flow</h4>
+        <button type="button" class="close" id="closeDrawer">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+    {% if available_flows %}
+    <form action="{{ url_for('client_flow.add_flow', client_id=client.id) }}" method="POST">
+        <div class="form-group">
+            <label for="flow_id">Select Data Flow</label>
+            <select class="form-control custom-select" id="flow_id" name="flow_id" required>
+                <option value="">-- Select Data Flow --</option>
+                {% for flow in available_flows %}
+                <option value="{{ flow.id }}">{{ flow.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group mt-4">
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-plus"></i> Add Flow
+            </button>
+        </div>
+    </form>
+    {% else %}
+    <div class="alert alert-warning">
+        <i class="fas fa-exclamation-triangle mr-2"></i> All available data flows are already mapped to this client.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Drawer functionality
+        const addFlowBtn = document.getElementById('addFlowBtn');
+        const addFlowDrawer = document.getElementById('addFlowDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const closeDrawer = document.getElementById('closeDrawer');
+        
+        function openDrawer() {
+            addFlowDrawer.classList.add('show');
+            drawerOverlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeDrawerFunc() {
+            addFlowDrawer.classList.remove('show');
+            drawerOverlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+        
+        addFlowBtn.addEventListener('click', openDrawer);
+        closeDrawer.addEventListener('click', closeDrawerFunc);
+        drawerOverlay.addEventListener('click', closeDrawerFunc);
+        
+        // Config toggle functionality
+        const configToggles = document.querySelectorAll('.config-toggle');
+        configToggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const expanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !expanded);
+            });
+        });
+    });
+</script>
+{% endblock %}

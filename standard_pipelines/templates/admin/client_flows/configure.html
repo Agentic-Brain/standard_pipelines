@@ -1,0 +1,223 @@
+{% extends 'admin/base.html' %}
+
+{% block inner_title %}Configure {{ flow.name }}{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style>
+    .config-form {
+        max-width: 1000px;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    label {
+        font-weight: 500;
+    }
+    
+    .hint-text {
+        font-size: 0.85rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
+    }
+    
+    /* Styling for JSON editor */
+    .json-editor {
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        min-height: 150px;
+        resize: vertical;
+    }
+    
+    /* Styling for long text fields */
+    textarea.form-control {
+        min-height: 120px;
+    }
+    
+    /* Nested fields styling */
+    .nested-field {
+        padding: 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .nested-field-title {
+        margin-bottom: 1rem;
+        font-weight: 500;
+    }
+    
+    /* Card styling */
+    .config-card {
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    
+    .config-card .card-header {
+        background-color: #f8f9fa;
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <!-- Breadcrumb navigation -->
+    <nav aria-label="breadcrumb" class="my-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.index') }}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.list_model', model_name='clients') }}">Clients</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.details_model', model_name='clients', id=client.id) }}">{{ client.name }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('client_flow.client_flows', client_id=client.id) }}">Data Flows</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Configure {{ flow.name }}</li>
+        </ol>
+    </nav>
+    
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Configure {{ flow.name }}</h2>
+                <div>
+                    <a href="{{ url_for('client_flow.client_flows', client_id=client.id) }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Flows
+                    </a>
+                </div>
+            </div>
+            <p class="text-muted">Configure {{ flow.name }} for {{ client.name }}</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card config-card">
+                <div class="card-header">
+                    <h5 class="mb-0">{{ flow.name }} Configuration</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="config-form">
+                        {% for field in config_fields %}
+                        <div class="form-group">
+                            <label for="{{ field.name }}">{{ field.label }}</label>
+                            
+                            {% if field.type == 'String' or field.type == 'UUID' %}
+                                <input type="text" class="form-control" id="{{ field.name }}" name="{{ field.name }}" 
+                                       value="{{ field.value or '' }}" {% if not field.nullable %}required{% endif %}>
+                            
+                            {% elif field.type == 'Text' %}
+                                <textarea class="form-control" id="{{ field.name }}" name="{{ field.name }}" 
+                                         rows="4">{{ field.value or '' }}</textarea>
+                            
+                            {% elif field.type == 'Integer' %}
+                                <input type="number" class="form-control" id="{{ field.name }}" name="{{ field.name }}" 
+                                       value="{{ field.value or '' }}" {% if not field.nullable %}required{% endif %}>
+                            
+                            {% elif field.type == 'Numeric' or field.type == 'Float' %}
+                                <input type="number" step="0.01" class="form-control" id="{{ field.name }}" name="{{ field.name }}" 
+                                       value="{{ field.value or '' }}" {% if not field.nullable %}required{% endif %}>
+                            
+                            {% elif field.type == 'Boolean' %}
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="{{ field.name }}" name="{{ field.name }}" 
+                                           {% if field.value %}checked{% endif %} value="true">
+                                    <label class="form-check-label" for="{{ field.name }}">Enabled</label>
+                                </div>
+                            
+                            {% elif field.type == 'JSON' or field.type == 'JSONB' %}
+                                <textarea class="form-control json-editor" id="{{ field.name }}" name="{{ field.name }}" 
+                                          rows="6">{{ field.value_json }}</textarea>
+                                <small class="hint-text">Enter valid JSON</small>
+                            
+                            {% elif field.type == 'Date' %}
+                                <input type="date" class="form-control" id="{{ field.name }}" name="{{ field.name }}" 
+                                       value="{{ field.value }}" {% if not field.nullable %}required{% endif %}>
+                            
+                            {% elif field.type == 'DateTime' %}
+                                <input type="datetime-local" class="form-control" id="{{ field.name }}" name="{{ field.name }}" 
+                                       value="{{ field.value }}" {% if not field.nullable %}required{% endif %}>
+                            
+                            {% else %}
+                                <input type="text" class="form-control" id="{{ field.name }}" name="{{ field.name }}" 
+                                       value="{{ field.value or '' }}" {% if not field.nullable %}required{% endif %}>
+                            {% endif %}
+                            
+                            {% if field.description %}
+                                <small class="hint-text">{{ field.description }}</small>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Configuration
+                            </button>
+                            <a href="{{ url_for('client_flow.client_flows', client_id=client.id) }}" class="btn btn-outline-secondary ml-2">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Validate JSON inputs
+        const jsonEditors = document.querySelectorAll('.json-editor');
+        const form = document.querySelector('form');
+        
+        form.addEventListener('submit', function(event) {
+            let hasError = false;
+            
+            jsonEditors.forEach(editor => {
+                try {
+                    const jsonValue = editor.value.trim();
+                    if (jsonValue && (jsonValue.startsWith('{') || jsonValue.startsWith('['))) {
+                        JSON.parse(jsonValue);
+                    }
+                } catch (e) {
+                    event.preventDefault();
+                    hasError = true;
+                    
+                    // Add error styling
+                    editor.classList.add('is-invalid');
+                    
+                    // Check if error message exists, create if not
+                    let errorMsg = editor.nextElementSibling.nextElementSibling;
+                    if (!errorMsg || !errorMsg.classList.contains('invalid-feedback')) {
+                        errorMsg = document.createElement('div');
+                        errorMsg.classList.add('invalid-feedback', 'd-block');
+                        editor.parentNode.appendChild(errorMsg);
+                    }
+                    
+                    errorMsg.textContent = 'Invalid JSON: ' + e.message;
+                }
+            });
+            
+            if (hasError) {
+                // Scroll to first error
+                const firstError = document.querySelector('.is-invalid');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+        
+        // Clear error styling when editing
+        jsonEditors.forEach(editor => {
+            editor.addEventListener('input', function() {
+                this.classList.remove('is-invalid');
+                const errorMsg = this.nextElementSibling.nextElementSibling;
+                if (errorMsg && errorMsg.classList.contains('invalid-feedback')) {
+                    errorMsg.textContent = '';
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

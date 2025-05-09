@@ -17,9 +17,3 @@ def test_main_blueprint_initialization(app):
     assert 'main' in app.blueprints
     main_bp = app.blueprints['main']
     assert main_bp.name == 'main'
-
-def test_admin_dash_blueprint_initialization(app):
-    """Test that the admin_dash blueprint is properly registered"""
-    assert 'admin_dash' in app.blueprints
-    admin_bp = app.blueprints['admin_dash']
-    assert admin_bp.name == 'admin_dash'

@@ -11,3 +11,6 @@ __pycache__
 .idea
 resources/
 sdk_tokens.txt
+**/.claude/settings.local.json
+bitwarden_state
+CLAUDE.md

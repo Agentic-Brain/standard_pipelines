@@ -56,16 +56,21 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Registered Models</h5>
+                    <h5 class="card-title mb-0">Client Management</h5>
                 </div>
                 <div class="card-body">
                     <div class="list-group">
-                        {% for view in admin_views %}
-                        <a href="{{ url_for('admin.list_model', model_name=view.endpoint) }}" class="list-group-item list-group-item-action">
-                            <i class="fas fa-{% if 'client' in view.endpoint %}users{% elif 'flow' in view.endpoint %}project-diagram{% elif 'user' in view.endpoint %}user{% elif 'role' in view.endpoint %}user-tag{% else %}table{% endif %} mr-2" style="color: var(--primary);"></i>
-                            {{ view.name }}
+                        <a href="{{ url_for('client.index_view') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fas fa-users mr-2" style="color: var(--primary);"></i>
+                                View All Clients
+                            </div>
+                            <span class="badge badge-primary badge-pill">{{ stats.total_clients }}</span>
                         </a>
-                        {% endfor %}
+                        <a href="{{ url_for('client.create_view') }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-plus mr-2" style="color: var(--primary);"></i>
+                            Add New Client
+                        </a>
                     </div>
                 </div>
             </div>
@@ -74,19 +79,48 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Quick Links</h5>
+                    <h5 class="card-title mb-0">Data Flow Management</h5>
                 </div>
                 <div class="card-body">
                     <div class="list-group">
-                        {% for category_name, views in admin_categories.items() %}
-                        <div class="mb-2 text-muted small text-uppercase mt-2">{{ category_name }}</div>
-                        {% for view in views %}
-                        <a href="{{ url_for('admin.list_model', model_name=view.endpoint) }}" class="list-group-item list-group-item-action">
-                            <i class="fas fa-{% if 'client' in view.endpoint %}users{% elif 'flow' in view.endpoint %}project-diagram{% elif 'user' in view.endpoint %}user{% elif 'role' in view.endpoint %}user-tag{% else %}table{% endif %} mr-2" style="color: var(--primary);"></i>
-                            {{ view.name }}
+                        <a href="{{ url_for('dataflow.index_view') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fas fa-project-diagram mr-2" style="color: var(--primary);"></i>
+                                View All Data Flows
+                            </div>
+                            <span class="badge badge-primary badge-pill">{{ stats.total_flows }}</span>
                         </a>
-                        {% endfor %}
-                        {% endfor %}
+                        <a href="{{ url_for('clientdataflowjoin.index_view') }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-link mr-2" style="color: var(--primary);"></i>
+                            Manage Client-Flow Mappings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- User Management Section -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">User Management</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="{{ url_for('user.index_view') }}" class="btn btn-outline-primary btn-block mb-3">
+                                <i class="fas fa-user mr-2"></i>
+                                Manage Users
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{ url_for('role.index_view') }}" class="btn btn-outline-primary btn-block mb-3">
+                                <i class="fas fa-user-tag mr-2"></i>
+                                Manage Roles
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

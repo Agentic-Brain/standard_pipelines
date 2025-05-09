@@ -1,0 +1,79 @@
+{% extends 'admin/base.html' %}
+
+{% block inner_title %}Create {{ admin_view.name }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Create {{ admin_view.name }}</h2>
+                <div>
+                    <a href="{{ url_for('admin.list_model', model_name=model_name) }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </div>
+            <p class="text-muted">Create a new {{ admin_view.name.lower() }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">{{ admin_view.name }} Information</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% for field_name in admin_view._form_columns %}
+                            {% set field = form[field_name] %}
+                            <div class="form-group">
+                                <label for="{{ field.id }}">
+                                    {{ admin_view.get_column_label(field_name) }}
+                                    {% if field_name in admin_view.readonly_columns %}
+                                        <span class="badge badge-secondary">Read-only</span>
+                                    {% endif %}
+                                </label>
+                                
+                                {% if field.type == 'BooleanField' %}
+                                    <div class="form-check">
+                                        {{ field(class='form-check-input') }}
+                                    </div>
+                                {% elif field.type == 'TextAreaField' %}
+                                    {{ field(class='form-control', rows=4) }}
+                                {% elif field.type == 'SelectField' or field.type == 'SelectMultipleField' %}
+                                    {{ field(class='form-control custom-select') }}
+                                {% else %}
+                                    {{ field(class='form-control') }}
+                                {% endif %}
+                                
+                                {% if field.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in field.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                
+                                {% if admin_view.get_column_description(field_name) %}
+                                    <small class="form-text text-muted">{{ admin_view.get_column_description(field_name) }}</small>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Create {{ admin_view.name }}
+                            </button>
+                            <a href="{{ url_for('admin.list_model', model_name=model_name) }}" class="btn btn-outline-secondary ml-2">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
