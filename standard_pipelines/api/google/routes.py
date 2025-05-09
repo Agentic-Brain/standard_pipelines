@@ -8,6 +8,7 @@ from standard_pipelines.data_flow.models import Client
 from standard_pipelines.extensions import oauth
 from authlib.integrations.base_client.errors import OAuthError
 from standard_pipelines.api import api
+from .. import load_oauth
 
 
 @api.route('/google/oauth/login')
@@ -114,6 +115,19 @@ def authorize_google():
                 google_credentials.client = client
                 google_credentials.save()
                 current_app.logger.info(f"Successfully created new credentials for email: {user_email}")
+
+            # Testing the load oauth stuff with the required google creds
+        
+            data = {
+                'access_token': token['access_token'],
+                'refresh_token': token['refresh_token'],
+                'expires_in': token['expires_in'],
+                'token_type': "Bearer",
+                'scope': current_app.config.get('GOOGLE_SCOPES')
+            }
+
+            # TODO: Centralize this
+            load_oauth('Adam Testing Cred Load','gmailOAuth2', current_app.config.get('GOOGLE_CLIENT_ID'), current_app.config.get('GOOGLE_CLIENT_SECRET'), data)
 
         except SQLAlchemyError as e:
             current_app.logger.error(f"Database error while saving credentials: {str(e)}")

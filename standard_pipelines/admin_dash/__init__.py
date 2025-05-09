@@ -1,5 +1,4 @@
 from flask import Blueprint, Flask
-from flask_admin import Admin
 from flask_babel import Babel
 from standard_pipelines.extensions import db
 # TODO: Move flask_admin stuff to a new blueprint
@@ -26,10 +25,7 @@ def init_app(app: Flask):
     babel = Babel(app)
     
     # Initialize Flask-Admin
-    admin = Admin(name='Standard Pipelines Admin', 
-                  index_view=SecureAdminIndexView(), 
-                  template_mode=None)
-    admin.init_app(app)
+
     
     # Add context processor for templates
     @app.context_processor
