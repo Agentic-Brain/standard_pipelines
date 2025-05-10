@@ -1,11 +1,11 @@
 from flask import current_app
 from standard_pipelines.api.services import BaseAPIManager
-from requests.exceptions import HTTPError, RequestException, JSONDecodeError 
+from requests.exceptions import HTTPError, RequestException, JSONDecodeError
 import requests
 import uuid
 from datetime import datetime, timedelta, timezone
 from dateutil.relativedelta import relativedelta
-import re
+import re  # Used for phone number formatting and other string manipulations
 
 class SharpSpringAPIManager(BaseAPIManager):
     MAX_QUERIES = 500
@@ -238,52 +238,83 @@ class SharpSpringAPIManager(BaseAPIManager):
 
         return {"success": True}
         
-    def get_contact(self, phone_number: str, name: str = None, email: str = None, max_batches: int = 3, days: int = 30) -> dict:
+    def get_contact(self, phone_number: str = "", name: str = None, email: str = None, max_batches: int = 3, days: int = 30) -> dict:
         """
-        Gets a contact from SharpSpring using phone number, name, and/or email.
-        
+        Gets a contact from SharpSpring using phone number, name, and/or email using direct API queries.
+
         Args:
-            phone_number (str): The phone number to search for
-            name (str, optional): The contact name to search for
+            phone_number (str, optional): The phone number to search for
+            name (str, optional): The contact name to search for (currently not used for direct matching)
             email (str, optional): The contact email to search for
-            max_batches (int, optional): Maximum number of batches to fetch
-            days (int, optional): Number of days back to search
-            
+            max_batches (int, optional): Not used in direct API approach
+            days (int, optional): Not used in direct API approach
+
         Returns:
             dict: A dictionary containing the contact information or an error message
         """
         try:
-            # Validate input parameters
-            param_check_response = self._validate_contact_params(phone_number, name, email, max_batches, days)
-            if "error" in param_check_response:
-                return param_check_response
-            
             # Get transcript field name
             transcript_field_name = self.get_transcript_field()
             if "error" in transcript_field_name:
                 return transcript_field_name
-                
-            # Prepare search data
-            available_data = self._prepare_contact_search_data(phone_number, name, email)
-            if "error" in available_data:
-                return available_data
-            
-            # Find matching contact
-            contact_data = self._find_matching_contact(
-                available_data, 
-                transcript_field_name["system_name"], 
-                max_batches, 
-                days
-            )
-            
-            if "error" in contact_data:
-                current_app.logger.warning(f"Could not find contact with phone number: {phone_number}")
-            
-            return contact_data
+
+            system_name = transcript_field_name.get("system_name")
+
+            # Only proceed if we have at least one search parameter
+            if not (phone_number or email):
+                return {"error": "At least one search parameter (phone_number or email) must be provided"}
+
+            contact_id = None
+            transcript = None
+
+            # First priority: Search by email (if provided)
+            if email and email.strip():
+                current_app.logger.debug(f"Searching for contact by email: {email}")
+                params = {
+                    "where": {"emailAddress": email.strip().lower()},
+                    "limit": 1,
+                    "fields": ["id", "firstName", "lastName", "phoneNumber", "emailAddress", system_name]
+                }
+
+                result = self._make_api_call("getLeads", params)
+                if "error" not in result:
+                    leads = result.get("result", {}).get("lead", [])
+                    if leads:
+                        lead = leads[0]
+                        contact_id = lead.get("id")
+                        transcript = lead.get(system_name)
+                        current_app.logger.debug(f"Found contact by email with ID: {contact_id}")
+                        return {"contact_id": contact_id, "transcript": transcript}
+
+            # Second priority: Search by phone (if provided and email search failed)
+            if phone_number and phone_number.strip():
+                # Format phone number by removing non-numeric characters
+                formatted_phone = re.sub(r"\D", "", phone_number)
+                if formatted_phone:
+                    current_app.logger.debug(f"Searching for contact by phone: {formatted_phone}")
+                    params = {
+                        "where": {"phoneNumber": formatted_phone},
+                        "limit": 1,
+                        "fields": ["id", "firstName", "lastName", "phoneNumber", "emailAddress", system_name]
+                    }
+
+                    result = self._make_api_call("getLeads", params)
+                    if "error" not in result:
+                        leads = result.get("result", {}).get("lead", [])
+                        if leads:
+                            lead = leads[0]
+                            contact_id = lead.get("id")
+                            transcript = lead.get(system_name)
+                            current_app.logger.debug(f"Found contact by phone with ID: {contact_id}")
+                            return {"contact_id": contact_id, "transcript": transcript}
+
+            # No contact found
+            current_app.logger.debug(f"No contact found with provided parameters")
+            return {"contact_id": None, "transcript": None}
 
         except Exception as e:
-            current_app.logger.exception(f"An unexpected error occurred while getting recent contacts: {e}")
-            return {'error': 'An unexpected error occurred while getting recent contacts'}
+            current_app.logger.exception(f"An unexpected error occurred while getting contact: {e}")
+            return {'error': f'An unexpected error occurred while getting contact: {e}'}
         
     def create_contact(self, full_name: str, email: str, phone_number: str, owner_id: str) -> dict:
         try:

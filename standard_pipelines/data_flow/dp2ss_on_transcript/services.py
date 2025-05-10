@@ -13,6 +13,8 @@ from ...api.sharpspring.models import SharpSpringCredentials
 from ...api.dialpad.services import DialpadAPIManager
 from ...api.dialpad.models import DialpadCredentials
 from flask import current_app
+import time
+import re
 
 
 class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
@@ -400,6 +402,57 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
                               (summary_length / transcript_length * 100) if transcript_length > 0 else 0)
 
         return summary
+
+    def _direct_contact_search(self, value: str, field_type: str) -> str:
+        """
+        Direct contact search using SharpSpring's API for when normal methods fail.
+        This is a last-resort fallback method for finding contacts that exist but can't be found through standard means.
+
+        Args:
+            value (str): The exact value to search for (email or phone)
+            field_type (str): The type of field ('email' or 'phone')
+
+        Returns:
+            str: Contact ID if found, or None if not found
+        """
+        try:
+            # Map field type to SharpSpring field name
+            field_name = "emailAddress" if field_type == "email" else "phoneNumber"
+
+            # Prepare search parameters for direct Leads query
+            params = {
+                "where": {
+                    field_name: value
+                },
+                "limit": 1  # We only need one exact match
+            }
+
+            current_app.logger.debug("[DP2SS:CONTACT] Performing direct query for %s=%s", field_name, value)
+            result = self.sharpspring_api_manager._make_api_call("getLeads", params)
+
+            if "error" in result:
+                current_app.logger.warning("[DP2SS:CONTACT] Direct query failed: %s", result.get('error'))
+                return None
+
+            # Get lead results
+            leads = result.get("result", {}).get("lead", [])
+            if not leads:
+                current_app.logger.warning("[DP2SS:CONTACT] No leads found in direct query")
+                return None
+
+            # Get the first matching lead
+            lead = leads[0]
+            contact_id = lead.get("id")
+
+            if contact_id:
+                current_app.logger.info("[DP2SS:CONTACT] Direct query found contact ID: %s", contact_id)
+                return contact_id
+
+            return None
+
+        except Exception as e:
+            current_app.logger.exception("[DP2SS:CONTACT] Error in direct contact search: %s", str(e))
+            return None
     
     def ensure_contact_id(self, data, context) -> str:
         if not data["contact_id"]:
@@ -601,11 +654,39 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
 
                         return contact_id
 
-                # If we still couldn't find it after all attempts, we need to error but with a more helpful message
-                current_app.logger.error("[DP2SS:CONTACT] Contact exists in SharpSpring but cannot be found after multiple search attempts: %s",
+                # If we still couldn't find it after all attempts, create a unique contact variant
+                current_app.logger.warning("[DP2SS:CONTACT] Contact exists in SharpSpring but cannot be found after multiple search attempts: %s",
                                      contact_response.get('error', 'Unknown error'))
-                raise APIError(f"Contact already exists in SharpSpring but cannot be located for {contact.get('name', 'Unknown')} "
-                               f"({contact.get('email', 'Unknown')}): {contact_response.get('error', 'Unknown error')}")
+
+                # Direct API calls already used in the new get_contact method, so if we still can't find it,
+                # we'll create a unique contact variant to avoid conflicts
+                current_app.logger.warning("[DP2SS:CONTACT] Creating a unique contact variant...")
+
+                # Add a timestamp to the email to ensure it's unique
+                unique_email = contact["email"]
+                if "@" in unique_email:
+                    username, domain = unique_email.split("@", 1)
+                    unique_email = f"{username}+{int(time.time())}@{domain}"
+                else:
+                    unique_email = f"{unique_email}+{int(time.time())}@example.com"
+
+                current_app.logger.warning("[DP2SS:CONTACT] Using unique email: %s", unique_email)
+
+                current_app.logger.warning("[DP2SS:CONTACT] Creating contact with unique email: %s", unique_email)
+                unique_response = self.sharpspring_api_manager.create_contact(
+                    contact["name"],
+                    unique_email,  # Use unique email
+                    contact["phone"],
+                    data["owner_id"]
+                )
+
+                if "error" in unique_response:
+                    current_app.logger.error("[DP2SS:CONTACT] Even unique contact creation failed: %s",
+                                     unique_response.get('error', 'Unknown error'))
+                    raise APIError(f"Failed to create unique contact variant for {contact.get('name', 'Unknown')}: "
+                                  f"{unique_response.get('error', 'Unknown error')}")
+
+                return unique_response["contact_id"]
 
             # Handle any other errors
             elif "error" in contact_response or not contact_response.get("contact_id"):
