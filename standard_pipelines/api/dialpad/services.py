@@ -17,8 +17,11 @@ class DialpadAPIManager(BaseAPIManager):
         return ["api_key"]
 
     #============ API Functions =============#
-    def get_transcript(self, call_id: str | int, timezone: str = "UTC"):
+    def get_transcript(self, call_id: dict, timezone: str = "UTC"):
         try:
+            # call_id comes in as a dict
+            # may need to convert to an int?
+            call_id = call_id['call_id']
             if not isinstance(call_id, (str, int)):
                 current_app.logger.error("Invalid call_id provided.")
                 return {"error": "Invalid call_id provided."}
