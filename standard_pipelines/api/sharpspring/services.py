@@ -27,6 +27,10 @@ class SharpSpringAPIManager(BaseAPIManager):
     #====== Opportunity functions ======#
     def create_opportunity(self, owner_email: str, client_name: str, contact_id: str) -> dict:
         try:
+            # Convert contact_id to string if it's not already
+            if not isinstance(contact_id, str):
+                contact_id = str(contact_id)
+
             param_check_response = self._check_for_required_params([("owner_email", owner_email, str), ("client_name", client_name, str), ("contact_id", contact_id, str)])
             if "error" in param_check_response:
                 current_app.logger.error(f"Invalid parameters for create_opportunity: {param_check_response['error']}")
@@ -159,68 +163,80 @@ class SharpSpringAPIManager(BaseAPIManager):
             current_app.logger.exception(f"Unexpected error retrieving owners: {e}")
             return {'error': f'Unexpected error retrieving owners: {e}'}
           
-    def _prepare_contact_search_data(self, phone_number: str, name: str = None, email: str = None) -> dict:
+    def _prepare_contact_search_data(self, phone_number: str = "", name: str = None, email: str = None) -> dict:
         """
         Prepares contact data for searching by formatting the provided parameters.
-        
+
         Args:
-            phone_number (str): The phone number to format and include in search
+            phone_number (str, optional): The phone number to format and include in search
             name (str, optional): The name to format and include in search
             email (str, optional): The email to format and include in search
-            
+
         Returns:
             dict: A dictionary containing formatted search parameters or an error message
         """
         available_data = {}
-        
-        # Format phone number
-        formatted_phone_number = self._format_phone_number(phone_number)
-        if formatted_phone_number["valid"]:
-            available_data["phone_number"] = formatted_phone_number["phone_number"]
-        
-        # Format name if provided
-        if name:
-            formatted_name = self._format_name(name)
-            if formatted_name["valid"]:
-                available_data["name"] = formatted_name["name"]
-                
-        # Format email if provided
+
+        # Format phone number if provided - this is our highest priority search field
+        if phone_number and phone_number.strip():
+            formatted_phone_number = self._format_phone_number(phone_number)
+            if formatted_phone_number["valid"]:
+                available_data["phone_number"] = formatted_phone_number["phone_number"]
+
+        # Format email if provided - second priority
         if email:
             formatted_email = self._format_email(email)
             if formatted_email["valid"]:
                 available_data["email"] = formatted_email["email"]
 
+        # Format name if provided - lowest priority
+        if name:
+            formatted_name = self._format_name(name)
+            if formatted_name["valid"]:
+                available_data["name"] = formatted_name["name"]
+
         # Check if we have at least one valid search parameter
         if not available_data:
-            return {"error": "Invalid phone number, name, and email provided"}
-            
+            return {"error": "No valid search parameters provided"}
+
         return available_data
     
     def _validate_contact_params(self, phone_number: str, name: str = None, email: str = None, max_batches: int = 3, days: int = 30) -> dict:
         """
         Validates parameters for the get_contact method.
-        
+
         Args:
-            phone_number (str): The phone number to search for
+            phone_number (str): The phone number to search for (can be empty if email or name is provided)
             name (str, optional): The contact name to search for
             email (str, optional): The contact email to search for
             max_batches (int, optional): Maximum number of batches to fetch
             days (int, optional): Number of days back to search
-            
+
         Returns:
             dict: A success response or error message
         """
-        function_params = [("phone_number", phone_number, str),("max_batches", max_batches, int),("days", days, int),]
-        if name:
-            function_params.append(("name", name, str))
-        if email:
-            function_params.append(("email", email, str))
-
-        param_check_response = self._check_for_required_params(function_params)
+        # Validate max_batches and days
+        required_params = [("max_batches", max_batches, int), ("days", days, int)]
+        param_check_response = self._check_for_required_params(required_params, positive_only=True)
         if "error" in param_check_response:
             current_app.logger.error(f"Invalid parameters for get_contact: {param_check_response['error']}")
-        
-        return param_check_response
+            return param_check_response
+
+        # Ensure at least one search parameter is provided
+        if not (phone_number or name or email):
+            return {"error": "At least one search parameter (phone_number, name, or email) must be provided"}
+
+        # Validate types of provided parameters
+        if phone_number is not None and not isinstance(phone_number, str):
+            return {"error": "phone_number must be of type str"}
+
+        if name is not None and not isinstance(name, str):
+            return {"error": "name must be of type str"}
+
+        if email is not None and not isinstance(email, str):
+            return {"error": "email must be of type str"}
+
+        return {"success": True}
         
     def get_contact(self, phone_number: str, name: str = None, email: str = None, max_batches: int = 3, days: int = 30) -> dict:
         """
@@ -303,59 +319,97 @@ class SharpSpringAPIManager(BaseAPIManager):
         
     def update_contact_transcript(self, contact_id: str, transcript: str) -> dict:
         try:
+            contact_id = str(contact_id)
             param_check_response = self._check_for_required_params([("contact_id", contact_id, str), ("transcript", transcript, str)])
             if "error" in param_check_response:
                 current_app.logger.error(f"Invalid parameters for update_contact_transcript: {param_check_response['error']}")
                 return param_check_response
-            
-            transcript_field_name = self.get_transcript_field()
-            if "error" in transcript_field_name:
-                return transcript_field_name
 
-            lead_data = {"id": contact_id, transcript_field_name["system_name"]: transcript}
+            # Get the transcript field system name from SharpSpring
+            transcript_field = self.get_transcript_field()
+            if "error" in transcript_field:
+                return transcript_field
+
+            # Make sure we have the system_name
+            system_name = transcript_field.get("system_name")
+            if not system_name:
+                current_app.logger.error("No system_name found for transcript field")
+                return {"error": "No system_name found for transcript field"}
+
+            # Update the contact with the transcript
+            lead_data = {"id": contact_id, system_name: transcript}
             params = {'objects': [lead_data]}
             result = self._make_api_call("updateLeads", params)
             if "error" in result:
                 return result
 
-            update_list = result.get("result", {}).get("updates", []) 
+            update_list = result.get("result", {}).get("updates", [])
             if not update_list:
                 return {"error": "No contact updated"}
-            
-            if update_list[0].get("success") == "false":
-                return {"error": update_list[0].get("error", {}).get("message", "No contact updated")}
-            
+
+            # Check for success or error in the update
+            success_flag = update_list[0].get("success")
+            if success_flag == "false" or success_flag is False:
+                error_obj = update_list[0].get("error", {})
+                error_msg = error_obj.get("message", "No contact updated")
+                return {"error": error_msg}
+
             return {"success": True}
-        
+
         except Exception as e:
-            current_app.logger.exception(f"An unexpected error occurred while creating contact: {e}")
-            return {'error': 'An unexpected error occurred while creating contact'}
+            current_app.logger.exception(f"An unexpected error occurred while updating contact transcript: {e}")
+            return {'error': f'An unexpected error occurred while updating contact transcript: {e}'}
 
     #====== Field functions ======#
     def get_transcript_field(self) -> dict:
         try:
-            existing_data = self.gathered_data.get("system_name")
-            if existing_data:
-                return {"system_name": existing_data}
-            
+            # Check if we already have the system_name cached
+            existing_system_name = self.gathered_data.get("system_name")
+            existing_field_id = self.gathered_data.get("field_id")
+
+            # If we have both pieces of data cached, return them
+            if existing_system_name and existing_field_id:
+                return {
+                    "system_name": existing_system_name,
+                    "field_id": existing_field_id
+                }
+
+            # Otherwise, look up the field from SharpSpring
             params = {"where": {"label": "Call Transcripts"}}
             result = self._make_api_call("getFields", params)
             if "error" in result:
                 return result
-            
-            field_list = result.get("result", {}).get("field", [])
-            field = field_list[0] if field_list else {}
-            
-            field_id = field.get("id")
-            system_name = field.get("systemName")
-            if system_name:
-                self.gathered_data["system_name"] = system_name
 
-            return {"field_id": field_id, "system_name": system_name}
-        
+            field_list = result.get("result", {}).get("field", [])
+
+            # If we found the field
+            if field_list:
+                field = field_list[0]
+                field_id = field.get("id")
+                system_name = field.get("systemName")
+
+                # Cache the values we found for future use
+                if field_id:
+                    self.gathered_data["field_id"] = field_id
+                if system_name:
+                    self.gathered_data["system_name"] = system_name
+
+                # Return both values (either could be None)
+                return {
+                    "field_id": field_id,
+                    "system_name": system_name
+                }
+            else:
+                # Field doesn't exist yet
+                current_app.logger.warning("Transcript field not found in SharpSpring")
+                return {
+                    "field_id": None,
+                    "system_name": None
+                }
+
         except Exception as e:
-            current_app.logger.exception(f"An unexpected error occurred while getting contact: {e}")
-            return {'error': 'An unexpected error occurred while getting contact'}
+            current_app.logger.exception(f"An unexpected error occurred while getting transcript field: {e}")
+            return {'error': f'An unexpected error occurred while getting transcript field: {e}'}
         
     def create_transcript_field(self) -> dict:
         try:
@@ -524,9 +578,15 @@ class SharpSpringAPIManager(BaseAPIManager):
     def _format_phone_number(self, phone_number: str) -> dict:
         if not phone_number or not isinstance(phone_number, str):
             return {"phone_number": phone_number, "valid": False}
-        
-        formatted_phone_number = re.sub(r"\D", "", phone_number) 
-        
+
+        # Check for empty string after stripping whitespace
+        if not phone_number.strip():
+            return {"phone_number": phone_number, "valid": False}
+
+        # Remove all non-numeric characters (including plus sign, parentheses, dashes, spaces)
+        formatted_phone_number = re.sub(r"\D", "", phone_number)
+
+        # Ensure we have a reasonable length for a phone number
         if len(formatted_phone_number) < 7 or len(formatted_phone_number) > 15:
             return {"phone_number": phone_number, "valid": False}
 
@@ -535,29 +595,44 @@ class SharpSpringAPIManager(BaseAPIManager):
     def _format_name(self, name: str) -> dict:
         if not name or not isinstance(name, str):
             return {"name": name, "valid": False}
-        
-        # Remove all non-alphabetic characters and spaces
-        formatted_name = re.sub(r"[^a-zA-Z]", "", name).lower()
-        
+
+        # Check for empty string after stripping whitespace
+        if not name.strip():
+            return {"name": name, "valid": False}
+
+        # Remove leading/trailing whitespace and convert to lowercase
+        formatted_name = name.strip().lower()
+
+        # Replace multiple spaces with single space
+        formatted_name = re.sub(r"\s+", " ", formatted_name)
+
+        # Further normalization: remove non-alphabetic characters if needed
+        # Commented out but available if strict matching is required
+        # formatted_name = re.sub(r"[^a-z\s]", "", formatted_name)
+
         return {"name": formatted_name, "valid": True}
     
     def _format_email(self, email: str) -> dict:
         if not email or not isinstance(email, str):
             return {"email": email, "valid": False}
-        
+
+        # Check for empty string after stripping whitespace
+        if not email.strip():
+            return {"email": email, "valid": False}
+
         formatted_email = email.strip().lower()
         return {"email": formatted_email, "valid": True}
 
     def _find_matching_contact(self, available_data: dict, field_name: str, max_batches: int = 3, days: int = 30) -> dict:
         """
         Retrieves a contact by phone number, looking up recent contacts created or updated within a given time range.
-        
+
         Args:
             available_data (dict): A dictionary containing the phone number, name, and email to search for if all are provided.
             max_batches (int): The maximum number of batches(500 contacts each) to retrieve (default 3).
             days (int): The number of days back to search for contacts (default 30).
             field_name (str): The name of the field to search for the transcript (default None).
-            
+
         Returns:
             dict: A dictionary containing the contact ID and transcript or an error message if not found.
         """
@@ -567,7 +642,10 @@ class SharpSpringAPIManager(BaseAPIManager):
             if "error" in param_check_response:
                 current_app.logger.error(f"Invalid parameters for _find_matching_contact: {param_check_response['error']}")
                 return param_check_response
-            
+
+            # Check if we're looking for a contact with an email - useful for validation
+            looking_for_email = available_data.get("email") and len(available_data.get("email", "")) > 0
+
             start_date = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d %H:%M:%S")
             end_date = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
             offset = 0
@@ -584,37 +662,120 @@ class SharpSpringAPIManager(BaseAPIManager):
                 result = self._make_api_call("getLeadsDateRange", params)
                 if "error" in result:
                     return result
-                
+
                 contacts = result.get("result", {}).get("lead", [])
 
-                for contact in reversed(contacts): #Reversed to get the newest contacts first
+                # Process in reverse order to get newest first
+                for contact in reversed(contacts):
+                    # Get all the fields we need for matching
                     contact_number = contact.get("phoneNumber") or contact.get("mobilePhoneNumber")
-                    contact_name = contact.get("firstName","") + contact.get("lastName","")
+                    first_name = contact.get("firstName", "")
+                    last_name = contact.get("lastName", "")
+                    contact_name = first_name + last_name
                     contact_email = contact.get("emailAddress")
+                    contact_id = contact.get("id")
 
+                    # Skip any contact that doesn't have the fields we're looking for
+                    # This handles the case where we're looking for a contact with an email
+                    # but the current contact doesn't have one
+                    if looking_for_email and not contact_email:
+                        continue
+
+                    # Skip empty contacts
                     if not contact_number and not contact_name and not contact_email:
                         continue
 
-                    contact_number = self._format_phone_number(contact_number)
-                    contact_name = self._format_name(contact_name)
-                    contact_email = self._format_email(contact_email)
+                    # Format the fields for comparison
+                    contact_number_data = self._format_phone_number(contact_number)
+                    contact_name_data = self._format_name(contact_name)
+                    contact_email_data = self._format_email(contact_email)
 
-                    if not contact_number["valid"] and not contact_name["valid"] and not contact_email["valid"]:
+                    # Skip invalid contacts
+                    if not contact_number_data["valid"] and not contact_name_data["valid"] and not contact_email_data["valid"]:
                         continue
-                    
-                    if contact_number["phone_number"] == available_data.get("phone_number"):
-                        return {"contact_id": contact.get("id"), "transcript": contact.get(field_name)}
-                    
-                    if contact_name["name"] == available_data.get("name"):
-                        return {"contact_id": contact.get("id"), "transcript": contact.get(field_name)}
-                    
-                    if contact_email["email"] == available_data.get("email"):
-                        return {"contact_id": contact.get("id"), "transcript": contact.get(field_name)}
 
-                offset += self.MAX_QUERIES  
+                    # ===============================================================
+                    # PRIORITY ORDER: Phone -> Email -> Name (as specified in requirements)
+                    # ===============================================================
+
+                    # 1. PHONE MATCHING (HIGHEST PRIORITY)
+                    if contact_number_data["valid"] and available_data.get("phone_number"):
+                        # Don't match on empty values - this is a key requirement
+                        if not contact_number_data["phone_number"].strip():
+                            continue
+
+                        # Direct phone match
+                        if contact_number_data["phone_number"] == available_data.get("phone_number"):
+                            current_app.logger.debug(f"[SHARPSPRING] Found contact by phone match: {contact_id}")
+                            return {"contact_id": contact_id, "transcript": contact.get(field_name)}
+
+                        # No need to check alternative phone formats since we're normalizing all numbers
+                        # in the _format_phone_number method. The normalized phone numbers should match directly.
+
+                    # 2. EMAIL MATCHING (SECOND PRIORITY)
+                    if contact_email_data["valid"] and available_data.get("email"):
+                        # Don't match on empty values
+                        if not contact_email_data["email"].strip():
+                            continue
+
+                        # Direct email match - already normalized to lowercase
+                        if contact_email_data["email"] == available_data.get("email"):
+                            current_app.logger.debug(f"Found contact by email match: {contact_id}")
+                            return {"contact_id": contact_id, "transcript": contact.get(field_name)}
+
+                        # Optional: domain match if there's variation in the local part
+                        contact_email_parts = contact_email_data["email"].split('@')
+                        search_email_parts = available_data.get("email").lower().split('@')
+                        if (len(contact_email_parts) == 2 and len(search_email_parts) == 2 and
+                            contact_email_parts[1] == search_email_parts[1] and
+                            (contact_email_parts[0].startswith(search_email_parts[0]) or
+                             search_email_parts[0].startswith(contact_email_parts[0]))):
+                            current_app.logger.debug(f"Found contact by partial email match (same domain): {contact_id}")
+                            return {"contact_id": contact_id, "transcript": contact.get(field_name)}
+
+                    # 3. NAME MATCHING (LOWEST PRIORITY)
+                    if contact_name_data["valid"] and available_data.get("name"):
+                        # Don't match on empty values
+                        if not contact_name_data["name"].strip():
+                            continue
+
+                        # Direct normalized name match
+                        if contact_name_data["name"] == available_data.get("name"):
+                            current_app.logger.debug(f"Found contact by name match: {contact_id}")
+                            return {"contact_id": contact_id, "transcript": contact.get(field_name)}
+
+                        # Optional: partial name matching for first/last name combinations
+                        if ' ' in first_name + ' ' + last_name and ' ' in available_data.get("name"):
+                            # Get first and last names from both sides
+                            contact_first = first_name.lower().strip()
+                            contact_last = last_name.lower().strip()
+                            search_parts = available_data.get("name").lower().split(' ', 1)
+                            search_first = search_parts[0].strip()
+                            search_last = search_parts[1].strip() if len(search_parts) > 1 else ""
+
+                            # Skip empty name parts
+                            if (not contact_first or not contact_last or
+                                not search_first or not search_last):
+                                continue
+
+                            # Check last name match with first initial match
+                            if (contact_last == search_last and
+                                contact_first[0] == search_first[0]):
+                                current_app.logger.debug(f"Found contact by last name + first initial match: {contact_id}")
+                                return {"contact_id": contact_id, "transcript": contact.get(field_name)}
+
+                            # Check first name match with last initial match
+                            if (contact_first == search_first and
+                                contact_last[0] == search_last[0]):
+                                current_app.logger.debug(f"Found contact by first name + last initial match: {contact_id}")
+                                return {"contact_id": contact_id, "transcript": contact.get(field_name)}
+
+                # Move to next batch if needed
+                offset += self.MAX_QUERIES
                 if not contacts or len(contacts) < self.MAX_QUERIES:
                     break  # No more data left to fetch
-            
+
+            # No match found
             return {"contact_id": None, "transcript": None}
 
         except Exception as e:
