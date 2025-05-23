@@ -16,3 +16,4 @@ def healthcheck():
     return Response(status=200)
 
 from . import routes
+from . import credentials_routes

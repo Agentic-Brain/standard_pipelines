@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12">
-            <h2>Standard Pipelines Dashboard</h2>
+            <h2>Agentic Brain Admin Dashboard</h2>
             <p class="text-muted">Welcome to the administration dashboard. Manage clients, data flows, and user permissions.</p>
         </div>
     </div>
@@ -78,6 +78,11 @@
                 </div>
                 <div class="card-body">
                     <div class="list-group">
+                        <a href="{{ url_for('admin.credentials_overview') }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-key mr-2" style="color: var(--primary);"></i>
+                            Manage All Credentials
+                        </a>
+                        <div class="dropdown-divider"></div>
                         {% for category_name, views in admin_categories.items() %}
                         <div class="mb-2 text-muted small text-uppercase mt-2">{{ category_name }}</div>
                         {% for view in views %}

@@ -1,0 +1,191 @@
+{% extends 'admin/base.html' %}
+
+{% block inner_title %}Client Details{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>
+                <i class="fas fa-user-circle mr-2" style="color: var(--primary);"></i>
+                {{ model.name }}
+            </h2>
+            <p class="text-muted">{{ model.description if model.description else 'No description provided' }}</p>
+            
+            <div class="mb-3">
+                <span class="badge badge-{{ 'success' if model.is_active else 'secondary' }} px-3 py-2">
+                    {{ 'Active' if model.is_active else 'Inactive' }}
+                </span>
+                <small class="text-muted ml-3">Created: {{ model.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+            </div>
+            
+            <div class="btn-group mb-4" role="group">
+                <a href="{{ url_for('.edit_view', id=model.id) }}" class="btn btn-outline-primary">
+                    <i class="fas fa-edit mr-1"></i> Edit Client
+                </a>
+                <a href="{{ url_for('clientdataflowjoin.create_view', url=url_for('clientdataflowjoin.create_view', client_id=model.id)) }}" class="btn btn-outline-primary">
+                    <i class="fas fa-plus mr-1"></i> Assign Data Flow
+                </a>
+                <a href="{{ url_for('.index_view') }}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left mr-1"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Flows Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-project-diagram mr-2" style="color: var(--primary);"></i>
+                        Assigned Data Flows
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    {% if model.data_flows %}
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Flow Name</th>
+                                    <th>Description</th>
+                                    <th>Version</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for flow_relation in client_data_flows %}
+                                <tr>
+                                    <td>{{ flow_relation.data_flow.name }}</td>
+                                    <td>{{ flow_relation.data_flow.description }}</td>
+                                    <td><span class="badge badge-info">{{ flow_relation.data_flow.version }}</span></td>
+                                    <td>
+                                        <span class="badge badge-{{ 'success' if flow_relation.is_active else 'secondary' }}">
+                                            {{ 'Active' if flow_relation.is_active else 'Inactive' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="{{ url_for('dataflow.details_view', id=flow_relation.data_flow.id) }}" class="btn btn-outline-info" title="Flow Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ url_for('clientdataflowjoin.edit_view', id=flow_relation.id) }}" class="btn btn-outline-primary" title="Edit Mapping">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            {% if flow_relation.is_active %}
+                                            <a href="{{ url_for('clientdataflowjoin.action_view', action='toggle_active', id=flow_relation.id) }}" class="btn btn-outline-warning" title="Deactivate">
+                                                <i class="fas fa-toggle-off"></i>
+                                            </a>
+                                            {% else %}
+                                            <a href="{{ url_for('clientdataflowjoin.action_view', action='toggle_active', id=flow_relation.id) }}" class="btn btn-outline-success" title="Activate">
+                                                <i class="fas fa-toggle-on"></i>
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-project-diagram fa-3x mb-3 text-muted"></i>
+                        <p>No data flows assigned to this client yet.</p>
+                        <a href="{{ url_for('clientdataflowjoin.create_view', url=url_for('clientdataflowjoin.create_view', client_id=model.id)) }}" class="btn btn-primary btn-sm mt-2">
+                            <i class="fas fa-plus mr-1"></i> Assign Data Flow
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Configuration Objects Section -->
+    {% if config_objects %}
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-cogs mr-2" style="color: var(--primary);"></i>
+                        Flow Configurations
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-tabs" id="configTabs" role="tablist">
+                        {% for flow_type, configs in config_objects.items() %}
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link {% if loop.first %}active{% endif %}" 
+                               id="tab-{{ flow_type }}" 
+                               data-toggle="tab" 
+                               href="#content-{{ flow_type }}" 
+                               role="tab" 
+                               aria-controls="content-{{ flow_type }}" 
+                               aria-selected="{{ 'true' if loop.first else 'false' }}">
+                                {{ flow_type }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="tab-content mt-3" id="configTabContent">
+                        {% for flow_type, configs in config_objects.items() %}
+                        <div class="tab-pane fade {% if loop.first %}show active{% endif %}" 
+                             id="content-{{ flow_type }}" 
+                             role="tabpanel" 
+                             aria-labelledby="tab-{{ flow_type }}">
+                            
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Configuration ID</th>
+                                            <th>Is Default</th>
+                                            <th>Created</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for config in configs %}
+                                        <tr>
+                                            <td>{{ config.id }}</td>
+                                            <td>
+                                                <span class="badge badge-{{ 'success' if config.is_default else 'secondary' }}">
+                                                    {{ 'Yes' if config.is_default else 'No' }}
+                                                </span>
+                                            </td>
+                                            <td>{{ config.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <a href="#" class="btn btn-outline-info" title="View Config">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-outline-primary" title="Edit Config">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    {% if not config.is_default %}
+                                                    <a href="#" class="btn btn-outline-success" title="Set as Default">
+                                                        <i class="fas fa-check"></i>
+                                                    </a>
+                                                    {% endif %}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
