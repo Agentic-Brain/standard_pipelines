@@ -13,7 +13,8 @@ class DialpadCredentials(BaseCredentials):
     dialpad_jwt_secret: Mapped[Optional[str]] = mapped_column(String(255))
 
     # TODO: Consider breaking dialpad credentials and dialpad jwt secret into separate tables
-    def __init__(self, client_id: UUID, dialpad_api_key: str, dialpad_jwt_secret: str):
-        super().__init__(client_id=client_id)
+    def __init__(self, client_id: UUID, dialpad_api_key: str, dialpad_jwt_secret: str, **kwargs):
+        self.client_id = client_id
         self.dialpad_api_key = dialpad_api_key
         self.dialpad_jwt_secret = dialpad_jwt_secret
+        super().__init__(**kwargs)

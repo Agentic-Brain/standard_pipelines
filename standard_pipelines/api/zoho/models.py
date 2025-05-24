@@ -20,7 +20,8 @@ class ZohoCredentials(BaseCredentials):
 
     oauth_expires_at: Mapped[int] = unencrypted_mapped_column(Integer)
 
-    def __init__(self, client_id: UUID, oauth_client_id: str, oauth_client_secret: str):
-        super().__init__(client_id=client_id)
+    def __init__(self, client_id: UUID, oauth_client_id: str, oauth_client_secret: str, **kwargs):
+        self.client_id = client_id
         self.oauth_client_id = oauth_client_id
         self.oauth_client_secret = oauth_client_secret
+        super().__init__(**kwargs)

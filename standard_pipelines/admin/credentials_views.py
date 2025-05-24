@@ -135,14 +135,14 @@ def add_credential(client_id: UUID, credential_type: str):
     
     if request.method == 'POST':
         try:
-            # Create new credential instance
-            credential = model()
-            credential.client_id = client_id
-            
-            # Set fields from form
+            # Collect all form data including client_id
+            kwargs = {'client_id': client_id}
             for field in request.form:
-                if hasattr(credential, field) and field != 'client_id':
-                    setattr(credential, field, request.form[field])
+                if field != 'client_id':
+                    kwargs[field] = request.form[field]
+            
+            # Create new credential instance with all data
+            credential = model(**kwargs)
             
             db.session.add(credential)
             db.session.commit()

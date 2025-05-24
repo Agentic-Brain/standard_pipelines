@@ -13,6 +13,7 @@ class FirefliesCredentials(BaseCredentials):
     # API Key for Fireflies.ai
     fireflies_api_key: Mapped[str] = mapped_column(String(255))
 
-    def __init__(self, client_id: UUID, fireflies_api_key: str):
+    def __init__(self, client_id: UUID, fireflies_api_key: str, **kwargs):
         self.client_id = client_id
         self.fireflies_api_key = fireflies_api_key
+        super().__init__(**kwargs)

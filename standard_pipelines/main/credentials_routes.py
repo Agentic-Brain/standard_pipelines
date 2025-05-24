@@ -1,10 +1,10 @@
 """
 User-facing credentials management routes
 """
-from flask import render_template, request, redirect, url_for, flash, jsonify
+from flask import render_template, request, redirect, url_for, flash, jsonify, current_app
 from flask_login import login_required, current_user
 from uuid import UUID
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 
 from ..extensions import db
 from ..data_flow.models import Client
@@ -21,6 +21,9 @@ from ..api.fireflies.models import FirefliesCredentials
 from ..api.hubspot.models import HubSpotCredentials
 
 # Credential models registry
+# TODO: Gonna wanna make this into a global registry of some sort to auto populate
+# See dataflow registry meta for examples
+# TODO: Fix icon drawing using credential logo type
 CREDENTIAL_MODELS = {
     'anthropic': {
         'model': AnthropicCredentials,
@@ -100,8 +103,11 @@ CREDENTIAL_MODELS = {
         }
     }
 }
-
+# LOG: Add error loggin to this entire section
 # Fields to exclude from display (encrypted fields)
+# TODO: This sucks, gonna want to change it as well
+# TODO: Possible defaults plus override on a per model basis? Look into working with the actual DB model
+# Hiding all by default and only revealing what is requested is probably a better idea
 ENCRYPTED_FIELDS = {
     'api_key', 'secret', 'password', 'token', 'refresh_token',
     'client_secret', 'private_key', 'jwt_secret', 'anthropic_api_key',
@@ -110,13 +116,14 @@ ENCRYPTED_FIELDS = {
 }
 
 
-def get_user_client():
+def get_user_client() -> Optional[Client]:
     """Get the client associated with the current user"""
     if not current_user.is_authenticated:
         return None
     return current_user.client
 
-
+# TODO: Set credentials as "enabled" for certain clients so they can only see what is relevant
+# TODO: Don't display oauth credentials here
 @main.route('/credentials')
 @login_required
 def credentials():
@@ -124,10 +131,13 @@ def credentials():
     client = get_user_client()
     if not client:
         flash('No client associated with your account', 'error')
+        # This should not be possible, user should always have associated client
+        current_app.logger.error(f'User {current_user} tried to access credentials without associated client')
         return redirect(url_for('main.index'))
     
     # Get all credentials for this client
     user_credentials = {}
+    # TODO: Change this to registry model as mentioned above
     for key, info in CREDENTIAL_MODELS.items():
         model = info['model']
         creds = db.session.query(model).filter_by(client_id=client.id).all()
@@ -160,14 +170,15 @@ def add_credential(credential_type: str):
     
     if request.method == 'POST':
         try:
-            # Create new credential instance
-            credential = model()
-            credential.client_id = client.id
-            
-            # Set fields from form
+            # Collect all form data including client_id
+            kwargs = {'client_id': client.id}
             for field in request.form:
-                if hasattr(credential, field) and field != 'client_id':
-                    setattr(credential, field, request.form[field])
+                if field != 'client_id':
+                    kwargs[field] = request.form[field]
+            
+            # Create new credential instance with all data
+            credential = model(**kwargs)
+            credential.client_id = client.id
             
             db.session.add(credential)
             db.session.commit()
@@ -182,7 +193,8 @@ def add_credential(credential_type: str):
     # Get model fields for form
     fields = []
     for column in model.__table__.columns:
-        if column.name not in ['id', 'client_id', 'created_at', 'updated_at']:
+        # TODO: Find a way to define this as "non-viewable" in the base credentials model
+        if column.name not in ['id', 'client_id', 'created_at', 'updated_at', 'modified_at']:
             field_info = {
                 'name': column.name,
                 'type': str(column.type),

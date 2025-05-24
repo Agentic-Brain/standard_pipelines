@@ -11,7 +11,8 @@ class RapidAPICredentials(BaseCredentials):
     rapidapi_key: Mapped[str] = mapped_column(Text)
     rapidapi_host: Mapped[str] = mapped_column(Text)
 
-    def __init__(self, client_id: UUID, rapidapi_key: str, rapidapi_host: str):
+    def __init__(self, client_id: UUID, rapidapi_key: str, rapidapi_host: str, **kwargs):
         self.client_id = client_id
         self.rapidapi_key = rapidapi_key
         self.rapidapi_host = rapidapi_host
+        super().__init__(**kwargs)
