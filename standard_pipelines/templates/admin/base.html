@@ -17,8 +17,16 @@
         background: var(--dark) !important;
         color: #fff !important;
         padding: 14px 28px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        margin: 24px auto !important;
+        max-width: 1400px !important;
+        width: calc(100% - 48px) !important;
         border-radius: 12px !important;
         box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+        position: relative !important;
+        z-index: 1000 !important;
     }
     
     .floating-navbar .btn-navbar {
@@ -26,11 +34,17 @@
         color: #fff !important;
         border: 1px solid #333 !important;
         border-radius: 6px !important;
+        padding: 6px 18px !important;
+        font-size: 0.9rem !important;
+        cursor: pointer !important;
+        text-decoration: none !important;
+        transition: background 0.2s !important;
     }
     
     .floating-navbar .btn-navbar:hover {
         background: #444 !important;
         color: #fff !important;
+        text-decoration: none !important;
     }
     
     /* Change blue icons to HubSpot orange */
@@ -63,11 +77,52 @@
         color: var(--primary) !important;
     }
     
+    /* Add navbar-brand and navbar-actions classes to match base.html */
+    .navbar-brand {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+    }
+    
+    .navbar-brand img {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    .navbar-brand h1 {
+        font-size: 1.3rem !important;
+        font-weight: 600 !important;
+        font-family: 'Space Grotesk', sans-serif !important;
+        margin: 0 !important;
+    }
+    
+    .navbar-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+    }
+    
     /* Specific icon colors */
     .fa-tachometer-alt, .fa-key, .fa-users, .fa-user-tag, 
     .fa-user, .fa-table, .fa-project-diagram, .fa-link,
     .fa-check-circle, .fa-wrench {
         color: var(--primary) !important;
+    }
+    
+    /* Secondary button styling */
+    .btn-secondary, .btn-outline-secondary {
+        color: var(--text-secondary) !important;
+        border-color: var(--border) !important;
+    }
+    
+    .btn-secondary:hover, .btn-outline-secondary:hover {
+        background-color: #f5f5f5 !important;
+        color: var(--text-secondary) !important;
+    }
+    
+    /* Fix text-secondary color for icons */
+    .text-secondary {
+        color: var(--text-secondary) !important;
     }
     
     .admin-layout {
