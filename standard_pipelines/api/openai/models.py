@@ -13,6 +13,7 @@ class OpenAICredentials(BaseCredentials):
     # API Key for OpenAI
     openai_api_key: Mapped[str] = mapped_column(Text)
 
-    def __init__(self, client_id: UUID, openai_api_key: str):
+    def __init__(self, client_id: UUID, openai_api_key: str, **kwargs):
         self.client_id = client_id
         self.openai_api_key = openai_api_key
+        super().__init__(**kwargs)

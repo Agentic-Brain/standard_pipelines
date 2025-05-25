@@ -26,7 +26,7 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_papertrail_system_hostname
 
 x-base-service: &base-service
-  image: ghcr.io/agentic-brain/standard_pipelines:v1.2.0
+  image: ghcr.io/agentic-brain/standard_pipelines:v1.3.0
   environment:
     - FLASK_ENV=production
     - PRODUCTION_DB_HOST=standard_pipelines_production_postgres
@@ -69,9 +69,10 @@ services:
   migrations:
     <<: *base-service
     command: /bin/sh -c "uv run flask db upgrade && uv run flask create-default-admin && uv run flask init-flows"
-    environment:
-      - PRODUCTION_DB_HOST=standard_pipelines_production_postgres
-      - PRODUCTION_ENABLE_PAPERTRAIL_LOGGING=False
+    # TODO: Find some way to manually modify migrations env vars without wiping the base ones, probably separate out env vars and base service
+    # environment:
+    #   - PRODUCTION_DB_HOST=standard_pipelines_production_postgres
+    #   - PRODUCTION_ENABLE_PAPERTRAIL_LOGGING=False
     depends_on:
       - postgres
 

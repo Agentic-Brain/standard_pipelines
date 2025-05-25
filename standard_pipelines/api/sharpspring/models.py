@@ -11,7 +11,8 @@ class SharpSpringCredentials(BaseCredentials):
     account_id: Mapped[str] = mapped_column(String(255))
     secret_key: Mapped[str] = mapped_column(String(255))
 
-    def __init__(self, client_id: UUID, account_id: str, secret_key: str):
-        super().__init__(client_id=client_id)
+    def __init__(self, client_id: UUID, account_id: str, secret_key: str, **kwargs):
+        self.client_id = client_id
         self.account_id = account_id
         self.secret_key = secret_key
+        super().__init__(**kwargs)

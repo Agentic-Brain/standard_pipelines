@@ -15,8 +15,9 @@ class HubSpotCredentials(BaseCredentials):
     hubspot_client_secret: Mapped[str] = mapped_column(String(255))
     hubspot_refresh_token: Mapped[str] = mapped_column(String(255))
 
-    def __init__(self, client_id: UUID, hubspot_client_id: str, hubspot_client_secret: str, hubspot_refresh_token: str):
-        super().__init__(client_id=client_id)
+    def __init__(self, client_id: UUID, hubspot_client_id: str, hubspot_client_secret: str, hubspot_refresh_token: str, **kwargs):
+        self.client_id = client_id
         self.hubspot_client_id = hubspot_client_id
         self.hubspot_client_secret = hubspot_client_secret
         self.hubspot_refresh_token = hubspot_refresh_token
+        super().__init__(**kwargs)

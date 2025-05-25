@@ -66,12 +66,18 @@ class BaseCredentials(SecureMixin):
     """Base model for storing encrypted credentials."""
 
     __abstract__ = True
+    def __init__(self, **kwargs):
+        for k, v in kwargs.items():
+                setattr(self, k, v)
     
     # Link to client for encryption key lookup, unique constraint moved to __table_args__
     client_id: Mapped[UUID] = mapped_column(
         UUID, 
         ForeignKey('client.id', ondelete='CASCADE')
     )
+
+    def validate_fields(self):
+        pass
 
     # Default to unique constraint, can be overridden by child classes
     @declared_attr
@@ -85,13 +91,24 @@ class BaseCredentials(SecureMixin):
     def get_encryption_key(self) -> bytes:
         """Get encryption key from Bitwarden using the client's encryption key ID."""
         
-        # Get Bitwarden client from Flask app extensions
+        # Import here to avoid circular imports
+        from standard_pipelines.data_flow.models import Client
+        from standard_pipelines.extensions import db
         
+        # Get client directly from database to avoid relationship loading issues
+        client = db.session.get(Client, self.client_id)
+        if not client:
+            raise Exception(f"Client with ID {self.client_id} not found")
+        
+        if not client.bitwarden_encryption_key_id:
+            raise Exception(f"Client {client.name} does not have a Bitwarden encryption key ID configured")
+        
+        # Get Bitwarden client from Flask app extensions
         bitwarden_client = current_app.extensions['bitwarden_client']
         
         # Retrieve the secret using the client's encryption key ID
         try:
-            secret = bitwarden_client.secrets().get(self.client.bitwarden_encryption_key_id)
+            secret = bitwarden_client.secrets().get(client.bitwarden_encryption_key_id)
             if secret.success:
                 return secret.data.value.encode()
             else:
@@ -113,6 +130,7 @@ class AnthropicCredentials(BaseCredentials):
     # API Key for Anthropic
     anthropic_api_key: Mapped[str] = mapped_column(String(255))
     
-    def __init__(self, client_id: UUID, anthropic_api_key: str):
+    def __init__(self, client_id: UUID, anthropic_api_key: str, **kwargs):
         self.client_id = client_id
         self.anthropic_api_key = anthropic_api_key
+        super().__init__(**kwargs)

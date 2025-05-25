@@ -7,7 +7,14 @@ This file demonstrates how to register models with the CustomAdmin system.
 from standard_pipelines.admin import register_view
 from standard_pipelines.admin.views import ModelView
 from standard_pipelines.data_flow.models import Client, DataFlow, ClientDataFlowJoin
-from standard_pipelines.auth.models import User, Role
+from standard_pipelines.auth.models import User, Role, AnthropicCredentials
+from standard_pipelines.api.openai.models import OpenAICredentials
+from standard_pipelines.api.google.models import GoogleCredentials
+from standard_pipelines.api.zoho.models import ZohoCredentials
+from standard_pipelines.api.dialpad.models import DialpadCredentials
+from standard_pipelines.api.sharpspring.models import SharpSpringCredentials
+from standard_pipelines.api.fireflies.models import FirefliesCredentials
+from standard_pipelines.api.hubspot.models import HubSpotCredentials
 from standard_pipelines.extensions import db
 
 def register_admin_models():
@@ -96,3 +103,8 @@ def register_admin_models():
         }
     )
     register_view(mapping_view)
+    
+    # Credential Management
+    # Note: We don't register individual credential models here because they contain
+    # sensitive encrypted data. Use the specialized credential views instead.
+    # The credential management is accessible through each client's detail page.

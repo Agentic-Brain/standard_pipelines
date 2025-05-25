@@ -1,97 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agentic Brain OAuth Portal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
-  <style>
+{% extends "base.html" %}
+
+{% block title %}Agentic Brain OAuth Portal{% endblock %}
+
+{% block header_title %}Agentic Brain OAuth Portal{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style>
     :root {
-      --primary: #ff7a00; /* accent colour (HubSpot orange) */
-      --gray-bg: #f6f7f9; /* fallback colour underneath hero bg */
-      --dark: #111; /* dark navbar background */
-      --border: #e5e7eb; /* light gray border */
       --connected: #22c55e; /* green */
       --not-connected: #9ca3af; /* slate */
       --disabled: #d1d5db; /* light slate */
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Inter, system-ui, -apple-system, sans-serif;
-    }
-
-    /* ----------  PAGE BACKGROUND  ---------- */
-    body {
-      background: var(--gray-bg) url("{{ url_for('static', filename='img/bg-dots.png') }}") no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    /* ----------  FLOATING NAVBAR  ---------- */
-    .navbar {
-      background: var(--dark);
-      color: #fff;
-      padding: 14px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 24px;
-      border-radius: 12px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-    }
-
-    .navbar h1 {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.3rem;
-      font-weight: 600;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-
-    .navbar .logo {
-      width: 32px;
-      height: 32px;
-    }
-
-    .btn-logout {
-      background: #222;
-      color: #fff;
-      border: 1px solid #333;
-      border-radius: 6px;
-      padding: 6px 18px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.2s;
-    }
-    .btn-logout:hover {
-      background: #444;
-    }
-
-    /* ----------  FLOATING CONTENT PANEL  ---------- */
-    .panel {
-      max-width: 1400px;
-      margin: 24px auto 48px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-      backdrop-filter: blur(3px);
-      /* give a subtle translucency against hero bg */
-    }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 32px 24px 48px;
     }
 
     /* ----------  CARD GRID  ---------- */
@@ -229,20 +148,11 @@
       }
     }
   </style>
-</head>
-<body>
-  <!-- NAV -->
-  <nav class="navbar">
-    <h1>
-      <img src="{{ url_for('static', filename='img/logo-small.png') }}" alt="Agentic Brain" class="logo" />
-      Agentic Brain OAuth Portal
-    </h1>
-    <a href="{{ url_for('security.logout') }}" class="btn-logout">Logout</a>
-  </nav>
+{% endblock %}
 
-  <!-- MAIN FLOATING PANEL -->
-  <div class="panel">
-    <div class="container">
+
+{% block content %}
+    <div class="oauth-container">
 
       <div class="card-grid">
         {% for name, service in oauth_services.items() %}
@@ -272,9 +182,4 @@
         {% endfor %}
       </div>
     </div>
-  </div>
-  
-  <!-- Footer -->
-  {% include 'footer.html' %}
-</body>
-</html>
+{% endblock %}

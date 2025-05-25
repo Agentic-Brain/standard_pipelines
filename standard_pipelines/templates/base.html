@@ -1,64 +1,150 @@
+{# templates/base.html #}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Agentic Brain{% endblock %}</title>
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favico.ico')}}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Agentic Brain{% endblock %}</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/favico.ico') }}">
+
+  {# ─── FONTS ────────────────────────────────────────────────────────────────── #}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+
+  {# ─── BASE CSS ──────────────────────────────────────────────────────────────── #}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+
+  {# ─── FLOATING NAVBAR CSS ──────────────────────────────────────────────────── #}
+  <style>
+    .floating-navbar {
+      background: var(--dark);
+      color: #fff;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 24px auto;
+      max-width: 1400px;
+      width: calc(100% - 48px);
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      position: relative;
+      z-index: 1000;
+    }
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
     
-    <!-- Base CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    .navbar-brand img {
+      width: 32px;
+      height: 32px;
+    }
     
-    <!-- Additional CSS -->
-    {% block styles %}{% endblock %}
+    .navbar-brand h1 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      margin: 0;
+    }
+    
+    .navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .btn-navbar {
+      background: #222;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 6px 18px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    
+    .btn-navbar:hover {
+      background: #444;
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    @media (max-width: 768px) {
+      .floating-navbar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        margin: 12px auto;
+        width: calc(100% - 24px);
+      }
+      
+      .navbar-actions {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+
+  {# ─── PAGE-SPECIFIC CSS ────────────────────────────────────────────────────── #}
+  {% block styles %}{% endblock %}
 </head>
 <body>
-    <!-- Flash Messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div class="flash-messages">
-                {% for category, message in messages %}
-                    <div class="flash-message {{ category }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
+  {# ─── FLASH MESSAGES ────────────────────────────────────────────────────────── #}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for category, message in messages %}
+          <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
 
-    <!-- Content Card -->
-    <div class="content-wrapper">
-        <!-- Header -->
-        {% block header %}
-        <div class="content-header">
-            <img src="{{ url_for('static', filename='img/logo-small.png') }}" alt="Logo" />
-            <h2>{% block header_title %}Standard Pipelines{% endblock %}</h2>
-        </div>
-        {% endblock %}
-        
-        <!-- Main Content -->
-        <div class="content-body">
-            {% block content %}{% endblock %}
-        </div>
-        
-        <!-- Optional Footer -->
-        {% block footer %}
-            <div class="content-footer">
-                {% block footer_content %}
-                {% include 'footer.html' %}
-                {% endblock %}
-            </div>
-        {% endblock %}
+  {# ─── FLOATING NAVBAR ──────────────────────────────────────────────────────── #}
+  {% block header %}
+  <nav class="floating-navbar">
+    <div class="navbar-brand">
+      <img src="{{ url_for('static', filename='img/logo-small.png') }}" alt="Logo"/>
+      <h1>{% block header_title %}Agentic Brain{% endblock %}</h1>
     </div>
-    
-    <!-- Scripts -->
-    {% block scripts %}{% endblock %}
+    {% block header_actions %}
+    <div class="navbar-actions">
+      <a href="{{ url_for('main.credentials') }}" class="btn btn-navbar">Credentials</a>
+      {% if current_user.is_authenticated and current_user.has_role('admin') %}
+        <a href="{{ url_for('admin.index') }}" class="btn btn-navbar">Admin Dashboard</a>
+      {% endif %}
+      <a href="{{ url_for('security.logout') }}" class="btn btn-navbar">Logout</a>
+      {% block extra_actions %}{% endblock %}
+    </div>
+    {% endblock %}
+  </nav>
+  {% endblock %}
+
+  {# ─── CONTENT WRAPPER ──────────────────────────────────────────────────────── #}
+  <div class="content-wrapper">
+    <div class="content-body">
+      {% block content %}{% endblock %}
+    </div>
+
+    {% block footer %}
+      <div class="content-footer">
+        {% block footer_content %}
+          {% include 'footer.html' %}
+        {% endblock %}
+      </div>
+    {% endblock %}
+  </div>
+
+  {# ─── SCRIPTS ──────────────────────────────────────────────────────────────── #}
+  {% block scripts %}{% endblock %}
 </body>
 </html>

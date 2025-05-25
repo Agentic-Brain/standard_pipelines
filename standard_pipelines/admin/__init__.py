@@ -45,3 +45,4 @@ def register_view(view):
 
 # Import routes at the end to avoid circular imports
 from . import routes
+from . import credentials_views  # noqa: F401 - registers credential routes
