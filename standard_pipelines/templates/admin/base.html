@@ -3,51 +3,97 @@
 {% block title %}{% block inner_title %}Admin Dashboard{% endblock %} - Agentic Brain Admin{% endblock %}
 
 {% block styles %}
+{{ super() }}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
     /* Admin-specific styling */
     body {
-        padding-top: 80px; /* Account for fixed navbar */
+        padding-top: 0; /* Remove extra padding since navbar is already handled */
     }
     
-    .navbar {
-        background-color: var(--dark);
-        position: fixed;
-        top: 12px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 95%;
-        max-width: 1300px;
-        z-index: 1000;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-        border-radius: 12px;
+    /* Ensure floating navbar styles are preserved */
+    .floating-navbar {
+        background: var(--dark) !important;
+        color: #fff !important;
+        padding: 14px 28px !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
     }
     
-    .navbar-brand {
-        font-family: 'Space Grotesk', sans-serif;
-        font-weight: 600;
+    .floating-navbar .btn-navbar {
+        background: #222 !important;
+        color: #fff !important;
+        border: 1px solid #333 !important;
+        border-radius: 6px !important;
     }
     
-    .content-wrapper {
-        max-width: 1300px;
-        margin: 24px auto;
+    .floating-navbar .btn-navbar:hover {
+        background: #444 !important;
+        color: #fff !important;
+    }
+    
+    /* Change blue icons to HubSpot orange */
+    .text-primary, .btn-primary, .badge-primary, 
+    .fas.text-primary, .fab.text-primary, .far.text-primary,
+    i.text-primary, .btn-outline-primary {
+        color: var(--primary) !important;
+    }
+    
+    .btn-primary {
+        background-color: var(--primary) !important;
+        border-color: var(--primary) !important;
+    }
+    
+    .btn-outline-primary {
+        color: var(--primary) !important;
+        border-color: var(--primary) !important;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: var(--primary) !important;
+        border-color: var(--primary) !important;
+        color: white !important;
+    }
+    
+    /* Admin dashboard icons */
+    .card .fas, .card .fab, .card .far,
+    .list-group-item .fas, .list-group-item .fab, .list-group-item .far,
+    .sidebar .fas, .sidebar .fab, .sidebar .far {
+        color: var(--primary) !important;
+    }
+    
+    /* Specific icon colors */
+    .fa-tachometer-alt, .fa-key, .fa-users, .fa-user-tag, 
+    .fa-user, .fa-table, .fa-project-diagram, .fa-link,
+    .fa-check-circle, .fa-wrench {
+        color: var(--primary) !important;
+    }
+    
+    .admin-layout {
         display: flex;
-        border-radius: 12px;
+        min-height: 400px;
     }
     
-    .sidebar {
+    .admin-sidebar {
         width: 250px;
         background-color: #f8f9fa;
         border-right: 1px solid var(--border);
-        padding: 20px 0;
     }
     
-    .main-content {
+    .admin-main {
         flex: 1;
         padding: 28px;
         background: white;
-        border-radius: 0 0 12px 0;
+    }
+    
+    .admin-main.admin-full-width {
+        width: 100%;
+        flex: none;
+    }
+    
+    .sidebar {
+        padding: 20px 0;
     }
     
     .sidebar .nav-link {
@@ -145,92 +191,63 @@
 {% block head_css %}{% endblock %}
 {% endblock %}
 
-{% block header %}
-<!-- Top Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('admin.index') }}">
-            <img src="{{ url_for('static', filename='img/logo-small.png') }}" alt="Logo" height="28" class="d-inline-block align-top mr-2">
-            Agentic Brain Admin
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                {% if current_user.is_authenticated %}
-                <li class="nav-item">
-                    <span class="nav-link">{{ current_user.email }}</span>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('security.logout') }}">Logout</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('security.login') }}">Login</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-</nav>
+{% block header_title %}Agentic Brain Admin{% endblock %}
+
+{% block extra_actions %}
+{% if current_user.is_authenticated %}
+    <span class="btn-navbar" style="background: transparent; border: none; cursor: default;">{{ current_user.email }}</span>
+{% endif %}
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid mt-4 mb-4 {% if 'details_model' in request.endpoint or 'edit_model' in request.endpoint %}px-4{% endif %}">
-    <div class="row">
-        {% if not 'details_model' in request.endpoint and not 'edit_model' in request.endpoint %}
-        <div class="col-lg-3 col-md-4 d-none d-lg-block">
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin.index') }}">
-                            <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin.credentials_overview') }}">
-                            <i class="fas fa-key mr-2"></i>Credentials
-                        </a>
-                    </li>
-                    
-                    {% for category_name, views in admin_categories.items() %}
-                    <li class="nav-item mt-3">
-                        <div class="pl-3 mb-2 text-muted small text-uppercase">{{ category_name }}</div>
-                    </li>
-                    {% for view in views %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin.list_model', model_name=view.endpoint) }}">
-                            <i class="fas fa-{% if 'client' in view.endpoint %}users{% elif 'flow' in view.endpoint %}project-diagram{% elif 'user' in view.endpoint %}user{% elif 'role' in view.endpoint %}user-tag{% else %}table{% endif %} mr-2"></i>{{ view.name }}
-                        </a>
-                    </li>
-                    {% endfor %}
-                    {% endfor %}
-                    
-                    <!-- Views without category -->
-                    {% for view in admin_views %}
-                    {% if not view.category %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin.list_model', model_name=view.endpoint) }}">
-                            <i class="fas fa-table mr-2"></i>{{ view.name }}
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
+<div class="admin-layout">
+    {% if not 'details_model' in request.endpoint and not 'edit_model' in request.endpoint %}
+    <div class="admin-sidebar">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin.index') }}">
+                        <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin.credentials_overview') }}">
+                        <i class="fas fa-key mr-2"></i>Credentials
+                    </a>
+                </li>
+                
+                {% for category_name, views in admin_categories.items() %}
+                <li class="nav-item mt-3">
+                    <div class="pl-3 mb-2 text-muted small text-uppercase">{{ category_name }}</div>
+                </li>
+                {% for view in views %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin.list_model', model_name=view.endpoint) }}">
+                        <i class="fas fa-{% if 'client' in view.endpoint %}users{% elif 'flow' in view.endpoint %}project-diagram{% elif 'user' in view.endpoint %}user{% elif 'role' in view.endpoint %}user-tag{% else %}table{% endif %} mr-2"></i>{{ view.name }}
+                    </a>
+                </li>
+                {% endfor %}
+                {% endfor %}
+                
+                <!-- Views without category -->
+                {% for view in admin_views %}
+                {% if not view.category %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin.list_model', model_name=view.endpoint) }}">
+                        <i class="fas fa-table mr-2"></i>{{ view.name }}
+                    </a>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
         </div>
-        {% endif %}
-        
-        <!-- Main Content -->
-        <div class="{% if 'details_model' in request.endpoint or 'edit_model' in request.endpoint %}col-12{% else %}col-lg-9 col-md-8{% endif %}">
-            <div class="main-content">
-                <div class="{% if 'details_model' in request.endpoint or 'edit_model' in request.endpoint %}px-4{% else %}px-2{% endif %}">
-                    {% block body %}{% endblock %}
-                </div>
-            </div>
-        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Main Content -->
+    <div class="admin-main {% if 'details_model' in request.endpoint or 'edit_model' in request.endpoint %}admin-full-width{% endif %}">
+        {% block body %}{% endblock %}
     </div>
 </div>
 {% endblock %}
