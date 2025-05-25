@@ -1,5 +1,4 @@
 version = 1
-revision = 1
 requires-python = "==3.12.*"
 
 [[package]]
@@ -1737,7 +1736,7 @@ wheels = [
 
 [[package]]
 name = "standard-pipelines"
-version = "1.2.0"
+version = "1.3.0"
 source = { editable = "." }
 dependencies = [
     { name = "alembic" },
@@ -2019,7 +2018,6 @@ requires-dist = [
     { name = "wtforms", specifier = "==3.1.2" },
     { name = "zohocrmsdk7-0", specifier = ">=5.0.0" },
 ]
-provides-extras = ["test", "dev"]
 
 [[package]]
 name = "testcontainers"
