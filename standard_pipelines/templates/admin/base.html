@@ -109,6 +109,21 @@
         color: var(--primary) !important;
     }
     
+    /* Override all Bootstrap info/blue colors */
+    .bg-info {
+        background-color: var(--primary) !important;
+    }
+    
+    .card.bg-info {
+        background-color: var(--primary) !important;
+        border-color: var(--primary) !important;
+    }
+    
+    /* Ensure text-success and text-warning use primary color for consistency */
+    .text-success, .text-warning {
+        color: var(--primary) !important;
+    }
+    
     /* Override Bootstrap blue colors with primary orange */
     .badge-info {
         background-color: var(--primary) !important;
