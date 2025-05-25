@@ -105,8 +105,36 @@
     /* Specific icon colors */
     .fa-tachometer-alt, .fa-key, .fa-users, .fa-user-tag, 
     .fa-user, .fa-table, .fa-project-diagram, .fa-link,
-    .fa-check-circle, .fa-wrench {
+    .fa-check-circle, .fa-wrench, .fa-info-circle, .fa-exchange-alt {
         color: var(--primary) !important;
+    }
+    
+    /* Override Bootstrap blue colors with primary orange */
+    .badge-info {
+        background-color: var(--primary) !important;
+        border-color: var(--primary) !important;
+    }
+    
+    .btn-info {
+        background-color: var(--primary) !important;
+        border-color: var(--primary) !important;
+        color: white !important;
+    }
+    
+    .btn-info:hover {
+        background-color: #e66e00 !important;
+        border-color: #e66e00 !important;
+        color: white !important;
+    }
+    
+    .text-info {
+        color: var(--primary) !important;
+    }
+    
+    .alert-info {
+        border-color: var(--primary) !important;
+        background-color: rgba(255, 122, 0, 0.1) !important;
+        color: #333 !important;
     }
     
     /* Secondary button styling */
