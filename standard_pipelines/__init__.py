@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask import Flask, jsonify
 import os
 import socket
-from standard_pipelines.version import APP_VERSION, FLASK_BASE_VERSION
+from standard_pipelines.version import __version__, FLASK_BASE_VERSION
 from dotenv import load_dotenv
 import logging
 import colorlog
@@ -48,7 +48,8 @@ def create_app():
     app.config.from_object(config)
 
     # Initialize Papertrail logging after config is loaded
-    init_papertrail_logging(app)
+    if app.config['USE_PAPERTRAIL']:
+        init_papertrail_logging(app)
 
     migrate.init_app(app, db)
     
@@ -101,7 +102,7 @@ def create_app():
 
     @app.context_processor
     def inject_semver():
-        return dict(app_version=str(APP_VERSION), flask_base_version=str(FLASK_BASE_VERSION))
+        return dict(app_version=str(__version__), flask_base_version=str(FLASK_BASE_VERSION))
         
     @app.context_processor
     def inject_now():
@@ -166,6 +167,7 @@ def create_app():
 
     return app
 
+# Setup basic logging to track error in papertrail logs
 def init_basic_logging(app: Flask) -> None:
     """Initialize basic logging without config-dependent features"""
     # Clear ALL handlers (including Flask's default handlers)
@@ -263,7 +265,7 @@ def init_sentry() -> None:
         dsn=config.SENTRY_DSN, #type: ignore
         integrations=[FlaskIntegration(), CeleryIntegration()],
         environment=str(os.getenv('FLASK_ENV')),
-        release=APP_VERSION if APP_VERSION else FLASK_BASE_VERSION,
+        release=__version__ if __version__ else FLASK_BASE_VERSION,
         traces_sample_rate=1.0,
         send_default_pii=True,
         profiles_sample_rate=1.0,
