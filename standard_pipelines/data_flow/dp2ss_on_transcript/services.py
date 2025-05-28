@@ -85,6 +85,17 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
                 current_app.logger.error(f"[DP2SS] Missing required field: {field}")
                 raise InvalidWebhookError(error_message)
 
+        # Additional validation for the contact object and its email field
+        contact_data = webhook_data["contact"]
+        if not isinstance(contact_data, dict):
+            raise InvalidWebhookError("Contact data in webhook must be a dictionary object.")
+
+        contact_email = contact_data.get("email")
+        if contact_email is None or not isinstance(contact_email, str) or not contact_email.strip():
+            contact_email = 'email@example.com'
+
+        contact_data['email'] = contact_email
+
         call_data = {
             "date_started": webhook_data["date_started"],
             "call_id": webhook_data["call_id"],
