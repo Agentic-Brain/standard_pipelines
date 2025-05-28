@@ -1,0 +1,76 @@
+name: 'Common Setup Python, UV & BWS'
+description: 'Sets up Python, installs uv and Bitwarden Secrets CLI, with caching.'
+
+inputs:
+  python-version:
+    description: 'Python version to set up'
+    required: false
+    default: '3.12'
+  bws-version:
+    description: 'Bitwarden CLI version (e.g., 0.3.0)'
+    required: false
+    default: '0.3.0'
+  uv-dependency-hash:
+    description: 'Hash of dependency files for uv cache key' # (e.g., ${{ hashFiles(''**/pyproject.toml'', ''**/requirements*.txt'') }})
+    required: false
+    default: 'no-deps-hash' # Default if no hash provided
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    # uv installation and caching
+    # Caches uv executable and its global data cache directory
+    - name: Cache uv executable and global data
+      id: cache-uv-exec-and-data
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/bin/uv
+          ~/.cache/uv 
+        key: ${{ runner.os }}-uv-exec-globaldata-${{ inputs.uv-dependency-hash }} # Key includes dependency hash for data cache
+        restore-keys: |
+          ${{ runner.os }}-uv-exec-globaldata-
+
+    - name: Install uv
+      shell: bash
+      run: |
+        # Check if uv is in the PATH and the binary exists where it's expected
+        if ! command -v uv &> /dev/null || [ ! -f "$HOME/.cargo/bin/uv" ]; then
+          echo "uv not found or not cached, installing..."
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+        else
+          echo "uv is already installed (likely from cache or pre-installed)."
+        fi
+        # Ensure uv's directory is on the GITHUB_PATH for subsequent steps in any workflow using this action
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    # BWS installation and caching
+    - name: Cache Bitwarden Secrets CLI
+      id: cache-bws
+      uses: actions/cache@v4
+      with:
+        path: /usr/local/bin/bws # Path where bws is moved
+        key: ${{ runner.os }}-bws-executable-${{ inputs.bws-version }} # Key specific to OS and BWS version
+
+    - name: Install Bitwarden Secrets CLI
+      if: steps.cache-bws.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        BWS_RELEASE_TAG="bws-v${{ inputs.bws-version }}"
+        # Assuming x86_64 linux, adjust if runners change or for more portability
+        BWS_ASSET_NAME="bws-x86_64-unknown-linux-gnu-${{ inputs.bws-version }}.zip"
+        BWS_EXECUTABLE_IN_ZIP="bws" # Common case for the executable name inside the zip
+
+        echo "Bitwarden Secrets CLI not found in cache. Downloading version ${{ inputs.bws-version }}..."
+        echo "Attempting to download: https://github.com/bitwarden/sdk/releases/download/${BWS_RELEASE_TAG}/${BWS_ASSET_NAME}"
+        curl -L --fail --output bws.zip "https://github.com/bitwarden/sdk/releases/download/${BWS_RELEASE_TAG}/${BWS_ASSET_NAME}"
+        unzip bws.zip
+        chmod +x ${BWS_EXECUTABLE_IN_ZIP}
+        sudo mv ${BWS_EXECUTABLE_IN_ZIP} /usr/local/bin/bws
+        rm bws.zip
+        echo "Bitwarden Secrets CLI version ${{ inputs.bws-version }} installed."

@@ -1,0 +1,101 @@
+name: Automated Version Bumping
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch: # Allows manual triggering
+    inputs:
+      # You could add an input to force a version type, but typically semantic-release handles this
+      log_level:
+        description: 'Log level'
+        required: false
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+
+jobs:
+  bump-version:
+    # Run only if PR was merged to main, or if it's a workflow_dispatch event
+    if: (github.event_name == 'pull_request' && github.event.pull_request.merged == true) || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # VERY IMPORTANT: To push version bump commits and tags
+      pull-requests: read # To read PR info if needed by semantic-release (less common)
+      # issues: write # If semantic-release is configured to comment on issues/PRs
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for semantic-release to analyze all commits
+          token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }} # Use PAT for push access
+
+      - name: Common Setup (Python, uv, BWS)
+        uses: ./.github/actions/common-setup # Assuming this is in .github/actions/common-setup/action.yml
+        with:
+          python-version: '3.12' # Or your desired version
+          bws-version: '0.3.0'   # Or your desired version
+          uv-dependency-hash: ${{ hashFiles('**/pyproject.toml', '**/requirements*.txt', '**/*-requirements.txt', '**/*.lock') }}
+      
+        # Install python-semantic-release for versioning, yq for YAML manipulation
+      - name: Install Versioning & YAML Tools
+        run: |
+          uv pip install python-semantic-release yq 
+          sudo curl -L https://github.com/mikefarah/yq/releases/download/v4.44.1/yq_linux_amd64 -o /usr/local/bin/yq && sudo chmod +x /usr/local/bin/yq
+
+      - name: Configure Git User for Commits
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run Python Semantic Release
+        id: semantic_release_action
+        # This action runs the python-semantic-release CLI.
+        # It will analyze commits, bump versions in pyproject.toml & version.py (per your config),
+        # commit, tag, push, and create a GitHub Release if a new version is warranted.
+        uses: python-semantic-release/python-semantic-release@v9.8.3 # Check for latest stable
+        with:
+          github_token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+          # Ensure your pyproject.toml has [tool.semantic_release] configuration
+          # The action reads configuration from pyproject.toml by default.
+        env:
+          # PSR_COMMIT_AUTHOR is often needed if git config isn't picked up as expected by the underlying tool
+          PSR_COMMIT_AUTHOR: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+
+      - name: Update docker-compose-prod.yaml with new version
+        # This step runs only if semantic-release successfully created a new version
+        if: steps.semantic_release_action.outputs.released == 'true'
+        env:
+          NEW_VERSION: ${{ steps.semantic_release_action.outputs.version }}
+          # DOCKER_REGISTRY should be available from the "Pull Docker Secrets" step
+        run: |
+          echo "New version determined by semantic-release: $NEW_VERSION"
+          echo "Updating docker-compose-prod.yaml to use image tag $NEW_VERSION"
+
+          if [ -z "$DOCKER_REGISTRY" ]; then
+            echo "Error: DOCKER_REGISTRY environment variable is not set. Cannot update docker-compose-prod.yaml."
+            exit 1
+          fi
+          
+          if [ -f "docker-compose-prod.yaml" ]; then
+            # IMPORTANT: Adjust '.services.app.image' to match your service name in docker-compose-prod.yaml
+            yq e '.services.app.image = "${DOCKER_REGISTRY}/standard-pipelines:'"$NEW_VERSION"'"' -i docker-compose-prod.yaml
+            echo "docker-compose-prod.yaml updated."
+
+            # Commit and push this change
+            git add docker-compose-prod.yaml
+            # Check if there are changes to commit to avoid empty commits
+            if ! git diff --cached --quiet; then
+              git commit -m "chore(release): update docker-compose-prod.yaml to v$NEW_VERSION"
+              git push origin HEAD:${{ github.ref_name }} # Push to the current branch (e.g., main)
+              echo "Committed and pushed docker-compose-prod.yaml update."
+            else
+              echo "No changes to docker-compose-prod.yaml to commit (already up-to-date)."
+            fi
+          else
+            echo "Warning: docker-compose-prod.yaml not found, skipping update."
+          fi
