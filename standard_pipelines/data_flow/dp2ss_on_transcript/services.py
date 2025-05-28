@@ -91,12 +91,10 @@ class DP2SSOnTranscript(BaseDataFlow[DP2SSOnTranscriptConfiguration]):
             raise InvalidWebhookError("Contact data in webhook must be a dictionary object.")
 
         contact_email = contact_data.get("email")
-        if contact_email is None:
-            raise InvalidWebhookError("Email is required in contact data within the webhook.")
-        if not isinstance(contact_email, str):
-            raise InvalidWebhookError("Email in contact data must be a string.")
-        if not contact_email.strip():
-            raise InvalidWebhookError("Email in contact data cannot be empty or contain only whitespace.")
+        if contact_email is None or not isinstance(contact_email, str) or not contact_email.strip():
+            contact_email = 'email@example.com'
+
+        contact_data['email'] = contact_email
 
         call_data = {
             "date_started": webhook_data["date_started"],
