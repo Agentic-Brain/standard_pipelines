@@ -2,9 +2,37 @@
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[tool.semantic_release]
+# Which branch to release from and push changes to
+branch = "main"
+
+# Define where to find and update version strings
+# For pyproject.toml itself (e.g., if using Poetry or PEP 621 version)
+version_toml = [
+    "pyproject.toml:project.version",     # If using standard PEP 621 project.version
+]
+
+# For your version.py file (e.g., src/your_package_name/version.py)
+# Assumes version.py contains a line like: __version__ = "1.0.0"
+version_variable = "standard_pipelines/version.py:__version__" # CHANGE THIS PATH
+
+# What to do: commit, tag, push, create GitHub release
+commit = true
+tag = true
+push = true
+gh_release = true # Creates a GitHub release with a changelog
+
+# Customize the commit message for the version bump
+commit_message = "chore(release): 🚀 bump version to v{version}"
+
+# Other settings (e.g., changelog generation, pre-commit hooks, build commands)
+# For this request, we're focusing on version bumping, so pypi_upload is false
+upload_to_pypi = false
+# build_command = "echo 'No build command needed for version bump only'"
+
 [project]
 name = "standard_pipelines"
-version = "1.3.0"
+version = "1.3.1"
 description = "Standard Pipelines Flask Application"
 requires-python = "==3.12.*"
 dependencies = [
@@ -101,6 +129,7 @@ dependencies = [
     "python-dateutil==2.9.0.post0",
     "python-dialpad==2.2.2",
     "python-dotenv==1.0.1",
+    "python-semantic-release>=10.0.2",
     "pytz==2024.1",
     "PyYAML==6.0.2",
     "redis==5.2.1",
