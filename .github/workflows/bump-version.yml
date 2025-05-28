@@ -84,19 +84,14 @@ jobs:
         if: steps.semantic_release_action.outputs.released == 'true'
         env:
           NEW_VERSION: ${{ steps.semantic_release_action.outputs.version }}
-          # DOCKER_REGISTRY should be available from the "Pull Docker Secrets" step
         run: |
           echo "New version determined by semantic-release: $NEW_VERSION"
           echo "Updating docker-compose-prod.yaml to use image tag $NEW_VERSION"
 
-          if [ -z "$DOCKER_REGISTRY" ]; then
-            echo "Error: DOCKER_REGISTRY environment variable is not set. Cannot update docker-compose-prod.yaml."
-            exit 1
-          fi
           
           if [ -f "docker-compose-prod.yaml" ]; then
             # IMPORTANT: Adjust '.services.app.image' to match your service name in docker-compose-prod.yaml
-            yq e '.services.app.image = "${DOCKER_REGISTRY}/standard-pipelines:'"$NEW_VERSION"'"' -i docker-compose-prod.yaml
+            yq e '.services.app.image = "$agentic-brain/standard_pipelines:'"$NEW_VERSION"'"' -i docker-compose-prod.yaml
             echo "docker-compose-prod.yaml updated."
 
             # Commit and push this change
