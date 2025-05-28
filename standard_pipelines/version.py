@@ -3,10 +3,10 @@ FLASK_BASE_VERSION = "0.2.1"
 
 # Application version - always 0.0.0 in base framework
 # Will be updated in derived projects
-APP_VERSION = "1.3.0"
+__version__ = "1.3.1"
 
 def get_versions():
     return {
         "flask_base": FLASK_BASE_VERSION,
-        "app": APP_VERSION
+        "app": __version__
     } 

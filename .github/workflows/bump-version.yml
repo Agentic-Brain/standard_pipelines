@@ -42,10 +42,23 @@ jobs:
           uv-dependency-hash: ${{ hashFiles('**/pyproject.toml', '**/requirements*.txt', '**/*-requirements.txt', '**/*.lock') }}
       
         # Install python-semantic-release for versioning, yq for YAML manipulation
-      - name: Install Versioning & YAML Tools
+      - name: Install Versioning & Build Tools # Renamed for clarity
+        env:
+          YQ_VERSION: v4.44.1 # Specify desired yq version - check for latest stable
+          YQ_BINARY: yq_linux_amd64 # Adjust if your runner architecture differs
         run: |
-          uv pip install python-semantic-release yq 
-          sudo curl -L https://github.com/mikefarah/yq/releases/download/v4.44.1/yq_linux_amd64 -o /usr/local/bin/yq && sudo chmod +x /usr/local/bin/yq
+          echo "Installing Python tools with uv..."
+          # Use --system to install into the Python set up by actions/setup-python
+          uv pip install --system python-semantic-release pytest pytest-cov
+          
+          echo "Installing yq binary ${YQ_VERSION}..."
+          sudo curl -L https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/${YQ_BINARY} -o /usr/local/bin/yq
+          sudo chmod +x /usr/local/bin/yq
+          
+          echo "Verifying installations..."
+          echo -n "python-semantic-release: " & python-semantic-release --version
+          echo -n "pytest: " & pytest --version
+          echo -n "yq: " & yq --version
 
       - name: Configure Git User for Commits
         run: |
