@@ -21,6 +21,9 @@ x-production-secrets: &production-secrets
     - standard_pipelines_production_zoho_client_secret
     - standard_pipelines_production_google_client_id
     - standard_pipelines_production_google_client_secret
+    - standard_pipelines_production_office365_client_id
+    - standard_pipelines_production_office365_client_secret
+    - standard_pipelines_production_n8n_api_key
     - standard_pipelines_production_papertrail_host
     - standard_pipelines_production_papertrail_port
     - standard_pipelines_production_papertrail_system_hostname
@@ -144,6 +147,12 @@ secrets:
   standard_pipelines_production_google_client_id:
     external: true
   standard_pipelines_production_google_client_secret:
+    external: true
+  standard_pipelines_production_office365_client_id:
+    external: true
+  standard_pipelines_production_office365_client_secret:
+    external: true
+  standard_pipelines_production_n8n_api_key:
     external: true
   standard_pipelines_production_papertrail_host:
     external: true

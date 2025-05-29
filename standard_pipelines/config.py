@@ -111,7 +111,7 @@ class Config:
             'OFFICE365_CLIENT_SECRET': None,
         },
         'N8N': {
-            'N8N_ENDPOINT': None,
+            'N8N_ENDPOINT': 'https://jakeagenticbrain.app.n8n.cloud/api/v1/credentials',
             'N8N_API_KEY': None
         }
         # Add more API configurations as needed
