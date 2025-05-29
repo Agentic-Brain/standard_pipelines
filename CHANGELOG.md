@@ -1,8 +1,51 @@
 # CHANGELOG
 
-## v0.2.0 (2025-05-29)
+## v0.3.0 (2025-05-29)
 
 ### Chore
+
+* chore(docker-compose-prod.yaml): add new secrets for Office365 and N8N to support additional integrations
+chore(config.py): set default N8N_ENDPOINT URL to a specific API endpoint for better configuration management ([`a378de5`](https://github.com/Agentic-Brain/standard_pipelines/commit/a378de5ef22b254f272710126550cebf15a2d095))
+
+### Feature
+
+* feat: add new migration for Office365 credentials and modify existing tables to change token fields to Text type for better storage capacity; also introduce a migration to change several OAuth token columns from VARCHAR(512) to Text for consistency and flexibility ([`81e3792`](https://github.com/Agentic-Brain/standard_pipelines/commit/81e37926d263f5ca5c7faf1b401c1c9bf8d4201c))
+
+### Fix
+
+* fix: enhance OAuthCredentialMixin with methods to support N8N credential sync
+feat: implement get_n8n_credential_types to specify supported N8N credential types
+feat: add sync_to_n8n method to sync credentials to N8N using API
+fix: update oauth_callback to trigger sync_to_n8n after credential creation or update
+refactor: introduce _sync_credential_to_n8n helper function for API interaction
+feat: add get_n8n_credential_types to Office365 and Google models for N8N support
+fix: improve error handling and logging during N8N sync process
+
+feat(config.py): add N8N API usage flag and configuration section to support new integration
+refactor(config.py): include N8N in API_REQUIREMENTS mapping for automatic registration
+docs: update configuration to document new N8N API options ([`a84d4d0`](https://github.com/Agentic-Brain/standard_pipelines/commit/a84d4d02be0fd236359cdca2a67abd1c2c4065ef))
+
+### Refactor
+
+* refactor(oauth_system.py): update SQLAlchemy column types to use Text for OAuth tokens for better storage flexibility
+feat(office365/models.py): add Office365Credentials model with OAuth configuration and user info mapping for Office 365 API integration
+feat(config.py): enable OFFICE365 feature flag and add related environment variables for Office 365 credentials
+fix(models.py): add TODO comment to improve column skipping logic in database models
+feat(init.py): create Office 365 API module with descriptive docstring
+add(static/img/oauth/office365.svg): include Office 365 icon for OAuth UI
+fix(oauth.html): update URL endpoints to use &#39;oauth_system&#39; blueprint for login and reconnect actions ([`f3fa02c`](https://github.com/Agentic-Brain/standard_pipelines/commit/f3fa02cd3b36646f3767612ca6877fa9db34fb9e))
+
+### Unknown
+
+* Merge pull request #115 from Agentic-Brain/msft-oauth
+
+Msft oauth ([`3727480`](https://github.com/Agentic-Brain/standard_pipelines/commit/37274805978e36cee1edcf322f92e35eb81aa8f1))
+
+## v1.3.1 (2025-05-29)
+
+### Chore
+
+* chore(release): 🚀 bump version to v0.2.0 ([`416d5c8`](https://github.com/Agentic-Brain/standard_pipelines/commit/416d5c88250baa4fc9f7e6b69d5608382c16bb04))
 
 * chore: add new OAuth migration guide detailing the transition to the automated system
 
