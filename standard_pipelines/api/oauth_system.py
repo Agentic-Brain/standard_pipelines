@@ -9,9 +9,10 @@ from typing import Type, Dict, Any, Optional, List, Tuple, Callable
 from dataclasses import dataclass, field
 from flask import Blueprint, current_app, url_for, jsonify, render_template
 from flask_login import login_required, current_user
-from sqlalchemy import String, Integer
+from sqlalchemy import String, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.exc import SQLAlchemyError
+from standard_pipelines.database.models import unencrypted_mapped_column
 from authlib.integrations.base_client.errors import OAuthError
 import requests
 from functools import wraps
@@ -53,9 +54,9 @@ class OAuthCredentialMixin(BaseCredentials):
     __abstract__ = True
     
     # OAuth tokens - these are standard across all OAuth providers
-    oauth_refresh_token: Mapped[str] = mapped_column(String(512))
-    oauth_access_token: Mapped[Optional[str]] = mapped_column(String(512), nullable=True)
-    oauth_token_expires_at: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    oauth_refresh_token: Mapped[str] = mapped_column(Text)
+    oauth_access_token: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    oauth_token_expires_at: Mapped[Optional[int]] = unencrypted_mapped_column(Integer, nullable=True)
     
     def __init_subclass__(cls, **kwargs):
         """Automatically register OAuth credential models."""

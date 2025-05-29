@@ -52,6 +52,7 @@ class Config:
         'USE_PAPERTRAIL': True,
         'USE_RAPIDAPI': False,
         'USE_DEEP_RESEARCH': False,
+        'USE_OFFICE365': True,
         # Add more API usage flags as needed
     }
 
@@ -104,6 +105,10 @@ class Config:
             # Deep Research doesn't have its own credentials, 
             # it uses RAPIDAPI and client-specific OpenAI credentials
         },
+        'OFFICE365': {
+            'OFFICE365_CLIENT_ID': None,
+            'OFFICE365_CLIENT_SECRET': None,
+        },
         # Add more API configurations as needed
     }
 
@@ -119,6 +124,7 @@ class Config:
         'USE_ZOHO': 'ZOHO',
         'USE_RAPIDAPI': 'RAPIDAPI',
         'USE_DEEP_RESEARCH': 'DEEP_RESEARCH',
+        'USE_OFFICE365': 'OFFICE365',
         # Add more mappings as needed
     }
 
