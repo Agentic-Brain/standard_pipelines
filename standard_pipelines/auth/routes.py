@@ -19,27 +19,37 @@ def oauth_index():
     """Index page showing all available OAuth login options."""
     current_app.logger.debug("Rendering OAuth index page")
     
-    oauth_services = {
-        'hubspot': {
-            'enabled': bool(current_app.config.get('USE_HUBSPOT')),
-            'connected': HubSpotCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
-            'icon': url_for('static', filename='img/oauth/hubspot.svg'),
-            'description': 'Connect to HubSpot to sync contacts and deals'
-        },
-        'google': {
-            'enabled': bool(current_app.config.get('USE_GOOGLE')),
-            'connected': GoogleCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
-            'icon': url_for('static', filename='img/oauth/google.svg'),
-            'description': 'Connect to Google for email integration'
-        },
-        'zoho': {
-            'enabled': bool(current_app.config.get('USE_ZOHO')),
-            'connected': ZohoCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
-            'icon': url_for('static', filename='img/oauth/zoho.svg'),
-            'description': 'Connect to Zoho to sync contacts and deals'
+    # Import here to avoid circular imports
+    from standard_pipelines.api.oauth_system import get_oauth_services_status
+    
+    # Get OAuth services dynamically from the registry
+    oauth_services = get_oauth_services_status(current_user.client_id)
+    
+    # Fall back to manual configuration if no services registered yet
+    if not oauth_services:
+        oauth_services = {
+            'hubspot': {
+                'enabled': bool(current_app.config.get('USE_HUBSPOT')),
+                'connected': HubSpotCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
+                'icon': url_for('static', filename='img/oauth/hubspot.svg'),
+                'description': 'Connect to HubSpot to sync contacts and deals',
+                'display_name': 'HubSpot'
+            },
+            'google': {
+                'enabled': bool(current_app.config.get('USE_GOOGLE')),
+                'connected': GoogleCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
+                'icon': url_for('static', filename='img/oauth/google.svg'),
+                'description': 'Connect to Google for email integration',
+                'display_name': 'Google'
+            },
+            'zoho': {
+                'enabled': bool(current_app.config.get('USE_ZOHO')),
+                'connected': ZohoCredentials.query.filter_by(client_id=current_user.client_id).first() is not None,
+                'icon': url_for('static', filename='img/oauth/zoho.svg'),
+                'description': 'Connect to Zoho to sync contacts and deals',
+                'display_name': 'Zoho'
+            }
         }
-        # Add other services here as they're implemented
-    }
     
     return render_template(
         'oauth.html',

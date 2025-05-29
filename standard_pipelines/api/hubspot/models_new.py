@@ -1,8 +1,10 @@
+"""
+HubSpot OAuth credentials using the new OAuth system.
+"""
 from sqlalchemy import String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 from typing import Optional
-from sqlalchemy.ext.hybrid import hybrid_property
 
 from standard_pipelines.api.oauth_system import OAuthCredentialMixin, OAuthConfig
 
@@ -16,23 +18,10 @@ class HubSpotCredentials(OAuthCredentialMixin):
     hubspot_client_id: Mapped[str] = mapped_column(String(255))
     hubspot_client_secret: Mapped[str] = mapped_column(String(255))
     
-    # Backward compatibility property
-    @hybrid_property
-    def hubspot_refresh_token(self):
-        """Backward compatibility for old field name."""
-        return self.oauth_refresh_token
-    
-    @hubspot_refresh_token.setter
-    def hubspot_refresh_token(self, value):
-        """Backward compatibility for old field name."""
-        self.oauth_refresh_token = value
-    
-    def __init__(self, client_id: UUID, hubspot_client_id: str = '', hubspot_client_secret: str = '', hubspot_refresh_token: str = None, **kwargs):
+    def __init__(self, client_id: UUID, hubspot_client_id: str = '', hubspot_client_secret: str = '', **kwargs):
         self.client_id = client_id
         self.hubspot_client_id = hubspot_client_id
         self.hubspot_client_secret = hubspot_client_secret
-        if hubspot_refresh_token:
-            self.oauth_refresh_token = hubspot_refresh_token
         super().__init__(**kwargs)
     
     @classmethod

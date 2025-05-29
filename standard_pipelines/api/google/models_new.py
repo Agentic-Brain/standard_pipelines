@@ -1,8 +1,10 @@
+"""
+Google OAuth credentials using the new OAuth system.
+"""
 from sqlalchemy import String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 from typing import Optional, Dict, Any
-from sqlalchemy.ext.hybrid import hybrid_property
 
 from standard_pipelines.api.oauth_system import OAuthCredentialMixin, OAuthConfig
 
@@ -19,25 +21,8 @@ class GoogleCredentials(OAuthCredentialMixin):
     user_email: Mapped[str] = mapped_column(String(255))
     user_name: Mapped[Optional[str]] = mapped_column(String(255))
     
-    # Backward compatibility property
-    @hybrid_property
-    def refresh_token(self):
-        """Backward compatibility for old field name."""
-        return self.oauth_refresh_token
-    
-    @refresh_token.setter
-    def refresh_token(self, value):
-        """Backward compatibility for old field name."""
-        self.oauth_refresh_token = value
-    
-    def __init__(self, client_id: UUID, refresh_token: str = None, user_email: str = None, user_name: str = None, **kwargs):
+    def __init__(self, client_id: UUID, **kwargs):
         self.client_id = client_id
-        if refresh_token:
-            self.oauth_refresh_token = refresh_token
-        if user_email:
-            self.user_email = user_email
-        if user_name:
-            self.user_name = user_name
         super().__init__(**kwargs)
     
     @classmethod

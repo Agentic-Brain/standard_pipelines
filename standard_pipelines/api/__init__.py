@@ -7,6 +7,15 @@ api = Blueprint('api', __name__, url_prefix='/api')
 
 def init_app(app: Flask):
     app.logger.debug(f'Initializing blueprint {__name__}')
+    
+    # Initialize the new OAuth system
+    try:
+        from standard_pipelines.api.oauth_init import init_oauth_system
+        init_oauth_system(app)
+    except Exception as e:
+        app.logger.warning(f"Could not initialize OAuth system: {e}")
+    
+    # Keep old OAuth registration for backward compatibility
     hubspot_oauth_client_register(app)
     google_oauth_client_register(app)
     zoho_oauth_client_register(app)
@@ -110,3 +119,4 @@ from .google import routes as google_routes
 from .sharpspring import routes as sharpspring_routes
 from .dialpad import routes as dialpad_routes
 from .openai import routes as openai_routes
+from .notion import routes as notion_routes
