@@ -4,7 +4,7 @@ HubSpot OAuth credentials using the new OAuth system.
 from sqlalchemy import String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
-from typing import Optional
+from typing import Optional, List
 
 from standard_pipelines.api.oauth_system import OAuthCredentialMixin, OAuthConfig
 
@@ -48,6 +48,11 @@ class HubSpotCredentials(OAuthCredentialMixin):
             icon_path='img/oauth/hubspot.svg',
             description='Connect to HubSpot to sync contacts and deals'
         )
+    
+    @classmethod
+    def get_n8n_credential_types(cls) -> List[str]:
+        """HubSpot supports HubSpot API integration in N8N."""
+        return ['hubspotOAuth2Api']
     
     @classmethod
     def from_oauth_callback(cls, client_id, token, user_info=None):

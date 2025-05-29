@@ -53,6 +53,7 @@ class Config:
         'USE_RAPIDAPI': False,
         'USE_DEEP_RESEARCH': False,
         'USE_OFFICE365': True,
+        'USE_N8N': True
         # Add more API usage flags as needed
     }
 
@@ -109,10 +110,15 @@ class Config:
             'OFFICE365_CLIENT_ID': None,
             'OFFICE365_CLIENT_SECRET': None,
         },
+        'N8N': {
+            'N8N_ENDPOINT': None,
+            'N8N_API_KEY': None
+        }
         # Add more API configurations as needed
     }
 
     # Mapping of API usage flags to their corresponding API groups
+    # TODO: Remove the duplicate stuff here to automatically register API configurations
     API_REQUIREMENTS: Dict[str, str] = {
         'USE_STRIPE': 'STRIPE',
         'USE_BITWARDEN': 'BITWARDEN',
@@ -125,6 +131,7 @@ class Config:
         'USE_RAPIDAPI': 'RAPIDAPI',
         'USE_DEEP_RESEARCH': 'DEEP_RESEARCH',
         'USE_OFFICE365': 'OFFICE365',
+        'USE_N8N': 'N8N'
         # Add more mappings as needed
     }
 

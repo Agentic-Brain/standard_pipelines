@@ -4,7 +4,7 @@ Google OAuth credentials using the new OAuth system.
 from sqlalchemy import String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 
 from standard_pipelines.api.oauth_system import OAuthCredentialMixin, OAuthConfig
 
@@ -60,3 +60,8 @@ class GoogleCredentials(OAuthCredentialMixin):
                 'prompt': 'consent'
             }
         )
+    
+    @classmethod
+    def get_n8n_credential_types(cls) -> List[str]:
+        """Google supports Gmail and Google Calendar integration in N8N."""
+        return ['gmailOAuth2', 'googleCalendarOAuth2Api']

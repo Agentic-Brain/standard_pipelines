@@ -5,7 +5,7 @@ from sqlalchemy import String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 from standard_pipelines.database.models import unencrypted_mapped_column
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 
 from standard_pipelines.api.oauth_system import OAuthCredentialMixin, OAuthConfig
 
@@ -33,6 +33,7 @@ class Office365Credentials(OAuthCredentialMixin):
     
     @classmethod
     def get_oauth_config(cls) -> OAuthConfig:
+        # TODO: Verify the client_secred/id env settings here and see if they are redundant or overlap with the application config object
         return OAuthConfig(
             name='office365',
             display_name='Microsoft Office 365',
@@ -65,6 +66,11 @@ class Office365Credentials(OAuthCredentialMixin):
                 'response_mode': 'query'
             }
         )
+    
+    @classmethod
+    def get_n8n_credential_types(cls) -> List[str]:
+        """Office 365 supports Microsoft Outlook integration in N8N."""
+        return ['microsoftOutlookOAuth2Api']
     
     @classmethod
     def from_oauth_callback(cls, client_id, token: Dict[str, Any], user_info: Optional[Dict[str, Any]] = None) -> 'Office365Credentials':
