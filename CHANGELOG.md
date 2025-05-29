@@ -1,5 +1,225 @@
 # CHANGELOG
 
+## v0.2.0 (2025-05-29)
+
+### Chore
+
+* chore: add new OAuth migration guide detailing the transition to the automated system
+
+feat: create migration script for Notion OAuth credentials table with necessary fields
+
+feat: add Notion OAuth SVG icon to static images directory for UI integration ([`33161a0`](https://github.com/Agentic-Brain/standard_pipelines/commit/33161a0daa0d4713253cc04c69cdce36cb20cb0b))
+
+* chore(workflow): remove unnecessary check for DOCKER_REGISTRY environment variable
+fix(workflow): update yq command to set image tag to the new version without relying on DOCKER_REGISTRY variable ([`4e3d105`](https://github.com/Agentic-Brain/standard_pipelines/commit/4e3d105be51dc097fcd5bde0a056cbf5b3960f76))
+
+### Documentation
+
+* docs(OAUTH_MIGRATION_GUIDE.md): add comprehensive guide for migrating to the new OAuth system, including overview, key components, migration steps, benefits, examples, and backward compatibility instructions
+migration: add new table for Notion OAuth credentials with appropriate columns and constraints
+
+feat: add new Notion OAuth SVG icon to static images directory ([`473c8ea`](https://github.com/Agentic-Brain/standard_pipelines/commit/473c8ea25e15875e5c5cd3aed7a93759e5835e8e))
+
+* docs(OAUTH_MIGRATION_GUIDE.md): add comprehensive guide for migrating to the new OAuth system, including overview, key components, migration steps, benefits, examples, and backward compatibility considerations
+migration(versions/aeeabd940510_add_notion_oauth_credentials_table.py): create new table for Notion OAuth credentials with necessary fields and constraints
+
+feat: add new Notion OAuth SVG icon to static images directory ([`921a238`](https://github.com/Agentic-Brain/standard_pipelines/commit/921a238dc81932f852d9d0e2bbedeb5ec329f6bc))
+
+* docs(OAUTH_MIGRATION_GUIDE.md): add comprehensive guide for migrating to the new OAuth system, including overview, key components, migration steps, benefits, examples, and backward compatibility instructions
+migration: add new table for Notion OAuth credentials with appropriate columns and constraints
+
+feat: add new Notion OAuth SVG icon to static images directory ([`ba0de56`](https://github.com/Agentic-Brain/standard_pipelines/commit/ba0de563ca78e61f5ab8e55fb1a35c1500959cd3))
+
+### Feature
+
+* feat: add new models for Google, HubSpot, and Zoho OAuth credentials
+
+- Introduce `GoogleCredentials` with Google-specific OAuth configuration
+- Add `HubSpotCredentials` supporting HubSpot OAuth endpoints and scopes
+- Implement `ZohoCredentials` with Zoho OAuth details and scopes
+- Enable storing client credentials from app config during OAuth callback
+- Standardize OAuth credential models for new OAuth system integration ([`72894d9`](https://github.com/Agentic-Brain/standard_pipelines/commit/72894d905de1a07b34002ebe39ff3446245e1132))
+
+* feat(oauth_discovery.py): add module for automatic discovery of OAuth credential models by scanning the api directory, importing relevant modules to trigger registration, and providing functions to retrieve discovered models and ensure models are loaded
+
+feat(oauth_init.py): add module to initialize OAuth system by discovering models, registering OAuth clients, creating OAuth routes, and registering them with the Flask app, facilitating seamless OAuth setup during app initialization
+
+feat(oauth_system): implement a comprehensive OAuth system with registration, routes, and credential management
+add(OAuthConfig): define configuration dataclass for OAuth providers
+add(OAuthCredentialMixin): create base mixin for OAuth credentials with automatic registration
+add(register_oauth_clients): function to register OAuth clients from environment variables
+add(create_oauth_routes): blueprint with routes for OAuth login and callback handling
+add(get_oauth_services_status): retrieve OAuth services status for a client
+``` ([`c1a32cd`](https://github.com/Agentic-Brain/standard_pipelines/commit/c1a32cdc07eaa01cac4487e6a92618bea4695076))
+
+* feat(migration): add new &#39;rapidapi_credential&#39; table and migrate OAuth fields
+refactor: update OAuth fields in Google, HubSpot, and Zoho credentials to new structure
+add: support for OAuth refresh tokens, access tokens, and expiry timestamps
+remove: deprecated old OAuth columns after data migration ([`fb8594c`](https://github.com/Agentic-Brain/standard_pipelines/commit/fb8594c1a5a0f899f454a1bad5ca409f7deb1f12))
+
+* feat: add new models for Google, HubSpot, and Zoho OAuth credentials
+
+- Introduce `GoogleCredentials` with Google-specific OAuth configuration
+- Add `HubSpotCredentials` supporting HubSpot OAuth with client credentials
+- Implement `ZohoCredentials` for Zoho OAuth with relevant scopes
+- Each model inherits from `OAuthCredentialMixin` and defines OAuth configs
+- Enable storing client credentials separately from user tokens
+- Facilitate integration with new OAuth system for multiple providers ([`7e83f72`](https://github.com/Agentic-Brain/standard_pipelines/commit/7e83f72dd005b69204842f20298857f85607e2d4))
+
+* feat(oauth_discovery.py): add module for automatic OAuth credential model discovery
+feat(oauth_discovery.py): implement scanning of api directory to import models
+feat(oauth_discovery.py): trigger model registration via module import
+feat(oauth_discovery.py): provide function to ensure all OAuth models are loaded
+feat(oauth_init.py): add module to initialize OAuth system during app setup
+feat(oauth_init.py): register OAuth clients and routes after model discovery
+
+feat(oauth_system): implement a comprehensive OAuth system with registration, routes, and credential management
+- Adds OAuthConfig dataclass for provider configuration
+- Introduces OAuthCredentialMixin for credential models with automatic registration
+- Implements decorator for registering OAuth credential models
+- Sets up OAuth client registration based on environment variables
+- Creates Flask blueprint with login and callback routes for OAuth providers
+- Handles token exchange, user info retrieval, and credential storage
+- Provides function to get OAuth services status for a client ([`84b531f`](https://github.com/Agentic-Brain/standard_pipelines/commit/84b531fa5baa08cb45c0a739904473e4345f150a))
+
+* feat: add new models for Google, HubSpot, and Zoho OAuth credentials
+
+- Introduce `GoogleCredentials` with Google-specific OAuth configuration
+- Add `HubSpotCredentials` supporting HubSpot OAuth with client credentials
+- Implement `ZohoCredentials` for Zoho OAuth with relevant scopes
+- Each model inherits from `OAuthCredentialMixin` and defines OAuth configs
+- Enable storing client credentials separately from user tokens
+- Facilitate integration with new OAuth system for multiple providers ([`01b7392`](https://github.com/Agentic-Brain/standard_pipelines/commit/01b739277288d28aea92f008f2939863267dc8d4))
+
+* feat(oauth_discovery.py): add module for automatic discovery of OAuth credential models by scanning the api directory, importing relevant modules to trigger registration, and providing functions to retrieve discovered models and ensure models are loaded
+
+feat(oauth_init.py): add module to initialize OAuth system by discovering models, registering OAuth clients, creating OAuth routes, and registering them with the Flask app, facilitating seamless OAuth setup during app initialization
+
+feat(oauth_system): implement a comprehensive OAuth system with registration, routes, and credential management
+add(OAuthConfig): define configuration dataclass for OAuth providers
+add(OAuthCredentialMixin): create base mixin for OAuth credentials with automatic registration
+add(register_oauth_clients): function to register OAuth clients from environment variables
+add(create_oauth_routes): blueprint with routes for OAuth login and callback handling
+add(get_oauth_services_status): retrieve OAuth services status for a client
+``` ([`2350575`](https://github.com/Agentic-Brain/standard_pipelines/commit/2350575226dcf531dba86355f17b55b7f50ea252))
+
+* feat(generated models): add new OAuth credential models for Google, HubSpot, and Zoho systems to support the updated OAuth flow and enable seamless integration with these services. ([`627a3e0`](https://github.com/Agentic-Brain/standard_pipelines/commit/627a3e0dda16b4f3ea042c3516d458ef2528861f))
+
+* feat(oauth_discovery.py): add module for automatic OAuth credential model discovery
+feat(oauth_discovery.py): implement function to scan api directory and import models
+feat(oauth_discovery.py): register discovered models in the OAuth registry
+feat(oauth_discovery.py): provide function to ensure all OAuth models are loaded at startup
+feat(oauth_init.py): create module to initialize OAuth system and register routes
+feat(oauth_init.py): define function to initialize OAuth with Flask app, loading models and routes
+
+feat(oauth_system): implement a comprehensive OAuth system with registration, routes, and credential management
+
+- Adds OAuthConfig dataclass for provider configuration
+- Implements OAuthCredentialMixin for OAuth credential models
+- Registers OAuth models automatically via get_oauth_config method
+- Provides register_oauth_clients to initialize OAuth clients from env variables
+- Creates OAuth routes for login and callback handling
+- Supports user info retrieval and credential creation/update
+- Adds get_oauth_services_status to report OAuth service statuses ([`bcc6b70`](https://github.com/Agentic-Brain/standard_pipelines/commit/bcc6b708521e6904600e5ae0daf9c083c61d7aa7))
+
+* feat(generated models): add new OAuth credential models for Google, HubSpot, and Zoho systems to support the updated OAuth flow and enable seamless integration with these services. ([`307f91d`](https://github.com/Agentic-Brain/standard_pipelines/commit/307f91d66d56d3361563fa104d28f18b31a06547))
+
+* feat(oauth_discovery.py): add module for automatic discovery of OAuth credential models by scanning the api directory, importing relevant modules to trigger registration, and providing functions to ensure models are loaded and registered
+
+feat(oauth_init.py): add module to initialize OAuth system by discovering models, registering OAuth clients, and setting up OAuth routes within a Flask app
+
+feat(oauth_system): introduce a comprehensive OAuth system with automatic registration and route creation
+
+- Adds OAuthConfig dataclass for provider configuration
+- Implements OAuthCredentialMixin for credential models with automatic registration
+- Provides decorator for registering OAuth credential models
+- Registers OAuth clients from environment variables
+- Creates OAuth login and callback routes dynamically for each provider
+- Handles token exchange, user info retrieval, and credential storage
+- Adds function to retrieve OAuth services status for a client ([`31a1902`](https://github.com/Agentic-Brain/standard_pipelines/commit/31a1902e43379dffca40dca74a2f6a17f6f57e2f))
+
+### Fix
+
+* fix(oauth.html): update image alt text to use service.display_name if available for better accessibility
+fix(oauth.html): update button labels to display service.display_name instead of name for clarity and consistency ([`294ca9a`](https://github.com/Agentic-Brain/standard_pipelines/commit/294ca9af7acaccb552d2924df07985439b9cdfbf))
+
+* fix(models.py): standardize credential models by adding backward-compatible properties and constructors for Google and HubSpot credentials, ensuring proper OAuth configuration and support for environment variables
+
+refactor(models): remove deprecated models for HubSpot and Zoho credentials to clean up codebase and prevent usage of outdated implementations ([`4036da2`](https://github.com/Agentic-Brain/standard_pipelines/commit/4036da22415e1e33235310e07a4e2d6cd195f409))
+
+* fix(oauth.html): update image alt text to use service.display_name if available for better accessibility
+fix(oauth.html): update button labels to display service.display_name when available for clearer user interface ([`9f651ae`](https://github.com/Agentic-Brain/standard_pipelines/commit/9f651aee81c51d3cb73caf125355bd07703a46be))
+
+* fix(oauth.html): update image alt text to use service.display_name if available for better accessibility
+fix(oauth.html): update button labels to display service.display_name instead of name for clarity and consistency ([`b715c9a`](https://github.com/Agentic-Brain/standard_pipelines/commit/b715c9a9eface57f3c90d52bfaec6c2611cb3a0e))
+
+* fix(oauth.html): update image alt text to use service.display_name if available
+fix(oauth.html): update button labels to display service.display_name when connecting or reconnecting ([`94b0e85`](https://github.com/Agentic-Brain/standard_pipelines/commit/94b0e85560738e6add38cfc6c229ad89d9d6b273))
+
+* fix(oauth.html): update image alt text to use service.display_name if available for better accessibility
+fix(oauth.html): update button labels to display service.display_name when available for clearer user interface ([`2fbc6df`](https://github.com/Agentic-Brain/standard_pipelines/commit/2fbc6df711120249e3f433a7a8b169f1c7801d4c))
+
+### Refactor
+
+* refactor(api): add new Notion API module with models, routes, and init file to support Notion workspace integration using the new OAuth system; include OAuth credentials model with additional workspace and owner info, and implement route to fetch connected workspaces for current user.
+
+feat(api/notion/services.py): add a comprehensive Notion API client for
+interacting with Notion&#39;s endpoints, including search, database queries,
+page creation, updates, and user info retrieval to facilitate seamless API
+integration and data management within the application
+
+ref(auth/routes.py): modify OAuth index route to dynamically fetch OAuth service
+status using get_oauth_services_status, falling back to manual configuration
+with service details and connection status for better modularity and maintainability ([`e05d9e7`](https://github.com/Agentic-Brain/standard_pipelines/commit/e05d9e728f13339e86ab844cf3df30a05d98d7ce))
+
+* refactor(api): initialize OAuth system in __init__.py with error handling for backward compatibility
+feat(api): add notion module with models, routes, and new OAuth credentials class
+create(api/notion): define NotionCredentials model with extended workspace and owner info
+add(api/notion): implement route to fetch connected Notion workspaces for current user
+
+feat(api/notion/services.py): add a comprehensive Notion API client for
+interacting with Notion&#39;s endpoints, including search, database queries,
+page creation, updates, and user info retrieval to facilitate seamless API
+integration and data management within the application
+
+ref(auth/routes.py): modify OAuth index route to dynamically fetch OAuth service
+status via get_oauth_services_status, falling back to manual configuration
+with service connection checks and icons, enhancing flexibility and maintainability ([`daab309`](https://github.com/Agentic-Brain/standard_pipelines/commit/daab309e6dcab6449e78cd31241b9afbbf9eb069))
+
+* refactor: remove deprecated OAuth credential models for Google, HubSpot, Zoho
+These models are no longer used and are removed to clean up the codebase ([`8b29d03`](https://github.com/Agentic-Brain/standard_pipelines/commit/8b29d030631f1647b5b03e7d774ac1af4de467c5))
+
+* refactor(api): add new Notion API module with models, routes, and init file to support Notion workspace integration using the new OAuth system; include OAuth credentials model with additional workspace and owner info, and implement route to fetch connected workspaces for current user.
+
+feat(api/notion/services.py): add a comprehensive Notion API client for
+interacting with Notion&#39;s endpoints, including search, database queries,
+page creation, updates, and user info retrieval to facilitate seamless API
+integration and data management within the application
+
+ref(auth/routes.py): modify OAuth index route to dynamically fetch OAuth service
+status using get_oauth_services_status, falling back to manual configuration
+with service details and connection status for better modularity and maintainability ([`ceefe12`](https://github.com/Agentic-Brain/standard_pipelines/commit/ceefe12aa5ae39fb02408eec6fd61f500f3dcbd2))
+
+* refactor(api): initialize OAuth system in __init__.py with error handling for backward compatibility
+feat(api): add notion module and routes for managing Notion workspace credentials
+feat(models): define NotionCredentials model with fields for OAuth data and workspace info
+add(notion): create __init__.py, models.py, and routes.py for Notion API integration
+
+refactor(auth/routes.py): update OAuth services setup to dynamically fetch service status
+- replaces static dictionary with get_oauth_services_status() call
+- adds fallback to manual configuration with service details
+- improves flexibility and maintainability of OAuth service management ([`981354e`](https://github.com/Agentic-Brain/standard_pipelines/commit/981354efd281c46f91a11533e9ca3221b8cad6ef))
+
+### Unknown
+
+* Merge pull request #114 from Agentic-Brain/oauth-rebuild
+
+Oauth rebuild ([`eadaf56`](https://github.com/Agentic-Brain/standard_pipelines/commit/eadaf56c0e60ac8125667f707bae84abcf491478))
+
+* Merge pull request #113 from Agentic-Brain/fixing_auto_bump
+
+fixed error requiring docker registry ([`65688d3`](https://github.com/Agentic-Brain/standard_pipelines/commit/65688d37d0eb204171b9c9f4a4edc22db76daa4d))
+
 ## v0.1.0 (2025-05-28)
 
 ### Build
@@ -13,6 +233,8 @@ Co-Authored-By: adam@agenticbrain.com &lt;adam@agenticbrain.com&gt; ([`ee64b67`]
 Co-Authored-By: adam@agenticbrain.com &lt;adam@agenticbrain.com&gt; ([`dbf33d6`](https://github.com/Agentic-Brain/standard_pipelines/commit/dbf33d63e468c74c171c7a188c829fa8e327ce71))
 
 ### Chore
+
+* chore(release): 🚀 bump version to v0.1.0 ([`da16eb5`](https://github.com/Agentic-Brain/standard_pipelines/commit/da16eb5097f3bb715d26c45cf48f5fad934ace92))
 
 * chore(workflow): rename step to &#34;Install Versioning &amp; Build Tools&#34; for clarity
 fix(workflow): add explicit version for yq and verify installations after setup
