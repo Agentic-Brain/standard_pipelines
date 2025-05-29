@@ -9,9 +9,10 @@ from typing import Type, Dict, Any, Optional, List, Tuple, Callable
 from dataclasses import dataclass, field
 from flask import Blueprint, current_app, url_for, jsonify, render_template
 from flask_login import login_required, current_user
-from sqlalchemy import String, Integer
+from sqlalchemy import String, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.exc import SQLAlchemyError
+from standard_pipelines.database.models import unencrypted_mapped_column
 from authlib.integrations.base_client.errors import OAuthError
 import requests
 from functools import wraps
@@ -53,9 +54,9 @@ class OAuthCredentialMixin(BaseCredentials):
     __abstract__ = True
     
     # OAuth tokens - these are standard across all OAuth providers
-    oauth_refresh_token: Mapped[str] = mapped_column(String(512))
-    oauth_access_token: Mapped[Optional[str]] = mapped_column(String(512), nullable=True)
-    oauth_token_expires_at: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    oauth_refresh_token: Mapped[str] = mapped_column(Text)
+    oauth_access_token: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    oauth_token_expires_at: Mapped[Optional[int]] = unencrypted_mapped_column(Integer, nullable=True)
     
     def __init_subclass__(cls, **kwargs):
         """Automatically register OAuth credential models."""
@@ -82,7 +83,57 @@ class OAuthCredentialMixin(BaseCredentials):
         raise NotImplementedError("Subclasses must implement get_oauth_config()")
     
     @classmethod
-    def from_oauth_callback(cls, client_id, token: Dict[str, Any], user_info: Dict[str, Any] = None) -> 'OAuthCredentialMixin':
+    def get_n8n_credential_types(cls) -> List[str]:
+        """
+        Get list of N8N credential types this OAuth credential should create.
+        Return empty list if no N8N integration needed.
+        
+        Examples:
+        - Google: ['gmailOAuth2Api', 'googleCalendarOAuth2Api'] 
+        - Office365: ['microsoftOutlookOAuth2Api']
+        - HubSpot: ['hubspotOAuth2Api']
+        """
+        return []
+    
+    def sync_to_n8n(self, user_email: str) -> bool:
+        """
+        Sync this credential to N8N.
+        
+        Args:
+            user_email: Email of the user who completed the OAuth flow
+            
+        Returns:
+            True if successful, False otherwise.
+        """
+        from standard_pipelines.data_flow.models import Client
+        
+        n8n_types = self.get_n8n_credential_types()
+        if not n8n_types:
+            return True  # No N8N sync needed
+        
+        try:
+            # Get client info for naming
+            client = Client.query.get(self.client_id)
+            if not client:
+                current_app.logger.error(f"Client {self.client_id} not found for N8N sync")
+                return False
+            
+            service_name = self.get_oauth_config().display_name if self.get_oauth_config() else self.__class__.__name__
+            
+            success = True
+            for n8n_type in n8n_types:
+                credential_name = f"{client.name} - {user_email} - {service_name}"
+                if not _sync_credential_to_n8n(self, n8n_type, credential_name):
+                    success = False
+            
+            return success
+            
+        except Exception as e:
+            current_app.logger.error(f"Error syncing {self.__class__.__name__} to N8N: {e}")
+            return False
+    
+    @classmethod
+    def from_oauth_callback(cls, client_id, token: Dict[str, Any], user_info: Optional[Dict[str, Any]] = None) -> 'OAuthCredentialMixin':
         """
         Create credential instance from OAuth callback data.
         Can be overridden by subclasses for custom behavior.
@@ -254,12 +305,19 @@ def create_oauth_routes() -> Blueprint:
                 
                 db.session.commit()
                 current_app.logger.info(f"Updated {provider} credentials for client: {client.name}")
+                
+                # Sync updated credentials to N8N
+                existing.sync_to_n8n(current_user.email)
+                
             else:
                 # Create new credentials
                 new_creds = credential_cls.from_oauth_callback(client.id, token, user_info)
                 db.session.add(new_creds)
                 db.session.commit()
                 current_app.logger.info(f"Created new {provider} credentials for client: {client.name}")
+                
+                # Sync new credentials to N8N
+                new_creds.sync_to_n8n(current_user.email)
             
             # Render success page
             return render_template('auth/oauth_success.html', service=config.display_name if config else provider)
@@ -273,6 +331,80 @@ def create_oauth_routes() -> Blueprint:
             return jsonify({'error': 'Authorization failed'}), 500
     
     return oauth_bp
+
+
+def _sync_credential_to_n8n(credential: OAuthCredentialMixin, n8n_type: str, credential_name: str) -> bool:
+    """
+    Sync a single credential to N8N.
+    
+    Args:
+        credential: The OAuth credential instance
+        n8n_type: The N8N credential type (e.g., 'gmailOAuth2Api')
+        credential_name: The name to use in N8N
+        
+    Returns:
+        True if successful, False otherwise
+    """
+    try:
+        n8n_endpoint = current_app.config.get('N8N_ENDPOINT')
+        n8n_api_key = current_app.config.get('N8N_API_KEY')
+        
+        if not n8n_api_key or not n8n_endpoint:
+            current_app.logger.warning("N8N_API_KEY not configured, skipping N8N sync")
+            return False
+        
+        # Get OAuth config
+        oauth_config = credential.get_oauth_config()
+        if not oauth_config:
+            current_app.logger.error(f"No OAuth config found for {credential.__class__.__name__}")
+            return False
+        
+        # Prepare credential data for N8N based on credential type
+        if n8n_type == 'microsoftOutlookOAuth2Api':
+            # Microsoft Outlook OAuth2 API expects specific format
+            credential_data = {
+                'name': credential_name,
+                'type': n8n_type,
+                'data': {
+                    'clientId': current_app.config.get(oauth_config.client_id_env),
+                    'clientSecret': current_app.config.get(oauth_config.client_secret_env),
+                    'userPrincipalName': getattr(credential, 'user_principal_name', ''),
+                }
+            }
+        else:
+            # Generic OAuth2 format for other services
+            credential_data = {
+                'name': credential_name,
+                'type': n8n_type,
+                'data': {
+                    'clientId': current_app.config.get(oauth_config.client_id_env),
+                    'clientSecret': current_app.config.get(oauth_config.client_secret_env),
+                    'accessToken': credential.oauth_access_token,
+                    'refreshToken': credential.oauth_refresh_token,
+                }
+            }
+            
+            # Add expires information if available
+            if credential.oauth_token_expires_at:
+                credential_data['data']['expiresAt'] = credential.oauth_token_expires_at
+        
+        headers = {
+            'Content-Type': 'application/json',
+            'X-N8N-API-KEY': n8n_api_key
+        }
+        
+        response = requests.post(n8n_endpoint, json=credential_data, headers=headers)
+        
+        if response.status_code in [200, 201]:
+            current_app.logger.info(f"Successfully synced {credential_name} to N8N as {n8n_type}")
+            return True
+        else:
+            current_app.logger.error(f"Failed to sync to N8N: {response.status_code} - {response.text}")
+            return False
+            
+    except Exception as e:
+        current_app.logger.error(f"Error syncing credential to N8N: {e}")
+        return False
 
 
 def get_oauth_services_status(client_id) -> Dict[str, Dict[str, Any]]:

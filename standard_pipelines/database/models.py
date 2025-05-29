@@ -257,6 +257,7 @@ def unencrypted_mapped_column(*args, **kwargs):
     return mapped_column(*args, **kwargs)
 
 def __should_skip_column(column_name : str, column : MappedColumn):
+    # TODO: We should probably remove this and replace sometime with the unencrypted_mapped_column instead, same with the _ prefix
     explicit_skip_columns = {'id', 'created_at', 'modified_at', 'client_id', 'user_email', 'user_name'}
 
     if column_name.startswith('_'):
