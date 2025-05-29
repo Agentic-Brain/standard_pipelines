@@ -157,7 +157,7 @@
       <div class="card-grid">
         {% for name, service in oauth_services.items() %}
         <div class="service-card {% if service.connected %}connected{% endif %}">
-          <img src="{{ service.icon }}" alt="{{ name|title }}" class="service-logo" />
+          <img src="{{ service.icon }}" alt="{{ service.display_name or name|title }}" class="service-logo" />
           
           {% if service.connected %}
           <span class="status-badge status-connected">Connected</span>
@@ -171,9 +171,9 @@
           
           {% if service.enabled %}
             {% if service.connected %}
-            <a href="{{ url_for('api.login_' + name|lower) }}" class="btn btn-dark">Reconnect to {{ name|title }}</a>
+            <a href="{{ url_for('api.login_' + name|lower) }}" class="btn btn-dark">Reconnect to {{ service.display_name or name|title }}</a>
             {% else %}
-            <a href="{{ url_for('api.login_' + name|lower) }}" class="btn btn-orange">Connect to {{ name|title }}</a>
+            <a href="{{ url_for('api.login_' + name|lower) }}" class="btn btn-orange">Connect to {{ service.display_name or name|title }}</a>
             {% endif %}
           {% else %}
             <button class="btn btn-disabled">Service Unavailable</button>
