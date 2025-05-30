@@ -1,8 +1,25 @@
 # CHANGELOG
 
+## v0.3.1 (2025-05-30)
+
+### Fix
+
+* fix(api/__init__.py): update OAuth registration comments to clarify backward compatibility and migration status
+fix(append_hubspot_note/services.py): add manual decryption of credentials as a temporary fix
+fix(lead_followup_human_notification/services.py): add manual decryption for Google OAuth refresh token
+fix(models.py): enhance decrypt_after_load to handle exceptions gracefully and log errors ([`92fe386`](https://github.com/Agentic-Brain/standard_pipelines/commit/92fe3867121d4f162286d026a50dd4635545066d))
+
+### Unknown
+
+* Merge pull request #116 from Agentic-Brain/manuall_decrypt_patch
+
+fix(api/__init__.py): update OAuth registration comments to clarify b… ([`a389ad7`](https://github.com/Agentic-Brain/standard_pipelines/commit/a389ad7fa5dd6f7944fccba740b5b5e5cf393d46))
+
 ## v0.3.0 (2025-05-29)
 
 ### Chore
+
+* chore(release): 🚀 bump version to v0.3.0 ([`b572b56`](https://github.com/Agentic-Brain/standard_pipelines/commit/b572b5644ff426c0c4fbd4358005135b201347ed))
 
 * chore(docker-compose-prod.yaml): add new secrets for Office365 and N8N to support additional integrations
 chore(config.py): set default N8N_ENDPOINT URL to a specific API endpoint for better configuration management ([`a378de5`](https://github.com/Agentic-Brain/standard_pipelines/commit/a378de5ef22b254f272710126550cebf15a2d095))

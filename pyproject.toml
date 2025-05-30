@@ -32,7 +32,7 @@ upload_to_pypi = false
 
 [project]
 name = "standard_pipelines"
-version = "0.3.0"
+version = "0.3.1"
 description = "Standard Pipelines Flask Application"
 requires-python = "==3.12.*"
 dependencies = [
