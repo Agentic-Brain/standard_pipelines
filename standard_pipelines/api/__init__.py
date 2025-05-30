@@ -15,8 +15,8 @@ def init_app(app: Flask):
     except Exception as e:
         app.logger.warning(f"Could not initialize OAuth system: {e}")
     
-    # Keep old OAuth registration for backward compatibility
-    hubspot_oauth_client_register(app)
+    # Keep old OAuth registration for backward compatibility - only for services not yet migrated
+    # hubspot_oauth_client_register(app)  # Commented out - HubSpot uses new OAuth system
     google_oauth_client_register(app)
     zoho_oauth_client_register(app)
 

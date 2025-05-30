@@ -286,12 +286,24 @@ def encrypt_before_save(mapper : Mapper, connection, target):
 # Decrypt after loading from database
 @event.listens_for(SecureMixin, 'load', propagate=True)
 def decrypt_after_load(target, context):
-    for column_name in inspect(target).mapper.columns.keys():
-        column : Column = inspect(target).mapper.columns.get(column_name)
+    try:
+        for column_name in inspect(target).mapper.columns.keys():
+            column : Column = inspect(target).mapper.columns.get(column_name)
 
-        if not __should_skip_column(column_name, column):
-            value = getattr(target, column_name)
-            decrypted_value = target._decrypt_value(value)
-            setattr(target, column_name, decrypted_value)
+            if not __should_skip_column(column_name, column):
+                try:
+                    value = getattr(target, column_name)
+                    decrypted_value = target._decrypt_value(value)
+                    setattr(target, column_name, decrypted_value)
+                except Exception as e:
+                    # Log the error but don't fail the entire load
+                    from flask import current_app
+                    if current_app:
+                        current_app.logger.warning(f"Failed to decrypt {column_name} on {target.__class__.__name__}: {e}")
+    except Exception as e:
+        # Log any unexpected errors
+        from flask import current_app
+        if current_app:
+            current_app.logger.error(f"Decryption event listener failed for {target.__class__.__name__}: {e}")
 
     
