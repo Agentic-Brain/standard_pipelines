@@ -25,10 +25,12 @@ class AppendHubspotNote(BaseDataFlow[AppendHubspotNoteConfiguration]):
         credentials: Optional[HubSpotCredentials] = HubSpotCredentials.query.filter_by(client_id=self.client_id).first()
         if credentials is None:
             raise ValueError("No HubSpot credentials found for client")
+        
+        # Manually decrypt credentials as a temporary fix until automatic decryption is resolved
         hubspot_config = {
-            "client_id": credentials.hubspot_client_id,
-            "client_secret": credentials.hubspot_client_secret,
-            "refresh_token": credentials.hubspot_refresh_token
+            "client_id": credentials._decrypt_value(credentials.hubspot_client_id),
+            "client_secret": credentials._decrypt_value(credentials.hubspot_client_secret),
+            "refresh_token": credentials._decrypt_value(credentials.hubspot_refresh_token)
         }
         return HubSpotAPIManager(hubspot_config)
     
