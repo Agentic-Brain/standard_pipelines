@@ -1,6 +1,33 @@
 # CHANGELOG
 
+## v0.3.2 (2025-06-09)
+
+### Chore
+
+* chore(docker-compose-prod.yaml): update image tag to v1.4.3 for the production service to ensure deployment uses the latest stable version ([`a646208`](https://github.com/Agentic-Brain/standard_pipelines/commit/a64620886dbbd936cb1c9ee4e4723b8932821551))
+
+* chore(version.py): update application version from 1.3.1 to 1.4.3 to reflect new release ([`62d9de3`](https://github.com/Agentic-Brain/standard_pipelines/commit/62d9de333b6e4a2775097f3911ea404fb7db7600))
+
+### Fix
+
+* fix(standard_pipelines/api/__init__.py): remove commented out OAuth registration calls to clean up code and improve readability ([`2a9a91a`](https://github.com/Agentic-Brain/standard_pipelines/commit/2a9a91ac7ac1f515cbebfe38951ea3e3b81a59fc))
+
+### Refactor
+
+* refactor(api): comment out OAuth client registration functions for future cleanup
+fix(models): add missing import for set_committed_value to handle decrypted data properly ([`b0a7e72`](https://github.com/Agentic-Brain/standard_pipelines/commit/b0a7e7217c751e0d354723e1d15b98c3b275778b))
+
+### Unknown
+
+* Merge pull request #117 from Agentic-Brain/fix_decryption
+
+Fix decryption ([`20416f6`](https://github.com/Agentic-Brain/standard_pipelines/commit/20416f68777ee33ccd5b0a735b1024bb6f30b392))
+
 ## v0.3.1 (2025-05-30)
+
+### Chore
+
+* chore(release): 🚀 bump version to v0.3.1 ([`c9b8aad`](https://github.com/Agentic-Brain/standard_pipelines/commit/c9b8aad0201164e120bab16c55c0f95cea33b262))
 
 ### Fix
 
