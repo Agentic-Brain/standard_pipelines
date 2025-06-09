@@ -17,8 +17,7 @@ def init_app(app: Flask):
     
     # Keep old OAuth registration for backward compatibility - only for services not yet migrated
     # hubspot_oauth_client_register(app)  # Commented out - HubSpot uses new OAuth system
-    google_oauth_client_register(app)
-    zoho_oauth_client_register(app)
+
 
 
     # Add any API-specific initialization here
