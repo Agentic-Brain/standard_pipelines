@@ -4,11 +4,12 @@ from sqlalchemy.dialects.postgresql import UUID as pgUUID
 from sqlalchemy import Column, func, DateTime, Integer, String, Boolean, event, inspect, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship, Mapper, MappedColumn
 from standard_pipelines.database.exceptions import ScheduledJobError
+from sqlalchemy.orm.attributes import set_committed_value
 from flask import current_app
 from uuid import UUID
 from standard_pipelines.extensions import db
 from celery import shared_task
-from time import time
+import time
 from cryptography.fernet import Fernet
 from bitwarden_sdk import BitwardenClient
 from typing import Any, Optional, List
@@ -289,12 +290,13 @@ def decrypt_after_load(target, context):
     try:
         for column_name in inspect(target).mapper.columns.keys():
             column : Column = inspect(target).mapper.columns.get(column_name)
-
+            # current_app.logger.debug('Current app debug log')
             if not __should_skip_column(column_name, column):
                 try:
                     value = getattr(target, column_name)
-                    decrypted_value = target._decrypt_value(value)
-                    setattr(target, column_name, decrypted_value)
+                    plain = target._decrypt_value(getattr(target, column.key))
+                    # mark the value as "what came from the DB" – keeps the instance clean
+                    set_committed_value(target, column.key, plain)
                 except Exception as e:
                     # Log the error but don't fail the entire load
                     from flask import current_app
